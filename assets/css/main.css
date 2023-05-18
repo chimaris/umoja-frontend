@@ -1,0 +1,87 @@
+.mainbg{
+    background-position: center;
+    background: url('https://res.cloudinary.com/dkbt6at26/image/upload/c_fit,w_1000/v1684229328/Rectangle_2_pixza2.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+.pointhere{
+    cursor: pointer!important;
+}
+.tophead{
+
+    background: linear-gradient(90deg, #2C6E63 0%, #F38218 100%);
+}
+.authBg{
+    background: #F8F8F8;
+    min-height: 100vh;
+}
+.inputLabel{
+    font-style: normal;
+font-weight: 500;
+font-size: 14px;
+line-height: 20px;
+margin-bottom:12px
+}
+.v-field__outline{
+    display: none!important;
+}
+.v-btn__content{
+    font-weight: 500!important;
+    font-size: 16px!important;
+    line-height: 20px!important;
+    text-transform: capitalize;
+}
+.v-text-field .v-field {
+    border-radius: 10px!important;
+}
+.v-btn{
+    border-radius: 6px!important;
+}
+.headerText{
+font-style: normal;
+font-weight: 400;
+font-size: 20px;
+line-height: 140%;
+/* or 28px */
+
+letter-spacing: 0.03em;
+}
+.pointer{
+    position:absolute ;
+width: 54.09px;
+content: '';
+height: 54.09px;
+display:block;
+transform: rotate(45deg);
+z-index: -1;
+border-radius: 9px;
+bottom: -11px;
+background: rgba(255, 255, 255, 0.8)!important;
+backdrop-filter: blur(28.7705px);
+
+}
+.howit .v-btn__content {
+        text-transform: none;
+    
+}
+.v-btn{
+    letter-spacing: 0!important;
+}
+.africacard{
+width: 250.88px;
+height: 176.08px;
+
+background: rgba(255, 255, 255, 0.8)!important;
+backdrop-filter: blur(28.7705px);
+border-radius: 23.0164px!important;
+}
+.list .v-avatar.v-avatar--density-default {
+    margin-left: -15px;
+    position: relative;
+}
+.arrowimage{
+    position: absolute;
+    top: -35px;
+    width: 237px;
+    right: 21px;
+}
