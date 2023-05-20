@@ -49,9 +49,9 @@ Quality African products from any part of the world.
             vendors from across Africa.
           </p>
           <div style="position:relative" class="mt-8">
-            <v-btn flat color="green" size="x-large"
+            <v-btn flat to="/vendor/profile" color="green" size="x-large"
               >Start Exploring <v-avatar rounded="0" size="20" class="ml-4"><v-img src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684373214/Vector_iu4lgn.png"></v-img></v-avatar></v-btn>
-            <v-btn flat variant="text" size="x-large" class="ml-2 howit"><span style="text-decoration:underline">
+            <v-btn to="/user/login" flat variant="text" size="x-large" class="ml-2 howit"><span style="text-decoration:underline">
 
                 How it works
             </span>

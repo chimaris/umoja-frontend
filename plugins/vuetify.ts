@@ -10,14 +10,15 @@ import '@fortawesome/fontawesome-free/css/all.css' // Ensure your project is cap
 const myCustomLightTheme: ThemeDefinition = {
     dark: false,
     colors: {
-      'green': '#2C6E63'
+      'green': '#2C6E63',
+      'orange': '#F38218'
     },
   }
 const myCustomDarkTheme: ThemeDefinition = {
     dark: true,
     colors: {
       'secondary-darken-1': '#018786',
-      error: '#B00020'
+      'green': '#F38218'
     },
   }
 export default defineNuxtPlugin((nuxt) => {
