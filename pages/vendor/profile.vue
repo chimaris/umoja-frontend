@@ -200,8 +200,7 @@ letter-spacing: 0.03em;" class="ml-1">
                         {{n.likes}}
                     </span>
                     </v-btn> 
-            </div> git config --global user.email "sayhitobona@gmail.com"
-  git config --global user.name "2bona"
+            </div>
             <v-btn   :color="n.oos? 'grey-lighten-3':'green'" flat :class="n.oos? 'text-grey':''" class="ml-2">
                 <v-icon icon="mdi mdi-plus" class="mr-2"></v-icon>
                  <span class="smallBtn">{{!n.oos?'Create':'Add to cart'}}</span> 
