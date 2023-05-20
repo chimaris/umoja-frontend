@@ -17,11 +17,11 @@ color: #333333;">Welcome Back</h1>
 <p class="font-weight-regular mb-6 mt-1" style="font-size:20px">Welcome back, please enter your details</p>
 <p class="inputLabel">Email Address</p>             
         
-        <v-text-field append-inner-icon="mdi mdi-eye-outline" placeholder="Enter email address" density="comfortable"  >
+        <v-text-field prepend-inner-icon="mdi mdi-email-outline" placeholder="Enter email address" density="comfortable"  >
         </v-text-field>
 
         <p class="inputLabel">Password</p>             
-    <v-text-field append-inner-icon="mdi mdi-eye-outline" placeholder="Enter Password" density="comfortable"  >
+    <v-text-field prepend-inner-icon="mdi mdi-lock-outline" append-inner-icon="mdi mdi-eye-outline" placeholder="Enter Password" density="comfortable"  >
         </v-text-field>  
     <v-row>
     <v-col cols="6" class="py-0">

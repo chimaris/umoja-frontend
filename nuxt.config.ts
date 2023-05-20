@@ -38,15 +38,5 @@ export default defineNuxtConfig({
         '~/assets/css/main.css',
         "vuetify/lib/styles/main.sass",
         "@mdi/font/css/materialdesignicons.min.css",
-      ],
-      modules: [
-        // @ts-ignore
-        // this adds the vuetify vite plugin
-        // also produces type errors in the current beta release
-        async (options, nuxt) => {
-            nuxt.hooks.hook('vite:extendConfig', config => config.plugins.push(
-                vuetify()
-            ))
-        }
-    ]
+      ]
 })

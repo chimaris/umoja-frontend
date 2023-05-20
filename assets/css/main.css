@@ -15,12 +15,34 @@
     background: #F8F8F8;
     min-height: 100vh;
 }
+.smallBtn{
+    font-size: 12px!important;
+}
+.itemCost{
+    font-weight: 800;
+font-size: 24px;
+line-height: 30px;
+}
 .inputLabel{
     font-style: normal;
 font-weight: 500;
 font-size: 14px;
 line-height: 20px;
 margin-bottom:12px
+}
+.textClass{
+    font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+color: #333333;
+}
+.priceClass{
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    text-transform: uppercase;
+    
+    color: #000000;
 }
 .v-field__outline{
     display: none!important;
@@ -29,10 +51,24 @@ margin-bottom:12px
     font-weight: 500!important;
     font-size: 16px!important;
     line-height: 20px!important;
-    text-transform: capitalize;
+    text-transform: none;
+}
+.v-tab.v-slide-group-item--active .v-btn__content{
+
+    font-weight: 800!important;
+}
+.v-tab .v-btn__content{
+    font-weight: 500!important;
+    font-size: 14px!important;
+    line-height: 17px!important;
+    letter-spacing: 0.03em!important;
+    text-transform: unset!important;
 }
 .v-text-field .v-field {
     border-radius: 10px!important;
+}
+.v-tab.v-btn{
+    border-radius: unset!important;
 }
 .v-btn{
     border-radius: 6px!important;

@@ -1,6 +1,6 @@
 <template>
 
-      <v-container  style="max-width:1300px">
+      <v-container  style="max-width:">
         <div class="d-flex justify-space-between align-center">
           <v-avatar class="" @click="$router.push('/')" size="150" style="height:auto!important" rounded="0">
     
@@ -8,15 +8,15 @@
   </v-avatar>
   <div class="d-flex align-center">
 
-      <div class="d-flex mx-4">
-          <v-btn :to="n.route" variant="text" class="mx-2" flat v-for="n in urls" :key="n.title">
+      <div class="d-flex mx-1">
+          <v-btn :to="n.route" variant="text" class="mx-1" flat v-for="n in urls" :key="n.title">
             {{n.title}}
         </v-btn>
         
         
 
     </div>
-    <div style="width:400px">
+    <div style="width:370px">
     <v-text-field placeholder="Search items, collections or accounts" density="comfortable"  hide-details style="width:100%;max-width:390px">
         <template v-slot:prepend-inner>
             <v-icon icon="mdi mdi-magnify"></v-icon>
@@ -25,7 +25,7 @@
 </div>
     </div>
         <div>
-            <v-btn to="/vendor/create" size="x-large" color="green" flat class="ml-2"><v-icon icon="mdi mdi-plus" class="mr-2"></v-icon> create</v-btn>
+            <v-btn to="/vendor/create" size="x-large" color="green" flat class="ml-2"><v-icon icon="mdi mdi-plus" class="mr-2"></v-icon> Create</v-btn>
             <v-btn class="ml-2 py-1"  rounded size="small" flat stacked>
       <v-badge
         content="3"
