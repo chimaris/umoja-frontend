@@ -26,7 +26,7 @@
     </div>
         <div>
             <v-btn to="/vendor/create" size="x-large" color="green" flat class="ml-2"><v-icon icon="mdi mdi-plus" class="mr-2"></v-icon> Create</v-btn>
-            <v-btn class="ml-2 py-1"  rounded size="small" flat stacked>
+            <v-btn to="/order/cart" class="ml-2 py-1"  rounded size="small" flat stacked>
       <v-badge
         content="3"
         color="error"
@@ -60,7 +60,7 @@
         theme: useTheme(),
         btn_radio: null,
         urls: [
-          {title:'Discover', route:'/buy'},
+          {title:'Discover', route:'/discovery'},
           {title:'Market Place', route:'/vendor/prevendor'},
           ]
       };

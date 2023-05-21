@@ -11,7 +11,8 @@ const myCustomLightTheme: ThemeDefinition = {
     dark: false,
     colors: {
       'green': '#2C6E63',
-      'orange': '#F38218'
+      'orange': '#F38218',
+      'red': '#C20052'
     },
   }
 const myCustomDarkTheme: ThemeDefinition = {

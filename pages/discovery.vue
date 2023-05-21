@@ -19,7 +19,7 @@ Carved Mask</h1>
                 <div class="d-flex mt-4">
                     <v-btn width="250px" size="large" flat class="px-6 mr-3 d-flex align-center text-white " style="text-transform:none!important"  color="rgba(0, 0, 0, 0.5)" >
                         View product details 
-                        <v-icon icon="mdi mdi-arrow-right" class="mx-2" size="21"></v-icon> 
+                        <v-icon icon="mdi mdi-arrow-right" class="ml-4" size="21"></v-icon> 
                     </v-btn>
 
                   <v-btn width="250px" class=""  flat size="large" to="/vendor/profile" color="orange" 
