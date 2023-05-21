@@ -210,6 +210,10 @@ letter-spacing: 0.03em;" class="ml-1">
         </v-card>
     </v-col>
    </v-row>        
+        <p style="font-weight: 400;
+font-size: 14px;
+line-height: 17px;
+color: #CECECE;" class="font-weight-regular pt-12 mt-12 mb-4">©2022 Umoja. All Rights Reserved.</p>
 </v-sheet>
             </v-col>
         </v-row>

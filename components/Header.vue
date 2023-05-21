@@ -39,7 +39,7 @@ export default {
       theme: useTheme(),
       btn_radio: null,
       urls: [
-        {title:'Buy', route:'/buy'},
+        {title:'Buy', route:'/discovery'},
         {title:'Sell', route:'/vendor/prevendor'},
         {title:'About us', route:'/about'},
         ]
