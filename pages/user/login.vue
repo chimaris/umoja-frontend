@@ -73,7 +73,7 @@ color: #CECECE;" class="font-weight-regular pt-12 mb-4">©2022 Umoja. All Rights
         <v-col :cols="cols[1]" class=" px-0 py-0">
         <v-carousel :show-arrows="false" :hide-delimiters="true" cycle width="100%" height="auto">
             <v-carousel-item v-for="n in images" :key="n">
-                <v-img cover eager width="100%" min-height="100vh" height="880px" :src="n"></v-img>
+                <v-img cover class="bg-grey-lighten-2" eager width="100%" min-height="100vh" height="880px" :src="n"></v-img>
             </v-carousel-item>
         </v-carousel>
         </v-col>

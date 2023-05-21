@@ -3,7 +3,7 @@
     <div style="min-height: 120vh;width: 100%;">
         <v-img
     height="251" style="position: relative;"
-    width="100%" cover class="d-flex  justify-end align-end"
+    width="100%" cover class="d-flex bg-grey  justify-end align-end"
     src="https://res.cloudinary.com/payhospi/image/upload/v1684584271/Rectangle_448_x784z8.png"
   >
   <v-container style="width: 100%;" class="d-flex pb-6 justify-end align-end">
@@ -18,7 +18,7 @@
                     <v-sheet width="100%" style="padding-top: 80px" >
 <div class="text-center pa-4 pb-6">
     <v-avatar class="mx-auto" style="border: 2.93049px solid #FCE7CE;" size="100">
-        <v-img src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684497818/Frame_481586_zfgoph.png"></v-img>
+        <v-img class="bg-grey-lighten-3 rounded-xl" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684497818/Frame_481586_zfgoph.png"></v-img>
     </v-avatar>
     <h3 class="py-4" style="font-size: 24px;font-weight: 800;
 line-height: 30px;">Thatdesignpro <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon></h3>
@@ -180,7 +180,7 @@ color: #333333;">hours</p>
    <v-row style="background-color: #F7F7F7;" class="mt-2">
     <v-col cols="12" v-for="(n, i) in items" :key="i" lg="4" md="6">
         <v-card flat class="bg-white rounded-lg pa-4">
-            <v-img class="rounded-lg" cover width="100%" height="243px" :src="n.image"></v-img>
+            <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="243px" :src="n.image"></v-img>
             <p class="textClass my-2">{{filt(n.name)}}</p>
             <div class="d-flex align-center">
 

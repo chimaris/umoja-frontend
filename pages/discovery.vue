@@ -1,9 +1,9 @@
 <template>
     <userHeader />
     <div style="min-height: 120vh;width: 100%;">
-        <v-img
+        <v-img eager v-once
     height="calc(640px)" style="position: relative;min-height: 500px"
-    width="100%" cover class="d-flex  align-center"
+    width="100%" cover class="d-flex  bg-grey align-center"
     src="https://res.cloudinary.com/payhospi/image/upload/v1684653737/Rectangle_448_1_bur9sb.png"
   >
   <v-container style="width: 100%;" class="">
@@ -127,12 +127,12 @@ v-model="chip"
    <v-row style="background-color: #F7F7F7;" class="">
     <v-col cols="6" v-for="(n, i) in items" :key="i" lg="3" md="4">
         <v-card flat class="bg-white rounded-lg pa-4">
-            <v-img class="rounded-lg" cover width="100%" height="243px" :src="n.image"></v-img>
+            <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="243px" :src="n.image"></v-img>
          <div style="position:relative;top: -12px ;left: -7px;">
 
          </div>
             <div style="height: 40px;position: relative;left: -12px;"  class="d-flex align-center ">
-<v-avatar color="white" size="60" class="pa-3 "><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img></v-avatar> 
+<v-avatar color="white" size="60" class="pa-3 "><v-img  class="bg-grey-lighten-2 rounded-xl" src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img></v-avatar> 
 <p style="font-weight: 800;
 font-size: 16px;">The Golden Matrix</p>
 </div>
