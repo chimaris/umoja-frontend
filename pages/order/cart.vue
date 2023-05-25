@@ -102,7 +102,7 @@ Every delivery is carried out by <span class="text-blue">
 </p>
 </div>
 </div>
-<v-btn flat block size="x-large" color="green"> Proceed to checkout</v-btn>
+<v-btn to="/order/checkout" flat block size="x-large" color="green"> Proceed to checkout</v-btn>
 </v-card>
 
 <v-img style="position: relative;border-radius: 10px;" class="mt-6 pt-10 bg-grey-lighten-1 pa-6 rounded-lg" width="100%" min-height="600px" cover eager src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png" height="auto">
