@@ -75,6 +75,31 @@ font-size: 14px;
 line-height: 20px;
 margin-bottom:12px
 }
+.addressName{
+    font-weight: 800;
+font-size: 16px;
+line-height: 20px;
+}
+.adddressPhone{
+    font-weight: 400;
+font-size: 14px;
+line-height: 20px;
+color: #969696;
+}
+.cardtitleuppercase{
+font-weight: 800;
+font-size: 16px;
+line-height: 20px;
+letter-spacing: 0.03em;
+text-transform: uppercase;
+color: #333333;
+}
+.carddetails{
+    font-weight: 400;
+font-size: 16px;
+line-height: 20px;
+color: #333333;
+}
 .textClass{
     font-weight: 400;
 font-size: 14px;
