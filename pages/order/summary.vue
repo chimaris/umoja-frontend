@@ -51,9 +51,8 @@ color: #333333;" class="">2. Payment method</p>
 </div>
 
 <v-divider class="my-4"></v-divider>
-    <p class="cardtitleuppercase mb-2">thatdesignpro</p>
-   <p class="carddetails">waldsteingartenstrasse 13,  Vienna, Austria 1020</p>
-   <p class="carddetails">+43 664 3174106</p>
+    <p class="cardtitleuppercase mb-2 d-flex align-center"><v-icon class="mr-2" size="16" color="grey-darken-1" icon="fa-brands fa-cc-mastercard"></v-icon>MASTERCARD</p>
+   <p class="carddetails"><span class="text-blue-darken-2">Billing Address: </span>Same as shipping address</p>
 </v-card>
 <v-card flat  class="bg-white rounded-lg mb-4 pa-4 py-6">
     
