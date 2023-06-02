@@ -47,7 +47,7 @@ background: #EDEDED;
 border-radius: 10px;
 }
 .timernum{
-    font-weight: 500;
+    font-weight: 500!important;
 font-size: 24px;
 line-height: 30px;
 text-align: center;
@@ -57,6 +57,13 @@ color: #333333;
     font-weight: 500;
 font-size: 16px;
 line-height: 140%;
+
+color: #969696;
+}
+.lightText2{
+    font-weight: 200;
+font-size: 16px;
+line-height: 20px;
 
 color: #969696;
 }
@@ -106,6 +113,11 @@ font-size: 14px;
 line-height: 20px;
 color: #333333;
 }
+.cardStyle{
+border: 1px solid #CECECE!important;
+border-radius: 15px!important;
+padding: 25px 20px!important;
+}
 .priceClass{
     font-weight: 800;
     font-size: 16px;
@@ -113,6 +125,15 @@ color: #333333;
     text-transform: uppercase;
     
     color: #000000;
+}
+.bigpriceClass2{
+
+    font-weight: 600;
+    font-size: 40px;
+    line-height: 50px;
+
+    
+    color: #333333;
 }
 .bigpriceClass{
     font-weight: 800;
@@ -124,11 +145,31 @@ color: #333333;
 .v-field__outline{
     display: none!important;
 }
+.coolTable{
+    border: 1px solid #CECECE!important;
+border-radius: 15px!important;
+}
 .v-btn__content{
-    font-weight: 500!important;
-    font-size: 16px!important;
-    line-height: 20px!important;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 20px;
     text-transform: none;
+}
+.v-table .v-btn__content{
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 20px;
+    text-transform: none;
+}
+.skinnyBtn2 .v-btn__content{
+    font-weight: 400!important;
+    font-size: 16px!important;
+    line-height: 30px;
+}
+.thickBtn .v-btn__content{
+    font-weight: 700!important;
+    font-size: 16px!important;
+    line-height: 30px;
 }
 .v-tab.v-slide-group-item--active .v-btn__content{
 

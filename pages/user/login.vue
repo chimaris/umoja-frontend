@@ -43,7 +43,7 @@ color: #333333;">Welcome Back</h1>
         </v-col>
     </v-row>
       
-        <v-btn to="/vendor/confirm" block color="green" flat size="x-large" class="rounded-lg mt-3"> 
+        <v-btn to="/vendor/profile" block color="green" flat size="x-large" class="rounded-lg mt-3"> 
             <span>
 
 Sign in

@@ -4,7 +4,7 @@
         <div class="d-flex justify-space-between align-center">
           <v-avatar class="" @click="$router.push('/')" size="150" style="height:auto!important" rounded="0">
     
-    <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
+    <v-img  eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
   </v-avatar>
   <div class="d-flex align-center">
 
@@ -46,7 +46,7 @@
 
       
     </v-btn>
-    <v-avatar class="ml-3" size="60"><v-img src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684497818/Frame_481586_zfgoph.png"></v-img></v-avatar>      
+    <v-avatar @click="$router.push('/user/login')" class="ml-3" size="60"><v-img src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684497818/Frame_481586_zfgoph.png"></v-img></v-avatar>      
 </div>
     </div>
       </v-container>

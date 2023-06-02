@@ -25,7 +25,7 @@
     </div>
     <div>
       <v-btn to="/vendor/login" variant="text" size="x-large" flat>Login</v-btn>
-      <v-btn to="/vendor/create" size="x-large" color="green" flat class="ml-2">sign up</v-btn>
+      <v-btn to="/vendor/registeration" size="x-large" color="green" flat class="ml-2">Sign up</v-btn>
     </div>
   </div>
     </v-container>
@@ -41,7 +41,7 @@ export default {
       urls: [
         {title:'Buy', route:'/discovery'},
         {title:'Sell', route:'/vendor/prevendor'},
-        {title:'About us', route:'/about'},
+        {title:'About us', route:'/vendor/dashboard'},
         ]
     };
   },

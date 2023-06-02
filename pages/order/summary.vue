@@ -1,17 +1,15 @@
 <template>
     <userHeader />
     <div style="background-color: #F7F7F7;">
-
     <v-container style="min-height: ;width: 100%;">
         <v-row class="pt-2">
                 <v-col cols="12" lg="8" >  
-<h1 style="font-weight: 800;
-font-size: 32px;
-line-height: 40px;
-text-transform: uppercase;
-color: #333333;">summary</h1>
-
-<v-divider class="my-4"></v-divider>
+                    <h1 style="font-weight: 800;
+                    font-size: 32px;
+                    line-height: 40px;
+                    text-transform: uppercase;
+                    color: #333333;">summary</h1>
+        <v-divider class="my-4"></v-divider>
 
 <v-card flat  class="bg-white rounded-lg mb-4 pa-4 py-6">
     
