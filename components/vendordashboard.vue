@@ -1,12 +1,6 @@
 <template>
-    <div class="w-100">
+    <v-container style="max-width: 1330px;" class="w-100 mt-5 pt-0 pr-8 pl-5">
 
-        <h2 style="font-weight: 600;
-font-size: 24px;
-line-height: 32px;
-
-rowor: #1A1D1F;" class="mt-5">Dashboard</h2>
-        <v-divider  class="mt-6 mb-5"></v-divider>
         <v-btn-toggle text
         v-model="text"  class="mb-6 skinnyBtn2"
          selected-class="thickBtn text-green"
@@ -79,6 +73,8 @@ color: #969696;">vs last 7 days</p>
         <v-card  class="mx-auto cardStyle" width="100%" style=""  flat >
            <h4 class="mb-2 timernum d-flex align-center text-left">Revenue Growth <span class="ml-2 lightText">(EUR)</span></h4> 
            <p class="lightText2">Revenue growth analytics of the week </p>
+           <!-- <revenuegraph /> -->
+           <v-img class="mt-12 mb-5" src="https://res.cloudinary.com/payhospi/image/upload/v1686320933/Group_427320557_ys3qve.png" width="100%" height="auto"></v-img>
   </v-card>
     </v-col>
     <v-col cols="12" lg="6">
@@ -147,8 +143,8 @@ color: #969696;" class="ml-4">{{ n.growth }}%</p>
   </v-card>
     </v-col>
     <v-col cols="12" lg="5">
-        <v-card height=""  class="mx-auto coolTable pa-4" width="100%" style=""  flat >
-        <div class="d-flex justify-space-between">
+        <v-card height="100%"  class=" mx-auto coolTable py-4" width="100%" style="overflow:hidden"  flat >
+        <div class="d-flex px-4 justify-space-between">
             <div>
                 <p class="mb-2 timernum d-flex align-center text-left">Top Transactions</p> 
                 <p class="lightText2">of the week based on total purchase </p>
@@ -156,10 +152,9 @@ color: #969696;" class="ml-4">{{ n.growth }}%</p>
             <v-btn variant="text" color="#1361F4" class="" >
 View Details            </v-btn>
         </div>
-<div class="rounded-xl mt-5" >
-    <v-table style="    height: 198px!important;
-    overflow: scroll;
-}">
+<div class="rounded- mt-5" >
+    <v-table style="    height: 190px!important;
+    overflow: scroll;">
     <thead>
       <tr class="bg-grey-lighten-3 ">
         <th style="font-size: 14px;" class="  font-weight-medium  text-left">
@@ -244,32 +239,279 @@ View more            </v-btn>
         </v-row>
   </v-card>
     </v-col>
-    <v-col cols="12" lg="3">
+    <v-col v-if="!show_more" cols="12" lg="3">
         <v-card theme="dark" image="https://res.cloudinary.com/payhospi/image/upload/v1685693850/Rectangle_1894_auhcts.png" height="100%" min-height="300px" class="mx-auto cardStyle" width="100%" style=""  flat >
         <div class="d-flex justify-space-between">
                 <p style="font-weight: 500;
 font-size: 27px;
 line-height: 35px;
-display: flex;
+display: flex;max-width: 200px;
 align-items: center;
 letter-spacing: -0.03em;" class=" text-left">See more detail
 statistic to analyze
 your decision</p> 
         </div>
-        <v-btn style="position: absolute;bottom: 24px; left:24px" color="white" flat class="" >
+        <v-btn  @click="show_more = !show_more" style="position: absolute;bottom: 24px; left:24px" color="white" flat class="" >
     See More</v-btn>
     </v-card>
     </v-col>
+    <v-col  v-if="show_more" cols="12" lg="3">
+        <v-card height="100%"  class="reviewstab mx-auto coolTable py-4" width="" style="overflow:hidden"  flat >
+        <div class="d-flex px-4 justify-space-between">
+            <div>
+                <p class="mb-2 timernum d-flex align-center text-left">Reviews</p> 
+                <p class="lightText2">Customer feedback </p>
+            </div>
+            <v-btn variant="text" color="#1361F4" class="" >
+See All            </v-btn>
+        </div>
+        <v-carousel style="overflow: visible;"
+    height="auto" 
+     :show-arrows="false" hide-delimiter-background="" >
+      <v-carousel-item 
+        v-for="n in 3"
+      >      
+<div class="d-flex align-center px-4 py-2 pt-3">
+<v-avatar size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686323650/Rectangle_1907_aocxwr.png"></v-img></v-avatar>
+<div class="ml-2">
+    <p class="" style="font-weight: 600;
+font-size: 16px;
+line-height: 20px;color: #333333;
+letter-spacing: -0.01em;">Black and Green Ankara School</p>
+    <p style="font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+letter-spacing: -0.01em;
+color: #969696;
+">Fashion and Style</p>
+</div>
+</div>
+<p style="font-style: normal;
+font-weight: 400;
+font-size: 14px;
+line-height: 140%;
+letter-spacing: -0.01em;
+color: #333333;" class="px-4">Lorem ipsum dolor sit amet consectetur. Accumsan dignissim venenatis egest
+drerit eget volutpat <span class="text-blue-darken-3 font-weight-medium">
+
+  See full Details
+</span>
+
+</p>
+<p style="font-weight: 450;
+    font-size: 16px;
+    line-height: 16px;
+    color: #000000;
+    " class="d-flex rev pl-4 mb-1 align-center">
+        <v-rating
+        v-model="rating"
+        color="grey-lighten-2"
+        active-color="#E7CE5D"
+        class="ml-2"
+        size="small"
+        ></v-rating><span style="margin-left:-9px ;" >4.0/5.0</span> 
+    </p>
+</v-carousel-item>
+    </v-carousel>
+  </v-card>
+    </v-col>
+    <v-col  v-if="show_more" cols="12" lg="6">
+        <v-card height="100%"  class=" mx-auto coolTable py-4" width="100%" style="overflow:hidden"  flat >
+        <div class="d-flex px-4 justify-space-between">
+            <div>
+                <p class="mb-2 timernum d-flex align-center text-left">Recent Orders</p> 
+                <p class="lightText2">of the week based on total purchase </p>
+            </div>
+            <v-btn variant="text" color="#1361F4" class="" >
+View More            </v-btn>
+        </div>
+<div class="rounded- mt-5" >
+    <v-table style="    height: 190px!important;
+    overflow: scroll;">
+    <thead>
+      <tr class="bg-grey-lighten-3 ">
+        <th style="font-size: 14px;" class="  font-weight-medium  text-left">
+           #ID
+        </th>
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+          First Item
+        </th>
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+          Date
+        </th>
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+          Purchase
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  @click="chosen = item.sn"
+      :style="chosen == item.sn ? 'background:#DFDFDF':''"
+        v-for="item in items"
+        :key="item.sn"
+      >
+        <td style="font-size: 14px;" class="px-1 pl-2">
+            <v-menu
+      
+      location="end"
+    >
+      <template v-slot:activator="{ props }">
+   
+        <span  v-bind="props">
+
+{{ item.sn }}
+</span>
+      </template> 
+      <v-card class="pa-4 rounded-lg bg-green">
+        <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: {{ item.sn }}</p>
+        <div class="pt-2 align-center d-flex">
+            <v-avatar size="44" class="mr-2"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685693849/Rectangle_1898_gyahsj.png"></v-img></v-avatar>
+            <div>
+                <p style="font-weight: 500;font-size: 14px" class="text-capitalize">Jenny Wilson</p>
+                <p style="font-weight: 500;
+font-size: 10px;
+line-height: 100%;
+/* identical to box height, or 10px */
+
+
+color: rgba(255, 255, 255, 0.75);" class="text-capitalize">
+<v-icon size="12" class="mr-1" icon="mdi mdi-map-marker"></v-icon>United States</p>
+            </div>
+        </div>
+      </v-card>
+    </v-menu>
+    </td>
+        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.name }}</td>
+        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.date }}</td>
+        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">
+            <span v-if="chosen !== item.sn ">
+                {{ item.total }}
+            </span>
+            <v-btn v-else color="green" size="small" class=" rounded-lg"> See details</v-btn>
+        </td>
+      </tr>
+    </tbody>
+  </v-table>
+</div>
+
+  </v-card>
+    </v-col>
+    <v-col  v-if="show_more" cols="12" lg="6">
+        <v-card height="100%"  class=" mx-auto coolTable py-4" width="100%" style="overflow:hidden"  flat >
+        <div class="d-flex px-4 justify-space-between">
+            <div>
+                <p class="mb-2 timernum d-flex align-center text-left">Out of Stock</p> 
+                <p class="lightText2">of the week based on total purchase </p>
+            </div>
+            <v-btn variant="text" color="#1361F4" class="" >
+View Details            </v-btn>
+        </div>
+<div class="rounded- mt-5" >
+    <v-table style="    height: 190px!important;
+    overflow: scroll;">
+    <thead>
+      <tr class="bg-grey-lighten-3 ">
+        <th style="font-size: 14px;" class="  font-weight-medium  text-left">
+           #ID
+        </th>
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+          First Item
+        </th>
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+          Date
+        </th>
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+          Purchase
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  @click="chosen = item.sn"
+      :style="chosen == item.sn ? 'background:#DFDFDF':''"
+        v-for="item in items"
+        :key="item.sn"
+      >
+        <td style="font-size: 14px;" class="px-1 pl-2">
+            <v-menu
+      
+      location="end"
+    >
+      <template v-slot:activator="{ props }">
+   
+        <span  v-bind="props">
+
+{{ item.sn }}
+</span>
+      </template> 
+      <v-card class="pa-4 rounded-lg bg-green">
+        <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: {{ item.sn }}</p>
+        <div class="pt-2 align-center d-flex">
+            <v-avatar size="44" class="mr-2"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685693849/Rectangle_1898_gyahsj.png"></v-img></v-avatar>
+            <div>
+                <p style="font-weight: 500;font-size: 14px" class="text-capitalize">Jenny Wilson</p>
+                <p style="font-weight: 500;
+font-size: 10px;
+line-height: 100%;
+/* identical to box height, or 10px */
+
+
+color: rgba(255, 255, 255, 0.75);" class="text-capitalize">
+<v-icon size="12" class="mr-1" icon="mdi mdi-map-marker"></v-icon>United States</p>
+            </div>
+        </div>
+      </v-card>
+    </v-menu>
+    </td>
+        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.name }}</td>
+        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.date }}</td>
+        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">
+            <span v-if="chosen !== item.sn ">
+                {{ item.total }}
+            </span>
+            <v-btn v-else color="green" size="small" class=" rounded-lg"> See details</v-btn>
+        </td>
+      </tr>
+    </tbody>
+  </v-table>
+</div>
+
+  </v-card>
+    </v-col>
+
 </v-row>
-    </div>
+</v-container>
 
 </template>
+<style>
+ .v-rating__item .v-btn{
+    scale: 0.8;
+    margin-left: -13px;
 
+}
+.reviewstab .v-carousel .v-btn--icon .v-icon{
+font-size: 9px;
+}
+.reviewstab .v-carousel--hide-delimiter-background .v-carousel__controls {
+    bottom: -33px;
+}
+.reviewstab .v-carousel .v-btn--icon.v-btn--active .v-icon{
+color: orange;
+}
+.reviewstab .rev .v-rating__item .v-btn{
+  scale: 2!important;
+    margin-left: -13px!important;
+
+
+}
+
+</style>
 <script>
 export default {
   data() {
     return {
         menu:true,
+        rating:4,
+        show_more:false,
    text:'1',
    chosen:'',
    countries:[
@@ -303,6 +545,24 @@ export default {
     },
     {
         sn:'#23442',
+        name:'Leather crop top & pants......',
+        date:'17 May',
+        total:'€2,349‎',
+    },
+    {
+        sn:'#26442',
+        name:'Leather crop top & pants......',
+        date:'17 May',
+        total:'€2,349‎',
+    },
+    {
+        sn:'#26442',
+        name:'Leather crop top & pants......',
+        date:'17 May',
+        total:'€2,349‎',
+    },
+    {
+        sn:'#26442',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',

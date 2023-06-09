@@ -15,8 +15,17 @@
  
  color: #333333;">Sign Up</h1>
              <p class="font-weight-medium mb-6 mt-1">Already have an account? <span style="color:#0076FF">Sign In</span></p>
- 
-             <v-row class="mt-6">
+
+             <v-row>
+              <v-col cols="6"><v-btn size="x-large" flat variant="outlined" block><v-avatar rounded="0" size="24" class="mr-2"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686302222/flat-color-icons_google_vhnhqm.png"></v-img></v-avatar>Sign Up with Google</v-btn></v-col>
+              <v-col cols="6"><v-btn size="x-large" flat color="black" block><v-avatar rounded="0" size="24" class="mr-2"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686302222/bi_apple_qka2so.png"></v-img></v-avatar>Sign Up with Apple</v-btn></v-col>
+             </v-row>
+             <div class="d-flex py-8  px-5 justify-space-between align-center"><v-divider></v-divider>
+            <p class="px-2 w-100 text-center">or sign up with</p>
+             <v-divider></v-divider>
+        
+            </div>
+             <v-row>
                  <v-col> 
         <p class="inputLabel">First Name</p>             
      <v-text-field placeholder="First name" density="comfortable"  >

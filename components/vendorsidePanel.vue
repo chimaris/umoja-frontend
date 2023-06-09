@@ -1,13 +1,13 @@
 <template>
-   
-                <v-card height="100%" min-height="930px"  class="rounded-0 pa-8" flat color="#F6F7F9" min>
+                <v-card  style="position: absolute;z-index: 99;" width="calc(100% - 5px)"  height="100%" min-height="1000px"  class="rounded-0 py-10" :class="$vuetify.display.smAndDown? 'elevation-20':''" flat color="#F6F7F9" min>
                 
                     <v-menu
-      open-on-hover
     >
       <template v-slot:activator="{ props }">
-        <v-card @click="" color="#EDEDED"  flat v-bind="props"
- class="rounded-xl " width="100%" height=""  >
+      <div class="px-8">
+
+        <v-card  color="#EDEDED"  flat v-bind="props"
+ class="rounded-xl  " width="100%" height=""  >
  <div class="d-flex pa-4 align-center justify-space-between ">
 
      <v-avatar size="48" color="white"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img></v-avatar>
@@ -26,6 +26,7 @@ color: #596066;">Nweke Franklin</p>
         <v-icon color="green" icon="mdi mdi-chevron-down"></v-icon>
     </div>
                     </v-card>
+      </div>
       </template>
 
       <v-list>
@@ -39,15 +40,15 @@ color: #596066;">Nweke Franklin</p>
     </v-menu>
 <div  v-for="(item, i) in items"
             :key="i" class="pt-8">
-    <p style="font-weight: 600;
+    <p  style="font-weight: 600;
 font-size: 14px;
 line-height: 20px;
-color: #333333; " class="mb-3 text-capitalize">{{item.name}}</p>
-  <div style="cursor: pointer;" @click="selectedItem = n.text" class="align-center text-capitalize  justify-space-between py-2 d-flex" v-for="(n, i) in item.list" :key="i">
+color: #333333; " class="mb-3 px-8 text-capitalize">{{item.name}}</p>
+  <div v-ripple  style="cursor: pointer;" @click="selectItem(n.text)" class="align-center px-8 text-capitalize  justify-space-between py-2 d-flex" v-for="(n, i) in item.list" :key="i">
     <div class="d-flex align-center">
 
         <v-icon size="18" :color="selectedItem == n.text? 'green ':'#969696'" class="mr-2" :icon="n.icon"></v-icon>
-        <p :class="selectedItem == n.text? 'text-green ':'text-grey'" 
+        <p  :class="selectedItem == n.text? 'text-green ':'text-grey'" 
         style="font-weight: 600;
 font-size: 16px;
 line-height: 24px;">{{ n.text }}</p>
@@ -56,7 +57,7 @@ line-height: 24px;">{{ n.text }}</p>
 <v-icon color="green" size="6" v-if="selectedItem == n.text && (n.text !== 'Notification')" icon="mdi mdi-circle"></v-icon>
   </div>
 </div>
-<div style="position: absolute; bottom: 22px;" class="d-flex pt-12 mt-12 justify-space-between align-center">
+<div style="position: absolute; bottom: 22px;margin-top: 300px;" class="d-flex pt-12 px-8  justify-space-between align-center">
   <v-avatar class="" @click="$router.push('/')" size="135" style="height:auto!important" rounded="0">
   
     <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
@@ -68,6 +69,10 @@ line-height: 24px;">{{ n.text }}</p>
 </template>
 <script>
 export default {
+  mounted(){
+    this.selectedItem = this.window
+  },
+  props: ['window', 'sidebar'],
   data() {
     return {
         list: '',
@@ -76,16 +81,18 @@ export default {
         {
         name: 'website',
         list: [
-            { text: 'Website preview', icon: 'fas fa-globe' },
+            { text: 'Website Preview', icon: 'fas fa-globe' },
         ]
       },
         {
         name: 'Menu',
         list: [
             { text: 'Dashboard', icon: 'mdi mdi-view-grid' },
-            { text: 'order management', icon: 'mdi mdi-shopping' },
-            { text: 'Product management', icon: 'mdi mdi-tag' },
-            { text: 'customer management', icon: 'mdi mdi-tag' },
+            { text: 'Orders', icon: 'mdi mdi-shopping' },
+            { text: 'Products', icon: 'mdi mdi-tag' },
+            { text: 'Customers', icon: 'mdi mdi-account-group' },
+            { text: 'Sales', icon: 'mdi mdi-trending-up' },
+            { text: 'Review', icon: 'mdi mdi-star' },
         ]
       },
         {
@@ -106,6 +113,15 @@ export default {
        
       ],
     }
+},
+methods:{
+  selectItem(n){
+    this.selectedItem = n
+    this.$emit('changePage', n)
+  },
+  sideFn(){
+   if( this.sidebar ) this.$emit('sideFn')
+  },
 }
 }
 </script>

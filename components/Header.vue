@@ -40,7 +40,7 @@ export default {
       btn_radio: null,
       urls: [
         {title:'Buy', route:'/discovery'},
-        {title:'Sell', route:'/vendor/prevendor'},
+        {title:'Sell', route:'/vendor/registeration/form'},
         {title:'About us', route:'/vendor/dashboard'},
         ]
     };
