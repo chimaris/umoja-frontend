@@ -32,7 +32,7 @@ color: #1A1D1F;">{{window}}</p>
 <!-- :value="$route.params.section -->
                     <v-window
                     v-model="window">
-                    <v-window-item :value="'Website Preview'">
+                    <v-window-item :value="'Homepage'">
                 
                         <Vendorpreview />
                         </v-window-item>

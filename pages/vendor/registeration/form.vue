@@ -29,16 +29,16 @@
 
                     <v-window v-model="window">
                         <v-window-item :value="1">
-                            <tellus />
+                            <tellus @submit="submit" />
                         </v-window-item>
-                        <v-window-item :value="2">
-                            <Ownerinfo />
+                        <v-window-item  :value="2">
+                            <Ownerinfo  @submit="submit" />
                         </v-window-item>
                         <v-window-item :value="3">
-                            <Documentation />
+                            <Documentation @submit="submit" />
                         </v-window-item>
                         <v-window-item :value="4">
-                            <Reviewsubmit />
+                            <Reviewsubmit @submit="submit" />
                         </v-window-item>
                     </v-window>
                 </v-card>
@@ -56,7 +56,7 @@
 export default {
     data() {
         return {
-            window: "1",
+            window: 1,
             formSect: 1,
             items: [
                 {
@@ -78,5 +78,13 @@ export default {
             ],
         };
     },
+    methods: {
+        submit() {
+            this.window = parseInt(this.window) + 1;
+            this.formSect = parseInt(this.formSect) + 1;
+            window.scrollTo(0, 0);
+            
+        }
+    }
 }
 </script>

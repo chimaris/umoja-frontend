@@ -19,7 +19,7 @@ color: #9EA5AD;">Please provide additional business information and upload busin
  <v-text-field  density="comfortable"  >
  </v-text-field>
  <p class="inputLabel">Utility Bill</p>             
-     <v-select  append-inner-icon="mdi mdi-chevron-down"  placeholder="Select a utility bill" density="comfortable"  >
+     <v-select :items="typeOfUtilityBills" append-inner-icon="mdi mdi-chevron-down"  placeholder="Select a utility bill" density="comfortable"  >
          </v-select>
 
 
@@ -61,8 +61,24 @@ color: #9EA5AD;">Drag and drop document here or Browse Supported file types: JPE
 </div>
          </v-card>           
 
- <v-btn flat style=" border: 1px solid #e5e5e5;" size="large" variant="outlined">Save and continue</v-btn>
+ <v-btn @click="submit()" flat style=" border: 1px solid #e5e5e5;" size="large" variant="outlined">Save and continue</v-btn>
 </div>
 
 </div>
 </template>
+<script>
+export default {
+    name: "documentation",
+    data() {
+        return {
+          typeOfUtilityBills: ['Electricity', 'Water', 'Gas', 'Internet', 'Telephone'],
+
+        };
+    },
+    methods: {
+      submit(){
+        this.$emit("submit");
+      }
+    },
+};
+</script>

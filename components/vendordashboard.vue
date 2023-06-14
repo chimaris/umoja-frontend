@@ -1,29 +1,39 @@
 <template>
     <v-container style="max-width: 1330px;" class="w-100 mt-5 pt-0 pr-8 pl-5">
 
-        <v-btn-toggle text
-        v-model="text"  class="mb-6 skinnyBtn2"
-         selected-class="thickBtn text-green"
-        color="transparent"
-        group
-      >
-        <v-btn :ripple="false" text  style="
-" class="mr-3 rounded-xl " value="1">
-          Last 24hrs
-        </v-btn>
+ <div class="pb-5 d-flex align-center justify-space-between">
+  <p style="font-weight: 600;
+font-size: 24px;
+line-height: 30px;">Hi Nweke Franklin, Welcome back </p>
 
-        <v-btn :ripple="false" text  class="mr-3 rounded-xl" value="2">
-          Last Week
-        </v-btn>
+  <div class="d-flex align-center">
+    <v-menu width="200">
+      <template v-slot:activator="{ props }">
+      
+        <div v-bind="props" v-ripple  style="  border-radius: 6px;  border: 1px solid #e5e5e5; width:200px;
+" variant="outlined" class="px-4 py-2 d-flex align-center justify-space-between text-grey-darken-3" >
+<span>
 
-        <v-btn :ripple="false" text  class="mr-3 rounded-xl" value="3">
-          Last Month
-        </v-btn>
-
-        <v-btn :ripple="false" text  class="mr-3 rounded-xl" value="4">
-          Last Year
-        </v-btn>
-      </v-btn-toggle>
+  <v-icon class="mr-2" icon="mdi mdi-tune-vertical-variant"></v-icon> Filter 
+</span>
+<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
+</div>
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in ['Last 7 days', 'This Month', 'This Year', 'Custom']"
+          :key="index"
+          :value="index"
+        >
+          <v-list-item-title>{{ item }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
+  
+    <v-text-field style="border: 1px solid #CECECE;width:200px;
+border-radius: 6px;" variant="outlined" density="compact" class="ml-5" hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Search"></v-text-field>
+  </div>
+ </div>
       <div class="d-flex justify-center">
 <v-row style=" overflow-x: scroll;
   -webkit-overflow-scrolling: touch;
@@ -329,18 +339,18 @@ View More            </v-btn>
     <v-table style="    height: 190px!important;
     overflow: scroll;">
     <thead>
-      <tr class="bg-grey-lighten-3 ">
-        <th style="font-size: 14px;" class="  font-weight-medium  text-left">
-           #ID
+      <tr class="bg-grey-lighten-3  ">
+        <th style="font-size: 14px;" class="  font-weight-bold  text-left">
+           Products & Category
         </th>
-        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          First Item
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-bold">
+         Qty
         </th>
-        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          Date
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-bold">
+          Sales
         </th>
-        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          Purchase
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-bold">
+          Total Prices
         </th>
       </tr>
     </thead>
@@ -350,45 +360,24 @@ View More            </v-btn>
         v-for="item in items"
         :key="item.sn"
       >
-        <td style="font-size: 14px;" class="px-1 pl-2">
-            <v-menu
-      
-      location="end"
-    >
-      <template v-slot:activator="{ props }">
-   
-        <span  v-bind="props">
+        <td style="font-size: 14px;" class="px-1  d-flex align-center pl-2">
+          <v-avatar color="grey-lighten-2" class="pa-1 mr-3 ml-1" size="30" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img></v-avatar>
+          <div >
 
-{{ item.sn }}
-</span>
-      </template> 
-      <v-card class="pa-4 rounded-lg bg-green">
-        <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: {{ item.sn }}</p>
-        <div class="pt-2 align-center d-flex">
-            <v-avatar size="44" class="mr-2"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685693849/Rectangle_1898_gyahsj.png"></v-img></v-avatar>
-            <div>
-                <p style="font-weight: 500;font-size: 14px" class="text-capitalize">Jenny Wilson</p>
-                <p style="font-weight: 500;
-font-size: 10px;
-line-height: 100%;
-/* identical to box height, or 10px */
-
-
-color: rgba(255, 255, 255, 0.75);" class="text-capitalize">
-<v-icon size="12" class="mr-1" icon="mdi mdi-map-marker"></v-icon>United States</p>
-            </div>
-        </div>
-      </v-card>
-    </v-menu>
+            <p class="" style="font-weight: 600;
+font-size: 16px;
+line-height: 20px;
+color: #333333;">{{ item.name }}</p>
+            <p style="font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+color: #969696;">Fashion and Style</p>
+          </div>
     </td>
-        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.name }}</td>
-        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.date }}</td>
-        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">
-            <span v-if="chosen !== item.sn ">
-                {{ item.total }}
-            </span>
-            <v-btn v-else color="green" size="small" class=" rounded-lg"> See details</v-btn>
-        </td>
+        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">240</td>
+        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">{{ item.total }}</td>
+        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">{{ item.total }}</td>
+       
       </tr>
     </tbody>
   </v-table>
@@ -412,16 +401,19 @@ View Details            </v-btn>
     <thead>
       <tr class="bg-grey-lighten-3 ">
         <th style="font-size: 14px;" class="  font-weight-medium  text-left">
-           #ID
+           #
         </th>
         <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          First Item
+          ID Number
         </th>
         <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          Date
+          Name
         </th>
         <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          Purchase
+          Price
+        </th>
+        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+          Stock
         </th>
       </tr>
     </thead>
@@ -432,43 +424,14 @@ View Details            </v-btn>
         :key="item.sn"
       >
         <td style="font-size: 14px;" class="px-1 pl-2">
-            <v-menu
-      
-      location="end"
-    >
-      <template v-slot:activator="{ props }">
-   
-        <span  v-bind="props">
-
-{{ item.sn }}
-</span>
-      </template> 
-      <v-card class="pa-4 rounded-lg bg-green">
-        <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: {{ item.sn }}</p>
-        <div class="pt-2 align-center d-flex">
-            <v-avatar size="44" class="mr-2"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685693849/Rectangle_1898_gyahsj.png"></v-img></v-avatar>
-            <div>
-                <p style="font-weight: 500;font-size: 14px" class="text-capitalize">Jenny Wilson</p>
-                <p style="font-weight: 500;
-font-size: 10px;
-line-height: 100%;
-/* identical to box height, or 10px */
-
-
-color: rgba(255, 255, 255, 0.75);" class="text-capitalize">
-<v-icon size="12" class="mr-1" icon="mdi mdi-map-marker"></v-icon>United States</p>
-            </div>
-        </div>
-      </v-card>
-    </v-menu>
+          <v-avatar  color="grey-lighten-2" class="pa-1 ml-1" size="30" rounded="lg"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img></v-avatar>
     </td>
-        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.name }}</td>
-        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.date }}</td>
+        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.sn }}</td>
+        <td style="font-size: 16px;" class="font-weight-bold text-grey-darken-2 px-1">{{ item.name }}</td>
+        <td style="font-size: 14px;" class="text-grey-darken-2 px-1">{{ item.total }}</td>
         <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">
-            <span v-if="chosen !== item.sn ">
-                {{ item.total }}
-            </span>
-            <v-btn v-else color="green" size="small" class=" rounded-lg"> See details</v-btn>
+          
+            <v-btn color="red" variant="tonal" size="small" class=" rounded-lg"> Out of Stock</v-btn>
         </td>
       </tr>
     </tbody>
@@ -550,31 +513,31 @@ export default {
         total:'€2,349‎',
     },
     {
-        sn:'#26442',
+        sn:'#26042',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
     },
     {
-        sn:'#26442',
+        sn:'#25442',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
     },
     {
-        sn:'#26442',
+        sn:'#23442',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
     },
     {
-        sn:'#26442',
+        sn:'#26742',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
     },
     {
-        sn:'#23042',
+        sn:'#21042',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
@@ -616,6 +579,7 @@ export default {
     },
    ]
     }
-}
+},
+
 }
 </script>

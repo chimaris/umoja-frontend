@@ -76,12 +76,12 @@ export default {
   data() {
     return {
         list: '',
-           selectedItem: 'Website preview',
+           selectedItem: 'Homepage',
       items: [ 
         {
         name: 'website',
         list: [
-            { text: 'Website Preview', icon: 'fas fa-globe' },
+            { text: 'Homepage', icon: 'fas fa-globe' },
         ]
       },
         {
@@ -92,7 +92,8 @@ export default {
             { text: 'Products', icon: 'mdi mdi-tag' },
             { text: 'Customers', icon: 'mdi mdi-account-group' },
             { text: 'Sales', icon: 'mdi mdi-trending-up' },
-            { text: 'Review', icon: 'mdi mdi-star' },
+            { text: 'Reviews', icon: 'mdi mdi-star' },
+            { text: 'Merchandise', icon: 'mdi mdi-warehouse' },
         ]
       },
         {

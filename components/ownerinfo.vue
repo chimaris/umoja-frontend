@@ -19,6 +19,10 @@ color: #9EA5AD;">Complete your company information</p>
      <v-text-field placeholder="Last name" density="comfortable"  >
          </v-text-field></v-col>
          </v-row>                 
+ <p class="inputLabel">Email Address</p>             
+ 
+ <v-text-field  placeholder="Enter email address" density="comfortable"  >
+ </v-text-field>
  <p class="inputLabel">Phone Number</p>             
  
  <v-text-field  append-inner-icon="mdi mdi-phone-outline" placeholder="NG" density="comfortable"  >
@@ -26,7 +30,7 @@ color: #9EA5AD;">Complete your company information</p>
  <v-row>
                  <v-col> 
         <p class="inputLabel">Gender</p>             
-     <v-select  append-inner-icon="mdi mdi-chevron-down"  placeholder="Select gender" density="comfortable"  >
+     <v-select :items="gender" append-inner-icon="mdi mdi-chevron-down"  placeholder="Select gender" density="comfortable"  >
          </v-select></v-col>
                  <v-col> 
                      <p class="inputLabel">Date of Birth</p>             
@@ -49,7 +53,7 @@ line-height: 24px;color: #9EA5AD;
 <v-row>
                  <v-col> 
         <p class="inputLabel">Form of ID</p>             
-     <v-select  append-inner-icon="mdi mdi-chevron-down"  placeholder="Select" density="comfortable"  >
+     <v-select :items="formOfId" append-inner-icon="mdi mdi-chevron-down"  placeholder="Select" density="comfortable"  >
          </v-select></v-col>
                  <v-col> 
                      <p class="inputLabel">ID Number</p>             
@@ -75,8 +79,25 @@ color: #9EA5AD;">Drag and drop document here or Browse Supported file types: JPE
 </div>
          </v-card>           
 
- <v-btn flat style=" border: 1px solid #e5e5e5;" size="large" variant="outlined">Save and continue</v-btn>
+ <v-btn @click="submit()" flat style=" border: 1px solid #e5e5e5;" size="large" variant="outlined">Save and continue</v-btn>
 </div>
 
 </div>
 </template>
+<script>
+export default {
+    name: "ownerinfo",
+    data() {
+        return {
+          gender:['Male', 'Female'],
+          formOfId:['National ID', 'International Passport', 'Driver’s License'],
+          listOfAfricanCountriesAndStates: []
+        };
+    },
+    methods: {
+      submit(){
+        this.$emit("submit");
+      } 
+    },
+};
+</script>

@@ -52,7 +52,7 @@ line-height: 24px;color: #9EA5AD;
     
     <v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"  >
     </v-select>
-    <v-btn style=" border: 1px solid #e5e5e5;" size="large" variant="outlined">Save and continue</v-btn>
+    <v-btn @click="submit()" style=" border: 1px solid #e5e5e5;" size="large" variant="outlined">Save and continue</v-btn>
 </div>
 
 </div>
@@ -135,7 +135,12 @@ export default {
                 'Other'
             ]
    
+        }
+    },
+    methods: {
+        submit() {
+            this.$emit('submit')
+        }
     }
-}
 }
 </script>

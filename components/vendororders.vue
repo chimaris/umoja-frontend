@@ -183,9 +183,7 @@ export default {
   data() {
     return {
         tab: '',
-
-  
-    items:[
+    items1:[
     {
         sn:'#23942',
         name:'Leather crop top & pants......',
@@ -356,8 +354,19 @@ export default {
         delivery_method: 'Umoja Delivery'
     },
 
-   ],  
+   ],
+   items: []  
 }
+},
+mounted(){
+    this.items = this.items1;
+},
+methods:{
+  sort(x, y){
+    var items = this.items.map((item) => {
+      return item[x] == y;
+    });
+  }
 }
 }
 </script>

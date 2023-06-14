@@ -129,6 +129,7 @@ color: #000000;" class="pa-6">Related Products ({{ items.length }})</h1>
         size="x-small"
         ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
     </p>
+
                           <div style="position: absolute; bottom: 0;" class="d-flex align-center w-100 justify-space-between">
                 <div class="d-flex align-center"> 
                     <h1 
