@@ -26,7 +26,7 @@
     :show-arrows="false"
   >
     <v-carousel-item 
-      v-for="(slide, i) in ['Buy   ', 'Sell   ', 'Deilver']"
+      v-for="(slide, i) in ['Buy   ', 'Sell   ', 'Deliver']"
       :key="i"
     >
     
