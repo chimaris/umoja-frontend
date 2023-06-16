@@ -24,7 +24,7 @@
      
     </div>
     <div>
-      <v-btn to="/vendor/login" variant="text" size="x-large" flat>Login</v-btn>
+      <v-btn to="/user/login" variant="text" size="x-large" flat>Login</v-btn>
       <v-btn to="/vendor/registeration" size="x-large" color="green" flat class="ml-2">Sign up</v-btn>
     </div>
   </div>

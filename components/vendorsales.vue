@@ -38,7 +38,7 @@ color: #EDF0EF; ">€‎ 23,512.07</h1>
     <v-card color="" height="260" min-width="300px" class=" pt-4 px-4 mx-auto cardStyle" width="100%" style=""  flat >
            
 
-            <div class="d-flex align-center justify-space-between">
+            <div class="d-flex  justify-space-between">
               <p style="font-weight: 600;
 font-size: 24px;
 line-height: 30px;
@@ -70,7 +70,7 @@ View All            </v-btn>
     <v-card color="" height="260" min-width="300px" class=" pt-4 px-4 mx-auto cardStyle" width="100%" style=""  flat >
            
 
-            <div class="d-flex align-center justify-space-between">
+            <div class="d-flex justify-space-between">
               <p style="font-weight: 600;
 font-size: 24px;
 line-height: 30px;
