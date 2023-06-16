@@ -44,6 +44,14 @@ color: #1A1D1F;">{{window}}</p>
                     
                             <Vendororders />
                             </v-window-item>
+                        <v-window-item :value="'Sales'">
+                    
+                            <Vendorsales />
+                            </v-window-item>
+                        <v-window-item :value="'Customers'">
+                    
+                            <Vendorcustomers />
+                            </v-window-item>
         </v-window>
         </v-card>            </keep-alive>
 

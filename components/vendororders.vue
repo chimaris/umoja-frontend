@@ -2,7 +2,8 @@
      <v-card height="100%"  class=" mx-auto pt-6 pa-4" width="100%" style="overflow:hidden"  flat >
         <div class="d-flex align-center  justify-space-between">
             <div>
-                <p class="mb-2 timernum d-flex align-center text-left">
+                <p style="font-weight: 600;
+font-size: 24px;" class="mb-2  d-flex align-center text-left">
                     Manage all your orders here
                 </p> 
             </div>
@@ -50,12 +51,13 @@ border-radius: 6px;" variant="outlined" density="compact" hide-details prepend-i
       
     >
       <v-tab 
-        v-for="item in ['All Orders', 'Unfulfilled', 'Unpaid', 'Open', 'closed']"
+      @click.stop="sort(item.prop, item.value)"
+        v-for="item in tabs"
         :key="item"
         :value="item" 
         class="d-flex text-capitalize  align-center"
       >
-        {{ item }} 
+        {{ item.name }} 
 
       </v-tab>
     </v-tabs>
@@ -183,6 +185,7 @@ export default {
   data() {
     return {
         tab: '',
+        tabs:[{name:'All Orders', prop:null,value: null}, {name:'Unfulfilled',prop:'status',value: 0}, {name:'Unpaid',prop:'payment_status',value: 0}, {name:'Open',prop:'status',value: 1}, {name:'closed',prop:'status',value: 2}],
     items1:[
     {
         sn:'#23942',
@@ -193,7 +196,7 @@ export default {
         customer: 'Okoli Bonaventure',
         delivery: '€ 24.08',
         payment_status: 1,
-        status: 1,
+        status: 2,
         items_no: 7,
         delivery_method: 'Umoja Delivery'
     },
@@ -205,7 +208,7 @@ export default {
         date: 'May 29, 2023',
         customer: 'David',
         delivery: 0,
-        payment_status: 2,
+        payment_status: 0,
         status: 2,
         items_no: 1,
         delivery_method: 'Fedex Delivery'
@@ -219,7 +222,7 @@ export default {
         customer: 'Frank',
         delivery: '€ 24.08',
         payment_status: 1,
-        status: 0,
+        status: 2,
         items_no: 4,
         delivery_method: 'DHL Delivery'
     },
@@ -257,13 +260,13 @@ export default {
         date: 'May 29, 2023',
         customer: 'David',
         delivery: '€ 24.08',
-        payment_status: 2,
+        payment_status: 0,
         status: 2,
         items_no: 1,
         delivery_method: 'DHL Delivery'
     },
     {
-        sn:'#23942',
+        sn:'#239042',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
@@ -271,12 +274,12 @@ export default {
         customer: 'Frank',
         delivery: '€ 24.08',
         payment_status: 1,
-        status: 0,
+        status: 2,
         items_no: 4,
         delivery_method: 'Umoja Delivery'
     },
     {
-        sn:'#98763',
+        sn:'#9867763',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
@@ -289,20 +292,20 @@ export default {
         delivery_method: 'DHL Delivery'
     },
     {
-        sn:'#98765',
+        sn:'#98755765',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
         date: 'May 29, 2023',
         customer: 'David',
         delivery: '€ 24.08',
-        payment_status: 2,
-        status: 2,
+        payment_status: 0,
+        status: 1,
         items_no: 1,
         delivery_method: 'Umoja Delivery'
     },
     {
-        sn:'#76439',
+        sn:'#7646439',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
@@ -310,12 +313,12 @@ export default {
         customer: 'Frank',
         delivery: '€ 24.08',
         payment_status: 1,
-        status: 0,
+        status: 1,
         items_no: 4,
         delivery_method: 'Umoja Delivery'
     },
     {
-        sn:'#98765',
+        sn:'#9876765',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
@@ -328,20 +331,20 @@ export default {
         delivery_method: 'Fedex Delivery'
     },
     {
-        sn:'#98765',
+        sn:'#9876765',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
         date: 'May 29, 2023',
         customer: 'David',
         delivery: '€ 24.08',
-        payment_status: 2,
-        status: 2,
+        payment_status: 0,
+        status: 0,
         items_no: 1,
         delivery_method: 'Fedex Delivery'
     },
     {
-        sn:'#12345',
+        sn:'#12t65345',
         name:'Leather crop top & pants......',
         date:'17 May',
         total:'€2,349‎',
@@ -349,7 +352,7 @@ export default {
         customer: 'Frank',
         delivery: '€ 24.08',
         payment_status: 1,
-        status: 0,
+        status: 1,
         items_no: 4,
         delivery_method: 'Umoja Delivery'
     },
@@ -360,10 +363,11 @@ export default {
 },
 mounted(){
     this.items = this.items1;
-},
-methods:{
-  sort(x, y){
-    var items = this.items.map((item) => {
+  },
+  methods:{
+    sort(x, y){
+      var itm = this.items1;
+      this.items = itm.filter((item) => {
       return item[x] == y;
     });
   }

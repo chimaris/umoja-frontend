@@ -94,10 +94,25 @@ color: #969696;">vs last 7 days</p>
                 <p class="mb-2 timernum d-flex align-center text-left">Customer Growth</p> 
                 <p class="lightText2">of the week based on country </p>
             </div>
-            <v-btn style="    border: 1px solid #e5e5e5;
-" variant="outlined" class="text-grey-darken-3" >
-                Country <v-icon icon="mdi mdi-chevron-down"></v-icon>
-            </v-btn>
+            <v-menu width="auto">
+              <template v-slot:activator="{ props }">
+              <v-btn  v-bind="props"  style="    border: 1px solid #e5e5e5;
+  " variant="outlined" class="text-grey-darken-3" >
+                  Country <v-icon icon="mdi mdi-chevron-down"></v-icon>
+              </v-btn>
+      
+  
+      </template>
+      <v-list>
+        <v-list-item
+          v-for="(item, index) in ['United States', 'United Kingdom', 'Germany', 'France', 'Nigeria', 'Ghana', 'Kenya', 'South Africa']"
+          :key="index"
+          :value="index"
+        >
+          <v-list-item-title>{{ item }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+    </v-menu>
         </div>
         <v-row class="mt-8">
             <v-col cols="7">
@@ -160,7 +175,7 @@ color: #969696;" class="ml-4">{{ n.growth }}%</p>
                 <p class="lightText2">of the week based on total purchase </p>
             </div>
             <v-btn variant="text" color="#1361F4" class="" >
-View Details            </v-btn>
+View All            </v-btn>
         </div>
 <div class="rounded- mt-5" >
     <v-table style="    height: 190px!important;
