@@ -86,7 +86,7 @@ color: #1A1D1F;">{{window}}</p>
 export default {
   data() {
     return {
-   window:'Order details',
+   window:'Homepage',
    sidebar:true
     }
 },
