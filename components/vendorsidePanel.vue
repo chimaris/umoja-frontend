@@ -43,7 +43,7 @@ color: #596066;">Nweke Franklin</p>
 
 <div  v-for="(item, i) in items"
             :key="i" class="pt-8">
-    <p  v-if="sidebar" style="font-weight: 600;
+    <p  v-show="sidebar" style="font-weight: 600;
 font-size: 14px;
 line-height: 20px;
 color: #333333; " class="mb-3 px-8 text-capitalize">{{item.name}}</p>
@@ -51,7 +51,7 @@ color: #333333; " class="mb-3 px-8 text-capitalize">{{item.name}}</p>
     <div class="d-flex align-center">
 
         <v-icon size="18" :color="selectedItem == n.text? 'green ':'#969696'" class="mr-2" :icon="n.icon"></v-icon>
-        <p  v-if="sidebar" :class="selectedItem == n.text? 'text-green ':'text-grey'" 
+        <p  v-show="sidebar" :class="selectedItem == n.text? 'text-green ':'text-grey'" 
         style="font-weight: 600;
 font-size: 16px;
 line-height: 24px;">{{ n.text }}</p>
@@ -61,7 +61,7 @@ line-height: 24px;">{{ n.text }}</p>
   </div>
 </div>
 <div style="position: absolute; bottom: 22px;margin-top: 300px;" class="d-flex pt-12 px-8  justify-space-between align-center">
-  <v-avatar class="" @click="$router.push('/')" size="135" style="height:auto!important" rounded="0">
+  <v-avatar v-show="sidebar" class="" @click="$router.push('/')" size="135" style="height:auto!important" rounded="0">
   
     <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
   </v-avatar>
