@@ -44,7 +44,6 @@
                 </v-card>
             </v-col>
         </v-row>
-
     </div>
 </template>
 <style>

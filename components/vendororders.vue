@@ -1,5 +1,5 @@
 <template>
-     <v-card height="100%"  class=" mx-auto pt-6 pa-4" width="100%" style="overflow:hidden"  flat >
+     <v-container height="100%"  class=" mx-auto pt-6 pa-4" width="100%" style="overflow:hidden"  flat >
         <div class="d-flex align-center  justify-space-between">
             <div>
                 <p style="font-weight: 600;
@@ -103,7 +103,7 @@ border-radius: 6px;" class="  rounded-lg">
     </thead>
     <tbody>
         <!-- @click="chosen = item.sn" -->
-        <tr 
+        <tr  @click="choose(item.sn)"
         :style="chosen == item.sn ? 'background:#DFDFDF':''"
         v-for="item in items"
         :key="item.sn"
@@ -177,7 +177,7 @@ color: rgba(255, 255, 255, 0.75);" class="text-capitalize">
 </v-table>
 </div>
 
-  </v-card> 
+     </v-container> 
 </template>
 <script>
 export default {
@@ -365,6 +365,9 @@ mounted(){
     this.items = this.items1;
   },
   methods:{
+    choose(x){
+      this.$emit('changePage', 'Order details');
+    },
     sort(x, y){
       var itm = this.items1;
       this.items = itm.filter((item) => {

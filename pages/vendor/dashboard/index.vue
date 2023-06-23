@@ -11,27 +11,42 @@
             <v-col style="position: fixed;
     right: 0;z-index: 99;
     height: 102vh;transition: all 0.2s ease-out;" :class="sidebar ?'px-0 ':'px-0'" cols="12" :md="!sidebar? '12': '9'"> 
-                         <keep-alive>
    <v-card style="overflow: scroll;" min-height="100vh" height="100%" :class="!(window == 'dash')?'':'pr-8 py-8'" class=" " flat color="#fff" min>
-                  <div style="height: 83px;
-    background: white;
-    height: 83px;
-    position: sticky;
+    <div style="height: 110px;
+    background: rgb(255 255 255 / 65%);
+    backdrop-filter: blur(3px);    position: sticky;
     z-index: 99;
-    top: 0; border-bottom: 0.4px #EFEFEF solid;
-" class=" d-flex align-center ">
+    top: 0; border-bottom: 0.4px #EFEFEF solid;" >
+ 
+ <div v-if="window != 'Order details'" class="h-100 d-flex align-center ">
+  <v-btn class="mx-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn> 
 
-<v-btn class="mx-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn> 
-<p 
-style="font-weight: 600;
+  <p 
+  style="font-weight: 600;
 font-size: 24px;
 line-height: 32px;
 color: #1A1D1F;">{{window}}</p>
 </div>
+ <div v-else class="h-100 px-8 d-flex align-center ">
+  <v-btn class="mr-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn> 
 
-<!-- :value="$route.params.section -->
+  <v-btn
+  @click="window = 'Orders'" size="large" 
+    v-bind="props"  style="    border: 1px solid #e5e5e5;
+  " variant="outlined" class=" text-grey-darken-3" >
+                   <v-icon size="16" class="mr-2" icon="mdi mdi-arrow-left-top"></v-icon>
+                  Back to Orders
+              </v-btn>
+</div>
+</div>
+
+<!-- :value=" -->
                     <v-window
                     v-model="window">
+                    <v-window-item :value="'Order details'">
+                
+                        <Vendororderdetails />
+                        </v-window-item>
                     <v-window-item :value="'Homepage'">
                 
                         <Vendorpreview />
@@ -42,18 +57,22 @@ color: #1A1D1F;">{{window}}</p>
                         </v-window-item>
                         <v-window-item :value="'Orders'">
                     
-                            <Vendororders />
+                            <Vendororders  @changePage="changePage" />
                             </v-window-item>
+                            <v-window-item @changeTab="changePage" :value="'Customers'">
+                        
+                                <Vendorcustomers />
+                                </v-window-item>
                         <v-window-item :value="'Sales'">
                     
                             <Vendorsales />
                             </v-window-item>
-                        <v-window-item :value="'Customers'">
+                        <v-window-item :value="'Reviews'">
                     
-                            <Vendorcustomers />
+                            <Vendorreviews/>
                             </v-window-item>
         </v-window>
-        </v-card>            </keep-alive>
+        </v-card>           
 
         </v-col>
         </v-row>
@@ -63,7 +82,7 @@ color: #1A1D1F;">{{window}}</p>
 export default {
   data() {
     return {
-   window:'Dashboard',
+   window:'Order details',
    sidebar:true
     }
 },

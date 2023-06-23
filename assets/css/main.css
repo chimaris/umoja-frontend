@@ -23,6 +23,10 @@
     background: #F8F8F8;
     min-height: 100vh;
 }
+.linearl{
+    left: 8px!important;
+    transform: none!important;
+}
 .timerwords{
     font-weight: 500;
     font-size: 12px;
@@ -37,6 +41,10 @@ font-size: 14px!important;
 line-height: 20px!important;
 color: #333333!important;
 
+}
+.reviews .v-rating__item .v-btn {
+    scale: 0.8;
+    margin-left: -8px;
 }
 .um{
     font-weight: 500!important;
@@ -108,20 +116,20 @@ line-height: 140%;
 color: #969696;
 }
 .tiny3{
-    font-weight: 400;
-font-size: 14px;
-line-height: 18px;
-color: #333333;}
+    font-weight: 400!important;
+font-size: 14px!important;
+line-height: 18px!important;
+color: #333333!important;}
 .tiny2{
-    font-weight: 600;
-font-size: 14px;
-line-height: 18px;
-color: #333333;}
+    font-weight: 600!important;
+font-size: 14px!important;
+line-height: 18px!important;
+color: #333333!important;}
 .tiny{
-    font-weight: 600;
-font-size: 14px;
-line-height: 18px;
-color: #CDD6D4;
+    font-weight: 600!important;
+font-size: 14px!important;
+line-height: 18px!important;
+color: #CDD6D4!important;
 }
 .lightText2{
     font-weight: 200;
