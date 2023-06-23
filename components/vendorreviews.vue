@@ -225,20 +225,22 @@ font-weight: 600;" class="ml-4">50</span>
 
       <tr  
       @click="chosen = item.sn" 
-      style="height: 100px;"
+      style="height: 100px;width: 100%;"
       :style="chosen == item.sn ? 'background:#DFDFDF':''"
         v-for="(item, i) in items"
         :key="item.sn">
-        <td style="font-size: 14px;height: 100px;" 
+        <td style="position:relative;font-size: 14px;height: 100px;width: 270px;" 
         >
-        <v-menu offset="9px" open-on-hover location="top">
-            <template v-slot:activator="{ props }">
+        <div style="position: absolute;top: 24px; width: 270px;">
+
+        <v-menu  offset="9px" open-on-hover location="top">
+            <template  v-slot:activator="{ props }">
         <div  v-bind="props"
-        class="px-1 d-flex align-center pl-2"
+        class="px-1 d-flex  pl-2"
         >
 
 
-          <v-avatar color="grey-lighten-2" class="rounded-lg pa-1 mr-3 ml-1" size="50" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img></v-avatar>
+          <v-avatar color="grey-lighten-4" class="rounded-lg pa-1 mr-3 ml-1" size="50" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img></v-avatar>
           <div>
             <p class="" style="font-weight: 600;
 font-size: 16px!important;
@@ -252,7 +254,7 @@ color: #969696;">Fashion and Style</p>
         </div></template>
             <v-card max-width="310" class="pa-6 rounded-lg" color="#2C6E63">
         <v-row class="d-flex align-start">
-            <v-avatar color="grey-lighten-3" class="pa-1" size="70" rounded="lg">
+            <v-avatar color="grey-lighten-4" class="pa-1" size="70" rounded="lg">
                 <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img>
             </v-avatar>
             <v-col class=" py-0">
@@ -274,18 +276,20 @@ line-height: 20px;" class="mt-1"> € 235.00 per yard</p>
         </v-row>
      </v-card>
     </v-menu>
+        </div>
 
        
 
     </td>
-        <td style="font-size: 14px;height: 100px;" 
+    <td style="position:relative;font-size: 14px;height: 100px;width: 200px;" 
         >
+        <div style="position: absolute;top: 24px; width: 200px;">
         <div
         class="px-1 d-flex align-center pl-0"
         >
 
 
-          <v-avatar color="grey-lighten-2" class=" pa-1 mr-3" size="50" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687517181/Rectangle_1923_oguuzi.png"></v-img></v-avatar>
+          <v-avatar color="grey-lighten-4" class=" pa-1 mr-3" size="50" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687517181/Rectangle_1923_oguuzi.png"></v-img></v-avatar>
           <div>
             <p class="" style="font-weight: 500;
 font-size: 16px!important;
@@ -295,12 +299,14 @@ color: #333333;"> Sarah Johnson</p>
 font-size: 14px;
 line-height: 18px;
 color: #969696;">🇺🇸 USA, New York City</p>
-          </div>        </div>
+          </div>    
+            </div>
+            </div>
 
 
     </td>
      
-        <td style="max-width: 300px;" class="text-grey-darken-1 pb-4">
+        <td style="max-width: 250px;" class="text-grey-darken-1 pb-4">
            <div class="d-flex reviews2 pr-1 align-center mt-4 justify-space-between">
             <v-rating style="    height: 37px;
     display: flex;
@@ -327,18 +333,24 @@ font-weight: 700!important;
 line-height: 140%!important;
 letter-spacing: 0.6px!important;" class="text-overline pa-0 mt-2 text-uppercase">LEAVE A COMMENT</v-btn>
         </td>
-        <td style="font-size: 14px;" class="text-grey-darken-1 px-4">
-            <v-chip style="width:82px;
+        <td style="position:relative;font-size: 14px;height: 100px;width: ;" 
+        >
+        <div style="position: absolute;top: 24px; width: ;">
+                    <v-chip style="width:82px;
 font-size: 10px;
 font-weight: 500;" class="rounded-lg d-flex justify-center align-center" size="small" color="#C5912C" variant="tonal">
 
 Pending
-</v-chip></td>
-        <td style="font-size: 14px;" class="text-grey-darken-1 px-5">
-            <v-btn flat variant="text"
+</v-chip>
+</div></td>
+<td style="position:relative;font-size: 14px;height: ;width: ;" 
+        >
+        <div style="position: absolute;top: 10px;right: 10px; width: ;">  
+                      <v-btn flat variant="text"
             icon="mdi mdi-dots-horizontal" >
 
                 </v-btn>
+                </div>
             </td>
        
       </tr>
@@ -365,12 +377,13 @@ export default {
    return {
     rating: 4,
     skill: 100,
+    chosen: '',
        tab: '',
        tabs:[{name:'All Orders', prop:null,value: null}, {name:'Unfulfilled',prop:'status',value: 0}, {name:'Unpaid',prop:'payment_status',value: 0}, {name:'Open',prop:'status',value: 1}, {name:'closed',prop:'status',value: 2}],
    items1:[
    {
        sn:'#23942',
-       name:'Leather crop top & pants......',
+       name:'Leather crop top & pants',
        date:'17 May',
        total:'€2,349‎',
       country: '🇺🇸 United States',
@@ -387,7 +400,7 @@ export default {
    },
    {
        sn:'#876567',
-       name:'Leather crop top & pants......',
+       name:'Leather crop top & pants',
        added_cat: 'Added Manually',
        date:'17 May',
        total:'€2,349‎',
@@ -405,7 +418,7 @@ export default {
    },
    {
        sn:'#3456456',
-       name:'Leather crop top & pants......',
+       name:'Leather crop top & pants',
        added_cat: 'Added Manually',
        date:'17 May',
        total:'€2,349‎',
@@ -423,7 +436,7 @@ export default {
    },
    {
        sn:'#65459',
-       name:'Leather crop top & pants......',
+       name:'Leather crop top & pants',
        added_cat: 'Added Manually',
        date:'17 May',
        total:'€2,349‎',
@@ -441,7 +454,7 @@ export default {
    },
    {
        sn:'#098765',
-       name:'Leather crop top & pants......',
+       name:'Leather crop top & pants',
        added_cat: 'Added Manually',
        date:'17 May',
        total:'€2,349‎',
@@ -457,149 +470,8 @@ export default {
        items_no: 7,
        delivery_method: 'Umoja Delivery'
    },
-   {
-       sn:'#65456',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'David',
-       delivery: '€ 24.08',
-       payment_status: 0,
-       status: 2,
-       items_no: 1,
-       delivery_method: 'DHL Delivery'
-   },
-   {
-       sn:'#239042',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'Frank',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 2,
-       items_no: 4,
-       delivery_method: 'Umoja Delivery'
-   },
-   {
-       sn:'#9867763',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'Okoli Bonaventure',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 1,
-       items_no: 7,
-       delivery_method: 'DHL Delivery'
-   },
-   {
-       sn:'#98755765',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'David',
-       delivery: '€ 24.08',
-       payment_status: 0,
-       status: 1,
-       items_no: 1,
-       delivery_method: 'Umoja Delivery'
-   },
-   {
-       sn:'#7646439',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'Frank',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 1,
-       items_no: 4,
-       delivery_method: 'Umoja Delivery'
-   },
-   {
-       sn:'#9876765',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'Okoli Bonaventure',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 1,
-       items_no: 7,
-       delivery_method: 'Fedex Delivery'
-   },
-   {
-       sn:'#9876765',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'David',
-       delivery: '€ 24.08',
-       payment_status: 0,
-       status: 0,
-       items_no: 1,
-       delivery_method: 'Fedex Delivery'
-   },
-   {
-       sn:'#12t65345',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-       date: 'May 29, 2023',
-       customer: 'Frank',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 1,
-       items_no: 4,
-       delivery_method: 'Umoja Delivery'
-   },
+ 
+ 
 
   ],
   dashes:[

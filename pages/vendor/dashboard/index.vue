@@ -2,15 +2,15 @@
     <div>
         <v-row class="d-flex ">
           
-          <v-col  cols="12" :class="!(window == 'dash')?'pr-0':''" style="max-width: 400px;background-color: #F6F7F9;position: relative;" :md="!sidebar? '12': '3'" class="pb-0 pt-0">
+          <v-col  cols="12" :class="!(window == 'dash')?'px-0':''" style="background-color: #F6F7F9;position: absolute;top: 0;left: 0;z-index: 99;" :md="!sidebar? '3': '3'" class="pb-0 pt-0">
             <v-slide-x-transition >
-              <VendorsidePanel :window="window" :sidebar="sidebar"   @sideFn="sideFn"  @changePage="changePage"  v-show="sidebar" />
+              <VendorsidePanel :window="window" :sidebar="sidebar"   @sideFn="sideFn"  @changePage="changePage"   />
             </v-slide-x-transition>
             </v-col>
               
             <v-col style="position: fixed;
     right: 0;z-index: 99;
-    height: 102vh;transition: all 0.2s ease-out;" :class="sidebar ?'px-0 ':'px-0'" cols="12" :md="!sidebar? '12': '9'"> 
+    height: 102vh;transition: all 0.2s ease-out;" class="maincont" :class="sidebar ?'px-0 ':'px-0'" cols="12" :md="!sidebar? '12': '9'"> 
    <v-card style="overflow: scroll;" min-height="100vh" height="100%" :class="!(window == 'dash')?'':'pr-8 py-8'" class=" " flat color="#fff" min>
     <div style="height: 110px;
     background: rgb(255 255 255 / 65%);
@@ -78,6 +78,10 @@ color: #1A1D1F;">{{window}}</p>
         </v-row>
     </div>
 </template>
+<style>
+.maincont.v-col-md-12{
+  max-width: calc(100% - 85px);}
+</style>
 <script>
 export default {
   data() {

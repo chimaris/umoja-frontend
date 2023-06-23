@@ -1,7 +1,9 @@
 <template>
-                <v-card  style="position: absolute;z-index: 99;" width="calc(100% - 5px)"  height="100%" min-height="1000px"  class="rounded-0 py-10" :class="$vuetify.display.smAndDown? 'elevation-20':''" flat color="#F6F7F9" min>
-                
-                    <v-menu
+                <v-card  style="position: ;z-index: 99;" width="calc(100% - 5px)"  height="100%" min-height="1000px"  class="rounded-0 py-10 p" flat color="#F6F7F9" min>
+                  <v-slide-x-transition>
+
+                  <v-menu
+                  v-if="sidebar"
     >
       <template v-slot:activator="{ props }">
       <div class="px-8">
@@ -31,16 +33,17 @@ color: #596066;">Nweke Franklin</p>
 
       <v-list>
         <v-list-item
-          v-for="(item, index) in ['items', 'hello']"
+          v-for="(item, index) in ['Account','Settings', 'Logout']"
           :key="index"
         >
           <v-list-item-title>{{ item }}</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+    </v-menu>                  </v-slide-x-transition>
+
 <div  v-for="(item, i) in items"
             :key="i" class="pt-8">
-    <p  style="font-weight: 600;
+    <p  v-if="sidebar" style="font-weight: 600;
 font-size: 14px;
 line-height: 20px;
 color: #333333; " class="mb-3 px-8 text-capitalize">{{item.name}}</p>
@@ -48,7 +51,7 @@ color: #333333; " class="mb-3 px-8 text-capitalize">{{item.name}}</p>
     <div class="d-flex align-center">
 
         <v-icon size="18" :color="selectedItem == n.text? 'green ':'#969696'" class="mr-2" :icon="n.icon"></v-icon>
-        <p  :class="selectedItem == n.text? 'text-green ':'text-grey'" 
+        <p  v-if="sidebar" :class="selectedItem == n.text? 'text-green ':'text-grey'" 
         style="font-weight: 600;
 font-size: 16px;
 line-height: 24px;">{{ n.text }}</p>
