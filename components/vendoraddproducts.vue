@@ -272,7 +272,7 @@ line-height: 20px;" class="ml-2 font-weight-medium">
     </div>
     <div class="pa-4">
 
-    <p>Shipping weight</p>
+    <p class="inputLabel">Shipping weight</p>
     <div class="d-flex my-2">
 
         <v-text-field style="max-width: 180px;" class="mr-3 rounded-lg bg-grey-lighten-3" density="compact" hide-details variant="outline" value="0.00"></v-text-field>
