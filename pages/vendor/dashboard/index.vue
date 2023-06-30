@@ -35,7 +35,7 @@ color: #1A1D1F;">{{window}}</p>
   <v-btn class="mr-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn> 
 
   <v-btn
-  @click="window = 'Orders'" size="large" 
+  @click="window = (window == 'Add Products'? 'Products': 'Orders' )" size="large" 
     v-bind="props"  style="    border: 1px solid #e5e5e5;
   " variant="outlined" class=" text-grey-darken-3" >
                    <v-icon size="16" class="mr-2" icon="mdi mdi-arrow-left-top"></v-icon>
