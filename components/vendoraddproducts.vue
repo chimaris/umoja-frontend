@@ -194,7 +194,7 @@ font-weight: 600;"> Inventory
          <div style="color: #333;
 font-size: 14px;
 font-weight: 500;
-line-height: 20px;" class="font-weight-medium">
+line-height: 20px;" class="ml-2 font-weight-medium">
              Track Quantity
 
          </div>
@@ -235,10 +235,12 @@ border: 1px solid  #CECECE;width: 141px;">
 
  <v-checkbox hide-details density="compact" color="#00966D">
        <template v-slot:label>
-         <div style="color: #333;
-font-size: 14px;
-font-weight: 500;
-line-height: 20px;" class="font-weight-medium">
+         <div 
+         style="color: #333;
+                font-size: 14px;
+                font-weight: 500;
+                line-height: 20px;" 
+            class="ml-2 font-weight-medium">
            This product has a SKU or barcode
 
          </div>
@@ -290,7 +292,7 @@ width: 121px;">
         <div style="color: #333;
 font-size: 14px;
 font-weight: 500;
-line-height: 20px;" class="font-weight-medium">
+line-height: 20px;" class="ml-2 font-weight-medium">
          This product ships internationally
 
         </div>

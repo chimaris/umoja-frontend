@@ -60,8 +60,14 @@ line-height: 24px;">{{ n.text }}</p>
 <v-icon color="green" size="6" v-if="selectedItem == n.text && (n.text !== 'Notification')" icon="mdi mdi-circle"></v-icon>
   </div>
 </div>
-<div style="position: absolute; bottom: 22px;margin-top: 300px;" class="d-flex pt-12 px-8  justify-space-between align-center">
-  <v-avatar v-show="sidebar" class="" @click="$router.push('/')" size="135" style="height:auto!important" rounded="0">
+<div v-if="!sidebar" style="position:; bottom: 22px;margin-top: 100px;" class="d-flex pt-12 px-4  justify-space-between align-center">
+  <v-avatar  class="" @click="$router.push('/')" size="57" style="height:auto!important" rounded="0">
+    <v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1688141514/Frame_2_gfd65l.png"></v-img>
+  </v-avatar>
+  </div>
+<div v-else style="position:; bottom: 22px;margin-top: 100px;" class="d-flex pt-12 px-8  justify-space-between align-center">
+
+  <v-avatar class="" @click="$router.push('/')" size="135" style="height:auto!important" rounded="0">
   
     <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
   </v-avatar>
