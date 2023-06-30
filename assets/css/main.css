@@ -233,6 +233,12 @@ border-radius: 15px!important;
     line-height: 20px;
     text-transform: none;
 }
+.menubar .v-btn__content{
+    font-weight: 600!important;
+    font-size: 14px!important;
+    line-height: 20px!important;
+    text-transform: none!important;
+}
 .v-table .v-btn__content{
     font-weight: 500;
     font-size: 12px;

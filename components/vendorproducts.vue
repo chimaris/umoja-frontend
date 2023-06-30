@@ -1,229 +1,427 @@
-<template>  <div>
+<template>
+    <v-container height="100%"  class=" mx-auto pt-6 pa-4" width="100%" style="max-width: ;overflow:hidden" fluid flat >
+       <div class="d-flex align-center  justify-space-between">
+        <div class="d-flex w-100 align-center ">
+           <div class="d-flex  align-center ">
+        <v-text-field style="width:235px;border: 1px solid #CECECE;
+          border-radius: 6px;" variant="outlined" density="compact" hide-details prepend-inner-icon="mdi mdi-magnify" placeholder="Search ">
+          </v-text-field>
+        </div>
+           <div class="d-flex align-center">
 
-    <div style="background-color: ;" class="d-flex py-6 align-center justify-space-between">
-        <p style="font-weight: 600;
+               <v-btn style=" border: 1px solid #e5e5e5;
+" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3" >
+               Sort by
+               <v-icon  class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
+           </v-btn>
+           <v-btn style="    border: 1px solid #e5e5e5;
+" variant="outlined" size="default" class="ml-4 menubar  text-grey-darken-3" >
+               Collection type 
+               <v-icon  class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
+           </v-btn>
+           <v-btn style="    border: 1px solid #e5e5e5;
+" variant="outlined" size="default" class="ml-4 menubar  text-grey-darken-3" >
+               Price Range 
+               <v-icon  class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
+           </v-btn>
+        
+       </div>
+       </div>
+           <div class="d-flex align-center">
+
+               <v-btn style="    border: 1px solid #e5e5e5;
+" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3" >
+                <v-icon class="mr-2" icon="mdi mdi-tray-arrow-down"></v-icon>
+               Import
+           </v-btn>
+           <v-btn style="    border: 1px solid #e5e5e5;
+" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3" >
+               <v-icon class="mr-2" icon="mdi mdi-tray-arrow-up"></v-icon>
+               Export 
+           </v-btn>
+           <v-btn flat color="green" size="default" class="ml-4 menubar text-grey-darken-3" >
+                <v-icon class="mr-2"  icon="mdi mdi-plus"></v-icon>
+               Add product
+           </v-btn>
+       </div>
+       </div>
+      
+<div class=" mt-5" >
+   <v-tabs
+     v-model="tab" class="orders"
+     color="green">
+     <v-tab 
+     @click.stop="sort(item.prop, item.value)"
+       v-for="item in tabs"
+       :key="item"
+       :value="item" 
+       class="d-flex text-capitalize  align-center"
+     >
+       {{ item.name }} 
+
+     </v-tab>
+   </v-tabs>
+   <v-divider></v-divider>
+   <v-table style="    height: 80%; !important;
+   overflow: scroll;">
+   <thead>
+     <tr style="background: #F8F8F8;
+border-radius: 6px;" class="  rounded-lg">
+       <th style="
+   width: 50px;
+" class="  font-weight-medium  text-left">
+          <v-checkbox hide-details></v-checkbox>
+       </th>
+       <th  style="font-size: 14px;width: 100px;" class="  font-weight-medium  text-left">
+         Product Details
+       </th>
+       <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+         Category
+       </th>
+       <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+         Options/Colors
+       </th>
+       <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+         Status
+       </th>
+       <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+         Price
+       </th>
+       <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+         Stock
+       </th>
+       <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+         SKU
+       </th>
+       <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+        Actions
+       </th>
+       <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+         
+       </th>
+     </tr>
+   </thead>
+   <tbody>
+       <!-- @click="chosen = item.sn" -->
+       <tr  
+       @click="choose(item.sn)"
+       :style="chosen == item.sn ? 'background:#DFDFDF':''"
+       v-for="item in items"
+       :key="item.sn"
+       >
+       <td  class="text-grey-lighten-1 pl-4 px-1">   
+              <v-checkbox hide-details></v-checkbox>
+       </td>
+       <td style="position:relative;font-size: 14px;height: 100px;" 
+        >
+        <div style="position: ;top: 24px; width: ;">
+
+        <v-menu class="pl-0" offset="9px" open-on-hover location="top">
+            <template  v-slot:activator="{ props }">
+        <div  v-bind="props"
+        class=" d-flex align-center pr-4 pl-2"
+        >
+          <v-avatar color="grey-lighten-4" class="rounded-lg pa-1 mr-3 ml-0" size="50" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img></v-avatar>
+          <div>
+            <p class="mb-1" style="font-weight: 600;
+font-size: 16px!important;
+line-height: 20px;
+color: #333333;">Ghana multi-colored kente... </p>
+            <p style="font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+color: #969696;" class="text-truncate">The Ghana kente material comes with a...</p>
+          </div>
+        </div></template>
+            <v-card max-width="310" class="pa-6 rounded-lg" color="#2C6E63">
+        <v-row class="d-flex align-start">
+            <v-avatar color="grey-lighten-4" class=" pa-1" size="70" rounded="lg">
+                <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img>
+            </v-avatar>
+            <v-col class=" py-0">
+                <p 
+    style="color: #EDF0EF;
+font-size: 14px;
+font-weight: 600;
+line-height: 20px;">Multicolored Ankara Material made in the Suberbs of Africa</p>
+<p style="color: #CDD6D4;
 font-size: 12px;
-line-height: 15px;
-text-transform: uppercase;
-color: #969696;"> 72 products found</p>
-        <div >
-            <v-btn flat rounded="xl" size="x-small" color="transparent" style=" font-size: 20px; color:#333333" icon="mdi mdi-view-grid"></v-btn>
-            <v-btn flat rounded="xl" size="x-small" color="transparent" style=" font-size: 20px; color:#333333" icon="mdi mdi-order-bool-descending-variant" class="mx-2"></v-btn>
-            <v-btn variant="tonal" color="#333333" class="textClass" flat> <v-icon class="mr-2" size="20" icon="mdi mdi-tune-vertical"></v-icon>Filter</v-btn>
+font-weight: 500;
+line-height: 20px;">Fashion and Style </p>
+
+<p style="color: #EDF0EF;
+font-size: 16px;
+font-weight: 600;
+line-height: 20px;" class="mt-1"> € 235.00 per yard</p>
+            </v-col>
+        </v-row>
+     </v-card>
+    </v-menu>
         </div>
-    </div>
-    <v-carousel style="overflow: visible;"
-    height="170" class="promo"
-     :show-arrows="false" hide-delimiter-background="" cycle>
-      <v-carousel-item 
-        v-for="n in 6"
-      >
-      <v-img cover height="auto" min-height="160px" class="bg-black d-flex py-3 align-center rounded-lg" src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1684602013/Rectangle_458_zafbwy.png">
-        <div>
-            <v-row class="d-flex pa-4 px-6 justify-space-between align-center">
-                <v-col  cols="6" sm="6">
-                    <h1 style="line-height: 1.2;" class=" mb-0 text-white font-weight-black">The Waden Cloth</h1>
-                    <p class="textClass mb-4 text-white">known to be used by the Nawi people</p>
-                    <div>
-                      <v-btn  flat to="/vendor/profile" color="orange" 
-                  ><span class="smallBtn">
-                    See product
-                </span>
-            </v-btn>
-                <v-btn to="/user/login"  flat variant="text"  class="ml-2 text-white howit"><span style="text-decoration:underline">
-                    <span class="smallBtn">
-                    Not now
-                </span>
-                </span>
-                </v-btn>
-                    </div>
-                </v-col>
-                <v-col class="d-flex justify-end" cols="6" sm="6">
-                    <v-card max-width="200px" style="background: rgba(0, 0, 0, 0.25);
-    border: 0.5px solid #333333;
-    backdrop-filter: blur(15.1475px);
-    border-radius: 12.118px;" class="bg-black px-5 py-3">
-                        <p class="text-white text-overline text-center ">auction ends in</p>
+
+       
+
+    </td>
     
-                        <div class="d-flex align-center justify-space-between">
-                            <div  class="text-center bg-grey-lighten-3 rounded-lg px-3 py-2">
-    <p style="font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #333333;">23</p>
-        <p style="font-weight: 500;
-    font-size: 7px;
-    line-height: 9px;
-    letter-spacing: 0.03em;
+   <td style="height: 100px;" class=" align-center d-flex px-1">  
+    <v-chip style="color:  #333;
+font-size: 10px;
+font-weight: 500;
+" rounded="lg" class="" size="small" color="grey" variant='tonal'>
+Fashion and style               
+           </v-chip>
+    <v-chip style="color:  #333;
+font-size: 10px;
+font-weight: 500;
+" rounded="lg" class="mx-2" size="small" color="grey" variant='tonal'>
+Clothes             
+           </v-chip>
+          </td>
+   <td  class="tableThick px-1">                                               <div class="h-100 d-flex align-center">
+
+<v-icon icon="mdi mdi-circle" class="mx-1" color="black"
+     size="12"></v-icon>
+<v-icon icon="mdi mdi-circle" class="mx-1" color="yellow"
+     size="12"></v-icon>
+<v-icon icon="mdi mdi-circle" class="mx-1" color="brown"
+     size="12"></v-icon>
+</div></td>
+       <td  class="tableLight px-1">
+        <v-chip style="color:  #333;
+font-size: 10px;
+font-weight: 500;
+" rounded="lg" class="" size="small" color="green" variant='tonal'>
+Active               
+           </v-chip>
+       </td>
+       <td  class="tableThick px-1">{{ item.total  }}</td>
+       <td  class="tableThick px-1">
+      <p>36 in stock</p>
+      <p style="color: #969696;font-weight: 400;">for 3 variants</p>
+      </td>
     
-    color: #333333;">hours</p>
-                            </div>
-                            <p class="text-grey-lighten-3 mb-1 text-h3 mx-1" style="line-height: 1;">:</p>
-                            <div  class="text-center bg-grey-lighten-3 rounded-lg px-3 py-2">
-                                <p style="font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #333333;">23</p>
-                                <p style="font-weight: 500;
-    font-size: 7px;
-    line-height: 9px;
-    letter-spacing: 0.03em;
-    
-    color: #333333;">hours</p>
-                            </div>
-                            <p class="text-grey-lighten-3 mb-1 text-h3 mx-1" style="line-height: 1;">:</p>
-    
-                            <div  class="text-center bg-grey-lighten-3 rounded-lg px-3 py-2">
-         <p style="font-weight: 500;
-    font-size: 14px;
-    line-height: 17px;
-    color: #333333;">23</p>
-         <p style="font-weight: 500;
-    font-size: 7px;
-    line-height: 9px;
-    letter-spacing: 0.03em;
-    
-    color: #333333;">hours</p>
-                            </div>
-                        </div>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </div>
-    </v-img>
-    </v-carousel-item>
-    </v-carousel>
-       <v-row style="background-color: #fff;" class="mt-8">
-        <v-col  v-for="(n, i) in items" :key="i" lg="4" xs="6" sm="4" md="6">
-            <v-card flat style="border-radius: 15px;border: 1px solid #CECECE;" class="bg-white rounded-lg pa-4">
-                <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="236px" :src="n.image">
-                <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
-                <v-icon size="x-small" color="#1C274C" icon="mdi mdi-heart-outline"></v-icon></v-btn>
-                </v-img>
-                <p style="font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;
-    
-    color: #000000;
-    " class=" mt-2">{{filt(n.name)}}</p>
-    <p style="font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #000000;
-    " class="mt-1">Organic cotton certified</p>
-    <p style="font-weight: 600;
-    font-size: 10px;
-    line-height: 13px;
-    color: #000000;
-    " class="d-flex mb-1 align-center">
-        <v-rating
-        v-model="rating"
-        color="grey-lighten-2"
-        active-color="#E7CE5D"
-        class="ml-2"
-        size="x-small"
-        ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
-    </p>
-                          <div class="d-flex align-center justify-space-between">
-                <div class="d-flex align-center"> 
-                    <h1 
-    style="font-size: 16px;
-            line-height: 20px;
-            color: #1A1D1F;
-    " class="priceClass">N{{n.price}}</h1>
-    
-                </div>
-                <v-btn size="small" style="border: 1px solid #CED2D6;
-    border-radius: 6px;"  :color="n.oos? 'green':''" :variant="!n.oos? 'outlined':'elevated'" flat :class="n.oos? 'text-grey':''" class="ml-2">
-                     <span class="smallBtn">{{'Add to Cart'}}</span> 
-                </v-btn>
-    
-                </div>
-            </v-card>
-        </v-col>
-       </v-row>    
-      </div></template>
+       <td  class="tableLight px-1"><p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;">UY3749</p></td>
+       <td  class="text-grey-lighten-1 text-center px-1">
+         
+           <v-btn style=" border: 1px solid #e5e5e5;
+" variant="outlined" size="default" class=" menubar text-grey-darken-3" >
+               Edit
+           </v-btn>
+       </td>
+       <td  class="um  px-1"><v-icon icon="mdi mdi-dots-horizontal"></v-icon></td>
+       
+       <!-- <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">
+           <span v-if="chosen !== item.sn ">
+               {{ item.total }}
+           </span>
+           <v-btn v-else color="green" size="small" class=" rounded-lg"> See details</v-btn>
+       </td> -->
+   </tr>
+</tbody>
+</v-table>
+</div>
+
+    </v-container> 
+</template>
 <script>
 export default {
-    methods: {
-filt(text){
-var newText = text.length > 40 ? text.slice(0, 40) +'...' : text
-   return newText
+
+ data() {
+   return {
+    dialog: true,
+       tab: '',
+       tabs:[{name:'All Products', prop:null,value: null}, {name:'Active',prop:'status',value: 0}, {name:'Drafts',prop:'payment_status',value: 0}, {name:'Archived',prop:'status',value: 1}],
+   items1:[
+   {
+       sn:'#23942',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Okoli Bonaventure',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 2,
+       items_no: 7,
+       delivery_method: 'Umoja Delivery'
+   },
+   {
+       sn:'#876567',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'David',
+       delivery: 0,
+       payment_status: 0,
+       status: 2,
+       items_no: 1,
+       delivery_method: 'Fedex Delivery'
+   },
+   {
+       sn:'#3456456',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Frank',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 2,
+       items_no: 4,
+       delivery_method: 'DHL Delivery'
+   },
+   {
+       sn:'#65459',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Okoli Bonaventure',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 1,
+       items_no: 7,
+       delivery_method: 'Umoja Delivery'
+   },
+   {
+       sn:'#098765',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Okoli Bonaventure',
+       delivery: 0,
+       payment_status: 1,
+       status: 1,
+       items_no: 7,
+       delivery_method: 'Umoja Delivery'
+   },
+   {
+       sn:'#65456',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'David',
+       delivery: '€ 24.08',
+       payment_status: 0,
+       status: 2,
+       items_no: 1,
+       delivery_method: 'DHL Delivery'
+   },
+   {
+       sn:'#239042',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Frank',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 2,
+       items_no: 4,
+       delivery_method: 'Umoja Delivery'
+   },
+   {
+       sn:'#9867763',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Okoli Bonaventure',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 1,
+       items_no: 7,
+       delivery_method: 'DHL Delivery'
+   },
+   {
+       sn:'#98755765',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'David',
+       delivery: '€ 24.08',
+       payment_status: 0,
+       status: 1,
+       items_no: 1,
+       delivery_method: 'Umoja Delivery'
+   },
+   {
+       sn:'#7646439',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Frank',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 1,
+       items_no: 4,
+       delivery_method: 'Umoja Delivery'
+   },
+   {
+       sn:'#9876765',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Okoli Bonaventure',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 1,
+       items_no: 7,
+       delivery_method: 'Fedex Delivery'
+   },
+   {
+       sn:'#9876765',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'David',
+       delivery: '€ 24.08',
+       payment_status: 0,
+       status: 0,
+       items_no: 1,
+       delivery_method: 'Fedex Delivery'
+   },
+   {
+       sn:'#12t65345',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+       date: 'May 29, 2023',
+       customer: 'Frank',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 1,
+       items_no: 4,
+       delivery_method: 'Umoja Delivery'
+   },
+
+  ],
+  items: []  
 }
-  },
-  data() {
-    return {
-        placescards:false,
-        mods:1,
-        window: 'products',
-        rating: 4,
-        items:[
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png',
-                price: '115.32',
-                likes: '1.2k'
-            },
-            {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png',
-                price: '57.00',
-                likes: '456',
-                oos: true
-            },
-          
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
-                price: '57.00',
-                likes: '456',
-            },
-            {
-                name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
-                price: '79.00',
-                likes: '66',
-                oos: true
-            },
-            {
-                name: 'Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png',
-                price: '179.00',
-                likes: '966',
-            },
-            {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png',
-                price: '57.00',
-                likes: '456',
-            },
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
-                price: '57.00',
-                likes: '456',
-            },
-            {
-                name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
-                price: '79.00',
-                likes: '66',
-                oos: true
-            },
-            {
-                name: 'Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png',
-                price: '179.00',
-                likes: '966',
-            },
-            {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png',
-                price: '57.00',
-                likes: '456',
-            },
-        ]
-    }
+},
+mounted(){
+   this.items = this.items1;
+ },
+ methods:{
+   choose(x){
+     this.$emit('changePage', 'Add Products');
+   },
+   sort(x, y){
+     var itm = this.items1;
+     this.items = itm.filter((item) => {
+     return item[x] == y;
+   });
+ }
 }
 }
 </script>

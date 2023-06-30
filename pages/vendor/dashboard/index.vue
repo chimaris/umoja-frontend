@@ -1,4 +1,6 @@
 <template>
+
+
     <div>
         <v-row class="d-flex ">
           
@@ -11,14 +13,16 @@
             <v-col style="position: fixed;
     right: 0;z-index: 99;
     height: 102vh;transition: all 0.2s ease-out;" class="maincont" :class="sidebar ?'px-0 ':'px-0'" cols="12" :md="!sidebar? '12': '9'"> 
+
    <v-card style="overflow: scroll;" min-height="100vh" height="100%" :class="!(window == 'dash')?'':'pr-8 py-8'" class=" " flat color="#fff" min>
-    <div style="height: 110px;
+    <div style="position: fixed;z-index: 99;width: 100%;">
+      <div style="height: 110px;
     background: rgb(255 255 255 / 65%);
     backdrop-filter: blur(3px);    position: sticky;
     z-index: 99;
     top: 0; border-bottom: 0.4px #EFEFEF solid;" >
  
- <div v-if="window != 'Order details'" class="h-100 d-flex align-center ">
+ <div v-if="(window != 'Order details') && (window != 'Add Products')" class="h-100 d-flex align-center ">
   <v-btn class="mx-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn> 
 
   <p 
@@ -35,30 +39,35 @@ color: #1A1D1F;">{{window}}</p>
     v-bind="props"  style="    border: 1px solid #e5e5e5;
   " variant="outlined" class=" text-grey-darken-3" >
                    <v-icon size="16" class="mr-2" icon="mdi mdi-arrow-left-top"></v-icon>
-                  Back to Orders
+                  Back to {{window !== 'Add Products'? 'Orders': 'Products'}}
               </v-btn>
 </div>
-</div>
-
+</div></div>
 <!-- :value=" -->
-                    <v-window
+                    <v-window style="padding-top: 110px;"
                     v-model="window">
                     <v-window-item :value="'Order details'">
-                
                         <Vendororderdetails />
                         </v-window-item>
-                    <v-window-item :value="'Homepage'">
-                
-                        <Vendorpreview />
+                        <v-window-item :value="'Homepage'">
+                          
+                          <Vendorpreview />
                         </v-window-item>
                         <v-window-item :value="'Dashboard'">
                           
                           <Vendordashboard />
                         </v-window-item>
                         <v-window-item :value="'Orders'">
-                    
-                            <Vendororders  @changePage="changePage" />
+                          
+                          <Vendororders  @changePage="changePage" />
+                        </v-window-item>
+                        <v-window-item :value="'Add Products'">
+                            <Vendoraddproducts  />
                             </v-window-item>
+                            <v-window-item :value="'Products'">
+                        
+                                <Vendorproducts @changePage="changePage" />
+                                </v-window-item>
                             <v-window-item @changeTab="changePage" :value="'Customers'">
                         
                                 <Vendorcustomers />
@@ -84,19 +93,19 @@ color: #1A1D1F;">{{window}}</p>
 </style>
 <script>
 export default {
-  data() {
-    return {
-   window:'Homepage',
-   sidebar:true
-    }
-},
-methods:{
-  changePage(n){
-    this.window = n
-  },
-  sideFn(){
-    this.sidebar = false
-  },
-}
+    data() {
+        return {
+            window: "Homepage",
+            sidebar: true,
+        };
+    },
+    methods: {
+        changePage(n) {
+            this.window = n;
+        },
+        sideFn() {
+            this.sidebar = false;
+        },
+    },
 }
 </script>

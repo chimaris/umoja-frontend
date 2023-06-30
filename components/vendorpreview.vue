@@ -95,7 +95,7 @@ color: #969696;">ON THE WEB</p>
   v-model="tab"
   >
     <v-window-item value="products">
-  <Vendorproducts />
+  <Vendorproductstab />
               </v-window-item>
     <v-window-item value="posts">
   <Vendorposts />

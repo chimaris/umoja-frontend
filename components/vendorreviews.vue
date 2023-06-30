@@ -1,5 +1,5 @@
 <template>
-    <v-container height="100%"  class=" mx-auto pt-6 pa-4" width="100%" style="overflow:hidden"  flat >
+    <v-container height="100%"  class=" mx-auto pt-6 pa-4" width="100%" style="overflow:hidden;position: relative;"  flat >
        <div class="d-flex align-center  justify-space-between">
            <div>
                <p style="font-weight: 500;
@@ -226,7 +226,7 @@ font-weight: 600;" class="ml-4">50</span>
       <tr  
       @click="chosen = item.sn" 
       style="height: 100px;width: 100%;"
-      :style="chosen == item.sn ? 'background:#DFDFDF':''"
+      :style="chosen == item.sn ? 'background:#ececec':''"
         v-for="(item, i) in items"
         :key="item.sn">
         <td style="position:relative;font-size: 14px;height: 100px;width: 270px;" 
@@ -327,11 +327,33 @@ line-height: 140%;" class="px-">Lorem ipsum dolor sit amet consectetur. Lobortis
     Read More
 </span></p>
 
-<v-btn variant="text" style="color:  #333;
+<v-btn v-if=" i !== 1" variant="text" style="color:  #333;
 font-size: 12px!important;
 font-weight: 700!important;
 line-height: 140%!important;
-letter-spacing: 0.6px!important;" class="text-overline pa-0 mt-2 text-uppercase">LEAVE A COMMENT</v-btn>
+letter-spacing: 0.6px!important;" @click="dialog = true" class="text-overline  mt-2 text-uppercase">LEAVE A COMMENT</v-btn>
+<div class="py-4" v-else>
+    <p style="color: #969696;
+font-size: 12px;
+font-weight: 600;
+letter-spacing: 0.6px;
+text-transform: uppercase;" class="mb-2">Your Response</p>
+<p style="color: #333;
+font-size: 16px;
+line-height: 140%;" class="px-">Lorem ipsum dolor sit amet consectetur. Lobortis sagittis porta tincidunt nibh eget lacus. 
+</p>
+<div class="mt-2">
+    <v-btn variant="text" class="" ><span 
+    style="color:  #333;
+font-size: 16px;
+font-weight: 600;">Edit</span> </v-btn>
+    <v-btn variant="text" color="red" class="ml-2" ><span 
+    style="
+font-size: 16px;
+font-weight: 600;">Delete</span> </v-btn>
+</div>
+</div>
+
         </td>
         <td style="position:relative;font-size: 14px;height: 100px;width: ;" 
         >
@@ -361,11 +383,37 @@ Pending
   </v-card>
  
 </div>
+<v-dialog absolute
+      v-model="dialog"
+      width="395"
+    >
+   
 
+      <v-card class="cardStyle py-2">
+       <div class="d-flex mb-2 align-center justify-space-between">
+        <p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;">Replying to <span style="color: #1273EB;">@sarahjohnson</span></p>
+<v-btn @click="dialog = false" icon="mdi mdi-close" flat></v-btn>
+       </div>
+       <v-textarea persistent-counter :counter="200" class="reviewtextarea" variant="outlined"  placeholder="Add a comment" >
+
+       </v-textarea>
+         <div class="d-flex my-2 align-center justify-space-between">
+        <p style="font-size: 32px;">🙂</p> 
+        <v-btn color="green" flat width="97" size="large">Send</v-btn>   
+        </div>
+      </v-card>
+    </v-dialog>
  </v-container> 
 </template>
 
 <style>
+.reviewtextarea .v-input__control{
+    border-radius: 6px;
+border: 1px solid var(--carbon-2, #CECECE)!important;
+}
 .reviews2 .v-rating__item .v-btn {
     scale: 0.8;
     margin-left: -25px;
@@ -379,6 +427,7 @@ export default {
     skill: 100,
     chosen: '',
        tab: '',
+       dialog: false,
        tabs:[{name:'All Orders', prop:null,value: null}, {name:'Unfulfilled',prop:'status',value: 0}, {name:'Unpaid',prop:'payment_status',value: 0}, {name:'Open',prop:'status',value: 1}, {name:'closed',prop:'status',value: 2}],
    items1:[
    {

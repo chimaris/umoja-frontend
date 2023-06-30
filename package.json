@@ -16,6 +16,12 @@
     "vite-plugin-vuetify": "^1.0.2"
   },
   "dependencies": {
+    "@tiptap/extension-link": "^2.0.3",
+    "@tiptap/extension-text-align": "^2.0.3",
+    "@tiptap/extension-underline": "^2.0.3",
+    "@tiptap/pm": "^2.0.3",
+    "@tiptap/starter-kit": "^2.0.3",
+    "@tiptap/vue-3": "^2.0.3",
     "laue": "^0.2.1",
     "sass": "^1.57.1",
     "vuetify": "^3.2.5"

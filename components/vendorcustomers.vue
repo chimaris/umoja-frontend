@@ -1,5 +1,5 @@
 <template>
-    <v-container height="100%"  class=" mx-auto pt-6 pa-4" width="100%" style="overflow:hidden"  flat >
+    <v-container height="100%"  class=" mx-auto pt-6 pb-12 pa-4" width="100%" style="overflow:hidden"  flat >
        <div class="d-flex align-center  justify-space-between">
            <div>
                <p style="font-weight: 600;
@@ -15,7 +15,7 @@ font-size: 24px;" class="mb-2  d-flex align-center text-left">
            </v-btn>
            <v-btn flat color="green" size="large" class="ml-4 text-grey-darken-3" >
                 <v-icon class="mr-2"  icon="mdi mdi-plus"></v-icon>
-               Add Customer 
+               Add Customer
            </v-btn>
        </div>
        </div>
@@ -33,17 +33,14 @@ font-size: 24px;" class="mb-2  d-flex align-center text-left">
             <p style="font-weight: 500;
 font-size: 20px;
 line-height: 25px;
-
 color: #333333;">{{n.name}}</p>
 <div class="ml-2">
     <v-icon size="16" icon="mdi mdi-information"> </v-icon>
     <v-tooltip
         activator="parent"
-        location="end" class="text-red"
-      >{{ n.tooltip }}</v-tooltip>
+        location="end" class="text-red">
+      {{ n.tooltip }}</v-tooltip>
 </div>
-     
-
         </div>
 <div class="d-flex align-center mt-4 justify-space-between">
     <h1 class="bigpriceClass2 ">{{ n.amount }}</h1>
@@ -131,8 +128,8 @@ border-radius: 6px;height: 55px;" class="  rounded-lg">
      </tr>
    </thead>
    <tbody>
-       <!-- @click="chosen = item.sn" -->
-       <tr 
+     <tr  
+     @click="dialog = true"
        :style="chosen == item.sn ? 'background:#DFDFDF':''"
        v-for="item in items"
        :key="item.sn"
@@ -203,16 +200,482 @@ font-size: 10px!important" size="small" rounded="lg" class="tablechip  text-cent
 </tbody>
 </v-table>
 </div>
+<v-dialog scrollable class="customerdet"
+      v-model="dialog" transition="slide-x-reverse-transition" 
+      :scrim="true" 
+    >
+  
+      <div  style=" ;width: 100%;height: 100%;display:flex ;justify-content: right;">
+<div @click="dialog = false" style="position: absolute;height: 100%;width: 100%;">
+
+</div>
+        <v-card height="100vh" 
+        style="overflow: scroll;" 
+          width="100%" max-width="825" class="">
+      <div style="height: 110px;
+    background: rgb(255 255 255 / 65%);
+    backdrop-filter: blur(3px);    position: sticky;
+    z-index: 99;
+    top: 0; border-bottom: 0.4px #EFEFEF solid;" >
+ 
+ <div  class="h-100 pa-6 justify-space-between d-flex align-center ">
+ <div class=" d-flex align-center ">
+
+   <v-btn class="mr-4" icon="mdi mdi-arrow-right-top" flat rounded="xl" @click="dialog = !dialog" variant="outlined">
+  </v-btn> 
+  
+  <p 
+  style="font-weight: 600;
+font-size: 24px;
+line-height: 32px;
+color: #1A1D1F;">Customer #23456</p>
+</div>
+  <v-btn style="    border: 1px solid #C20052;
+" variant="outlined" size="large" class="ml-4 " color="red" >
+               <v-icon class="mr-2" icon="mdi mdi-trash-can-outline"></v-icon>
+               Remove Customer
+           </v-btn>
+</div>
+
+</div>
+<div class=" ">
+<div class="d-flex px-6 py-8 ">
+  <v-avatar class="" size="150"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687702335/rectangle-1939_khvhag.png"></v-img></v-avatar>
+
+
+  <div>
+    <p class="px-6" style="color:#333;
+font-size: 32px;
+font-weight: 600;
+letter-spacing: -0.96px;">Nweke Franklin Odira</p>
+<div class="d-flex px-6">
+
+  <v-chip size="small" style="color:#333;
+font-size: 10px;
+font-weight: 500;width: 98px;" rounded="lg" class="d-flex justify-center align-center  mr-2">
+<span class="">
+  
+  Follows you
+</span>
+</v-chip>
+<v-chip color="green" size="small" style="
+font-size: 10px;
+font-weight: 500;width: 98px;" rounded="lg" class="d-flex justify-center align-center mx-"> Active User</v-chip>
+</div>
+<div style="max-width: ;" class="px-1 pt-8 d-flex">
+  <div :style="i < 3? 'border-right: 1px solid #e0e0e0;':''" class="px-5" v-for="(n, i) in customer_details" :key="i">
+    <div>
+      <p style="color: #969696;
+font-size: 14px;
+font-weight: 500;">{{ n.item }}</p>
+</div>
+<p style="color:#333;
+font-size: 14px;
+font-weight: 500;">{{ n.value }}</p>
+
+</div>
+  </div></div>
+
+</div>
+</div>
+<div class="pa-6"> 
+  <p style="
+font-size: 20px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;" class="mb-2">Private note     <v-icon size="16" icon="mdi mdi-information"> </v-icon>
+    <v-tooltip
+        activator="parent"
+        location="right" class="text-red">
+      Note for Customer</v-tooltip></p>
+   <v-card height="auto"  class=" mx-auto pt-2 coolTable  pb-0 mb-8" width="100%" style="overflow:hidden"  flat >
+
+  <div class="bg-white d-flex justify-space-between px-2 pb-2" v-if="editor">
+    <!-- :disabled="!editor.can().chain().focus().toggleBold().run()" -->
+   <div>
+
+    <v-btn flat
+    icon="mdi mdi-format-italic"
+    class="mr-1"
+    @click="editor.chain().focus().toggleItalic().run()" 
+     :class="{ 'is-active': editor.isActive('italic') }">
+    </v-btn>
+    <v-btn flat
+    icon="mdi mdi-format-bold"
+    class="mr-1"
+    @click="editor.chain().focus().toggleBold().run()" 
+    :class="{ 'is-active': editor.isActive('bold') }">
+  </v-btn>
+  <v-btn flat
+  class="mr-1"
+  @click="editor.chain().focus().toggleUnderline().run()" 
+    icon="mdi mdi-format-underline"
+     :class="{ 'is-active': editor.isActive('underline') }">
+    </v-btn>
+    <v-btn flat
+    icon="mdi mdi-format-strikethrough"
+    class="mr-1"
+    @click="editor.chain().focus().toggleStrike().run()" 
+    :class="{ 'is-active': editor.isActive('strike') }">
+  </v-btn>
+  <v-btn flat
+  icon="mdi mdi-link-variant"
+  class="mr-1"
+  @click="setLink" 
+  :class="{ 'is-active': editor.isActive('link') }">
+</v-btn>
+  <v-btn flat
+  icon="mdi mdi-link-variant-off"
+  class="mr-1"
+  @click="editor.chain().focus().unsetLink().run()" :disabled="!editor.isActive('link')"  >
+</v-btn>
+<v-btn flat
+icon="mdi mdi-format-align-left"
+class="mr-1"
+@click="editor.chain().focus().setTextAlign('left').run()" 
+>
+</v-btn>
+<v-btn flat
+icon="mdi mdi-format-align-center"
+class="mr-1"
+@click="editor.chain().focus().setTextAlign('center').run()" 
+>
+</v-btn>
+<v-btn flat
+icon="mdi mdi-format-align-right"
+class="mr-1"
+@click="editor.chain().focus().setTextAlign('right').run()" 
+>
+</v-btn>
+<v-btn flat
+icon="mdi mdi-format-list-bulleted"
+class="mr-1"
+@click="editor.chain().focus().toggleBulletList().run()" 
+     :class="{ 'is-active': editor.isActive('bullet') }">
+      
+    </v-btn>
+  </div>
+  <div>
+    <v-btn flat color="grey" variant="text" icon="mdi mdi-arrow-left"></v-btn>
+    <v-btn flat color="grey" variant="text" icon="mdi mdi-arrow-right"></v-btn>
+  </div>
+  </div>
+  <div style="min-height: 162px ;" class="bg-grey-lighten-4 pa-4">
+
+    <editor-content :editor="editor" />
+  </div>
+</v-card>
+ 
+<v-card height="auto"  class=" mx-auto px-6 pt-6 coolTable  pb-12" width="100%" style="overflow:hidden"  flat >
+   <v-tabs
+      v-model="tab" class="orders"
+      color="green"
+      
+    >
+      <v-tab 
+      @click.stop="sort(item.prop, item.value)"
+        v-for="item in tabs"
+        :key="item"
+        :value="item" 
+        class="d-flex text-capitalize  align-center"
+      >
+        {{ item.name }} 
+
+      </v-tab>
+    </v-tabs>
+    <v-divider></v-divider>
+<v-window  v-model="window">
+  <v-window-item :value="'Customer Orders'">
+    <div  >
+    <v-table>
+    <thead>
+      <tr class="  ">
+        <th style="font-size: 14px;width: 53%;" class="  font-weight-bold  text-left">
+           Products
+        </th>
+        <th style="font-size: 14px;width: 10%;" class=" text- px-1  font-weight-bold">
+         Price
+        </th>
+        <th style="font-size: 14px;" class=" text-left  text-right font-weight-bold">
+          Date
+        </th>
+        <th style="font-size: 14px;" class=" text-left pr-8  text-right font-weight-bold">
+          
+        </th>
+   
+      </tr>
+    </thead>
+    </v-table>
+
+
+    <div class="px-4 rounded-lg" :class="selected== item.sn+''+ i? 'bg-grey-lighten-4':''"  style="width: 100%!important;" v-for="(item, i) in items1" :key="item.sn">
+      <v-table :class="selected== item.sn+''+ i? 'bg-grey-lighten-4':''">
+
+    <tbody    
+        >
+      <tr       style=" width: 100%;"
+      :style="chosen == item.sn ? 'background:#DFDFDF':''"
+     
+      >
+        <td style="font-size: 14px;height: 100px;" class="px-1  d-flex align-center pl-2">
+          <v-avatar rounded="lg" color="grey-lighten-2" class="pa-1 mr-3 ml-1" size="50" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img></v-avatar>
+          <div>
+
+            <p class="" style="font-weight: 600;
+font-size: 16px;
+line-height: 20px;
+color: #333333;">{{ item.name }}</p>
+            <p style="font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+color: #969696;">Fashion and Style</p>
+          </div>
+    </td>
+        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">
+        <v-chip rounded="lg" color="blue">
+        <span style="color: var(--carbon-4, #333);
+font-size: 14px!important;
+font-weight: 600;
+line-height: 20px;" class="text-black">
+          € 1,829.00
+        </span>
+      </v-chip>
+        </td>
+        <td style="color: #000;
+font-size: 14px;
+font-weight: 500;" class="text-right px-1 ">
+<span>
+
+  September 9, 2022
+</span>
+</td>
+        <td style="color: #000;
+font-size: 14px;
+font-weight: 500;" class="text-right px-1 ">
+
+ <v-icon @click="select(item.sn+''+ i)" class="ml-" :icon="selected !== (item.sn+''+ i) ?'mdi mdi-chevron-down-circle-outline':'mdi mdi-chevron-up-circle-outline'"></v-icon></td>
+
+</tr>
+</tbody>
+</v-table>
+<div style="width: 100%;border-bottom: 0.5px solid rgb(215, 215, 215);" class=" ">
+  <v-expand-transition>
+
+    <v-card color="grey-lighten-4" class="pb-4" flat v-show="selected == item.sn+''+ i" style="width:100%;border-top: 1px dashed  #CECECE;">
+      <v-row class="pa-4" >
+        <v-col >
+          <p 
+          class="mb-2"
+          style="color:  #969696;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Address</p>
+<p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Mrs Smith 71 Cherry Court Southampton SO53 5PD</p>
+        </v-col>
+        <v-col >
+          <p 
+          class="mb-2"
+          style="color:  #969696;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Product purchase </p>
+<p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;">In-store purchase</p>
+        </v-col>
+        <v-col >
+          <p 
+          class="mb-2"
+          style="color:  #969696;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Tracking #UMOJA</p>
+<p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal; " class="d-flex align-center">4589058409584045845 <v-icon size="x-small" color="green" class="ml-2" icon="mdi mdi-content-copy"></v-icon></p>
+        </v-col>
+        <v-col >
+          <p 
+          class="mb-2"
+          style="color:  #969696;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Delivery type</p>
+<p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Umoja Shipping</p>
+        </v-col>
+      </v-row>
+      <v-row class="pa-4" style="border-top-width: 300px;border-top :1px dashed #90BEAA " >
+        <v-col style="position: relative;">
+          <v-icon style="    top: -28px;
+    left: 0px;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
+
+    
+          <p 
+          class="mb-2"
+          style="color:  #969696;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Processed</p>
+<p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">May 14</p>
+        </v-col>
+        <v-col style="position: relative;">
+          <v-icon style="    top: -28px;
+    left: 10%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
+          <p 
+          class="mb-2"
+          style="color:  #969696;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Shipped </p>
+<p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 600;
+line-height: normal;">May 16</p>
+        </v-col>
+        <v-col style="position: relative;">
+          <v-icon style="    top: -28px;
+    left: 10%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
+          <p 
+          class="mb-2"
+          style="color:  #969696;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">In-transit</p>
+<p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal; " class="d-flex align-center">May 24</p>
+        </v-col>
+        <v-col style="position: relative;">
+          <v-icon style="    top: -28px;
+    right: 0px;position: absolute;" color="green" icon="mdi mdi-check-circle"></v-icon>
+          <p 
+          class="mb-2"
+          style="color:  #969696;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Delivery type</p>
+<p style="color: #333;
+font-size: 14px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;">Umoja Shipping</p>
+        </v-col>
+      </v-row>
+    </v-card>
+  </v-expand-transition>
+ 
+</div>
+    </div>
+</div>
+</v-window-item>
+<v-window-item :value="'Activities'">
+
+  <v-card class="py-4">
+    <div class="py-4" style="border-bottom: 0.5px solid rgb(215, 215, 215);" v-for="n in 4" :key="n">
+      <div class="d-flex justify-space-between align-center">
+<div class="d-flex">
+
+        <v-avatar size="56">
+          <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688110792/rectangle-22424_cbrmty.png"></v-img>
+        </v-avatar>
+        <div class="px-4">
+
+          <p  style="color: #969696;
+font-size: 14px;
+font-weight: 400;"><span style="color: #333;
+font-weight: 700;">
+          Nweke Franklin 
+        </span>
+        and 47 others liked your post.</p>
+        <p style="color: #8E97AD;
+font-size: 12px;
+font-weight: 400;">2hrs ago</p>
+    </div>
+      </div>
+      <v-avatar rounded="lg" size="56">
+          <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688113032/rectangle-22423_gbfrmk.png"></v-img>
+        </v-avatar>
+    </div>
+   </div>
+
+  </v-card>
+</v-window-item>
+</v-window>
+  </v-card>
+</div>
+
+          </v-card>
+      </div>
+        </v-dialog>
 
  </v-container> 
 </template>
+<style>
+.v-btn--density-default.v-btn--size-default.v-btn--variant-elevated.is-active {
+    background: black;
+    color: white;
+}
+.ProseMirror-focused {
+  outline: none;
+}
+
+.customerdet.v-dialog > .v-overlay__content {
+    max-height: calc(100%);
+    width: calc(100%);
+    max-width: calc(100%);
+    margin: 0px;
+    height: 100%;
+    display: flex;
+}
+</style>
+
 <script>
+import { Editor, EditorContent } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
+import TextAlign from '@tiptap/extension-text-align'
+import Underline from '@tiptap/extension-underline'
+import Link from '@tiptap/extension-link'
+
 export default {
+  components: {
+    EditorContent,
+  },
 
  data() {
    return {
        tab: '',
-       tabs:[{name:'All Orders', prop:null,value: null}, {name:'Unfulfilled',prop:'status',value: 0}, {name:'Unpaid',prop:'payment_status',value: 0}, {name:'Open',prop:'status',value: 1}, {name:'closed',prop:'status',value: 2}],
+       editor: null,
+       dialog: false,
+       selected: '',
+       window: 'Customer Orders',
+       tabs:[{name:'Customer Orders', prop:null,value: 'Customer Orders'}, {name:'Activities',prop:'status',value: 'Activities'}],
    items1:[
    {
        sn:'#23942',
@@ -303,150 +766,8 @@ export default {
        items_no: 7,
        delivery_method: 'Umoja Delivery'
    },
-   {
-       sn:'#65456',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'David',
-       delivery: '€ 24.08',
-       payment_status: 0,
-       status: 2,
-       items_no: 1,
-       delivery_method: 'DHL Delivery'
-   },
-   {
-       sn:'#239042',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'Frank',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 2,
-       items_no: 4,
-       delivery_method: 'Umoja Delivery'
-   },
-   {
-       sn:'#9867763',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'Okoli Bonaventure',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 1,
-       items_no: 7,
-       delivery_method: 'DHL Delivery'
-   },
-   {
-       sn:'#98755765',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'David',
-       delivery: '€ 24.08',
-       payment_status: 0,
-       status: 1,
-       items_no: 1,
-       delivery_method: 'Umoja Delivery'
-   },
-   {
-       sn:'#7646439',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'Frank',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 1,
-       items_no: 4,
-       delivery_method: 'Umoja Delivery'
-   },
-   {
-       sn:'#9876765',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'Okoli Bonaventure',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 1,
-       items_no: 7,
-       delivery_method: 'Fedex Delivery'
-   },
-   {
-       sn:'#9876765',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-      added_cat: 'Added Manually', 
-      date: 'May 29, 2023',
-       customer: 'David',
-       delivery: '€ 24.08',
-       payment_status: 0,
-       status: 0,
-       items_no: 1,
-       delivery_method: 'Fedex Delivery'
-   },
-   {
-       sn:'#12t65345',
-       name:'Leather crop top & pants......',
-       added_cat: 'Added Manually',
-       date:'17 May',
-       total:'€2,349‎',
-      country: '🇺🇸 United States',
-      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
-      city: 'New York City',
-       date: 'May 29, 2023',
-       customer: 'Frank',
-       delivery: '€ 24.08',
-       payment_status: 1,
-       status: 1,
-       items_no: 4,
-       delivery_method: 'Umoja Delivery'
-   },
 
+ 
   ],
   dashes:[
     {
@@ -475,19 +796,150 @@ export default {
     },
   
    ],
-  items: []  
+  customer_details: [
+    {
+      item: 'Gender',
+      value: 'Male'
+    },
+    {
+      item: 'Age',
+      value: '26yrs'
+    },
+    {
+      item: 'Customer since',
+      value: '14th May, 2023'
+    },
+    {
+      item: 'Country',
+      value: '🇺🇸 United States, New York City'
+    },
+    
+  ]  
 }
 },
+
 mounted(){
    this.items = this.items1;
+
+    this.editor = new Editor({
+      extensions: [
+      StarterKit,
+      Link,
+      Underline,
+      TextAlign.configure({
+       types: ['heading', 'paragraph'],
+     }),
+      ],
+      content: '',
+    })
  },
+ beforeUnmount() {
+    this.editor.destroy()
+  },
  methods:{
+  select(x){
+    if(this.selected == x){
+      this.selected = null;
+      return;
+    }else{
+
+      this.selected = x;
+    }
+  },
    sort(x, y){
-     var itm = this.items1;
-     this.items = itm.filter((item) => {
-     return item[x] == y;
-   });
- }
+     this.window = y;
+ },
+ mkbld(){
+  console.log(this.editor.getHTML())
+ },
+ setLink() {
+      const previousUrl = this.editor.getAttributes('link').href
+      const url = window.prompt('URL', previousUrl)
+
+      // cancelled
+      if (url === null) {
+        return
+      }
+
+      // empty
+      if (url === '') {
+        this.editor
+          .chain()
+          .focus()
+          .extendMarkRange('link')
+          .unsetLink()
+          .run()
+
+        return
+      }
+
+      // update link
+      this.editor
+        .chain()
+        .focus()
+        .extendMarkRange('link')
+        .setLink({ href: url })
+        .run()
+    },
 }
 }
 </script>
+
+<style lang="scss">
+/* Basic editor styles */
+.ProseMirror {
+  > * + * {
+    margin-top: 0.75em;
+  }
+
+  ul,
+  ol {
+    padding: 0 1rem;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    line-height: 1.1;
+  }
+
+  code {
+    background-color: rgba(#616161, 0.1);
+    color: #616161;
+  }
+
+  pre {
+    background: #0D0D0D;
+    color: #FFF;
+    font-family: 'JetBrainsMono', monospace;
+    padding: 0.75rem 1rem;
+    border-radius: 0.5rem;
+
+    code {
+      color: inherit;
+      padding: 0;
+      background: none;
+      font-size: 0.8rem;
+    }
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  blockquote {
+    padding-left: 1rem;
+    border-left: 2px solid rgba(#0D0D0D, 0.1);
+  }
+
+  hr {
+    border: none;
+    border-top: 2px solid rgba(#0D0D0D, 0.1);
+    margin: 2rem 0;
+  }
+}
+</style>
