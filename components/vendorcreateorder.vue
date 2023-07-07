@@ -2,7 +2,7 @@
     <v-container height="100%" class=" mx-auto px-5 " width="100%"
     style="overflow:hidden;padding-bottom: 200px;max-width: 1330px;" flat>
     
-    <v-alert class="text-white rounded-lg pa-6"
+    <v-alert v-if="false" class="text-white rounded-lg pa-6"
    color="#00966D"
    
  ><div class="d-flex align-center" style="font-size: 14px;

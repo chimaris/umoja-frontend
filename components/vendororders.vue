@@ -19,8 +19,8 @@ font-size: 24px;" class="mb-2  d-flex align-center text-left">
                 <v-icon class="mr-2" icon="mdi mdi-tray-arrow-up"></v-icon>
                 Export 
             </v-btn>
-            <v-btn flat color="green" size="large" class="ml-4 text-grey-darken-3" >
-                 <v-icon class="mr-2"  icon="mdi mdi-tune"></v-icon>
+            <v-btn @click="choose2()" flat color="green" size="large" class="ml-4 text-grey-darken-3" >
+                 <v-icon class="mr-2"  icon="mdi mdi-plus"></v-icon>
                 Create Order
             </v-btn>
         </div>
@@ -367,6 +367,9 @@ mounted(){
   methods:{
     choose(x){
       this.$emit('changePage', 'Order details');
+    },
+    choose2(x){
+      this.$emit('changePage', 'createorder');
     },
     sort(x, y){
       var itm = this.items1;
