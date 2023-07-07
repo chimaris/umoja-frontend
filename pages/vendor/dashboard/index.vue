@@ -80,8 +80,8 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
             <v-window-item :value="'Posts'">
               <Vendorcreatepost />
             </v-window-item>
-            <v-window-item :value="'article'">
-              <Vendorcreateorder />
+            <v-window-item :value="'Articles'">
+              <Vendorcreatearticle />
             </v-window-item>
             <v-window-item @changeTab="changePage" :value="'Customers'">
 
@@ -111,7 +111,7 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
 export default {
   data() {
     return {
-      window: "Posts",
+      window: "Articles",
       sidebar: true,
     };
   },

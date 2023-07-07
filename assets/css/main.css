@@ -251,6 +251,12 @@ font-size: 14px;
 font-weight: 500;
 line-height: 20px;
 }
+.headerso.v-text-field input 
+{
+      font-weight: 600!important;
+        font-size: 41px!important;
+    
+}
 .borderedinput{
     border: 1px solid #e5e5e5!important;
     width:200px!important;

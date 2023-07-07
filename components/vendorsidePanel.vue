@@ -183,7 +183,7 @@ export default {
         {
         name: 'Content Media',
         list: [
-            { text: 'Post', icon: 'mdi mdi-note-text' },
+            { text: 'Posts', icon: 'mdi mdi-note-text' },
             { text: 'Articles', icon: 'mdi mdi-note-text' },
         ]
       },

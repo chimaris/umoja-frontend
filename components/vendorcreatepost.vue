@@ -115,9 +115,8 @@ font-weight: 500;">SVG, PNF, JPG, or GIF (max 800X400px)</p>
                             font-weight: 600;"> Post Preview
                         </p>
                     </div>
-                    <v-text-field v-if="false" hide-details="" class="borderedinput w-100 my-4" variant="outlined" prepend-inner-icon="mdi mdi-magnify" placeholder="Search or create a customer" density="compact"  >
-     </v-text-field>
-           <div class="mb-4 d-flex ">
+              
+           <div  class="mb-4 d-flex ">
             <v-avatar size="50">
                 <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687702335/rectangle-1939_khvhag.png"></v-img>
             </v-avatar>
@@ -137,9 +136,64 @@ font-size: 14px;
 font-weight: 400;"> .  Address</p>
 </div>
 
-            </div>
-           </div>
-     
+
+</div>
+</div>
+<v-card  flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg">
+    <div>
+
+        <v-img style="opacity: 0.25;" width="175px" src="https://res.cloudinary.com/payhospi/image/upload/v1688740513/gallery_azmmka.png"></v-img>
+    </div>
+</v-card>
+<div class="rounded-lg pa-2 w-100 bg-grey-lighten-4 mt-6"></div>
+<div class="rounded-lg pa-2 w-100 bg-grey-lighten-4 mt-3"></div>
+<div class="rounded-lg pa-2 w-50 bg-grey-lighten-4 mt-3"></div>
+<div class="d-flex mt-4 align-center justify-space-between">
+<div class="d-flex ">
+
+    <v-icon icon="mdi mdi-heart-outline"></v-icon> <div style="width: 40px;" class="rounded-lg pa-1 ml-2  bg-grey-lighten-4"></div>
+    <v-icon class="ml-3" icon="mdi mdi-comment-outline"></v-icon> <div style="width: 40px;" class="rounded-lg pa-1 ml-2  bg-grey-lighten-4"></div>
+</div> 
+<v-icon icon="mdi mdi-tray-arrow-up"></v-icon>   
+</div>  
+<v-divider class="my-5"></v-divider>
+<div>
+    <p class="my-5" style="color: #333;
+font-size: 20px;
+font-weight: 600;
+line-height: 20px;
+">Related products</p>
+
+<div class="cardStyle">
+
+    <v-card  flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg">
+    <v-btn  rounded="xl" flat size="x-small" style="position: absolute; top:15px; right: 15px;" icon="mdi mdi-heart-outline"></v-btn>
+        <div>
+
+        <v-img style="opacity: 0.25;" width="175px" src="https://res.cloudinary.com/payhospi/image/upload/v1688740513/gallery_azmmka.png"></v-img>
+    </div>
+</v-card>
+<div class="rounded-lg pa-2 w-100 bg-grey-lighten-4 mt-6"></div>
+<div class="rounded-lg pa-2 w-100 bg-grey-lighten-4 mt-3"></div>
+<div class="rounded-lg pa-2 w-50 bg-grey-lighten-4 mt-3"></div>
+<div class="d-flex mt-4 align-center justify-space-between">
+<div class="d-flex ">
+<span style="color:#1A1D1F;
+
+font-size: 16px;
+font-weight: 700;">
+
+    Price
+</span>
+</div> 
+<v-btn style="    border: 1px solid #e5e5e5;" size="small" variant="outlined"><span style="color: var(--grey-1000, #1A1D1F);
+
+font-size: 12px;
+font-weight: 600;">Pre-Order</span></v-btn>
+
+</div>  
+</div></div>
+
     </v-sheet>
               
             </v-col>
