@@ -245,6 +245,17 @@ border-radius: 15px!important;
     line-height: 20px;
     text-transform: none;
 }
+.timelinetext{
+    color: #333;
+font-size: 14px;
+font-weight: 500;
+line-height: 20px;
+}
+.borderedinput{
+    border: 1px solid #e5e5e5!important;
+    width:200px!important;
+border-radius: 6px!important;
+}
 .skinnyBtn2 .v-btn__content{
     font-weight: 400!important;
     font-size: 16px!important;

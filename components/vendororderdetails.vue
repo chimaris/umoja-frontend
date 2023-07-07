@@ -99,7 +99,56 @@ color: #333333;" class="mt-2">{{ n.value }}
                                         </v-row>
                                    </v-sheet> </v-window-item>
                               <v-window-item value="Payments">
-                                   <div></div>
+                                   <div>
+                                   <div>
+                                      <div class="d-flex justify-space-between align-center py-4">
+                                        <p style="color:  #969696;
+                                        font-size: 14px;
+                                        font-weight: 500;">Amount paid by customer</p>
+                                        <p style="color:  #333;
+                                        font-size: 14px;
+                                        font-weight: 600;
+                                        line-height: 20px;"  class="d-flex align-center">
+                                        <v-icon icon="mdi mdi-check-circle" size="small" color="teal" class="mr-2"></v-icon>€ 1,829.00</p>
+                                      </div>  
+                                      <v-divider></v-divider>
+                                   </div>
+                                   <div>
+                                      <div class="d-flex justify-space-between align-center py-4">
+                                        <p style="color:  #969696;
+                                        font-size: 14px;
+                                        font-weight: 500;">Receiving amount</p>
+                                        <p style="color:  #333;
+                                        font-size: 14px;
+                                        font-weight: 600;
+                                        line-height: 20px;"  class="d-flex align-center">€ 1,810.00</p>
+                                      </div>  
+                                      <v-divider></v-divider>
+                                   </div>
+                                   <div>
+                                      <div class="d-flex justify-space-between align-center py-4">
+                                        <p style="color:  #969696;
+                                        font-size: 14px;
+                                        font-weight: 500;">Companys %</p>
+                                        <p style="color:  #333;
+                                        font-size: 14px;
+                                        font-weight: 600;
+                                        line-height: 20px;"  class="d-flex align-center">€ 19.00</p>
+                                      </div>  
+                                      <v-divider></v-divider>
+                                   </div>
+                                   <div>
+                                      <div class="d-flex justify-space-between align-center py-4">
+                                        <p style="color:  #969696;
+                                        font-size: 14px;
+                                        font-weight: 500;">Payment status</p>
+                                  <v-chip style="width: 81px;" color="#C5912C" size="small" class="d-flex justify-center align-center" rounded="lg"><span style="color: var(--baklava-5, #C5912C);
+                                        font-size: 12px;
+                                        font-weight: 600;
+                                        letter-spacing: -0.12px;">Pending</span></v-chip>
+                                      </div>  
+                                   </div>
+                                   </div>
                               </v-window-item>
                          </v-window>
 

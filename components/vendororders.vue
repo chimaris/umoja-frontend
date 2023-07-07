@@ -14,8 +14,8 @@ font-size: 24px;" class="mb-2  d-flex align-center text-left">
                  <v-icon class="mr-2" icon="mdi mdi-printer"></v-icon>
                 Print
             </v-btn>
-            <v-btn style="    border: 1px solid #e5e5e5;
-" variant="outlined" size="large" class="ml-4 text-grey-darken-3" >
+            <v-btn style="    border: 1px solid #e5e5e5;"
+             variant="outlined" size="large" class="ml-4 text-grey-darken-3" >
                 <v-icon class="mr-2" icon="mdi mdi-tray-arrow-up"></v-icon>
                 Export 
             </v-btn>

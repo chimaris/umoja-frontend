@@ -30,8 +30,7 @@ line-height: 30px;">Hi Nweke Franklin, Welcome back </p>
       </v-list>
     </v-menu>
   
-    <v-text-field style="border: 1px solid #CECECE;width:200px;
-border-radius: 6px;" variant="outlined" density="compact" class="ml-5" hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Search"></v-text-field>
+    <v-text-field style="" variant="outlined" density="compact" class="ml-2 borderedinput" hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Search"></v-text-field>
   </div>
  </div>
       <div class="d-flex justify-center">

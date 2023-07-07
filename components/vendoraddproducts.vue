@@ -19,7 +19,7 @@
 
         <v-row>
             <v-col cols="12" sm="8">
-                <v-sheet class="cardStyle mt-2 ">
+                <v-sheet class="cardStyle  ">
                     <p class="inputLabel">Email Address</p>
 
                     <v-text-field hint="Do not exceed 20 characters when entering the product name." persistent-hint
