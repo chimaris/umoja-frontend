@@ -35,7 +35,14 @@ letter-spacing: -0.2px;">Products</p>
 </div>
 <div class=" justify-space-between">
 <v-row class="my-4">
-    <v-col v-for="n in 3" :key="n" cols="4">
+    <v-col  cols="4">
+        <v-card width="100%" image="https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png" flat style="border-radius: 6px; " height="266" class="d-flex justify-end align-start pa-2" color="#F8F8F8">
+<v-btn size="small" class="rounded-xl" icon="mdi mdi-trash-can-outline">
+
+</v-btn>
+</v-card>
+    </v-col>
+    <v-col v-for="n in 2" :key="n" cols="4">
         <v-card width="100%" flat style="border-radius: 6px;
 border: 1px dashed var(--carbon-2, #CECECE);" height="266" class="d-flex justify-center align-center" color="#F8F8F8">
 <div class=" text-center">
@@ -108,14 +115,15 @@ font-weight: 500;">SVG, PNF, JPG, or GIF (max 800X400px)</p>
 
             </v-col>
             <v-col cols="12" sm="4">
-                <v-sheet class="cardStyle">
+                <v-sheet class="cardStyle d-block">
                     <div class="d-flex mb-6 mt-2 justify-space-between align-center">
                         <p style="color: #333;
                             font-size: 20px;
                             font-weight: 600;"> Post Preview
                         </p>
                     </div>
-              
+              <div>
+
            <div  class="mb-4 d-flex ">
             <v-avatar size="50">
                 <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687702335/rectangle-1939_khvhag.png"></v-img>
@@ -156,6 +164,60 @@ font-weight: 400;"> .  Address</p>
 </div> 
 <v-icon icon="mdi mdi-tray-arrow-up"></v-icon>   
 </div>  
+</div>
+<v-divider class="my-8"></v-divider>
+
+              <div >
+
+           <div  class="mb-4 d-flex ">
+
+                <v-avatar size="50">
+                    <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687702335/rectangle-1939_khvhag.png"></v-img>
+                </v-avatar>
+
+            <div  class="pl-3" style="min-width: 0;">
+            <div class=" d-flex"><p style="color: #1E1E1E;
+font-size: 16px;
+font-weight: 600;
+line-height: 140%;">Thatdesignpro</p> <p 
+style="color: #969696;
+font-size: 14px;
+font-weight: 400;
+line-height: 140%;"> . 27th Nov, 2023</p></div>
+<div class="d-block   mt-1">
+   <div class="d-flex align-center">
+
+       <v-chip color="#936900"  size="small" rounded="lg"> Fashion</v-chip>
+       <v-icon class="mx-1" size="5" color="grey" icon="mdi mdi-circle"></v-icon>
+       <div class=" text-truncate "
+       style="color: #1E1E1E;
+   font-size: 14px!important;
+   font-weight: 400;">Shaftesbury Avenue Accra, Ghana</div>
+   </div>
+    </div> 
+
+
+
+            </div>         
+
+           </div>
+<v-card image="https://res.cloudinary.com/payhospi/image/upload/v1689243700/rectangle-53_mxs2dz.png" flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg">
+ 
+</v-card>
+<p 
+style="color: #1E1E1E;
+font-size: 14px;
+font-weight: 400;" class="mt-4">Lorem ipsum dolor sit amet consectetur. Duis pulvinar semper ornare quis. Est faucibus eu nullam ornare in.Lorem ipsum dolor sit amet consectetur. Duis pulvinar semper ornare quis. Est faucibus eu nullam ornare.</p>
+<div class="d-flex mt-4 align-center justify-space-between">
+<div class="d-flex ">
+
+    <v-icon icon="mdi mdi-heart-outline"></v-icon> <div style="width: 40px;" class="rounded-lg pa-1 ml-2  bg-grey-lighten-4"></div>
+    <v-icon class="ml-3" icon="mdi mdi-comment-outline"></v-icon> <div style="width: 40px;" class="rounded-lg pa-1 ml-2  bg-grey-lighten-4"></div>
+</div> 
+<v-icon icon="mdi mdi-tray-arrow-up"></v-icon>   
+</div>  
+</div>
+
 <v-divider class="my-5"></v-divider>
 <div>
     <p class="my-5" style="color: #333;
@@ -165,6 +227,53 @@ line-height: 20px;
 ">Related products</p>
 
 <div class="cardStyle">
+
+    <v-card flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg">
+    <v-btn  rounded="xl" flat size="x-small" style="position: absolute; top:15px; right: 15px;" icon="mdi mdi-heart-outline"></v-btn>
+      <v-img contain height="100%" width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1689252826/matskirt_ecf6ym.png"></v-img>
+</v-card>
+<p style="font-weight: 600;
+    font-size: 14px;
+    line-height: 18px;
+    
+    color: #000000;
+    " class=" mt-2">Multicolored Ankara Material from Ghana</p>
+    <p style="font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #000000;
+    " class="mt-1">Organic cotton certified</p>
+    <p style="font-weight: 600;
+    font-size: 10px;
+    line-height: 13px;
+    color: #000000;
+    " class="d-flex mb-1 align-center">
+        <v-rating
+        v-model="rating"
+        color="grey-lighten-2 "
+        active-color="#E7CE5D"
+        class="ml-2 rt"
+        size="x-small"
+        ></v-rating><span style="margin-left:-9px ;" >(0)</span> 
+    </p>
+                          <div class="d-flex align-center justify-space-between">
+                <div class="d-flex align-center"> 
+                    <h1 
+    style="font-size: 16px;
+            line-height: 20px;
+            color: #1A1D1F;
+    " class="priceClass">N15,000.00</h1>
+    
+                </div>
+                <v-btn style="    border: 1px solid #e5e5e5;" size="small" variant="outlined"><span style="color: var(--grey-1000, #1A1D1F);
+
+font-size: 12px;
+font-weight: 600;">Pre-Order</span></v-btn>
+    
+                </div>
+
+</div>
+<div class="cardStyle  mt-4">
 
     <v-card  flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg">
     <v-btn  rounded="xl" flat size="x-small" style="position: absolute; top:15px; right: 15px;" icon="mdi mdi-heart-outline"></v-btn>
@@ -192,12 +301,41 @@ font-size: 12px;
 font-weight: 600;">Pre-Order</span></v-btn>
 
 </div>  
-</div></div>
+</div>
+
+</div>
 
     </v-sheet>
               
             </v-col>
         </v-row>
+        <v-divider class="my-8"></v-divider>
+        <div class="d-flex justify-end">
+            <v-btn   size="large" color="white" flat>
+<span style="font-size: 14px;
+font-weight: 600;
+line-height: 20px;">
+
+    Schedule post
+</span>
+</v-btn>
+            <v-btn  class="mx-2"  style="    border: 1px solid #e5e5e5;"  size="large" color="white" flat>
+<span style="font-size: 14px;
+font-weight: 600;
+line-height: 20px;">
+
+    Save post as draft
+</span>
+</v-btn>
+            <v-btn   size="large"  style="    border: 1px solid #e5e5e5;" color="green" flat>
+<span style="font-size: 14px;
+font-weight: 600;
+line-height: 20px;">
+
+    Post
+</span>
+</v-btn>
+        </div>
        
 <v-dialog   width="auto" v-model="dialog">
     <v-sheet width="100vw" max-width="669px" class="cardStyle px-0">
@@ -402,6 +540,10 @@ line-height: 20px;" >
 </v-dialog>
     </v-container>
 </template>
+<style>
+.rt .v-icon--size-default {
+    font-size: 18px;
+}</style>
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-3'
 import StarterKit from '@tiptap/starter-kit'
