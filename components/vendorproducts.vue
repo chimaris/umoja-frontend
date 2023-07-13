@@ -29,7 +29,7 @@
        </div>
            <div class="d-flex align-center">
 
-               <v-btn style="    border: 1px solid #e5e5e5;
+               <v-btn @click="choose('Import Product')"  style="    border: 1px solid #e5e5e5;
 " variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3" >
                 <v-icon class="mr-2" icon="mdi mdi-tray-arrow-down"></v-icon>
                Import
@@ -39,9 +39,9 @@
                <v-icon class="mr-2" icon="mdi mdi-tray-arrow-up"></v-icon>
                Export 
            </v-btn>
-           <v-btn flat color="green" size="default" class="ml-4 menubar text-grey-darken-3" >
+           <v-btn @click="choose('Add Products')" flat color="green" size="default" class="ml-4 menubar text-grey-darken-3" >
                 <v-icon class="mr-2"  icon="mdi mdi-plus"></v-icon>
-               Add product
+               Add products
            </v-btn>
        </div>
        </div>
@@ -104,7 +104,6 @@ border-radius: 6px;" class="  rounded-lg">
    <tbody>
        <!-- @click="chosen = item.sn" -->
        <tr  
-       @click="choose(item.sn)"
        :style="chosen == item.sn ? 'background:#DFDFDF':''"
        v-for="item in items"
        :key="item.sn"
@@ -414,7 +413,7 @@ mounted(){
  },
  methods:{
    choose(x){
-     this.$emit('changePage', 'Add Products');
+     this.$emit('changePage', x);
    },
    sort(x, y){
      var itm = this.items1;

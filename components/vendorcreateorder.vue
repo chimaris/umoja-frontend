@@ -1,4 +1,4 @@
-<template>
+ <template>
     <v-container height="100%" class=" mx-auto px-5 " width="100%"
     style="overflow:hidden;padding-bottom: 200px;max-width: 1330px;" flat>
     

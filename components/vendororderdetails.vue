@@ -38,7 +38,7 @@ color: #C5912C;">Unfulfilled</span>
                          <v-icon class="mr-2" icon="mdi mdi-cash"></v-icon>
                          Refund
                     </v-btn>
-                    <v-btn flat color="green" size="large" class="ml-4 text-grey-darken-3">
+                    <v-btn @click="edit = !edit" flat color="green" size="large" class="ml-4 text-grey-darken-3">
                          <v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon>
                          Edit
                     </v-btn>
@@ -84,17 +84,27 @@ color: #969696;" class="ml-3">Maximum Delivery Period:
                                         <v-avatar rounded="sm" class="mr-6" size="107"><v-img
                                                   src="https://res.cloudinary.com/payhospi/image/upload/v1687259890/Rectangle_1925_rbn5se.png"></v-img></v-avatar>
                                         <v-row>
-                                             <v-col v-for="n in orderDetails" :key="n.title" cols="12" style="font-weight: 500;
-font-size: 14px;
-line-height: 18px;" sm="6" md="4">
+                                             <v-col v-show="!edit || (edit && (n.title !== 'Email' && n.title !== 'Phone'))" v-for="n in orderDetails" :key="n.title" cols="12" style="font-weight: 500;
+                                                  font-size: 14px;
+                                                  line-height: 18px;" sm="6" md="4">
                                                   <p style="
-color: #969696;" class="text-capitalize">{{ n.title }}</p>
+                                                  color: #969696;" class="text-capitalize">{{ n.title }}</p>
                                                   <p style="
-color: #333333;" class="mt-2">{{ n.value }}
+                                                  color: #333333;" class="mt-2">{{ n.value }}
                                                        <v-btn v-if="n.img" color="grey-lighten-2" height="auto" flat
                                                             class="pa-1 mt-2 px-2 rounded-lg "> <v-img width="50"
                                                                  :src="n.img"></v-img></v-btn>
                                                   </p>
+                                             </v-col>
+                                             <v-col   v-if="edit" cols="12" style="font-weight: 500;
+font-size: 14px;
+line-height: 18px;" sm="6" md="8">
+                                                  <p style="
+color: #969696;" class="text-capitalize">Order Status</p>
+                                   
+                                                       <v-select density="compact" append-inner-icon="mdi mdi-chevron-down" color="grey-lighten-2"  flat
+                                                            class=" mt-2"  size="x-small" block value="Processing" :items="['Processing', 'Shipped', 'In Transit', 'Delivered']"></v-select>
+                                                  
                                              </v-col>
                                         </v-row>
                                    </v-sheet> </v-window-item>
@@ -352,6 +362,7 @@ export default {
           return {
                tab: 'Customer Details',
                chip: 'All',
+               edit: false,
                chosen: '',
                notes: [{
                     name: 'Benjamin Franklin O.',

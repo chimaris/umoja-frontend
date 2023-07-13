@@ -24,7 +24,7 @@
     z-index: 99;
     top: 0; border-bottom: 0.4px #EFEFEF solid;">
 
-              <div v-if="(window != 'Order details') && (window != 'Add Products') && (window != 'createorder')" class="h-100 d-flex align-center ">
+              <div v-if="(window != 'Order details') && (window != 'Add Products') && (window != 'createorder') && (window !== 'Import Product')" class="h-100 d-flex align-center ">
                 <v-btn class="mx-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon
                     icon="mdi mdi-menu"></v-icon></v-btn>
 
@@ -37,17 +37,17 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
                 <v-btn class="mr-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon
                     icon="mdi mdi-menu"></v-icon></v-btn>
 
-                <v-btn @click="window = (window == 'Add Products' ? 'Products' : 'Orders')" size="large" v-bind="props"
+                <v-btn @click="window = (window == 'Add Products' ) || (window == 'Import Product') ? 'Products' : 'Orders'" size="large" v-bind="props"
                   style="    border: 1px solid #e5e5e5;
   " variant="outlined" class=" text-grey-darken-3">
                   <v-icon size="16" class="mr-2" icon="mdi mdi-arrow-left-top"></v-icon>
-                  Back to {{ window !== 'Add Products' ? 'Orders' : 'Products' }}
+                  Back to {{ ((window !== 'Add Products' ) && (window !== 'Import Product')) ? 'Orders' : 'Products' }}
                 </v-btn>
               </div>
             </div>
           </div>
           <!-- :value=" -->
-          <v-window style="padding-top: 110px;" v-model="window">
+          <v-window :touch="false"  style="padding-top: 110px;" v-model="window">
             <v-window-item :value="'Order details'">
               <Vendororderdetails />
             </v-window-item>
@@ -67,8 +67,10 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
             <v-window-item :value="'Add Products'">
               <Vendoraddproducts />
             </v-window-item>
+            <v-window-item :value="'Import Product'">
+              <Vendorimportproduct />
+            </v-window-item>
             <v-window-item :value="'Products'">
-
               <Vendorproducts @changePage="changePage" />
             </v-window-item>
             <v-window-item :value="'cpage'">
@@ -111,8 +113,9 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
 export default {
   data() {
     return {
-      window: "Articles",
+      window: "Orders",
       sidebar: true,
+      edit: true,
     };
   },
   methods: {

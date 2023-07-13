@@ -44,7 +44,7 @@ font-size: 24px;
 line-height: 30px;
 letter-spacing: -0.03em;
 color: #333333;"
-            >Most Popular Category</p>
+            >Most Purchased Category</p>
             <v-btn size="small" variant="text" color="#1361F4" class="" >
 View All            </v-btn>
         </div>
@@ -62,7 +62,7 @@ View All            </v-btn>
       </div>
       <v-progress-linear class="rounded-xl" :color="n.color" :model-value="n.sales" :height="5"></v-progress-linear>
     </div>
-</div>
+  </div>
     </v-card>
 </v-col>
 <v-col cols="12" lg="4" >
@@ -76,7 +76,7 @@ font-size: 24px;
 line-height: 30px;
 letter-spacing: -0.03em;
 color: #333333;"
-            >Most Purchased Product</p>
+            >Most Popular Product</p>
             <v-btn size="small" variant="text" color="#1361F4" class="" >
 View All            </v-btn>
         </div>

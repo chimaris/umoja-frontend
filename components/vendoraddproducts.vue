@@ -20,10 +20,10 @@
         <v-row>
             <v-col cols="12" sm="8">
                 <v-sheet class="cardStyle  ">
-                    <p class="inputLabel">Email Address</p>
+                    <p class="inputLabel">Product Name</p>
 
                     <v-text-field hint="Do not exceed 20 characters when entering the product name." persistent-hint
-                        placeholder="Enter email address" density="comfortable">
+                        placeholder="Ankara Sneakers made with Ghanian Leather " density="comfortable">
                     </v-text-field>
                     <p class="inputLabel mt-4">Description</p>
                     <v-card height="auto" class=" mx-auto pt-2 coolTable  pb-0 mb-1" width="100%" style="overflow:hidden"
@@ -378,14 +378,7 @@ font-weight: 600;"> Variants
             <p style="color: #1273EB;
 font-size: 14px;
 font-weight: 600;" class=" d-flex align-center"><v-icon icon="mdi mdi-plus" class="mr-2"></v-icon> Add Options like size or color</p>
-
-           
                 </v-sheet>
-
-
-
-
-
             </v-col>
             <v-col cols="12" sm="4">
                 <v-sheet class="cardStyle">
