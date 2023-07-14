@@ -77,13 +77,7 @@ font-weight: 500;">Lobortis sagittis porta tincidunt nibh eget lacus. Tristique 
 <a style="text-decoration: none;color: #1273EB;" href="">
     Read More
   </a></span>"  </span>
-<span style="color:  #969696;
-font-size: 14px;
-font-weight: 500;" v-if="n.type == 'products'">
-  is almost out of stock. <a style="color: #1273EB;" href="">
-    Tap to see product details
-  </a>
-</span>
+
   <span v-if="n.type == 'order'">
 
 <span 
