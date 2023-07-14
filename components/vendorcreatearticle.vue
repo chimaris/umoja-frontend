@@ -186,7 +186,7 @@ font-weight: 600;">
 
 <div  class="mb-4 d-flex ">
  <v-avatar size="50">
-     <v-img src=""></v-img>
+     <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688715270/rectangle-22429_agrgwa.png"></v-img>
  </v-avatar>
  <div  class="ml-3">
  <div class=" d-flex"><p style="color: #1E1E1E;
@@ -228,8 +228,14 @@ Read more
 </span>
 <v-icon size="small" class="ml-4" icon="mdi mdi-arrow-right"></v-icon></v-btn>
 </div>
+<div class="px-5 pt-12 mt-12">
 
-    </v-sheet>
+    <v-btn block style="    border: 1px solid #e5e5e5;"  variant="outlined"><span style="color: var(--grey-1000, #1A1D1F);
+
+font-size: 12px;
+font-weight: 600;">View all Articles</span></v-btn>
+</div>
+</v-sheet>
               
             </v-col>
         </v-row>

@@ -97,6 +97,12 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
 
               <Vendorreviews />
             </v-window-item>
+            <v-window-item :value="'Notifications'">
+              <Vendornotifications/>
+            </v-window-item>
+            <v-window-item :value="'All Apps'">
+              <Vendorapps/>
+            </v-window-item>
           </v-window>
         </v-card>
 
@@ -113,7 +119,7 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
 export default {
   data() {
     return {
-      window: "Orders",
+      window: "Notifications",
       sidebar: true,
       edit: true,
     };
