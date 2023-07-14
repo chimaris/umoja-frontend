@@ -70,6 +70,7 @@ font-weight: 500;">Promotions about software package prices and about the latest
         </div>
     </v-col>
 </v-row>
+</div>
             <v-divider></v-divider>
 <div class="pa-5 pt-8">
 <v-row>
@@ -137,7 +138,6 @@ font-weight: 500;">Only notify me all the reminders that have been made</p>
         </div>
     </v-col>
 </v-row>
-</div>
 </div>
            
     </div>

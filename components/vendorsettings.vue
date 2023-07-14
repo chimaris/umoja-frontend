@@ -35,6 +35,12 @@ font-weight: 600;" :style="selected == n? 'color:#2C6E63': ''">
                 <v-window-item value="Notifications">
                 <Vendorsettingsnotifications />
                           </v-window-item>
+                <v-window-item value="Security">
+                <Vendorsettingssecurity />
+                          </v-window-item>
+                <v-window-item value="Account Details">
+                <Vendorsettingsaccount />
+                          </v-window-item>
 
             </v-window>
         </v-col>
