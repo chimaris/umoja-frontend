@@ -9,7 +9,7 @@
 <div class="pa-5 py-8 d-flex align-center justify-space-between">
 <div class=" d-flex align-center">
 <v-avatar size="100"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png" size="100"></v-img></v-avatar>
-<div class="ml-2">
+<div class="ml-3">
     <p style="font-size: 20px;
 font-weight: 600;">Thatdesignpro </p>
     <p style="color:#969696;

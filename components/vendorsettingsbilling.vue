@@ -16,7 +16,7 @@ font-weight: 500;">Basic Plan</span></v-chip>
 </div>
 <p style="color:#333;
 font-size: 40px;
-font-weight: 600;">€ 10/Month</p>
+font-weight: 600;">€10/Month</p>
 <p style="color: #333;
 font-size: 16px;
 font-weight: 400;" class="mb-8">Our free plan has...</p>
@@ -44,7 +44,7 @@ font-weight: 500;">Premium Plan</span></v-chip>
 </div>
 <p style="color:#2C6E63;
 font-size: 40px;
-font-weight: 600;">€ 30/Month</p>
+font-weight: 600;">€30/Month</p>
 <p style="color: #333;
 font-size: 16px;
 font-weight: 400;" class="mb-8">Everything in our free plan plus...</p>

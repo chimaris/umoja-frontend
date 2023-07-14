@@ -6,7 +6,7 @@ font-weight: 500;">Manage your account settings</p>
 <v-sheet class="cardStyle mt-4 mb-12 py-0">
     <v-row>
         <v-col class="py-4" cols="12" lg="2">
-            <div class="py-3" :key="n" v-for="n in ['My Profile', 'Security', 'Notifcations', 'Account Details', 'Billing', 'Integrations']">
+            <div class="py-3" :key="n" v-for="n in ['My Profile', 'Security', 'Notifications', 'Account Details', 'Billing', 'Integrations']">
                 <v-btn size="large" variant="tonal"  @click="selected = n" rounded="xl" flat :color="selected == n? 'green': 'white'">
                   <v-scale-transition>
 
@@ -31,6 +31,9 @@ font-weight: 600;" :style="selected == n? 'color:#2C6E63': ''">
                           </v-window-item>
                 <v-window-item value="Billing">
                 <Vendorsettingsbilling />
+                          </v-window-item>
+                <v-window-item value="Notifications">
+                <Vendorsettingsnotifications />
                           </v-window-item>
 
             </v-window>
