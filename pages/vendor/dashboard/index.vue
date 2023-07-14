@@ -100,6 +100,9 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
             <v-window-item :value="'Notifications'">
               <Vendornotifications/>
             </v-window-item>
+            <v-window-item :value="'Settings'">
+              <Vendorsettings/>
+            </v-window-item>
             <v-window-item :value="'All Apps'">
               <Vendorapps/>
             </v-window-item>

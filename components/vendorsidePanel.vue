@@ -116,7 +116,7 @@ export default {
         {
         name: 'Others',
         list: [
-            { text: 'Notification', icon: 'mdi mdi-message-badge' },
+            { text: 'Notifications', icon: 'mdi mdi-message-badge' },
             { text: 'Help', icon: 'mdi mdi-help-circle' },
             { text: 'Settings', icon: 'mdi mdi-cog' },
         ]
