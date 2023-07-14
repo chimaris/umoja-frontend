@@ -1,5 +1,5 @@
 <template>
-    <v-container style="padding-bottom: 200px;">
+    <v-container style="padding-bottom: 200px;" class="pa-8">
         <div class="mb-8 my-4" >
           <div class="d-flex justify-space-between">
 
