@@ -311,7 +311,7 @@ font-weight: 600;">Pre-Order</span></v-btn>
         </v-row>
         <v-divider class="my-8"></v-divider>
         <div class="d-flex justify-end">
-            <v-btn   size="large" color="white" flat>
+            <v-btn  style="    border: 1px solid #e5e5e5;"   size="large" color="white" flat>
 <span style="font-size: 14px;
 font-weight: 600;
 line-height: 20px;">
