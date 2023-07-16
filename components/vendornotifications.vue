@@ -1,6 +1,6 @@
 <template>
-    <v-container style="padding-bottom: 200px;" class="pa-8">
-        <div class="mb-8 my-4" >
+ <v-container height="100%" class=" mx-auto px-5 " width="100%"
+    style="overflow:hidden;padding-bottom: 200px;max-width: 1330px;" flat>        <div class="mb-8 my-4" >
           <div class="d-flex justify-space-between">
 
             <v-tabs

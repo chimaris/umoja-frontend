@@ -1,6 +1,6 @@
 <template>
-    <v-container height="100%"  class=" mx-auto pt-6 pa-4" width="100%" style="max-width: ;overflow:hidden" fluid flat >
-       <div class="d-flex align-center  justify-space-between">
+ <v-container height="100%" class=" mx-auto px-5 " width="100%"
+    style="overflow:hidden;padding-bottom: 200px;max-width: 1330px;" flat>       <div class="d-flex align-center  justify-space-between">
         <div class="d-flex w-100 align-center ">
            <div class="d-flex  align-center ">
         <v-text-field style="width:235px;border: 1px solid #CECECE;

@@ -1,6 +1,6 @@
 <template>
-        <v-container class="pb-12">
-   <p style="color: var(--carbon-4, #333);
+ <v-container height="100%" class=" mx-auto px-5 " width="100%"
+    style="overflow:hidden;padding-bottom: 200px;max-width: 1330px;" flat>   <p style="color: var(--carbon-4, #333);
 font-size: 24px;
 font-weight: 600;">App Integrations</p>
    <p style="color: #969696;
