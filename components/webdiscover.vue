@@ -44,7 +44,7 @@ Vendors
 <v-container class="mt-12">
 
 <v-row>
-    <v-col v-for=" n in (mods == 1? items1: items2)" :key="n" cols="12" lg="3">
+    <v-col v-for=" n in (mods == 1? items1: items2)" :key="n" cols="12" sm="6" lg="3">
         <v-card height="436" flat class="cardStyle">
             <v-avatar eager :color="n.color" class="mb-4 mt-6 rounded-lg" size="60"><img width="30" :src="n.src" /></v-avatar>
             <p class="my-4" style="color: var(--carbon-4, #333);

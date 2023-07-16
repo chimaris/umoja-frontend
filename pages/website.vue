@@ -111,6 +111,9 @@ font-weight: 400;" class="mt-4">The world first and largest e-commerce platform 
 
     </v-container>
   <webfooter />
+  <v-dialog>
+  <webdialog />
+  </v-dialog>
     </div>
 
 </template>
@@ -124,6 +127,7 @@ display: none;
 export default {
   data() {
     return {
+        dialog: true,
         mods:1,
   
      

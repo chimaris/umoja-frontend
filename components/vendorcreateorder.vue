@@ -676,7 +676,7 @@ font-weight: 600;max-width: 260px;">
 </v-row>
                         <v-row class="mt-3">
                  <v-col> 
-        <p class="inputLabel">city</p>             
+        <p class="inputLabel">First Name</p>             
      <v-text-field placeholder="Enter first name" density="comfortable"  >
          </v-text-field></v-col>
                  <v-col> 
