@@ -169,9 +169,9 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
         <v-img eager style="    width: 100%;
     scale: 1;
     position: relative;
-    transform: rotate(-15deg);
+    
     top: 30%;
-    right: -160px;" width="100%"  class="imgs" src="https://res.cloudinary.com/payhospi/image/upload/v1689486665/Sales_x325hs.png"></v-img>
+    " width="100%"  class="imgs" src="https://res.cloudinary.com/payhospi/image/upload/v1689486665/Sales_x325hs.png"></v-img>
      
     </div>
 </div>
