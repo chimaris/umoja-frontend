@@ -6,8 +6,8 @@
  
     <v-container class="pt-12">
 <v-row class="mt-12">
-    <v-col cols="12" class="alignc" lg="6">
-        <v-avatar class="mb-4" style="width:130px; height:80px" rounded="0" flat>
+    <v-col cols="12" class="pt-0 alignc" lg="6">
+        <v-avatar class="mb-6" style="width:130px; height:54px" rounded="0" flat>
                     <v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689512117/frame-4_cawhs0.png">
                     </v-img>
                 </v-avatar >
