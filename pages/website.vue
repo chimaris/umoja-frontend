@@ -4,7 +4,7 @@
         <v-container   class="py-0">
             <div style="max-width: 1200px;" class="mx-auto d-flex justify-space-between align-center">
                 <v-avatar class="logo" style="width:203px; height:150px" rounded="0" flat>
-                    <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689483300/Frame_3_isko6t.png">
+                    <v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689483300/Frame_3_isko6t.png">
                     </v-img>
                 </v-avatar>
 
@@ -17,7 +17,7 @@
     </v-container>
     <v-container style=" position: relative;   max-width: 1417px;" class="pt-0" fluid>
 
-        <v-card flat class="rounded-xl d-flex justify-center align-center" height="auto" min-height="calc(100vh  + 122px)"  image="https://res.cloudinary.com/payhospi/image/upload/v1689483514/african-safari-animals-11_k5q3lr.png">
+        <v-card flat class="rounded-xl d-flex justify-center align-center" height="auto" min-height="calc(100vh  + 122px)"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
            
             <div
              style="
@@ -26,7 +26,7 @@
             height: 100%;
             width: 100%;">
                 <v-btn style="height: auto;top: 15%;left: 10%;"  flat rounded="xl" class="rw px-2 py-2" height="auto" >
-                    <v-avatar size="30.88" class="mr-1"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
                     <span class="mr-2" style="color: var(--carbon-4, #333);
                         font-size: 14px;letter-spacing: 2.38px;
                         font-weight: 500;">
@@ -35,7 +35,7 @@
                     </span>
                 </v-btn>
                 <v-btn style="height: auto;position: absolute;right: 25%;top: 8%;"  flat rounded="xl" class="gh px-2 py-2" height="auto" >
-                    <v-avatar size="30.88" class="mr-1"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img></v-avatar>
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img></v-avatar>
                     <span class="mr-2" style="color: var(--carbon-4, #333);
                         font-size: 14px;letter-spacing: 2.38px;
                         font-weight: 500;">
@@ -45,7 +45,7 @@
                 </v-btn>
                 <v-btn style="position: absolute;
     top: 50%;" flat rounded="xl" class="ng px-2 py-2" height="auto" >
-                    <v-avatar size="30.88" class="mr-1"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img></v-avatar>
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img></v-avatar>
                     <span class="mr-2" style="color: var(--carbon-4, #333);
                         font-size: 14px;letter-spacing: 2.38px;
                         font-weight: 500;">
@@ -56,7 +56,7 @@
                 <v-btn style="    position: absolute;
     top: 40%;
     right: 5%;" flat rounded="xl" class="sa px-2 py-2" height="auto" >
-                    <v-avatar size="30.88" class="mr-1"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img></v-avatar>
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img></v-avatar>
                     <span class="mr-2" style="color: var(--carbon-4, #333);
                         font-size: 14px;letter-spacing: 2.38px;
                         font-weight: 500;">
@@ -69,7 +69,7 @@
     bottom: 25%;
     right: 20%;
 " flat rounded="xl" class="ke px-2 py-2" height="auto" >
-                    <v-avatar size="30.88" class="mr-1"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img></v-avatar>
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img></v-avatar>
                     <span class="mr-2" style="color: var(--carbon-4, #333);
                         font-size: 14px;letter-spacing: 2.38px;
                         font-weight: 500;">
@@ -123,8 +123,13 @@ font-weight: 400;" class="mt-4">The world first and largest e-commerce platform 
 display: none;
 }
 .imgs{
-    transition: all 0.5s ease!important;;
+    transition: all 0.5s ease!important;
+    transform: rotate(-15deg);
+    right: -160px;
 }
+.bentcard:hover .imgs, .imgs:hover {
+    transform: rotate(0deg) !important;
+    right: 0!important;}
 @media only screen and (max-width: 768px) {
   /* CSS rules for smaller screens */
   .bigTitle{
@@ -157,9 +162,7 @@ display: none;
 .alignc{
     text-align: center!important;
 }
-.bentcard:hover .imgs {
-    transform: rotate(0deg) !important;
-    right: 0!important;}
+
 .ke{
     bottom: 19%!important;
     top: unset!important;
