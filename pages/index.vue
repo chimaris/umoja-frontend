@@ -1,419 +1,348 @@
 <template>
-  <v-app>
-    <div class="mainbg">
+    <div>
 
-    <Header />
-    <v-container id="hero" class="" style="min-height: calc(100vh - 96px)">
-      <v-row class="mt-12">
-        <v-col class="mb-12 pb-12 px-0" id="herotext" style="position: relative" :cols="cols[1]">
-          <h1 class=""
-            style="color:#333333;
-              font-family: ;
-              font-style: normal;
-              font-weight: 900;
-              font-size: 60px;text-indent:190px
-            "
-          >
-          <span style="overflow:visible;position:absolute; left:-195px;" >
-<v-img eager width="165" style="    width: 223px;
-    position: absolute;
-    left: 161px;
-    height: 100%;" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229325/svg_jjolmp.png"></v-img>
-            <v-carousel
-     class="d-flex" cycle :interval="3000"
-    height="auto" width=""
-    :hide-delimiters="true"
-    :show-arrows="false"
-  >
-    <v-carousel-item 
-      v-for="(slide, i) in ['Buy   ', 'Sell   ', 'Deliver']"
-      :key="i"
-    >
-    
-      <span style="width:100px">
+        <v-container   class="py-0">
+            <div style="max-width: 1200px;" class="mx-auto d-flex justify-space-between align-center">
+                <v-avatar class="logo" style="width:203px; height:150px" rounded="0" flat>
+                    <v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689483300/Frame_3_isko6t.png">
+                    </v-img>
+                </v-avatar>
 
-          {{slide}}
-      </span>
-    </v-carousel-item>
-    
-</v-carousel>
-</span>
-Quality African products from any part of the world.
-          </h1>
-          <p class="mt-6 mb-0 headerText">
-            The world's first and largest e-commerce platform with a wide
-            variety of authentic and sustainable African products.
-          </p>
-          <p style="color:#1A423B" class="mt-6 headerText">
-            Click on any country on the map to explore and discover different
-            vendors from across Africa.
-          </p>
-          <div style="position:relative" class="mt-8">
-            <v-btn flat to="/vendor/profile" color="green" size="x-large"
-              >Start Exploring <v-avatar rounded="0" size="20" class="ml-4"><v-img src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684373214/Vector_iu4lgn.png"></v-img></v-avatar></v-btn>
-            <v-btn to="/user/login" flat variant="text" size="x-large" class="ml-2 howit"><span style="text-decoration:underline">
-
-                How it works
+            <v-btn @click="opendialog()" flat size="large" color="green rounded-xl" >
+            <span style="font-size: 14px;">
+                Join the Waitlist
             </span>
             </v-btn>
-         
-            <img
-              class="arrowimage"
-              src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684307877/Arrow_01_a5rxq0.png"
-            />
         </div>
-        </v-col>
-        <v-col id="heromap" style="" :cols="cols[2]">
-          <v-img eager
-            style="position: relative;overflow:visible;"
-            class="pa-3"
-            contain min-width="700px"
-            height="auto" @load="placescards = true"
-            width="100%"
-            src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684303944/African_Map_fmici3.png"
-          >
-            <div v-if="placescards"
-              class="d-flex justify-center"
-              style="width: 250.88px; scale: 0.9;  top: 14%;
-    left: 14%; position: absolute"
-            >
-              <v-card flat class="transparent africacard">
-                <div class="pa-5 d-flex align-center justify-center w-100">
-                  <div>
-                    <v-img
-                      width="30px"
-                      style="border-radius: 5px !important"
-                      height="auto"
-                      src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/NG_-_Nigeria_c8g2on.png"
-                    />
-                  </div>
-                  <p class="ml-3">Nigeria</p>
-                </div>
-                <v-divider></v-divider>
+    </v-container>
+    <v-container style=" position: relative;   max-width: 1417px;" class="pt-0" fluid>
 
-                <div class="d-flex px-5 pt-4 pb-3 justify-center">
-                    <div class="list">
-                    <v-avatar class="" size="38" :key="i" v-for="(n, i) in images"
-                      ><v-img
-                        :src="n"
-                      ></v-img
-                    ></v-avatar>
-                    <v-avatar color="green">
-                      <span style="font-size: 13px">+1499</span></v-avatar
-                    >
-                  </div>
-                </div>
+        <v-card flat class="rounded-xl d-flex justify-center align-center" height="100vh" min-height="958px"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
+           
+            <div
+             style="
+            position: absolute;
+            top: 0;
+            height: 100%;
+            width: 100%;">
+                <v-btn style="height: auto;top: 15%;left: 10%;"  flat rounded="xl" class="rw px-2 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
 
-                <div class="d-flex justify-center">
-                  <v-btn size="small" color="blue" variant="text" flat>
-                    <span
-                      style="
-                        font-size: 14px;
-                        text-transform: none;
-                        color: #0062bc;
-                      "
-                    >
-                      See vendors in this area
+                        RWANDA
                     </span>
-                    <v-avatar class="ml-2" size="25" rounded="0"
-                      ><v-img
-                        src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                      ></v-img
-                    ></v-avatar>
-                  </v-btn>
-                </div>
-              </v-card>
-              <div class="pointer"></div>
-            </div>
-            <div v-if="placescards"
-              class="d-flex justify-center"
-              style="width: 250.88px;    top: -10%;
-    right: 23%;
-    scale: 0.9; position: absolute"
-            >
-              <v-card flat class="transparent africacard">
-                <div class="pa-5 d-flex align-center justify-center w-100">
-                  <div>
-                    <v-img
-                      width="30px"
-                      style="border-radius: 5px !important"
-                      height="auto"
-                      src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229323/EG_-_Egypt_mlkkl6.png"
-                    />
-                  </div>
-                  <p class="ml-3">Egypt</p>
-                </div>
-                <v-divider></v-divider>
+                </v-btn>
+                <v-btn style="height: auto;position: absolute;right: 25%;top: 8%;"  flat rounded="xl" class="gh px-2 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
 
-                <div class="d-flex px-5 pt-4 pb-3 justify-center">
-                    <div class="list">
-                    <v-avatar class="" size="38" :key="i" v-for="(n, i) in images"
-                      ><v-img
-                        :src="n"
-                      ></v-img
-                    ></v-avatar>
-                    <v-avatar color="green">
-                      <span style="font-size: 13px">+324</span></v-avatar
-                    >
-                  </div>
-                </div>
-
-                <div class="d-flex justify-center">
-                  <v-btn size="small" color="blue" variant="text" flat>
-                    <span
-                      style="
-                        font-size: 14px;
-                        text-transform: none;
-                        color: #0062bc;
-                      "
-                    >
-                      See vendors in this area
+                        GHANA
                     </span>
-                    <v-avatar class="ml-2" size="25" rounded="0"
-                      ><v-img
-                        src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                      ></v-img
-                    ></v-avatar>
-                  </v-btn>
-                </div>
-              </v-card>
-              <div class="pointer"></div>
-            </div>
-            <div v-if="placescards"
-              class="d-flex justify-center"
-              style="width: 250.88px;    bottom: 7%;
-    right: 30%;
-    scale: 0.9; position: absolute"
-            >
-              <v-card flat class="transparent africacard">
-                <div class="pa-5 d-flex align-center justify-center w-100">
-                  <div>
-                    <v-img
-                      width="30px"
-                      style="border-radius: 5px !important"
-                      height="auto"
-                      src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_9_cxzweo.png"
-                    />
-                  </div>
-                  <p class="ml-3">South Africa</p>
-                </div>
-                <v-divider></v-divider>
+                </v-btn>
+                <v-btn style="position: absolute;
+    top: 50%;" flat rounded="xl" class="ng px-2 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
 
-                <div class="d-flex px-5 pt-4 pb-3 justify-center">
-                    <div class="list">
-                    <v-avatar class="" size="38" :key="i" v-for="(n, i) in images"
-                      ><v-img
-                        :src="n"
-                      ></v-img
-                    ></v-avatar>
-                    <v-avatar color="green">
-                      <span style="font-size: 13px">+2403</span></v-avatar
-                    >
-                  </div>
-                </div>
-
-                <div class="d-flex justify-center">
-                  <v-btn size="small" color="blue" variant="text" flat>
-                    <span
-                      style="
-                        font-size: 14px;
-                        text-transform: none;
-                        color: #0062bc;
-                      "
-                    >
-                      See vendors in this area
+                        NIGERIA
                     </span>
-                    <v-avatar class="ml-2" size="25" rounded="0"
-                      ><v-img
-                        src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                      ></v-img
-                    ></v-avatar>
-                  </v-btn>
-                </div>
-              </v-card>
-              <div class="pointer"></div>
-            </div>
-            <div v-if="placescards"
-              class="d-flex justify-center"
-              style="width: 250.88px;       bottom: 25%;
-    right: 0%;
-    scale: 0.9; position: absolute"
-            >
-              <v-card flat class="transparent africacard">
-                <div class="pa-5 d-flex align-center justify-center w-100">
-                  <div>
-                    <v-img
-                      width="30px"
-                      style="border-radius: 5px !important"
-                      height="auto"
-                      src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_8_ftnhqn.png"
-                    />
-                  </div>
-                  <p class="ml-3">Madagscar</p>
-                </div>
-                <v-divider></v-divider>
+                </v-btn>
+                <v-btn style="    position: absolute;
+    top: 40%;
+    right: 5%;" flat rounded="xl" class="sa px-2 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
 
-                <div class="d-flex px-5 pt-4 pb-3 justify-center">
-                  <div class="list">
-                    <v-avatar class="" size="38" :key="i" v-for="(n, i) in images"
-                      ><v-img
-                        :src="n"
-                      ></v-img
-                    ></v-avatar>
-                    <v-avatar color="green">
-                      <span style="font-size: 13px">+476</span></v-avatar
-                    >
-                  </div>
-                </div>
-
-                <div class="d-flex justify-center">
-                  <v-btn size="small" color="blue" variant="text" flat>
-                    <span
-                      style="
-                        font-size: 14px;
-                        text-transform: none;
-                        color: #0062bc;
-                      "
-                    >
-                      See vendors in this area
+                        SOUTH AFRICA
                     </span>
-                    <v-avatar class="ml-2" size="25" rounded="0"
-                      ><v-img
-                        src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                      ></v-img
-                    ></v-avatar>
-                  </v-btn>
+                </v-btn>
+                <v-btn style="
+    position: absolute;
+    bottom: 25%;
+    right: 20%;
+" flat rounded="xl" class="ke px-2 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
+
+                        KENYA
+                    </span>
+                </v-btn>
+
+            </div>
+            <v-container class="">
+
+                <div class="text-center  mx-auto mt-12" style="position:relative;bottom:100px;max-width:834px ;">
+                    <p style="color:  #F38218;
+                        font-size: 14px;
+                        font-weight: 500;
+                        line-height: 120%; /* 16.8px */
+                        letter-spacing: 0.7px;
+                        text-transform: uppercase;">
+                        Growing the African Market Space
+                    </p>
+                    <p style="color:#1E1E1E;
+font-size: 64px;
+font-weight: 600;
+line-height: 120%;
+letter-spacing: -1.92px;" class="bigTitle mt-4">Buy/Sell quality African products from any part of the world!</p>
+<p style="color: var(--carbon-4, #333);
+font-size: 20px;
+font-weight: 400;" class="mt-4">The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.</p>
+
+<div class="py-8">
+    <v-btn @click="opendialog()"  color="green" flat class="mx-auto" size="x-large" rounded="xl">Join the Waitlist</v-btn>
+</div>
                 </div>
-              </v-card>
-              <div class="pointer"></div>
-            </div>
-          </v-img>
-        </v-col>
-      </v-row>
-      <div class="d-">
-          <div  class=" d-flex">
+            </v-container>
 
-              <p class="bg-green rounded-t-lg pa-8 px-12">Buy</p>
-            </div>
-          
-          <div >
-          <v-row class="d-flex mb-8 justify-space-between align-center">
-        <v-col  class="d-flex" :cols="cols[8]">
-            <v-sheet class="d-flex rounded-lg  pa-8">
-                <div class="pr-6 d-flex"  v-for="(n, i) in seachbtns" :key="n.title">
-<div style="width:201px">
+        </v-card>
+<webdiscover />
+<webexplore />
 
-                <p>{{n.title}}</p>
-                <v-menu
-                style="width:90%"
-      transition="scale-transition"
-    >
-      <template v-slot:activator="{ props }">
-        <p  style="width:90%;font-size:14px"
-          variant="text" class="d-flex text-grey-darken-1 justify-space-between px-0"
-          v-bind="props"
-        >
-          {{n.value}} <v-icon icon="mdi mdi-chevron-down"></v-icon>
-        </p>
-      </template>
+    </v-container>
+  <webfooter @opendialog="opendialog"/>
+  <v-dialog max-width="1200" class="d-flex justify-center" v-model="dialog">
+  <webdialog />
+  </v-dialog>
+    </div>
 
-      <v-list>
-        <v-list-item
-          v-for="(item, o) in items[i]"
-          :key="o"
-        >
-          <v-list-item-title>{{ item }}</v-list-item-title>
-        </v-list-item>
-      </v-list>
-    </v-menu>  </div>
-   
-    <v-divider inset vertical></v-divider>
-           </div>
-           <v-btn variant="text">
-            <v-img width="30px" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684311511/Magnifer_fexs3d.png"></v-img>
-           </v-btn>
-            </v-sheet>
-        </v-col>
-        <v-col class="d-flex justify-end" :cols="cols[9]">
-          <v-btn-toggle mandatory model-value="2" v-model="mods" style="background:rgb(255 255 255 / 36%)" rounded="xl">
-            <v-btn :style="mods == 2 ? '    background: transparent!important;': ''" value="1"    style="border-radius: 50%!important;
-" icon="mdi mdi-weather-night"></v-btn>
-            <v-btn :style="mods == 1 ? '    background: transparent!important;': ''" value="2" style="border-radius: 50%!important;
-" icon="mdi mdi-weather-sunny"></v-btn>
-          </v-btn-toggle>
-        </v-col>
-      </v-row>    
-      </div>
-      </div>
-
-    </v-container>    </div>
-
-  </v-app>
 </template>
+<style>
+
+.bto .v-btn__overlay {
+display: none;
+}
+.smlimg{
+    animation: float 6s ease-in-out infinite;
+    transform: translatey(0px);
+}
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
+.imgs{
+    transition: all 0.5s ease!important;
+    transform: rotate(-15deg);
+    right: -160px;
+}
+.discoimgs{
+    transition: all 0.5s ease!important;
+    scale:1.0
+}
+.discocard:hover .discoimgs, .discoimgs:hover { 
+    scale:1.05
+}
+.customimgs{
+    transition: all 0.5s ease!important;
+    top: 30%;
+    left: 30%;
+}
+.customcard:hover .customimgs, .customimgs:hover { 
+    top: 22%;
+    left: 24%;
+}
+.rw {
+    background: #ffffff87;
+    backdrop-filter: blur(3px);
+  animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.ng {
+    background: #ffffff87;
+    backdrop-filter: blur(3px);
+  animation: slide2 10s linear infinite;
+}
+
+@keyframes slide2 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(30px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.sa {
+  animation: slide3 12s linear infinite;
+  background: #ffffff87;
+    backdrop-filter: blur(3px);
+}
+
+@keyframes slide3 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(45px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.gh {
+  animation: slide4 10s linear infinite;
+}
+
+@keyframes slide4 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.ke {
+    background: #ffffff87;
+    backdrop-filter: blur(3px);
+  animation: slide5 10s linear infinite;
+}
+
+@keyframes slide5 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.rotimg {
+  animation: rotate 60s linear infinite;
+}
+
+@keyframes rotate {
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+.bentcard:hover .imgs, .imgs:hover {
+    transform: rotate(0deg) !important;
+    right: 0!important;}
+    @media only screen and (max-width: 768px) {
+        .rotimg {
+    top: -11%!important;
+    left: 65%!important;        }
+        /* CSS rules for smaller screens */
+  .bigTitle{
+    font-size: 46px !important;
+  }
+  .gh{
+    scale: 0.9;
+    right: -9%!important;
+    top: 2%!important;
+  }
+  .rw{
+    scale: 0.9;
+    top: 7%!important;
+    left: -6%!important;
+  }
+  .ng{
+    scale: 0.9;
+    bottom: 9%!important;
+    top: unset!important;
+    left: 3%!important;
+    
+}
+.ke{
+    scale: 0.9;
+    bottom: 19%!important;
+    top: unset!important;
+    right: -9%!important;
+}
+.sa{
+    scale: 0.9;
+    bottom: 28%!important;
+    top: unset!important;
+    right: 55%!important;
+  }
+.logo{
+    width: 161px!important;
+    height: 100px!important;
+}
+.subtitles{
+
+    font-size: 40px!important;
+
+}
+.alignc{
+    text-align: center!important;
+}
+
+.dialogrow{
+    padding:12px 12px 0px 12px!important;
+    text-align: center!important;
+}
+  /* Add more rules here as needed */
+  .cardtitle{
+      font-size: 30px;
+  }
+  .cardsub{
+      font-size: 18px;
+  }
+  .conte{
+    padding-left: 0!important;
+    padding-right: 0!important;
+  }
+}
+</style>
 <script>
-import { useTheme } from "vuetify";
 
 export default {
   data() {
     return {
-        placescards:false,
+        dialog: false,
         mods:1,
-       images:['https://res.cloudinary.com/dkbt6at26/image/upload/v1684302547/Rectangle_8_bjr2cm.png',
-    'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302547/Rectangle_7_h4lxnd.png',
-'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_6_1_qlrzss.png',
-'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_5_ucb5ag.png',
-'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_4_tzf2yf.png',
-'https://res.cloudinary.com/dkbt6at26/image/upload/v1684298703/profile_ievpza.png'],
-        eComCategories: ['Electronics', 'Clothing', 'Home & Kitchen', 'Beauty & Personal Care', 'Sports & Outdoors', 'Books & Media', 'Toys & Games', 'Automotive', 'Health & Wellness', 'Jewelry & Accessories'],
-
-     countries:[ {
-    name: ['Algeria', 'Nigeria', 'South Africa'],
-    states: ['Algiers', 'Oran', 'Constantine', 'Annaba', 'Batna', 'Blida']
-  },
-  {
-    name: 'Nigeria',
-    states: ['Lagos', 'Kano', 'Abuja', 'Ibadan', 'Kaduna', 'Port Harcourt']
-  },
-  {
-    name: 'South Africa',
-    states: ['Gauteng', 'KwaZulu-Natal', 'Western Cape', 'Eastern Cape', 'Free State', 'Mpumalanga']
-  }],
-        theme: useTheme(),
+  
+     
     };
   },
-  computed: {
-    items(){
-    
-    return [
-            this.countries[0].name,
-            this.countries[1].states,
-            this.eComCategories
-        ]},
-    seachbtns(){
-        return [
-        { title: 'Country',
-    value: 'Nigeria'},
-        { title: 'State',
-    value: 'Enugu Nigeria'},
-        { title: 'Category',
-    value: 'Fashion and Design', content: this.eComCategories}]},
-    cols() {
-      const { lg, sm, md } = this.$vuetify.display;
-      return lg
-        ? [4, 6, 6, 6, 4, 8, 4, 3, 10, 2]
-        : md
-        ? [4, 6, 6, 12, 6, 8, 4, 3, 10, 2]
-        : sm
-        ? [6, 12, 12, 12, 12, 12, 12, 12, 12]
-        : [6, 12, 12, 12, 12, 12, 12, 12, 12];
-    },
-  },
   methods: {
-    toggleTheme() {
-      this.theme.global.name.value = this.theme.global.current.value.dark
-        ? "light"
-        : "dark";
-    },
-  },
+    opendialog(){
+        this.dialog = true
+    }
+  }
+
 };
 </script>
