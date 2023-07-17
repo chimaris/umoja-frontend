@@ -28,7 +28,7 @@ font-weight: 400;max-width: 487px;
 line-height: 160%; /* 32px */
 letter-spacing: -0.6px;" class="mt-4">Vendors and users connect in the Umoja digital African market</p>
 
-<v-btn flat size="large" variant="outlined" width="188" color="#EDEDED" class="mt-12 rounded-xl" >
+<v-btn @click="$emit('opendialog')" flat size="large" variant="outlined" width="188" color="#EDEDED" class="mt-12 rounded-xl" >
             <span style="font-size: 14px;">
                 Join the Waitlist
             </span>

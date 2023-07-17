@@ -202,7 +202,7 @@ letter-spacing: -0.6px;" class="mt-4" >Umoja as a platform offers vendors full f
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 160%; /* 32px */
-                    letter-spacing: -0.6px;" class="mt-4" >Vendors have access to a variety of dashboards that helps them oversee and manage their businesses on the platform.</p>
+                    letter-spacing: -0.6px;" class="mt-4" >Umoja as a CRM Tool, we offer our vendors a variety of apps to better manage and scale their business to its full potential.</p>
                </div>  
 </v-col>
                

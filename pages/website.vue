@@ -110,7 +110,7 @@ font-weight: 400;" class="mt-4">The world first and largest e-commerce platform 
 <webexplore />
 
     </v-container>
-  <webfooter />
+  <webfooter @opendialog="opendialog"/>
   <v-dialog max-width="1200" class="d-flex justify-center" v-model="dialog">
   <webdialog />
   </v-dialog>

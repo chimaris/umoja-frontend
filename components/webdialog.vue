@@ -28,9 +28,9 @@ letter-spacing: -1.44px;">Join the Umoja Waitlist</p>
          </div>
             </v-col>
             <v-col cols="12" class="pa-0" md="5">
-                <v-carousel height="568"  cycle hide-delimiter-background hide-delimiters hide-controls :show-arrows="false">
-                <v-carousel-item  height="568">
-                    <v-card height="568"  rounded="0" width="100%" image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_700/v1689518404/rectangle-1922_a41ixf.png">
+                <v-carousel continuous :interval="3000" height="568"  cycle hide-delimiter-background hide-delimiters hide-controls :show-arrows="false">
+                <v-carousel-item  v-for="n in ['https://res.cloudinary.com/payhospi/image/upload/c_fit,w_700/v1689518404/rectangle-1922_a41ixf.png', 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_700/v1689486649/rectangle-1922_rfqjbp.png']" :key="n" height="568">
+                    <v-card height="568"  rounded="0" width="100%" :image="n">
                     <div class="pa-8" style="width: 100%; left: 0;bottom:0;position: absolute;">
                     <p  style="color: #FFF;
 font-size: 14px;max-width: 413px;
@@ -44,22 +44,6 @@ letter-spacing: -0.3px;">© Copyright 2023. All Rights Reserved.</p>
 </div>
                 </v-card>
                     </v-carousel-item>
-                <v-carousel-item  height="568">
-                    <v-card height="568"  rounded="0" width="100%" image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_700/v1689486649/rectangle-1922_rfqjbp.png">
-                    <div class="pa-8" style="width: 100%; left: 0;bottom:0;position: absolute;">
-                    <p  style="color: #FFF;
-font-size: 14px;max-width: 413px;
-font-weight: 400;
-line-height: 140%;">Join our waitlist today and be the first to experience our social commerce platform.</p>
-<p class="my-4" style="color: var(--magnetic-green-2, #CDD6D4);
-font-size: 10px;
-font-weight: 400;
-line-height: 180%; /* 18px */
-letter-spacing: -0.3px;">© Copyright 2023. All Rights Reserved.</p>
-</div>
-                </v-card>
-                    </v-carousel-item>
-
                 </v-carousel>
             
             </v-col>
@@ -101,8 +85,6 @@ export default {
     return {
         dialog2: false,
         category:null,
-  
-     
     };
   },
   methods: {
