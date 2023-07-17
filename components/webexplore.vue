@@ -42,7 +42,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Users have direct access to vendo
         <v-img eager width="70%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486650/frame-1000006827_nwg6of.png"></v-img>
         <div style="width: 70%;">
 
-            <v-img style="width: 56%;position: absolute;top: 3px;right: -26px;" width="60%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486479/frame-1000006834_gzholy.png"></v-img>
+            <v-img eager style="width: 56%;position: absolute;top: 3px;right: -26px;" width="60%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486479/frame-1000006834_gzholy.png"></v-img>
         </div>
     </div>
     </div>
@@ -105,7 +105,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
 </v-col>
                
             <v-col style="position: relative;" cols="12" md="7">
-<v-img style="    scale: 1.5;
+<v-img eager style="    scale: 1.5;
     position: relative;
     top: 30%;
     left: 30%;" src="https://res.cloudinary.com/payhospi/image/upload/v1689486668/DASHBOARD_pcv7ef.png"></v-img>
@@ -166,7 +166,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
 <div class=" pt-8" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
 
-        <v-img style="    width: 100%;
+        <v-img eager style="    width: 100%;
     scale: 1;
     position: relative;
     transform: rotate(-15deg);
@@ -207,7 +207,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
 </v-col>
                
             <v-col  style="position: relative;" class="d-flex justify-end py-12" cols="12" md="8">
-<v-img max-width="486px" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/v1689508489/frame-1000007234_fqn6um.png"></v-img>
+<v-img eager max-width="486px" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/v1689508489/frame-1000007234_fqn6um.png"></v-img>
             </v-col>
  </v-row>
 
