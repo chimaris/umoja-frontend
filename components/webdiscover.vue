@@ -64,7 +64,6 @@ letter-spacing: -0.16px;">{{ n.content }}</p>
 </div>
 
 </v-card>
-<v-divider class="w-75 mx-auto" inset></v-divider>
 </template>
 <script>
 

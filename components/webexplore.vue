@@ -1,5 +1,5 @@
 <template>
-    <v-card min-height="100vh" flat style="padding-top: 200px;padding-bottom: 200px;" class="d-flex  justify-center align-center">
+    <v-card min-height="100vh" flat style="padding-bottom: 200px;" class="d-flex  justify-center align-center">
     <div class=" w-100 ">
     <div class=" w-100 text-center">
 
