@@ -19,12 +19,14 @@ letter-spacing: -1.44px;">Join the Umoja Waitlist</p>
      <p class="inputLabel">User Category Name</p>             
      <v-select :items="['User', 'Vendor']" v-model="category" placeholder="Select Buyer or Vendor" append-inner-icon="mdi mdi-chevron-down" density="comfortable"  >
     </v-select>
+<div class="alignc">
 
     <v-btn @click="dialog2 = true" width="235" class="my-4" flat size="large" color="green rounded-xl" >
-       <span style="font-size: 14px;">
-           Join the Waitlist
-       </span>
-       </v-btn>
+        <span style="font-size: 14px;">
+            Join the Waitlist
+        </span>
+    </v-btn>
+</div>
 </div>
 
          </div>
