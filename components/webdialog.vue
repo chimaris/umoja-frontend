@@ -1,5 +1,5 @@
 <template>
-      <v-sheet class="mx-auto " width="100%" style="max-width: 1200px;overflow: hidden; border-radius: 15px;" >
+      <v-sheet class="mx-auto " width="100%" style="max-width: 1200px;overflow-x: hidden; border-radius: 15px;" >
         <v-row class="dialogrow">
             <v-col cols="12" md="7" class="pa-0 d-flex align-center justify-center ">
                 <div class="py-12">
