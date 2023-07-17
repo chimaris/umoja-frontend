@@ -86,7 +86,7 @@
                         font-size: 14px;
                         font-weight: 500;
                         line-height: 120%; /* 16.8px */
-                        letter-spacing: 0.7px;
+                        letter-spacing: 0.9px;
                         text-transform: uppercase;">
                         Growing the African Market Space
                     </p>
