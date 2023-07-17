@@ -17,7 +17,7 @@
     </v-container>
     <v-container style=" position: relative;   max-width: 1417px;" class="pt-0" fluid>
 
-        <v-card flat class="rounded-xl d-flex justify-center align-center" height="auto" min-height="calc(100vh  + 122px)"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
+        <v-card flat class="rounded-xl d-flex justify-center align-center" height="100vh" min-height="958px"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
            
             <div
              style="
