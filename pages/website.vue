@@ -8,7 +8,7 @@
                     </v-img>
                 </v-avatar>
 
-            <v-btn flat size="large" color="green rounded-xl" >
+            <v-btn @click="opendialog()" flat size="large" color="green rounded-xl" >
             <span style="font-size: 14px;">
                 Join the Waitlist
             </span>
@@ -100,7 +100,7 @@ font-size: 20px;
 font-weight: 400;" class="mt-4">The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.</p>
 
 <div class="py-8">
-    <v-btn color="green" flat class="mx-auto" size="x-large" rounded="xl">Join the Waitlist</v-btn>
+    <v-btn @click="opendialog()"  color="green" flat class="mx-auto" size="x-large" rounded="xl">Join the Waitlist</v-btn>
 </div>
                 </div>
             </v-container>
@@ -111,7 +111,7 @@ font-weight: 400;" class="mt-4">The world first and largest e-commerce platform 
 
     </v-container>
   <webfooter />
-  <v-dialog>
+  <v-dialog max-width="1200" class="d-flex justify-center" v-model="dialog">
   <webdialog />
   </v-dialog>
     </div>
@@ -127,12 +127,17 @@ display: none;
 export default {
   data() {
     return {
-        dialog: true,
+        dialog: false,
         mods:1,
   
      
     };
   },
+  methods: {
+    opendialog(){
+        this.dialog = true
+    }
+  }
 
 };
 </script>
