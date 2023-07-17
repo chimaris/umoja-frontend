@@ -247,21 +247,24 @@ display: none;
 }
 
 @keyframes rotate {
-  0% {
-    transform: rotate(0deg);
-  }
-  50% {
-    transform: rotate(360deg);
-  }
-  100% {
-    transform: rotate(0deg);
-  }
+    0% {
+        transform: rotate(0deg);
+    }
+    50% {
+        transform: rotate(360deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
 }
 .bentcard:hover .imgs, .imgs:hover {
     transform: rotate(0deg) !important;
     right: 0!important;}
-@media only screen and (max-width: 768px) {
-  /* CSS rules for smaller screens */
+    @media only screen and (max-width: 768px) {
+        .rotimg {
+    top: -11%!important;
+    left: 65%!important;        }
+        /* CSS rules for smaller screens */
   .bigTitle{
     font-size: 46px !important;
   }
