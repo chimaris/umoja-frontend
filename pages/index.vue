@@ -491,7 +491,7 @@ display: none;
     right: 55%!important;
   }
 .logo{
-    width: 102px!important;
+    width: 122px!important;
     height: 80px!important;
 }
 .card2{
