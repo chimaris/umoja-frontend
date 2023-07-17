@@ -122,10 +122,140 @@ font-weight: 400;" class="mt-4">The world first and largest e-commerce platform 
 .bto .v-btn__overlay {
 display: none;
 }
+.smlimg{
+    animation: float 6s ease-in-out infinite;
+    transform: translatey(0px);
+}
+@keyframes float {
+	0% {
+		transform: translatey(0px);
+	}
+	50% {
+		transform: translatey(-20px);
+	}
+	100% {
+		transform: translatey(0px);
+	}
+}
 .imgs{
     transition: all 0.5s ease!important;
     transform: rotate(-15deg);
     right: -160px;
+}
+.discoimgs{
+    transition: all 0.5s ease!important;
+    scale:1.0
+}
+.discocard:hover .discoimgs, .discoimgs:hover { 
+    scale:1.05
+}
+.customimgs{
+    transition: all 0.5s ease!important;
+    top: 30%;
+    left: 30%;
+}
+.customcard:hover .customimgs, .customimgs:hover { 
+    top: 22%;
+    left: 24%;
+}
+.rw {
+    background: #ffffff87;
+    backdrop-filter: blur(3px);
+  animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.ng {
+    background: #ffffff87;
+    backdrop-filter: blur(3px);
+  animation: slide2 10s linear infinite;
+}
+
+@keyframes slide2 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(30px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.sa {
+  animation: slide3 12s linear infinite;
+  background: #ffffff87;
+    backdrop-filter: blur(3px);
+}
+
+@keyframes slide3 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(45px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+
+.gh {
+  animation: slide4 10s linear infinite;
+}
+
+@keyframes slide4 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.ke {
+    background: #ffffff87;
+    backdrop-filter: blur(3px);
+  animation: slide5 10s linear infinite;
+}
+
+@keyframes slide5 {
+  0% {
+    transform: translateX(0px);
+  }
+  50% {
+    transform: translateX(-50px);
+  }
+  100% {
+    transform: translateX(0px);
+  }
+}
+.rotimg {
+  animation: rotate 60s linear infinite;
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(360deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
 }
 .bentcard:hover .imgs, .imgs:hover {
     transform: rotate(0deg) !important;
@@ -136,20 +266,34 @@ display: none;
     font-size: 46px !important;
   }
   .gh{
+    scale: 0.9;
     right: -9%!important;
     top: 2%!important;
   }
   .rw{
+    scale: 0.9;
     top: 7%!important;
     left: -6%!important;
   }
   .ng{
-
+    scale: 0.9;
     bottom: 9%!important;
     top: unset!important;
     left: 3%!important;
     
 }
+.ke{
+    scale: 0.9;
+    bottom: 19%!important;
+    top: unset!important;
+    right: -9%!important;
+}
+.sa{
+    scale: 0.9;
+    bottom: 28%!important;
+    top: unset!important;
+    right: 55%!important;
+  }
 .logo{
     width: 161px!important;
     height: 100px!important;
@@ -163,20 +307,10 @@ display: none;
     text-align: center!important;
 }
 
-.ke{
-    bottom: 19%!important;
-    top: unset!important;
-    right: -9%!important;
-}
 .dialogrow{
     padding:12px 12px 0px 12px!important;
     text-align: center!important;
 }
-.sa{
-    bottom: 28%!important;
-    top: unset!important;
-    right: 55%!important;
-  }
   /* Add more rules here as needed */
   .cardtitle{
       font-size: 30px;

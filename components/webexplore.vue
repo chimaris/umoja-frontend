@@ -20,7 +20,7 @@
 <v-container class="conte my-12">
     <v-row>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" px-10" color="#EDF0EF" height="100%" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="discocard px-10" color="#EDF0EF" height="100%" >
                 <p  class="cardtitle"
                  style="color: var(--carbon-5, #2A2A2A);
                         font-size: 36px;
@@ -39,10 +39,10 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Users have direct access to vendo
     <div class="" style="width: 100%;height: ;">
     <div class="d-flex" style="width: 100%;height: %;">
 
-        <v-img eager width="70%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486650/frame-1000006827_nwg6of.png"></v-img>
+        <v-img class="discoimgs" eager width="70%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486650/frame-1000006827_nwg6of.png"></v-img>
         <div style="width: 70%;">
 
-            <v-img eager style="width: 56%;position: absolute;top: 3px;right: -26px;" width="60%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486479/frame-1000006834_gzholy.png"></v-img>
+            <v-img eager class="smlimg" style="width: 56%;position: absolute;top: 3px;right: -26px;" width="60%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486479/frame-1000006834_gzholy.png"></v-img>
         </div>
     </div>
     </div>
@@ -51,7 +51,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Users have direct access to vendo
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" px-10" color="#F0B136" height="auto" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="discocard px-10" color="#F0B136" height="auto" >
                 <p  class="cardtitle"
                  style="color: var(--carbon-5, #FFFFFF);
                         font-size: 36px;
@@ -69,7 +69,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
 <div class=" pt-8" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
 
-        <v-img eager width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1689498203/frame-1000006863_a92zuh.png"></v-img>
+        <v-img class="discoimgs" eager width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1689498203/frame-1000006863_a92zuh.png"></v-img>
      
     </div>
 </div>
@@ -77,14 +77,14 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
             </v-card>
         </v-col>
         <v-col cols="12">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" px-10" color="#C20052" height="auto" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="customcard px-10" color="#C20052" height="auto" >
                 <v-img eager width="50%" style="
     position: absolute;
     z-index: -1;
     top: -38%;
     opacity: 0.1;
     left: 26%;
-" src="https://res.cloudinary.com/payhospi/image/upload/v1689505008/Frame_3_rr0ci5.png"></v-img>
+" class="rotimg" src="https://res.cloudinary.com/payhospi/image/upload/v1689505008/Frame_3_rr0ci5.png"></v-img>
              <v-row >
 <v-col cols="12" md="5" class="d-flex align-center">
       <div>
@@ -107,8 +107,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
             <v-col style="position: relative;" cols="12" md="7">
 <v-img eager style="    scale: 1.5;
     position: relative;
-    top: 30%;
-    left: 30%;" src="https://res.cloudinary.com/payhospi/image/upload/v1689486668/DASHBOARD_pcv7ef.png"></v-img>
+   " class="customimgs" src="https://res.cloudinary.com/payhospi/image/upload/v1689486668/DASHBOARD_pcv7ef.png"></v-img>
             </v-col>
  </v-row>
 
@@ -116,7 +115,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="bentcard px-10" color="#FBE5B6" height="auto" max-height="536px" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="bentcard px-10" color="#FBE5B6" height="auto" max-height="583px" >
                 <p class="cardtitle"
                  style="color: var(--carbon-5, #2A2A2A);
                         font-size: 36px;
@@ -139,7 +138,6 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage ord
     scale: 1;
     position: relative;
     transform: rotate(-15deg);
-    top: 30%;
     right: -160px;" width="100%" class="imgs" src="https://res.cloudinary.com/payhospi/image/upload/v1689486665/orders_nagfeh.png"></v-img>
      
     </div>
@@ -148,7 +146,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage ord
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="bentcard px-10" color="#EDF0EF" height="auto" max-height="536px">
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="bentcard px-10" color="#EDF0EF" height="auto" max-height="583px">
                 <p 
                  style="color: var(--carbon-5, #333);
                         font-size: 36px;
@@ -186,7 +184,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
                 z-index: -1;
                 top: -38%;
                 opacity: 0.1;
-                left: 16%;" eager src="https://res.cloudinary.com/payhospi/image/upload/v1689508811/vector_k3xdni.png"></v-img>
+                left: 16%;" class="rotimg" eager src="https://res.cloudinary.com/payhospi/image/upload/v1689508811/vector_k3xdni.png"></v-img>
              <v-row >
 <v-col cols="12" md="4" class="d-flex align-center">
       <div>
