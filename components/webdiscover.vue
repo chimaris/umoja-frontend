@@ -13,7 +13,7 @@
             font-size: 48px;
             font-weight: 600;
             line-height: 120%; /* 57.6px */
-            letter-spacing: -1.44px;" class="mt-4 mb-4">Discover a dynamic Marketplace</p>
+            letter-spacing: -1.44px;" class="mt-4 subtitles mb-4">Discover a dynamic Marketplace</p>
         <p style="color: var(--carbon-4, #333);
             font-size: 20px;
             font-weight: 400;max-width: 577px;

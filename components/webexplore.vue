@@ -14,14 +14,14 @@
             font-size: 48px;
             font-weight: 600;
             line-height: 120%;
-            letter-spacing: -1.44px;" class="mt-4 mb-4">Explore our Unique world</p>
+            letter-spacing: -1.44px;" class="subtitles  mt-4 mb-4">Explore our Unique world</p>
    
           </div>
-<v-container class="my-12">
+<v-container class="conte my-12">
     <v-row>
         <v-col cols="12" md="6">
             <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" px-10" color="#EDF0EF" height="100%" >
-                <p 
+                <p  class="cardtitle"
                  style="color: var(--carbon-5, #2A2A2A);
                         font-size: 36px;
                         font-weight: 600;
@@ -33,7 +33,7 @@
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4" >Users have direct access to vendors which gives the users a unique experience.</p>
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Users have direct access to vendors which gives the users a unique experience.</p>
 
 <div class=" pt-12" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
@@ -52,7 +52,7 @@ letter-spacing: -0.6px;" class="mt-4" >Users have direct access to vendors which
         </v-col>
         <v-col cols="12" md="6">
             <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" px-10" color="#F0B136" height="auto" >
-                <p 
+                <p  class="cardtitle"
                  style="color: var(--carbon-5, #FFFFFF);
                         font-size: 36px;
                         font-weight: 600;
@@ -64,7 +64,7 @@ letter-spacing: -0.6px;" class="mt-4" >Users have direct access to vendors which
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4" >Vendors can share business, product and cultural contents directly with the users adding a learning experience and building a personal connection.</p>
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, product and cultural contents directly with the users adding a learning experience and building a personal connection.</p>
 
 <div class=" pt-8" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
@@ -88,7 +88,7 @@ letter-spacing: -0.6px;" class="mt-4" >Vendors can share business, product and c
              <v-row >
 <v-col cols="12" md="5" class="d-flex align-center">
       <div>
-               <p 
+               <p  class="cardtitle"
                   style="color: var(--carbon-5, #FFFFFF);
                          font-size: 36px;
                          font-weight: 600;
@@ -100,7 +100,7 @@ letter-spacing: -0.6px;" class="mt-4" >Vendors can share business, product and c
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 160%; /* 32px */
-                    letter-spacing: -0.6px;" class="mt-4" >Vendors have access to a variety of dashboards that helps them oversee and manage their businesses on the platform.</p>
+                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors have access to a variety of dashboards that helps them oversee and manage their businesses on the platform.</p>
                </div>  
 </v-col>
                
@@ -116,8 +116,8 @@ letter-spacing: -0.6px;" class="mt-4" >Vendors can share business, product and c
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" px-10" color="#FBE5B6" height="auto" max-height="536px" >
-                <p 
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="bentcard px-10" color="#FBE5B6" height="auto" max-height="536px" >
+                <p class="cardtitle"
                  style="color: var(--carbon-5, #2A2A2A);
                         font-size: 36px;
                         font-weight: 600;
@@ -129,7 +129,7 @@ letter-spacing: -0.6px;" class="mt-4" >Vendors can share business, product and c
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4" >Vendors can seamlessly manage orders from all over the globe with the Umoja platform.</p>
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage orders from all over the globe with the Umoja platform.</p>
 
 
 <div class=" pt-12" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
@@ -140,7 +140,7 @@ letter-spacing: -0.6px;" class="mt-4" >Vendors can seamlessly manage orders from
     position: relative;
     transform: rotate(-15deg);
     top: 30%;
-    right: -160px;" width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486665/orders_nagfeh.png"></v-img>
+    right: -160px;" width="100%" class="imgs" src="https://res.cloudinary.com/payhospi/image/upload/v1689486665/orders_nagfeh.png"></v-img>
      
     </div>
 </div>
@@ -148,7 +148,7 @@ letter-spacing: -0.6px;" class="mt-4" >Vendors can seamlessly manage orders from
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" px-10" color="#EDF0EF" height="auto" max-height="536px">
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="bentcard px-10" color="#EDF0EF" height="auto" max-height="536px">
                 <p 
                  style="color: var(--carbon-5, #333);
                         font-size: 36px;
@@ -161,7 +161,7 @@ letter-spacing: -0.6px;" class="mt-4" >Vendors can seamlessly manage orders from
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4" >Umoja as a platform offers vendors full financial, commercial and market transparency of their e-commerce businesses.</p>
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendors full financial, commercial and market transparency of their e-commerce businesses.</p>
 
 <div class=" pt-8" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
@@ -171,7 +171,7 @@ letter-spacing: -0.6px;" class="mt-4" >Umoja as a platform offers vendors full f
     position: relative;
     transform: rotate(-15deg);
     top: 30%;
-    right: -160px;" width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1689486665/Sales_x325hs.png"></v-img>
+    right: -160px;" width="100%"  class="imgs" src="https://res.cloudinary.com/payhospi/image/upload/v1689486665/Sales_x325hs.png"></v-img>
      
     </div>
 </div>
@@ -202,7 +202,7 @@ letter-spacing: -0.6px;" class="mt-4" >Umoja as a platform offers vendors full f
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 160%; /* 32px */
-                    letter-spacing: -0.6px;" class="mt-4" >Umoja as a CRM Tool, we offer our vendors a variety of apps to better manage and scale their business to its full potential.</p>
+                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a CRM Tool, we offer our vendors a variety of apps to better manage and scale their business to its full potential.</p>
                </div>  
 </v-col>
                
