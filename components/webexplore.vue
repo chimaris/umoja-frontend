@@ -20,7 +20,7 @@
 <v-container class="conte my-12">
     <v-row>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="discocard px-10" color="#EDF0EF" height="100%" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="discocard card2 px-10" color="#EDF0EF" height="100%" >
                 <p  class="cardtitle"
                  style="color: var(--carbon-5, #2A2A2A);
                         font-size: 36px;
@@ -51,7 +51,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Users have direct access to vendo
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="discocard px-10" color="#F0B136" height="auto" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="card2 discocard px-10" color="#F0B136" height="auto" >
                 <p  class="cardtitle"
                  style="color: var(--carbon-5, #FFFFFF);
                         font-size: 36px;
@@ -77,7 +77,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
             </v-card>
         </v-col>
         <v-col cols="12">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="customcard px-10" color="#C20052" height="auto" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="card2 customcard px-10" color="#C20052" height="auto" >
                 <v-img eager width="50%" style="
     position: absolute;
     z-index: -1;
@@ -115,7 +115,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="bentcard px-10" color="#FBE5B6" height="auto" max-height="583px" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="card2 bentcard px-10" color="#FBE5B6" height="auto" max-height="583px" >
                 <p class="cardtitle"
                  style="color: var(--carbon-5, #2A2A2A);
                         font-size: 36px;
@@ -146,8 +146,8 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage ord
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="bentcard px-10" color="#EDF0EF" height="auto" max-height="583px">
-                <p 
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" card2 bentcard px-10" color="#EDF0EF" height="auto" max-height="583px">
+                <p  class="cardtitle"
                  style="color: var(--carbon-5, #333);
                         font-size: 36px;
                         font-weight: 600;
@@ -177,7 +177,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
             </v-card>
         </v-col>
         <v-col cols="12">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" px-10" color="#F38218" height="auto" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="card2 px-10" color="#F38218" height="auto" >
                 <v-img  
                 width="40%" 
                 style=" position: absolute;
@@ -188,7 +188,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
              <v-row >
 <v-col cols="12" md="4" class="d-flex align-center">
       <div>
-               <p 
+               <p  class="cardtitle"
                   style="color: var(--carbon-5, #FFFFFF);
                          font-size: 36px;
                          font-weight: 600;

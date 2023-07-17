@@ -6,7 +6,7 @@
  
     <v-container class="pt-12">
 <v-row class="mt-12">
-    <v-col cols="12" class="pt-0 alignc" lg="6">
+    <v-col cols="12" class="pt-0 " lg="6">
         <v-avatar class="mb-8" style="width:130px; height:54px" rounded="0" flat>
                     <v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689512117/frame-4_cawhs0.png">
                     </v-img>
@@ -39,27 +39,27 @@ letter-spacing: -0.6px;" class="mt-4">Vendors and users connect in the Umoja dig
             <v-col cols="12" lg="4">
                 <p style="color: #FFF;
 font-size: 18px;
-font-weight: 600;" class="alignc">Product</p>
+font-weight: 600;" class="">Product</p>
 <div class="mt-8">
 
     <p style="color: var(--carbon-2, #CECECE);
 
 font-size: 14px;
 font-weight: 400;
-letter-spacing: -0.42px;" class="alignc mb-8" v-for="n in ['How it works', 'Contact Us', 'Join waitlist']">{{ n }}</p>
+letter-spacing: -0.42px;" class=" mb-8" v-for="n in ['How it works', 'Contact Us', 'Join waitlist']">{{ n }}</p>
 </div>
             </v-col>
             <v-col cols="12" lg="4">
                 <p style="color: #FFF;
 font-size: 18px;
-font-weight: 600;" class="alignc">Company</p>
+font-weight: 600;" class="">Company</p>
 <div class="mt-8">
 
     <p style="color: var(--carbon-2, #CECECE);
 
 font-size: 14px;
 font-weight: 400;
-letter-spacing: -0.42px;" class=" alignc mb-8" v-for="n in ['About Us', 'FAQ', 'Privacy policy']">{{ n }}</p>
+letter-spacing: -0.42px;" class="  mb-8" v-for="n in ['About Us', 'FAQ', 'Privacy policy']">{{ n }}</p>
 </div>
             </v-col>
             <v-col cols="12" lg="6"></v-col>
@@ -67,7 +67,7 @@ letter-spacing: -0.42px;" class=" alignc mb-8" v-for="n in ['About Us', 'FAQ', '
         </v-row>
 </v-col>
 </v-row>
-<v-divider class="my-12 " style="height:2px" color="#969696"></v-divider>
+<v-divider class="mb-12 " style="height:2px" color="#969696"></v-divider>
      <p  style="margin-top:;color: var(--carbon-2, #CECECE);
 font-size: 14px;
 font-weight: 400;

@@ -15,11 +15,11 @@
             </v-btn>
         </div>
     </v-container>
-    <v-container style=" position: relative;   max-width: 1417px;" class="pt-0" fluid>
+    <v-container style=" position: relative;   max-width: 1417px;" class="pt-0 padzero" fluid>
 
-        <v-card flat class="rounded-xl d-flex justify-center align-center" height="100vh" min-height="958px"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
+        <v-card flat class="topcard height1 rounded-xl d-flex justify-center align-center" height="100vh" min-height="958px"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
            
-            <div
+            <div v-if="$vuetify.display.smAndUp"
              style="
             position: absolute;
             top: 0;
@@ -81,7 +81,7 @@
             </div>
             <v-container class="">
 
-                <div class="text-center  mx-auto mt-12" style="position:relative;bottom:100px;max-width:834px ;">
+                <div class="text-center bottom0 mx-auto mt-12" style="position:relative;bottom:100px;max-width:834px ;">
                     <p style="color:  #F38218;
                         font-size: 14px;
                         font-weight: 500;
@@ -106,6 +106,9 @@ font-weight: 400;" class="mt-4">The world first and largest e-commerce platform 
             </v-container>
 
         </v-card>
+        </v-container>
+        <v-container style=" position: relative;   max-width: 1417px;" class="pt-0 " fluid>
+
 <webdiscover />
 <webexplore />
 
@@ -260,7 +263,30 @@ display: none;
 .bentcard:hover .imgs, .imgs:hover {
     transform: rotate(0deg) !important;
     right: 0!important;}
+    .height0{
+      height: 436px!important;
+
+    }
     @media only screen and (max-width: 768px) {
+      .imgs {
+    transform: rotate(0deg) !important;
+    right: 0!important;}
+      .height1{
+    min-height: 852px!important;
+      }
+      .bottom0{
+        bottom: 0!important;
+      }
+     .topcard {
+        align-items: start!important;
+      }
+      .height0{
+        height: 376px!important;
+
+      }
+      .padzero{
+        padding: 0!important;
+      }
         .rotimg {
     top: -11%!important;
     left: 65%!important;        }
@@ -301,9 +327,20 @@ display: none;
     width: 161px!important;
     height: 100px!important;
 }
+.card2{
+  padding-top: 45px!important;
+  padding-right: 24px !important;
+    padding-left: 24px !important;
+
+}
+.titlesub{
+
+    font-size:18px!important;
+
+}
 .subtitles{
 
-    font-size: 40px!important;
+    font-size: 36px!important;
 
 }
 .alignc{
@@ -316,10 +353,10 @@ display: none;
 }
   /* Add more rules here as needed */
   .cardtitle{
-      font-size: 30px;
+      font-size: 28px!important;
   }
   .cardsub{
-      font-size: 18px;
+      font-size: 16px!important;
   }
   .conte{
     padding-left: 0!important;

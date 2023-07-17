@@ -18,7 +18,7 @@
             font-size: 20px;
             font-weight: 400;max-width: 577px;
             line-height: 180%;
-            letter-spacing: -0.6px;" class="mx-auto">Umoja provides a unique experience, connecting a variety of buyers and sellers to a digital african market.</p>
+            letter-spacing: -0.6px;" class="mx-auto titlesub">Umoja provides a unique experience, connecting a variety of buyers and sellers to a digital african market.</p>
                <v-btn-toggle mandatory :model-value="1"  v-model="mods" style="background:#F8F8F8" class="bto mt-6" rounded="xl" >
             <v-btn :style="mods == 2 ? '    background: #F8F8F8!important;': ''" color="green" width="188" :value="1"  rounded="xl" >
                  <span
@@ -45,7 +45,7 @@ Vendors
 
 <v-row>
     <v-col v-for=" n in (mods == 1? items1: items2)" :key="n" cols="12" sm="6" lg="3">
-        <v-card height="436" flat class="cardStyle">
+        <v-card   flat class="height0 cardStyle">
             <v-avatar eager :color="n.color" class="mb-4 mt-6 rounded-lg" size="60"><img width="30" :src="n.src" /></v-avatar>
             <p class="my-4" style="color: var(--carbon-4, #333);
 font-size: 20px;
