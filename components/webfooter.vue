@@ -76,15 +76,15 @@ line-height: 180%; /* 25.2px */">Umoja - Connecting you to Quality African Produ
 <v-sheet style="border-radius: 15px;
 background: var(--carbon-5, #2A2A2A);" class="px-6 py-4 my-12 align-center d-flex justify-space-between">
 <v-row >
-<v-col cols="12" md="6">
-    <p class="alignc" style="color: var(--carbon-2, #CECECE);
-font-size: 14px;
+<v-col cols="12" class="d-flex align-center" md="6">
+    <p class="alignc " style="color: var(--carbon-2, #CECECE);
+font-size: 14px;width: 100%;
 font-weight: 400;
 line-height: 180%; /* 25.2px */
 letter-spacing: -0.42px;">© Copyright 2023. All Rights Reserved.</p>
 </v-col>
-<v-col cols="12" md="6">
-<div class="alignc">
+<v-col cols="12"  class="d-flex align-center" md="6">
+<div class="alignc w-100 text-right">
     <v-btn color="#333333" flat icon="mdi mdi-instagram" class="mx-2"  rounded="xl" style="color: #CECECE;"></v-btn>
     <v-btn color="#333333" flat icon="mdi mdi-twitter" class="mx-2" rounded="xl" style="color: #CECECE;"></v-btn>
     <v-btn color="#333333" flat icon="mdi mdi-facebook" class="mx-2"  rounded="xl" style="color: #CECECE;"></v-btn>
