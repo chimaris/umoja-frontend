@@ -263,7 +263,7 @@ font-weight: 400;" class="mt-4">The world first and largest e-commerce platform 
   overflow: hidden;
   height: 100%;
   white-space: nowrap;
-  animation: scrollText 10s infinite linear;
+  animation: scrollText 20s infinite linear;
   margin: 0;
   font-size: 0;
   display: flex;
