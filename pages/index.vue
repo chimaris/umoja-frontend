@@ -94,7 +94,10 @@
 font-size: 64px;
 font-weight: 600;
 line-height: 120%;
-letter-spacing: -1.92px;" class="bigTitle mt-4">Buy/Sell quality African products from any part of the world!</p>
+letter-spacing: -1.92px;" class="bigTitle mt-4">
+<span style="color: #2C6E63;">
+Buy/Sell
+</span> quality African products from any part of the world!</p>
 <p style="color: var(--carbon-4, #333);
 font-size: 20px;
 font-weight: 400;" class="mt-4">The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.</p>
@@ -268,6 +271,9 @@ display: none;
 
     }
     @media only screen and (max-width: 768px) {
+      .row0{
+        margin-top: 0px!important;
+      }
       .imgs {
     transform: rotate(0deg) !important;
     right: 0!important;}
@@ -292,7 +298,7 @@ display: none;
     left: 65%!important;        }
         /* CSS rules for smaller screens */
   .bigTitle{
-    font-size: 46px !important;
+    font-size: 48px !important;
   }
   .gh{
     scale: 0.9;
@@ -324,8 +330,8 @@ display: none;
     right: 55%!important;
   }
 .logo{
-    width: 161px!important;
-    height: 100px!important;
+    width: 102px!important;
+    height: 80px!important;
 }
 .card2{
   padding-top: 45px!important;
@@ -358,9 +364,25 @@ display: none;
   .cardsub{
       font-size: 16px!important;
   }
+  .footcard{
+    padding-bottom: 100px!important;
+
+  }
+  .footbot{
+    padding-bottom: 20px !important;
+
+  }
   .conte{
     padding-left: 0!important;
     padding-right: 0!important;
+  }
+  .customimgs {
+    scale: 1!important;
+      position: relative!important;
+      bottom: -5px!important;
+    transition: all 0.5s ease!important;
+    top: unset!important;
+    left: 0!important;
   }
 }
 </style>
