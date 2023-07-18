@@ -3,7 +3,7 @@
     <div class=" w-100 ">
     <div class=" w-100 text-center">
 
-        <p 
+        <p  class="tinytext1"
         style="color: var(--magnetic-green-4, #2C6E63);
             font-size: 14px;
             font-weight: 500;

@@ -82,7 +82,7 @@
             <v-container class="">
 
                 <div class="text-center bottom0 mx-auto mt-12" style="position:relative;bottom:100px;max-width:834px ;">
-                    <p style="color:  #F38218;
+                    <p class="tinytext1" style="color:  #F38218;
                         font-size: 14px;
                         font-weight: 500;
                         line-height: 120%; /* 16.8px */
@@ -326,7 +326,7 @@ display: none;
     left: 24%;
 }
 .rw {
-    background: #ffffff87;
+    background: #fff;
     backdrop-filter: blur(3px);
   animation: slide 20s linear infinite;
 }
@@ -343,9 +343,9 @@ display: none;
   }
 }
 .ng {
-    background: #ffffff87;
+    background: #fff;
     backdrop-filter: blur(3px);
-  animation: slide2 10s linear infinite;
+  animation: slide2 13s linear infinite;
 }
 
 @keyframes slide2 {
@@ -353,7 +353,7 @@ display: none;
     transform: translateX(0px);
   }
   50% {
-    transform: translateX(30px);
+    transform: translateX(15px);
   }
   100% {
     transform: translateX(0px);
@@ -361,7 +361,7 @@ display: none;
 }
 .sa {
   animation: slide3 12s linear infinite;
-  background: #ffffff87;
+  background: #fff;
     backdrop-filter: blur(3px);
 }
 
@@ -393,7 +393,7 @@ display: none;
   }
 }
 .ke {
-    background: #ffffff87;
+    background: #fff;
     backdrop-filter: blur(3px);
   animation: slide5 10s linear infinite;
 }
@@ -521,6 +521,9 @@ display: none;
   /* Add more rules here as needed */
   .cardtitle{
       font-size: 28px!important;
+  }
+  .tinytext1{
+      font-size: 12px!important;
   }
   .cardsub{
       font-size: 16px!important;
