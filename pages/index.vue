@@ -3,7 +3,7 @@
 
         <v-container   class="py-0">
             <div style="max-width: 1200px;" class="mx-auto d-flex justify-space-between align-center">
-                <v-avatar class="logo" style="width:203px; height:150px" rounded="0" flat>
+                <v-avatar class="logo" style="width:123px; height:80px" rounded="0" flat>
                     <v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689483300/Frame_3_isko6t.png">
                     </v-img>
                 </v-avatar>
@@ -17,7 +17,7 @@
     </v-container>
     <v-container style=" position: relative;   max-width: 1417px;" class="pt-0 padzero" fluid>
 
-        <v-card flat class="topcard height1 rounded-xl d-flex justify-center align-center" height="100vh" min-height="958px"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
+        <v-card flat class="topcard height1 rounded-xl d-flex justify-center align-center" height="100vh" min-height="900px"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
            
             <div v-if="$vuetify.display.smAndUp"
              style="
@@ -81,7 +81,7 @@
             </div>
             <v-container class="">
 
-                <div class="text-center bottom0 mx-auto mt-12" style="position:relative;bottom:100px;max-width:834px ;">
+                <div class="text-center bottom0 mx-auto mt-0" style="position:relative;bottom:100px;max-width:834px ;">
                     <p class="tinytext1" style="color:  #F38218;
                         font-size: 14px;
                         font-weight: 500;
