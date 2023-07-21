@@ -109,7 +109,7 @@ export default {
         {
         name: 'Content Media',
         list: [
-            { text: 'Posts', icon: 'mdi mdi-note-text' },
+            { text: 'Posts', icon: 'mdi mdi-image-outline' },
             { text: 'Articles', icon: 'mdi mdi-note-text' },
         ]
       },

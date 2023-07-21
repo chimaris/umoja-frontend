@@ -826,7 +826,7 @@ export default {
             checkqty: true,
             window: 'basic',
             radioship:true,
-            dialog:true,
+            dialog:false,
             editor: null,
             tab: 'Customer Details',
             chip: 'All',

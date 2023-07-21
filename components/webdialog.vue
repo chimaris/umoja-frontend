@@ -11,7 +11,7 @@ line-height: 120%; /* 76.8px */
 letter-spacing: -1.44px;">Join the Umoja Waitlist</p>
 <div class="px-8 text-left" style="max-width: 400px;">
     <p class="inputLabel">Full Name</p>             
-     <v-text-field placeholder="Enter your full name" density="comfortable"  >
+     <v-text-field v-model="name" placeholder="Enter your full name" density="comfortable"  >
          </v-text-field>
          <p class="inputLabel">Email Address</p>             
      <v-text-field placeholder="Enter your email address" density="comfortable"  >
@@ -21,7 +21,7 @@ letter-spacing: -1.44px;">Join the Umoja Waitlist</p>
     </v-select>
 <div class="alignc">
 
-    <v-btn @click="dialog2 = true" width="235" class="my-4" flat size="large" color="green rounded-xl" >
+    <v-btn :loading="loading" @click="submitForm()" width="235" class="my-4" flat size="large" color="green rounded-xl" >
         <span style="font-size: 14px;">
             Join the Waitlist
         </span>
@@ -86,17 +86,40 @@ letter-spacing: -0.3px;">© Copyright 2023. All Rights Reserved.</p>
     </v-sheet>
 </template>
 <script>
+import axios from 'axios';
 
 export default {
   data() {
     return {
+        name: '',
         dialog2: false,
+        loading: false,
         category:null,
+        email: ''
     };
   },
   methods: {
     opendialog(){
         this.dialog = true
+    },
+    submitForm() {
+    this.loading = true;
+      axios.post('/api/submit-form', {
+        name: this.name,
+        category: this.category,
+        email: this.email
+      })
+      .then(response => {
+        this.loading = false;
+        console.log(response.data);
+        this.dialog2 = true
+        // Handle successful response here
+    })
+    .catch(error => {
+          this.loading = false;
+        console.error(error);
+        // Handle error here
+      });
     }
   }
 

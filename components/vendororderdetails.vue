@@ -39,8 +39,8 @@ color: #C5912C;">Unfulfilled</span>
                          Refund
                     </v-btn>
                     <v-btn @click="edit = !edit" flat color="green" size="large" class="ml-4 text-grey-darken-3">
-                         <v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon>
-                         Edit
+                         <v-icon class="mr-2" :icon="!edit? 'mdi mdi-pencil' : 'mdi mdi-check-outline'"></v-icon>
+                         {{!edit? 'Edit' :'Update Order'}}
                     </v-btn>
 
                </div>
