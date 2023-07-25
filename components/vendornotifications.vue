@@ -39,7 +39,7 @@ font-weight: 600;" class="my-5">{{ g.date }}</p>
 <v-sheet class=" d-flex justify-space-between align-center py-6">
   <div>
   <div style="max-width: 759px;" class="d-flex">
-<v-avatar :rounded="n.type == 'review' || n.type == 'customer'? 'xl': 'lg'" color="grey" class="mr-4"><v-img :src="n.image"></v-img></v-avatar>
+<v-avatar :rounded="n.type == 'review' || n.type == 'customer'? 'xl': 'lg'" color="grey-lighten-3" class="mr-4"><v-img :src="n.image"></v-img></v-avatar>
 <div>
   <p>
     <span v-if="n.type == 'products' || n.type == 'order'" style="color: #333;

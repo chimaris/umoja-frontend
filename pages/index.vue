@@ -443,6 +443,7 @@ display: none;
       }
       .bottom0{
         bottom: 0!important;
+        padding-top: 49px!important;
       }
      .topcard {
         align-items: start!important;

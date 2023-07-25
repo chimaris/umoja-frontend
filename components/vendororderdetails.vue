@@ -17,10 +17,10 @@
                          color="#1273EB">
                          <v-icon class="mr-2" size="16" icon="mdi mdi-check-circle"></v-icon>
                          <span style="font-weight: 600;
-font-size: 12px;
-line-height: 15px;
-letter-spacing: -0.01em;
-color: #1273EB;">Paid</span>
+                         font-size: 12px;
+                         line-height: 15px;
+                         letter-spacing: -0.01em;
+                         color: #1273EB;">Paid</span>
                     </v-chip>
                     <v-chip rounded="lg" style="width: 108px;" class="d-flex align-center justify-center mx-2"
                          color="#C5912C">
@@ -32,7 +32,6 @@ color: #C5912C;">Unfulfilled</span>
                     </v-chip>
                </div>
                <div class="d-flex align-center">
-
                     <v-btn style="    border: 1px solid #e5e5e5;
 " variant="outlined" size="large" class="ml-4 text-grey-darken-3">
                          <v-icon class="mr-2" icon="mdi mdi-cash"></v-icon>
