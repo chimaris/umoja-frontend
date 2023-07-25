@@ -666,7 +666,7 @@ export default {
     },
     submitForm() {
     this.loading = true;
-      axios.post('http://0.0.0/api/join_waitlist', {
+      axios.post('https://umoja-eaac4dc3d4d4.herokuapp.com/api/join_waitlist', {
         name: this.name,
         category: this.category,
         email: this.email
