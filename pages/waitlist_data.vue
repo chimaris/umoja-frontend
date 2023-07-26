@@ -1,7 +1,9 @@
 <template>
   <div class="v-container">
-
-    <h1 class="mt-4">Waitlist</h1>
+<div class="d-flex align-center justify-space-between">
+  <h1 class="mt-4">Waitlist</h1>
+  <v-btn @click="load()" :loading="loading" flat icon="mdi mdi-reload"></v-btn>
+</div>
     <v-progress-linear :indeterminate="loading" v-if="loading" class="mb-5" model-value="20"></v-progress-linear>
     <v-table>
       <thead>
@@ -61,14 +63,17 @@ export default {
     };
   },
   mounted() {
-    this.loading = true;
+ this.load()
+},
+  methods: {
+    load(){
+      this.loading = true;
     axios.get('https://umoja-eaac4dc3d4d4.herokuapp.com/api/get_waitlist').then(response => {
         this.list = response.data.list
         console.log(response.data)
         this.loading = false;
     })
-},
-  methods: {
+    },
     opendialog(){
         this.dialog = true
     },
