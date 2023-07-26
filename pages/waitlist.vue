@@ -1,33 +1,38 @@
 <template>
-  <v-table>
-    <thead>
-      <tr>
-        <th class="text-left">
-          S/N
-        </th>
-        <th class="text-left">
-          Name
-        </th>
-        <th class="text-left">
-          Email
-        </th>
-        <th class="text-left">
-          Category
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr
-        v-for="(item, i) in list"
-        :key="i"
-      >
-        <td>{{ i + 1 }}</td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.email }}</td>
-        <td>{{ item.category }}</td>
-      </tr>
-    </tbody>
-  </v-table>
+  <div class="v-container">
+
+    <h1 class="mt-4">Waitlist</h1>
+    <v-progress-linear :indeterminate="loading" v-if="loading" class="mb-5" model-value="20"></v-progress-linear>
+    <v-table>
+      <thead>
+        <tr>
+          <th class="text-left">
+            S/N
+          </th>
+          <th class="text-left">
+            Name
+          </th>
+          <th class="text-left">
+            Email
+          </th>
+          <th class="text-left">
+            Category
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="(item, i) in list"
+          :key="i"
+        >
+          <td>{{ i + 1 }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.email }}</td>
+          <td>{{ item.category }}</td>
+        </tr>
+      </tbody>
+    </v-table>
+  </div>
 </template>
 
 <script>
@@ -56,8 +61,11 @@ export default {
     };
   },
   mounted() {
+    this.loading = true;
     axios.get('https://umoja-eaac4dc3d4d4.herokuapp.com/api/get_waitlist').then(response => {
         this.list = response.data.list
+        console.log(response.data)
+        this.loading = false;
     })
 },
   methods: {
