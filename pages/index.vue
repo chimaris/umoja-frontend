@@ -248,7 +248,7 @@ font-weight: 400;" class="mt-4">The world first and largest e-commerce platform 
             <v-col cols="12" md="7" class="pa-0 d-flex align-center justify-center ">
                 <div class="py-12">
 
-                <p class="mb-4 subtitles" style="color: #000;
+                <p class="mb-4 px-3 subtitles" style="color: #000;
 font-size: 48px;
 font-weight: 600;
 line-height: 120%; /* 76.8px */
