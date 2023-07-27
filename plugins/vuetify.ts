@@ -30,10 +30,11 @@ export default defineNuxtPlugin((nuxt) => {
         theme: {
             defaultTheme: 'myCustomLightTheme',
             themes: {
-                myCustomLightTheme,myCustomDarkTheme
+                myCustomLightTheme,
+                myCustomDarkTheme
               },
           
-        },
+        }, 
         icons: {
             defaultSet: 'fa',
             aliases,

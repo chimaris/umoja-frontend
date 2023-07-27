@@ -35,6 +35,7 @@ export default defineNuxtConfig({
         }
       },
       css: [
+        '~/assets/css/fonts.css',
         '~/assets/css/main.css',
         "vuetify/lib/styles/main.sass",
         "@mdi/font/css/materialdesignicons.min.css",
