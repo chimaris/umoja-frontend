@@ -1,3 +1,6 @@
+html{
+    font-family: Faktum,Roboto,'sans-serif'!important;
+}
 .mainbg{
     background-position: center;
     background: url('https://res.cloudinary.com/dkbt6at26/image/upload/c_fit,w_1000/v1684229328/Rectangle_2_pixza2.png');
