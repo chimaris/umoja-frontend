@@ -96,8 +96,8 @@ font-weight: 600;
 line-height: 120%;
 letter-spacing: -1.92px;" class="bigTitle mt-4">
 <span style="color: #2C6E63;">
-Buy/Sell
-</span> quality African products from any part of the world!</p>
+Explore
+</span> a new digital African marketplace from any part of the world!</p>
 <p style="color: var(--carbon-4, #333);
 font-size: 20px;
 font-weight: 400;" class="mt-4">The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.</p>
