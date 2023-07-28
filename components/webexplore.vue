@@ -77,7 +77,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
             </v-card>
         </v-col>
         <v-col cols="12">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="card2 customcard px-10" color="#C20052" height="auto" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="card2 customcard pl-10 pr-0" color="#C20052" height="auto" >
                 <v-img eager width="50%" style="
     position: absolute;
     z-index: -1;
@@ -87,7 +87,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
 " class="rotimg" src="https://res.cloudinary.com/payhospi/image/upload/v1689505008/Frame_3_rr0ci5.png"></v-img>
              <v-row >
 <v-col cols="12" md="5" class="d-flex align-center">
-      <div>
+    <div class="card2div pr-10">
                <p  class="cardtitle"
                   style="color: var(--carbon-5, #FFFFFF);
                          font-size: 36px;
@@ -115,7 +115,9 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="card2 bentcard px-10" color="#FBE5B6" height="auto" max-height="583px" >
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class="card2 bentcard pl-10 pr-0" color="#FBE5B6" height="auto" max-height="583px" >
+                <div class="card2div pr-10">
+
                 <p class="cardtitle"
                  style="color: var(--carbon-5, #2A2A2A);
                         font-size: 36px;
@@ -130,7 +132,7 @@ font-weight: 400;
 line-height: 160%; /* 32px */
 letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage orders from all over the globe with the Umoja platform.</p>
 
-
+</div>
 <div class=" pt-12" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
 
@@ -146,9 +148,12 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage ord
             </v-card>
         </v-col>
         <v-col cols="12" md="6">
-            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" card2 bentcard px-10" color="#EDF0EF" height="auto" max-height="583px">
-                <p  class="cardtitle"
-                 style="color: var(--carbon-5, #333);
+            <v-card flat width="100%" style="padding-top:60px;border-radius: 15px;position: relative;" class=" card2 bentcard2 pl-10 pr-0" color="#EDF0EF" height="auto" max-height="583px">
+               
+               <div class="card2div pr-10">
+
+                   <p  class="cardtitle"
+                   style="color: var(--carbon-5, #333);
                         font-size: 36px;
                         font-weight: 600;
                         line-height: 120%; /* 43.2px */
@@ -161,6 +166,7 @@ font-weight: 400;
 line-height: 160%; /* 32px */
 letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendors full financial, commercial and market transparency of their e-commerce businesses.</p>
 
+</div>
 <div class=" pt-8" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
 
@@ -168,7 +174,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
     scale: 1;
     position: relative;
     
-    top: 30%;
+   
     " width="100%"  class="imgs" src="https://res.cloudinary.com/payhospi/image/upload/v1689486665/Sales_x325hs.png"></v-img>
      
     </div>

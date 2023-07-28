@@ -19,8 +19,8 @@
             font-weight: 400;max-width: 577px;
             line-height: 180%;
             letter-spacing: -0.6px;" class="mx-auto titlesub">Umoja provides a unique experience, connecting a variety of buyers and sellers to a digital african market.</p>
-               <v-btn-toggle mandatory :model-value="1"  v-model="mods" style="background:#F8F8F8" class="bto mt-6" rounded="xl" >
-            <v-btn :style="mods == 2 ? '    background: #F8F8F8!important;': ''" color="green" width="188" :value="1"  rounded="xl" >
+               <v-btn-toggle mandatory :model-value="1"  v-model="mods" style="background:#F8F8F8" class="bto mt-8" rounded="xl" >
+            <v-btn :style="mods == 2 ? '    background: #F8F8F8!important;': ''" color="green" :width="$vuetify.display.smAndDown? '150':$vuetify.display.xsAndDown? '120': '188'" :value="1"  rounded="xl" >
                  <span
                  :style="mods == 2 ? 'color: var(--magnetic-green-3, #94AAA5);':''"
                  style="
@@ -29,7 +29,7 @@
         Buyers
             </span>
              </v-btn>
-            <v-btn :style="mods == 1 ? '    background: #F8F8F8!important;': ''" color="green" width="188" :value="2" rounded="xl"> 
+            <v-btn :style="mods == 1 ? '    background: #F8F8F8!important;': ''" color="green" :width="$vuetify.display.smAndDown? '150':$vuetify.display.xsAndDown? '120': '188'" :value="2" rounded="xl"> 
                 <span
                  :style="mods == 1 ? 'color: var(--magnetic-green-3, #94AAA5);':''"
                  style="
