@@ -120,7 +120,7 @@ color: #969696;"> 72 products found</p>
         v-model="rating"
         color="grey-lighten-2"
         active-color="#E7CE5D"
-        class="ml-2"
+        class="rts ml-4"
         size="x-small"
         ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
     </p>
@@ -143,6 +143,16 @@ color: #969696;"> 72 products found</p>
         </v-col>
        </v-row>    
       </div></template>
+      <style>
+   .rts .v-rating__item .v-btn .v-icon {
+    transition: inherit;
+    font-size: 16px;
+    }
+    .rts  .v-rating__item .v-btn {
+    scale: 0.8;
+    margin-left: -16px;
+}
+    </style>
 <script>
 export default {
     methods: {

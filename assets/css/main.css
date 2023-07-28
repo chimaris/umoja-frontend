@@ -10,9 +10,17 @@ html{
 .pointhere{
     cursor: pointer!important;
 }
+#homepage .v-rating__item .v-btn .v-icon {
+    transition: inherit !important;
+    font-size: 16px !important;
+    }
+    #homepage  .v-rating__item .v-btn {
+    scale: 0.8 !important;
+    margin-left: -16px !important;
+}
 .tophead{
 
-    background: linear-gradient(90deg, #2C6E63 0%, #F38218 100%);
+    background: black;
 }
     .v-responsive.v-img.signupimg {
         position: absolute;
@@ -30,6 +38,7 @@ html{
     left: 8px!important;
     transform: none!important;
 }
+
 .timerwords{
     font-weight: 500;
     font-size: 12px;
@@ -60,6 +69,7 @@ color: #333333!important;
 font-size: 12px!important;
 line-height: 15px!important;
 }
+ 
 .tabledate{
     font-weight: 600!important;
 font-size: 14px!important;
@@ -365,4 +375,15 @@ border-radius: 23.0164px!important;
     top: -35px;
     width: 237px;
     right: 21px;
+}
+.textr{
+    text-align: right;
+}
+@media only screen and (max-width: 768px) {
+.justyc{
+    justify-content: center!important;
+}
+.alignc{
+    text-align: center!important;
+}
 }

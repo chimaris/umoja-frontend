@@ -125,7 +125,7 @@ color: #000000;" class="pa-6">Related Products ({{ items.length }})</h1>
         v-model="rating"
         color="grey-lighten-2"
         active-color="#E7CE5D"
-        class="ml-2"
+        class="pts ml-4"
         size="x-small"
         ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
     </p>
@@ -163,6 +163,16 @@ color: #000000;" class="pa-6">Related Products ({{ items.length }})</h1>
     </div>
       
       </template>
+      <style>
+   .pts .v-rating__item .v-btn .v-icon {
+    transition: inherit;
+    font-size: 16px;
+    }
+    .pts  .v-rating__item .v-btn {
+    scale: 0.8;
+    margin-left: -16px;
+}
+    </style>
 <script>
 export default {
     methods: {

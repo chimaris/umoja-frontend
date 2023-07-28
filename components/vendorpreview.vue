@@ -1,5 +1,5 @@
 <template>
-    <div style="min-height: 100vh;width: 100%;">
+    <div id="homepage" style="min-height: 100vh;width: 100%;">
         <v-img
      style="height:185px;position: relative;"
     width="auto" cover class="d-flex bg-grey  justify-end align-end"
@@ -236,6 +236,7 @@ var newText = text.length > 40 ? text.slice(0, 40) +'...' : text
 };
 </script>
 <style>
+
 .v-carousel.promo .v-btn.v-btn--icon{
     border-radius: 50%!important;
 }
