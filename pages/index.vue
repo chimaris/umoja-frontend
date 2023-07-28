@@ -254,15 +254,18 @@ font-weight: 600;
 line-height: 120%; /* 76.8px */
 letter-spacing: -1.44px;">Join the Umoja Waitlist</p>
 <div class="px-8 text-left" style="max-width: 400px;">
+<v-form ref="form" >
+
   <p class="inputLabel">Full Name</p>             
-   <v-text-field :rules="[rules.required]" v-model="name" placeholder="Enter your full name" density="comfortable"  >
-       </v-text-field>
-       <p class="inputLabel">Email Address</p>             
-   <v-text-field :rules="[rules.email]"  v-model="email" placeholder="Enter your email address" density="comfortable"  >
-       </v-text-field>
-   <p class="inputLabel">User Category Name</p>             
-   <v-select :rules="[rules.required]" :items="['User', 'Vendor']" v-model="category" placeholder="Select Buyer or Vendor" append-inner-icon="mdi mdi-chevron-down" density="comfortable"  >
+  <v-text-field :rules="[required]" v-model="name" placeholder="Enter your full name" density="comfortable"  >
+  </v-text-field>
+  <p class="inputLabel">Email Address</p>             
+  <v-text-field :rules="[rules.email]"  v-model="email" placeholder="Enter your email address" density="comfortable"  >
+  </v-text-field>
+  <p class="inputLabel">User Category Name</p>             
+  <v-select :rules="[required]" :items="['User', 'Vendor']" v-model="category" placeholder="Select Buyer or Vendor" append-inner-icon="mdi mdi-chevron-down" density="comfortable"  >
   </v-select>
+</v-form>
 <div class="alignc">
 
   <v-btn :loading="loading" @click="submitForm()" width="235" class="my-4" flat size="large" color="green rounded-xl" >
@@ -654,7 +657,6 @@ data() {
       email: '',
       emailtxt: '',
       rules: {
-      required: (value) => !!value || "Required.",
       email: (value) => {
         const pattern =
           /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -663,11 +665,28 @@ data() {
     },
   };
 },
+computed: {
+  required() {
+      return (value) => {
+        if (!value) {
+          return "Required.";
+        } else if (value.length < 3) {
+          return "Must be at least 3 characters.";
+        } else {
+          return true;
+        }
+      };
+    },
+  },
 methods: {
   opendialog(){
       this.dialog = true
   },
-  submitForm() {
+  async submitForm() {
+ var validator = await this.$refs.form.validate()
+    if (validator.valid) {
+   
+
   this.loading = true;
     axios.post('https://umoja-eaac4dc3d4d4.herokuapp.com/api/join_waitlist', {
       name: this.name,
@@ -693,6 +712,9 @@ methods: {
       alert('An error occurred')
       // Handle error here
     });
+  }else{
+    this.loading = false;
+  }
   }
 }
 };
