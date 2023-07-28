@@ -87,7 +87,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
 " class="rotimg" src="https://res.cloudinary.com/payhospi/image/upload/v1689505008/Frame_3_rr0ci5.png"></v-img>
              <v-row >
 <v-col cols="12" md="5" class="d-flex align-center">
-    <div class="card2div pr-10">
+    <div class="card2div nhu pr-10">
                <p  class="cardtitle"
                   style="color: var(--carbon-5, #FFFFFF);
                          font-size: 36px;
@@ -224,6 +224,17 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
 
 </v-card>
 </template>
+<style>
+.nhu{
+    margin-bottom: 80px;
+}
+@media only screen and (max-width: 768px) {
+
+    .nhu{
+    margin-bottom: 0px;
+}
+}
+</style>
 <script>
 
 export default {
