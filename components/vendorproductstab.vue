@@ -113,16 +113,16 @@ color: #969696;"> 72 products found</p>
     " class="mt-1">Organic cotton certified</p>
     <p style="font-weight: 600;
     font-size: 10px;
-    line-height: 13px;
+    line-height: 10px;
     color: #000000;
-    " class="d-flex mb-1 align-center">
+    " class="d-flex mb-1 pb-3 pt-1 align-center">
         <v-rating
-        v-model="rating"
+        model-value="4"
         color="grey-lighten-2"
         active-color="#E7CE5D"
-        class="rts ml-4"
+        class="rts" density="compact"
         size="x-small"
-        ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
+        ></v-rating><span style="margin-left:3px;margin-top: 3px ;" >(65)</span> 
     </p>
                           <div class="d-flex align-center justify-space-between">
                 <div class="d-flex align-center"> 
@@ -144,14 +144,7 @@ color: #969696;"> 72 products found</p>
        </v-row>    
       </div></template>
       <style>
-   .rts .v-rating__item .v-btn .v-icon {
-    transition: inherit;
-    font-size: 16px;
-    }
-    .rts  .v-rating__item .v-btn {
-    scale: 0.8;
-    margin-left: -16px;
-}
+
     </style>
 <script>
 export default {

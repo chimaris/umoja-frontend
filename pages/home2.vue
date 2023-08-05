@@ -450,18 +450,18 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     line-height: 15px;
     color: #000000;
     " class="mt-1">Organic cotton certified</p>
-    <p style="font-weight: 600;
+   <p style="font-weight: 600;
     font-size: 10px;
-    line-height: 13px;
+    line-height: 10px;
     color: #000000;
-    " class="d-flex mb-1 align-center">
+    " class="d-flex mb-1 pb-3 pt-1 align-center">
         <v-rating
-        v-model="rating"
+        model-value="4"
         color="grey-lighten-2"
         active-color="#E7CE5D"
-        class="rts ml-4"
+        class="rts" density="compact"
         size="x-small"
-        ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
+        ></v-rating><span style="margin-left:3px;margin-top: 3px ;" >(65)</span> 
     </p>
                           <div class="d-flex align-center justify-space-between">
                 <div class="d-flex align-center"> 
@@ -552,18 +552,18 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     line-height: 15px;
     color: #000000;
     " class="mt-1">Organic cotton certified</p>
-    <p style="font-weight: 600;
+  <p style="font-weight: 600;
     font-size: 10px;
-    line-height: 13px;
+    line-height: 10px;
     color: #000000;
-    " class="d-flex mb-1 align-center">
+    " class="d-flex mb-1 pb-3 pt-1 align-center">
         <v-rating
-        v-model="rating"
+        model-value="4"
         color="grey-lighten-2"
         active-color="#E7CE5D"
-        class="rts ml-4"
+        class="rts" density="compact"
         size="x-small"
-        ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
+        ></v-rating><span style="margin-left:3px;margin-top: 3px ;" >(65)</span> 
     </p>
                           <div class="d-flex align-center justify-space-between">
                 <div class="d-flex align-center"> 

@@ -258,11 +258,7 @@ color: #CECECE;
 .v-carousel--hide-delimiter-background .v-carousel__controls{
     bottom: -46px;
 }
-.v-rating__item .v-btn{
-    scale: 0.6;
-    margin-left: -13px;
-    
-}
+
 
 
 </style>

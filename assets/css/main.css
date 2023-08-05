@@ -1,6 +1,11 @@
 html{
     font-family: Faktum, Roboto, 'sans-serif'!important;
 }
+ .rts .v-rating__item .v-btn{
+    scale: 0.6;
+    margin-left: px;
+    
+}
 .mainbg{
     background-position: center;
     background: url('https://res.cloudinary.com/dkbt6at26/image/upload/c_fit,w_1000/v1684229328/Rectangle_2_pixza2.png');
@@ -10,14 +15,7 @@ html{
 .pointhere{
     cursor: pointer!important;
 }
-#homepage .v-rating__item .v-btn .v-icon {
-    transition: inherit !important;
-    font-size: 16px !important;
-    }
-    #homepage  .v-rating__item .v-btn {
-    scale: 0.8 !important;
-    margin-left: -16px !important;
-}
+
 .tophead{
 
     background: black;
@@ -99,6 +97,13 @@ color: #969696!important;
     text-transform: uppercase!important;    
     color: #FDF1ED!important;  
     background: #1E1E1E!important;
+}
+.chipselected3{
+    font-size: 14px!important;
+    line-height: 17px!important;
+    letter-spacing: 0.03em!important;
+    color: #2C6E63!important;  
+    border-color: #2C6E63!important;  
 }
 .chipunselected{
     font-weight: 500!important;
@@ -242,8 +247,8 @@ border-radius: 15px!important;
 }
 .v-btn__content{
     font-weight: 500;
-    font-size: 16px;
-    line-height: 20px;
+    /* font-size: 16px; */
+    /* line-height: 20px; */
     text-transform: none;
 }
 .menubar .v-btn__content{

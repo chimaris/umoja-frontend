@@ -5,7 +5,7 @@
     width="100%" cover class="d-flex  bg-grey align-center"
     src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1690557693/rectangle-1943_ki3qvz.png"
   >
-  <v-container style="width: 100%;" class="">
+  <v-container style="max-width:1300px;width: 100%;" class="">
     <div class="w-100 d-flex justify-end">
 
         <v-card flat style="border-radius: 15px; padding: 40px!important;" max-width="420">
@@ -22,7 +22,7 @@ font-weight: 400;
 line-height: 140%; ">Shopping is a bit of a relaxing hobby for
 me, which is sometimes troubling for the
 bank balance.</p>
-<v-btn class="mt-6 " color="#333" size="large" style="" variant="outlined" rounded="xl" >
+<v-btn to="/product_page" class="mt-6 " color="#333" size="large" style="" variant="outlined" rounded="xl" >
 Learn More <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </v-card>
@@ -32,7 +32,7 @@ Learn More <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 font-size: 16px;
 font-weight: 600;
 letter-spacing: -0.16px;" class="mb-2"> Select African Country</p>
-    <v-chip style="width:209px;height: 44px;" size="large" color="white" variant="elevated"  flat rounded="xl" class="rw chipper d-flex justify-start px-2 py-2"  >
+    <v-chip style="width:209px;height: 44px;border: 1px solid #CECECE;" size="large" color="white" variant="default"  flat rounded="xl" class="rw chipper d-flex justify-start px-2 py-2"  >
                  <div>
 
                      <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
@@ -116,16 +116,16 @@ v-model="chip"
     " class="mt-1">Organic cotton certified</p>
     <p style="font-weight: 600;
     font-size: 10px;
-    line-height: 13px;
+    line-height: 10px;
     color: #000000;
-    " class="d-flex mb-1 align-center">
+    " class="d-flex mb-1 pb-3 pt-1 align-center">
         <v-rating
         model-value="4"
         color="grey-lighten-2"
         active-color="#E7CE5D"
-        class="rts ml-4"
+        class="rts" density="compact"
         size="x-small"
-        ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
+        ></v-rating><span style="margin-left:3px;margin-top: 3px ;" >(65)</span> 
     </p>
                           <div class="d-flex align-center justify-space-between">
                 <div class="d-flex align-center"> 
@@ -318,7 +318,7 @@ color: #333333;">Top Articles</p>
 </v-col>
 </v-row>
 <v-row style="" class="">
-    <v-col cols="6" v-for="(n, i) in 4" :key="i" lg="3" md="4">
+    <v-col cols="6" v-for="(n, i) in 4" :key="i" lg="" md="4">
         
         <div class="">
 

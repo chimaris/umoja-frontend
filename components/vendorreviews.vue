@@ -288,8 +288,6 @@ line-height: 20px;" class="mt-1"> € 235.00 per yard</p>
         <div
         class="px-1 d-flex align-center pl-0"
         >
-
-
           <v-avatar color="grey-lighten-4" class=" pa-1 mr-3" size="50" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687517181/Rectangle_1923_oguuzi.png"></v-img></v-avatar>
           <div>
             <p class="" style="font-weight: 500;
