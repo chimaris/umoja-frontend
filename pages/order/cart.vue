@@ -1,8 +1,9 @@
 <template>
-    <userHeader />
-    <div style="background-color: #F7F7F7;">
+    <Header2 />
+    <v-divider></v-divider>
+    <div style="background-color;">
 
-    <v-container style="min-height: ;width: 100%;">
+    <v-container style="max-width: 1400px;width: 100%;">
         <v-row class="pt-2">
                 <v-col cols="12" lg="8" >  
 <v-card class="overflow-visible" flat  color="#F7F7F7" min-height="" width="100%">
@@ -140,80 +141,13 @@ border-radius: 20px;" class=" d-flex align-center  pa-4">
 </v-img>
 </v-col>
 </v-row> 
-<v-row>
-          
-            <v-col class="pt-0" cols="12" xs="12">
-                <v-sheet color="transparent" class="pt-0">
-         <div class=" py-8">
-           <p style="font-style: normal;
-font-weight: 800;
-font-size: 24px;
-line-height: 30px;
-/* identical to box height */
 
-text-transform: uppercase;
+</v-container> 
+<product-row :showVendor="false" title="😎 Recently viewed" />
+<product-row :showVendor="false" title="🎩 Top Selling Items" />
+<Mainfooter />
 
-/* Carbon/4 */
-
-color: #333333;">recently viewed</p> 
-
-         </div>
-
-   <v-row style="background-color: #F7F7F7;" class="">
-    <v-col cols="6" v-for="(n, i) in items" :key="i" lg="3" md="4">
-        <v-card flat class="bg-white rounded-lg pa-4">
-            <v-img class="bg-grey-lighten-2 rounded-lg" cover width="100%" height="243px" :src="n.image"></v-img>
-         <div style="position:relative;top: -12px ;left: -7px;">
-
-         </div>
-            <div style="height: 40px;position: relative;left: -12px;"  class="d-flex align-center ">
-<v-avatar color="white" size="60" class="pa-3 "><v-img class="bg-grey-lighten-2 rounded-xl" src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img></v-avatar> 
-<p style="font-weight: 800;
-font-size: 16px;">The Golden Matrix</p>
-</div>
-            <p class="textClass my-2">{{filt(n.name)}}</p>
-            <div class="d-flex align-center">
-
-                <h1 class="itemCost">${{n.price}}</h1>
-                <v-chip v-if="n.oos == true" variant="default" size="small" class="ml-2 bg-green text-white rounded-lg"><v-icon size="12" class="mr-1 " icon="mdi mdi-clock-outline"></v-icon> Place a Bid</v-chip>
-            </div>
-            <v-divider class="my-4"></v-divider>
-            <div class="d-flex align-center justify-space-between">
-            <div class="d-flex align-center"> 
-                <v-btn flat size="x-small" color="transparent" class="rounded-xl">
-                    <v-avatar rounded="0" size="22"> <v-img width="22" src="https://res.cloudinary.com/payhospi/image/upload/v1684611504/Vector_Stroke_hc1tqr.png"></v-img></v-avatar>
-                     <span style="font-weight: 400;
-font-size: 14px;
-line-height: 24px;
-letter-spacing: 0.03em;" class="ml-1">
-
-                        {{n.likes}}
-                    </span>
-                    </v-btn> 
-            </div>
-            <v-btn flat size="x-small" color="transparent" class="rounded-xl">
-                    <v-avatar rounded="0" size="22"> <v-img width="22" src="https://res.cloudinary.com/payhospi/image/upload/v1684665314/location_1_p9ic81.png"></v-img></v-avatar>
-                     <span style="font-weight: 400;
-font-size: 14px;
-line-height: 24px;
-letter-spacing: 0.03em;" class="ml-1">
-
-                        {{n.location}}
-                    </span>
-                    </v-btn> 
-
-            </div>
-        </v-card>
-    </v-col>
-   </v-row>        
-        <p style="font-weight: 400;
-font-size: 14px;
-line-height: 17px;
-color: #CECECE;" class="font-weight-regular pt-12 mt-12 mb-4">©2022 Umoja. All Rights Reserved.</p>
-</v-sheet>
-            </v-col>
-        </v-row>
-    </v-container>    </div>
+   </div>
 
 </template>
 <script>

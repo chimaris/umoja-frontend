@@ -11,13 +11,10 @@ font-size: 16px;
 font-weight: 500;
 letter-spacing: -0.48px;"  class="mt-1">Get lots of products with attractive offers up to 50% Discount</p>
 </div>
-
-<v-chip style="width:209px;height: 44px;border: 1px solid var(--carbon-2, #CECECE);
-" size="large" color="white" variant="default"  flat rounded="xl" class="rw chipper d-flex justify-start px-2 py-2"  >
-                 <div>
-
-                     <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1691207440/game-icons_africa_1_yshh6q.png"></v-img></v-avatar>
-                     <span class="mr-2" style="color: var(--carbon-4, #333);
+<v-chip style="width:209px;height: 44px;border: 1px solid #CECECE;" size="large" color="white" variant="elevated"  flat rounded="xl" class=" elevation-0 chipper d-flex justify-start px-2 py-2"  >
+    <div>
+<v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
+<span class="mr-2" style="color: var(--carbon-4, #333);
                       font-size: 14px;letter-spacing: -0.14px;
                       font-weight: 500;">
 
@@ -27,6 +24,7 @@ All of Africa
 <v-spacer></v-spacer>
 <v-icon class="mr-3" icon="mdi mdi-chevron-down"></v-icon>
               </v-chip>
+
         </div>
         <v-divider class="mb-6" color="#a4a4a4"></v-divider>
         <v-row>

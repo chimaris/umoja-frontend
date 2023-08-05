@@ -32,7 +32,7 @@ Learn More <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 font-size: 16px;
 font-weight: 600;
 letter-spacing: -0.16px;" class="mb-2"> Select African Country</p>
-    <v-chip style="width:209px;height: 44px;border: 1px solid #CECECE;" size="large" color="white" variant="elevated"  flat rounded="xl" class="rw elevation-0 chipper d-flex justify-start px-2 py-2"  >
+    <v-chip style="width:209px;height: 44px;border: 1px solid #CECECE;" size="large" color="white" variant="elevated"  flat rounded="xl" class=" elevation-0 chipper d-flex justify-start px-2 py-2"  >
     <div>
 <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
 <span class="mr-2" style="color: var(--carbon-4, #333);
