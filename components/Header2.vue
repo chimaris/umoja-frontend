@@ -7,7 +7,7 @@
       <v-container class="py-1" style="max-width:1400px">
         <div class="d-flex justify-space-between align-center">
         <div class="d-flex  align-center">
-         <v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="height:65px!important" rounded="0">
+         <v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer;height:65px!important" rounded="0">
     <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
   </v-avatar>
       <div class="d-flex">
