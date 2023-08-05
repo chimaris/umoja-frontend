@@ -1,7 +1,7 @@
 <template>
 <Header2 />
 <div class="py-12" style="background: #FDF5E7;" >
-    <v-container  style="max-width:1300px" class="mt-9">
+    <v-container  style="max-width:1400px" class="mt-9">
      
 <v-row class="pb-6">
     <v-col cols="12" lg="7">
@@ -267,7 +267,7 @@ How it works
           </v-img>
 </div>
 <div>
-    <v-container   style="max-width:1300px" class="py-12 my-12">
+    <v-container   style="max-width:1400px" class="py-12 my-12">
         <v-row>
             <v-col v-for="n in points" :key="n.icon" cols="12" lg="3" md="6">
                <div class="d-flex">
@@ -295,7 +295,7 @@ letter-spacing: -0.14px;" class="pr-8">  {{ n.body }}</p>
 </div>
 
 <div>
-    <v-container  style="max-width:1300px">
+    <v-container  style="max-width:1400px">
         <div class="d-flex mb-12 align-center">
 <p class="d-block" style="color: var(--magnetic-green-4, #2C6E63);
 font-size: 14px;
@@ -329,7 +329,7 @@ letter-spacing: -0.6px;">Umoja provides a unique experience, connecting a variet
 
 </div>
 <div>
-    <v-container   style="max-width:1300px" class="py-12">
+    <v-container   style="max-width:1400px" class="py-12">
 
         <v-row>
             <v-col cols="12" lg="5">
@@ -419,7 +419,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
 </div>
 
 <div>
-    <v-container  style="max-width:1300px">
+    <v-container  style="max-width:1400px">
         <div class="d-flex mb-8 mt-12 align-center">
 <p class="d-block" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
@@ -497,7 +497,7 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
                 </v-col>
                 <v-col class="px-0" cols="12" md="6" lg="6">
                     <v-card rounded="0" width="100%" height="100%" min-height="429" color="green" flat class=" d-flex align-center">
-                        <v-container   style="max-width:1300px" class="px-12">
+                        <v-container   style="max-width:1400px" class="px-12">
                             <p style="color: var(--magnetic-green-2, #CDD6D4);
 font-size: 12px;
 font-weight: 500;
@@ -521,7 +521,7 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
         </v-carousel-item>
     </v-carousel>
 </div>
-<v-container  style="max-width:1300px">
+<v-container  style="max-width:1400px">
         <div class="d-flex mb-8 mt-12 align-center">
 <p class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
@@ -619,7 +619,7 @@ letter-spacing: -0.42px;">You will be able to unsubscribe at anytime. Read our p
 </v-container>
 </div>
 <div>
-    <v-container  style="max-width:1300px">
+    <v-container  style="max-width:1400px">
         <p style="
 font-size: 48px;
 font-weight: 600;
