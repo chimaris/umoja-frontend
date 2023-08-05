@@ -18,8 +18,7 @@ html{
 
 .tophead{
 
-    background: black;
-}
+    background: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.88) 100%);}
     .v-responsive.v-img.signupimg {
         position: absolute;
         width: 37%;
