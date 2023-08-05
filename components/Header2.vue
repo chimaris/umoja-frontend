@@ -22,7 +22,7 @@
 <v-btn rounded="xl" icon flat color="transparent"><v-avatar size="35">
   <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img>
 </v-avatar></v-btn>
-<v-btn icon size="48" rounded="xl" flat color="transparent"
+<v-btn to="/order/cart" icon size="48" rounded="xl" flat color="transparent"
 class="text-none" >
       <v-badge offset-y="20" content="2" color="error">
         <v-icon icon="mdi mdi-shopping-outline"></v-icon>
