@@ -308,9 +308,10 @@ letter-spacing: -0.42px;" class="px-2"> and above</span>
                 <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;" class="pa-0"  flat size="x-small">
                 <v-icon size="small" color="#1C274C" icon="mdi mdi-heart-outline"></v-icon></v-btn>
                 </v-img>
-<p style="font-weight: 600;
+
+         <p @click="$router.push('/product_page')" style="font-weight: 600;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 18px;cursor: pointer;
     
     color: #000000;
     " class=" mt-2">{{filt(n.name)}}</p>
@@ -338,7 +339,7 @@ letter-spacing: 0.5px;">FREE DELIVERY</v-chip>
     <div >
     <div class="d-flex mt-4">
         <v-avatar size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img></v-avatar>
-        <div class="ml-2 ">
+        <div style="cursor: pointer;" @click="$router.push('/vendor_page')" class="ml-2 ">
             <p style="color: #1E1E1E;
 font-size: 14px;
 font-weight: 600;

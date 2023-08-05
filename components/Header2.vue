@@ -43,8 +43,8 @@ class="text-none" >
         urls: [
           {title:'Buy', route:'/discovery'},
           {title:'Sell', route:'/vendor/registeration/form'},
-          {title:'Discovery', route:'/vendor/registeration/form'},
-          {title:'Market Place', route:'/vendor/dashboard'},
+          {title:'Discovery', route:'/discovery_page'},
+          {title:'Market Place', route:'/market_place'},
           {title:'About Us', route:'/vendor/dashboard'},
           ]
       };

@@ -101,9 +101,9 @@ v-model="chip"
                 <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
                 <v-icon size="x-small" color="#1C274C" icon="mdi mdi-heart-outline"></v-icon></v-btn>
                 </v-img>
-                <p style="font-weight: 600;
+                <p @click="$router.push('/product_page')" style="font-weight: 600;
     font-size: 14px;
-    line-height: 18px;
+    line-height: 18px;cursor: pointer;
     
     color: #000000;
     " class=" mt-2">{{filt(n.name)}}</p>
@@ -134,7 +134,7 @@ v-model="chip"
     " class="priceClass">N{{n.price}}</h1>
     
                 </div>
-                <v-btn size="small" style="border: 1px solid #CED2D6;
+                <v-btn to="/order/cart" size="small" style="border: 1px solid #CED2D6;
     border-radius: 6px;"  :color="n.oos? 'green':''" :variant="!n.oos? 'outlined':'elevated'" flat :class="n.oos? 'text-grey':''" class="ml-2">
                      <span class="smallBtn">{{'Add to Cart'}}</span> 
                 </v-btn>
