@@ -1,5 +1,5 @@
 <template>
-        <v-container  style="max-width:1300px">
+        <v-container  style="max-width:1400px">
         <div class="d-flex mb-8 mt-12 align-center">
 <div class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
@@ -13,7 +13,7 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </div>
         <v-row id="homepage" style="background-color: #fff;" class=" mt-8">
-        <v-col  v-for="(n, i) in items" :key="i" lg="3" cols="12" sm="6" md="4">
+        <v-col  v-for="(n, i) in items" :key="i" lg="2" cols="6" sm="4" md="3">
             <v-card flat class="bg-white rounded-lg ">
                 <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="303px" :src="n.image">
                 <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
@@ -57,7 +57,7 @@ font-weight: 500;
 letter-spacing: -0.12px;">Accra, Ghana🇬🇭</p>
         </div>
         </div>
-        <v-divider color="#ededed" class="my-4"></v-divider>
+        <v-divider color="#a4a4a4" class="my-4"></v-divider>
     </div>
                           <div class="d-flex align-center justify-space-between">
                 <div class="d-flex align-center"> 
@@ -107,6 +107,13 @@ export default {
                 price: '57.00',
                 location: 'Mumbasa, Kenya',
                 likes: '456',
+            },
+            {
+                name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png',
+                price: '115.32',
+                location: 'Accra, Ghana',
+                likes: '1.2k'
             },
      
             {

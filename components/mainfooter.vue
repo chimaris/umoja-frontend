@@ -4,7 +4,7 @@
 <v-card color="" flat class="rounded-xl px-3" height="auto" min-height="100vh">
  
 
-  <v-container  style="max-width:1300px" class="pt-12">
+  <v-container  style="max-width:1400px" class="pt-12">
     <v-divider class="my-12 " style="height:2px" color="#"></v-divider>
 
 <v-row style="margin-bottom: 90px;" class="row0 mt-12">

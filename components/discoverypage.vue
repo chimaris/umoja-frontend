@@ -5,7 +5,7 @@
     width="100%" cover class="d-flex  bg-grey align-center"
     src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1690557693/rectangle-1943_ki3qvz.png"
   >
-  <v-container style="max-width:1300px;width: 100%;" class="">
+  <v-container style="max-width:1400px;width: 100%;" class="">
     <div class="w-100 d-flex justify-end">
 
         <v-card flat style="border-radius: 15px; padding: 40px!important;" max-width="420">
@@ -32,14 +32,12 @@ Learn More <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 font-size: 16px;
 font-weight: 600;
 letter-spacing: -0.16px;" class="mb-2"> Select African Country</p>
-    <v-chip style="width:209px;height: 44px;border: 1px solid #CECECE;" size="large" color="white" variant="default"  flat rounded="xl" class="rw chipper d-flex justify-start px-2 py-2"  >
-                 <div>
-
-                     <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
-                     <span class="mr-2" style="color: var(--carbon-4, #333);
-                      font-size: 14px;letter-spacing: 2.38px;
-                      font-weight: 500;">
-
+    <v-chip style="width:209px;height: 44px;border: 1px solid #CECECE;" size="large" color="white" variant="elevated"  flat rounded="xl" class="rw elevation-0 chipper d-flex justify-start px-2 py-2"  >
+    <div>
+<v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
+<span class="mr-2" style="color: var(--carbon-4, #333);
+font-size: 14px;letter-spacing: 2.38px;
+font-weight: 500;">
 RWANDA
 </span>
 </div>
@@ -50,7 +48,7 @@ RWANDA
    </v-container>
 </v-img>
 <v-card  class="overflow-visible" flat tile color="" min-height="100vh" width="100%">
-    <v-container  style="max-width:1300px">
+    <v-container  style="max-width:1400px">
         <v-row>
           
             <v-col class="pt-0" cols="12" xs="12">
@@ -97,7 +95,7 @@ v-model="chip"
 
 
    <v-row style="" class="">
-    <v-col cols="6" v-for="(n, i) in items" :key="i" lg="3" md="4">
+    <v-col cols="6" v-for="(n, i) in items" sm="4" :key="i" lg="2" md="3">
         <v-card flat class="bg-white rounded-lg mb-4">
                 <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="236px" :src="n.image">
                 <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
@@ -159,7 +157,7 @@ v-model="chip"
                 </v-col>
                 <v-col class="px-0" cols="12" md="6" lg="6">
                     <v-card rounded="0" width="100%" height="100%" min-height="429" color="#F8B735" flat class=" d-flex align-center">
-                        <v-container   style="max-width:1300px" class="px-12">
+                        <v-container   style="max-width:1400px" class="px-12">
                             <p style="color: var(--magnetic-green-2, #333);
 font-size: 12px;
 font-weight: 500;
@@ -181,7 +179,7 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
                 </v-col>
             </v-row>
     </div>
-    <v-container  style="max-width:1300px">
+    <v-container  style="max-width:1400px">
         <v-row>
           
             <v-col class="pt-0" cols="12" xs="12">
@@ -265,7 +263,7 @@ font-weight: 400;" class="mt-4">Lorem ipsum dolor sit amet consectetur. Duis pul
 <div style="padding: 100px 0;">
 <v-row>      <v-col class="px-0" cols="12" md="6" lg="6">
                         <v-card rounded="0" width="100%" style="border: none!important;" height="100%" min-height="429" color="green" flat class=" cardStyle py-0 d-flex align-center">
-                            <v-container   style="max-width:1300px" class="px-12">
+                            <v-container   style="max-width:1400px" class="px-12">
                                 <p style="color: var(--magnetic-green-2, #fff);
     font-size: 12px;
     font-weight: 500;
@@ -291,7 +289,7 @@ font-weight: 400;" class="mt-4">Lorem ipsum dolor sit amet consectetur. Duis pul
                 </v-col>
             </v-row>
     </div>
-    <v-container  style="max-width:1300px">
+    <v-container  style="max-width:1400px">
         <v-row>
           
             <v-col class="pt-0" cols="12" xs="12">

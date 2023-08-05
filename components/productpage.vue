@@ -1,6 +1,6 @@
 <template>
     <v-divider></v-divider>
-    <v-container class="pt-0" style="max-width: 1300px;">
+    <v-container class="pt-0" style="max-width: 1400px;">
         <v-breadcrumbs class="pl-0" v-model="item" active-class="text--green" :items="items">
       <template v-slot:divider>
         <v-icon color="#969696" icon="mdi mdi-chevron-right"></v-icon>

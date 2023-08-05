@@ -589,6 +589,7 @@ export default {
                 name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
                 price: '57.00',
+                disco:true,
                 location: 'Mumbasa, Kenya',
                 likes: '456',
             },
@@ -607,7 +608,7 @@ export default {
                 price: '115.32',
                 location: 'Accra, Ghana',
                 likes: '1.2k',
-                deliv: true
+               
             },
             {
                 name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
@@ -615,8 +616,9 @@ export default {
                 price: '57.00',
                 location: 'Madagascar',
                 likes: '456',
+                disco:true,
                 oos: true,
-                deliv: true
+              
             },
           
             {
@@ -626,16 +628,16 @@ export default {
                 location: 'Mumbasa, Kenya',
                 likes: '456',
                 deliv: true,
-                disco:true,
-
+                
             },
-     
+            
             {
                 name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
                 price: '79.00',
                 location: 'Accra, Ghana',
                 likes: '66',
+                disco:true,
                 oos: true
             },
             {

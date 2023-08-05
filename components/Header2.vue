@@ -4,7 +4,7 @@
 <span class="pointhere">Sign up now
 </span></p>
   </div>
-      <v-container class="py-1" style="max-width:1300px">
+      <v-container class="py-1" style="max-width:1400px">
         <div class="d-flex justify-space-between align-center">
         <div class="d-flex  align-center">
          <v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="height:65px!important" rounded="0">
