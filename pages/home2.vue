@@ -21,7 +21,7 @@ font-weight: 400;
 line-height: 180%;
 letter-spacing: -0.6px;">The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.</p>
 <div class="pt-5">
-    <v-btn to="/vendor_page" color="green" size="large" flat rounded="xl" width="163px">
+    <v-btn to="/discovery_page" color="green" size="large" flat rounded="xl" width="163px">
       <span style="color:  #EDF0EF;
 font-size: 14px;
 font-weight: 600;
@@ -419,69 +419,8 @@ letter-spacing: -0.96px;">Cosmetics</p>
 </div>
 
 <div>
-    <v-container  style="max-width:1400px">
-        <div class="d-flex mb-8 mt-12 align-center">
-<p class="d-block" style="color: var(--magnetic-green-4, #000);
-font-size: 24px;
-font-weight: 600;width: auto;
-    min-width: 155px;
-line-height: 120%; /* 16.8px */
-letter-spacing: -0.24px;"> 🔥 Hot Deals </p>
-    <v-divider class="mr-4"></v-divider>
-    <v-btn color="#333" size="large" style="" variant="outlined" rounded="xl" >
-See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
-    </v-btn>
-        </div>
-        <v-row id="homepage" style="background-color: #fff;" class=" mt-8">
-        <v-col  v-for="(n, i) in items" :key="i" lg="3" cols="12" sm="6" md="4">
-            <v-card flat class="bg-white rounded-lg pa-4">
-                <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="303px" :src="n.image">
-                <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
-                <v-icon size="x-small" color="#1C274C" icon="mdi mdi-heart-outline"></v-icon></v-btn>
-                </v-img>
-                <p style="font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;
-    
-    color: #000000;
-    " class=" mt-2">{{filt(n.name)}}</p>
-    <p style="font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #000000;
-    " class="mt-1">Organic cotton certified</p>
-   <p style="font-weight: 600;
-    font-size: 10px;
-    line-height: 10px;
-    color: #000000;
-    " class="d-flex mb-1 pb-3 pt-1 align-center">
-        <v-rating
-        model-value="4"
-        color="grey-lighten-2"
-        active-color="#E7CE5D"
-        class="rts" density="compact"
-        size="x-small"
-        ></v-rating><span style="margin-left:3px;margin-top: 3px ;" >(65)</span> 
-    </p>
-                          <div class="d-flex align-center justify-space-between">
-                <div class="d-flex align-center"> 
-                    <h1 
-    style="font-size: 16px;
-            line-height: 20px;
-            color: #1A1D1F;
-    " class="priceClass">N{{n.price}}</h1>
-    
-                </div>
-                <v-btn size="small" style="border: 1px solid #CED2D6;
-    border-radius: 6px;"  :color="n.oos? 'green':''" :variant="!n.oos? 'outlined':'elevated'" flat :class="n.oos? 'text-grey':''" class="ml-2">
-                     <span class="smallBtn">{{'Add to Cart'}}</span> 
-                </v-btn>
-    
-                </div>
-            </v-card>
-        </v-col>
-       </v-row> 
-        </v-container>
+  <product-row :showVendor="false" title=" 🔥 Hot Deals " />
+
 
         <div style="padding:100px 0px">
 
@@ -521,69 +460,9 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
         </v-carousel-item>
     </v-carousel>
 </div>
-<v-container  style="max-width:1400px">
-        <div class="d-flex mb-8 mt-12 align-center">
-<p class="" style="color: var(--magnetic-green-4, #000);
-font-size: 24px;
-font-weight: 600;width: auto;
-    min-width: 385px;
-line-height: 120%; /* 16.8px */
-letter-spacing: -0.24px;"> ⚡️ Popular Products of the Week </p>
-    <v-divider class="mr-4"></v-divider>
-    <v-btn color="#333" size="large" style="" variant="outlined" rounded="xl" >
-See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
-    </v-btn>
-        </div>
-        <v-row id="homepage" style="background-color: #fff;" class=" mt-8">
-        <v-col  v-for="(n, i) in items" :key="i" lg="3" cols="12" sm="6" md="4">
-            <v-card flat class="bg-white rounded-lg pa-4">
-                <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="303px" :src="n.image">
-                <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
-                <v-icon size="x-small" color="#1C274C" icon="mdi mdi-heart-outline"></v-icon></v-btn>
-                </v-img>
-                <p style="font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;
-    
-    color: #000000;
-    " class=" mt-2">{{filt(n.name)}}</p>
-    <p style="font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #000000;
-    " class="mt-1">Organic cotton certified</p>
-  <p style="font-weight: 600;
-    font-size: 10px;
-    line-height: 10px;
-    color: #000000;
-    " class="d-flex mb-1 pb-3 pt-1 align-center">
-        <v-rating
-        model-value="4"
-        color="grey-lighten-2"
-        active-color="#E7CE5D"
-        class="rts" density="compact"
-        size="x-small"
-        ></v-rating><span style="margin-left:3px;margin-top: 3px ;" >(65)</span> 
-    </p>
-                          <div class="d-flex align-center justify-space-between">
-                <div class="d-flex align-center"> 
-                    <h1 
-    style="font-size: 16px;
-            line-height: 20px;
-            color: #1A1D1F;
-    " class="priceClass">N{{n.price}}</h1>
-    
-                </div>
-                <v-btn size="small" style="border: 1px solid #CED2D6;
-    border-radius: 6px;"  :color="n.oos? 'green':''" :variant="!n.oos? 'outlined':'elevated'" flat :class="n.oos? 'text-grey':''" class="ml-2">
-                     <span class="smallBtn">{{'Add to Cart'}}</span> 
-                </v-btn>
-    
-                </div>
-            </v-card>
-        </v-col>
-       </v-row> 
-        </v-container>
+<product-row :showVendor="false" title="⚡️ Popular Products of the Week" />
+
+
         </div>
         <div class="bg-black " style="margin:100px 0px">
 <v-container style="height:774px" class="d-flex align-center justify-center">

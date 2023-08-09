@@ -3,70 +3,117 @@
     <v-divider></v-divider>
     <div style="background-color;">
 
-    <v-container style="max-width: 1400px;width: 100%;">
-        <v-row class="pt-2">
+    <v-container class="mt-4" style="max-width: 1400px;width: 100%;">
+        <v-row>
                 <v-col cols="12" lg="8" >  
 <v-card class="overflow-visible" flat  color="#F7F7F7" min-height="" width="100%">
         <v-card flat style="border-radius: 10px;" class="pt-8 pb-4 px-4">
-           
-            <h1 style="font-weight: 800;
+           <div class="d-flex align-center justify-space-between">
+
+               <h1 style="font-weight: 600;
 font-size: 32px;
-line-height: 40px;
-/* identical to box height */
+line-height: 40px;">Cart (3)</h1>
+    <v-btn  color="#333" variant="text"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
 
-text-transform: uppercase;
-
-/* Carbon/4 */
-
-color: #333333;">CART (3)</h1>
-<v-divider class="my-4"></v-divider>
-<div class=" d-flex justify-space-between align-center">
-    <v-btn  color="red" variant="tonal"><span class="smallBtn">Clear cart</span>  <v-icon size="15" class="ml-1" icon="mdi mdi-trash-can-outline"></v-icon></v-btn>
-    
-    <p class="text-overline text-grey-lighten-1">price</p>
 </div>
-<v-divider class="my-4"></v-divider>
-       
+
 <v-sheet>
-    <v-card v-for="(n, i) in 3" :key="n" class="py-2 px-2 my-2" flat color="transparent">
-        <v-row >
-<v-col cols="3">
+    <v-table class="mt-4" style="    height: 80%; !important;
+   overflow: scroll;">
+   <thead>
+     <tr style="border-radius: 6px;" class="  rounded-lg">
+       <th style="
+   width: 50px;
+" class="  font-weight-medium  text-left">
+          <v-checkbox hide-details ></v-checkbox>
+       </th>
+       <th  style="font-size: 14px;width: 100px;" class="  font-weight-medium  text-left">
+         Product Details
+       </th>
+       <th style="font-size: 14px;" class=" text-center px-1  font-weight-medium">
+         Quantity
+       </th>
 
-    <v-img cover class="rounded-lg bg-grey-lighten-2" width="100%" height="180" src="https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png"></v-img>
-</v-col>
-<v-col cols="6">
-    <v-chip size="x-small" class=" rounded-lg text-overline font-weight-regular" variant="tonal" color="green">in stock</v-chip>
-    <p style="font-weight: 700;
-font-size: 16px;
-line-height: 140%;
-color: #333333;" class="my-2">The Benin stone sculpture, made of clay in the 1900’s.</p>
-<p class="lightText">Category: Stone, Art, Sculpting, Carving.</p>
-<p class="lightText">Location: Lagos Nigeria.</p>
-<div   class="d-flex py-2 align-center ">
-<v-avatar color="white" size="40" class=" "><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img></v-avatar> 
-<p style="font-weight: 800;
-font-size: 16px;" class="ml-2">The Golden Matrix</p>
-</div>
-</v-col>
-<v-col cols="3">
-    <h1 class="text-right bigpriceClass">$150.00</h1>
-</v-col>
-        </v-row>
-        <div class="d-flex  pt-2 pb-4 justify-space-between">
-            <v-btn  color="red" variant="tonal"><span class="smallBtn">Remove</span>  <v-icon size="15" class="ml-1" icon="mdi mdi-close"></v-icon></v-btn>
-            <div class="d-flex align-center ">
-                <v-btn flat  color="orange" variant="tonal"><v-icon size="15" icon="mdi mdi-minus"></v-icon></v-btn>
-                <p style="font-weight: 500;
-font-size: 16px;
+       <th style="font-size: 14px;" class=" text-right px-1  font-weight-medium">
+        Price
+       </th>
+    
+     </tr>
+   </thead>
+   
+   <tbody>
+       <!-- @click="chosen = item.sn" -->
+       <tr   v-for="item in items"
+       :key="item.sn"
+       >
+       <td  class="text-grey-lighten-1 pl-1 ">   
+              <v-checkbox hide-details></v-checkbox>
+       </td>
+       <td style="position:relative;font-size: 14px;height: 100px;" 
+        >
+        <div style="position: ;top: 24px; width: ;">
+
+      <div  v-bind="props"
+        class=" d-flex align-start pr-4 pl-1"
+        >
+          <v-avatar color="grey-lighten-4" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" ><v-img cover :src="item.image"></v-img></v-avatar>
+          <div>
+            <p class="mb-1" style="font-weight: 600;
+font-size: 16px!important;
 line-height: 20px;
-letter-spacing: 0.03em;
-color: #333333;" class="mx-6">2</p>
-                <v-btn flat  color="orange"><v-icon size="15" icon="mdi mdi-plus"></v-icon></v-btn>
-                
-</div>
+color: #333333;">The Benin stone sculpture, made of clay in the 1900’s. </p>
+            <p style="font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+color: #969696;" class="text-truncate">Category: Stone, Art, Sculpting, Carving.</p>
+            <p style="font-weight: 400;
+font-size: 14px;
+line-height: 18px;
+color: #969696;" class="text-truncate">Location: Lagos Nigeria.</p>
+<v-chip size="x-small" color="green" style="font-weight: 500;" class="mt-1" rounded="lg">IN STOCK</v-chip>
+          </div>
         </div>
-        <v-divider v-if="(i+1) !== 3" class="my-2"></v-divider>
-    </v-card>
+        </div>
+
+       
+
+    </td>
+    
+   <td style="height: 189px;" class=" align-center d-flex px-1">  
+    <div class="text-center w-100  py-8 ">
+            <div class="d-flex w-100 justify-center align-center ">
+                <v-btn-group
+        border width="122"
+         rounded="lg"
+        divided density="compact"
+      >
+        <v-btn  rounded="0">
+          <v-icon icon="mdi mdi-minus "></v-icon>
+        </v-btn>
+
+        <v-btn :ripple="false" rounded="0">
+         2
+        </v-btn>
+        <v-btn rounded="0">
+          <v-icon icon="mdi mdi-plus"></v-icon>
+        </v-btn>
+</v-btn-group>     
+</div>
+<v-btn  color="#333" variant="text" class="mt-2"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
+</div>
+
+          </td>
+
+    
+       <td  class="tableLight text-right px-1"><p style="color: #333;
+font-size: 16px;
+font-style: normal;
+font-weight: 600;">€ 5,829.00 </p></td>
+   
+  </tr>
+</tbody>
+</v-table>
+  
 </v-sheet>
 
 </v-card>
@@ -74,46 +121,67 @@ color: #333333;" class="mx-6">2</p>
 </v-card>
 </v-col>
 <v-col cols="12" lg="4">
-<v-card style="border-radius: 10px;" flat class="pa-4">
+
+<v-card style="border-radius: 15px;
+border: 1px solid var(--carbon-2, #CECECE);" flat class="pa-6">
 <div class="mb-3">
-    <p style="font-weight: 800;
+   
+<div class="d-flex  pb-3 align-center justify-space-between">
+<p style="font-weight: 500;
+font-size: 14px;
+color: #969696;">Subtotal</p>
+    <p style="color: var(--carbon-4, #333);
 font-size: 16px;
-line-height: 20px;
-text-transform: uppercase;
-color: #333333;" class="mt-8 mb-6">cart summary</p>
-<v-divider></v-divider>
-<div class="d-flex  py-3 align-center justify-space-between">
-<p style="font-weight: 700;
-font-size: 16px;
-line-height: 20px;
-color: #C20052;">Subtotal</p>
-    <p style="color:#C20052" class="bigpriceClass">$1,380.32</p>
+font-weight: 600;" class="">€ 5,829.00</p>
 </div>
-<div class="d-flex">
-    <v-icon icon="mdi mdi-circle-small" color="grey"></v-icon>
+<div class="d-flex  pb-3 align-center justify-space-between">
+<p style="font-weight: 500;
+font-size: 14px;
+color: #969696;">Discount</p>
+    <p style="color: var(--carbon-4, #333);
+font-size: 16px;
+font-weight: 600;" class="">€ 0.00</p>
+</div>
+<hr  class="dashed-2 my-8" />
+<div class="d-flex  pb-3 align-center justify-space-between">
+<p style="font-weight: 500;
+font-size: 14px;
+color: #969696;">Grand Total</p>
+    <p style="color: var(--carbon-4, #333);
+font-size: 24px;
+font-weight: 600;" class="">€ 5,829.00 </p>
+</div>
+
+
+<div class="d-flex mt-4 align-center">
+    <v-icon class="mr-2" icon="mdi mdi-information" color="green" size="18"></v-icon>
     <p class="textClass text-grey">Delivery fees not Included</p>
 </div>
-<div class="d-flex">
-    <v-icon icon="mdi mdi-circle-small" color="grey"></v-icon>
-    <p class="textClass text-grey">
-Every delivery is carried out by <span class="text-blue">
 
-    umoja logistics
-</span>
-</p>
 </div>
-</div>
-<v-btn to="/order/checkout" flat block size="x-large" color="green"> Proceed to checkout</v-btn>
+<v-btn to="/order/checkout" flat block size="x-large" class="mt-8" rounded="xl" color="green"> Checkout Now</v-btn>
 </v-card>
+<v-card style="border-radius: 15px;
+border: 1px solid var(--carbon-2, #CECECE);" flat class="mt-4 pa-6">
+<p style="color: #333;
+font-size: 20px;
+font-weight: 600;
+line-height: 20px; /* 100% */
+letter-spacing: -0.2px;" class="mb-4">Returns are easy</p>
 
-<v-img style="position: relative;border-radius: 10px;" class="mt-6 pt-10 bg-grey-lighten-1 pa-6 rounded-lg" width="100%" min-height="600px" cover eager src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png" height="auto">
+<p style="color:#969696;
+font-size: 14px;
+font-weight: 500;
+">Free return within 15 days for Official Store items and 7 days for other eligible items See more</p>
+</v-card>
+<v-img style="position: relative;border-radius: 10px;" class="mt-6 pt-10 bg-grey-lighten-1 pa-6 rounded-lg" width="100%" max-height="674px" cover eager src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png" height="100%">
     <div  class=" ">
                 <h1 style="font-size: 50.4px;
-line-height: 53px;" class=" mb-0 text-white font-weight-black">Nawi’s long
+line-height: 53px;" class=" mb-0 text-white font-weight-bold">Nawi’s long
 scarf</h1>
                 <p class="textClass mb-4 text-white">known to be used by the Nawi people</p>
                 <div>
-                  <v-btn  flat to="/vendor/profile" color="orange" 
+                  <v-btn  rounded="xl" flat to="/vendor/profile" color="orange" 
               ><span class="smallBtn">
                 See product
             </span>
@@ -126,7 +194,7 @@ scarf</h1>
             </v-btn>
                 </div>
             </div>
-            <div class="pa-6" style="position: absolute;bottom:0;left: 0;width: 100%;">
+            <div v-if="false" class="pa-6" style="position: absolute;bottom:0;left: 0;width: 100%;">
                 <v-card style="
 background: rgba(0, 0, 0, 0.7);
 backdrop-filter: blur(25px); bottom: 0;
@@ -222,35 +290,7 @@ export default {
                 location: 'Mumbasa, Kenya',
                 likes: '456',
             },
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
-                price: '57.00',
-                location: 'Accra, Ghana',
-                likes: '456',
-            },
-            {
-                name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
-                price: '79.00',
-                location: 'Accra, Ghana',
-                likes: '66',
-                oos: true
-            },
-            {
-                name: 'Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png',
-                price: '179.00',
-                location: 'Madagascra',
-                likes: '966',
-            },
-            {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png',
-                price: '57.00',
-                location: 'Accra, Ghana',
-                likes: '456',
-            },
+        
         ]
 
     };

@@ -6,6 +6,12 @@ html{
     margin-left: px;
     
 }
+.dashed-2 {
+    border: none!important;
+    height: 1px!important;
+    background: #EDEDED!important;
+    background: repeating-linear-gradient(90deg,#EDEDED,#EDEDED 6px,transparent 6px,transparent 12px)!important;
+  }
 .mainbg{
     background-position: center;
     background: url('https://res.cloudinary.com/dkbt6at26/image/upload/c_fit,w_1000/v1684229328/Rectangle_2_pixza2.png');

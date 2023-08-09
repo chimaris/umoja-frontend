@@ -13,7 +13,7 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </div>
         <v-row id="homepage" style="background-color: #fff;" class=" mt-8">
-        <v-col  v-for="(n, i) in items" :key="i" lg="2" cols="6" sm="4" md="3">
+        <v-col  v-for="(n, i) in items" :key="i" lg="3" cols="6" sm="4" md="3">
             <v-card flat class="bg-white rounded-lg ">
                 <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="303px" :src="n.image">
                 <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
