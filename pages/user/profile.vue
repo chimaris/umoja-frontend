@@ -39,9 +39,9 @@ font-weight: 500;">{{ n.data }}</p>
         <v-btn class="mt-6"    style="border-radius: 6px;
 border: 1px solid var(--carbon-2, #CECECE);" icon="mdi mdi-dots-vertical" flat></v-btn>
         </div>
+        <v-divider class="mt-4"></v-divider> 
     </v-container> 
-    <v-divider class="mb-6"></v-divider> 
-    <v-container style="max-width: 1400px;">
+    <v-container class="pt-2" style="max-width: 1400px;">
 
     <v-card flat class="cardStyle px-0 mt-4 mb-12 py-0">
         <div class="d-flex px-4 pt-6 justify-space-around">
@@ -62,7 +62,7 @@ font-weight: 600;" :style="selected == n? 'color:#2C6E63': ''">
             </div>
         </div>
         <v-divider class="mt-6"></v-divider>
-<div class="px-6 py-12"> 
+<div class="px-6 py-10"> 
     <p style="color: #000;
 font-size: 24px;
 font-weight: 600;
@@ -74,11 +74,11 @@ font-style: normal;
 font-weight: 500;">Here you can manage your order</p>
 </div>
 <div>
-
+    
     <v-window v-model="selected">
-        <!-- <v-window-item value="My Profile">
-            <Vendorsettingsprofile />
-        </v-window-item> -->
+        <v-window-item value="Order History">
+            <Orderhistory />
+        </v-window-item>
         
     </v-window>
 </div>
@@ -96,7 +96,7 @@ export default {
   data() {
     return {
         placescards:false,
-        selected:'Account Settings',
+        selected:'Order History',
         mods:1,
         tab: null,
         userDetails:[
