@@ -7,7 +7,7 @@
         <v-row>
                 <v-col cols="12" lg="8" >  
 <v-card class="overflow-visible" flat  color="#F7F7F7" min-height="" width="100%">
-        <v-card flat style="border-radius: 10px;" class="pt-8 pb-4 px-4">
+        <v-card flat style="border-radius: 10px;" class="pt-2 pb-4 px-4">
            <div class="d-flex align-center justify-space-between">
 
                <h1 style="font-weight: 600;
@@ -62,11 +62,11 @@ line-height: 40px;">Cart (3)</h1>
 font-size: 16px!important;
 line-height: 20px;
 color: #333333;">The Benin stone sculpture, made of clay in the 1900’s. </p>
-            <p style="font-weight: 400;
+            <p style="font-weight: 500;
 font-size: 14px;
 line-height: 18px;
 color: #969696;" class="text-truncate">Category: Stone, Art, Sculpting, Carving.</p>
-            <p style="font-weight: 400;
+            <p style="font-weight: 500;
 font-size: 14px;
 line-height: 18px;
 color: #969696;" class="text-truncate">Location: Lagos Nigeria.</p>

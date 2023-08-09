@@ -6,10 +6,15 @@ html{
     margin-left: px;
     
 }
+.chkt{
+    font-weight: 600;
+font-size: 20px;
+color: #333333;
+}
 .dashed-2 {
     border: none!important;
     height: 1px!important;
-    background: #EDEDED!important;
+    background: #a4a4a4!important;
     background: repeating-linear-gradient(90deg,#EDEDED,#EDEDED 6px,transparent 6px,transparent 12px)!important;
   }
 .mainbg{
@@ -178,13 +183,13 @@ line-height: 30px;
 }
 .inputLabel{
     font-style: normal;
-font-weight: 500;
-font-size: 14px;
+font-weight: 600;
+font-size: 16px;
 line-height: 20px;
 margin-bottom:12px
 }
 .addressName{
-    font-weight: 800;
+    font-weight: 600;
 font-size: 16px;
 line-height: 20px;
 }
