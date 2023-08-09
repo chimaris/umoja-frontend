@@ -62,22 +62,30 @@ font-weight: 600;" :style="selected == n? 'color:#2C6E63': ''">
             </div>
         </div>
         <v-divider class="mt-6"></v-divider>
-<div class="px-6 py-10"> 
-    <p style="color: #000;
-font-size: 24px;
-font-weight: 600;
-">Order History</p>
-    <p style="color: var(--carbon-3, #969696);
-font-family: Faktum;
-font-size: 14px;
-font-style: normal;
-font-weight: 500;">Here you can manage your order</p>
-</div>
+
 <div>
     
     <v-window v-model="selected">
+        <v-window-item value="Account Settings">
+            <Useraccountsettings />
+        </v-window-item>
+        <v-window-item value="Following">
+            <Userfollowing />
+        </v-window-item>
+        <v-window-item value="Manage Password">
+            <Usermanagepassword />
+        </v-window-item>
         <v-window-item value="Order History">
-            <Orderhistory />
+            <Userorderhistory />
+        </v-window-item>
+        <v-window-item value="Payment method">
+            <Userpaymentmenthod />
+        </v-window-item>
+        <v-window-item value="Address">
+            <Useraddressbook />
+        </v-window-item>
+        <v-window-item value="Notification">
+            <Usernotification />
         </v-window-item>
         
     </v-window>
