@@ -104,7 +104,7 @@ export default {
   data() {
     return {
         placescards:false,
-        selected:'Order History',
+        selected:'Account Settings',
         mods:1,
         tab: null,
         userDetails:[
