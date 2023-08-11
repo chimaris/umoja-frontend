@@ -1,6 +1,6 @@
 <template>
-     <div class="mx-6 pa-6 mb-6 cardStyle " >
-  <div style="width: 100%;border-bottom: 0.5px solid rgb(215, 215, 215);" class=" ">
+     <div class="mx-6 pa-6 pb-2 mb-6 cardStyle " >
+  <div style="width: 100%;" class=" ">
   <v-expand-transition>
 
     <v-card rounded="0" color="" class="pb-4" flat v-if="true" style="width:100%;">
