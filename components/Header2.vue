@@ -22,9 +22,13 @@
         <div >
         <div  v-bind="props">
 
-          <v-btn  v-if="!isActive" icon="mdi mdi-magnify" rounded="xl" flat color="transparent"></v-btn>
+      
+          <v-btn v-if="!isActive" icon size="48" v-bind="props" rounded="xl" flat color="transparent">
+  <v-avatar rounded="0" size="28">
+  <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png"></v-img>
+</v-avatar></v-btn>
           </div>
-          <v-slide-x-reverse-transition  leave-absolute="">
+          <v-slide-x-reverse-transition  leave-absolute>
            <v-text-field v-if="isActive" variant="outline" style="min-width: 500px;" class="search mt-1 mr-2"  hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Ankara"
            density="compact">
            <template v-slot:append-inner>
@@ -40,19 +44,26 @@
 </template>
 <dialogsearch />
 </v-menu>
-<v-btn v-if="false" icon="mdi mdi-account-outline" rounded="xl" flat color="transparent"></v-btn>
-<v-btn rounded="xl" to="/user/profile" icon flat color="transparent"><v-avatar size="35">
+<v-btn v-if="false" class="ml-4" icon="mdi mdi-account-outline" rounded="xl" flat color="transparent">
+</v-btn>
+<v-btn rounded="xl" to="/user/profile" class="ml-4" icon flat color="transparent">
+  <v-avatar size="35">
   <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img>
 </v-avatar></v-btn>
-<v-btn to="/order/cart" icon size="48" rounded="xl" flat color="transparent"
-class="text-none" >
+<v-btn to="/order/cart" class="ml-4 text-none" icon size="48" rounded="xl" flat color="transparent"
+ >
       <v-badge offset-y="20" content="2" color="error">
-        <v-icon icon="mdi mdi-shopping-outline"></v-icon>
+        <v-avatar rounded="0" size="32">
+  <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png"></v-img>
+</v-avatar>
       </v-badge>
     </v-btn>
-    <v-menu :close-on-content-click="false" location="bottom" offset="20px">
+    <v-menu  :close-on-content-click="false" location="bottom" offset="20px">
       <template v-slot:activator="{ props }">
-<v-btn  v-bind="props" icon="mdi mdi-bell-outline" rounded="xl" flat color="transparent"></v-btn>
+<v-btn class="ml-4"  icon size="48" v-bind="props" rounded="xl" flat color="transparent">
+  <v-avatar rounded="0" size="23">
+  <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742990/outline-notifications-vector_vkwg9h.svg"></v-img>
+</v-avatar></v-btn>
 </template>
 <dialognotification />
 </v-menu>
