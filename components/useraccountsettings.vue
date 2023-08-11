@@ -10,7 +10,7 @@ font-size: 14px;
 font-style: normal;
 font-weight: 500;">Here you can manage your profile settongs.</p>
 </div>
-<div class="cardStyle ma-6">
+<div class="cardStyle mx-6 mb-6">
     <div class="pa-5 py-8">
 
 <div class="mb-4 d-flex align-center justify-space-between">

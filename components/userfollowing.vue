@@ -24,7 +24,7 @@ font-weight: 600;">
             </span>
         </v-btn>
     </div>
-<div class="ma-6 cardStyle">
+<div class="mx-6 mb-6  cardStyle">
     <div v-for="n in 8">
     <div  class="pa-6 d-flex align-center justify-space-between">
 <div class="d-flex">

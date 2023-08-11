@@ -1,10 +1,12 @@
 <template>
-      <v-container style=" position: relative;   max-width: 1417px;" class="pt-0 footbot pb-12" fluid>
+      <v-container style=" position: relative;   max-width: ;" class="pt-0 footbot pb-5" fluid>
 
 <v-card color="#1E1E1E" flat class="rounded-xl px-2" height="auto" min-height="100vh">
    
  
-    <v-container class="pt-12">
+    <v-container style="
+    max-width: 1300px;
+" class="mx-auto pt-12">
 <v-row class="row0 mt-12">
     <v-col cols="12" class="pt-0 " lg="6">
         <v-avatar class="mb-8" style="width:130px; height:54px" rounded="0" flat>

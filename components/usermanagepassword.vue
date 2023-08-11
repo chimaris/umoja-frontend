@@ -10,9 +10,9 @@ font-size: 14px;
 font-style: normal;
 font-weight: 500;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo pellentesque massa tellus ac augue. Lectus arcu at in in rhoncus malesuada ipsum turpis.</p>
 </div>
-<div class=" ma-6 cardStyle">
+<div class=" mx-6 mb-6 cardStyle">
     <v-row>
-                <v-col cols="12" lg="4">
+                <v-col cols="12" lg="5">
                     
     
 <p class="inputLabel2">Current Password</p>             

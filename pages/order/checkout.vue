@@ -111,8 +111,8 @@ color: #333333;" class="">Add new address</p>
      <v-text-field placeholder="Enter your zipcode" density="comfortable"  >
          </v-text-field>           
            
-         <v-btn class="textClass px-8" color="green" flat>Use this address</v-btn>          
-         <v-btn variant="tonal" class="textClass ml-2 px-8" color="green" flat>Cancel</v-btn>          
+         <v-btn class="textClass px-8" rounded="xl" color="green"  flat>Use this address</v-btn>          
+         <v-btn variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>          
          
 </v-card>
 </v-card>

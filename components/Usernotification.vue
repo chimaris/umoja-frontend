@@ -10,7 +10,7 @@ font-size: 14px;
 font-style: normal;
 font-weight: 500;">Here you can manage all your notifications</p>
 </div>
-<v-sheet class="ma-6 cardStyle">
+<v-sheet class="mx-6 mb-6 cardStyle">
     <div class="pa-5 pt-8">
 <v-row>
     <v-col cols="12" lg="3">

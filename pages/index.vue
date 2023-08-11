@@ -15,7 +15,7 @@
           </v-btn>
       </div>
   </v-container>
-  <v-container style=" position: relative;   max-width: 1417px;" class="pt-0 padzero" fluid>
+  <v-container style=" position: relative;   ;" class="pt-0 padzero" fluid>
 
       <v-card flat class="topcard height1 rounded-xl d-flex justify-center align-center" height="100vh" min-height="900px"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
          

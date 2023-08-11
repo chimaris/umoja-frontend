@@ -60,7 +60,7 @@ color: #333333;" class="">Credit Card</p>
          </v-text-field>
          <v-text-field placeholder="Name on card" density="comfortable"  >
          </v-text-field>
-        <v-row class="mt-">
+        <v-row class="mb-1">
     
                  <v-col class="pb-0" cols="12" md="6"> 
                   
@@ -70,8 +70,10 @@ color: #333333;" class="">Credit Card</p>
      <v-text-field placeholder="CVV" density="comfortable"  >
          </v-text-field></v-col>
          </v-row> 
+         <v-btn class="textClass px-8" rounded="xl" color="green" flat>Use this card</v-btn>          
+              <v-btn variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>          
          </v-card>              
-    <v-card flat :color="n.cost == '0.00'? '#EDF3F0': ''"   class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" v-for="n in paymenthods" :key="n">
+           <v-card flat :color="n.cost == '0.00'? '#EDF3F0': ''"   class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" v-for="n in paymenthods" :key="n">
    <div  class=" align-center d-flex">
 
        <v-icon size="20"   :color="n.cost == '0.00'? '#2C6E63': ''" :icon="n.cost == '0.00'? 'mdi mdi-radiobox-marked':'mdi mdi-circle-outline'"></v-icon>
@@ -88,9 +90,7 @@ color: #333333;" class="">{{n.name}}</p>
 <v-img  :src="n.image"></v-img>
 </v-avatar>
 </v-card>
-         <v-btn class="textClass px-8" color="green" flat>Use this card</v-btn>          
-         <v-btn variant="tonal" class="textClass ml-2 px-8" color="green" flat>Cancel</v-btn>          
-         
+       
 </v-card>
   
 
@@ -201,18 +201,6 @@ export default {
                 },
             ],
      paymenthods:[
-        // {
-        //     name: 'Google Pay',
-        //     image: 'https://res.cloudinary.com/payhospi/image/upload/v1684927396/gpay-new-logo-png-removebg-preview_1_wn3n7e.png'
-        // },
-        // {
-        //     name: 'Apple Pay',
-        //     image: 'https://res.cloudinary.com/payhospi/image/upload/v1684926118/icon_q5y7el.png'
-        // },
-        // {
-        //     name: 'Stripe',
-        //     image: 'https://res.cloudinary.com/payhospi/image/upload/v1684926107/Stripe_berhja.png'
-        // },
         {
             name: 'Paypal',
             image: 'https://res.cloudinary.com/payhospi/image/upload/v1691582666/pay-pal-1_dtxv1k.png'

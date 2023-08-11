@@ -409,7 +409,7 @@ class="mr-1"
     </v-table>
 
 
-    <div class="px-4 rounded-lg" :class="selected== item.sn+''+ i? 'bg-grey-lighten-4':''"  style="width: 100%!important;" v-for="(item, i) in items1" :key="item.sn">
+    <div class=" rounded-lg" :class="selected== item.sn+''+ i? 'bg-grey-lighten-4':''"  style="width: 100%!important;" v-for="(item, i) in items1" :key="item.sn">
       <v-table :class="selected== item.sn+''+ i? 'bg-grey-lighten-4':''">
 
     <tbody    
@@ -542,7 +542,7 @@ line-height: normal;">May 14</p>
         </v-col>
         <v-col style="position: relative;">
           <v-icon style="    top: -28px;
-    left: 10%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
+    left: 5%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
           <p 
           class="mb-2"
           style="color:  #969696;
@@ -558,7 +558,7 @@ line-height: normal;">May 16</p>
         </v-col>
         <v-col style="position: relative;">
           <v-icon style="    top: -28px;
-    left: 10%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
+    left: 5%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
           <p 
           class="mb-2"
           style="color:  #969696;
@@ -574,7 +574,7 @@ line-height: normal; " class="d-flex align-center">May 24</p>
         </v-col>
         <v-col style="position: relative;">
           <v-icon style="    top: -28px;
-    right: 0px;position: absolute;" color="green" icon="mdi mdi-check-circle"></v-icon>
+    left: 5%;position: absolute;" color="green" icon="mdi mdi-check-circle"></v-icon>
           <p 
           class="mb-2"
           style="color:  #969696;

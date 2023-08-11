@@ -11,14 +11,36 @@
     <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
   </v-avatar>
       <div class="d-flex">
-          <v-btn :to="n.route" variant="text" class="mx-2" flat v-for="n in urls" :key="n.title">
+          <v-btn  :to="n.route" variant="text" class="mx-2" flat v-for="n in urls" :key="n.title">
             {{n.title}}
           </v-btn>
       </div>
     </div>   
-      <div>
-<v-btn icon="mdi mdi-magnify" rounded="xl" flat color="transparent"></v-btn>
-<v-btn icon="mdi mdi-account-outline" rounded="xl" flat color="transparent"></v-btn>
+      <div class="d-flex">
+        <v-menu persistent="" v-model="searchmenu" :close-on-content-click="false" location="bottom" offset="68px">
+      <template v-slot:activator="{ props, isActive }">
+        <div >
+        <div  v-bind="props">
+
+          <v-btn  v-if="!isActive" icon="mdi mdi-magnify" rounded="xl" flat color="transparent"></v-btn>
+          </div>
+          <v-slide-x-reverse-transition  leave-absolute="">
+           <v-text-field v-if="isActive" variant="outline" style="min-width: 500px;" class="search mt-1 mr-2"  hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Ankara"
+           density="compact">
+           <template v-slot:append-inner>
+      <v-icon color="grey"
+        @click="searchmenu = false"
+        icon="mdi mdi-close-circle"
+      />
+    </template>
+          </v-text-field>
+        </v-slide-x-reverse-transition>
+        </div>
+
+</template>
+<dialogsearch />
+</v-menu>
+<v-btn v-if="false" icon="mdi mdi-account-outline" rounded="xl" flat color="transparent"></v-btn>
 <v-btn rounded="xl" to="/user/profile" icon flat color="transparent"><v-avatar size="35">
   <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img>
 </v-avatar></v-btn>
@@ -28,10 +50,22 @@ class="text-none" >
         <v-icon icon="mdi mdi-shopping-outline"></v-icon>
       </v-badge>
     </v-btn>
+    <v-menu :close-on-content-click="false" location="bottom" offset="20px">
+      <template v-slot:activator="{ props }">
+<v-btn  v-bind="props" icon="mdi mdi-bell-outline" rounded="xl" flat color="transparent"></v-btn>
+</template>
+<dialognotification />
+</v-menu>
       </div>
     </div>
       </v-container>
   </template>
+  <style>
+.search .v-input__control{
+  border-radius: 6px;
+  border: 1px solid var(--carbon-2, #CECECE);
+}
+</style>
   <script>
   import { useTheme } from 'vuetify'
   
@@ -40,6 +74,7 @@ class="text-none" >
       return {
         theme: useTheme(),
         btn_radio: null,
+        searchmenu: false,
         urls: [
           {title:'Buy', route:'/discovery'},
           {title:'Sell', route:'/vendor/registeration/form'},
