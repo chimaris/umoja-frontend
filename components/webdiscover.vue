@@ -115,7 +115,7 @@ export default {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-business-statistic-graph-new_ogoig8.png',
                 color: '#FDF1ED',
                 title: 'Umoja Business Partner',
-                content: `Umoja is your partner. We want to support you and help you mana- ge your business with ease, so you're able to focus on your creativity, realise your potential and grow.`
+                content: `Umoja is your partner. We want to support you and help you manage your business with ease, so you're able to focus on your creativity, realise your potential and grow.`
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-transport-parts-service-bus_q2khvi.png',
