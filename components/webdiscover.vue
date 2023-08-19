@@ -7,8 +7,9 @@
         style="color: var(--magnetic-green-4, #2C6E63);
             font-size: 14px;
             font-weight: 500;
+            text-transform: uppercase;
             line-height: 120%; /* 16.8px */
-            letter-spacing: 0.7px;" >HOW IT WORKS</p>
+            letter-spacing: 0.7px;" >What is the Umoja solution?</p>
         <p style="color: var(--carbon-5, #2A2A2A);
             font-size: 48px;
             font-weight: 600;
@@ -100,27 +101,27 @@ export default {
         items2: [
             {
                 color: '#F7EDEE',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497083/bold-messages-coversation-pen-2_bm9ici.png',
-                title: 'Create an account',
-                content: 'Sign up for free to start using Umoja. Customize your account as it fits your business by setting up your vendor profile, company details, dashboards and upload your products.'
+                src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-shopping-ecommerce-shop-2_zay7a9.png',
+                title: 'African Marketplace',
+                content: 'Our marketplace is dedicated to vendors with connections to Africa. Experience a closer cooperation between seller and buyers. Get direct channels to customers from all parts of the world and share your potential with a global audience.'
             },
             {
                 color: '#FEF6ED',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-text-formatting-link_hica4l.png',
-                title: 'Engage with a network of buyers',
-                content: 'Experience a closer cooperation between seller and buyers. Get direct channels to customers from all parts of the world and share your potential with a global audience.'
+                src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-security-key-minimalistic-2_avxmje.png',
+                title: 'CRM Solution',
+                content: `The platform offers more than just a marketplace. We offer a CRM tool that comes with different apps and features which aims to cover all areas of your businesses.`
             },
             {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-settings-fine-tuning-widget_c23nms.png',
-                color: '#FEF6ED',
-                title: 'Exploit CRM features',
-                content: 'The platform offers more than just a marketplace. We offer a CRM tool that comes with different apps and features which aims to cover all areas of your businesses.'
+                src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-business-statistic-graph-new_ogoig8.png',
+                color: '#FDF1ED',
+                title: 'Umoja Business Partner',
+                content: `Umoja is your partner. We want to support you and help you mana- ge your business with ease, so you're able to focus on your creativity, realise your potential and grow.`
             },
             {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-business-statistic-graph-new_qqphec.png',
+                src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-transport-parts-service-bus_q2khvi.png',
                 color: '#EDF0EF',
-                title: 'Scale up your business',
-                content: "Umoja is your partner. We want to support you and help you manage your business with ease, so you're able to focus on your creativity, realize your potential and grow."
+                title: 'Umoja Logistics',
+                content: `With the Umoja logistics (TMS) solution, we aim to support our vendors through our global transport activities. Umoja logistics strives to ensure our Partners are able to fulfils the customers expectation.`
             },
         ],
      

@@ -4,6 +4,7 @@
 <span class="pointhere">Sign up now
 </span></p>
   </div>
+  <div>
       <v-container class="py-1" style="max-width:1400px">
         <div class="d-flex justify-space-between align-center">
         <div class="d-flex  align-center">
@@ -19,10 +20,8 @@
       <div class="d-flex">
         <v-menu persistent="" v-model="searchmenu" :close-on-content-click="false" location="bottom" offset="68px">
       <template v-slot:activator="{ props, isActive }">
-        <div >
+        <div>
         <div  v-bind="props">
-
-      
           <v-btn v-if="!isActive" icon size="48" v-bind="props" rounded="xl" flat color="transparent">
   <v-avatar rounded="0" size="28">
   <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png"></v-img>
@@ -70,6 +69,8 @@
       </div>
     </div>
       </v-container>
+       </div>
+
   </template>
   <style>
 .search .v-input__control{

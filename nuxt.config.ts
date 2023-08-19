@@ -15,6 +15,10 @@ export default defineNuxtConfig({
             noExternal: ['vuetify'], // add the vuetify vite plugin
         },
     },
+    modules: [
+      // ...
+      '@pinia/nuxt',
+    ],
     app: {
         head: {
           link: [

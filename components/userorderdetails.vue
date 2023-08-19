@@ -316,9 +316,6 @@ export default {
             },
           ],
             selected: '',
-
-            
-            
         }
     }
 }</script>
