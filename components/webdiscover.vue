@@ -121,7 +121,7 @@ export default {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-transport-parts-service-bus_q2khvi.png',
                 color: '#EDF0EF',
                 title: 'Umoja Logistics',
-                content: `With the Umoja logistics (TMS) solution, we aim to support our vendors through our global transport activities. Umoja logistics strives to ensure our Partners are able to fulfils the customers expectation.`
+                content: `With the Umoja logistics (TMS) solution, we aim to support our vendors through our global transport activities. Umoja logistics strives to ensure our Partners are able to fulfil the customers expectation.`
             },
         ],
      
