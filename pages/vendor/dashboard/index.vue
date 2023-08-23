@@ -18,7 +18,7 @@
         <v-card style="overflow: scroll;" min-height="100vh" height="100%" :class="!(window == 'dash') ? '' : 'pr-8 py-8'"
           class=" " flat color="#fff" min>
           <div style="position: fixed;z-index: 99;width: 100%;">
-            <div style="height: 110px;
+            <div style="height: 67px;
     background: rgb(255 255 255 / 65%);
     backdrop-filter: blur(3px);    position: sticky;
     z-index: 99;
@@ -47,7 +47,7 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
             </div>
           </div>
           <!-- :value=" -->
-          <v-window :touch="false"  style="padding-top: 110px;" v-model="window">
+          <v-window :touch="false"  style="padding-top: 67px;" v-model="window">
             <v-window-item :value="'Order details'">
               <Vendororderdetails />
             </v-window-item>
@@ -122,7 +122,7 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
 export default {
   data() {
     return {
-      window: "Notifications",
+      window: "Homepage",
       sidebar: true,
       edit: true,
     };

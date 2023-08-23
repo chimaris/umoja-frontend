@@ -460,11 +460,7 @@ View Details            </v-btn>
 
 </template>
 <style>
- .v-rating__item .v-btn{
-    scale: 0.8;
-    margin-left: -13px;
 
-}
 .reviewstab .v-carousel .v-btn--icon .v-icon{
 font-size: 9px;
 }

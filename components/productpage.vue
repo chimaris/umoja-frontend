@@ -29,16 +29,20 @@ letter-spacing: -0.14px;
 <v-row>
     <v-col cols="12" lg="8">
         <div class="py-6">
-        <v-row>
+  <productpageloader v-if="loading" /> 
+  <div v-else>
+        <v-row >
             <v-col cols="12" lg="6">
-                <v-carousel class="caro mb-2" style="border-radius: 6px;" hide-delimiters height="349px">
-                    <v-carousel-item  v-for="n in 6" cover
+                <v-carousel v-model="carousel" class="caro mb-2" style="border-radius: 6px;" hide-delimiters height="349px">
+                    <v-carousel-item  :value="n"  v-for="n in 4" cover
 height="349px" src="https://res.cloudinary.com/payhospi/image/upload/v1691080529/rectangle-1900_lpn3bj.png">
                     </v-carousel-item>
                 </v-carousel>
                 <v-row dense>
                     <v-col v-for="n in 4" cols="3">
-                        <v-img style="border-radius: 6px!important;" cover height="103px" src="https://res.cloudinary.com/payhospi/image/upload/v1691080529/rectangle-1900_lpn3bj.png"></v-img>
+                        <v-img v-ripple="{class: 'text-grey'}" class="bg-grey-lighten-4 caroimg" @click="carousel = n" style="border-radius: 6px!important;" cover height="103px" src="https://res.cloudinary.com/payhospi/image/upload/v1691080529/rectangle-1900_lpn3bj.png">
+                            <v-overlay persistent="" scrim="green" opacity="0" :model-value="carousel == n " contained></v-overlay>
+                        </v-img>
                     </v-col>
                 </v-row>
             </v-col>
@@ -76,8 +80,8 @@ line-height: 140%; ">Available Size</p>
 <div style="max-width: 295px;">
     <v-row dense>
         <v-col  cols="4" v-for="(n, i) in ['XXS', 'XL', 'XS', 'S', 'M', 'L', 'XXL', '3XL', '4XL']">
-        <p class="w-100 d-flex align-center justify-center" style="height: 40px;border-radius: 6px;
-border: 1px solid var(--carbon-1, #EDEDED);">{{ n }}</p>
+        <p :class="size == n? 'greenbox':''" @click="size = n" v-ripple class="caroimg green-hover w-100 d-flex align-center justify-center" style="height: 40px;border-radius: 6px;
+           border: 1px solid var(--carbon-1, #EDEDED);">{{ n }}</p>
         </v-col>
     </v-row>
 </div>
@@ -88,7 +92,7 @@ font-weight: 600;
 line-height: 140%; ">Color: <span style="color: #969696;">Yellow</span></p>
 </div>
 <div class="d-flex my-2">
-    <div  class="d-flex mr-2" v-for="(n, i) in ['#25476D', '#274F59', '#D5943A', '#A83837', '#373A6D']" :key="i" :style="'background:' + n" style="border-radius:50%;overflow:hidden;height: 26px;width:26px">
+    <div :class="color == i?'addborder':''"  @click="color = i"   class="caroimg d-flex mr-2" v-for="(n, i) in ['#25476D', '#274F59', '#D5943A', '#A83837', '#373A6D']" :key="i" :style="'background:' + n" style="border-radius:50%;overflow:hidden;height: 26px;width:26px">
         <div style="width: 50%;"></div>
         <div style="background:#fff;opacity: 0.5; width: 50%;"></div>
     </div>
@@ -101,7 +105,10 @@ font-size: 28px;
 font-weight: 600;
 line-height: 140%; /* 39.2px */
 letter-spacing: -0.84px;" class="mb-4">Product Description</p>
-            <p style="color: #333;
+ 
+ 
+
+         <p style="color: #333;
 font-size: 16px;
 font-weight: 600;
 line-height: 180%; /* 28.8px */
@@ -114,9 +121,10 @@ line-height: 180%;">
 
 Lorem ipsum dolor sit amet consectetur. In dolor pharetra duis eget eu aliquet volutpat. Pulvinar mauris nulla amet sagittis vitae lacus egestas lacus diam. Urna netus sollicitudin augue neque id enim mattis tellus quisque. Risus nibh feugiat id rhoncus volutpat elit in. Pellentesque sit at lectus nec habitant nunc leo. Viverra rhoncus enim praesent fringilla interdum sed commodo semper elementum. Est tortor congue diam egestas.
 Faucibus quam ac posuere sed neque euismod mi. Semper vitae in ultrices nunc nibh a massa. 
-</p>
+</p> 
+
 <v-divider color="#EDEDED" class="my-6"></v-divider>
-<div>
+
 <p style="color: #333;
 font-size: 16px;
 font-weight: 600;
@@ -131,7 +139,7 @@ letter-spacing: -0.48px;">Specification:
       <span>{{ item.label }}:</span> {{ item.value }}
     </li>
 </ul>
-  </div>
+
   <v-divider color="#EDEDED" class="my-6"></v-divider>
   <div>
     <p style="color: #000;
@@ -322,9 +330,13 @@ font-weight: 600;" class="inputLabel d-flex align-center">Review this product <v
     </div>
   </div>
 </div>
+</div>
 </v-col>
 <v-col cols="12" lg="4">
     <div class="py-6">
+<productsetloader v-if="loading" />
+<div v-else>
+
 
   <v-card flat class=" pa-0 cardStyle">
     <div style="background-color: #EDF3F0;height: 40px;" class="d-flex align-center justify-center w-100">
@@ -347,14 +359,14 @@ line-height: 140%;">Quantity: <span style="color: #000;">2</span></p>
          rounded="xl"
         divided density="compact"
       >
-        <v-btn  rounded="0">
+        <v-btn @click="removeItem({id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...'})" class="dark-hover" rounded="0">
           <v-icon icon="mdi mdi-minus "></v-icon>
         </v-btn>
 
         <v-btn :ripple="false" rounded="0">
-         2
+         {{getItemQuantity(1)}}
         </v-btn>
-        <v-btn rounded="0">
+        <v-btn @click="addToCart({id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...'})" class="green-hover" rounded="0">
           <v-icon icon="mdi mdi-plus"></v-icon>
         </v-btn>
 </v-btn-group>
@@ -373,7 +385,7 @@ line-height: 140%;">€ 5000.00</p>
     <v-btn to="/market_place" block  class="mb-2" size="large" flat color="green" rounded="xl"><span style="color: #EDF0EF;
 font-size: 14px;
 font-weight: 600;">Add to Cart</span></v-btn>
-    <v-btn block style="border-color:#333;color: #333;
+    <v-btn class="dark-hover" block style="border-color:#333;color: #333;
 font-size: 14px;
 font-weight: 600;" border size="large" variant="outline" flat color="#333333" rounded="xl">
 <span style="
@@ -396,6 +408,7 @@ font-weight: 600;">Buy Now</span></v-btn>
 </div>
     </div>
   </v-card> 
+
   <v-card flat class=" mt-4 py-9 cardStyle">
     <div class="d-flex justify-space-between align-center">
         <p style="color: #1E1E1E;
@@ -466,7 +479,7 @@ letter-spacing: -0.14px;">
     </v-row>
 </div>
  </div>
-</v-card> 
+</v-card> </div>
   </div>
 </v-col>
 </v-row>
@@ -476,6 +489,16 @@ letter-spacing: -0.14px;">
     </v-container>
 </template>
 <style>
+.caroimg{
+    transition: all 0.1s ease-in-out;
+}
+.addborder{
+    border: 3px solid white;
+    box-shadow:rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+.caroimg:hover{
+    scale: 0.98;
+}
 .v-carousel.caro .v-window__controls .v-btn{
     border-radius: 50%!important;
     width: 30px;
@@ -496,13 +519,14 @@ import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
+import { useCartStore } from '~/stores/cartStore';
 
 export default {
     components: {
         EditorContent,
     },
     mounted() {
-
+        this.mockLoading()
         this.editor = new Editor({
             extensions: [
                 StarterKit,
@@ -520,6 +544,7 @@ export default {
     },
     data() {
         return {
+            loading: true,
             productDetails: [
         { label: "Payment", labelColor: "#969696", value: "Secure transaction", valueColor: "#1273EB" },
         { label: "Ships from", labelColor: "#969696", value: "Umoja", valueColor: "#000" },
@@ -527,6 +552,9 @@ export default {
         { label: "Returns", labelColor: "#969696", value: "Eligible for Return, Refund or Replacement within 90 day of receipt", valueColor: "#1273EB" },
       ],
             editor: null,
+            carousel: 0,
+            color: 0,
+            size: '',
             chip: 'All Review',
         tags: [
             {
@@ -590,5 +618,27 @@ export default {
             ],
         }
     },
+    computed: {
+        cartStore() {
+      return useCartStore();
+    },
+    },
+    methods:{
+        mockLoading() {
+            setTimeout(() => {
+                this.loading = false
+            }, 2000)
+        },
+        getItemQuantity(itemId) {
+      const cartStore = useCartStore();
+      return cartStore.getItemQuantity(itemId);
+    },
+        addToCart(item) {
+          this.cartStore.addItem(item);
+        },
+        removeItem(item) {
+          this.cartStore.removeItem(item);
+        },
+    }
 }
 </script>

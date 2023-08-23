@@ -213,11 +213,7 @@ v-model="chip"
 
 </template>
 <style>
- .v-rating__item .v-btn{
-    scale: 0.8;
-    margin-left: -13px;
 
-}
 .reviewstab .v-carousel .v-btn--icon .v-icon{
 font-size: 9px;
 }
@@ -227,12 +223,7 @@ font-size: 9px;
 .reviewstab .v-carousel .v-btn--icon.v-btn--active .v-icon{
 color: orange;
 }
-.reviewstab .rev .v-rating__item .v-btn{
-  scale: 2!important;
-    margin-left: -13px!important;
 
-
-}
 
 </style>
 <script>

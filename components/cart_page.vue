@@ -50,13 +50,13 @@ font-size: 16px;" class="ml-2">The Golden Matrix</p>
         <div class="d-flex  pt-2 pb-4 justify-space-between">
             <v-btn  color="red" variant="tonal"><span class="smallBtn">Remove</span>  <v-icon size="15" class="ml-1" icon="mdi mdi-close"></v-icon></v-btn>
             <div class="d-flex align-center ">
-                <v-btn flat  color="orange" variant="tonal"><v-icon size="15" icon="mdi mdi-minus"></v-icon></v-btn>
+                <v-btn flat   color="orange" variant="tonal"><v-icon size="15" icon="mdi mdi-minus"></v-icon></v-btn>
                 <p style="font-weight: 500;
 font-size: 16px;
 line-height: 20px;
 letter-spacing: 0.03em;
 color: #333333;" class="mx-6">2</p>
-                <v-btn flat  color="orange"><v-icon size="15" icon="mdi mdi-plus"></v-icon></v-btn>
+                <v-btn flat class="green-hover"  color="orange"><v-icon size="15" icon="mdi mdi-plus"></v-icon></v-btn>
                 
 </div>
         </div>

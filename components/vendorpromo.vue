@@ -36,51 +36,8 @@ color: #333333;" class="ml-2">00:00:00</p>
 </v-sheet>
        <v-row style="background-color: #fff;" class="">
         <v-col cols="12" v-for="(n, i) in items" :key="i" lg="4" md="6">
-            <v-card flat style="border-radius: 15px;border: 1px solid #CECECE;" class="bg-white rounded-lg pa-4">
-                <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="236px" :src="n.image">
-                <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
-                <v-icon size="x-small" color="#1C274C" icon="mdi mdi-heart-outline"></v-icon></v-btn>
-                </v-img>
-                <p style="font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;
-    
-    color: #000000;
-    " class=" mt-2">{{filt(n.name)}}</p>
-    <p style="font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #000000;
-    " class="mt-1">Organic cotton certified</p>
-    <p style="font-weight: 600;
-    font-size: 10px;
-    line-height: 13px;
-    color: #000000;
-    " class="d-flex mb-1 align-center">
-        <v-rating
-        v-model="rating"
-        color="grey-lighten-2"
-        active-color="#E7CE5D"
-        class="ml-2"
-        size="x-small"
-        ></v-rating><span style="margin-left:-9px ;" >(65)</span> 
-    </p>
-                          <div class="d-flex align-center justify-space-between">
-                <div class="d-flex align-center"> 
-                    <h1 
-    style="font-size: 16px;
-            line-height: 20px;
-            color: #1A1D1F;
-    " class="priceClass">N{{n.price}}</h1>
-    
-                </div>
-                <v-btn size="small" style="border: 1px solid #CED2D6;
-    border-radius: 6px;"  :color="n.oos? 'green':''" :variant="!n.oos? 'outlined':'elevated'" flat :class="n.oos? 'text-grey':''" class="ml-2">
-                     <span class="smallBtn">{{'Add to Cart'}}</span> 
-                </v-btn>
-    
-                </div>
-            </v-card>
+            <product-component :index="i" :item="n" />
+
         </v-col>
        </v-row>   
         </div>
@@ -113,6 +70,13 @@ var newText = text.length > 40 ? text.slice(0, 40) +'...' : text
                 price: '57.00',
                 likes: '456',
                 oos: true
+            },
+          
+            {
+                name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
+                price: '57.00',
+                likes: '456',
             },
           
             {

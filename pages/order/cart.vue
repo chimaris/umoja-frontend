@@ -13,7 +13,7 @@
                <h1 style="font-weight: 600;
 font-size: 32px;
 line-height: 40px;">Cart (3)</h1>
-    <v-btn  color="#333" variant="text"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
+    <v-btn  color="#333" class="red-hover" variant="text"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1 " icon="mdi mdi-trash-can-outline"></v-icon>Remove all</v-btn>
 
 </div>
 
@@ -24,8 +24,8 @@ line-height: 40px;">Cart (3)</h1>
      <tr style="border-radius: 6px;" class="  rounded-lg">
        <th style="
    width: 50px;
-" class="  font-weight-medium  text-left">
-          <v-checkbox hide-details ></v-checkbox>
+" class="  font-weight-medium px-1  text-left">
+          <v-checkbox color="green" v-model="selectAll" hide-details ></v-checkbox>
        </th>
        <th  style="font-size: 14px;width: 100px;" class="  font-weight-medium  text-left">
          Product Details
@@ -47,7 +47,7 @@ line-height: 40px;">Cart (3)</h1>
        :key="item.sn"
        >
        <td  class="text-grey-lighten-1 pl-1 ">   
-              <v-checkbox hide-details></v-checkbox>
+              <v-checkbox color="green" v-model="item.selected" hide-details></v-checkbox>
        </td>
        <td style="position:relative;font-size: 14px;height: 100px;" 
         >
@@ -87,19 +87,19 @@ color: #969696;" class="text-truncate">Location: Lagos Nigeria.</p>
          rounded="lg"
         divided density="compact"
       >
-        <v-btn  rounded="0">
+        <v-btn class="dark-hover" rounded="0">
           <v-icon icon="mdi mdi-minus "></v-icon>
         </v-btn>
 
-        <v-btn :ripple="false" rounded="0">
+        <v-btn  :ripple="false" rounded="0">
          2
         </v-btn>
-        <v-btn rounded="0">
+        <v-btn class="green-hover" rounded="0">
           <v-icon icon="mdi mdi-plus"></v-icon>
         </v-btn>
 </v-btn-group>     
 </div>
-<v-btn  color="#333" variant="text" class="mt-2"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
+<v-btn  color="#333" variant="text" class="red-hover mt-2"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
 </div>
 
           </td>
@@ -174,7 +174,7 @@ font-size: 14px;
 font-weight: 500;
 ">Free return within 15 days for Official Store items and 7 days for other eligible items See more</p>
 </v-card>
-<v-img style="position: relative;border-radius: 10px;" class="mt-6 pt-10 bg-grey-lighten-1 pa-6 rounded-lg" width="100%" max-height="674px" cover eager src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png" height="100%">
+<v-img style="position: relative;border-radius: 10px;" class="mt-6  shine pt-10 bg-grey-lighten-1 pa-6 rounded-lg" width="100%" max-height="674px" cover eager src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png" height="100%">
     <div  class=" ">
                 <h1 style="font-size: 50.4px;
 line-height: 53px;" class=" mb-0 text-white font-weight-bold">Nawi’s long
@@ -220,8 +220,16 @@ border-radius: 20px;" class=" d-flex align-center  pa-4">
 </template>
 <script>
 export default {
+  watch: {
+    selectAll(value) {
+      this.items.forEach(item => {
+        item.selected = value
+      })
+    }
+  },
   data() {
     return {
+      selectAll: false,
         placescards:false,
         mods:1,
         tab: null,
@@ -246,14 +254,16 @@ export default {
       ],
         items:[
             {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+              selected:false,  
+              name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png',
                 price: '115.32',
                 location: 'Accra, Ghana',
                 likes: '1.2k'
             },
             {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
+              selected:false,  
+              name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png',
                 price: '57.00',
                 location: 'Madagascar',
@@ -262,14 +272,16 @@ export default {
             },
           
             {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
+              selected:false,  
+              name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
                 price: '57.00',
                 location: 'Mumbasa, Kenya',
                 likes: '456',
             },
             {
-                name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
+              selected:false,  
+              name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
                 price: '79.00',
                 location: 'Lagos, Nigeria',
@@ -277,14 +289,16 @@ export default {
                 oos: true
             },
             {
-                name: 'Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.',
+              selected:false,  
+              name: 'Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png',
                 price: '179.00',
                 location: 'Accra, Ghana',
                 likes: '966',
             },
             {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
+              selected:false,  
+              name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png',
                 price: '57.00',
                 location: 'Mumbasa, Kenya',

@@ -1,7 +1,7 @@
 <template>
 <Header2 />
-<div class="py-12" style="background: #FDF5E7;" >
-    <v-container  style="max-width:1400px" class="mt-9">
+<div class="pt-8" style="background: #FDF5E7;" >
+    <v-container  style="max-width:1400px" class="mt-4">
      
 <v-row class="pb-6">
     <v-col cols="12" lg="7">
@@ -41,230 +41,268 @@ How it works
     </v-col>
 </v-row>
     </v-container>
-    <v-img eager
-            style="position: relative;overflow:visible;"
-            class="pa-3 mt-6"
-            contain min-width="700px"
-            height="auto" @load="placescards = true"
-            width="100%"
-            src="https://res.cloudinary.com/payhospi/image/upload/v1690528044/map-base-1_qyacm7.png"
-          >
-            <div v-if="placescards"
-              class="d-flex justify-center"
-              style="width: 250.88px; scale: 0.9;  top: 14%;
-    left: 14%; position: absolute"
-            >
-              <v-card flat class="transparent africacard">
-                <div class="pa-5 d-flex align-center justify-center w-100">
-                  <div>
-                    <v-img
-                      width="30px"
-                      style="border-radius: 5px !important"
-                      height="auto"
-                      src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/NG_-_Nigeria_c8g2on.png"
-                    />
-                  </div>
-                  <p class="ml-3">Nigeria</p>
-                </div>
-                <v-divider></v-divider>
+    <div style="position: relative;overflow: hidden;">
+      <div style="position: absolute;top:0;z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, #FDF5E7, transparent);"></div>
+<div style="position: absolute;bottom: 0px; z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, transparent, #fff);"></div>      
+    
+<v-img eager
+        style="position: relative;overflow:hidden;"
+        class="  mt-6"  min-height="50vh"
+        contain min-width="700px"  id="img"
+        height="auto" @load="startall()"
+        width="100%"
+        src="https://res.cloudinary.com/payhospi/image/upload/v1690528044/map-base-1_qyacm7.png"
+      >
 
-                <div class="d-flex px-5 pt-4 pb-3 justify-center">
-                    <div class="list">
-                    <v-avatar class="" size="38" :key="i" v-for="(n, i) in images"
-                      ><v-img
-                        :src="n"
-                      ></v-img
-                    ></v-avatar>
-                    <v-avatar color="green">
-                      <span style="font-size: 13px">+300</span></v-avatar
-                    >
-                  </div>
-                </div>
 
-                <div class="d-flex justify-center">
-                  <v-btn size="small" color="blue" variant="text" flat>
-                    <span
-                      style="
-                        font-size: 14px;
-                        text-transform: none;
-                        color: #0062bc;
-                      "
-                    >
-                      See vendors in this area
-                    </span>
-                    <v-avatar class="ml-2" size="25" rounded="0"
-                      ><v-img
-                        src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                      ></v-img
-                    ></v-avatar>
-                  </v-btn>
-                </div>
-              </v-card>
-              <div class="pointer"></div>
+<div v-show="placescards"
+          class="d-flex justify-center"
+          style="width: 250.88px; scale: 0.9;  top: 24%;
+left: 10%; position: absolute"
+        >
+        
+           
+          
+
+        <div class="blinking-circle"></div>
+        <v-card   flat class="transparent box1 africacard">
+
+            <div class="pa-5 d-flex align-center justify-center w-100">
+              <div>
+                <v-img
+                  width="30px"
+                  style="border-radius: 5px !important"
+                  height="auto"
+                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/NG_-_Nigeria_c8g2on.png"
+                />
+              </div>
+              <p class="ml-3">Nigeria</p>
             </div>
-            <div v-if="placescards"
-              class="d-flex justify-center"
-              style="width: 250.88px;    top: -10%;
-    right: 23%;
-    scale: 0.9; position: absolute"
-            >
-              <v-card flat class="transparent africacard">
-                <div class="pa-5 d-flex align-center justify-center w-100">
-                  <div>
-                    <v-img
-                      width="30px"
-                      style="border-radius: 5px !important"
-                      height="auto"
-                      src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229323/EG_-_Egypt_mlkkl6.png"
-                    />
-                  </div>
-                  <p class="ml-3">Egypt</p>
-                </div>
-                <v-divider></v-divider>
+            <v-divider></v-divider>
 
-                <div class="d-flex px-5 pt-4 pb-3 justify-center">
-                    <div class="list">
-                    <v-avatar class="" size="38" :key="i" v-for="(n, i) in images"
-                      ><v-img
-                        :src="n"
-                      ></v-img
-                    ></v-avatar>
-                    <v-avatar color="green">
-                      <span style="font-size: 13px">+324</span></v-avatar
-                    >
-                  </div>
-                </div>
-
-                <div class="d-flex justify-center">
-                  <v-btn size="small" color="blue" variant="text" flat>
-                    <span
-                      style="
-                        font-size: 14px;
-                        text-transform: none;
-                        color: #0062bc;
-                      "
-                    >
-                      See vendors in this area
-                    </span>
-                    <v-avatar class="ml-2" size="25" rounded="0"
-                      ><v-img
-                        src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                      ></v-img
-                    ></v-avatar>
-                  </v-btn>
-                </div>
-              </v-card>
-              <div class="pointer"></div>
+            <div class="d-flex px-5 pt-4 pb-3 justify-center">
+              <div class="list">
+                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
+                  ><v-img
+                    :src="n"
+                  ></v-img
+                ></v-avatar>
+                <v-avatar class="pa-0" style="border:3px solid white" color="green">
+                  <span style="font-size: 12px">+300</span></v-avatar
+                >
+              </div>
             </div>
-            <div v-if="placescards"
-              class="d-flex justify-center"
-              style="width: 250.88px;    bottom: 7%;
-    right: 30%;
-    scale: 0.9; position: absolute"
-            >
-              <v-card flat class="transparent africacard">
-                <div class="pa-5 d-flex align-center justify-center w-100">
-                  <div>
-                    <v-img
-                      width="30px"
-                      style="border-radius: 5px !important"
-                      height="auto"
-                      src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_9_cxzweo.png"
-                    />
-                  </div>
-                  <p class="ml-3">South Africa</p>
-                </div>
-                <v-divider></v-divider>
 
-                <div class="d-flex px-5 pt-4 pb-3 justify-center">
-                    <div class="list">
-                    <v-avatar class="" size="38" :key="i" v-for="(n, i) in images"
-                      ><v-img
-                        :src="n"
-                      ></v-img
-                    ></v-avatar>
-                    <v-avatar color="green">
-                      <span style="font-size: 13px">+243</span></v-avatar
-                    >
-                  </div>
-                </div>
-
-                <div class="d-flex justify-center">
-                  <v-btn size="small" color="blue" variant="text" flat>
-                    <span
-                      style="
-                        font-size: 14px;
-                        text-transform: none;
-                        color: #0062bc;
-                      "
-                    >
-                      See vendors in this area
-                    </span>
-                    <v-avatar class="ml-2" size="25" rounded="0"
-                      ><v-img
-                        src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                      ></v-img
-                    ></v-avatar>
-                  </v-btn>
-                </div>
-              </v-card>
-              <div class="pointer"></div>
+            <div class="d-flex justify-center">
+              <v-btn size="small" color="blue" variant="text" flat>
+                <span
+                  style="
+                    font-size: 14px;
+                    text-transform: none;
+                    color: #0062bc;
+                  "
+                >
+                  See vendors in this area
+                </span>
+                <v-avatar class="ml-2" size="25" rounded="0"
+                  ><v-img
+                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
+                  ></v-img
+                ></v-avatar>
+              </v-btn>
             </div>
-            <div v-if="false"
-              class="d-flex justify-center"
-              style="width: 250.88px;       bottom: 25%;
-    right: 0%;
-    scale: 0.9; position: absolute"
-            >
-              <v-card flat class="transparent africacard">
-                <div class="pa-5 d-flex align-center justify-center w-100">
-                  <div>
-                    <v-img
-                      width="30px"
-                      style="border-radius: 5px !important"
-                      height="auto"
-                      src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_8_ftnhqn.png"
-                    />
-                  </div>
-                  <p class="ml-3">Madagscar</p>
-                </div>
-                <v-divider></v-divider>
+            <div  class="pointer"></div>
+          </v-card>
+          
+          
+            
+          
+        </div>
+        <div v-show="placescards"
+          class="d-flex justify-center"
+          style="width: 250.88px;    top: 10%;
+right: 23%;
+scale: 0.9; position: absolute"
+        >
+        
+            <div class="blinking-circle"></div>
+           
+          
 
-                <div class="d-flex px-5 pt-4 pb-3 justify-center">
-                  <div class="list">
-                    <v-avatar class="" size="38" :key="i" v-for="(n, i) in images"
-                      ><v-img
-                        :src="n"
-                      ></v-img
-                    ></v-avatar>
-                    <v-avatar color="green">
-                      <span style="font-size: 13px">+476</span></v-avatar
-                    >
-                  </div>
-                </div>
-
-                <div class="d-flex justify-center">
-                  <v-btn size="small" color="blue" variant="text" flat>
-                    <span
-                      style="
-                        font-size: 14px;
-                        text-transform: none;
-                        color: #0062bc;
-                      "
-                    >
-                      See vendors in this area
-                    </span>
-                    <v-avatar class="ml-2" size="25" rounded="0"
-                      ><v-img
-                        src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                      ></v-img
-                    ></v-avatar>
-                  </v-btn>
-                </div>
-              </v-card>
-              <div class="pointer"></div>
+        <v-card   flat class="transparent box2 africacard">
+            <div class="pa-5 d-flex align-center justify-center w-100">
+              <div>
+                <v-img
+                  width="30px"
+                  style="border-radius: 5px !important"
+                  height="auto"
+                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229323/EG_-_Egypt_mlkkl6.png"
+                />
+              </div>
+              <p class="ml-3">Egypt</p>
             </div>
-          </v-img>
+            <v-divider></v-divider>
+
+            <div class="d-flex px-5 pt-4 pb-3 justify-center">
+              <div class="list">
+                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
+                  ><v-img
+                    :src="n"
+                  ></v-img
+                ></v-avatar>
+                <v-avatar class="pa-0" style="border:3px solid white" color="green">
+                  <span style="font-size: 12px">+300</span></v-avatar
+                >
+              </div>
+            </div>
+
+            <div class="d-flex justify-center">
+              <v-btn size="small" color="blue" variant="text" flat>
+                <span
+                  style="
+                    font-size: 14px;
+                    text-transform: none;
+                    color: #0062bc;
+                  "
+                >
+                  See vendors in this area
+                </span>
+                <v-avatar class="ml-2" size="25" rounded="0"
+                  ><v-img
+                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
+                  ></v-img
+                ></v-avatar>
+              </v-btn>
+            </div>
+            <div  class="pointer"></div>
+          </v-card>
+          
+          
+            
+          
+        </div>
+        <div v-show="placescards"
+          class="d-flex justify-center"
+          style="width: 250.88px;    bottom: 22%;
+right: 42%;
+scale: 0.9; position: absolute"
+        >
+        
+           
+          
+
+        <v-card flat   class="transparent box3 africacard">
+            <div class="pa-5 d-flex align-center justify-center w-100">
+              <div>
+                <v-img
+                  width="30px"
+                  style="border-radius: 5px !important"
+                  height="auto"
+                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_9_cxzweo.png"
+                />
+              </div>
+              <p class="ml-3">South Africa</p>
+            </div>
+            <v-divider></v-divider>
+
+            <div class="d-flex px-5 pt-4 pb-3 justify-center">
+              <div class="list">
+                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
+                  ><v-img
+                    :src="n"
+                  ></v-img
+                ></v-avatar>
+                <v-avatar class="pa-0" style="border:3px solid white" color="green">
+                  <span style="font-size: 12px">+300</span></v-avatar
+                >
+              </div>
+            </div>
+
+            <div class="d-flex justify-center">
+              <v-btn size="small" color="blue" variant="text" flat>
+                <span
+                  style="
+                    font-size: 14px;
+                    text-transform: none;
+                    color: #0062bc;
+                  "
+                >
+                  See vendors in this area
+                </span>
+                <v-avatar class="ml-2" size="25" rounded="0"
+                  ><v-img
+                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
+                  ></v-img
+                ></v-avatar>
+              </v-btn>
+            </div>
+            <div  class="pointer"></div>
+          </v-card>
+          
+          
+            
+                      <div class="blinking-circle"></div>
+
+        </div>
+
+        <div v-show="placescards"
+          class="d-flex justify-center"
+          style="width: 250.88px;       bottom: 25%;
+right: 0%;
+scale: 0.9; position: absolute"
+        >
+          <v-card  flat class="transparent box4 africacard">
+            <div class="pa-5 d-flex align-center justify-center w-100">
+              <div>
+                <v-img
+                  width="30px"
+                  style="border-radius: 5px !important"
+                  height="auto"
+                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_8_ftnhqn.png"
+                />
+              </div>
+              <p class="ml-3">Madagscar</p>
+            </div>
+            <v-divider></v-divider>
+
+            <div class="d-flex px-5 pt-4 pb-3 justify-center">
+              <div class="list">
+                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
+                  ><v-img
+                    :src="n"
+                  ></v-img
+                ></v-avatar>
+                <v-avatar class="pa-0" style="border:3px solid white" color="green">
+                  <span style="font-size: 12px">+300</span></v-avatar
+                >
+              </div>
+            </div>
+
+            <div class="d-flex justify-center">
+              <v-btn size="small" color="blue" variant="text" flat>
+                <span
+                  style="
+                    font-size: 14px;
+                    text-transform: none;
+                    color: #0062bc;
+                  "
+                >
+                  See vendors in this area
+                </span>
+                <v-avatar class="ml-2" size="25" rounded="0"
+                  ><v-img
+                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
+                  ></v-img
+                ></v-avatar>
+              </v-btn>
+            </div>
+            <div class="pointer"></div>
+          </v-card>
+          <div class="blinking-circle"></div>
+
+        </div>
+      </v-img>
+    </div>
 </div>
 <div>
     <v-container   style="max-width:1400px" class="py-12 my-12">
@@ -333,7 +371,9 @@ letter-spacing: -0.6px;">Umoja provides a unique experience, connecting a variet
 
         <v-row>
             <v-col cols="12" lg="5">
-                <v-img style="position: relative;border-radius: 15px;" width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1690529528/rectangle-64_zmh8cd.png">
+                <v-img class="heroimg"  style="position: relative;border-radius: 15px;" width="100%"
+                 lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529528/rectangle-64_zmh8cd.png"
+                 src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690529528/rectangle-64_zmh8cd.png">
     <v-btn color="white" size="large" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
 Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
@@ -354,7 +394,9 @@ letter-spacing: -0.96px;">Fashion</p>
             <v-col cols="12" lg="7">
                 <v-row>
             <v-col cols="12"  md="6">
-                <v-img style="position: relative;border-radius: 15px;" width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-66_kbe8bk.png">
+                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%" 
+                lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529526/rectangle-66_kbe8bk.png"
+                src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-66_kbe8bk.png">
     <v-btn color="white" size="44" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
  <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
@@ -374,7 +416,9 @@ letter-spacing: -0.96px;">Home decoration</p>
                 </v-img>
             </v-col>
             <v-col cols="12" md="6">
-                <v-img style="position: relative;border-radius: 15px;" width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-67_oa0r6o.png">
+                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%"
+                 lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529526/rectangle-67_oa0r6o.png"
+                 src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-67_oa0r6o.png">
     <v-btn icon="mdi mdi-arrow-top-right" color="#333" size="44"  style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
     </v-btn>
     
@@ -393,7 +437,9 @@ letter-spacing: -0.96px;">Cosmetics</p>
                 </v-img>
             </v-col>
             <v-col cols="12">
-                <v-img style="position: relative;border-radius: 15px;" width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1690529527/rectangle-65_czgty7.png">
+                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%"
+                 lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529527/rectangle-65_czgty7.png"
+                 src="https://res.cloudinary.com/payhospi/image/upload/v1690529527/rectangle-65_czgty7.png">
                 <v-btn color="white" size="large" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
                 Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
                 </v-btn>
@@ -432,7 +478,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
             >
             <v-row>
                 <v-col class="px-0" cols="12" md="6" lg="6">
-                    <v-img eager width="100%" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690541372/rectangle-69_jzdwc3.png" ></v-img>
+                    <v-img class="heroimg" eager width="100%" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690541372/rectangle-69_jzdwc3.png" ></v-img>
                 </v-col>
                 <v-col class="px-0" cols="12" md="6" lg="6">
                     <v-card rounded="0" width="100%" height="100%" min-height="429" color="green" flat class=" d-flex align-center">
@@ -450,7 +496,7 @@ letter-spacing: -1.44px;">Style Meets Substance</p>
 font-size: 20px;
 font-weight: 500;
 letter-spacing: -0.2px;" class="mb-8"> GET 20% OFF for your first order</p>
-  <v-btn color="white" size="large"  variant="outlined" rounded="xl" >
+  <v-btn color="white" class="green-hover" size="large"  variant="outlined" rounded="xl" >
 Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
                         </v-container>
@@ -530,6 +576,66 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 <mainfooter />
 </template>
 <style>
+.divbtn{
+    transition: all 0.3s ease-in-out;
+}
+
+
+.blinking-circle {
+  width: 38px;
+    height: 6px;
+    top: 105%;
+    padding: 4px;
+    position: absolute;
+    border: 4px solid white;
+    border-radius: 50%;
+    z-index: -3;
+    background-color: #2C6E63;
+    animation: blink 2.5s infinite;
+}
+
+@keyframes blink {
+  0% {
+    scale: 1.5;
+  }
+  50% {
+    scale: 0.5;
+  }
+  100% {
+    scale: 1.5;
+  }
+}
+
+/* img.v-img__img.v-img__img--contain:first-of-type */
+  .background {
+    animation: zoom-and-slide 20s infinite;
+    will-change: transform;
+  }
+
+  @keyframes zoom-and-slide {
+    0% {
+      transform: scale(1);
+    }
+    25% {
+      transform: translate3d(0, 0, 0) scale(1.5);
+      transform-origin: left;
+    }
+
+    50% {
+      transform: translate3d(0, 0, 0) scale(1.4);
+      transform-origin: top right;
+    }
+
+    75% {
+      transform: translate3d(0, 0, 0) scale(1.5);
+      transform-origin: bottom center;
+    }
+
+   
+    100% {
+      transform: scale(1);
+    }
+  }
 .v-carousel.promo .v-btn.v-btn--icon{
     border-radius: 50%!important;
 }
@@ -542,12 +648,19 @@ color: #CECECE;
 }
 
 .v-carousel--hide-delimiter-background .v-carousel__controls{
-    bottom: -46px;
-}</style>
+    bottom: -60px;
+}
+
+</style>
 <script>
+import { gsap, Bounce, CSSPlugin } from 'gsap';
+
+
 export default {
   data() {
     return {
+     
+    
         points:[
             {
             icon: 'cart',
@@ -573,7 +686,7 @@ export default {
     openid: null,
         placescards:false,
         mods:1,
-       images:['https://res.cloudinary.com/dkbt6at26/image/upload/v1684302547/Rectangle_8_bjr2cm.png',
+       images:[
     'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302547/Rectangle_7_h4lxnd.png',
 'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_6_1_qlrzss.png',
 'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_5_ucb5ag.png',
@@ -637,8 +750,42 @@ rating: 4,
         ]
     }
     },
-    
+    mounted(){
+  
+      gsap.registerPlugin(CSSPlugin);
+
+    },
 methods: {
+  async startall(){
+    this.placescards = true
+
+    this.$nextTick(() => {
+    
+  this.animateBox('.box1', 0);
+  this.animateBox('.box2', 0.5);
+  this.animateBox('.box3', 1);
+  this.animateBox('.box4', 1.5);
+  const box =  document.getElementById('img')
+
+setTimeout(() => {
+  box.classList.add('background');
+}, 2000);
+});
+  },
+   animateBox(box, delay) {
+   gsap.to(box,
+    {
+      opacity: 1,
+      scale: 1,
+      borderRadius: '23.0164px',
+      bottom: '2px',
+      ease: Bounce.easeOut,
+      duration: 1.3,
+      delay,
+      
+    }
+  );
+},
     openfaq(i){
         if(this.openid == i){
             this.openid = null
@@ -646,6 +793,7 @@ methods: {
         }
         this.openid = i
     },
+
 filt(text){
 var newText = text.length > 40 ? text.slice(0, 40) +'...' : text
 return newText

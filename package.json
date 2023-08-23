@@ -27,8 +27,8 @@
     "@tiptap/starter-kit": "^2.0.3",
     "@tiptap/vue-3": "^2.0.3",
     "axios": "^1.4.0",
+    "gsap": "^3.12.2",
     "laue": "^0.2.1",
-    "pinia": "^2.1.6",
     "sass": "^1.57.1",
     "vuetify": "^3.2.5"
   }

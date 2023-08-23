@@ -22,7 +22,7 @@ font-weight: 400;
 line-height: 140%; ">Shopping is a bit of a relaxing hobby for
 me, which is sometimes troubling for the
 bank balance.</p>
-<v-btn to="/product_page" class="mt-6 " color="#333" size="large" style="" variant="outlined" rounded="xl" >
+<v-btn to="/product_page" class="mt-6 green-hover" color="#333" size="large" style="" variant="outlined" rounded="xl" >
 Learn More <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </v-card>
@@ -32,18 +32,36 @@ Learn More <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 font-size: 16px;
 font-weight: 600;
 letter-spacing: -0.16px;" class="mb-2"> Select African Country</p>
-    <v-chip style="width:209px;height: 44px;border: 1px solid #CECECE;" size="large" color="white" variant="elevated"  flat rounded="xl" class=" elevation-0 chipper d-flex justify-start px-2 py-2"  >
-    <div>
-<v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
-<span class="mr-2" style="color: var(--carbon-4, #333);
-font-size: 14px;letter-spacing: 2.38px;
-font-weight: 500;">
-RWANDA
+    <v-menu location="bottom" offset="10px" width="150px" max-height="400">
+      <template v-slot:activator="{ props }">
+<div v-ripple  v-bind="props" style="cursor: pointer;width:fit-content;height: 44px;border: 1px solid #CECECE;" size="large" color="white" variant="elevated"  flat  class="bg-white rounded-xl elevation-0 chipper px-2 "  >
+    
+    <div class="d-flex justify-space-between w-100 h-100  align-center">
+        <div class="d-flex  align-center">
+
+            <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
+            <span class="mr-2" style="color: var(--carbon-4, #333);
+                      font-size: 14px;letter-spacing: -0.14px;
+                      font-weight: 500;">
+
+{{country}}
 </span>
 </div>
-<v-spacer></v-spacer>
-<v-icon class="mr-3" icon="mdi mdi-chevron-down"></v-icon>
-              </v-chip>
+<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
+</div>
+              </div>
+</template>
+<v-list>
+        <v-list-item 
+          v-for="(item, index) in africanCountries"
+          :key="index"
+          :value="index"
+          @click="selectCountry(item)"
+        >
+          <v-list-item-title >{{ item }}</v-list-item-title>
+        </v-list-item>
+      </v-list>
+</v-menu>
     </div>
    </v-container>
 </v-img>
@@ -95,52 +113,8 @@ v-model="chip"
 
 
    <v-row style="" class="">
-    <v-col cols="6" v-for="(n, i) in items" sm="4" :key="i" lg="2" md="3">
-        <v-card flat class="bg-white rounded-lg mb-4">
-                <v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="236px" :src="n.image">
-                <v-btn  rounded="xl" icon style="position: absolute;right:12px;top:12px;"  flat size="x-small">
-                <v-icon size="x-small" color="#1C274C" icon="mdi mdi-heart-outline"></v-icon></v-btn>
-                </v-img>
-                <p @click="$router.push('/product_page')" style="font-weight: 600;
-    font-size: 14px;
-    line-height: 18px;cursor: pointer;
-    
-    color: #000000;
-    " class=" mt-2">{{filt(n.name)}}</p>
-    <p style="font-weight: 500;
-    font-size: 12px;
-    line-height: 15px;
-    color: #000000;
-    " class="mt-1">Organic cotton certified</p>
-    <p style="font-weight: 600;
-    font-size: 10px;
-    line-height: 10px;
-    color: #000000;
-    " class="d-flex mb-1 pb-3 pt-1 align-center">
-        <v-rating
-        model-value="4"
-        color="grey-lighten-2"
-        active-color="#E7CE5D"
-        class="rts" density="compact"
-        size="x-small"
-        ></v-rating><span style="margin-left:3px;margin-top: 3px ;" >(65)</span> 
-    </p>
-                          <div class="d-flex align-center justify-space-between">
-                <div class="d-flex align-center"> 
-                    <h1 
-    style="font-size: 16px;
-            line-height: 20px;
-            color: #1A1D1F;
-    " class="priceClass">N{{n.price}}</h1>
-    
-                </div>
-                <v-btn to="/order/cart" size="small" style="border: 1px solid #CED2D6;
-    border-radius: 6px;"  :color="n.oos? 'green':''" :variant="!n.oos? 'outlined':'elevated'" flat :class="n.oos? 'text-grey':''" class="ml-2">
-                     <span class="smallBtn">{{'Add to Cart'}}</span> 
-                </v-btn>
-    
-                </div>
-            </v-card>
+    <v-col cols="6" v-for="(n, i) in items" sm="4" :key="i" lg="24" md="3">
+   <product-component :item="n" :index="i" />
        
     </v-col>
    </v-row>        
@@ -372,16 +346,17 @@ Read more
 </template>
 <style>
 
-.chipper .v-chip__content {
-    width: 100%;
-}</style>
+</style>
 <script>
+import { useProductStore } from '~/stores/productStore.js';
+
 export default {
   data() {
     return {
         placescards:false,
         mods:1,
         tab: null,
+        country: 'All of Africa',
         chip: 'POPULAR products',
         tags: [
             {
@@ -401,73 +376,72 @@ export default {
             image: 'trending-up'
             },
       ],
-        items:[
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png',
-                price: '115.32',
-                location: 'Accra, Ghana',
-                likes: '1.2k'
-            },
-            {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png',
-                price: '57.00',
-                location: 'Madagascar',
-                likes: '456',
-                oos: true
-            },
-          
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
-                price: '57.00',
-                location: 'Mumbasa, Kenya',
-                likes: '456',
-            },
-            {
-                name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
-                price: '79.00',
-                location: 'Lagos, Nigeria',
-                likes: '66',
-                oos: true
-            },
-            {
-                name: 'Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png',
-                price: '179.00',
-                location: 'Accra, Ghana',
-                likes: '966',
-            },
-            {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png',
-                price: '57.00',
-                location: 'Mumbasa, Kenya',
-                likes: '456',
-            },
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
-                price: '57.00',
-                location: 'Accra, Ghana',
-                likes: '456',
-            },
-            {
-                name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
-                price: '79.00',
-                location: 'Accra, Ghana',
-                likes: '66',
-                oos: true
-            },
-     
-        ]
+      africanCountries:[
+  'Algeria',
+  'Angola',
+  'Benin',
+  'Botswana',
+  'Burkina Faso',
+  'Burundi',
+  'Cabo Verde',
+  'Cameroon',
+  'Central African Republic',
+  'Chad',
+  'Comoros',
+  'Democratic Republic of the Congo',
+  'Republic of the Congo',
+  'Cote d\'Ivoire',
+  'Djibouti',
+  'Egypt',
+  'Equatorial Guinea',
+  'Eritrea',
+  'Eswatini',
+  'Ethiopia',
+  'Gabon',
+  'Gambia',
+  'Ghana',
+  'Guinea',
+  'Guinea-Bissau',
+  'Kenya',
+  'Lesotho',
+  'Liberia',
+  'Libya',
+  'Madagascar',
+  'Malawi',
+  'Mali',
+  'Mauritania',
+  'Mauritius',
+  'Morocco',
+  'Mozambique',
+  'Namibia',
+  'Niger',
+  'Nigeria',
+  'Rwanda',
+  'Sao Tome and Principe',
+  'Senegal',
+  'Seychelles',
+  'Sierra Leone',
+  'Somalia',
+  'South Africa',
+  'South Sudan',
+  'Sudan',
+  'Tanzania',
+  'Togo',
+  'Tunisia',
+  'Uganda',
+  'Zambia',
+  'Zimbabwe'
+]
 
     };
   },
   computed: {
+    productStore() {
+            return useProductStore();
+        },
+   items() {
+           return this.productStore.getProductsArray('main');
+        },
 buttons(){
     return [{
         icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png',
@@ -496,6 +470,9 @@ buttons(){
     },
   },
   methods: {
+    selectCountry(item){
+            this.country = item
+        },
 filt(text){
 
 var newText = text.length > 50 ? text.slice(0, 50) +'...' : text

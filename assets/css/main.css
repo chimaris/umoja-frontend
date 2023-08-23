@@ -6,6 +6,119 @@ html{
     margin-left: px;
     
 }
+.ProseMirror-focused{
+    outline: none!important;
+}
+.chipper .v-btn__content {
+    width: inherit;
+}
+.heroimg {
+    -webkit-mask-image: linear-gradient(45deg,#000 25%,rgba(0,0,0,.2) 50%,#000 75%);
+    mask-image: linear-gradient(45deg,#000 25%,rgba(0,0,0,.2) 50%,#000 75%);
+    -webkit-mask-size: 800%;
+    mask-size: 800%;
+    -webkit-mask-position: 0;
+    mask-position: 0;
+}
+.shine {
+    -webkit-mask-image: linear-gradient(45deg,#000 25%,rgba(0,0,0,.2) 50%,#000 75%);
+    mask-image: linear-gradient(45deg,#000 25%,rgba(0,0,0,.2) 50%,#000 75%);
+    -webkit-mask-size: 800%;
+    mask-size: 800%;
+    -webkit-mask-position: 0;
+    mask-position: 0;
+    animation: shine 6s linear 10s infinite both;
+}
+@keyframes shine {
+    0% {
+        -webkit-mask-position: 100%;
+        mask-position: 100%;
+    }
+    16.67% {
+        -webkit-mask-position: 0;
+        mask-position: 0;
+    }
+}
+.heroimg:hover {
+    transition: mask-position 2s ease,-webkit-mask-position 2s ease;
+    -webkit-mask-position: 120%;
+    mask-position: 120%;
+    opacity: 1;
+}
+@media (min-width: 1200px){
+
+    .v-col-lg-24 {
+        flex: 0 0 20%!important;
+        max-width: 20%!important;
+    }
+}
+.parent-card:hover .smallBtn {
+    color: #fff!important;
+  }
+  .parent-btn{
+      transition: all 0.3s ease-in-out;
+    }
+    .parent-card:hover .parent-btn {
+        background-color: #2b6e63;
+        border: none!important;
+        color: #fff;
+    }
+    
+.red-hover {
+    transition: all 0.3s ease-in-out;
+}
+.red-hover:hover .v-btn__content {
+    color: #fff!important;
+  }
+  .red-hover:hover {
+    background-color: #C20052;
+    font-weight: 600;
+    border: none!important;
+    color: #fff;
+  }
+  .red-hover:hover .v-btn__content .v-icon {
+    color: #fff!important;
+  }
+.green-hover {
+    transition: all 0.3s ease-in-out;
+}
+.green-hover:hover .v-btn__content {
+    color: #fff!important;
+  }
+  .dark-hover:hover .v-btn__content {
+    color: #fff!important;
+  }
+.green-hover:hover .v-btn__content .v-icon {
+    color: #fff!important;
+  }
+  .dark-hover:hover .v-btn__content .v-icon  {
+    color: #fff!important;
+  }
+.green-hover:hover {
+    background-color: #2b6e63;
+    font-weight: 600;
+    border: none!important;
+    color: #fff;
+  }
+  .greenbox .v-btn__content .v-icon  {
+    color: #fff!important;
+  }
+.greenbox {
+    background-color: #2b6e63;
+    font-weight: 600;
+    border: none!important;
+    color: #fff;
+  }
+.dark-hover {
+    transition: all 0.3s ease-in-out!important;
+}
+
+.dark-hover:hover {
+    background-color: #333!important;
+    font-weight: 600!important;
+    border: none!important;
+    color: #fff!important;
+  }
 .chkt{
     font-weight: 600;
 font-size: 20px;
@@ -28,7 +141,7 @@ color: #333333;
 }
 
 .tophead{
-
+cursor: pointer;
     background: linear-gradient(90deg, #000 0%, rgba(0, 0, 0, 0.88) 100%);}
     .v-responsive.v-img.signupimg {
         position: absolute;
@@ -376,7 +489,7 @@ content: '';
 height: 54.09px;
 display:block;
 transform: rotate(45deg);
-z-index: -1;
+z-index:-1;left: calc(50% - 27.045px);
 border-radius: 9px;
 bottom: -11px;
 background: rgba(255, 255, 255, 0.8)!important;
@@ -391,10 +504,16 @@ backdrop-filter: blur(28.7705px);
     letter-spacing: 0!important;
 }
 .africacard{
+    opacity: 1;
+    scale: 0;bottom: -70%;
+    border-radius: 50%;
 width: 250.88px;
-height: 176.08px;
 
-background: rgba(255, 255, 255, 0.8)!important;
+height: 176.08px;
+position: relative;
+overflow: visible!important;
+
+background: rgba(255, 255, 255, 0.9)!important;
 backdrop-filter: blur(28.7705px);
 border-radius: 23.0164px!important;
 }
@@ -402,6 +521,7 @@ border-radius: 23.0164px!important;
     margin-left: -15px;
     position: relative;
 }
+
 .arrowimage{
     position: absolute;
     top: -35px;

@@ -1,11 +1,12 @@
 <template>
-    <div class="tophead">
+    <div @click="$router.push('/user/signup')" class="tophead heroimg">
     <p class="text-white text-center pa-4">Sign up and GET 20% OFF for your first order🎉. 
 <span class="pointhere">Sign up now
 </span></p>
   </div>
-  <div>
-      <v-container class="py-1" style="max-width:1400px">
+  <div  class="topbar"> 
+
+      <v-container  class="py-1" style="max-width:1400px">
         <div class="d-flex justify-space-between align-center">
         <div class="d-flex  align-center">
          <v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer;height:65px!important" rounded="0">
@@ -51,13 +52,13 @@
 </v-avatar></v-btn>
 <v-btn to="/order/cart" class="ml-4 text-none" icon size="48" rounded="xl" flat color="transparent"
  >
-      <v-badge offset-y="20" content="2" color="error">
+      <v-badge  offset-y="20" :dot="cartStore.totalCartItems == 0" :content="cartStore.totalCartItems" color="error">
         <v-avatar rounded="0" size="32">
   <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png"></v-img>
 </v-avatar>
       </v-badge>
     </v-btn>
-    <v-menu  :close-on-content-click="false" location="bottom" offset="20px">
+    <v-menu  open-on-hover :close-on-content-click="false" location="bottom" offset="20px">
       <template v-slot:activator="{ props }">
 <v-btn class="ml-4"  icon size="48" v-bind="props" rounded="xl" flat color="transparent">
   <v-avatar rounded="0" size="23">
@@ -69,10 +70,20 @@
       </div>
     </div>
       </v-container>
-       </div>
+    </div>
+       <!-- <v-card height="500px" class=" d-flex align-end">{{ hasScrolledPastPoint }}</v-card> -->
 
   </template>
   <style>
+  .topbar{
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: rgb(255 255 255 / 65%);
+    backdrop-filter: blur(8px);
+  }
+
+
 .search .v-input__control{
   border-radius: 6px;
   border: 1px solid var(--carbon-2, #CECECE);
@@ -80,7 +91,8 @@
 </style>
   <script>
   import { useTheme } from 'vuetify'
-  
+  import { useCartStore } from '~/stores/cartStore';
+
   export default {
       data() {
       return {
@@ -88,13 +100,18 @@
         btn_radio: null,
         searchmenu: false,
         urls: [
-          {title:'Buy', route:'/discovery'},
+          {title:'Buy', route:'/user/signup'},
           {title:'Sell', route:'/vendor/registeration/form'},
           {title:'Discovery', route:'/discovery_page'},
           {title:'Market Place', route:'/market_place'},
-          {title:'About Us', route:'/vendor/dashboard'},
+          {title:'CRM', route:'/vendor/dashboard'},
           ]
       };
+    },
+    computed: {
+      cartStore() {
+        return useCartStore();
+      },      
     },
     methods: {
       toggleTheme() {

@@ -413,10 +413,7 @@ font-weight: 500;">Replying to <span style="color: #1273EB;">@sarahjohnson</span
     border-radius: 6px;
 border: 1px solid var(--carbon-2, #CECECE)!important;
 }
-.reviews2 .v-rating__item .v-btn {
-    scale: 0.8;
-    margin-left: -25px;
-}</style>
+</style>
 <script>
 export default {
 

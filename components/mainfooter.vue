@@ -39,58 +39,23 @@ letter-spacing: -0.48px;">Accepted Payments</p>
   </v-col>
   <v-col cols="12" lg="6">
       <v-row>
-          <v-col cols="12" lg="3">
+          <v-col v-for="(n, i) in categoriesData" :key="i" cols="12" lg="3">
               <p style="color: #000;
 font-size: 18px;
-font-weight: 600;" class="">Categories</p>
+font-weight: 600;" class="pl-4">{{n.title}}</p>
 <div class="mt-6">
 
   <p style="color: var(--carbon-2, #000);
 
 font-size: 14px;
 font-weight: 400;
-letter-spacing: -0.42px;" class=" mb-4" v-for="n in ['Fashion', 'Home Decoration', 'Art', 'Cosmetics']">{{ n }}</p>
+letter-spacing: -0.42px;" class=" mb-2" v-for="b in n.items">  <v-btn   variant="text" class="mx-2" flat >
+            {{b}}
+          </v-btn></p>
+
 </div>
           </v-col>
-          <v-col cols="12" lg="3">
-              <p style="color: #000;
-font-size: 18px;
-font-weight: 600;" class="">About Us</p>
-<div class="mt-6">
-
-  <p style="color: var(--carbon-2, #000);
-
-font-size: 14px;
-font-weight: 400;
-letter-spacing: -0.42px;" class="  mb-4" v-for="n in ['About Umoja', 'Careers', 'News & Blog', 'Help', 'Press Center', 'Shop by Location', 'Affiliate & Partners', 'Ideas & Guides']">{{ n }}</p>
-</div>
-          </v-col>
-          <v-col cols="12" lg="3">
-              <p style="color: #000;
-font-size: 18px;
-font-weight: 600;" class="">Services</p>
-<div class="mt-6">
-
-  <p style="color: var(--carbon-2, #000);
-
-font-size: 14px;
-font-weight: 400;
-letter-spacing: -0.42px;" class="  mb-4" v-for="n in ['Mobile App', 'Shipping & Delivery', 'Order Pickup', 'Account Signup']">{{ n }}</p>
-</div>
-          </v-col>
-          <v-col cols="12" lg="3">
-              <p style="color: #000;
-font-size: 18px;
-font-weight: 600;" class="">Help</p>
-<div class="mt-6">
-
-  <p style="color: var(--carbon-2, #000);
-
-font-size: 14px;
-font-weight: 400;
-letter-spacing: -0.42px;" class="  mb-4" v-for="n in ['Umoja Help', 'Returns', 'Track Orders', 'Contact Us', 'Feedback', 'Security & Fraud']">{{ n }}</p>
-</div>
-          </v-col>
+       
           
       </v-row>
 </v-col>
@@ -138,10 +103,10 @@ letter-spacing: -0.42px;">© Copyright 2023. All Rights Reserved.</p>
 </v-col>
 <v-col cols="12"  class="d-flex justyc align-center" md="3">
 <div class="alignc w-100 textr">
-  <v-btn color="#F8F8F8" flat icon="mdi mdi-instagram" class="mx-2"  rounded="xl" style="color: #333;"></v-btn>
-  <v-btn color="#F8F8F8" flat icon="mdi mdi-twitter" class="mx-2" rounded="xl" style="color: #333;"></v-btn>
-  <v-btn color="#F8F8F8" flat icon="mdi mdi-facebook" class="mx-2"  rounded="xl" style="color: #333;"></v-btn>
-  <v-btn color="#F8F8F8" flat icon="mdi mdi-linkedin" rounded="xl" style="color: #333;"></v-btn>
+  <v-btn color="#F8F8F8" flat icon="mdi mdi-instagram" class="mx-2 dark-hover"  rounded="xl" style="color: #333;"></v-btn>
+  <v-btn color="#F8F8F8" flat icon="mdi mdi-twitter" class="mx-2 dark-hover" rounded="xl" style="color: #333;"></v-btn>
+  <v-btn color="#F8F8F8" flat icon="mdi mdi-facebook" class="mx-2 dark-hover"  rounded="xl" style="color: #333;"></v-btn>
+  <v-btn color="#F8F8F8" flat icon="mdi mdi-linkedin" class=" dark-hover" rounded="xl" style="color: #333;"></v-btn>
 </div></v-col>
 </v-row>
 </v-sheet>
@@ -155,7 +120,27 @@ letter-spacing: -0.42px;">© Copyright 2023. All Rights Reserved.</p>
 export default {
   data() {
     return {
-  payms: ['https://res.cloudinary.com/payhospi/image/upload/v1690546033/logo_kyqdsa.png','https://res.cloudinary.com/payhospi/image/upload/v1690546096/frame-736_gvcp91.png',
+      
+      categoriesData :[
+  {
+    title: 'Categories',
+    items: ['Fashion', 'Home Decoration', 'Art', 'Cosmetics']
+  },
+  {
+    title: 'About Us',
+    items: ['About Umoja', 'Careers', 'News & Blog', 'Help', 'Press Center', 'Shop by Location', 'Affiliate & Partners', 'Ideas & Guides']
+  },
+  {
+    title: 'Services',
+    items: ['Mobile App', 'Shipping & Delivery', 'Order Pickup', 'Account Signup']
+  },
+  {
+    title: 'Help',
+    items: ['Umoja Help', 'Returns', 'Track Orders', 'Contact Us', 'Feedback', 'Security & Fraud']
+  }
+],      
+      
+      payms: ['https://res.cloudinary.com/payhospi/image/upload/v1690546033/logo_kyqdsa.png','https://res.cloudinary.com/payhospi/image/upload/v1690546096/frame-736_gvcp91.png',
   'https://res.cloudinary.com/payhospi/image/upload/v1690546117/frame-740_hguwrg.png',
   'https://res.cloudinary.com/payhospi/image/upload/v1690546170/frame-741_rmvrys.png',
   'https://res.cloudinary.com/payhospi/image/upload/v1690546012/logo_k0mxoj.png',

@@ -8,7 +8,7 @@
 
 </v-img>
 <v-card class="overflow-visible pr-2" flat tile color="#Fff" min-height="100vh"  width="100%">
-    <v-container>
+    <v-container style="max-width:1300px">
         <v-row>
             <v-col  md="4" cols="12" xs="12">
                 <v-card variant="outlined" style="border: 1px solid #CECECE;margin-top: -45px;border-radius: 16px;z-index: 99;" flat  class="pb-12 bg-white" width="100%" >
@@ -251,11 +251,7 @@ color: #CECECE;
 .v-carousel--hide-delimiter-background .v-carousel__controls{
     bottom: -46px;
 }
-.v-rating__item .v-btn{
-    scale: 0.6;
-    margin-left: -13px;
-    
-}
+
 
 
 </style>
