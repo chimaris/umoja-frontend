@@ -31,10 +31,16 @@ font-size: 16px;
 line-height: 20px;
 color: #333333;
 ">Time Left</p>
+<div class="d-flex align-center justify-space-between">
+   <vue-countdown style="  font-weight: 700;
+  font-size:40px;" class="text-yellow-darken-1" :time="timediff" v-slot="{ days, hours, minutes, seconds }">
 <p style="font-weight: 600;
 font-size: 16px;
 line-height: 20px;
-color: #333333;" class="ml-2">00:00:00</p>
+color: #333333;" class="ml-2">{{hours}}:{{minutes}}:{{seconds}}</p>
+
+</vue-countdown>
+</div>
 </div>
 </v-sheet>
        <v-row style="background-color: #fff;" class="">
@@ -47,12 +53,26 @@ color: #333333;" class="ml-2">00:00:00</p>
  
       </div></template>
 <script>
+import VueCountdown from '@chenfengyuan/vue-countdown';
+
 export default {
+    components:{
+    VueCountdown
+  },
     methods: {
 filt(text){
 var newText = text.length > 40 ? text.slice(0, 40) +'...' : text
    return newText
 }
+  },
+  computed: {
+        timediff(){
+      var startDate = new Date();
+// Do your operations
+var endDate   = new Date('2023-12-21');
+var seconds = (endDate.getTime() - startDate.getTime()) ;
+return seconds
+    },
   },
   data() {
     return {

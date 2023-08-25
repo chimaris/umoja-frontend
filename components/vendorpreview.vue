@@ -59,12 +59,12 @@ font-size: 12px;
 line-height: 20px;
 color: #969696;">ON THE WEB</p>
 <div class="pt-4 justify-start align-center d-flex">
-    <v-btn size="small" style="border: 0.357149px solid #2C6E63;" class="rounded-xl mr-4" variant="outlined"  :key="n.icon" v-for="n in buttons" flat icon>
+    <v-btn size="small" style="border: 0.357149px solid #2C6E63;" class="green-hover rounded-xl mr-4" variant="outlined"  :key="n.icon" v-for="n in buttons" flat icon>
     <v-avatar rounded="0" size="23"><v-icon color="green" :icon="'mdi mdi-'+n.icon"></v-icon></v-avatar>
     </v-btn>
 </div>
 <div class="pt-12 mt-12 justify-start align-center d-flex">
-<v-btn style="border: 0.357149px solid #2C6E63;" flat size="large" variant="text" block class="mb-8" color="green" ><v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon> Edit Profile</v-btn>
+<v-btn style="border: 0.357149px solid #2C6E63;" flat size="large" variant="text" block class="green-hover mb-8" color="green" ><v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon> Edit Profile</v-btn>
     </div>
 <p class="text-center textClass  text-grey-darken-1">
     MEMBER SINCE: MARCH 24, 2020
