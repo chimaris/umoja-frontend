@@ -2,9 +2,10 @@
   <div>
     <v-row class="d-flex ">
 
-      <v-col cols="12" :class="!(window == 'dash') ? 'px-0' : ''"
-        style="background-color: #F6F7F9;position: absolute;top: 0;left: 0;z-index: 99;" :md="!sidebar ? '3' : '3'"
-        class="pb-0 pt-0">
+      <v-col cols="12" lg="24" :class="!(window == 'dash') ? 'px-0' : ''"
+        style="background-color: #F6F7F9;position: absolute;top: 0;left: 0;z-index: 99;" 
+        :md="!sidebar ? '3': '24'" 
+        class="pb-0 pt-0 dash">
         <v-slide-x-transition>
           <VendorsidePanel :window="window" :sidebar="sidebar" @sideFn="sideFn" @changePage="changePage" />
         </v-slide-x-transition>
@@ -12,7 +13,7 @@
 
       <v-col style="position: fixed;
     right: 0;z-index: 99;
-    height: 102vh;transition: all 0.2s ease-out;" class="maincont" :class="sidebar ? 'px-0 ' : 'px-0'" cols="12"
+    height: 102vh;transition: all 0.2s ease-out;" class="dash maincont" :class="sidebar ? 'px-0 ' : 'px-0'" cols="12"
         :md="!sidebar ? '12' : '9'">
 
         <v-card style="overflow: scroll;" min-height="100vh" height="100%" :class="!(window == 'dash') ? '' : 'pr-8 py-8'"

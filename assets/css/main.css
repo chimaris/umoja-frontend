@@ -6,6 +6,38 @@ html{
     margin-left: px;
     
 }
+
+.scroll-container::-webkit-scrollbar {
+    width: 2px;
+    transition: all 0.5s ease-in-out;
+}
+.scroll-container:hover::-webkit-scrollbar {
+    width: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 6px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: #2C6E63;
+  }
+  
+  .scroll-container::-webkit-scrollbar-thumb:hover {
+    background: #2C6E63;
+  }
+    @media (min-width: 600px){
+        .dash.v-col-md-3 {
+            flex: 0 0 20%!important;
+            max-width: 20%!important;
+        }
+.dash.v-col-md-9 {
+    flex: 0 0 80%!important;
+    max-width: 80%!important;
+}
+}
 .ProseMirror-focused{
     outline: none!important;
 }
@@ -48,6 +80,10 @@ html{
 @media (min-width: 1200px){
 
     .v-col-lg-24 {
+        flex: 0 0 20%!important;
+        max-width: 20%!important;
+    }
+    .v-col-md-24 {
         flex: 0 0 20%!important;
         max-width: 20%!important;
     }

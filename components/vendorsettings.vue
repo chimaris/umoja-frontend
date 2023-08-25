@@ -5,7 +5,7 @@ font-size: 24px;
 font-weight: 500;">Manage your account settings</p>
 <v-sheet class="cardStyle mt-4 mb-12 py-0">
     <v-row>
-        <v-col class="py-4" cols="12" lg="2">
+        <v-col class="py-4 dash " cols="12" md="3">
             <div class="py-3" :key="n" v-for="n in ['My Profile', 'Security', 'Notifications', 'Account Details', 'Billing', 'Integrations']">
                 <v-btn size="large" variant="tonal"  @click="selected = n" rounded="xl" flat :color="selected == n? 'green': 'white'">
                   <v-scale-transition>
@@ -24,7 +24,7 @@ font-weight: 600;" :style="selected == n? 'color:#2C6E63': ''">
         <v-divider style="    margin-bottom: 12px;
     margin-top: 12px;
     max-height: calc(100% - 24px);" vertical="" inset=""></v-divider>
-        <v-col cols="12" class="px-0" lg="10">
+        <v-col cols="12" class="px-0 dash" md="9">
             <v-window v-model="selected">
                 <v-window-item value="My Profile">
                 <Vendorsettingsprofile />

@@ -102,7 +102,7 @@ border-radius: 6px;height: 55px;" class="  rounded-lg">
        <th style="
    width: 50px;
 " class="  font-weight-medium  text-left">
-          <v-checkbox hide-details></v-checkbox>
+          <v-checkbox color="green" hide-details></v-checkbox>
        </th>
        <th  style="font-size: 14px;color:#333333;width: 100px;" class="  font-weight-medium  text-left">
          ID
@@ -136,7 +136,7 @@ border-radius: 6px;height: 55px;" class="  rounded-lg">
        :key="item.sn"
        >
        <td  class="text-grey-lighten-1 pl-4 px-1">   
-              <v-checkbox hide-details></v-checkbox>
+              <v-checkbox color="green" hide-details></v-checkbox>
        </td>
        <td style="font-size: 14px;" class="tableLight px-1 pl-2">
         {{ item.sn }}
@@ -212,8 +212,8 @@ font-size: 10px!important" size="small" rounded="lg" class="tablechip  text-cent
 </div>
         <v-card height="100vh" 
         style="overflow: scroll;" 
-          width="100%" max-width="825" class="">
-      <div style="height: 110px;
+          width="100%" max-width="825" class="rounded-0">
+      <div style="height: 67px;
     background: rgb(255 255 255 / 65%);
     backdrop-filter: blur(3px);    position: sticky;
     z-index: 99;

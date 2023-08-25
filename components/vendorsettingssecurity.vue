@@ -195,7 +195,7 @@ font-weight: 500;">London, UK . Oct 23 at 1:15 AM</p>
 </div>
 </div>
 <v-btn block style="    border: 1px solid #e5e5e5;
-" variant="outlined" size="large" class="ml-4 mt-8 menubar text-grey-darken-3" >
+" variant="outlined" size="large" class=" mt-8 menubar text-grey-darken-3" >
 Need help?
 </v-btn>
 
