@@ -5,11 +5,14 @@
 font-size: 12px;
 line-height: 15px;
 text-transform: uppercase;
-color: #969696;"> 3 live promos</p>
-        <div >
-            <v-btn flat rounded="xl" size="x-small" color="transparent" style=" font-size: 20px; color:#333333" icon="mdi mdi-view-grid"></v-btn>
-            <v-btn flat rounded="xl" size="x-small" color="transparent" style=" font-size: 20px; color:#333333" icon="mdi mdi-order-bool-descending-variant" class="mx-2"></v-btn>
-            <v-btn variant="tonal" color="#333333" class="textClass" flat> <v-icon class="mr-2" size="20" icon="mdi mdi-tune-vertical"></v-icon>Filter</v-btn>
+color: #969696;"> 3 live promos%</p>
+           <div >
+            <v-btn flat rounded="xl" size="x-small" color="transparent" style=" font-size: 15px; color:#333333" icon="mdi mdi-view-grid"></v-btn>
+            <v-btn flat rounded="xl" size="x-small" color="transparent" style=" font-size: 15px; color:#333333" icon="mdi mdi-filter-variant" class="mx-2"></v-btn>
+            <v-btn style="    border: 1px solid #e5e5e5;
+" variant="outlined" class="ml-4 textClass text-grey-darken-3" >
+                 <v-icon class="mr-2" size="20" icon="mdi mdi-tune-vertical"></v-icon>Filter
+            </v-btn>
         </div>
     </div>
     <div class="mb-6" v-for="n in 2">

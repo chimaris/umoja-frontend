@@ -77,7 +77,7 @@ color: #596066;">Nweke Franklin</p>
   </div>
 </v-expand-transition>
 <v-expand-transition leave-absolute>
-  <div class="pt-4" v-show="!integratedApps.length && n.subapps && openapps">
+  <div @click.stop="" class="pt-4" v-show="!integratedApps.length && n.subapps && openapps">
   <div style="position: relative;" class="align-center pl-8 pr-6 text-capitalize justify-space-between py-2 d-flex style-2">
    <div :style=" 'border-left: 1px solid #e0e0e0; border-bottom: 1px solid #e0e0e0;'" style="position: absolute;    top: -18px;
     left: 11px;

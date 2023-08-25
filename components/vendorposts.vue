@@ -7,8 +7,10 @@ line-height: 15px;
 text-transform: uppercase;
 color: #969696;"> 2 posts found</p>
         <div >
-          <v-btn variant="tonal" color="#333333" class="textClass" flat> <v-icon class="mr-2" size="20" icon="mdi mdi-tune-vertical"></v-icon>Filter</v-btn>
-        </div>
+            <v-btn style="    border: 1px solid #e5e5e5;
+" variant="outlined" class="ml-4 textClass text-grey-darken-3" >
+                 <v-icon class="mr-2" size="20" icon="mdi mdi-tune-vertical"></v-icon>Filter
+            </v-btn>        </div>
     </div>
 
        <v-row style="background-color: #fff;">
