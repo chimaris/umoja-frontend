@@ -1,7 +1,14 @@
 <template>
-    <div style="position:relative;background-color: #F8F8F8; min-height: 100vh;">
+    <div style=";background-color: #F8F8F8;">
 
         <regHeader />
+ 
+        <v-row>
+            <v-col cols="12" style="max-width: 400px;    " class="pb-0 dash" md="3">
+            
+              <div class="w-100" style="height: calc(100vh - 96px);
+    position: sticky;
+    top: 69px;">
         <div style="position: absolute;left: 24px; bottom: 22px;"
             class="d-flex pt-12 mt-12 justify-space-between align-center">
             <v-avatar class="" @click="$router.push('/')" size="135" style="height:auto!important" rounded="0">
@@ -10,22 +17,26 @@
             </v-avatar>
 
         </div>
-        <v-row>
-            <v-col cols="12" style="max-width: 400px;" class="pb-0" sm="3">
-                <v-card class="rounded-0 pa-4 pt-12" flat color="#F6F7F9" min>
-                    <v-timeline density="compact" side="end" truncate-line="start">
-                        <v-timeline-item v-for="item in items" :key="item.id" style="cursor: pointer;"
-                            @click="formSect = window = item.id"
-                            :dot-color="item.id == formSect ? '#00966D' : 'grey-lighten-2'" size="x-small">
-                            <p style="font-weight: 500;
-    font-size: 16px;" :class="item.id == formSect ? 'text-black' : 'text-grey'">{{ item.id + '. ' + item.name }}</p>
-                        </v-timeline-item>
-                    </v-timeline>
-                </v-card>
+                  <v-card class="rounded-0 py-4 pl-4 pt-12" height="256px"  flat color="#F6F7F9" min>
+                    
+                      <v-timeline density="compact" side="end" truncate-line="start">
+                          <v-timeline-item   fill-dot
+       v-for="item in items" :key="item.id" style="cursor: pointer;"
+                              @click="formSect = window = item.id"
+                              :dot-color="item.id == formSect ? '#00966D' : formSect > item.id? '#00966D': 'grey-lighten-2'" size="x-small">
+                              <template  v-slot:icon> <v-icon size="14" color="white" :icon="formSect > item.id? 'mdi mdi-check':''"></v-icon>
+      </template>
+                              <p style="font-weight: 500;
+      font-size: 16px;" :class="item.id == formSect ? 'text-black' : 'text-grey'">{{ item.id + '. ' + item.name }}</p>
+                          </v-timeline-item>
+                      </v-timeline>
+                  </v-card>
+
+              </div>
 
             </v-col>
-            <v-col cols="12" class="pb-0" sm="9">
-                <v-card min-height="100vh" height="100%" class=" pa-4 py-8" flat color="#fff" min>
+            <v-col cols="12" class="pb-0 dash" md="9"  >
+                <v-card min-height="100vh" height="auto" class=" pa-4 py-8" flat color="#fff" min>
 
                     <v-window v-model="window">
                         <v-window-item :value="1">
@@ -76,6 +87,9 @@ export default {
                 },
             ],
         };
+    },
+    computed(){
+        window()
     },
     methods: {
         submit() {

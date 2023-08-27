@@ -16,7 +16,7 @@ color: #969696;"> 72 products found</p>
         </div>
     </div>
     <v-carousel style="overflow: visible;"
-    height="170" class="promo"
+    height="170" class="promo promoshort"
      :show-arrows="false" hide-delimiter-background="" cycle>
       <v-carousel-item 
         v-for="n in 6"

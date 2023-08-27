@@ -32,15 +32,13 @@ color: #596066;">We’ve sent a verification link to your email address.
                 Click on the link to verify your email address.
                  If you didn’t get the email, check your spam folder or resend the link.
 </p>
- 
+      <v-btn to="/vendor/setpass" width="295" color="green" flat size="x-large" class="rounded-lg"> 
+        <span style="text-transform: none;">
 
-           <v-btn to="/vendor/forgot" width="295" color="green" flat size="x-large" class="rounded-lg"> 
-             <span style="text-transform: none;">
- 
-                Check your email
-           </span>
-         </v-btn>
-         </v-card>
+          Check your email
+      </span>
+    </v-btn>
+      </v-card>
      </div>
     </div> 
  </template>

@@ -28,24 +28,24 @@
              <v-row>
                  <v-col> 
         <p class="inputLabel">First Name</p>             
-     <v-text-field placeholder="First name" density="comfortable"  >
+     <v-text-field v-model="first_name" placeholder="First name" density="comfortable"  >
          </v-text-field></v-col>
                  <v-col> 
                      <p class="inputLabel">Last Name</p>             
             
-     <v-text-field placeholder="Last name" density="comfortable"  >
+     <v-text-field v-model="last_name" placeholder="Last name" density="comfortable"  >
          </v-text-field></v-col>
          </v-row>                 
          <p class="inputLabel">Email Address</p>             
          
-         <v-text-field placeholder="Enter email address" density="comfortable"  >
+         <v-text-field v-model="email" placeholder="Enter email address" density="comfortable"  >
          </v-text-field>
  
          <p class="inputLabel">Password</p>             
-     <v-text-field append-inner-icon="mdi mdi-eye-outline" placeholder="Enter Password" density="comfortable"  >
+     <v-text-field append-inner-icon="mdi mdi-eye-outline" v-model="password" placeholder="Enter Password" density="comfortable"  >
          </v-text-field>
  
-         <v-checkbox color="#0076FF">
+         <v-checkbox :model-value="true" color="green">
        <template v-slot:label>
          <div class="font-weight-medium">
              I agree to Umoja 
@@ -81,3 +81,13 @@
      </div>
     </div> 
  </template>
+ <script>
+ export default {
+     data: () => ({
+         email: 'demo@gmail.com',
+         password: '123456',
+         first_name: 'demo',
+          last_name: 'account',
+     }),
+ }
+ </script>

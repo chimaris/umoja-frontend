@@ -4,7 +4,7 @@
         <v-col :cols="cols[0]" class="pb-0">
             <v-card flat tile width="100%"  height="100%">
             <v-container style="min-height:100vh">
-                <v-avatar class="" @click="$router.push('/')" size="150" style="height:auto!important" rounded="0">
+                <v-avatar class="" @click="$router.push('/')" size="150" style="cursor: pointer;height:auto!important" rounded="0">
   
   <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
 </v-avatar>
@@ -17,15 +17,15 @@ color: #333333;">Welcome Back</h1>
 <p class="font-weight-regular mb-6 mt-1" style="font-size:20px">Welcome back, please enter your details</p>
 <p class="inputLabel">Email Address</p>             
         
-        <v-text-field prepend-inner-icon="mdi mdi-email-outline" placeholder="Enter email address" density="comfortable"  >
+        <v-text-field v-model="email" prepend-inner-icon="mdi mdi-email-outline" placeholder="Enter email address" density="comfortable"  >
         </v-text-field>
 
         <p class="inputLabel">Password</p>             
-    <v-text-field prepend-inner-icon="mdi mdi-lock-outline" append-inner-icon="mdi mdi-eye-outline" placeholder="Enter Password" density="comfortable"  >
+    <v-text-field v-model="password" prepend-inner-icon="mdi mdi-lock-outline" append-inner-icon="mdi mdi-eye-outline" placeholder="Enter Password" density="comfortable"  >
         </v-text-field>  
     <v-row>
     <v-col cols="6" class="py-0">
-        <v-checkbox>
+        <v-checkbox color="green">
        <template v-slot:label>
          <div class="font-weight-medium">
            Remember me 
@@ -43,7 +43,7 @@ color: #333333;">Welcome Back</h1>
         </v-col>
     </v-row>
       
-        <v-btn to="/vendor/profile" block color="green" flat size="x-large" class="rounded-lg mt-3"> 
+        <v-btn @click="login()" block color="green" flat size="x-large" class="rounded-lg mt-3"> 
             <span>
 
 Sign in
@@ -55,11 +55,11 @@ Sign in
         
             </div>
             <div class="d-flex justify-space-between py-0 mb-4">
-                <v-btn flat color="grey-lighten-3" class="text-green" width="30%" icon="mdi mdi-apple"></v-btn>
-                <v-btn flat color="grey-lighten-3" class="text-green" width="30%" icon="mdi mdi-google"></v-btn>
-                <v-btn flat color="grey-lighten-3" class="text-green" width="30%" icon="mdi mdi-facebook"></v-btn>
+                <v-btn flat style="background-color: #ededed;" class="text-green green-hover" width="30%" icon="mdi mdi-apple"></v-btn>
+                <v-btn flat style="background-color: #ededed;" class="text-green green-hover" width="30%" icon="mdi mdi-google"></v-btn>
+                <v-btn flat style="background-color: #ededed;" class="text-green green-hover" width="30%" icon="mdi mdi-facebook"></v-btn>
             </div>
-            <p class="font-weight-regular mb-12 mt-6">Don't have an account? <span style="color:#0076FF">Sign Up</span></p>
+            <p class="font-weight-regular mb-12 mt-6">Don't have an account? <span @click="$router.push('/user/signup')" style="cursor: pointer;color:#0076FF">Sign Up</span></p>
             <p style="font-weight: 400;
 font-size: 14px;
 line-height: 17px;
@@ -81,17 +81,37 @@ color: #CECECE;" class="font-weight-regular pt-12 mb-4">©2022 Umoja. All Rights
    </div> 
 </template>
 <script>
-
+  import { useUserStore } from '~/stores/userStore';
 export default {
     data() {
     return {
         images:[ 'https://res.cloudinary.com/dkbt6at26/image/upload/v1684229355/portrait-scary-african-shaman-female-with-petrified-cracked-skin-dreadlocks-holds-traditional-mask-dark-background-make-up-concept_1_dr3e2c.png',
             'https://img.freepik.com/free-photo/side-view-woman-clay-sculpting_23-2149730894.jpg?size=926&ext=jpg','https://img.freepik.com/free-photo/close-up-hands-holding-money_23-2148761613.jpg?size=926&ext=jpg',
         'https://img.freepik.com/free-photo/high-angle-souvenirs-arrangement_23-2149726233.jpg?size=926&ext=jpg',
-   ]
+   ],
+   email: 'demo@gmail.com',
+   password: '123456'
+    }
+},
+methods:{
+login(){
+    this.userStore.login({email: this.email,password: this.password});
+}
+},
+watch:{
+    isLoggedIn(val){
+        if(val){
+            this.$router.push('/')
+        }
     }
 },
     computed:{
+        userStore() {
+        return useUserStore();
+      }, 
+      isLoggedIn() {
+        return this.userStore.getIsLoggedIn;
+      },
     cols() {
       const { lg, sm, md } = this.$vuetify.display;
       return lg

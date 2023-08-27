@@ -159,7 +159,9 @@ font-weight: 600;" class="">€ 5,829.00 </p>
 </div>
 
 </div>
-<v-btn to="/order/checkout" flat block size="x-large" class="mt-8" rounded="xl" color="green"> Checkout Now</v-btn>
+<v-btn to="/order/checkout" flat block size="x-large" class="mt-8" rounded="xl" color="green"><span style="font-size: 14px;
+font-style: normal;
+font-weight: 600;"> Checkout Now</span></v-btn>
 </v-card>
 <v-card style="border-radius: 15px;
 border: 1px solid var(--carbon-2, #CECECE);" flat class="mt-4 pa-6">

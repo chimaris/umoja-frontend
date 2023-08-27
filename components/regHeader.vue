@@ -1,6 +1,10 @@
 <template>
    
-    <div>
+    <div style="position: sticky;
+    top: 0;
+    z-index: 99;
+    background: rgb(246 247 249 / 80%);
+    backdrop-filter: blur(3px);">
  
         <div class="d-flex py-4 px-4 justify-space-between align-center">
        <p style="font-weight: 600;

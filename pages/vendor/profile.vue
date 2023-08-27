@@ -111,7 +111,7 @@ Pellentesque enim orci aenean interdum morbi suspendisse. Dictumst aliquam donec
                 <h1 style="line-height: 1.2;" class=" mb-0 text-white font-weight-black">The Waden Cloth</h1>
                 <p class="textClass mb-4 text-white">known to be used by the Nawi people</p>
                 <div>
-                  <v-btn  flat to="/vendor/profile" color="orange" 
+                  <v-btn  flat to="/vendor_page" color="orange" 
               ><span class="smallBtn">
                 See product
             </span>

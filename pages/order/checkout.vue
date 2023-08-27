@@ -3,7 +3,7 @@
     <div >
      
     <v-container style="max-width:1400px ;width: 100%;">
-          <v-breadcrumbs class="pl-0" v-model="item" active-class="text--green" :items="items">
+          <v-breadcrumbs  class="breadcrumbstick pl-0" v-model="item" active-class="text--green" :items="items">
       <template v-slot:divider>
         <v-icon color="#969696" icon="mdi mdi-chevron-right"></v-icon>
       </template>

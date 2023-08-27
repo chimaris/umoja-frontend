@@ -28,7 +28,7 @@ border: 1px solid #E5E7EA;
 border-radius: 8px;">
 <div>
 
-  <v-checkbox indeterminate color="#0076FF" hide-details>
+  <v-checkbox :model-value="true" color="#0076FF" hide-details>
     <template v-slot:label>
       <div class="font-weight-medium">
         Owner’s Information
@@ -43,7 +43,7 @@ border: 1px solid #E5E7EA;
 border-radius: 8px;">
 <div>
 
-  <v-checkbox disabled="" color="#0076FF" hide-details>
+  <v-checkbox :model-value="true" color="#0076FF" hide-details>
     <template v-slot:label>
       <div class="font-weight-medium">
         Business documentation
@@ -67,7 +67,7 @@ border-radius: 8px;">
 
 
 
- <v-btn to="/vendor/login" flat class="mt-8" color="green" size="large" >Submit application</v-btn>
+ <v-btn to="/vendor/setpass" flat class="mt-8" color="green" size="large" >Submit application</v-btn>
 </div>
 
 </div>

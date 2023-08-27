@@ -20,13 +20,13 @@
  
          <p class="inputLabel">New Password</p>             
          
-         <v-text-field append-inner-icon="mdi mdi-eye-outline" placeholder="Enter new password" density="comfortable"  >
+         <v-text-field v-model="password" append-inner-icon="mdi mdi-eye-outline" placeholder="Enter new password" density="comfortable"  >
          </v-text-field>
          <p class="inputLabel">Confirm Password</p>             
          
-         <v-text-field placeholder="Repeat password" append-inner-icon="mdi mdi-eye-outline" density="comfortable"  >
+         <v-text-field v-model="c_password" placeholder="Repeat password" append-inner-icon="mdi mdi-eye-outline" density="comfortable"  >
          </v-text-field>
- <v-btn to="/vendor/confirm" block color="green" flat size="x-large" class="rounded-lg mr-1 mt-6"> 
+ <v-btn @click="login()" block color="green" flat size="x-large" class="rounded-lg mr-1 mt-6"> 
              <span style="text-transform: none;">
  
  Reset password
@@ -38,3 +38,39 @@
      </div>
     </div> 
  </template>
+ <script>
+ import { useUserStore } from '~/stores/userStore';
+
+export default {
+  data() {
+      return {
+          email: 'demo@gmail.com',
+          password: '123456',
+          c_password: '123456',
+          first_name: '',
+          last_name: '',
+          cols: [12, 12, 12],
+      }
+  },
+  computed: {
+      userStore() {
+          return useUserStore();
+      },
+      isLoggedIn() {
+      return this.userStore.getIsLoggedIn;
+    },
+  },
+  watch:{
+  isLoggedIn(val){
+      if(val){
+          this.$router.push('/')
+      }
+  }
+},
+      methods:{
+login(){
+  this.userStore.login({email: this.email,password: this.password});
+}
+  }
+}
+</script>

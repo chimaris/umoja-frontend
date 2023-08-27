@@ -1,7 +1,7 @@
 <template>
     <v-divider></v-divider>
     <v-container class="pt-0" style="max-width: 1400px;">
-        <v-breadcrumbs class="pl-0" v-model="item" active-class="text--green" :items="items">
+        <v-breadcrumbs class="breadcrumbstick pl-0" v-model="item" active-class="text--green" :items="items">
       <template v-slot:divider>
         <v-icon color="#969696" icon="mdi mdi-chevron-right"></v-icon>
       </template>
@@ -382,7 +382,7 @@ font-size: 24px;
 font-weight: 600;
 line-height: 140%;">€ 5000.00</p>
     </div>
-    <v-btn to="/market_place" block  class="mb-2" size="large" flat color="green" rounded="xl"><span style="color: #EDF0EF;
+    <v-btn to="/order/cart" block  class="mb-2" size="large" flat color="green" rounded="xl"><span style="color: #EDF0EF;
 font-size: 14px;
 font-weight: 600;">Add to Cart</span></v-btn>
     <v-btn class="dark-hover" block style="border-color:#333;color: #333;

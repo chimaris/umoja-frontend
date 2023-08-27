@@ -5,7 +5,7 @@ font-size: 24px;
 font-weight: 500;">Manage your account settings</p>
 <v-sheet class="cardStyle mt-4 mb-12 py-0">
     <v-row>
-        <v-col class="py-4 dash " cols="12" md="3">
+        <v-col class="py-4 dash " style="position: relative;min-height: 600px;" cols="12" md="3">
             <div class="py-3" :key="n" v-for="n in ['My Profile', 'Security', 'Notifications', 'Account Details', 'Billing', 'Integrations']">
                 <v-btn size="large" variant="tonal"  @click="selected = n" rounded="xl" flat :color="selected == n? 'green': 'white'">
                   <v-scale-transition>
@@ -19,6 +19,19 @@ font-weight: 600;" :style="selected == n? 'color:#2C6E63': ''">
                         {{ n }}
                     </span>
                 </v-btn>
+            </div>
+            <div class="px-4" style="min-height:50px;position: absolute;bottom: 30px;left: -4px;width: 100%;">
+              <v-btn  @click="logout" block size="x-large" color="red" variant="outlined"     style="border-radius: 6px;
+border: 1px solid var(--carbon-2, #CECECE);"  flat>
+<v-icon icon="mdi mdi-logout"></v-icon> <span 
+style="color:#C20052;
+font-size: 14px;
+font-weight: 600;">
+
+    Log Out Account
+</span>
+
+</v-btn>
             </div>
         </v-col>
         <v-divider style="    margin-bottom: 12px;
@@ -51,6 +64,8 @@ font-weight: 600;" :style="selected == n? 'color:#2C6E63': ''">
 </template>
 
 <script>
+  import { useUserStore } from '~/stores/userStore';
+
 export default {
  
   data() {
@@ -63,7 +78,16 @@ export default {
 mounted(){
     this.items = this.items1;
   },
+  computed:{
+    userStore() {
+        return useUserStore();
+      }, 
+  },
   methods:{
+    logout(){
+    this.userStore.logout()
+        this.$router.push('/')
+},
     choose(x){
       this.$emit('changePage', 'Order details');
     },

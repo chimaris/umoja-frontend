@@ -6,7 +6,31 @@ html{
     margin-left: px;
     
 }
+.breadcrumbstick{
+    position: sticky;
+    top: 73px;
+    z-index: 99;
+    background: rgb(255 255 255 / 65%);
+    -webkit-backdrop-filter: blur(8px);
+    backdrop-filter: blur(8px);
+}
+.v-carousel.promo .v-btn.v-btn--icon{
+    border-radius: 50%!important;
+}
+.v-carousel.promo .v-btn--icon .v-icon{
+font-size: 9px;
+color: #CECECE;
+}
+.v-carousel.promo .v-btn--icon.v-btn--active .v-icon{
+    color: orange!important;
+}
 
+.v-carousel.promo.v-carousel--hide-delimiter-background .v-carousel__controls{
+    bottom: -60px!important;
+}
+.v-carousel.promo.promoshort.v-carousel--hide-delimiter-background .v-carousel__controls{
+    bottom: -45px!important;
+}
 .scroll-container::-webkit-scrollbar {
     width: 2px;
     transition: all 0.5s ease-in-out;
@@ -131,7 +155,7 @@ html{
     color: #fff!important;
   }
 .green-hover:hover {
-    background-color: #2b6e63;
+    background-color: #2b6e63!important;
     font-weight: 600;
     border: none!important;
     color: #fff;

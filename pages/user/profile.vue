@@ -18,9 +18,9 @@
     <v-container style="margin-top: -66px;max-width: 1400px;">
         <div class="d-flex align-center justify-space-between">
         <div class="d-flex align-center" >
-            <v-avatar style="overflow: visible;" class="pa-2" size="166">
+            <v-avatar color="grey-lighten-3" style="overflow: visible;" class="mr-2" size="166">
                 <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691587215/ellipse-103_o9gvrw.png"></v-img>
-                <v-btn color="white" rounded="xl" size="x-small" variant="elevated" flat style="position: absolute;top: 16px; right: 16px;" icon="mdi mdi-pencil-outline"></v-btn>
+                <v-btn color="white" rounded="xl" size="x-small" variant="elevated" flat style="position: absolute;top: 8px; right: 11px;" icon="mdi mdi-pencil-outline"></v-btn>
             </v-avatar>
             <div class="pt-4">
                 <p style="
@@ -36,8 +36,23 @@ font-weight: 500;">{{ n.data }}</p>
 </div>
             </div>
         </div>
-        <v-btn class="mt-6"    style="border-radius: 6px;
+        <v-menu>
+      <template v-slot:activator="{ props }">
+        <v-btn v-bind="props" class="mt-6"    style="border-radius: 6px;
 border: 1px solid var(--carbon-2, #CECECE);" icon="mdi mdi-dots-vertical" flat></v-btn>
+</template>
+<v-btn @click="logout" width="250" size="x-large" color="red" variant="outlined" class="mt-2"    style="border-radius: 6px;
+border: 1px solid var(--carbon-2, #CECECE);"  flat>
+<v-icon icon="mdi mdi-logout"></v-icon> <span 
+style="color:#C20052;
+font-size: 14px;
+font-weight: 600;">
+
+    Log Out Account
+</span>
+
+</v-btn>
+</v-menu>
         </div>
         <v-divider class="mt-4"></v-divider> 
     </v-container> 
@@ -100,6 +115,8 @@ font-weight: 600;" :style="selected == n? 'color:#2C6E63': ''">
     </div>
 </template>
 <script>
+  import { useUserStore } from '~/stores/userStore';
+
 export default {
   data() {
     return {
@@ -195,6 +212,9 @@ export default {
     };
   },
   computed: {
+    userStore() {
+        return useUserStore();
+      }, 
 buttons(){
     return [{
         icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png',
@@ -223,6 +243,10 @@ buttons(){
     },
   },
   methods: {
+logout(){
+    this.userStore.logout()
+        this.$router.push('/')
+},
 filt(text){
 var newText = text.length > 50 ? text.slice(0, 50) +'...' : text
    return newText

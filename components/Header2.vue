@@ -9,27 +9,29 @@
       <v-container  class="py-1" style="max-width:1400px">
         <div class="d-flex justify-space-between align-center">
         <div class="d-flex  align-center">
-         <v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer;height:65px!important" rounded="0">
+         <v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="cursor: pointer;height:65px!important" rounded="0">
     <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
   </v-avatar>
       <div class="d-flex">
-          <v-btn  :to="n.route" variant="text" class="mx-2" flat v-for="n in urls" :key="n.title">
-            {{n.title}}
+          <v-btn  :to="n.route" variant="text" v-show="!n.disabled" class="mx-2" flat v-for="n in urls" :key="n.title">
+            {{n.title}} 
           </v-btn>
       </div>
     </div>   
       <div class="d-flex">
-        <v-menu persistent="" v-model="searchmenu" :close-on-content-click="false" location="bottom" offset="68px">
+        <v-menu persistent="" v-model="searchmenu" :close-on-content-click="false" location="bottom" offset="28px">
       <template v-slot:activator="{ props, isActive }">
-        <div>
+        <div class="d-flex align-center">
         <div  v-bind="props">
+          <v-slide-x-reverse-transition  leave-absolute origin="center center"> 
           <v-btn v-if="!isActive" icon size="48" v-bind="props" rounded="xl" flat color="transparent">
   <v-avatar rounded="0" size="28">
   <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png"></v-img>
 </v-avatar></v-btn>
+</v-slide-x-reverse-transition>
           </div>
-          <v-slide-x-reverse-transition  leave-absolute>
-           <v-text-field v-if="isActive" variant="outline" style="min-width: 500px;" class="search mt-1 mr-2"  hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Ankara"
+          <v-slide-x-reverse-transition  leave-absolute origin="center center"> 
+           <v-text-field v-if="isActive" variant="outline" style="min-width: 500px;" class="search  "  hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Ankara"
            density="compact">
            <template v-slot:append-inner>
       <v-icon color="grey"
@@ -41,15 +43,18 @@
         </v-slide-x-reverse-transition>
         </div>
 
-</template>
-<dialogsearch />
-</v-menu>
-<v-btn v-if="false" class="ml-4" icon="mdi mdi-account-outline" rounded="xl" flat color="transparent">
-</v-btn>
-<v-btn rounded="xl" to="/user/profile" class="ml-4" icon flat color="transparent">
+      </template>
+      <dialogsearch />
+    </v-menu>
+  
+<v-btn rounded="xl" v-if="!isLoggedIn" to="/user/login" class="ml-4" icon flat color="transparent">
   <v-avatar size="35">
-  <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img>
-</v-avatar></v-btn>
+    <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img>
+  </v-avatar></v-btn>
+  <v-btn v-else rounded="xl" to="/user/profile" class="ml-4" icon flat color="transparent">
+    <v-avatar size="35">
+    <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img>
+  </v-avatar></v-btn>
 <v-btn to="/order/cart" class="ml-4 text-none" icon size="48" rounded="xl" flat color="transparent"
  >
       <v-badge  offset-y="20" :dot="cartStore.totalCartItems == 0" :content="cartStore.totalCartItems" color="error">
@@ -58,7 +63,7 @@
 </v-avatar>
       </v-badge>
     </v-btn>
-    <v-menu  open-on-hover :close-on-content-click="false" location="bottom" offset="20px">
+    <v-menu  v-if="isLoggedIn" open-on-hover :close-on-content-click="false" location="bottom" offset="10px">
       <template v-slot:activator="{ props }">
 <v-btn class="ml-4"  icon size="48" v-bind="props" rounded="xl" flat color="transparent">
   <v-avatar rounded="0" size="23">
@@ -78,6 +83,7 @@
   .topbar{
     position: sticky;
     top: 0;
+    overflow: hidden;
     z-index: 999;
     background: rgb(255 255 255 / 65%);
     backdrop-filter: blur(8px);
@@ -92,6 +98,7 @@
   <script>
   import { useTheme } from 'vuetify'
   import { useCartStore } from '~/stores/cartStore';
+  import { useUserStore } from '~/stores/userStore';
 
   export default {
       data() {
@@ -99,18 +106,27 @@
         theme: useTheme(),
         btn_radio: null,
         searchmenu: false,
-        urls: [
-          {title:'Buy', route:'/user/signup'},
-          {title:'Sell', route:'/vendor/registeration/form'},
-          {title:'Discovery', route:'/discovery_page'},
-          {title:'Market Place', route:'/market_place'},
-          {title:'CRM', route:'/vendor/dashboard'},
-          ]
+   
       };
     },
     computed: {
+      urls() {
+        const loggedIn = this.isLoggedIn;
+        return [
+          {title:'Buy', route:'/user/login', disabled: loggedIn},
+          {title:'Sell', route:'/vendor/login', disabled: loggedIn},
+          {title:'Discovery', route:'/discovery_page', disabled: false},
+          {title:'Market Place', route:'/market_place', disabled: false},
+          {title:'CRM', route:'/vendor/dashboard', disabled: false},
+          ]},
       cartStore() {
         return useCartStore();
+      },      
+      userStore() {
+        return useUserStore();
+      },      
+      isLoggedIn() {
+        return this.userStore.getIsLoggedIn? this.userStore.getIsLoggedIn : false;
       },      
     },
     methods: {

@@ -31,7 +31,7 @@
  Reset password
            </span>
          </v-btn></v-col>
-    <v-col cols="6"> <v-btn to="/vendor/resetsent" block variant="outlined" flat size="x-large" class="rounded-lg ml-1 mt-6"> 
+    <v-col cols="6"> <v-btn to="/user/login" block variant="outlined" flat size="x-large" class="rounded-lg ml-1 mt-6"> 
              <span style="text-transform: none;">
  
  Go back to login
