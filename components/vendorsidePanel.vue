@@ -104,13 +104,13 @@ color: #596066;">Nweke Franklin</p>
 ">
 
   <div v-if="!sidebar" class="d-flex pt-12 px-4 justify-space-between align-center style-4">
-    <v-avatar class="style-5" @click="$router.push('/')" size="57" rounded="0">
+    <v-avatar class="style-5" style="cursor: pointer;" @click="$router.push('/')" size="57" rounded="0">
       <v-img eager="" src="https://res.cloudinary.com/payhospi/image/upload/v1688141514/Frame_2_gfd65l.png"></v-img>
     </v-avatar>
   </div>
   <div v-else="" class="d-flex pt-12 px-8 justify-space-between align-center style-6">
     
-    <v-avatar class="style-7" @click="$router.push('/')" size="135" rounded="0">
+    <v-avatar style="cursor: pointer;" class="style-7" @click="$router.push('/')" size="135" rounded="0">
       
       <v-img eager="" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
     </v-avatar>

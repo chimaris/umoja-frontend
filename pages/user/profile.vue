@@ -36,7 +36,7 @@ font-weight: 500;">{{ n.data }}</p>
 </div>
             </div>
         </div>
-        <v-menu>
+        <v-menu open-on-hover=""> 
       <template v-slot:activator="{ props }">
         <v-btn v-bind="props" class="mt-6"    style="border-radius: 6px;
 border: 1px solid var(--carbon-2, #CECECE);" icon="mdi mdi-dots-vertical" flat></v-btn>

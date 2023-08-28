@@ -63,7 +63,7 @@
 </v-avatar>
       </v-badge>
     </v-btn>
-    <v-menu  v-if="isLoggedIn" open-on-hover :close-on-content-click="false" location="bottom" offset="10px">
+    <v-menu  v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px">
       <template v-slot:activator="{ props }">
 <v-btn class="ml-4"  icon size="48" v-bind="props" rounded="xl" flat color="transparent">
   <v-avatar rounded="0" size="23">
@@ -80,14 +80,7 @@
 
   </template>
   <style>
-  .topbar{
-    position: sticky;
-    top: 0;
-    overflow: hidden;
-    z-index: 999;
-    background: rgb(255 255 255 / 65%);
-    backdrop-filter: blur(8px);
-  }
+
 
 
 .search .v-input__control{

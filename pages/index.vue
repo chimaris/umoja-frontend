@@ -1,790 +1,721 @@
 <template>
-<Header2 />
-<div class="pt-8" style="background: #FDF5E7;" >
-    <v-container  style="max-width:1400px" class="mt-4">
-     
-<v-row class="pb-6">
-    <v-col cols="12" lg="7">
-        <p style="color:#1E1E1E;
+  <div>
+
+      <v-container   class="py-0">
+          <div style="max-width: 1200px;" class="mx-auto d-flex justify-space-between align-center">
+              <v-avatar class="logo" style="width:123px; height:80px" rounded="0" flat>
+                  <v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689483300/Frame_3_isko6t.png">
+                  </v-img>
+              </v-avatar>
+
+          <v-btn @click="opendialog()" flat size="large" color="green rounded-xl" >
+          <span style="font-size: 14px;">
+              Join the Waitlist
+          </span>
+          </v-btn>
+      </div>
+  </v-container>
+  <v-container style=" position: relative;   ;" class="pt-0 padzero" fluid>
+
+      <v-card flat class="topcard height1 rounded-xl d-flex justify-center align-center" height="100vh" min-height="900px"  image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png">
+         
+          <div v-if="$vuetify.display.smAndUp"
+           style="
+          position: absolute;
+          top: 0;
+          height: 100%;
+          width: 100%;">
+              <v-btn style="height: auto;top: 15%;left: 10%;"  flat rounded="xl" class="rw px-2 py-2" height="auto" >
+                  <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
+                  <span class="mr-2" style="color: var(--carbon-4, #333);
+                      font-size: 14px;letter-spacing: 2.38px;
+                      font-weight: 500;">
+
+                      RWANDA
+                  </span>
+              </v-btn>
+              <v-btn style="height: auto;position: absolute;right: 25%;top: 8%;"  flat rounded="xl" class="gh px-2 py-2" height="auto" >
+                  <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img></v-avatar>
+                  <span class="mr-2" style="color: var(--carbon-4, #333);
+                      font-size: 14px;letter-spacing: 2.38px;
+                      font-weight: 500;">
+
+                      GHANA
+                  </span>
+              </v-btn>
+              <v-btn style="position: absolute;
+  top: 50%;" flat rounded="xl" class="ng px-2 py-2" height="auto" >
+                  <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img></v-avatar>
+                  <span class="mr-2" style="color: var(--carbon-4, #333);
+                      font-size: 14px;letter-spacing: 2.38px;
+                      font-weight: 500;">
+
+                      NIGERIA
+                  </span>
+              </v-btn>
+              <v-btn style="    position: absolute;
+  top: 40%;
+  right: 5%;" flat rounded="xl" class="sa px-2 py-2" height="auto" >
+                  <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img></v-avatar>
+                  <span class="mr-2" style="color: var(--carbon-4, #333);
+                      font-size: 14px;letter-spacing: 2.38px;
+                      font-weight: 500;">
+
+                      SOUTH AFRICA
+                  </span>
+              </v-btn>
+              <v-btn style="
+  position: absolute;
+  bottom: 25%;
+  right: 20%;
+" flat rounded="xl" class="ke px-2 py-2" height="auto" >
+                  <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img></v-avatar>
+                  <span class="mr-2" style="color: var(--carbon-4, #333);
+                      font-size: 14px;letter-spacing: 2.38px;
+                      font-weight: 500;">
+
+                      KENYA
+                  </span>
+              </v-btn>
+
+          </div>
+          <v-container class="">
+
+              <div class="text-center bottom0 mx-auto mt-0" style="position:relative;bottom:100px;max-width:834px ;">
+                  <p class="tinytext1" style="color:  #F38218;
+                      font-size: 14px;
+                      font-weight: 500;
+                      line-height: 120%; /* 16.8px */
+                      letter-spacing: 0.9px;
+                      text-transform: uppercase;">
+                      Growing the African Market Space
+                  </p>
+                  <p style="color:#1E1E1E;
 font-size: 64px;
 font-weight: 600;
 line-height: 120%;
-letter-spacing: -1.92px;" class="bigTitle ">
+letter-spacing: -1.92px;" class="bigTitle mt-4">
 <span style="color: #2C6E63;">
 Explore
 </span> a new digital African marketplace from any part of the world!</p>
-    </v-col>
-    <v-col cols="12" class="mt-3" lg="5">
-        <p style="color:  #333;
+<p style="color: var(--carbon-4, #333);
 font-size: 20px;
-font-weight: 400;
-line-height: 180%;
-letter-spacing: -0.6px;">The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.</p>
-<div class="pt-5">
-    <v-btn to="/discovery_page" color="green" size="large" flat rounded="xl" width="163px">
-      <span style="color:  #EDF0EF;
-font-size: 14px;
-font-weight: 600;
-line-height: 20px; ">
-Start Exploring
-</span>  
-    </v-btn>
-    <v-btn color="#333" class="ml-3" size="large" variant="outlined" flat rounded="xl" width="163px">
-      <span style="color:  #333;
-font-size: 14px;
-font-weight: 600;
-line-height: 20px; ">
-How it works
-</span>  
-    </v-btn>
+font-weight: 400;" class="mt-4">The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.</p>
+
+<div class="py-8">
+  <v-btn @click="opendialog()"  color="green" flat class="mx-auto" size="x-large" rounded="xl">Join the Waitlist</v-btn>
 </div>
-    </v-col>
-</v-row>
-    </v-container>
-    <div style="position: relative;overflow: hidden;">
-      <div style="position: absolute;top:0;z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, #FDF5E7, transparent);"></div>
-<div style="position: absolute;bottom: 0px; z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, transparent, #fff);"></div>      
-    
-<v-img eager
-        style="position: relative;overflow:hidden;"
-        class="  mt-6"  min-height="50vh"
-        contain min-width="700px"  id="img"
-        height="auto" @load="startall()"
-        width="100%"
-        src="https://res.cloudinary.com/payhospi/image/upload/v1690528044/map-base-1_qyacm7.png"
-      >
-
-
-<div v-show="placescards"
-          class="d-flex justify-center"
-          style="width: 250.88px; scale: 0.9;  top: 24%;
-left: 10%; position: absolute"
-        >
-        
-           
-          
-
-        <div class="blinking-circle"></div>
-        <v-card   flat class="transparent box1 africacard">
-
-            <div class="pa-5 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important"
-                  height="auto"
-                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/NG_-_Nigeria_c8g2on.png"
-                />
               </div>
-              <p class="ml-3">Nigeria</p>
-            </div>
-            <v-divider></v-divider>
+          </v-container>
+          <div v-if="!$vuetify.display.smAndUp" class="scroll">
+<div class="m-scroll">
 
-            <div class="d-flex px-5 pt-4 pb-3 justify-center">
-              <div class="list">
-                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
-                  ><v-img
-                    :src="n"
-                  ></v-img
-                ></v-avatar>
-                <v-avatar class="pa-0" style="border:3px solid white" color="green">
-                  <span style="font-size: 12px">+300</span></v-avatar
-                >
-              </div>
-            </div>
+  <span class="upspan">
 
-            <div class="d-flex justify-center">
-              <v-btn size="small" color="blue" variant="text" flat>
-                <span
-                  style="
-                    font-size: 14px;
-                    text-transform: none;
-                    color: #0062bc;
-                  "
-                >
-                  See vendors in this area
-                </span>
-                <v-avatar class="ml-2" size="25" rounded="0"
-                  ><v-img
-                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                  ></v-img
-                ></v-avatar>
-              </v-btn>
-            </div>
-            <div  class="pointer"></div>
-          </v-card>
-          
-          
-            
-          
-        </div>
-        <div v-show="placescards"
-          class="d-flex justify-center"
-          style="width: 250.88px;    top: 10%;
-right: 23%;
-scale: 0.9; position: absolute"
-        >
-        
-            <div class="blinking-circle"></div>
-           
-          
+    <v-btn style="height: auto;"  flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
 
-        <v-card   flat class="transparent box2 africacard">
-            <div class="pa-5 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important"
-                  height="auto"
-                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229323/EG_-_Egypt_mlkkl6.png"
-                />
-              </div>
-              <p class="ml-3">Egypt</p>
-            </div>
-            <v-divider></v-divider>
-
-            <div class="d-flex px-5 pt-4 pb-3 justify-center">
-              <div class="list">
-                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
-                  ><v-img
-                    :src="n"
-                  ></v-img
-                ></v-avatar>
-                <v-avatar class="pa-0" style="border:3px solid white" color="green">
-                  <span style="font-size: 12px">+300</span></v-avatar
-                >
-              </div>
-            </div>
-
-            <div class="d-flex justify-center">
-              <v-btn size="small" color="blue" variant="text" flat>
-                <span
-                  style="
-                    font-size: 14px;
-                    text-transform: none;
-                    color: #0062bc;
-                  "
-                >
-                  See vendors in this area
-                </span>
-                <v-avatar class="ml-2" size="25" rounded="0"
-                  ><v-img
-                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                  ></v-img
-                ></v-avatar>
-              </v-btn>
-            </div>
-            <div  class="pointer"></div>
-          </v-card>
-          
-          
-            
-          
-        </div>
-        <div v-show="placescards"
-          class="d-flex justify-center"
-          style="width: 250.88px;    bottom: 22%;
-right: 42%;
-scale: 0.9; position: absolute"
-        >
-        
-           
-          
-
-        <v-card flat   class="transparent box3 africacard">
-            <div class="pa-5 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important"
-                  height="auto"
-                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_9_cxzweo.png"
-                />
-              </div>
-              <p class="ml-3">South Africa</p>
-            </div>
-            <v-divider></v-divider>
-
-            <div class="d-flex px-5 pt-4 pb-3 justify-center">
-              <div class="list">
-                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
-                  ><v-img
-                    :src="n"
-                  ></v-img
-                ></v-avatar>
-                <v-avatar class="pa-0" style="border:3px solid white" color="green">
-                  <span style="font-size: 12px">+300</span></v-avatar
-                >
-              </div>
-            </div>
-
-            <div class="d-flex justify-center">
-              <v-btn size="small" color="blue" variant="text" flat>
-                <span
-                  style="
-                    font-size: 14px;
-                    text-transform: none;
-                    color: #0062bc;
-                  "
-                >
-                  See vendors in this area
-                </span>
-                <v-avatar class="ml-2" size="25" rounded="0"
-                  ><v-img
-                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                  ></v-img
-                ></v-avatar>
-              </v-btn>
-            </div>
-            <div  class="pointer"></div>
-          </v-card>
-          
-          
-            
-                      <div class="blinking-circle"></div>
-
-        </div>
-
-        <div v-show="placescards"
-          class="d-flex justify-center"
-          style="width: 250.88px;       bottom: 25%;
-right: 0%;
-scale: 0.9; position: absolute"
-        >
-          <v-card  flat class="transparent box4 africacard">
-            <div class="pa-5 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important"
-                  height="auto"
-                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_8_ftnhqn.png"
-                />
-              </div>
-              <p class="ml-3">Madagscar</p>
-            </div>
-            <v-divider></v-divider>
-
-            <div class="d-flex px-5 pt-4 pb-3 justify-center">
-              <div class="list">
-                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
-                  ><v-img
-                    :src="n"
-                  ></v-img
-                ></v-avatar>
-                <v-avatar class="pa-0" style="border:3px solid white" color="green">
-                  <span style="font-size: 12px">+300</span></v-avatar
-                >
-              </div>
-            </div>
-
-            <div class="d-flex justify-center">
-              <v-btn size="small" color="blue" variant="text" flat>
-                <span
-                  style="
-                    font-size: 14px;
-                    text-transform: none;
-                    color: #0062bc;
-                  "
-                >
-                  See vendors in this area
-                </span>
-                <v-avatar class="ml-2" size="25" rounded="0"
-                  ><v-img
-                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
-                  ></v-img
-                ></v-avatar>
-              </v-btn>
-            </div>
-            <div class="pointer"></div>
-          </v-card>
-          <div class="blinking-circle"></div>
-
-        </div>
-      </v-img>
-    </div>
-</div>
-<div>
-    <v-container   style="max-width:1400px" class="py-12 my-12">
-        <v-row>
-            <v-col v-for="n in points" :key="n.icon" cols="12" lg="3" md="6">
-               <div class="d-flex">
-
-                   <v-avatar class="mr-3" size="60" style="
-border: 1px solid var(--magnetic-green-4, #2C6E63);">
-                       <v-icon color="#2C6E63" :icon="'mdi mdi-'+n.icon"></v-icon>
-                    </v-avatar>
-                    <div>
-                    <p style="color: #333;
-font-size: 16px;
-font-weight: 600;
-line-height: 120%; /* 19.2px */
-letter-spacing: -0.16px;" class="mb-2">  {{ n.title }}</p>
-                    <p style="color: #333;
-font-size: 14px;
-font-weight: 400;
-line-height: 120%; /* 16.8px */
-letter-spacing: -0.14px;" class="pr-8">  {{ n.body }}</p>
-                     </div>
-                </div>
-            </v-col>
-        </v-row>
-    </v-container>
-</div>
-
-<div>
-    <v-container  style="max-width:1400px">
-        <div class="d-flex mb-12 align-center">
-<p class="d-block" style="color: var(--magnetic-green-4, #2C6E63);
-font-size: 14px;
-font-weight: 500;width: auto;
-    min-width: 215px;
-line-height: 120%; /* 16.8px */
-letter-spacing: 0.7px;
-text-transform: uppercase;"> Our shopping category  </p>
-    <v-divider></v-divider>
-
-        </div>
-        <v-row>
-            <v-col cols="12" lg="5">
-                <p style="color: var(--carbon-5, #2A2A2A);
-
-font-size: 48px;
-font-weight: 600;
-line-height: 120%; /* 57.6px */
-letter-spacing: -1.44px;">Discover a dynamic
-Marketplace</p>
-            </v-col>
-            <v-col cols="12" lg="7">
-                <p class="mt-2" style="color: var(--carbon-4, #333);
-font-size: 20px;
-font-weight: 400;max-width: 398px;
-line-height: 180%; /* 36px */
-letter-spacing: -0.6px;">Umoja provides a unique experience, connecting a variety of buyers and sellers to a digital african market.</p>
-            </v-col>
-        </v-row>
-    </v-container>
-
-</div>
-<div>
-    <v-container   style="max-width:1400px" class="py-12">
-
-        <v-row>
-            <v-col cols="12" lg="5">
-                <v-img class="heroimg"  style="position: relative;border-radius: 15px;" width="100%"
-                 lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529528/rectangle-64_zmh8cd.png"
-                 src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690529528/rectangle-64_zmh8cd.png">
-    <v-btn color="white" size="large" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
-Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
-    </v-btn>
-    <div style="position: absolute;
-width: 100%;bottom: 0;
-height: 122px;align-items: center;
-padding: 10px 30px;display: flex;
-gap: 10px;border-radius: 0px 0px 15px 15px;
-background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
-flex-shrink: 0;">
-        <p style="color: #FFF;
-font-size: 32px;
-font-weight: 500;
-letter-spacing: -0.96px;">Fashion</p>
-    </div>
-                </v-img>
-            </v-col>
-            <v-col cols="12" lg="7">
-                <v-row>
-            <v-col cols="12"  md="6">
-                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%" 
-                lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529526/rectangle-66_kbe8bk.png"
-                src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-66_kbe8bk.png">
-    <v-btn color="white" size="44" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
- <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
-    </v-btn>
-
-    <div style="position: absolute;
-width: 100%;bottom: 0;
-height: 83px;align-items: center;
-padding: 10px 30px;display: flex;
-gap: 10px;border-radius: 0px 0px 15px 15px;
-background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
-flex-shrink: 0;">
-        <p style="color: #FFF;
-font-size: 24px;
-font-weight: 500;
-letter-spacing: -0.96px;">Home decoration</p>
-    </div>
-                </v-img>
-            </v-col>
-            <v-col cols="12" md="6">
-                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%"
-                 lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529526/rectangle-67_oa0r6o.png"
-                 src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-67_oa0r6o.png">
-    <v-btn icon="mdi mdi-arrow-top-right" color="#333" size="44"  style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
-    </v-btn>
-    
-    <div style="position: absolute;
-width: 100%;bottom: 0;
-height: 83px;align-items: center;
-padding: 10px 30px;display: flex;
-gap: 10px;border-radius: 0px 0px 15px 15px;
-background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
-flex-shrink: 0;">
-        <p style="color: #FFF;
-font-size: 24px;
-font-weight: 500;
-letter-spacing: -0.96px;">Cosmetics</p>
-    </div>
-                </v-img>
-            </v-col>
-            <v-col cols="12">
-                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%"
-                 lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529527/rectangle-65_czgty7.png"
-                 src="https://res.cloudinary.com/payhospi/image/upload/v1690529527/rectangle-65_czgty7.png">
-                <v-btn color="white" size="large" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
-                Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
+                        RWANDA
+                    </span>
                 </v-btn>
-                
-                <div style="position: absolute;
-                width: 100%;bottom: 0;
-                height: 122px;align-items: center;
-                padding: 10px 30px;display: flex;
-                gap: 10px;border-radius: 0px 0px 15px 15px;
-                background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);
-                flex-shrink: 0;">
-                <p style="color: #FFF;
-                font-size: 32px;
-                font-weight: 500;
-                letter-spacing: -0.96px;">Art</p>
-                </div>
-                    </v-img>
-</v-col>
-            </v-row>
-            </v-col>
-        </v-row>
-    </v-container>
-</div>
+  </span>
+  <span class="upspan">
+    <v-btn style="height: auto;"  flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
 
-<div>
-  <product-row :showVendor="false" title=" 🔥 Hot Deals " />
+                        GHANA
+                    </span>
+                </v-btn>
+</span>   
+<span class="upspan">
+<v-btn style="" flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img></v-avatar>
+    <span class="mr-2" style="color: var(--carbon-4, #333);
+        font-size: 14px;letter-spacing: 2.38px;
+        font-weight: 500;">
 
+        NIGERIA
+    </span>
+</v-btn>
 
-        <div style="padding:100px 0px">
+</span>    
+<span class="upspan">
 
-            <v-carousel style="overflow: visible;"
-            height="429" class="promo"
-            :show-arrows="false" hide-delimiter-background="" cycle>
-            <v-carousel-item 
-            v-for="n in 6"
-            >
-            <v-row>
-                <v-col class="px-0" cols="12" md="6" lg="6">
-                    <v-img class="heroimg" eager width="100%" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690541372/rectangle-69_jzdwc3.png" ></v-img>
-                </v-col>
-                <v-col class="px-0" cols="12" md="6" lg="6">
-                    <v-card rounded="0" width="100%" height="100%" min-height="429" color="green" flat class=" d-flex align-center">
-                        <v-container   style="max-width:1400px" class="px-12">
-                            <p style="color: var(--magnetic-green-2, #CDD6D4);
-font-size: 12px;
-font-weight: 500;
-letter-spacing: 3.66px;
-text-transform: uppercase;">limited offer</p>
-<p style="color: #FFF;
-font-size: 48px;
-font-weight: 500;
-letter-spacing: -1.44px;">Style Meets Substance</p>
-<p style="color: #FFF;
-font-size: 20px;
-font-weight: 500;
-letter-spacing: -0.2px;" class="mb-8"> GET 20% OFF for your first order</p>
-  <v-btn color="white" class="green-hover" size="large"  variant="outlined" rounded="xl" >
-Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
-    </v-btn>
-                        </v-container>
-                    </v-card>
-                </v-col>
-            </v-row>
-        </v-carousel-item>
-    </v-carousel>
-</div>
-<product-row :showVendor="false" title="⚡️ Popular Products of the Week" />
+<v-btn style=" " flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img></v-avatar>
+    <span class="mr-2" style="color: var(--carbon-4, #333);
+        font-size: 14px;letter-spacing: 2.38px;
+        font-weight: 500;">
 
+        SOUTH AFRICA
+    </span>
+</v-btn>
+</span> 
+<span class="upspan">
 
-        </div>
-        <div class="bg-black " style="margin:100px 0px">
-<v-container style="height:774px" class="d-flex align-center justify-center">
-    <div class="text-center">
-        <v-img class="mx-auto mb-8" width="100%" max-width="420px" src="https://res.cloudinary.com/payhospi/image/upload/v1690543426/frame_aivj5d.png"></v-img>
-        <p style="max-width: 659px;
+<v-btn style="
+
+" flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img></v-avatar>
+    <span class="mr-2" style="color: var(--carbon-4, #333);
+        font-size: 14px;letter-spacing: 2.38px;
+        font-weight: 500;">
+
+        KENYA
+    </span>
+</v-btn>
+</span>
+  <span class="upspan">
+
+    <v-btn style="height: auto;"  flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
+
+                        RWANDA
+                    </span>
+                </v-btn>
+  </span>
+  <span class="upspan">
+    <v-btn style="height: auto;"  flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+                    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img></v-avatar>
+                    <span class="mr-2" style="color: var(--carbon-4, #333);
+                        font-size: 14px;letter-spacing: 2.38px;
+                        font-weight: 500;">
+
+                        GHANA
+                    </span>
+                </v-btn>
+</span>   
+<span class="upspan">
+<v-btn style="" flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img></v-avatar>
+    <span class="mr-2" style="color: var(--carbon-4, #333);
+        font-size: 14px;letter-spacing: 2.38px;
+        font-weight: 500;">
+
+        NIGERIA
+    </span>
+</v-btn>
+
+</span>    
+<span class="upspan">
+
+<v-btn style=" " flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img></v-avatar>
+    <span class="mr-2" style="color: var(--carbon-4, #333);
+        font-size: 14px;letter-spacing: 2.38px;
+        font-weight: 500;">
+
+        SOUTH AFRICA
+    </span>
+</v-btn>
+</span> 
+<span class="upspan">
+
+<v-btn style="
+
+" flat rounded="xl" class=" px-2  mx-3 py-2" height="auto" >
+    <v-avatar size="30.88" class="mr-1"><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img></v-avatar>
+    <span class="mr-2" style="color: var(--carbon-4, #333);
+        font-size: 14px;letter-spacing: 2.38px;
+        font-weight: 500;">
+
+        KENYA
+    </span>
+</v-btn>
+</span>
+ </div></div>
+      </v-card>
+      </v-container>
+      <v-container style=" position: relative;   max-width: 1417px;" class="pt-0 " fluid>
+
+<webdiscover />
+<webexplore />
+
+  </v-container>
+<webfooter @opendialog="opendialog"/>
+<v-dialog max-width="1200" class="d-flex justify-center" v-model="dialog">
+    <v-sheet class="mx-auto " width="100%" style="max-width: 1200px;overflow-x: hidden; border-radius: 15px;" >
+      <v-row class="dialogrow">
+          <v-col cols="12" md="7" class="pa-0 d-flex align-center justify-center ">
+              <div class="py-12">
+
+              <p class="mb-4 px-3 subtitles" style="color: #000;
 font-size: 48px;
 font-weight: 600;
-line-height: 120%; /* 57.6px */
-letter-spacing: -1.44px;
-background: linear-gradient(90deg, #FFF 0%, rgba(255, 255, 255, 0.42) 100%);
-background-clip: text;
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;">Subscribe to our newsletter to get updates on our Umoja</p>
+line-height: 120%; /* 76.8px */
+letter-spacing: -1.44px;">Join the Umoja Waitlist</p>
+<div class="px-8 text-left" style="max-width: 400px;">
+<v-form ref="form" >
 
-<p class="mt-4" style="color: #969696;
-font-size: 20px;
-font-weight: 400;
-line-height: 180%; /* 36px */
-letter-spacing: -0.6px;">GET 20% OFF for your first order buy subscribing to our news letter</p>
-<div style="max-width: 545px;" class="mx-auto d-flex mt-8 py-3">
-    <v-text-field style="    background: rgba(248, 248, 248, 0.10);
-    border-radius: 50px;overflow: hidden;"  prepend-inner-icon="mdi mdi-email-outline" class=" mr-3" :rules="[required]" v-model="name" hide-details="" placeholder="Enter your email address" density="comfortable"  >
+  <p class="inputLabel">Full Name</p>             
+  <v-text-field :rules="[required]" v-model="name" placeholder="Enter your full name" density="comfortable"  >
   </v-text-field>
-  <v-btn color="green" rounded="xl" size="x-large" flat width="134">Subscribe</v-btn>
+  <p class="inputLabel">Email Address</p>             
+  <v-text-field :rules="[rules.email]"  v-model="email" placeholder="Enter your email address" density="comfortable"  >
+  </v-text-field>
+  <p class="inputLabel">User Category Name</p>             
+  <v-select :rules="[required]" :items="['User', 'Vendor']" v-model="category" placeholder="Select Buyer or Vendor" append-inner-icon="mdi mdi-chevron-down" density="comfortable"  >
+  </v-select>
+</v-form>
+<div class="alignc">
+
+  <v-btn :loading="loading" @click="submitForm()" width="235" class="my-4" flat size="large" color="green rounded-xl" >
+      <span style="font-size: 14px;">
+          Join the Waitlist
+      </span>
+  </v-btn>
 </div>
-<p style="color: var(--carbon-1, #EDEDED);
-font-size: 14px;
+</div>
+
+       </div>
+          </v-col>
+          <v-col v-if="!$vuetify.display.smAndDown" cols="12" class="pa-0" md="5">
+              <v-carousel continuous :interval="3000" height="568"  cycle hide-delimiter-background hide-delimiters hide-controls :show-arrows="false">
+              <v-carousel-item  v-for="n in ['https://res.cloudinary.com/payhospi/image/upload/c_fit,w_700/v1689518404/rectangle-1922_a41ixf.png', 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_700/v1689486649/rectangle-1922_rfqjbp.png']" :key="n" height="568">
+                  <v-card height="568"  rounded="0" width="100%" :image="n">
+                  <div class="pa-8" style="width: 100%; left: 0;bottom:0;position: absolute;">
+                  <p  style="color: #FFF;
+font-size: 14px;max-width: 413px;
 font-weight: 400;
-line-height: 180%; /* 25.2px */
-letter-spacing: -0.42px;">You will be able to unsubscribe at anytime. Read our privacy policy <span style="color: var(--deep-sky-blue-4, #1273EB);text-decoration-line: underline;">here</span> </p>
-    </div>
-</v-container>
+line-height: 140%;">Join our waitlist today and be the first to experience our social commerce platform.</p>
+<p class="my-4" style="color: var(--magnetic-green-2, #CDD6D4);
+font-size: 10px;
+font-weight: 400;
+line-height: 180%; /* 18px */
+letter-spacing: -0.3px;">© Copyright 2023. All Rights Reserved.</p>
 </div>
-<div>
-    <v-container  style="max-width:1400px">
-        <p style="
-font-size: 48px;
+              </v-card>
+                  </v-carousel-item>
+              </v-carousel>
+          
+          </v-col>
+      </v-row>
+  </v-sheet>  
+</v-dialog>
+
+<v-dialog  max-width="504" v-model="dialog2">
+      <div class="pa-4">
+
+          <v-sheet class="pa-4 mx-auto" width="100%" style="max-width: 504px; border-radius: 20px;" >
+          <div class="d-flex justify-end">
+              <v-btn @click="dialog2 = false" icon="mdi mdi-close" size="x-small" flat color="#E6F0ED" rounded="xl"></v-btn>
+          </div>
+          <div class="text-center">
+              <v-avatar size="82"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/https-lottiefiles-com-91001-success_hwwtuz.png"></v-img></v-avatar>
+              <p class="mx-auto mt-6 mb-3" style="color: var(--carbon-4, #333);
+text-align: center;
+max-width: 311px;
+font-size: 32px;
 font-weight: 600;
-line-height: 180%;" class="mb-8">FAQ's</p>
-        <v-divider class="mb-12"></v-divider>
-
-<v-row>
-    <v-col class="py-0" @click="openfaq(i)" v-for="(n, i) in faqs" :key="i" cols="12" lg="6">
-      
-<div class="d-flex justify-space-between align-center">
-    <p style="
+line-height: 102.7%; /* 32.864px */
+letter-spacing: -1px;">We’ve added you to our waitlist</p>
+<p style="color: var(--carbon-3, #969696);
+text-align: center;
 font-size: 16px;
-font-weight: 600;">{{ n.title }}</p>
-
-    <v-icon  color="green" :icon="openid == i ? 'mdi mdi-minus': 'mdi mdi-plus'"></v-icon>
-</div>
-<v-expand-transition leave-absolute>
-
-    <p style="color: var(--carbon-4, #333);
-font-size: 14px;
 font-weight: 400;
-line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solutions for businesses of all sizes. Our connected tools are built to scale with future-focused, connected tools. Enhanced, customer-friendly experiences help build deeper data and better customer relationships. And our open platform means you can connect to prebuilt integrations or build out your own with our APIs. Learn how Umoja works with larger, more complex businesses.' }}</p>
-</v-expand-transition>
-        <v-divider class="my-8"></v-divider>
-    </v-col>
-</v-row>
-    </v-container>
-</div>
-<mainfooter />
+letter-spacing: -0.351px;">We’ll let you know when Umoja is ready</p>
+
+<v-btn width="215" color="#EDF0EF" flat rounded="xl" class="mt-4 mb-6"><v-icon size="15" color="green" icon="mdi mdi-email-outline" class="mr-2"></v-icon> <span style="color: var(--magnetic-green-4, #2C6E63);
+text-align: center;
+font-size: 12px;
+font-weight: 400;
+line-height: 102.7%; ">{{emailtxt}}</span></v-btn>
+          </div>
+          </v-sheet>
+      </div>
+                    </v-dialog>
+  </div>
+
 </template>
 <style>
-.divbtn{
-    transition: all 0.3s ease-in-out;
+.scroll {
+position: absolute;
+width: 100vw;
+bottom: 37px;
+overflow: hidden;
+z-index: 1;
+margin: 0;
+padding: 0;
 }
 
-
-.blinking-circle {
-  width: 38px;
-    height: 6px;
-    top: 105%;
-    padding: 4px;
-    position: absolute;
-    border: 4px solid white;
-    border-radius: 50%;
-    z-index: -3;
-    background-color: #2C6E63;
-    animation: blink 2.5s infinite;
+.m-scroll {
+overflow: hidden;
+height: 100%;
+white-space: nowrap;
+animation: scrollText 20s infinite linear;
+margin: 0;
+font-size: 0;
+display: flex;
+justify-content: space-between;
+width: fit-content;
 }
 
-@keyframes blink {
+.upspan {
+display: inline-block;
+margin: 0;
+padding: 0;
+color: white;
+}
+
+@keyframes scrollText {
+from {
+  transform: translateX(0%);
+}
+to {
+  transform: translateX(-50%);
+}
+}
+.bto .v-btn__overlay {
+display: none;
+}
+.smlimg{
+  animation: float 6s ease-in-out infinite;
+  transform: translatey(0px);
+}
+@keyframes float {
+0% {
+  transform: translatey(0px);
+}
+50% {
+  transform: translatey(-20px);
+}
+100% {
+  transform: translatey(0px);
+}
+}
+.imgs{
+  transition: all 0.5s ease!important;
+  transform: rotate(-15deg);
+  right: -160px;
+}
+.discoimgs{
+  transition: all 0.5s ease!important;
+  scale:1.0
+}
+.discocard:hover .discoimgs, .discoimgs:hover { 
+  scale:1.05
+}
+.customimgs{
+  transition: all 0.5s ease!important;
+  top: 30%;
+  left: 30%;
+}
+.customcard:hover .customimgs, .customimgs:hover { 
+  top: 22%;
+  left: 24%;
+}
+.rw {
+  background: #fff;
+  backdrop-filter: blur(3px);
+animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+0% {
+  transform: translateX(0px);
+}
+50% {
+  transform: translateX(50px);
+}
+100% {
+  transform: translateX(0px);
+}
+}
+.ng {
+  background: #fff;
+  backdrop-filter: blur(3px);
+animation: slide2 13s linear infinite;
+}
+
+@keyframes slide2 {
+0% {
+  transform: translateX(0px);
+}
+50% {
+  transform: translateX(15px);
+}
+100% {
+  transform: translateX(0px);
+}
+}
+.sa {
+animation: slide3 12s linear infinite;
+background: #fff;
+  backdrop-filter: blur(3px);
+}
+
+@keyframes slide3 {
+0% {
+  transform: translateX(0px);
+}
+50% {
+  transform: translateX(45px);
+}
+100% {
+  transform: translateX(0px);
+}
+}
+
+.gh {
+animation: slide4 10s linear infinite;
+}
+
+@keyframes slide4 {
+0% {
+  transform: translateX(0px);
+}
+50% {
+  transform: translateX(-50px);
+}
+100% {
+  transform: translateX(0px);
+}
+}
+.ke {
+  background: #fff;
+  backdrop-filter: blur(3px);
+animation: slide5 10s linear infinite;
+}
+
+@keyframes slide5 {
+0% {
+  transform: translateX(0px);
+}
+50% {
+  transform: translateX(-50px);
+}
+100% {
+  transform: translateX(0px);
+}
+}
+.rotimg {
+animation: rotate 60s linear infinite;
+}
+
+@keyframes rotate {
   0% {
-    scale: 1.5;
+      transform: rotate(0deg);
   }
   50% {
-    scale: 0.5;
+      transform: rotate(360deg);
   }
   100% {
-    scale: 1.5;
+      transform: rotate(0deg);
   }
 }
+.bentcard:hover .imgs, .imgs:hover {
+  transform: rotate(0deg) !important;
+  right: 0!important;}
+  .height0{
+    height: 436px!important;
 
-/* img.v-img__img.v-img__img--contain:first-of-type */
-  .background {
-    animation: zoom-and-slide 20s infinite;
-    will-change: transform;
   }
-
-  @keyframes zoom-and-slide {
-    0% {
-      transform: scale(1);
+  @media only screen and (max-width: 768px) {
+    .row0{
+      margin-top: 0px!important;
     }
-    25% {
-      transform: translate3d(0, 0, 0) scale(1.5);
-      transform-origin: left;
+    .imgs {
+  transform: rotate(0deg) !important;
+  right: 0!important;}
+    .height1{
+  min-height: 852px!important;
     }
-
-    50% {
-      transform: translate3d(0, 0, 0) scale(1.4);
-      transform-origin: top right;
+    .bottom0{
+      bottom: 0!important;
+      padding-top: 49px!important;
     }
-
-    75% {
-      transform: translate3d(0, 0, 0) scale(1.5);
-      transform-origin: bottom center;
+   .topcard {
+      align-items: start!important;
     }
+    .height0{
+      height: 376px!important;
 
-   
-    100% {
-      transform: scale(1);
     }
-  }
+    .padzero{
+      padding: 0!important;
+    }
+      .rotimg {
+  top: -11%!important;
+  left: 65%!important;        }
+      /* CSS rules for smaller screens */
+.bigTitle{
+  font-size: 48px !important;
+}
+.gh{
+  scale: 0.9;
+  right: -9%!important;
+  top: 2%!important;
+}
+.rw{
+  scale: 0.9;
+  top: 7%!important;
+  left: -6%!important;
+}
+.ng{
+  scale: 0.9;
+  bottom: 9%!important;
+  top: unset!important;
+  left: 3%!important;
+  
+}
+.ke{
+  scale: 0.9;
+  bottom: 19%!important;
+  top: unset!important;
+  right: -9%!important;
+}
+.sa{
+  scale: 0.9;
+  bottom: 28%!important;
+  top: unset!important;
+  right: 55%!important;
+}
+.logo{
+  width: 122px!important;
+  height: 80px!important;
+}
+.card2{
+padding-top: 45px!important;
+  padding-left: 24px !important;
 
+}
+.card2div{
+padding-right: 24px !important;
 
+}
+.titlesub{
+
+  font-size:18px!important;
+
+}
+.subtitles{
+
+  font-size: 36px!important;
+
+}
+.alignc{
+  text-align: center!important;
+}
+
+.dialogrow{
+  padding:12px 12px 0px 12px!important;
+  text-align: center!important;
+}
+/* Add more rules here as needed */
+.cardtitle{
+    font-size: 28px!important;
+}
+.tinytext1{
+    font-size: 12px!important;
+}
+.cardsub{
+    font-size: 16px!important;
+}
+.footcard{
+  padding-bottom: 100px!important;
+
+}
+.footbot{
+  padding-bottom: 20px !important;
+
+}
+.conte{
+  padding-left: 0!important;
+  padding-right: 0!important;
+}
+.customimgs {
+  scale: 1!important;
+    position: relative!important;
+    bottom: -5px!important;
+  transition: all 0.5s ease!important;
+  top: unset!important;
+  left: 0!important;
+}
+}
 </style>
 <script>
-import { gsap, Bounce, CSSPlugin } from 'gsap';
-
+import axios from 'axios';
 
 export default {
-  data() {
-    return {
-     
-    
-        points:[
-            {
-            icon: 'cart',
-            title: 'Umoja Delivery',
-            body: 'Get free delivery for every order above $20'
-        },
-            {
-            icon: 'history',
-            title: '90 Days Return',
-            body: 'Return within 90 days of receiving your order.'
-        },
-            {
-            icon: 'credit-card',
-            title: 'Secure Payment',
-            body: '100% secure payment. Get easy support anytime'
-        },
-            {
-            icon: 'face-agent',
-            title: '24/7 Online Support',
-            body: '100% secure payment. Get easy support anytime'
-        },
-    ],
-    openid: null,
-        placescards:false,
-        mods:1,
-       images:[
-    'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302547/Rectangle_7_h4lxnd.png',
-'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_6_1_qlrzss.png',
-'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_5_ucb5ag.png',
-'https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_4_tzf2yf.png',
-'https://res.cloudinary.com/dkbt6at26/image/upload/v1684298703/profile_ievpza.png'],
-rating: 4,
-        items:[
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png',
-                price: '115.32',
-                likes: '1.2k'
-            },
-            {
-                name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png',
-                price: '57.00',
-                likes: '456',
-                oos: true
-            },
-          
-            {
-                name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
-                price: '57.00',
-                likes: '456',
-            },
-            {
-                name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
-                price: '79.00',
-                likes: '66',
-                oos: true
-            },
-        ],
-        faqs: [
-            {
-                title: 'Does Umoja have tools for complex business?',
-                body: ''
-            },
-            {
-                title: 'How does buy now pay later work',
-                body: ''
-            },
-            {
-                title: 'What are merchant services?',
-                body: ''
-            },
-            {
-                title: 'What kind of resources does Umoja provide businesses?',
-                body: ''
-            },
-            {
-                title: 'Does Umoja have tools for professional services businesses?',
-                body: ''
-            },
-            {
-                title: 'How does Umoja compare to other e-commerce platforms',
-                body: ''
-            },
-        ]
-    }
+data() {
+  return {
+      dialog: false,
+      mods:1,
+      name: '',
+      dialog2: false,
+      loading: false,
+      category:null,
+      email: '',
+      emailtxt: '',
+      rules: {
+      email: (value) => {
+        const pattern =
+          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(value) || "Invalid e-mail.";
+      },
     },
-    mounted(){
-  
-      gsap.registerPlugin(CSSPlugin);
-
-    },
-methods: {
-  async startall(){
-    this.placescards = true
-
-    this.$nextTick(() => {
-    
-  this.animateBox('.box1', 0);
-  this.animateBox('.box2', 0.5);
-  this.animateBox('.box3', 1);
-  this.animateBox('.box4', 1.5);
-  const box =  document.getElementById('img')
-
-setTimeout(() => {
-  box.classList.add('background');
-}, 2000);
-});
-  },
-   animateBox(box, delay) {
-   gsap.to(box,
-    {
-      opacity: 1,
-      scale: 1,
-      borderRadius: '23.0164px',
-      bottom: '2px',
-      ease: Bounce.easeOut,
-      duration: 1.3,
-      delay,
-      
-    }
-  );
+  };
 },
-    openfaq(i){
-        if(this.openid == i){
-            this.openid = null
-            return
+computed: {
+  required() {
+      return (value) => {
+        if (!value) {
+          return "Required.";
+        } else if (value.length < 3) {
+          return "Must be at least 3 characters.";
+        } else {
+          return true;
         }
-        this.openid = i
+      };
     },
+  },
+methods: {
+  opendialog(){
+      this.dialog = true
+  },
+  async submitForm() {
+ var validator = await this.$refs.form.validate()
+    if (validator.valid) {
+   
 
-filt(text){
-var newText = text.length > 40 ? text.slice(0, 40) +'...' : text
-return newText
+  this.loading = true;
+    axios.post('https://umoja-eaac4dc3d4d4.herokuapp.com/api/join_waitlist', {
+      name: this.name,
+      category: this.category,
+      email: this.email
+    })
+    .then(response => {
+      this.loading = false;
+      this.emailtxt = this.email
+      this.name = ''
+      this.email = ''
+      this.category = null
+      this.dialog = false
+      this.dialog2 = true
+      
+      console.log(response.data);
+      // Handle successful response here
+    })
+    .catch(error => {
+    this.dialog = false
+        this.loading = false;
+      console.error(error);
+      alert('An error occurred')
+      // Handle error here
+    });
+  }else{
+    this.loading = false;
+  }
+  }
 }
-},
-}
+};
 </script>

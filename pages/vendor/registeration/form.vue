@@ -11,7 +11,7 @@
     top: 69px;">
         <div style="position: absolute;left: 24px; bottom: 22px;"
             class="d-flex pt-12 mt-12 justify-space-between align-center">
-            <v-avatar class="" @click="$router.push('/')" size="135" style="height:auto!important" rounded="0">
+            <v-avatar class="" @click="$router.push('/')" size="135" style="cursor: pointer;height:auto!important" rounded="0">
 
                 <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
             </v-avatar>

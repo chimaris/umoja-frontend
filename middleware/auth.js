@@ -1,4 +1,4 @@
-import { useUserStore } from '@/store/user'; // Adjust the import path
+import { useUserStore } from '@/store/userStore'; // Adjust the import path
 
 export default function ({ redirect }) {
   const userStore = useUserStore();

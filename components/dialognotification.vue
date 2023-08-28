@@ -1,18 +1,20 @@
 <template>
-    <v-card style="max-width: 620px;max-height: 80vh; border:none" class=" rounded-lg">
-        <div class="w-100">
+    <v-card style="    backdrop-filter: blur(7px);
+    background: rgb(255 255 255 / 89%);max-width: 620px;max-height: 80vh; border:none" class=" rounded-lg">
+        <div style="    position: sticky;
+    top: 0;" class="topbar w-100">
             <div class="d-flex pa-6 justify-space-bewteen">
                 <p style="color: #1E1E1E;
 font-size: 20px;
-font-weight: 600;">Notification</p>
+font-weight: 600;">Notifications</p>
 <v-spacer></v-spacer>
-                <v-btn><span>Mark all as read</span></v-btn>
+                <v-btn class="green-hover" flat style="border:1px solid #ececec"><span>Mark all as read</span></v-btn>
             </div>
         </div>
 
         <div v-for="n in ['Shipped', 'Processed']">
             <v-divider></v-divider>
-            <div class="px-6 py-6">
+            <div class="notihover px-6 py-6">
                 <v-row>
                     <v-col cols="1">
                         <v-icon size="7" color="#1273EB" icon="mdi mdi-circle"></v-icon>
@@ -40,7 +42,7 @@ font-weight: 500;" class="mt-2">Just Now</p></v-col>
 
         <div v-for="(n, i) in ['Shipped', 'Processed']">
             <v-divider></v-divider>
-            <div class="px-6 py-6">
+            <div class="notihover px-6 py-6">
                 <v-row>
                     <v-col style="position: relative;" cols="1">
                         <v-icon v-if="i == 0" style="position: absolute;top: 5px;left: 5px;" size="7" color="#1273EB" icon="mdi mdi-circle"></v-icon>
@@ -75,7 +77,7 @@ font-weight: 500;" class="mt-2">Just Now</p></v-col>
         </div>
         <div v-for="(n, i) in recentitems">
             <v-divider></v-divider>
-            <div class="px-6 py-6">
+            <div class="notihover px-6 py-6">
                 <v-row>
                     <v-col style="position: relative;" cols="1">
                         <!-- <v-icon v-if="i == 0" style="position: absolute;top: 5px;left: 5px;" size="7" color="#1273EB" icon="mdi mdi-circle"></v-icon> -->
@@ -109,7 +111,7 @@ font-weight: 500;" class="mt-2">Just Now</p></v-col>
         </div>
         <div v-for="(n, i) in ['Shipp']">
             <v-divider></v-divider>
-            <div class="px-6 py-6">
+            <div class="notihover px-6 py-6">
                 <v-row>
                     <v-col style="position: relative;" cols="1">
                         <v-icon v-if="i == 0" style="position: absolute;top: 5px;left: 5px;" size="7" color="#1273EB" icon="mdi mdi-circle"></v-icon>

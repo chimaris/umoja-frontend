@@ -1,5 +1,6 @@
 <template>
-    <v-card style="max-width: 620px;max-height: 80vh; border:none" class=" rounded-lg">
+    <v-card style="    backdrop-filter: blur(7px);
+    background: rgb(255 255 255 / 89%);max-width: 620px;max-height: 80vh; border:none" class=" rounded-lg">
 <p style="color: var(--carbon-6, #1E1E1E);
 font-size: 20px;
 font-weight: 600;" class="pa-6 pb-4">🔥 Popular Products </p>
