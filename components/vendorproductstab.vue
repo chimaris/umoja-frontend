@@ -33,7 +33,7 @@ color: #969696;"> 72 products found</p>
                     See product
                 </span>
             </v-btn>
-                <v-btn to="/user/login"  flat variant="text"  class="ml-2 text-white howit"><span style="text-decoration:underline">
+                <v-btn   flat variant="text"  class="ml-2 text-white howit"><span style="text-decoration:underline">
                     <span class="smallBtn">
                     Not now
                 </span>

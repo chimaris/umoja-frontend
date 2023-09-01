@@ -10,10 +10,11 @@ font-weight: 400;">Lorem ipsum dolor sit amet consectetur. Mattis vitae.</p>
 <v-row class="mt-4"> 
  
     <v-col cols="12" v-for="(n, i) in availableApps" :key="i" md="6" lg="4">
-        <v-sheet style="min-height: 235px;" class="cardStyle">
+        <v-sheet style="min-height: 220px;" class="cardStyle">
             <div class="d-flex mb-4 justify-space-between">
 
-                <v-avatar size="50" :color="n.color" rounded="lg"></v-avatar>
+                <v-avatar size="50" class="pa-2" :color="n.color" rounded="lg">
+                <v-img style="opacity: 0.4;" src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_100/v1693570621/frame_hcvde3.png"></v-img></v-avatar>
 
                 <v-btn class="rounded-lg" v-if="isIntegrated(n.id)" variant="tonal" color="green" @click="uninstall(n.id)" > <v-icon class="mr-1" icon="mdi mdi-lightning-bolt-outline"></v-icon>  <span style="
                 font-size: 14px;

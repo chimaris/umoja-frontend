@@ -17,7 +17,7 @@ color: #969696;"> 3 live promos%</p>
     </div>
     <div class="mb-6" v-for="n in 2">
 
-<v-sheet flat color="#FDF1ED" class="px-8 rounded-lg d-flex justify-space-between align-center mb-6 py-3">
+<v-sheet flat color="#FDF1ED" class="px-6 rounded-lg d-flex justify-space-between align-center mb-6 py-3">
 <div class="d-flex align-center">
 
     <v-icon icon="mdi mdi-sale" color="orange"></v-icon> <p class="ml-2" style="font-weight: 600;
