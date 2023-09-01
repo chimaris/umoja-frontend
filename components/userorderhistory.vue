@@ -13,7 +13,7 @@ font-size: 14px;
 font-style: normal;
 font-weight: 500;">Here you can manage your order</p>
 </div>
-    <div class="d-flex px-6 pb-6 w-100 align-center">
+    <div id="orderdet" class="d-flex px-6 pb-6 w-100 align-center">
         <v-text-field hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Search for Order ID or Product"
             density="compact">
         </v-text-field>
@@ -166,7 +166,7 @@ font-weight: 600;">
       </v-window-item>
       <v-window-item value="2">
         
-        <div id="orderdet" class="px-6 pb-6 pt-4">
+        <div  class="px-6 pb-6 pt-4">
 
           <v-btn @click="viewswitch = '1'" size="40" rounded="xl" flat style="border: 1px solid #CECECE;" 
           class="ml-" ><v-icon size="16" icon="mdi mdi-arrow-left-top"></v-icon>

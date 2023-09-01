@@ -129,22 +129,28 @@ font-weight: 500;">SVG, PNF, JPG, or GIF (max 800X400px)</p>
                 <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687702335/rectangle-1939_khvhag.png"></v-img>
             </v-avatar>
             <div  class="ml-3">
-            <div class=" d-flex"><p style="color: #1E1E1E;
-font-size: 16px;
-font-weight: 600;
-line-height: 140%;">Thatdesignpro</p> <p 
-style="color: #969696;
-font-size: 14px;
-font-weight: 400;
-line-height: 140%;"> . 27th Nov, 2023</p></div>
-
+       
+ <div class="d-block ">
+   <div class="d-flex align-center">
+    <p style="color: #1E1E1E;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 140%;">Thatdesignpro</p> 
+       <v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
+       <p 
+            style="color: #969696;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 140%;">  27th Nov, 2023</p>
+   </div>
+    </div> 
 <div class="d-block   mt-1">
    <div class="d-flex align-center">
 
        <v-chip style="    justify-content: center;
     align-items: center;
     display: flex;" color="#936900"  size="small" rounded="lg"> Category</v-chip>
-       <v-icon class="mx-1" size="10" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
+       <v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
        <div class=" text-truncate "
        style="color: #1E1E1E;
    font-size: 14px!important;
@@ -183,21 +189,25 @@ line-height: 140%;"> . 27th Nov, 2023</p></div>
                 </v-avatar>
 
             <div  class="pl-3" style="min-width: 0;">
-            <div class=" d-flex"><p style="color: #1E1E1E;
-font-size: 16px;
-font-weight: 600;
-line-height: 140%;">Thatdesignpro</p> <p 
-style="color: #969696;
-font-size: 14px;
-font-weight: 400;
-line-height: 140%;"> . 27th Nov, 2023</p></div>
+                <div class="d-flex align-center">
+    <p style="color: #1E1E1E;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 140%;">Thatdesignpro</p> 
+       <v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
+       <p 
+            style="color: #969696;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 140%;">  27th Nov, 2023</p>
+   </div>
 <div class="d-block   mt-1">
    <div class="d-flex align-center">
 
        <v-chip style="    justify-content: center;
     align-items: center;
     display: flex;" color="#936900"  size="small" rounded="lg"> Fashion</v-chip>
-       <v-icon class="mx-1" size="10" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
+       <v-icon class="mx-1" size="5" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
        <div class=" text-truncate "
        style="color: #1E1E1E;
    font-size: 14px!important;
