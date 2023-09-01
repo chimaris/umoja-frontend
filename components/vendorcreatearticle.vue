@@ -141,14 +141,21 @@ We recommend uploading an image that is <span style="font-weight: 700;">1920x108
                 <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687702335/rectangle-1939_khvhag.png"></v-img>
             </v-avatar>
             <div  class="ml-3">
-            <div class=" d-flex"><p style="color: #1E1E1E;
+
+            <div class="d-block   mt-1">
+   <div class="d-flex align-center">
+    <p style="color: #1E1E1E;
             font-size: 16px;
             font-weight: 600;
-            line-height: 140%;">Thatdesignpro</p> <p 
+            line-height: 140%;">Thatdesignpro</p> 
+       <v-icon class="mx-1" size="5" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
+       <p 
             style="color: #969696;
             font-size: 14px;
             font-weight: 400;
-            line-height: 140%;"> . 27th Nov, 2023</p></div>
+            line-height: 140%;">  27th Nov, 2023</p>
+   </div>
+    </div> 
 <div class="d-flex align-center  mt-1">
 <p 
     style="color: var(--carbon-3, #969696);
@@ -189,14 +196,20 @@ font-weight: 600;">
      <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688715270/rectangle-22429_agrgwa.png"></v-img>
  </v-avatar>
  <div  class="ml-3">
- <div class=" d-flex"><p style="color: #1E1E1E;
-font-size: 16px;
-font-weight: 600;
-line-height: 140%;">Thatdesignpro</p> <p 
-style="color: #969696;
-font-size: 14px;
-font-weight: 400;
-line-height: 140%;"> . 27th Nov, 2023</p></div>
+    <div class="d-block   mt-1">
+   <div class="d-flex align-center">
+    <p style="color: #1E1E1E;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 140%;">Thatdesignpro</p> 
+       <v-icon class="mx-1" size="5" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
+       <p 
+            style="color: #969696;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 140%;">  27th Nov, 2023</p>
+   </div>
+    </div> 
 <div class="d-flex align-center  mt-1">
 <p 
 style="color: var(--carbon-3, #969696);

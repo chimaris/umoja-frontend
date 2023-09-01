@@ -37,7 +37,7 @@ letter-spacing: -0.2px;">Products</p>
 <v-row class="my-4">
     <v-col  cols="4">
         <v-card width="100%" image="https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png" flat style="border-radius: 6px; " height="266" class="d-flex justify-end align-start pa-2" color="#F8F8F8">
-<v-btn size="small" class="rounded-xl" icon="mdi mdi-trash-can-outline">
+<v-btn size="x-small" class="rounded-xl" icon="mdi mdi-trash-can-outline">
 
 </v-btn>
 </v-card>
@@ -48,11 +48,11 @@ border: 1px dashed var(--carbon-2, #CECECE);" height="266" class="d-flex justify
 <div class=" text-center">
     <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688740513/gallery_azmmka.png" class="rounded-lg mx-auto mb-2" width="45"></v-img>
     <p style="color: #333;
-font-size: 10px;
+font-size: 13px;
 font-weight: 400;
 ">Drop your images here, or</p>
     <p style="color: #333;
-font-size: 10px;
+font-size: 13px;
 font-weight: 400;
 ">select <span style="color: #1273EB;">click to browse
 </span> </p>
@@ -137,13 +137,20 @@ style="color: #969696;
 font-size: 14px;
 font-weight: 400;
 line-height: 140%;"> . 27th Nov, 2023</p></div>
-<div class="d-flex align-center  mt-1">
-    <v-chip color="#936900" class="mr-2" size="small" rounded="lg"> Category</v-chip> <p 
-    style="color: #1E1E1E;
-font-size: 14px;
-font-weight: 400;"> .  Address</p>
-</div>
 
+<div class="d-block   mt-1">
+   <div class="d-flex align-center">
+
+       <v-chip style="    justify-content: center;
+    align-items: center;
+    display: flex;" color="#936900"  size="small" rounded="lg"> Category</v-chip>
+       <v-icon class="mx-1" size="10" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
+       <div class=" text-truncate "
+       style="color: #1E1E1E;
+   font-size: 14px!important;
+   font-weight: 400;">Address</div>
+   </div>
+    </div> 
 
 </div>
 </div>
@@ -187,8 +194,10 @@ line-height: 140%;"> . 27th Nov, 2023</p></div>
 <div class="d-block   mt-1">
    <div class="d-flex align-center">
 
-       <v-chip color="#936900"  size="small" rounded="lg"> Fashion</v-chip>
-       <v-icon class="mx-1" size="5" color="grey" icon="mdi mdi-circle"></v-icon>
+       <v-chip style="    justify-content: center;
+    align-items: center;
+    display: flex;" color="#936900"  size="small" rounded="lg"> Fashion</v-chip>
+       <v-icon class="mx-1" size="10" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
        <div class=" text-truncate "
        style="color: #1E1E1E;
    font-size: 14px!important;
@@ -244,17 +253,17 @@ line-height: 20px;
     color: #000000;
     " class="mt-1">Organic cotton certified</p>
     <p style="font-weight: 600;
-    font-size: 10px;
+    font-size: 12px;
     line-height: 13px;
     color: #000000;
-    " class="d-flex mb-1 align-center">
+    " class="d-flex my-1 align-center">
         <v-rating
         v-model="rating"
         color="grey-lighten-2 "
         active-color="#E7CE5D"
-        class="ml-2 rt"
-        size="x-small"
-        ></v-rating><span style="margin-left:-9px ;" >(0)</span> 
+        class="" density="compact"
+        size="small"
+        ></v-rating><span style="margin-left:9px ;" >(0)</span> 
     </p>
                           <div class="d-flex align-center justify-space-between">
                 <div class="d-flex align-center"> 

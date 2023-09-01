@@ -4,7 +4,7 @@
         <v-col :cols="cols[0]" class="pb-0">
             <v-card flat tile width="100%"  height="100%">
             <v-container style="min-height:100vh">
-                <v-avatar class="" @click="$router.push('/')" size="150" style="cursor: pointer;height:auto!important" rounded="0">
+                <v-avatar class="" @click="$router.push('/home2')" size="150" style="cursor: pointer;height:auto!important" rounded="0">
   
   <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
 </v-avatar>
@@ -96,12 +96,13 @@ export default {
 methods:{
 login(){
     this.userStore.login({email: this.email,password: this.password});
+    this.$router.push('/home2')
 }
 },
 watch:{
     isLoggedIn(val){
         if(val){
-            this.$router.push('/')
+            this.$router.push('/home2')
         }
     }
 },

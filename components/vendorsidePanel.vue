@@ -62,9 +62,9 @@ color: #596066;">Nweke Franklin</p>
 <v-expand-transition leave-absolute>
   <div class="pt-4" v-show="integratedApps.length && n.subapps && openapps">
   <div style="position: relative;" @click.stop="selectSubItem(b.title)" class="align-center pl-8 pr-6 text-capitalize justify-space-between py-2 d-flex style-2" v-for="(b, i) in integratedApps" :key="i">
-   <div :style="selectedSubItem !== b.title ? 'border-left: 1px solid #333; border-bottom: 1px solid;': 'border-left: 1px solid #2C6E63; border-bottom: 1px solid #2C6E63;'" style="position: absolute;    top: -18px;
+   <div :style="selectedSubItem !== b.title ? 'border-left: 1px solid #333; border-bottom: 1px solid;': 'border-left: 1px solid #2C6E63; border-bottom: 1px solid #2C6E63;'" style="position: absolute;    top: -27%;
     left: 11px;
-    height: 37px;
+    height: 77%;
     width: 16px;border-radius: 0 0 0 7px;"></div>
     <div class="d-flex align-center">
 
@@ -104,13 +104,13 @@ color: #596066;">Nweke Franklin</p>
 ">
 
   <div v-if="!sidebar" class="d-flex pt-12 px-4 justify-space-between align-center style-4">
-    <v-avatar class="style-5" style="cursor: pointer;" @click="$router.push('/')" size="57" rounded="0">
+    <v-avatar class="style-5" style="cursor: pointer;" @click="$router.push('/home2')" size="57" rounded="0">
       <v-img eager="" src="https://res.cloudinary.com/payhospi/image/upload/v1688141514/Frame_2_gfd65l.png"></v-img>
     </v-avatar>
   </div>
   <div v-else="" class="d-flex pt-12 px-8 justify-space-between align-center style-6">
     
-    <v-avatar style="cursor: pointer;" class="style-7" @click="$router.push('/')" size="135" rounded="0">
+    <v-avatar style="cursor: pointer;" class="style-7" @click="$router.push('/home2')" size="135" rounded="0">
       
       <v-img eager="" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
     </v-avatar>
@@ -170,7 +170,7 @@ export default {
             { text: 'Customers', icon: 'mdi mdi-account-group' },
             { text: 'Sales', icon: 'mdi mdi-trending-up' },
             { text: 'Reviews', icon: 'mdi mdi-star' },
-            { text: 'Merchandise', icon: 'mdi mdi-warehouse' },
+            // { text: 'Merchandise', icon: 'mdi mdi-warehouse' },
         ]
       },
         {
@@ -184,12 +184,12 @@ export default {
         name: 'Others',
         list: [
             { text: 'Notifications', icon: 'mdi mdi-message-badge' },
-            { text: 'Help', icon: 'mdi mdi-help-circle' },
+            // { text: 'Help', icon: 'mdi mdi-help-circle' },
             { text: 'Settings', icon: 'mdi mdi-cog' },
         ]
       },
         {
-        name: 'Apps',
+        name: 'Umoja Apps',
         list: [
             { text: 'All Apps', icon: 'mdi mdi-message-badge',
           subapps: [

@@ -280,7 +280,7 @@ your decision</p>
     </v-card>
     </v-col>
     <v-col  v-if="show_more" cols="12" lg="3">
-        <v-card height="100%"  class="reviewstab mx-auto coolTable py-4" width="" style="overflow:hidden"  flat >
+        <v-card height="100%"  class=" mx-auto coolTable py-4" width="" style="overflow:hidden"  flat >
         <div class="d-flex px-4 justify-space-between">
             <div>
                 <p class="mb-2 timernum d-flex align-center text-left">Reviews</p> 
@@ -323,18 +323,19 @@ drerit eget volutpat <span class="text-blue-darken-3 font-weight-medium">
 
 </p>
 <p style="font-weight: 450;
-    font-size: 16px;
+    font-size: 13px;
     line-height: 16px;
     color: #000000;
-    " class="d-flex rev pl-4 mb-1 align-center">
+    " class="d-flex  pl-4 my-2 align-center">
         <v-rating
         v-model="rating"
-        color="grey-lighten-2"
-        active-color="#E7CE5D"
-        class="ml-2"
-        size="small"
-        ></v-rating><span style="margin-left:-9px ;" >4.0/5.0</span> 
+        color="grey-lighten-1"
+        active-color="#F0B136"
+        class=" "
+        size="small" density="compact"
+        ></v-rating><span style="margin-left:9px ;" >4.0/5.0</span> 
     </p>
+    
 </v-carousel-item>
     </v-carousel>
   </v-card>

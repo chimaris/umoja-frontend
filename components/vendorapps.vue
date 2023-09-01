@@ -10,7 +10,7 @@ font-weight: 400;">Lorem ipsum dolor sit amet consectetur. Mattis vitae.</p>
 <v-row class="mt-4"> 
  
     <v-col cols="12" v-for="(n, i) in availableApps" :key="i" md="6" lg="4">
-        <v-sheet class="cardStyle">
+        <v-sheet style="min-height: 235px;" class="cardStyle">
             <div class="d-flex mb-4 justify-space-between">
 
                 <v-avatar size="50" :color="n.color" rounded="lg"></v-avatar>
@@ -29,7 +29,7 @@ font-weight: 600;
 line-height: 20px; /* 111.111% */" class="mb-3">{{n.title}}</p>
 <p style="color: var(--carbon-3, #969696);
 font-size: 14px;
-font-weight: 500;"> Lorem ipsum dolor sit amet consectetur. Aliquam fermentum pellentesque nisl neque faucibus sed hac rhoncus. Nibh purus vulputate potenti adipiscing nunc.</p>
+font-weight: 500;"> {{n.description}}</p>
         </v-sheet>
     </v-col>
 </v-row>

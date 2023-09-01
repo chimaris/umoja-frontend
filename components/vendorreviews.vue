@@ -307,10 +307,22 @@ color: #969696;">🇺🇸 USA, New York City</p>
      
         <td style="max-width: 250px;" class="text-grey-darken-1 pb-4">
            <div class="d-flex reviews2 pr-1 align-center mt-4 justify-space-between">
-            <v-rating style="    height: 37px;
+            <!-- <v-rating style="    height: 37px;
     display: flex;
-    align-items: center;" class="ml-5" color="#F0B136" v-model="rating"></v-rating>
-
+    align-items: center;" class="ml-5" color="#F0B136" v-model="rating"></v-rating> -->
+    <p style="font-weight: 600;
+    font-size: 16px;
+    line-height: 10px;
+    color: #000000;
+    " class="d-flex mb-1 pb-0 pt-1 align-center">
+        <v-rating readonly
+        model-value="4"
+        color="grey-lighten-1"
+        active-color="#F0B136"
+        class="rts" density="compact"
+        size=""
+        ></v-rating><span style="margin-left:3px;margin-top: 3px ;" ></span> 
+    </p>
             <p style="color:  #969696;
 font-size: 12px;
 font-weight: 500;

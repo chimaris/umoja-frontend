@@ -63,13 +63,14 @@ export default {
   watch:{
   isLoggedIn(val){
       if(val){
-          this.$router.push('/')
+          this.$router.push('/home2')
       }
   }
 },
       methods:{
 login(){
   this.userStore.login({email: this.email,password: this.password});
+  this.$router.push('/home2')
 }
   }
 }

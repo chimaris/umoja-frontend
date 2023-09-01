@@ -86,7 +86,7 @@ mounted(){
   methods:{
     logout(){
     this.userStore.logout()
-        this.$router.push('/')
+        this.$router.push('/home2')
 },
     choose(x){
       this.$emit('changePage', 'Order details');

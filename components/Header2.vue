@@ -9,7 +9,7 @@
       <v-container  class="py-1" style="max-width:1400px">
         <div class="d-flex justify-space-between align-center">
         <div class="d-flex  align-center">
-         <v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="cursor: pointer;height:65px!important" rounded="0">
+         <v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer;height:65px!important" rounded="0">
     <v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
   </v-avatar>
       <div class="d-flex">
@@ -110,7 +110,7 @@
           {title:'Sell', route:'/vendor/login', disabled: loggedIn},
           {title:'Discovery', route:'/discovery_page', disabled: false},
           {title:'Market Place', route:'/market_place', disabled: false},
-          {title:'CRM', route:'/vendor/dashboard', disabled: false},
+          {title:'CRM Solution', route:'/vendor/dashboard', disabled: false},
           ]},
       cartStore() {
         return useCartStore();

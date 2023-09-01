@@ -245,7 +245,7 @@ buttons(){
   methods: {
 logout(){
     this.userStore.logout()
-        this.$router.push('/')
+        this.$router.push('/home2')
 },
 filt(text){
 var newText = text.length > 50 ? text.slice(0, 50) +'...' : text
