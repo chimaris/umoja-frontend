@@ -164,7 +164,7 @@ font-weight: 600;">
 
             </div>
             <v-progress-linear
-            v-model="skill" style="width: 20%;left: 70px;"
+            v-model="skill" style="width: 11%;left: 70px;"
             color="#1273EB" class="linearl"
             height="6" rounded
             >    
