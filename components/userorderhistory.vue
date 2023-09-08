@@ -79,8 +79,8 @@ font-weight: 600;">
           <tr style=" width: 100%;height: 104px;">
           
       <td>
-      <v-btn size="40" rounded="xl" flat style="border: 1px solid #CECECE;" @click="select(item.sn+''+ i)" 
-      class="ml-" :icon="selected !== (item.sn+''+ i) ?'mdi mdi-chevron-down':'mdi mdi-chevron-up'">
+      <v-btn size="40" rounded="xl" flat style="border: 1px solid #CECECE;" @click="select(item.sn+''+ i, item)" 
+      class="ml-" icon="mdi mdi-chevron-down">
       </v-btn>
       </td>
       
@@ -154,7 +154,7 @@ font-weight: 600;">
             <td class="px-1">
       
       <v-btn size="40" flat style="border: 1px solid #CECECE;"
-      @click="select(item.sn+''+ i)" class="ml-" icon="mdi mdi-dots-vertical"></v-btn></td>
+      @click="select(item.sn+''+ i, item)" class="ml-" icon="mdi mdi-dots-vertical"></v-btn></td>
       </tr>
       <v-divider v-if="(i+1) < items1.length" style="position: absolute;" inset=""></v-divider>
       </tbody>
@@ -166,22 +166,23 @@ font-weight: 600;">
       </v-window-item>
       <v-window-item value="2">
         
-        <div  class="px-6 pb-6 pt-4">
+        <!-- <div  class="px-6 pb-6 pt-4">
 
-          <v-btn @click="viewswitch = '1'" size="40" rounded="xl" flat style="border: 1px solid #CECECE;" 
+          <v-btn size="40" rounded="xl" flat style="border: 1px solid #CECECE;" 
           class="ml-" ><v-icon size="16" icon="mdi mdi-arrow-left-top"></v-icon>
         </v-btn>
-      </div>
-    <userorderdetails  />
+      </div> -->
+    <userorderdetails :dataselect="dataselect" @takeback="viewswitch = '1'"  />
   </v-window-item>
 </v-window>
 </template>
 
 <script>
 export default {
-    name: "ownerinfo",
-    methods:{
-      select(x){
+name: "userorderhistory",
+  methods:{
+      select(x, y){
+        this.dataselect = y;
     this.viewswitch = '2';
     this.$nextTick(()=>{
 
@@ -199,6 +200,7 @@ export default {
 },
     data() {
         return {
+          dataselect: {},
           viewswitch: '1',
           summary: [
             {

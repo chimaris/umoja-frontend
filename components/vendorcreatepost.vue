@@ -237,7 +237,7 @@ font-weight: 400;" class="mt-4">Lorem ipsum dolor sit amet consectetur. Duis pul
 </div>  
 </div>
 
-<v-divider class="my-5"></v-divider>
+<v-divider class="my-8"></v-divider>
 <div>
     <p class="my-5" style="color: #333;
 font-size: 20px;

@@ -85,7 +85,7 @@ color: #CECECE;" class="font-weight-regular pt-12 mb-4">©2022 Umoja. All Rights
 export default {
     data() {
     return {
-        images:[ 'https://res.cloudinary.com/dkbt6at26/image/upload/v1684229355/portrait-scary-african-shaman-female-with-petrified-cracked-skin-dreadlocks-holds-traditional-mask-dark-background-make-up-concept_1_dr3e2c.png',
+        images:[ 'https://res.cloudinary.com/dkbt6at26/image/upload/c_fit,w_1000/v1684229355/portrait-scary-african-shaman-female-with-petrified-cracked-skin-dreadlocks-holds-traditional-mask-dark-background-make-up-concept_1_dr3e2c.png',
             'https://img.freepik.com/free-photo/side-view-woman-clay-sculpting_23-2149730894.jpg?size=926&ext=jpg','https://img.freepik.com/free-photo/close-up-hands-holding-money_23-2148761613.jpg?size=926&ext=jpg',
         'https://img.freepik.com/free-photo/high-angle-souvenirs-arrangement_23-2149726233.jpg?size=926&ext=jpg',
    ],

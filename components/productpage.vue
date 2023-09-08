@@ -609,7 +609,7 @@ export default {
                 {
                     title: 'Fashion',
                     disabled: false,
-                    href: '/products',
+                    href: '/fashion',
                 },
                 {
                     title: 'Green and brown kente scarf...',

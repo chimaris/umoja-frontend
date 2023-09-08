@@ -1,7 +1,7 @@
 <template>
-<Header2 />
-<div class="pt-8" style="background: #FDF5E7;" >
-    <v-container  style="max-width:1400px" class="mt-4">
+<Header2 :maxwidth="'1200px'"/>
+<div class="pt-12" style="background: #FDF5E7;" >
+    <v-container  style="max-width:1200px" class="mt-4">
      
 <v-row class="pb-6">
     <v-col cols="12" lg="7">
@@ -305,7 +305,7 @@ scale: 0.9; position: absolute"
     </div>
 </div>
 <div>
-    <v-container   style="max-width:1400px" class="py-12 my-12">
+    <v-container   style="max-width:1200px" class="py-12 my-12">
         <v-row>
             <v-col v-for="n in points" :key="n.icon" cols="12" lg="3" md="6">
                <div class="d-flex">
@@ -333,7 +333,7 @@ letter-spacing: -0.14px;" class="pr-8">  {{ n.body }}</p>
 </div>
 
 <div>
-    <v-container  style="max-width:1400px">
+    <v-container  style="max-width:1200px">
         <div class="d-flex mb-12 align-center">
 <p class="d-block" style="color: var(--magnetic-green-4, #2C6E63);
 font-size: 14px;
@@ -367,11 +367,11 @@ letter-spacing: -0.6px;">Umoja provides a unique experience, connecting a variet
 
 </div>
 <div>
-    <v-container   style="max-width:1400px" class="py-12">
+    <v-container   style="max-width:1200px" class="py-12">
 
         <v-row>
             <v-col cols="12" lg="5">
-                <v-img class="heroimg"  style="position: relative;border-radius: 15px;" width="100%"
+                <v-img cover class="heroimg" @click="$router.push('/fashion')"  style="cursor: pointer; height: calc(100% - 3px);position: relative;border-radius: 15px;" width="100%"
                  lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529528/rectangle-64_zmh8cd.png"
                  src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690529528/rectangle-64_zmh8cd.png">
     <v-btn color="white" size="large" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
@@ -394,7 +394,7 @@ letter-spacing: -0.96px;">Fashion</p>
             <v-col cols="12" lg="7">
                 <v-row>
             <v-col cols="12"  md="6">
-                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%" 
+                <v-img @click="$router.push('/home decoration')" class="heroimg" style="cursor: pointer; position: relative;border-radius: 15px;" width="100%" 
                 lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529526/rectangle-66_kbe8bk.png"
                 src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-66_kbe8bk.png">
     <v-btn color="white" size="44" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
@@ -416,7 +416,7 @@ letter-spacing: -0.96px;">Home decoration</p>
                 </v-img>
             </v-col>
             <v-col cols="12" md="6">
-                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%"
+                <v-img @click="$router.push('/cosmetics')" class="heroimg" style="cursor: pointer; position: relative;border-radius: 15px;" width="100%"
                  lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529526/rectangle-67_oa0r6o.png"
                  src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-67_oa0r6o.png">
     <v-btn icon="mdi mdi-arrow-top-right" color="#333" size="44"  style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
@@ -437,7 +437,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
                 </v-img>
             </v-col>
             <v-col cols="12">
-                <v-img class="heroimg" style="position: relative;border-radius: 15px;" width="100%"
+                <v-img @click="$router.push('/art')" class="heroimg" style="cursor: pointer; position: relative;border-radius: 15px;" width="100%"
                  lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529527/rectangle-65_czgty7.png"
                  src="https://res.cloudinary.com/payhospi/image/upload/v1690529527/rectangle-65_czgty7.png">
                 <v-btn color="white" size="large" style="position: absolute; top: 24px;right: 27.5px;" variant="outlined" rounded="xl" >
@@ -465,7 +465,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
 </div>
 
 <div>
-  <product-row :showVendor="false" title=" 🔥 Hot Deals " />
+  <product-row :maxwidth="'1200px'" :showVendor="false" title=" 🔥 Hot Deals " />
 
 
         <div style="padding:100px 0px">
@@ -482,7 +482,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
                 </v-col>
                 <v-col class="px-0" cols="12" md="6" lg="6">
                     <v-card rounded="0" width="100%" height="100%" min-height="429" color="green" flat class=" d-flex align-center">
-                        <v-container   style="max-width:1400px" class="px-12">
+                        <v-container   style="max-width:1200px" class="px-12">
                             <p style="color: var(--magnetic-green-2, #CDD6D4);
 font-size: 12px;
 font-weight: 500;
@@ -506,7 +506,7 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
         </v-carousel-item>
     </v-carousel>
 </div>
-<product-row :showVendor="false" title="⚡️ Popular Products of the Week" />
+<product-row :maxwidth="'1200px'" :showVendor="false" title="⚡️ Popular Products of the Week" />
 
 
         </div>
@@ -544,7 +544,7 @@ letter-spacing: -0.42px;">You will be able to unsubscribe at anytime. Read our p
 </v-container>
 </div>
 <div>
-    <v-container  style="max-width:1400px">
+    <v-container  style="max-width:1200px">
         <p style="
 font-size: 48px;
 font-weight: 600;
@@ -573,7 +573,7 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 </v-row>
     </v-container>
 </div>
-<mainfooter />
+<mainfooter :maxwidth="'1200px'" />
 </template>
 <style>
 .divbtn{
@@ -617,17 +617,17 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
       transform: scale(1);
     }
     25% {
-      transform: translate3d(0, 0, 0) scale(1.5);
+      transform: translate3d(0, 0, 0) scale(1.3);
       transform-origin: left;
     }
 
     50% {
-      transform: translate3d(0, 0, 0) scale(1.4);
+      transform: translate3d(0, 0, 0) scale(1.2);
       transform-origin: top right;
     }
 
     75% {
-      transform: translate3d(0, 0, 0) scale(1.5);
+      transform: translate3d(0, 0, 0) scale(1.3);
       transform-origin: bottom center;
     }
 

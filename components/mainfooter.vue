@@ -1,5 +1,5 @@
 <template>
-    <v-container style=" position: relative;   max-width: 1417px;" class="pt-0 px-0 footbot pb-12" fluid>
+    <v-container style=" position: relative;" :style="'max-width:'+maxw" class="pt-0 px-0 footbot pb-12" fluid>
 
 <v-card color="" flat class="rounded-xl px-3" height="auto" min-height="100vh">
  
@@ -8,7 +8,7 @@
     <v-divider class="my-12 " style="height:2px" color="#"></v-divider>
 
 <v-row style="margin-bottom: 90px;" class="row0 mt-12">
-  <v-col cols="12" class="pt-0 " lg="6">
+  <v-col cols="12" class="pt-0 " lg="5">
       <v-avatar class="mb-4" style="width:130px; height:54px" rounded="0" flat>
                   <v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1690545241/frame-4_q89xhq.png">
                   </v-img>
@@ -37,7 +37,7 @@ letter-spacing: -0.48px;">Accepted Payments</p>
 </v-row>
 </div>
   </v-col>
-  <v-col cols="12" lg="6">
+  <v-col cols="12" lg="7">
       <v-row>
           <v-col v-for="(n, i) in categoriesData" :key="i" cols="12" lg="3">
               <p style="color: #000;
@@ -49,8 +49,8 @@ font-weight: 600;" class="pl-4">{{n.title}}</p>
 
 font-size: 14px;
 font-weight: 400;
-letter-spacing: -0.42px;" class=" mb-2" v-for="b in n.items">  <v-btn   variant="text" class="mx-2" flat >
-            {{b}}
+letter-spacing: -0.42px;" class=" text-left mb-2" v-for="b in n.items">  <v-btn :to="b.route.toLowerCase()"  variant="text" class="mx-2" flat >
+            {{b.name}}
           </v-btn></p>
 
 </div>
@@ -118,25 +118,57 @@ letter-spacing: -0.42px;">© Copyright 2023. All Rights Reserved.</p>
 </template>
 <script>
 export default {
+  props: ['maxwidth'],
+  computed: {
+  maxw() {
+    return this.maxwidth? this.maxwidth : '1400px'
+  }
+},
   data() {
     return {
       
-      categoriesData :[
+categoriesData: [
   {
     title: 'Categories',
-    items: ['Fashion', 'Home Decoration', 'Art', 'Cosmetics']
+    items: [
+      { name: 'Fashion', route: 'Fashion' },
+      { name: 'Home Decoration', route: 'Home-Decoration' },
+      { name: 'Art', route: 'Art' },
+      { name: 'Cosmetics', route: 'Cosmetics' }
+    ]
   },
   {
     title: 'About Us',
-    items: ['About Umoja', 'Careers', 'News & Blog', 'Help', 'Press Center', 'Shop by Location', 'Affiliate & Partners', 'Ideas & Guides']
+    items: [
+      { name: 'About Umoja', route: 'About-Umoja' },
+      { name: 'Careers', route: 'Careers' },
+      { name: 'News & Blog', route: 'News-Blog' },
+      { name: 'Help', route: 'Help' },
+      { name: 'Press Center', route: 'Press-Center' },
+      { name: 'Shop by Location', route: 'Shop-by-Location' },
+      { name: 'Affiliate & Partners', route: 'Affiliate-Partners' },
+      { name: 'Ideas & Guides', route: 'Ideas-Guides' }
+    ]
   },
   {
     title: 'Services',
-    items: ['Mobile App', 'Shipping & Delivery', 'Order Pickup', 'Account Signup']
+    items: [
+      { name: 'Mobile App', route: 'Mobile-App' },
+      { name: 'Shipping & Delivery', route: 'Shipping-Delivery' },
+      { name: 'Order Pickup', route: 'Order-Pickup' },
+      { name: 'Account Signup', route: 'Account-Signup' }
+    ]
   },
   {
     title: 'Help',
-    items: ['Umoja Help', 'Returns', 'Track Orders', 'Contact Us', 'Feedback', 'Security & Fraud']
+    items: [
+      { name: 'Umoja Help', route: 'Umoja-Help' },
+      { name: 'Returns', route: 'Returns' },
+      { name: 'Track Orders', route: 'Track-Orders' },
+      { name: 'Contact Us', route: 'Contact-Us' },
+      { name: 'Feedback', route: 'Feedback' },
+      { name: 'Security & Fraud', route: 'Security-Fraud' }
+    ]
   }
 ],      
       
@@ -150,6 +182,7 @@ export default {
 
   ]
     }
-}
+},
+
 }
 </script>

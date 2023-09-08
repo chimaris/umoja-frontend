@@ -1,6 +1,6 @@
 <template>
-    <v-card flat class="bg-white rounded-lg mb-2">
-        <v-img class="rounded-lg bg-grey-lighten-4"  width="100%" height="303px" >
+    <v-card flat  class="bg-transparent  rounded-lg mb-2">
+        <v-img class="rounded-lg bg-grey-lighten-4"  width="100%" :height="short?'221px': '303px'" >
        </v-img>
  
    <p style="width: 100%;height: 14px;
@@ -16,7 +16,7 @@
     " class="d-flex mt-2 pb-0  bg-grey-lighten-4 rounded-lg  align-center">
    </p> -->
 
-    <div >
+    <div v-if="vendorShow" >
     <div class="d-flex mt-4">
         <v-avatar size="40"><v-img class="bg-grey-lighten-4" ></v-img></v-avatar>
         <div  class="ml-2 ">
@@ -45,3 +45,8 @@
                 </div>
             </v-card>
 </template>
+<script>
+export default {
+    props: ['vendorShow', 'short'],
+};
+</script>

@@ -6,7 +6,7 @@
   </div>
   <div  class="topbar"> 
 
-      <v-container  class="py-1" style="max-width:1400px">
+      <v-container  class="py-0" :style="'max-width:'+maxw">
         <div class="d-flex justify-space-between align-center">
         <div class="d-flex  align-center">
          <v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer;height:65px!important" rounded="0">
@@ -102,7 +102,11 @@
    
       };
     },
-    computed: {
+    props: ['maxwidth'],
+  computed: {
+  maxw() {
+    return this.maxwidth? this.maxwidth : '1400px'
+  },
       urls() {
         const loggedIn = this.isLoggedIn;
         return [

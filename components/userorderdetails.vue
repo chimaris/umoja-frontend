@@ -1,4 +1,137 @@
 <template>
+     <div class="mx-6 pa-0 my-6 cardStyle" >
+        <v-table>
+        <thead>
+          <tr class=" bg-grey-lighten-3 ">
+            <th  class="  font-weight-bold  ">
+               
+            </th>
+            <th style="color: var(--carbon-3, #969696);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;" class="  font-weight-bold px-1 ">
+               Order ID
+            </th>
+            <th style="color: var(--carbon-3, #969696);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;" class="   font-weight-bold px-1">
+             Date
+            </th>
+            <th style="color: var(--carbon-3, #969696);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;" class="  font-weight-bold px-1">
+              Items
+            </th>
+            <th style="color: var(--carbon-3, #969696);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;" class="  font-weight-bold px-1">
+              Total Amount
+            </th>
+            <th style="color: var(--carbon-3, #969696);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;" class="     font-weight-bold px-1">
+              Status 
+            </th>
+            <th style="color: var(--carbon-3, #969696);
+      font-size: 14px;
+      font-weight: 600;
+      line-height: 20px;" class="    font-weight-bold px-1">
+              Action 
+            </th>
+       
+          </tr>
+        </thead>
+         <tbody>
+          <tr style=" width: 100%;height: 104px;">
+          
+      <td>
+      <v-btn size="40" rounded="xl" flat style="border: 1px solid #CECECE;" @click="$emit('takeback')" 
+      class="ml-" icon="mdi mdi-chevron-up">
+      </v-btn>
+      </td>
+      
+      <td style="color: #000;
+        font-size: 14px;
+        font-weight: 500;" class="text- px-1 ">
+        <span>
+      
+            001798
+        </span>
+      </td>
+      
+      <td style="color: #000;
+      font-size: 14px;
+      font-weight: 500;" class=" px-1 ">
+      <span>
+      
+      September 9, 2022
+      </span>
+      </td>
+      <td style="color: #000;
+      font-size: 14px;
+      font-weight: 500;" class=" px-1 ">
+      <span>
+      
+      7
+      </span>
+      </td>
+      <td style="color: #000;
+      font-size: 14px;
+      font-weight: 500;" class=" px-1 ">
+      <span>
+      
+        € 5,829.00 
+      </span>
+      </td>
+            <td style="font-size: 14px;" class="text-grey-darken-1 px-1">
+            <v-chip v-if="dataselect.status == 4" size="small" rounded="lg" color="blue">
+            <span style="
+      font-size: 12px!important;
+      font-weight: 600;
+      line-height: 20px;">
+              Shipped
+            </span>
+          </v-chip>
+            <v-chip v-if="dataselect.status == 3" size="small" rounded="lg" color="green">
+            <span style="
+      font-size: 12px!important;
+      font-weight: 600;
+      line-height: 20px;">
+              Delivered
+            </span>
+          </v-chip>
+            <v-chip v-if="dataselect.status == 1" size="small" rounded="lg" color="#906A20">
+            <span style="
+      font-size: 12px!important;
+      font-weight: 600;
+      line-height: 20px;">
+              Awaiting Shipment
+            </span>
+          </v-chip>
+            <v-chip v-if="dataselect.status == 2" size="small" rounded="lg" color="#C20052">
+            <span style="
+      font-size: 12px!important;
+      font-weight: 600;
+      line-height: 20px;">
+              Cancelled
+            </span>
+          </v-chip>
+            </td>
+            <td class="px-1">
+      
+      <v-btn size="40" flat style="border: 1px solid #CECECE;"
+      @click="$emit('takeback')" class="ml-" icon="mdi mdi-dots-vertical"></v-btn></td>
+      </tr>
+      </tbody>
+      </v-table>
+      
+      
+      
+      </div> 
      <div class="mx-6 pa-6 pb-2 mb-6 cardStyle " >
   <div style="width: 100%;" class=" ">
   <v-expand-transition>
@@ -94,7 +227,7 @@ line-height: normal;">In-store purchase</p>
       <v-row class="pa-4" style="border-top-width: 300px;border-top :1px dashed #90BEAA " >
         <v-col style="position: relative;">
           <v-icon style="    top: -28px;
-    left: 0px;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
+    left:2%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
 
     
           <p 
@@ -112,7 +245,7 @@ line-height: normal;">May 14</p>
         </v-col>
         <v-col style="position: relative;">
           <v-icon style="    top: -28px;
-    left: 5%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
+    left: 2%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
           <p 
           class="mb-2"
           style="color:  #969696;
@@ -128,7 +261,7 @@ line-height: normal;">May 16</p>
         </v-col>
         <v-col style="position: relative;">
           <v-icon style="    top: -28px;
-    left: 5%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
+    left: 2%;position: absolute;" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
           <p 
           class="mb-2"
           style="color:  #969696;
@@ -144,7 +277,7 @@ line-height: normal; " class="d-flex align-center">May 24</p>
         </v-col>
         <v-col style="position: relative;">
           <v-icon style="    top: -28px;
-    left: 5%;position: absolute;" color="green" icon="mdi mdi-check-circle"></v-icon>
+    left: 2%;position: absolute;" color="green" icon="mdi mdi-check-circle"></v-icon>
           <p 
           class="mb-2"
           style="color:  #969696;
@@ -287,20 +420,11 @@ font-weight: 500;">€ 5,829.00 </p>
 </template>
 <script>
 export default {
-    name: "ownerinfo",
-    methods:{
-  select(x){
-    if(this.selected == x){
-      this.selected = null;
-      return;
-    }else{
-
-      this.selected = x;
-    }
-  },
-},
+    name: "UserOrderDetails",
+props: ['dataselect'],
     data() {
         return {
+
           summary: [
             {
               title: 'Subtotal:',
@@ -316,6 +440,27 @@ export default {
             },
           ],
             selected: '',
+            items1:[
+   {
+       sn:'#23942',
+       name:'Leather crop top & pants......',
+       date:'17 May',
+       total:'€2,349‎',
+      country: '🇺🇸 United States',
+      img: 'https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png',
+      city: 'New York City',
+      added_cat: 'Added Manually', 
+      date: 'May 29, 2023',
+       customer: 'Okoli Bonaventure',
+       delivery: '€ 24.08',
+       payment_status: 1,
+       status: 4,
+       items_no: 7,
+       delivery_method: 'Umoja Delivery'
+   },
+
+ 
+  ],
         }
     }
 }</script>

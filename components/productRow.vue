@@ -1,5 +1,5 @@
 <template>
-        <v-container class="parent-container"  style="max-width:1400px">
+        <v-container class="parent-container" :style="'max-width:'+maxw">
         <div class="d-flex my-8 align-center">
 <div class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
@@ -12,9 +12,10 @@ letter-spacing: -0.24px;"> {{title}} </div>
 See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </div>
-        <v-row id="homepage" style="background-color: #fff;" class=" mt-8">
-      <v-col  v-for="(n, i) in items" :key="i" lg="24" cols="6" sm="4" md="3">
-     <product-component :index="i" :item="n" />
+        <v-row id="homepage" style="    background: transparent!important;" class=" mt-8">
+      <v-col  v-for="(n, i) in items" :key="i" cols="6" sm="4" :lg="maxwidth? '3': '24'"  :md="maxwidth? '4': '3'">
+     <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
+     <product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
         </v-col>
        </v-row> 
         </v-container>
@@ -37,18 +38,42 @@ color: #fff!important;
 import { useProductStore } from '~/stores/productStore.js';
 
 export default {
-    props:['showVendor', 'title'],
-  data() {
-    return {
-     
-    };
-  },
+    props:['showVendor', 'vendorlist', 'cover', 'category', 'showdisco','vendor', 'items', 'title', 'maxwidth'],
   computed: {
+    maxw() {
+    return this.maxwidth? this.maxwidth : '1400px'
+  },
+    vendorBol() {
+    return this.vendor? this.vendor : false
+  },
+    coverbol() {
+    // Returns true if this.cover is set, otherwise returns true
+    return this.cover !== undefined ? this.cover : true;
+    },
     productStore() {
             return useProductStore();
         },
    items() {
-           return this.productStore.getProductsArray('row');
+if (this.vendor) {
+if (this.vendor == true) {
+  return this.vendorlist
+}else{
+  return this.getitems
+}
+}else{
+  return this.getitems
+}
+        },
+   getitems() {
+if (this.items) {
+if (this.items.length > 0) {
+  return this.items
+}else{
+  return this.productStore.getProductsArray('row')
+}
+}else{
+  return this.productStore.getProductsArray('row')
+}
         },
   },
   methods: {

@@ -95,13 +95,13 @@ export const row =  [
         likes: '66',
         oos: true
     },
-    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
-        price: '57.00',
-        location: 'Mumbasa, Kenya',
-        likes: '456',
-    },
+    // {
+    //     name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
+    //     image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
+    //     price: '57.00',
+    //     location: 'Mumbasa, Kenya',
+    //     likes: '456',
+    // },
 
 
 ]
