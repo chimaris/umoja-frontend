@@ -19,9 +19,9 @@ font-size: 12px;
 font-weight: 500;
 letter-spacing: 3.66px;
 text-transform: uppercase;">limited offer</p>
-<p style="color: #FFF;
-font-size: 48px;
-font-weight: 500;
+<p class="my-2" style="color: #FFF;
+font-size: 48px;line-height: 1.2;
+font-weight: 500;width: 520px;
 letter-spacing: -1.44px;">{{title}}</p>
 <p style="color: #FFF;
 font-size: 20px;

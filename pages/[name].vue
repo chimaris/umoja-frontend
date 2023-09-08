@@ -742,7 +742,7 @@ export default {
         likes: '66',
         oos: true
     },        {
-        name: 'https://res.cloudinary.com/payhospi/image/upload/v1694074683/rectangle-1899hgdx_afojsx.png',
+        name: 'The African Lotion - 03',
         image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074684/rectangle-1899chair54_cjabfa.png',
         price: '15000.00',
         subCategory: 'Oil Canvas',
@@ -812,7 +812,7 @@ export default {
                    adrow:{
                     title:'The Full Make-Over Kit by Ngozi Oluwafemi',
                     image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074733/rectangle-69adsert_zpuueh.png',
-                    color: '#8A95A3',
+                    color: '#8697a6',
                 },
                 postcarorow:{
                     title: '💰 Discounted% Products',
