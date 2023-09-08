@@ -3,7 +3,7 @@
         <v-container style="max-width:1200px;min-height:100vh;width: 100%;" class=" py-12">
         <v-row>
             <v-col class=" pr-12" cols="12" md="6">
-                <v-img class="bg-grey-lighten-2" style="border-radius: 15px;" cover :src="item.mainImg"  width="535" height="705" ></v-img>
+                <v-img class="bg-grey-lighten-2" style="border-radius: 15px;" cover :src="item.mainImg"  width="535" height="693" ></v-img>
             </v-col>
             <v-col class="d-flex flex-column justify-space-between" cols="12" md="6">
               <div>

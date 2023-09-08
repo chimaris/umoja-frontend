@@ -28,7 +28,7 @@
     <product-row style="margin-bottom: 100px;" :maxwidth="'1200px'" :showVendor="true"
     :title="databank.postadrow.title" :cover="false" :items="databank.postadrow.items"/>
 
-    <PopularTwoRow style="margin-bottom: 100px;" :maxwidth="'1200px'" :items="databank.twocardrow.items" :title="databank.twocardrow.title" />
+    <PopularTwoRow :showBid="databank.twocardrow.showBid" style="margin-bottom: 100px;" :maxwidth="'1200px'" :items="databank.twocardrow.items" :title="databank.twocardrow.title" />
     <div :style="'background-color: #' + categoryColor">
         <Adcarousel :image="databank.adrow.image" :title="databank.adrow.title" :color="databank.adrow.color" style="margin-bottom: 50px;margin-top: 100px;" />
         <product-row
@@ -154,6 +154,7 @@ export default {
                     ]
                 },
                 twocardrow:{
+                    showBid: false,
                     title: '⚡️ Popular fashion products of the week',
                     items: [
                         {
@@ -364,6 +365,7 @@ export default {
                     ]
                 },
                   twocardrow:{
+                    showBid: true,
                     title: '⚡️ Ongoing Bids',
                     items: [
                         {
@@ -575,6 +577,7 @@ export default {
                 }, 
                 twocardrow:{
                     title: '⚡️ Ongoing Bids',
+                    showBid: false,
                     items: [
                         {
                             image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074705/rectangle-22440ongodec_tjw2sp.png',
@@ -787,6 +790,7 @@ export default {
                     ]
                 },
                   twocardrow:{
+                    showBid: false,
                     title: '⚡️ Top products for the week',
                     items: [
                         {

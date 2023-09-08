@@ -4,8 +4,10 @@
 
         </v-img>
         <div class="pa-6">
+<div  class="d-flex align-center justify-space-between">
+<div >
 
-         <p @click="$router.push('/product_page')" style="font-weight: 600;
+    <p @click="$router.push('/product_page')" style="font-weight: 600;
     font-size: 20px;
     line-height: 18px;cursor: pointer;
     color: #000000;
@@ -14,22 +16,40 @@
 font-size: 14px;
 font-weight: 500;
 letter-spacing: -0.42px;
-    " class="mt-1">Sold by 
+" class="mt-1">Sold by 
     <span style="color: #1273EB;
 font-weight: 600;">
 
-        Nweke Franklin O.
-    </span>
-    </p>
+Nweke Franklin O.
+</span>
+</p>
+</div>
+<div v-if="showBid">
+
+    <p @click="$router.push('/product_page')" style="font-weight: 600;
+    font-size: 20px;
+    line-height: 18px;cursor: pointer;
+    color: #000000;
+    " class=" mt-2">€ 2430.00</p>
+    <p style="color:#969696;
+font-size: 12px;
+font-weight: 500;
+letter-spacing: 1.26px;
+text-transform: uppercase;
+" class="mt-1">
+Current Bid
+</p>
+</div>
+</div>
 
 
   
                           <div class="d-flex mt-4 align-end">
 
-                <v-btn height="44" width="161" @click="$router.push('/product_page')" rounded="xl"  style="border: 1px solid #CED2D6;
-    border-radius: 6px;"   variant="outlined" flat  class="green-hover parent-btn">
+                <v-btn height="44" width="161" @click="$router.push('/product_page')" rounded="xl"  style="
+    border-radius: 6px;" color="green"    flat  class=" parent-btn">
                      <span style="
-font-weight: 600;" class="">Shop Now</span> 
+font-weight: 600;" class="">{{showBid? 'Bid':'Shop'}} Now</span> 
                 </v-btn>
     
                 </div>
@@ -42,7 +62,7 @@ font-weight: 600;" class="">Shop Now</span>
 import { useLikedStore } from '~/stores/likedStore';
 
 export default {
-    props: ['item', 'index'],
+    props: ['item', 'index', 'showBid'],
     computed: {
         likedStore() {
             return useLikedStore();

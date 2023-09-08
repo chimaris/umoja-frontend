@@ -14,7 +14,7 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </div>
     <v-row id="homepage" style="background-color: #fff;" class=" my-8">
   <v-col  v-for="(n, i) in items" :key="i" cols="6">
- <populartwoComponent  :index="i" :item="n" />
+ <populartwoComponent :showBid="showBid" :index="i" :item="n" />
  
     </v-col>
    </v-row> 
@@ -38,7 +38,7 @@ border: none!important;
 import { useProductStore } from '~/stores/productStore.js';
 
 export default {
-props:['showVendor','vendor', 'items' ,'title', 'maxwidth'],
+props:['showVendor','vendor', 'showBid', 'items' ,'title', 'maxwidth'],
 computed: {
 maxw() {
 return this.maxwidth? this.maxwidth : '1400px'
