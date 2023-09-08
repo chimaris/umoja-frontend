@@ -5,10 +5,10 @@
 <div class="px-4">
 
         <v-avatar style="    margin-top: -37px;" size="67">
-            <v-img class=" bg-grey-lighten-2" cover style="border-radius: 16px;" width="100%" height="237" :src="item.vendorImage">
+        <v-img class=" bg-grey-lighten-2" cover style="border-radius: 16px;" width="100%" height="237" :src="item.vendorImage">
         </v-img>
         </v-avatar>
-         <p @click="$router.push('/product_page')" style="font-weight: 600;
+         <p @click="$router.push('/vendor_page')" style="font-weight: 600;
     font-size: 20px;
     line-height: normal;cursor: pointer;
     color: #000000;

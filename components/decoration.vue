@@ -1,5 +1,5 @@
 <template>
-    <v-card flat height="100vh" width="100%" image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1500/v1694077483/rectangle-22455decor_npteeu.png">
+    <v-card flat color="black" height="100vh" width="100%" image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1500/v1694077483/rectangle-22455decor_npteeu.png">
         <v-container style="max-width:1200px;width: 100%;height: 100vh;" class="d-flex align-center py-1">
            
            <div>
