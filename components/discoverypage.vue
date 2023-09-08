@@ -114,7 +114,7 @@ v-model="chip"
 
    <v-row style="" class="">
     <v-col cols="6" v-for="(n, i) in items" sm="4" :key="i" lg="24" md="3">
-   <product-component :item="n" :index="i" />
+   <product-component  :item="n" :index="i" />
        
     </v-col>
    </v-row>        
@@ -190,30 +190,33 @@ color: #333333;">Top Post</p>
          <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687702335/rectangle-1939_khvhag.png"></v-img>
      </v-avatar>
 
- <div  class="pl-3" style="min-width: 0;">
- <div class=" d-flex"><p style="color: #1E1E1E;
-font-size: 16px;
-font-weight: 600;
-line-height: 140%;">Thatdesignpro</p> <p 
-style="color: #969696;
-font-size: 14px;
-font-weight: 400;
-line-height: 140%;"> . 27th Nov, 2023</p></div>
+     <div  class="pl-3" style="min-width: 0;">
+                <div class="d-flex align-center">
+    <p style="color: #1E1E1E;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 140%;">Thatdesignpro</p> 
+       <v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
+       <p 
+            style="color: #969696;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 140%;">  27th Nov, 2023</p>
+   </div>
 <div class="d-block   mt-1">
-<div class="d-flex align-center">
+   <div class="d-flex align-center">
 
-<v-chip color="#936900"  size="small" rounded="lg"> Fashion</v-chip>
-<v-icon class="mx-1" size="5" color="grey" icon="mdi mdi-circle"></v-icon>
-<div class=" text-truncate "
-style="color: #1E1E1E;
-font-size: 14px!important;
-font-weight: 400;">Shaftesbury Avenue Accra, Ghana</div>
-</div>
-</div> 
-
-
-
- </div>         
+       <v-chip style="    justify-content: center;
+    align-items: center;
+    display: flex;" color="#936900"  size="small" rounded="lg"> Fashion</v-chip>
+       <v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
+       <div class=" text-truncate "
+       style="color: #1E1E1E;
+   font-size: 14px!important;
+   font-weight: 400;">Shaftesbury Avenue Accra, Ghana</div>
+   </div>
+    </div>
+            </div>           
 
 </div>
 <v-card image="https://res.cloudinary.com/payhospi/image/upload/v1689243700/rectangle-53_mxs2dz.png" flat color="grey-lighten-4" width="100%" height="303px" class="d-flex align-center justify-center rounded-lg">
@@ -299,14 +302,18 @@ color: #333333;">Top Articles</p>
      <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688715270/rectangle-22429_agrgwa.png"></v-img>
  </v-avatar>
  <div  class="ml-3">
- <div class=" d-flex"><p style="color: #1E1E1E;
-font-size: 16px;
-font-weight: 600;
-line-height: 140%;">Thatdesignpro</p> <p 
-style="color: #969696;
-font-size: 14px;
-font-weight: 400;
-line-height: 140%;"> . 27th Nov, 2023</p></div>
+    <div class="d-flex align-center">
+    <p style="color: #1E1E1E;
+            font-size: 16px;
+            font-weight: 600;
+            line-height: 140%;">Thatdesignpro</p> 
+       <v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
+       <p 
+            style="color: #969696;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 140%;">  27th Nov, 2023</p>
+   </div>
 <div class="d-flex align-center  mt-1">
 <p 
 style="color: var(--carbon-3, #969696);
