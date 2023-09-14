@@ -1,5 +1,5 @@
 <template>
-          <div :style="'background-color:'+ color">
+          <div :style="'background-color:'">
 
 <v-carousel style="overflow: visible;"
 height="429" class="promo"

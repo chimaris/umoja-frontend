@@ -465,8 +465,14 @@ letter-spacing: -0.96px;">Cosmetics</p>
 </div>
 
 <div>
-  <product-row :maxwidth="'1200px'" :showVendor="false" title=" 🔥 Hot Deals " />
+  <vendorRowCategorized :vendorlist="vendor.items" :category="select" style="margin: 100px auto;" :vendor="true" :maxwidth="'1200px'" :showVendor="true"
+        :title="vendor.title" />
 
+</div>
+  <div>
+  <product-row :cover="false" :maxwidth="'1200px'" :items="items23" :showVendor="false" title=" 🔥 Hot Deals " />
+
+ 
 
         <div style="padding:100px 0px">
 
@@ -506,7 +512,9 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
         </v-carousel-item>
     </v-carousel>
 </div>
-<product-row :maxwidth="'1200px'" :showVendor="false" title="⚡️ Popular Products of the Week" />
+
+<product-row :items="items2" :cover="false" :maxwidth="'1200px'" :showVendor="false" title="💰 Most Selling Products" />
+<PopularTwoRow :showBid="twocardrow.showBid" style="margin-bottom: 100px;" :maxwidth="'1200px'" :items="twocardrow.items" :title="twocardrow.title" />
 
 
         </div>
@@ -543,6 +551,8 @@ letter-spacing: -0.42px;">You will be able to unsubscribe at anytime. Read our p
     </div>
 </v-container>
 </div>
+<blogRow :items="blogpost.items" style="margin: 100px auto;"  :maxwidth="'1200px'" :showVendor="true"
+        :title="blogpost.title" />
 <div>
     <v-container  style="max-width:1200px">
         <p style="
@@ -573,6 +583,7 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 </v-row>
     </v-container>
 </div>
+
 <mainfooter :maxwidth="'1200px'" />
 </template>
 <style>
@@ -646,7 +657,187 @@ import { gsap, Bounce, CSSPlugin } from 'gsap';
 export default {
   data() {
     return {
-     
+      items23: [
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694169115/h-796-d-416305-eb-4758-b-6-bbba-310-e-078-fb-7-u-1gf_ps19db.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1691574327/s-2-gs-x-1-po-l_ckeqxo.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cosahoes_oifr7p.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694169115/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cohff_d1hbgf.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    ],
+      items2: [
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-796-d-416305-eb-4758-b-6-bbba-310-e-078-fb-7-u-2capjy_a5tncs.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170676/s-2-gs-x-1-po-lshoeuhyf_acrhye.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170674/ankara-sneakers-1500-xchapkufk_ykmili.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cosahoes_oifr7p.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},               {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170674/ankara-sneakers-1500-xchapkufk_ykmili.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cosahoes_oifr7p.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    ],
+      twocardrow:{
+                    showBid: false,
+                    title: '⚡️ Popular Products of the Week',
+                    items: [
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694659373/rectangle-22440jhfj456_ienfo3.png',
+                            name: 'Koko Rachel Deco Set',
+                            vendorName: 'Nweke Franklin O.'
+                        },
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694659373/rectangle-22440jghd454hfgd_qjlxsi.png',
+                            name: 'The Nawi Scarfs',
+                            vendorName: 'Okoli Cecilia Bona.'
+                        },
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694659373/rectangle-22440jhfj456_ienfo3.png',
+                            name: 'Koko Rachel Deco Set',
+                            vendorName: 'Nweke Franklin O.'
+                        },
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694659373/rectangle-22440jghd454hfgd_qjlxsi.png',
+                            name: 'The Nawi Scarfs',
+                            vendorName: 'Okoli Cecilia Bona.'
+                        },
+                    ]
+                },
+      blogpost:{
+                    title :'🗞 Tips, updates and stories from our community',
+                    items:[
+                        {
+                            image:'https://res.cloudinary.com/payhospi/image/upload/v1694661747/frame-1000007817jhcjcj867_lkwfam.png',
+                            author: 'Nweke Franklin O.',
+                            date:'Sept 04, 2023',
+                            title: 'Simple steps on how to use the Umoja CRM system.',
+                            category: 'How-to’s',
+                            color: '#1273EB'
+                        },
+                        {
+                            image:'https://res.cloudinary.com/payhospi/image/upload/v1694661747/frame-1000007818jhf78r853563764_x03szl.png',
+                            author: 'Okoli Bonaventure',
+                            date:'Sept 01, 2023',
+                            title: 'Umoja Africa raises $3 Million seed round.',
+                            category: 'Business',
+                            color: '#00966D'
+                        },
+                        {
+                            image:'https://res.cloudinary.com/payhospi/image/upload/v1694661747/frame-1000007817hgcnh756675_l1j5jm.png',
+                            author: 'David Obukeme',
+                            date:'Sept 04, 2023',
+                            title: 'A new feature has been added to the Umoja.',
+                            category: 'Product',
+                            color: '#F38218'
+                        },
+                        {
+                            image:'https://res.cloudinary.com/payhospi/image/upload/v1694661747/frame-1000007817jhcjcj867_lkwfam.png',
+                            author: 'Nweke Franklin O.',
+                            date:'Sept 04, 2023',
+                            title: 'Simple steps on how to use the Umoja CRM system.',
+                            category: 'How-to’s',
+                            color: '#1273EB'
+                        },
+                    
+                    
+
+                    ]
+                },
+    
+      vendor:{
+                    title :'🔥 Best Selling Stores',
+                    items:[
+                        {
+                            image:'https://res.cloudinary.com/payhospi/image/upload/v1694165862/rectangle-22439pointgftg_tpujdo.png',
+                            vendorImage: 'https://res.cloudinary.com/payhospi/image/upload/v1693922523/ellipse-107_pajkls.png',
+                            vendorName: 'Orderly Fashion',
+                            subCategory: 'Unisex Wears'
+                        },
+                        {
+                            image:'https://res.cloudinary.com/payhospi/image/upload/v1694165862/rectangle-22439bangli8_wxwwk9.png',
+                            vendorImage: 'https://res.cloudinary.com/payhospi/image/upload/v1694166638/ellipse-107hgcj_boyj1l.png',
+                            vendorName: 'Fashion De Africana',
+                            subCategory: 'Jewelry'
+                        },
+                        {
+                            image:'https://res.cloudinary.com/payhospi/image/upload/v1694165862/rectangle-22439sunglasses_zpydih.png',
+                            vendorImage: 'https://res.cloudinary.com/payhospi/image/upload/v1694166638/ellipse-107jgchgx_suyemd.png',
+                            vendorName: 'Woman Elegant',
+                            subCategory: 'Materials'
+                        },
+                        {
+                            image:'https://res.cloudinary.com/payhospi/image/upload/v1694165861/rectangle-22439baggd_c4bkra.png',
+                            vendorImage: 'https://res.cloudinary.com/payhospi/image/upload/v1694166638/ellipse-107mhgs_j5208p.png',
+                            vendorName: 'Me-Kweku Bags',
+                            subCategory: 'Bags'
+                        },
+                    
+
+                    ]
+                },
     
         points:[
             {

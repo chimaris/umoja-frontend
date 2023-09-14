@@ -6,6 +6,36 @@ html{
     margin-left: px;
     
 }
+div.rower{
+    overflow-x: scroll;
+    overflow-y: hidden;
+    padding-bottom: 40px;
+    scrollbar-width: thin; /* For Firefox */
+    scrollbar-color: #CECECE transparent; /* For Firefox */
+  
+    white-space: nowrap;
+    
+}
+div.rower::-webkit-scrollbar {
+    width: 6px; /* For Chrome, Safari, and Opera */
+    height: 3px;
+    cursor: e-resize;
+    transition: all 0.5s ease-in-out;
+}
+div.rower:hover::-webkit-scrollbar {
+    height: 8px;
+}
+div.rower::-webkit-scrollbar-thumb {
+    background-color: #2C6E63; /* For Chrome, Safari, and Opera */
+    border-radius: 47px;
+    cursor: e-resize;
+    width: 100px;
+}
+
+div.rower::-webkit-scrollbar-track {
+      border-radius: 47px;
+    background-color: #D9D9D9; /* For Chrome, Safari, and Opera */
+  }
 .topbar{
     position: sticky;
     top: 0;
@@ -16,9 +46,9 @@ html{
   }
 .breadcrumbstick{
     position: sticky;
-    top: 73px;
+    top: 65px;
     z-index: 99;
-    background: rgb(255 255 255 / 65%);
+    background: rgb(255 255 255 / 90%);
     -webkit-backdrop-filter: blur(8px);
     backdrop-filter: blur(8px);
 }

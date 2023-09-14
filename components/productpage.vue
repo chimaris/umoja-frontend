@@ -1,5 +1,4 @@
 <template>
-    <v-divider></v-divider>
     <v-container class="pt-0" style="max-width: 1400px;">
         <v-breadcrumbs class="breadcrumbstick pl-0" v-model="item" active-class="text--green" :items="items">
       <template v-slot:divider>

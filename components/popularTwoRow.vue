@@ -1,5 +1,5 @@
 <template>
-    <v-container class="parent-container" :style="'max-width:'+maxw">
+    <v-container class="parent-container" :style="'padding-top:100px;max-width:'+maxw">
     <div class="d-flex my-8 align-center">
 <div class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
@@ -12,17 +12,17 @@ letter-spacing: -0.24px;"> {{title}} </div>
 See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 </v-btn>
     </div>
-    <v-row id="homepage" style="background-color: #fff;" class=" my-8">
-  <v-col  v-for="(n, i) in items" :key="i" cols="6">
+    <div id="homepage" style="background-color: #fff;" class="rower my-8">
+        <div class="d-inline-block mr-4" style="width: 550px;"  v-for="(n, i) in items" :key="i" >
  <populartwoComponent :showBid="showBid" :index="i" :item="n" />
  
-    </v-col>
-   </v-row> 
+        </div>
+   </div> 
     </v-container>
     
 </template>
 <style>
-.divbtn{
+/* .divbtn{
 transition: all 0.3s ease-in-out;
 }
 .parent-container:hover .divbtn .v-btn__content {
@@ -31,7 +31,7 @@ color: #fff!important;
 .parent-container:hover .divbtn {
 background-color: #333;
 border: none!important;
-}
+} */
 
 </style>
 <script>

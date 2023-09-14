@@ -1,5 +1,5 @@
 <template>
-                <v-card flat class="cardStyle pa-4 pb-3">
+                <v-card width="100%" flat class="cardStyle pa-4 pb-3">
 
 <div  class="mb-4 d-flex ">
 
@@ -54,7 +54,7 @@ position: absolute;right:12px;top:12px;border-radius: 3.34447px;background:rgba(
 <p 
 style="color: #1E1E1E;
 font-size: 14px;
-font-weight: 400;" class="mt-4">Lorem ipsum dolor sit amet consectetur. Duis pulvinar semper ornare quis. Est faucibus.. <strong>See More</strong></p>
+font-weight: 400;" class="text-wrap mt-4">Lorem ipsum dolor sit amet consectetur. Duis pulvinar semper ornare quis. Est faucibus.. <strong>See More</strong></p>
 <div class="d-flex mt-4 align-center justify-space-between">
 <div class="d-flex align-center">
 

@@ -12,17 +12,21 @@ letter-spacing: -0.24px;"> {{title}} </div>
 </v-btn>
 </div>
 <v-divider style="flex: auto;" class="mb-4"></v-divider>
-    <v-row dense id="homepage" style="background-color: #fff;" class=" my-8">
-  <v-col  v-for="(n, i) in items" :key="i" cols="6" lg="3">
+    <div dense id="homepage" style="background-color: #fff;" class=" rower my-8">
+  <div class="d-inline-block mr-2" style="width: 275px;" v-for="(n, i) in items" :key="i" cols="6" lg="3">
  <postComponent  :index="i" :item="n" />
  
-    </v-col>
-   </v-row> 
+    </div>
+  <div class="d-inline-block mr-2" style="width: 275px;" v-for="(n, i) in items" :key="i" cols="6" lg="3">
+ <postComponent  :index="i" :item="n" />
+ 
+    </div>
+   </div> 
     </v-container>
     
 </template>
 <style>
-.divbtn{
+/* .divbtn{
 transition: all 0.3s ease-in-out;
 }
 .parent-container:hover .divbtn .v-btn__content {
@@ -31,7 +35,7 @@ color: #fff!important;
 .parent-container:hover .divbtn {
 background-color: #333;
 border: none!important;
-}
+} */
 
 </style>
 <script>

@@ -12,7 +12,26 @@ letter-spacing: -0.24px;"> {{title}} </div>
 See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </div>
-     
+        <div class="">
+                        <v-chip-group
+        v-model="category" color="green"
+        column
+         
+      >
+        <v-chip  :value="n"
+        style="border-radius: 6px;
+border: 1px solid var(--carbon-2, #CECECE);"
+        v-for="n in filters" :key="n"
+           rounded="xl"   close-icon="mdi mdi-close-circle-outline" class="px-5 py-4"
+          variant="outlined" grow active-class="bordergreen text--green"
+        >
+        <span style="font-size: 14px;
+font-weight: 500;
+letter-spacing: -0.42px;"> {{n}}</span> 
+        </v-chip>
+       
+        </v-chip-group>
+                    </div>
         <div id="homepage" style="    background: transparent!important;" class="rower mt-8">
       <div class="d-inline-block mr-4" style="width: 254px;" v-for="(n, i) in items" :key="i">
      <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />

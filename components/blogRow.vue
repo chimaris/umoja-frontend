@@ -14,14 +14,10 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
         </div>
      
         <div id="homepage" style="    background: transparent!important;" class="rower mt-8">
-      <div class="d-inline-block mr-4" style="width: 254px;" v-for="(n, i) in items" :key="i">
-     <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
-     <product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
+      <div class="d-inline-block mr-4" style="width: 343px;height: 520px;" v-for="(n, i) in items" :key="i">
+     <blog-component  :index="i"   :item="n" />
         </div>
-      <div class="d-inline-block mr-4" style="width: 254px;" v-for="(n, i) in items" :key="i">
-     <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
-     <product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
-        </div>
+   
        </div> 
         </v-container>
         
@@ -43,7 +39,7 @@ color: #fff!important;
 import { useProductStore } from '~/stores/productStore.js';
 
 export default {
-    props:['showVendor', 'vendorlist', 'cover', 'category', 'showdisco','vendor', 'items', 'title', 'maxwidth'],
+    props:[ 'category', 'showdisco','vendor', 'items', 'title', 'maxwidth'],
   computed: {
     maxw() {
     return this.maxwidth? this.maxwidth : '1400px'

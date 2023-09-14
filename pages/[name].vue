@@ -1,8 +1,8 @@
 <template>
     <Header2 :maxwidth="'1200px'" />
     <div style="    position: sticky;
-    top: 65px;
-    background: white;
+    top: 65px;backdrop-filter: blur(7px);
+    background: rgba(255, 255, 255, 0.906);
     z-index: 999;">
         <v-container style="max-width:1200px;width: 100%;" class="py-1">
             <div class="d-flex">
@@ -23,7 +23,7 @@
     <product-row :vendorlist="databank.vendor.items" :category="select" style="margin: 100px auto;" :vendor="true" :maxwidth="'1200px'" :showVendor="true"
         :title="databank.vendor.title" />
 
-    <newlylaunched :item="databank.newlylaunched" style="margin-bottom: 100px;" />
+    <newlylaunched :item="databank.newlylaunched" style="margin-bottom:;" />
 
     <product-row style="margin-bottom: 100px;" :maxwidth="'1200px'" :showVendor="true"
     :title="databank.postadrow.title" :cover="false" :items="databank.postadrow.items"/>
@@ -136,6 +136,21 @@ export default {
         likes: '66',
         oos: true},
                     {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170674/ankara-sneakers-1500-xchapkufk_ykmili.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},
+                    {
+        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cosahoes_oifr7p.png',
+        price: '150000.00',
+        subCategory: 'Organic cotton certified',
+        location: 'Lagos, Nigeria',
+        likes: '66',
+        oos: true},               {
         name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
         image: 'https://res.cloudinary.com/payhospi/image/upload/v1694170674/ankara-sneakers-1500-xchapkufk_ykmili.png',
         price: '150000.00',
