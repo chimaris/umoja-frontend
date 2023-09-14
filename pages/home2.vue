@@ -470,7 +470,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
 
 </div>
   <div>
-  <product-row :cover="false" :maxwidth="'1200px'" :items="items23" :showVendor="false" title=" 🔥 Hot Deals " />
+  <product-row :cover="false" :maxwidth="'1200px'" :items="items23" :showVendor="true" title=" 🔥 Hot Deals " />
 
  
 
@@ -513,7 +513,7 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-carousel>
 </div>
 
-<product-row :items="items2" :cover="false" :maxwidth="'1200px'" :showVendor="false" title="💰 Most Selling Products" />
+<product-row :items="items2" :cover="false" :maxwidth="'1200px'" :showVendor="true" title="💰 Most Selling Products" />
 <PopularTwoRow :showBid="twocardrow.showBid" :maxwidth="'1200px'" :items="twocardrow.items" :title="twocardrow.title" />
 
 
