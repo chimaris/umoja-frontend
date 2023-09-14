@@ -17,8 +17,7 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
  <populartwoComponent :showBid="showBid" :index="i" :item="n" />
  
         </div>
-        <div class="d-inline-block mr-4" style="width: 134px;">
-        </div>
+    
    </div> 
     </v-container>
     

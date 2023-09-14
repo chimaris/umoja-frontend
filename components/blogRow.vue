@@ -17,8 +17,7 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
       <div class="d-inline-block mr-4" style="width: 343px;height: 520px;" v-for="(n, i) in items" :key="i">
         <blog-component  :index="i"   :item="n" />
     </div>
-    <div class="d-inline-block mr-4" style="width: 134px;height: 520px;">
-        </div>
+  
    
        </div> 
         </v-container>

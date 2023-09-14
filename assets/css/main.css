@@ -14,7 +14,7 @@ div.rower{
     position: absolute;
     overflow-x: scroll;
     width: 100%;
-    max-width: 1326px;
+    max-width: 1168px;
     scrollbar-width: thin; /* For Firefox */
     scrollbar-color: #CECECE transparent; /* For Firefox */
   

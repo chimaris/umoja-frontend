@@ -21,8 +21,7 @@ letter-spacing: -0.24px;"> {{title}} </div>
  <postComponent  :index="i" :item="n" />
  
     </div>
-    <div class="d-inline-block mr-2" style="width: 134px;">
-        </div>
+
    </div> 
     </v-container>
     
