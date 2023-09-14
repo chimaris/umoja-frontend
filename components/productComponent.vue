@@ -31,7 +31,7 @@
 font-weight: 500;border-radius: 6px;
 letter-spacing: 0.5px;">FREE DELIVERY</v-chip>
     <div  v-if="vendorShow">
-    <div class="d-flex mt-4">
+    <div class="d-flex mt-2">
         <v-avatar size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img></v-avatar>
         <div style="cursor: pointer;" @click="$router.push('/vendor_page')" class="ml-2 ">
             <p style="color: #1E1E1E;
@@ -47,7 +47,7 @@ letter-spacing: -0.12px;">Accra, Ghana🇬🇭</p>
         <v-divider color="#a4a4a4" class="my-4"></v-divider>
     </div>
                           <div class="d-flex align-end justify-space-between">
-                <div :class="showdisco? 'mt-4':''"> 
+                <div :class="showdisco? 'mt-0':''"> 
                     <h1 
     style="font-size: 20px;
             color: #1A1D1F;

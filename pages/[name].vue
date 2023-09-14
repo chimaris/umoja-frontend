@@ -29,14 +29,14 @@
     :title="databank.postadrow.title" :items="databank.postadrow.items"/>
 
     <PopularTwoRow :showBid="databank.twocardrow.showBid" style="margin-bottom: 100px;" :maxwidth="'1200px'" :items="databank.twocardrow.items" :title="databank.twocardrow.title" />
-    <div :style="'background-color: #' + categoryColor">
+    <div          style="padding-bottom: 100px; margin-bottom: 100px;"  :style="'background-color: #' + categoryColor">
         <Adcarousel :image="databank.adrow.image" :title="databank.adrow.title" :color="databank.adrow.color" style="margin-bottom: 50px;margin-top: 100px;" />
         <product-row
          :showdisco="true"
-         style="padding-bottom: 140px; margin-bottom: 100px;" 
+
         :category="select" :cover="databank.postcarorow.cover" 
             :maxwidth="'1200px'"
-             :showVendor="false" 
+             :showVendor="true" 
             :title="databank.postcarorow.title" 
              :items="databank.postcarorow.items"
              />
