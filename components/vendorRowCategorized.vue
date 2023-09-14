@@ -1,5 +1,5 @@
 <template>
-        <v-container class="parent-container" :style="'max-width:'+maxw">
+        <v-container style="height: 895px;" class="parent-container" :style="'max-width:'+maxw">
         <div class="d-flex my-8 align-center">
 <div class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
@@ -40,6 +40,8 @@ letter-spacing: -0.42px;"> {{n}}</span>
       <div class="d-inline-block mr-4" style="width: 254px;" v-for="(n, i) in items" :key="i">
      <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
      <product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
+        </div>
+        <div class="d-inline-block mr-4" style="width: 134px;">
         </div>
        </div> 
         </v-container>

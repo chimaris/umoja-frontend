@@ -1,6 +1,6 @@
 <template>
-        <v-container class="parent-container" :style="'max-width:'+maxw">
-        <div class="d-flex my-8 align-center">
+        <v-container class="parent-container" style="height: 905px;" :style="'max-width:'+maxw">
+        <div class="d-flex my-6 align-center">
 <div class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
 font-weight: 600;width: auto;
@@ -13,9 +13,11 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </div>
      
-        <div id="homepage" style="    background: transparent!important;" class="rower mt-8">
+        <div id="homepage" style="     height: 578px!important;   background: transparent!important;" class="rower ">
       <div class="d-inline-block mr-4" style="width: 343px;height: 520px;" v-for="(n, i) in items" :key="i">
-     <blog-component  :index="i"   :item="n" />
+        <blog-component  :index="i"   :item="n" />
+    </div>
+    <div class="d-inline-block mr-4" style="width: 134px;height: 520px;">
         </div>
    
        </div> 

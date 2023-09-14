@@ -1,5 +1,5 @@
 <template>
-    <v-container class="parent-container" :style="'max-width:'+maxw">
+    <v-container class="parent-container" style="height: 895px;" :style="'max-width:'+maxw">
     <div class="d-flex my-4 justify-space-between align-center">
 <div class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
@@ -12,7 +12,7 @@ letter-spacing: -0.24px;"> {{title}} </div>
 </v-btn>
 </div>
 <v-divider style="flex: auto;" class="mb-4"></v-divider>
-    <div dense id="homepage" style="background-color: #fff;" class=" rower my-8">
+    <div dense id="homepage" style="    height: 572px!important;background-color: #fff;" class=" rower my-8">
   <div class="d-inline-block mr-2" style="width: 275px;" v-for="(n, i) in items" :key="i" cols="6" lg="3">
  <postComponent  :index="i" :item="n" />
  
@@ -21,6 +21,8 @@ letter-spacing: -0.24px;"> {{title}} </div>
  <postComponent  :index="i" :item="n" />
  
     </div>
+    <div class="d-inline-block mr-2" style="width: 134px;">
+        </div>
    </div> 
     </v-container>
     

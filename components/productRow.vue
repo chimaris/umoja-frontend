@@ -1,5 +1,5 @@
 <template>
-        <v-container class="parent-container" :style="'max-width:'+maxw">
+        <v-container class="parent-container" style="height: 696px;" :style="'max-width:'+maxw">
         <div class="d-flex my-8 align-center">
 <div class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
@@ -13,7 +13,7 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </div>
      
-        <div id="homepage" style="    background: transparent!important;" class="rower mt-8">
+        <div id="homepage" :style="showVendor? 'height: 545px!important;': ''" style="  display: inline-flex;  background: transparent!important;" class="rower mt-8">
       <div class="d-inline-block mr-4" style="width: 254px;" v-for="(n, i) in items" :key="i">
      <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
      <product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
@@ -21,6 +21,8 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
       <div class="d-inline-block mr-4" style="width: 254px;" v-for="(n, i) in items" :key="i">
      <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
      <product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
+        </div>
+        <div class="d-inline-block mr-4" style="width:134px;">
         </div>
        </div> 
         </v-container>

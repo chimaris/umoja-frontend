@@ -26,7 +26,7 @@
     <newlylaunched :item="databank.newlylaunched" style="margin-bottom:;" />
 
     <product-row style="margin-bottom: 100px;" :maxwidth="'1200px'" :showVendor="true"
-    :title="databank.postadrow.title" :cover="false" :items="databank.postadrow.items"/>
+    :title="databank.postadrow.title" :items="databank.postadrow.items"/>
 
     <PopularTwoRow :showBid="databank.twocardrow.showBid" style="margin-bottom: 100px;" :maxwidth="'1200px'" :items="databank.twocardrow.items" :title="databank.twocardrow.title" />
     <div :style="'background-color: #' + categoryColor">
@@ -172,6 +172,16 @@ export default {
                     showBid: false,
                     title: '⚡️ Popular fashion products of the week',
                     items: [
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1693932651/rectangle-22440j_qr3baf.png',
+                            name: 'Koko Rachel Deco Set',
+                            vendorName: 'Nweke Franklin O.'
+                        },
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1693932635/rectangle-22440_iixqtu.png',
+                            name: 'The Nawi Scarfs',
+                            vendorName: 'Okoli Cecilia Bona.'
+                        },
                         {
                             image: 'https://res.cloudinary.com/payhospi/image/upload/v1693932651/rectangle-22440j_qr3baf.png',
                             name: 'Koko Rachel Deco Set',
@@ -395,6 +405,18 @@ export default {
                             vendorName: 'Okoli Cecilia Bona.',
                             bid: 2430.00
                         },
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074723/rectangle-22440ele_ceelbp.png',
+                            name: 'Elephant Hand Painting',
+                            vendorName: 'Nweke Franklin O.',
+                            bid: 2430.00
+                        },
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074703/rectangle-22440childh_cih4ih.png',
+                            name: 'The Child',
+                            vendorName: 'Okoli Cecilia Bona.',
+                            bid: 2430.00
+                        },
                     ]
                 },
                    adrow:{
@@ -594,6 +616,18 @@ export default {
                     title: '⚡️ Ongoing Bids',
                     showBid: false,
                     items: [
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074705/rectangle-22440ongodec_tjw2sp.png',
+                            name: 'Bespoke Chair',
+                            vendorName: 'Nweke Franklin O.',
+                            bid: 2430.00
+                        },
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074705/rectangle-22440gdy_g3ghz5.png',
+                            name: 'Koko Rachel Deco Set',
+                            vendorName: 'Okoli Cecilia Bona.',
+                            bid: 2430.00
+                        },
                         {
                             image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074705/rectangle-22440ongodec_tjw2sp.png',
                             name: 'Bespoke Chair',
@@ -808,6 +842,20 @@ export default {
                     showBid: false,
                     title: '⚡️ Top products for the week',
                     items: [
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074701/rectangle-22440khkhkg_ivjjja.png',
+                            name: 'Kino Make Up Set',
+                            vendorName: 'Nweke Franklin O.',
+                            bid: 2430.00
+
+                        },
+                        {
+                            image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074701/rectangle-22440csmepyt_ubmuxa.png',
+                            name: 'Safari Scent',
+                            vendorName: 'Okoli Cecilia Bona.',
+                            bid: 2430.00
+
+                        },
                         {
                             image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074701/rectangle-22440khkhkg_ivjjja.png',
                             name: 'Kino Make Up Set',

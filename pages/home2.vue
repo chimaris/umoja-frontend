@@ -465,7 +465,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
 </div>
 
 <div>
-  <vendorRowCategorized :vendorlist="vendor.items" :category="select" style="margin: 100px auto;" :vendor="true" :maxwidth="'1200px'" :showVendor="true"
+  <vendorRowCategorized :vendorlist="vendor.items" :category="select" style="margin-top: 50px;" :vendor="true" :maxwidth="'1200px'" :showVendor="true"
         :title="vendor.title" />
 
 </div>
@@ -474,7 +474,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
 
  
 
-        <div style="padding:100px 0px">
+        <div style="padding:150px 0px">
 
             <v-carousel style="overflow: visible;"
             height="429" class="promo"
@@ -514,11 +514,11 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 </div>
 
 <product-row :items="items2" :cover="false" :maxwidth="'1200px'" :showVendor="false" title="💰 Most Selling Products" />
-<PopularTwoRow :showBid="twocardrow.showBid" style="margin-bottom: 100px;" :maxwidth="'1200px'" :items="twocardrow.items" :title="twocardrow.title" />
+<PopularTwoRow :showBid="twocardrow.showBid" :maxwidth="'1200px'" :items="twocardrow.items" :title="twocardrow.title" />
 
 
         </div>
-        <div class="bg-black " style="margin:100px 0px">
+        <div class="bg-black " >
 <v-container style="height:774px" class="d-flex align-center justify-center">
     <div class="text-center">
         <v-img class="mx-auto mb-8" width="100%" max-width="420px" src="https://res.cloudinary.com/payhospi/image/upload/v1690543426/frame_aivj5d.png"></v-img>
@@ -551,7 +551,7 @@ letter-spacing: -0.42px;">You will be able to unsubscribe at anytime. Read our p
     </div>
 </v-container>
 </div>
-<blogRow :items="blogpost.items" style="margin: 100px auto;"  :maxwidth="'1200px'" :showVendor="true"
+<blogRow :items="blogpost.items" style="margin-top: 100px ;"  :maxwidth="'1200px'" :showVendor="true"
         :title="blogpost.title" />
 <div>
     <v-container  style="max-width:1200px">
