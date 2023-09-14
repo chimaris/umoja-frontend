@@ -8,7 +8,7 @@ min-width: 155px;
 line-height: 120%; /* 16.8px */
 letter-spacing: -0.24px;"> {{title}} </div>
 <v-divider style="flex: auto;" class="mx-4"></v-divider>
-<v-btn class="divbtn" color="#333" size="large" style="" variant="outlined" rounded="xl" >
+<v-btn class="" color="#333" size="large" style="" variant="outlined" rounded="xl" >
 See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 </v-btn>
     </div>

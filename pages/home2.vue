@@ -584,7 +584,7 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
     </v-container>
 </div>
 
-<mainfooter :maxwidth="'1200px'" />
+<mainfooter style="margin-top: 100px ;" :maxwidth="'1200px'" />
 </template>
 <style>
 .divbtn{

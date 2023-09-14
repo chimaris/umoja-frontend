@@ -25,7 +25,7 @@
 
     <newlylaunched :item="databank.newlylaunched" style="margin-bottom:;" />
 
-    <product-row style="margin-bottom: 100px;" :maxwidth="'1200px'" :showVendor="true"
+    <product-row :cover="databank.postadrow.cover" style="margin-bottom: 100px;" :maxwidth="'1200px'" :showVendor="true"
     :title="databank.postadrow.title" :items="databank.postadrow.items"/>
 
     <PopularTwoRow :showBid="databank.twocardrow.showBid" style="margin-bottom: 100px;" :maxwidth="'1200px'" :items="databank.twocardrow.items" :title="databank.twocardrow.title" />
@@ -166,7 +166,8 @@ export default {
         location: 'Lagos, Nigeria',
         likes: '66',
         oos: true},
-                    ]
+                    ],
+                    cover: false
                 },
                 twocardrow:{
                     showBid: false,

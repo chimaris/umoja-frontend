@@ -1,5 +1,5 @@
 <template>
-    <v-card width="100%" v-if="loaded" style="overflow: visible;" flat class="bg-white parent-card rounded-lg mb-2">
+    <v-card width="254" v-if="loaded" style="overflow: visible;" flat class="bg-white parent-card rounded-lg mb-2">
         <v-img  class=" bg-grey-lighten-5" cover style="border-radius: 16px;" width="100%" height="237" :src="item.image">
         </v-img>
 <div class="px-4">
