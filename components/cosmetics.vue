@@ -1,20 +1,20 @@
 <template>
-    <v-card class="d-flex justify-center" style="background:radial-gradient(50% 50% at 50% 50%, #3AA3C7 0%, #1D7291 100%)" flat height="100vh" width="100%" >
-        <v-container style="max-width:1200px;width: 100%;height: 100vh; z-index: 99;"  class="d-flex align-center py-1">
+    <v-card class="colorcont d-flex justify-center" :style="'background:'+item.color" flat height="100vh" width="100%" >
+        <v-container style="max-width:1200px;width: 100%;height: 832px; z-index: 99;"  class="d-flex align-center py-1">
            
            <div style="width: 536px;">
 
-               <p style="color: #FFF;
+               <p class="title" style="color: #FFF;
 font-size: 96px;
 width: 695px;
 font-weight: 600;
 line-height: 100%; /* 96px */
-letter-spacing: -2.88px;">Unveil Your Beauty</p>
-<p class="my-6" style="color: #FFF;
+letter-spacing: -2.88px;">{{ item.title }}</p>
+<p class="my-6 sub" style="color: #FFF;
 font-size: 24px;
 font-weight: 500;
-">Step into a world where beauty knows no bounds, and empowerment is painted in vibrant hues.</p>
-<v-btn rounded="xl"   color="#F8B735" height="44" style="width: 225px;
+">{{ item.sub }}</p>
+<v-btn rounded="xl" class="btn"  color="#F8B735" height="44" style="width: 225px;
 padding: 12px 20px;" flat ><span style="color: var(--carbon-6, #1E1E1E);
 text-align: center;font-weight: 600;
 font-size: 14px;">
@@ -24,9 +24,98 @@ font-size: 14px;">
 </v-btn>
 </div>
 </v-container>
-<div style="position: absolute; width: 100%; max-width: 1400px; height: 100vh;">
-
-    <v-img eager style="position: absolute;bottom: 0;right: 0;width: 100%;max-width: 737px;z-index: 9;"  src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1694074737/photo-shot-asian-african-white-304050-year-old-woman-with-her-beauty-regime-copy-1_ads5t3.png"></v-img>
+<div class="img igj" style="">
+    <v-img eager style="position: absolute;bottom: 0;right: 0;width: 100%;max-width: 737px;z-index: 9;"  :src="item.image"></v-img>
 </div>
     </v-card>
 </template>
+<script>
+import { gsap, Power2, CSSPlugin } from 'gsap';
+export default {
+    data() {
+    return {
+        carouseldata: [
+            {
+                title: 'Unveil Your Beauty',
+                color: 'radial-gradient(50% 50% at 50% 50%, #3AA3C7 0%, #1D7291 100%)',
+                sub: 'Step into a world where beauty knows no bounds, and empowerment is painted in vibrant hues.',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1694074737/photo-shot-asian-african-white-304050-year-old-woman-with-her-beauty-regime-copy-1_ads5t3.png'
+            },
+            {
+                title: 'Unveil Your Beauty',
+                color: 'radial-gradient(50% 50% at 50% 50%, #348C5B 0%, #29593E 100%)',
+                sub: 'Step into a world where beauty knows no bounds, and empowerment is painted in vibrant hues.',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1694074729/young-black-man-taking-care-his-skin-with-nourishing-face-cream-copy-1_egaibh.png'
+            },
+        ],
+        selected: 1,
+    }
+},computed: {
+
+    item() {
+        return this.carouseldata[this.selected];
+    }
+    },
+    mounted(){
+  setInterval(() => {
+    this.startall();
+  }, 5000);
+  gsap.registerPlugin(CSSPlugin);
+
+},
+methods: {
+  async startall(){
+    const img = document.querySelector('.img');
+    const title = document.querySelector('.title');
+    const sub = document.querySelector('.sub');
+    const btn = document.querySelector('.btn');
+    gsap.to([title, btn, sub, img],
+    {
+      opacity: 0,
+      x: '-100%',
+      ease: Power2.easeOut,
+      stagger: 0.1,
+      onComplete: () => {
+
+        this.selected = this.selected === 0 ? 1 : 0;
+        // this.startall();
+        }
+  
+  })
+
+  setTimeout(() => {
+    gsap.fromTo([title, sub, btn, img],
+    {
+      opacity: 0,
+      x: '100%',
+      
+    },{
+        opacity: 1,
+        x: '0%',
+        ease: Power2.easeOut,
+        stagger: 0.1
+  })
+  }, 2000);
+  },
+   animateBox(box, delay) {
+   gsap.to(box,
+    {
+      opacity: 1,
+      scale: 1,
+      borderRadius: '23.0164px',
+      bottom: '2px',
+      ease: Bounce.easeOut,
+      duration: 1.3,
+      delay,
+      
+    }
+  );
+},
+},
+}
+</script>
+<style>
+
+.igj{
+    position: absolute; width: 100%; max-width: 1400px; height: 100vh;
+}</style>

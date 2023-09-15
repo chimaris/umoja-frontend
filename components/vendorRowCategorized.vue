@@ -41,8 +41,7 @@ letter-spacing: -0.42px;"> {{n}}</span>
      <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
      <product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
         </div>
-        <div class="d-inline-block mr-4" style="width: 134px;">
-        </div>
+  
        </div> 
         </v-container>
         
