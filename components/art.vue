@@ -1,12 +1,12 @@
 <template>
     
     <div class="d-flex align-center bg-black text-center justify-center" style="position: relative; height: 100vh;">
-        <div style="position: absolute; height: 100vh; width: 100%;">
-        <div style="position: relative; height: 100vh; width: 100%;">
-        <div style="height: 33.333%;position: relative;" v-for="(n, i) in images" :key="i" >
-        <div style="height: 100%;"  :class="'photobanner'+i" class=" d-flex justify-start">
-            <v-img height="100%" contain :width="(i == 0 && j == 0) ? '468': 'auto'"  width="auto" :src="n" v-for="(n, j) in n.images" :key="j"></v-img>
-            <v-img height="100%" :width="(i == 0 && k == 0) ? '468': 'auto'"  contain width="auto" :src="n" v-for="(n, k) in n.images" :key="k"></v-img>
+        <div style="position: absolute; height: 825px; width: 100%;">
+        <div style="position: relative; height: 825px; width: 100%;">
+        <div style="height: 275px;position: relative;" v-for="(n, i) in images" :key="i" >
+        <div style="height: 275px;"  :class="'photobanner'+i" class=" d-flex justify-start">
+            <v-img height="275px" contain :width="(i == 0 && j == 0) ? '468': 'auto'"  width="auto" :src="n" v-for="(n, j) in n.images" :key="j"></v-img>
+            <v-img height="275px" :width="(i == 0 && k == 0) ? '468': 'auto'"  contain width="auto" :src="n" v-for="(n, k) in n.images" :key="k"></v-img>
         </div>
     </div>
     </div>
@@ -56,7 +56,7 @@ export default {
                         'https://res.cloudinary.com/payhospi/image/upload/v1694775032/rectangle-22450khjg875875_smeumb.png',
                         'https://res.cloudinary.com/payhospi/image/upload/v1694074696/rectangle-22451dyig_kcur1m.png',
                         'https://res.cloudinary.com/payhospi/image/upload/v1694074696/rectangle-22452hydyewy_vilxk4.png',
-                        'https://res.cloudinary.com/payhospi/image/upload/v1694074699/rectangle-22453hdydhch_ehqtvi.png',
+                        'https://res.cloudinary.com/payhospi/image/upload/v1694794994/rectangle-22453jydhgxjhx_ic7xot.png',
                         'https://res.cloudinary.com/payhospi/image/upload/v1694774987/rectangle-22454jhfu64_ov13pm.png'
                     ]
                 }
