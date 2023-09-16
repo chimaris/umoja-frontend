@@ -119,7 +119,7 @@ methods: {
         const img = document.querySelector('.img'+this.selected);
         // img.src = this.item.image;
         gsap.to(img,{
-            scale:1.3,
+            scale:1.16,
             opacity:1,
             duration: 9,
             
