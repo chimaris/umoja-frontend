@@ -4,7 +4,7 @@
 <span class="pointhere">Sign up now
 </span></p>
   </div>
-  <div  class="topbar"> 
+  <div :style="sticky? ' position: relative;':' position: sticky;'" class="topbar"> 
 
       <v-container  class="py-0" :style="'max-width:'+maxw">
         <div class="d-flex justify-space-between align-center">
@@ -102,8 +102,11 @@
    
       };
     },
-    props: ['maxwidth'],
+    props: ['maxwidth', 'sticky'],
   computed: {
+    sticky() {
+    return this.sticky !== undefined ? this.sticky : false
+  },
   maxw() {
     return this.maxwidth? this.maxwidth : '1400px'
   },

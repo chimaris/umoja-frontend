@@ -1,7 +1,7 @@
 <template>
-    <Header2 :maxwidth="'1200px'" />
+    <Header2 :sticky="true" :maxwidth="'1200px'" />
     <div style="    position: sticky;
-    top: 65px;backdrop-filter: blur(7px);
+    top: 0px;backdrop-filter: blur(7px);
     background: rgba(255, 255, 255, 0.906);
     z-index: 999;">
         <v-container style="max-width:1200px;width: 100%;" class="py-1">

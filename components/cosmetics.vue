@@ -1,5 +1,5 @@
 <template>
-    <v-card class="colorcont d-flex justify-center" :style="'background:'+item.color" flat height="832px" width="100%" >
+    <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="832px" width="100%" >
         <v-container style="max-width:1200px;width: 100%;height: 832px; z-index: 99;"  class="d-flex align-center py-1">
            
            <div style="width: 536px;">

@@ -51,7 +51,7 @@ export default {
     return this.maxwidth? this.maxwidth : '1400px'
   },
     vendorBol() {
-    return this.vendor? this.vendor : false
+    return this.vendor !== undefined ? this.vendor : false
   },
     coverbol() {
     // Returns true if this.cover is set, otherwise returns true

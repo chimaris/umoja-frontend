@@ -42,7 +42,7 @@ div.rower::-webkit-scrollbar-track {
     background-color: #D9D9D9; /* For Chrome, Safari, and Opera */
   }
 .topbar{
-    position: sticky;
+   
     top: 0;
     overflow: hidden;
     z-index: 999;
