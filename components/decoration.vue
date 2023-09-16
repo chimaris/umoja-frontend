@@ -47,7 +47,7 @@ line-height: 140%; /* 19.6px */" class="bcont">{{ item.bcont }}</p>
 
 </template>
 <script>
-import { gsap, Power2, CSSPlugin } from 'gsap';
+import { gsap, Power2, Back, CSSPlugin } from 'gsap';
 export default {
     data() {
     return {
@@ -57,34 +57,34 @@ export default {
                 bcont: 'African lanterns and lampshades can create a warm and inviting atmosphere in any home. You could offer a selection of pendant lights, floor lamps, and table lamps that incorporate African design elements.',
                 btitle: 'Lighting and Lamps',
                 sub: 'Transforming Spaces with Cultural Flair',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1694077483/rectangle-22455decor_npteeu.png',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694077483/rectangle-22455decor_npteeu.png',
             },
             {
                 title: 'Unveil The Beauty In Your Home',
                 color: 'radial-gradient(50% 50% at 50% 50%, #348C5B 0%, #29593E 100%)',
                 sub: 'Transforming Spaces with Cultural Flair',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074749/rectangle-22456dec_dmg2jw.png',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074749/rectangle-22456dec_dmg2jw.png',
                 bcont: `Woven baskets are both functional and decorative. They can be used for storage, as planters, or simply as artistic pieces. Offering a variety of sizes and styles would cater to different customer preferences.`,
                 btitle: 'Woven Baskets and Storage',
             },
             {
                 title: 'Rooted in Africa',
                 sub: 'Transforming Spaces with Cultural Flair',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074739/rectangle-22457decor2_hizpjk.png',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074739/rectangle-22457decor2_hizpjk.png',
                 bcont: `African furniture often features intricate carvings and unique designs. This category could include items like chairs, tables, cabinets, and beds that are handmade by skilled artisans.`,
                 btitle: 'Handcrafted Furniture',
             },
             {
                 title: 'Rooted in Africa',
                 sub: 'Transforming Spaces with Cultural Flair',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074756/rectangle-22458decor43_oumcf7.png',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074756/rectangle-22458decor43_oumcf7.png',
                 bcont: `African textiles like kente, mudcloth, Ankara, and Kitenge are known for their rich patterns and colors. Offering a variety of fabrics that customers can use for upholstery, clothing, or decorative purposes.`,
                 btitle: 'Traditional Textiles and Fabrics',
             },
             {
                 title: 'Rooted in Africa',
                 sub: 'Transforming Spaces with Cultural Flair',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074741/rectangle-22459decore54_iwgiru.png',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074741/rectangle-22459decore54_iwgiru.png',
                 bcont: `African pottery is often handcrafted and beautifully decorated. You can showcase a range of vases, bowls, plates, and other ceramic pieces that showcase the region's traditional pottery techniques.`,
                 btitle: 'Ceramics and Pottery',
             },
@@ -115,12 +115,11 @@ methods: {
   tl.fromTo([cardo, ],
     {
       opacity: 0,
-      xPercent: -30,
+      xPercent: -100,
       
     },{
         opacity: 1,
         xPercent: 0,
-        ease: Power2.easeOut,
       
   })
   tl.fromTo([ title,btn, sub, ],
@@ -131,7 +130,7 @@ methods: {
     },{
         opacity: 1,
         xPercent: 0,
-        ease: Power2.easeOut,
+        ease: Back.easeOut,
         stagger: 0.1,
         delay: -0.2,
       
@@ -144,7 +143,7 @@ methods: {
     },{
         opacity: 1,
         yPercent: 0,
-        ease: Power2.easeOut,
+        ease: Back.easeOut,
         stagger: 0.1,
 
       
@@ -152,7 +151,7 @@ methods: {
   tl.to([btitle, bcont],{
       opacity: 0,
       yPercent: 100,
-      ease: Power2.easeOut,
+      ease: Back.easeOut,
       stagger: 0.1,
       delay: 5,
       
@@ -161,7 +160,7 @@ tl.to([title,sub, btn],
   {
     opacity: 0,
     xPercent: 100,
-    ease: Power2.easeOut,
+    ease: Back.easeOut,
     stagger: 0.1,
     
   })
@@ -170,7 +169,6 @@ tl.to([cardo, ],
         opacity: 0,
         xPercent: 100,
         delay: -0.2,
-        ease: Power2.easeOut,
         onComplete: () => {
          this.selected = this.selected === 4 ? 0 : this.selected + 1;
          }

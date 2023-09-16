@@ -32,7 +32,7 @@ font-size: 14px;">
     </v-card>
 </template>
 <script>
-import { gsap, Power2, Bounce, CSSPlugin } from 'gsap';
+import { gsap, Power2, Bounce,Back, CSSPlugin } from 'gsap';
 export default {
     data() {
     return {
@@ -79,7 +79,7 @@ methods: {
     },{
         opacity: 1,
         xPercent: 0,
-        ease: Power2.easeOut,
+        ease: Back.easeOut,
         stagger: 0.1,
       
   })
@@ -87,7 +87,7 @@ methods: {
     {
       opacity: 0,
       xPercent: 100,
-      ease: Power2.easeOut,
+      ease: Back.easeOut,
       stagger: 0.1,
       delay: 5,
        onComplete: () => {
