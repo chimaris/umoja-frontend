@@ -1,6 +1,6 @@
 <template>
-    <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="832px" width="100%" >
-        <v-container style="max-width:1200px;width: 100%;height: 832px; z-index: 99;"  class="d-flex align-center py-1">
+    <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="752px" width="100%" >
+        <v-container style="max-width:1200px;width: 100%;height: 752px; z-index: 99;"  class="d-flex align-center py-1">
            
            <div style="width: 536px;">
 
@@ -71,7 +71,20 @@ methods: {
     var tl = gsap.timeline({repeat: -1,
      
   });
-  tl.fromTo([img, title,btn, sub, ],
+  tl.fromTo([img ],
+    {
+      opacity: 0,
+      scale: 2,
+      
+    },{
+        opacity: 1,
+        scale: 1,
+        ease: Bounce.easeOut,
+        duration: 1,
+      
+      
+  })
+  tl.fromTo([, title,btn, sub, ],
     {
       opacity: 0,
       xPercent: -100,
@@ -81,6 +94,7 @@ methods: {
         xPercent: 0,
         ease: Back.easeOut,
         stagger: 0.1,
+        delay: -0.8,
       
   })
   tl.to([title,sub, btn , img],
@@ -100,9 +114,12 @@ methods: {
 }
 </script>
 <style>
+.colorcont{
+    transition: all 3s ease-in-out;
+}
 .imgcl{
     position: absolute;bottom: 0%!important;right: 0px;width: 100vw;max-width: 737px;z-index: 99;
 }
 .igj{
-    position: absolute; width: 100%; height: 832px;
+    position: absolute; width: 100%; height: 752px;
 }</style>

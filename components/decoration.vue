@@ -1,8 +1,8 @@
 <template>
     <div class="bg-black">
 
-    <v-card flat color="black" class="cardo rounded-0" height="832" width="100%" :image="item.image">
-        <v-container style="max-width:1200px;width: 100%;height: 832px; z-index: 99;"  class="d-flex align-center py-1">
+    <v-card flat color="black" class="cardo rounded-0" height="752" width="100%" :image="item.image">
+        <v-container style="max-width:1200px;width: 100%;height: 752px; z-index: 99;"  class="d-flex align-center py-1">
            
            <div style="width: 536px;">
 
@@ -120,6 +120,7 @@ methods: {
     },{
         opacity: 1,
         xPercent: 0,
+        delay: 0.095
       
   })
   tl.fromTo([ title,btn, sub, ],
@@ -168,7 +169,7 @@ tl.to([cardo, ],
 {
         opacity: 0,
         xPercent: 100,
-        delay: -0.2,
+        delay: -0.3,
         onComplete: () => {
          this.selected = this.selected === 4 ? 0 : this.selected + 1;
          }
@@ -183,5 +184,5 @@ tl.to([cardo, ],
     position: absolute;bottom: 0%!important;right: 0px;width: 100vw;max-width: 737px;z-index: 99;
 }
 .igj{
-    position: absolute; width: 100%; height: 832px;
+    position: absolute; width: 100%; height: 752px;
 }</style>
