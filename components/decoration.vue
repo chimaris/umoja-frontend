@@ -1,8 +1,8 @@
 <template>
     <div class="bg-black">
 
-    <v-card flat color="black" class="cardo rounded-0" height="752" width="100%" :image="item.image">
-        <v-container style="max-width:1200px;width: 100%;height: 752px; z-index: 99;"  class="d-flex align-center py-1">
+    <v-card flat color="black" class="cardo rounded-0" height="772" width="100%" :image="item.image">
+        <v-container style="max-width:1200px;width: 100%;height: 772px; z-index: 99;"  class="d-flex align-center py-1">
            
            <div style="width: 536px;">
 
@@ -16,9 +16,9 @@ letter-spacing: -2.88px;">{{ item.title }}</p>
 font-size: 24px;
 font-weight: 500;
 ">{{ item.sub }}</p>
-<div style="width: 695px;" class="btn">
+<div style="width: 695px;" v-show="selected == 0" class="btn">
 
-    <v-btn rounded="xl" color="#F8B735" height="44" style="width: 225px;
+    <v-btn rounded="xl" color="#F38218" height="44" style="width: 225px;
 padding: 12px 20px;" flat ><span style="color: var(--carbon-6, #1E1E1E);
 text-align: center;font-weight: 600;
 font-size: 14px;">
@@ -28,7 +28,7 @@ font-size: 14px;">
 </div>
 </div>
 </v-container>
-        <div class="align-center d-flex justify-start" style="height: 144px; position: absolute; bottom: 0px; left: 0px; right: 0px;
+        <div class="align-center d-flex justify-space-between" style="height: 144px; position: absolute; bottom: 0px; left: 0px; right: 0px;
 padding: 0px 40px;color: #FFF;background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, #000 100%);">
 <div>
 
@@ -41,6 +41,13 @@ font-size: 14px;
 font-weight: 400;
 line-height: 140%; /* 19.6px */" class="bcont">{{ item.bcont }}</p>
 </div>
+<v-btn class="btn2"  v-show="selected !== 0" rounded="xl" color="#F38218" height="54" style="width: 225px;
+padding: 12px 20px;" flat ><span style="color: var(--carbon-6, #ffffff);
+text-align: center;font-weight: 600;
+font-size: 14px;">
+    Shop Now <v-icon icon="mdi mdi-arrow-right"></v-icon>
+</span>
+</v-btn>
 </div>
     </v-card>
       </div>
@@ -60,30 +67,30 @@ export default {
                 image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694077483/rectangle-22455decor_npteeu.png',
             },
             {
-                title: 'Unveil The Beauty In Your Home',
+                title: '',
                 color: 'radial-gradient(50% 50% at 50% 50%, #348C5B 0%, #29593E 100%)',
-                sub: 'Transforming Spaces with Cultural Flair',
+                sub: '',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074749/rectangle-22456dec_dmg2jw.png',
                 bcont: `Woven baskets are both functional and decorative. They can be used for storage, as planters, or simply as artistic pieces. Offering a variety of sizes and styles would cater to different customer preferences.`,
                 btitle: 'Woven Baskets and Storage',
             },
             {
-                title: 'Rooted in Africa',
-                sub: 'Transforming Spaces with Cultural Flair',
+                title: '',
+                sub: '',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074739/rectangle-22457decor2_hizpjk.png',
                 bcont: `African furniture often features intricate carvings and unique designs. This category could include items like chairs, tables, cabinets, and beds that are handmade by skilled artisans.`,
                 btitle: 'Handcrafted Furniture',
             },
             {
-                title: 'Rooted in Africa',
-                sub: 'Transforming Spaces with Cultural Flair',
+                title: '',
+                sub: '',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074756/rectangle-22458decor43_oumcf7.png',
                 bcont: `African textiles like kente, mudcloth, Ankara, and Kitenge are known for their rich patterns and colors. Offering a variety of fabrics that customers can use for upholstery, clothing, or decorative purposes.`,
                 btitle: 'Traditional Textiles and Fabrics',
             },
             {
-                title: 'Rooted in Africa',
-                sub: 'Transforming Spaces with Cultural Flair',
+                title: '',
+                sub: '',
                 image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074741/rectangle-22459decore54_iwgiru.png',
                 bcont: `African pottery is often handcrafted and beautifully decorated. You can showcase a range of vases, bowls, plates, and other ceramic pieces that showcase the region's traditional pottery techniques.`,
                 btitle: 'Ceramics and Pottery',
@@ -109,6 +116,7 @@ methods: {
     const btn = document.querySelector('.btn');
     const btitle = document.querySelector('.btitle');
     const bcont = document.querySelector('.bcont');
+    const btn2 = document.querySelector('.btn2');
     var tl = gsap.timeline({repeat: -1,
      
   });
@@ -133,10 +141,10 @@ methods: {
         xPercent: 0,
         ease: Back.easeOut,
         stagger: 0.1,
-        delay: -0.2,
+        delay: -0.4,
       
   })
-  tl.fromTo([btitle, bcont],
+  tl.fromTo([btitle, bcont, btn2],
     {
       opacity: 0,
       yPercent: 100,
@@ -144,24 +152,22 @@ methods: {
     },{
         opacity: 1,
         yPercent: 0,
-        ease: Back.easeOut,
         stagger: 0.1,
+        delay: -0.2,
 
       
   })
-  tl.to([btitle, bcont],{
+  tl.to([btitle, bcont, btn2],{
       opacity: 0,
       yPercent: 100,
-      ease: Back.easeOut,
       stagger: 0.1,
-      delay: 5,
+      delay: 7,
       
 })
 tl.to([title,sub, btn],
   {
     opacity: 0,
     xPercent: 100,
-    ease: Back.easeOut,
     stagger: 0.1,
     
   })
@@ -184,5 +190,5 @@ tl.to([cardo, ],
     position: absolute;bottom: 0%!important;right: 0px;width: 100vw;max-width: 737px;z-index: 99;
 }
 .igj{
-    position: absolute; width: 100%; height: 752px;
+    position: absolute; width: 100%; height: 772px;
 }</style>

@@ -1,6 +1,6 @@
 <template>
-    <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="752px" width="100%" >
-        <v-container style="max-width:1200px;width: 100%;height: 752px; z-index: 99;"  class="d-flex align-center py-1">
+    <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="762px" width="100%" >
+        <v-container style="max-width:1200px;width: 100%;height: 762px; z-index: 99;"  class="d-flex align-center py-1">
            
            <div style="width: 536px;">
 
@@ -121,5 +121,5 @@ methods: {
     position: absolute;bottom: 0%!important;right: 0px;width: 100vw;max-width: 737px;z-index: 99;
 }
 .igj{
-    position: absolute; width: 100%; height: 752px;
+    position: absolute; width: 100%; height: 762px;
 }</style>
