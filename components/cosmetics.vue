@@ -1,5 +1,5 @@
 <template>
-    <v-card class="colorcont d-flex justify-center" :style="'background:'+item.color" flat height="100vh" width="100%" >
+    <v-card class="colorcont d-flex justify-center" :style="'background:'+item.color" flat height="832px" width="100%" >
         <v-container style="max-width:1200px;width: 100%;height: 832px; z-index: 99;"  class="d-flex align-center py-1">
            
            <div style="width: 536px;">
@@ -14,23 +14,25 @@ letter-spacing: -2.88px;">{{ item.title }}</p>
 font-size: 24px;
 font-weight: 500;
 ">{{ item.sub }}</p>
-<v-btn rounded="xl" class="btn"  color="#F8B735" height="44" style="width: 225px;
+<div style="width: 695px;" class="btn">
+
+    <v-btn rounded="xl" color="#F8B735" height="44" style="width: 225px;
 padding: 12px 20px;" flat ><span style="color: var(--carbon-6, #1E1E1E);
 text-align: center;font-weight: 600;
 font-size: 14px;">
-
     Shop Now
 </span>
 </v-btn>
 </div>
+</div>
 </v-container>
-<div class="img igj" style="">
-    <v-img eager style="position: absolute;bottom: 0;right: 0;width: 100%;max-width: 737px;z-index: 9;"  :src="item.image"></v-img>
+<div class=" igj d-flex justify-end align-end" style="">
+    <img class="img imgcl"  style=""  :src="item.image" />
 </div>
     </v-card>
 </template>
 <script>
-import { gsap, Power2, CSSPlugin } from 'gsap';
+import { gsap, Power2, Bounce, CSSPlugin } from 'gsap';
 export default {
     data() {
     return {
@@ -48,7 +50,7 @@ export default {
                 image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1694074729/young-black-man-taking-care-his-skin-with-nourishing-face-cream-copy-1_egaibh.png'
             },
         ],
-        selected: 1,
+        selected: 0,
     }
 },computed: {
 
@@ -57,11 +59,8 @@ export default {
     }
     },
     mounted(){
-  setInterval(() => {
-    this.startall();
-  }, 5000);
   gsap.registerPlugin(CSSPlugin);
-
+this.startall()
 },
 methods: {
   async startall(){
@@ -69,53 +68,41 @@ methods: {
     const title = document.querySelector('.title');
     const sub = document.querySelector('.sub');
     const btn = document.querySelector('.btn');
-    gsap.to([title, btn, sub, img],
+    var tl = gsap.timeline({repeat: -1,
+     
+  });
+  tl.fromTo([img, title,btn, sub, ],
     {
       opacity: 0,
-      x: '-100%',
-      ease: Power2.easeOut,
-      stagger: 0.1,
-      onComplete: () => {
-
-        this.selected = this.selected === 0 ? 1 : 0;
-        // this.startall();
-        }
-  
-  })
-
-  setTimeout(() => {
-    gsap.fromTo([title, sub, btn, img],
-    {
-      opacity: 0,
-      x: '100%',
+      xPercent: -100,
       
     },{
         opacity: 1,
-        x: '0%',
+        xPercent: 0,
         ease: Power2.easeOut,
-        stagger: 0.1
-  })
-  }, 2000);
-  },
-   animateBox(box, delay) {
-   gsap.to(box,
-    {
-      opacity: 1,
-      scale: 1,
-      borderRadius: '23.0164px',
-      bottom: '2px',
-      ease: Bounce.easeOut,
-      duration: 1.3,
-      delay,
+        stagger: 0.1,
       
-    }
-  );
-},
+  })
+  tl.to([title,sub, btn , img],
+    {
+      opacity: 0,
+      xPercent: 100,
+      ease: Power2.easeOut,
+      stagger: 0.1,
+      delay: 5,
+       onComplete: () => {
+        this.selected = this.selected === 0 ? 1 : 0;
+        }
+  
+  })
+  },
 },
 }
 </script>
 <style>
-
+.imgcl{
+    position: absolute;bottom: 0%!important;right: 0px;width: 100vw;max-width: 737px;z-index: 99;
+}
 .igj{
-    position: absolute; width: 100%; max-width: 1400px; height: 100vh;
+    position: absolute; width: 100%; height: 832px;
 }</style>
