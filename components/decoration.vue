@@ -129,8 +129,8 @@ methods: {
             const img = document.querySelector('.img'+this.selected);
             const title = document.querySelector('.title');
             const sub = document.querySelector('.sub');
-            const cardo = document.querySelector('.img'+this.selected);
             const btn = document.querySelector('.btn');
+            const cardo = document.querySelector('.img'+this.selected);
             const btitle = document.querySelector('.btitle');
             const bcont = document.querySelector('.bcont');
             const btn2 = document.querySelector('.btn2');

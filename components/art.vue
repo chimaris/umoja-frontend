@@ -14,21 +14,28 @@
     <div class="w-100  h-100" style="position: absolute; background-color: black;opacity: 0.7;">
     </div>
     <div style="z-index: 99;" class="mb-8">
-        <p style="color: #FFF;
-font-size: 120px;
+        <p class="title" style="color: #FFF;
+font-size: 120px
+;opacity: 0;
 font-weight: 600;
 letter-spacing: -3.6px;"> Art is Life</p>
 <p style="color: #FFF;
 font-size: 20px;
+opacity: 0;
 font-weight: 500;
 letter-spacing: 4px;
-text-transform: uppercase;" class="mb-8">Unleashing Artistry Beyond Boundaries</p>
-<v-btn rounded="xl" color="orange" height="44" style="width: 225px;
+text-transform: uppercase;" class="sub mb-8">Unleashing Artistry Beyond Boundaries</p>
+<div class="btn" style="height: 65px;">
+
+    <v-btn  rounded="xl" color="orange" height="44" style="width: 225px;
 padding: 12px 20px;">Shop Now</v-btn>
+</div>
     </div>
 </div>
 </template>
 <script>
+import { gsap, Bounce, Back, CSSPlugin } from 'gsap';
+
 export default {
     data() {
         return {
@@ -63,6 +70,28 @@ export default {
             ]
         }
     },
+    mounted(){
+  gsap.registerPlugin(CSSPlugin);
+        const title = document.querySelector('.title');
+            const sub = document.querySelector('.sub');
+            const btn = document.querySelector('.btn');
+            this.$nextTick(()=>{
+
+                gsap.fromTo([ title,sub, btn ],
+                {
+                    opacity: 0,
+                    yPercent: 100,
+                    
+                },{
+                    opacity: 1,
+                    yPercent: 0,
+                    ease: Back.easeOut,
+                    stagger: 0.1,
+                    delay: 0.4,
+                    
+                })
+            })
+    }
 }
 </script>
 <style>
