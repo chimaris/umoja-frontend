@@ -1,7 +1,9 @@
 <template>
-    <div class="bg-black">
+    <div class="bg-black" style="overflow: hidden;">
 
-    <v-card flat color="black" class="cardo rounded-0" height="772" width="100%" :image="item.image">
+    <v-card flat style="overflow: hidden;position: relative;" color="black" class="cardo rounded-0" height="772" width="100%">
+    <v-img cover   style="opacity: 0;z-index: -1;position: absolute;height:772px; width:100%;scale: 1;" :class="'img'+selected" :src="item.image"  class="bg-black rounded-0" />
+   
         <v-container style="max-width:1200px;width: 100%;height: 772px; z-index: 99;"  class="d-flex align-center py-1">
            
            <div style="width: 536px;">
@@ -19,10 +21,10 @@ font-weight: 500;
 <div style="width: 695px;" v-show="selected == 0" class="btn">
 
     <v-btn rounded="xl" color="#F38218" height="44" style="width: 225px;
-padding: 12px 20px;" flat ><span style="color: var(--carbon-6, #1E1E1E);
+padding: 12px 20px;" flat ><span style="color: var(--carbon-6, #ffffff);
 text-align: center;font-weight: 600;
 font-size: 14px;">
-    Shop Now
+    Shop Now  <v-icon class="arrow ml-3" icon="mdi mdi-arrow-right"></v-icon>
 </span>
 </v-btn>
 </div>
@@ -42,10 +44,10 @@ font-weight: 400;
 line-height: 140%; /* 19.6px */" class="bcont">{{ item.bcont }}</p>
 </div>
 <v-btn class="btn2"  v-show="selected !== 0" rounded="xl" color="#F38218" height="54" style="width: 225px;
-padding: 12px 20px;" flat ><span style="color: var(--carbon-6, #ffffff);
+padding: 12px 20px;border-radius: 50%;" flat ><span style="color: var(--carbon-6, #ffffff);
 text-align: center;font-weight: 600;
 font-size: 14px;">
-    Shop Now <v-icon icon="mdi mdi-arrow-right"></v-icon>
+    Shop Now <v-icon class="arrow ml-3" icon="mdi mdi-arrow-right"></v-icon>
 </span>
 </v-btn>
 </div>
@@ -54,10 +56,11 @@ font-size: 14px;">
 
 </template>
 <script>
-import { gsap, Power2, Back, CSSPlugin } from 'gsap';
+import { gsap, Bounce, Back, CSSPlugin } from 'gsap';
 export default {
     data() {
     return {
+        showImg:true,
         carouseldata: [
             {
                 title: 'Rooted in Africa',
@@ -106,86 +109,118 @@ export default {
     },
     mounted(){
   gsap.registerPlugin(CSSPlugin);
-this.startall()
+  this.$nextTick(() => {
+      this.startall()
+    })
 },
 methods: {
-  async startall(){
-    const title = document.querySelector('.title');
-    const sub = document.querySelector('.sub');
-    const cardo = document.querySelector('.cardo');
-    const btn = document.querySelector('.btn');
-    const btitle = document.querySelector('.btitle');
-    const bcont = document.querySelector('.bcont');
-    const btn2 = document.querySelector('.btn2');
-    var tl = gsap.timeline({repeat: -1,
-     
-  });
-  tl.fromTo([cardo, ],
-    {
-      opacity: 0,
-      xPercent: -100,
-      
-    },{
-        opacity: 1,
-        xPercent: 0,
-        delay: 0.095
-      
-  })
-  tl.fromTo([ title,btn, sub, ],
-    {
-      opacity: 0,
-      xPercent: -100,
-      
-    },{
-        opacity: 1,
-        xPercent: 0,
-        ease: Back.easeOut,
-        stagger: 0.1,
-        delay: -0.4,
-      
-  })
-  tl.fromTo([btitle, bcont, btn2],
-    {
-      opacity: 0,
-      yPercent: 100,
-      
-    },{
-        opacity: 1,
-        yPercent: 0,
-        stagger: 0.1,
-        delay: -0.2,
+    animateImg(){
 
-      
-  })
-  tl.to([btitle, bcont, btn2],{
-      opacity: 0,
-      yPercent: 100,
-      stagger: 0.1,
-      delay: 7,
-      
-})
-tl.to([title,sub, btn],
-  {
-    opacity: 0,
-    xPercent: 100,
-    stagger: 0.1,
-    
-  })
-tl.to([cardo, ],
-{
-        opacity: 0,
-        xPercent: 100,
-        delay: -0.3,
-        onComplete: () => {
-         this.selected = this.selected === 4 ? 0 : this.selected + 1;
-         }
-      
-  })
-  },
-},
+        const img = document.querySelector('.img'+this.selected);
+        // img.src = this.item.image;
+        gsap.to(img,{
+            scale:1.3,
+            opacity:1,
+            duration: 9,
+            
+        })
+    },
+    async startall(){
+            const img = document.querySelector('.img'+this.selected);
+            const title = document.querySelector('.title');
+            const sub = document.querySelector('.sub');
+            const cardo = document.querySelector('.img'+this.selected);
+            const btn = document.querySelector('.btn');
+            const btitle = document.querySelector('.btitle');
+            const bcont = document.querySelector('.bcont');
+            const btn2 = document.querySelector('.btn2');
+            var tl = gsap.timeline({repeat: -1,
+                
+            });
+
+            tl.fromTo([cardo, img],
+            {
+                opacity: 0,
+                xPercent: -30,
+                scale: 1,
+            },{
+                opacity: 1,
+                scale: 1,
+                xPercent: 0,
+                
+                onComplete: () => {
+                    this.animateImg()
+                }
+            })
+            
+            tl.fromTo([ title,btn, sub, ],
+            {
+                opacity: 0,
+                xPercent: -100,
+                
+            },{
+                opacity: 1,
+                xPercent: 0,
+                ease: Back.easeOut,
+                stagger: 0.1,
+                delay: -0.4,
+                
+            })
+            tl.fromTo([btitle, bcont, btn2],
+            {
+                opacity: 0,
+                yPercent: 100,
+                
+            },{
+                opacity: 1,
+                yPercent: 0,
+                stagger: 0.1,
+                delay: -0.2,
+                
+                
+            })
+            tl.to([btitle, bcont, btn2],{
+                opacity: 0,
+                yPercent: 100,
+                stagger: 0.1,
+                delay: 7,
+                
+            })
+            tl.to([title,sub, btn],
+            {
+                opacity: 0,
+                xPercent: 100,
+                stagger: 0.1,
+                
+            })
+            tl.to([cardo ],
+            {
+                visibility: 0,
+                xPercent: 120,
+                delay: -0.3,
+                scale: 1,
+           
+                
+            })
+            tl.to([img ],
+            {
+                delay: -0.3,
+                scale: 1,
+                onComplete: () => {
+                    // this.showImg = false;
+                   
+                    this.selected = this.selected === 4 ? 0 : this.selected + 1;
+                }
+                
+            })
+        },
+    },
 }
 </script>
 <style>
+.cardo .v-card__image .v-img img.v-img__img.v-img__img--cover{
+    scale: 1!important;
+}
 .imgcl{
     position: absolute;bottom: 0%!important;right: 0px;width: 100vw;max-width: 737px;z-index: 99;
 }
