@@ -131,7 +131,7 @@ const sn = this
         xPercent: 0,
         ease: Back.easeOut,
         stagger: 0.1,
-        delay: -0.8,
+        delay: -1.2,
       
   })
   tl.to([title,sub, btn , img],
