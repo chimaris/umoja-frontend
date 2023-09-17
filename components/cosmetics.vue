@@ -1,9 +1,9 @@
 <template>
+ 
+
     <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="722px" width="100%" >
         <v-container style="max-width:1200px;width: 100%;height: 722px; z-index: 99;"  class="d-flex align-center py-1">
-           
            <div style="width: 536px;">
-
                <p class="title" style="color: #FFF;
 font-size: 96px;
 width: 695px;
@@ -29,13 +29,20 @@ font-size: 14px;">
 <div class=" igj d-flex justify-end align-end" style="">
     <img class="img imgcl"  style=""  :src="item.image" />
 </div>
-    </v-card>
+
+
+</v-card>
+<div style="width: 100%;height: 5px;">
+
+<div style="height: 5px;background-color:#F8B735 ;" :style="'width:'+ prog+'%;background:'+item.color"></div>
+</div> 
 </template>
 <script>
 import { gsap, Power2, Bounce,Back, CSSPlugin } from 'gsap';
 export default {
     data() {
     return {
+        prog:0,
         carouseldata: [
             {
                 title: 'Unveil Your Beauty',
@@ -68,22 +75,24 @@ methods: {
     const title = document.querySelector('.title');
     const sub = document.querySelector('.sub');
     const btn = document.querySelector('.btn');
-    var tl = gsap.timeline({repeat: -1,
-     
-  });
-  tl.fromTo([img ],
+    var tl = gsap.timeline({repeat: -1,  onUpdate: () => {
+          const progress = tl.progress();
+          this.prog = progress * 100
+        },})
+    tl.fromTo([img ],
     {
-      opacity: 0,
-      scale: 2,
-      
+        opacity: 0,
+        scale: 1.35,
+        
     },{
         opacity: 1,
         scale: 1,
         ease: Bounce.easeOut,
-        duration: 1,
+        duration: 1.4,
       
-      
-  })
+        
+    })
+    // this.prog = tl.progress();
   tl.fromTo([, title,btn, sub, ],
     {
       opacity: 0,
@@ -106,7 +115,11 @@ methods: {
       delay: 5,
        onComplete: () => {
         this.selected = this.selected === 0 ? 1 : 0;
-        }
+        },
+        // onUpdate: () => {
+        //   const progress = tl.progress();
+        //   this.prog = progress
+        // },
   })
   },
 },
@@ -115,6 +128,7 @@ methods: {
 <style>
 .colorcont{
     transition: all 3s ease-in-out;
+    position: relative;
 }
 .imgcl{
     position: absolute;bottom: 0%!important;right: 0px;width: auto;z-index: 99;max-height: 700px;

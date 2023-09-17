@@ -1,8 +1,8 @@
 <template>
     <div class="bg-black" style="overflow: hidden;">
-
+<!-- <h1>{{'scale:'+ (1+ (prog * 0.2))}}</h1> -->
     <v-card flat style="overflow: hidden;position: relative;" color="black" class="cardo rounded-0" height="772" width="100%">
-    <v-img cover   style="opacity: 0;z-index: -1;position: absolute;height:772px; width:100%;scale: 1;" :class="'img'+selected" :src="item.image"  class="bg-black rounded-0" />
+    <v-img cover  eager style="z-index: -1;position: absolute;height:772px; width:100%;" :style="'scale:'+ (1+ (prog * 0.2))+';opacity:'+0.3+(prog * 0.7)" :class="'img'+selected" :src="item.image"  class="bg-black rounded-0" />
    
         <v-container style="max-width:1200px;width: 100%;height: 772px; z-index: 99;"  class="d-flex align-center py-1">
            
@@ -52,6 +52,10 @@ font-size: 14px;">
 </v-btn>
 </div>
     </v-card>
+    <div style="width: 100%;height: 5px;">
+
+<div style="height: 5px;background-color:#F8B735 ;" :style="'width:'+ prog * 100+'%'"></div>
+</div> 
       </div>
 
 </template>
@@ -60,6 +64,7 @@ import { gsap, Bounce, Back, CSSPlugin } from 'gsap';
 export default {
     data() {
     return {
+        prog:0,
         showImg:true,
         carouseldata: [
             {
@@ -114,17 +119,7 @@ export default {
     })
 },
 methods: {
-    animateImg(){
-
-        const img = document.querySelector('.img'+this.selected);
-        // img.src = this.item.image;
-        gsap.to(img,{
-            scale:1.16,
-            opacity:1,
-            duration: 9,
-            
-        })
-    },
+ 
     async startall(){
             const img = document.querySelector('.img'+this.selected);
             const title = document.querySelector('.title');
@@ -134,7 +129,10 @@ methods: {
             const btitle = document.querySelector('.btitle');
             const bcont = document.querySelector('.bcont');
             const btn2 = document.querySelector('.btn2');
-            var tl = gsap.timeline({repeat: -1,
+            var tl = gsap.timeline({repeat: -1,  onUpdate: () => {
+          const progress = tl.progress();
+          this.prog = progress
+        },
                 
             });
 
@@ -149,7 +147,7 @@ methods: {
                 xPercent: 0,
                 
                 onComplete: () => {
-                    this.animateImg()
+                    // this.animateImg()
                 }
             })
             
