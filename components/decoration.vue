@@ -228,7 +228,7 @@ const sn = this
             })
             tl.to([img ],
             {
-                delay: -0.3,
+                delay: -0.5,
                 scale: 1,
                 onComplete: () => {
                     // this.showImg = false;

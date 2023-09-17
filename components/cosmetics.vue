@@ -54,13 +54,13 @@ export default {
                 title: 'Unveil Your Beauty',
                 color: 'radial-gradient(50% 50% at 50% 50%, #3AA3C7 0%, #1D7291 100%)',
                 sub: 'Step into a world where beauty knows no bounds, and empowerment is painted in vibrant hues.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1694074737/photo-shot-asian-african-white-304050-year-old-woman-with-her-beauty-regime-copy-1_ads5t3.png'
+                image: 'https://res.cloudinary.com/payhospi/image/upload/v1694963388/photo-shot-asian-african-white-304050-year-old-woman-with-her-beauty-regime-copy-1hgdhx656_t5xyr0.png'
             },
             {
                 title: 'Unveil Your Beauty',
                 color: 'radial-gradient(50% 50% at 50% 50%, #348C5B 0%, #29593E 100%)',
                 sub: 'Step into a world where beauty knows no bounds, and empowerment is painted in vibrant hues.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1694074729/young-black-man-taking-care-his-skin-with-nourishing-face-cream-copy-1_egaibh.png'
+                image: 'https://res.cloudinary.com/payhospi/image/upload/v1694963379/young-black-man-taking-care-his-skin-with-nourishing-face-cream-copy-1hfgxhx_v9k2np.png'
             },
         ],
         selected: 0,
