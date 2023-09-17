@@ -57,12 +57,13 @@ font-size: 14px;">
 </span>
 </v-btn>
 </div>
-    </v-card>
-    <div style="width: 100%;height: 5px;">
+</v-card>
+</div>
+<div style="width: 100%;height: 5px; position: sticky;
+bottom: 0;">
 
 <div style="height: 5px;background-color:#F8B735 ;" :style="'width:'+ prog * 100+'%'"></div>
 </div> 
-      </div>
 
 </template>
 <script>

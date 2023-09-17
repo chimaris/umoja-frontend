@@ -1,13 +1,13 @@
 <template>
  
- <div v-if="loader" :style="'background:'+item.color" style="z-index: 9;position: absolute;left: 0;height:722px; width:100%;"  class=" d-flex justify-center align-center rounded-0">
+ <div v-if="loader" :style="'background:'+item.color" style="z-index: 9;position: absolute;left: 0;height:772px; width:100%;"  class=" d-flex justify-center align-center rounded-0">
 
 <div>
     <v-progress-linear color="#fff" class="rounded-xl" style="width: 500px;" indeterminate height="5"></v-progress-linear>
 </div> 
 </div>
-    <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="722px" width="100%" >
-        <v-container style="max-width:1200px;width: 100%;height: 722px; z-index: 99;"  class="d-flex align-center py-1">
+    <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="772px" width="100%" >
+        <v-container style="max-width:1200px;width: 100%;height: 772px; z-index: 99;"  class="d-flex align-center py-1">
            <div style="width: 536px;">
                <p class="title" style="color: #FFF;
 font-size: 96px;
@@ -37,9 +37,11 @@ font-size: 14px;">
 
 
 </v-card>
-<div style="width: 100%;height: 5px;">
+<div style="width: 100%;height: 5px;
+    position: sticky;
+    bottom: 0;">
 
-<div style="height: 5px;background-color:#F8B735 ;" :style="'width:'+ prog+'%;background:'+item.color"></div>
+<div style="height: 5px;background-color:#F8B735 ;" :style="'width:'+ prog+'%;'"></div>
 </div> 
 </template>
 <script>
@@ -166,6 +168,6 @@ const sn = this
 .igj{
     position: absolute;
     width: 100%;
-    height: 722px;
+    height: 772px;
     max-width: 1400px;
 }</style>
