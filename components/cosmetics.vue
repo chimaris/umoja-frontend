@@ -1,6 +1,11 @@
 <template>
  
+ <div v-if="loader" :style="'background:'+item.color" style="z-index: 9;position: absolute;left: 0;height:722px; width:100%;"  class=" d-flex justify-center align-center rounded-0">
 
+<div>
+    <v-progress-linear color="#fff" class="rounded-xl" style="width: 500px;" indeterminate height="5"></v-progress-linear>
+</div> 
+</div>
     <v-card class="colorcont rounded-0 d-flex justify-center" :style="'background:'+item.color" flat height="722px" width="100%" >
         <v-container style="max-width:1200px;width: 100%;height: 722px; z-index: 99;"  class="d-flex align-center py-1">
            <div style="width: 536px;">
@@ -43,6 +48,7 @@ export default {
     data() {
     return {
         prog:0,
+        loader: true,
         carouseldata: [
             {
                 title: 'Unveil Your Beauty',
@@ -71,13 +77,35 @@ this.startall()
 },
 methods: {
   async startall(){
+
+    const imageArray = this.carouseldata.map((item) => item.image);
+      let loadedImages = 0;
+const sn = this
+      function preloadImages() {
+        for (let i = 0; i < imageArray.length; i++) {
+          const tempImage = new Image();
+          tempImage.addEventListener('load', trackProgress, true);
+          tempImage.src = imageArray[i];
+        }
+      }
+
+      function trackProgress() {
+        loadedImages++;
+        if (loadedImages === imageArray.length) {
+          imagesLoaded();
+        }
+      }
+
+      function imagesLoaded() {
+        sn.loader = false;
+        console.log('All images loaded!');
     const img = document.querySelector('.img');
     const title = document.querySelector('.title');
     const sub = document.querySelector('.sub');
     const btn = document.querySelector('.btn');
     var tl = gsap.timeline({repeat: -1,  onUpdate: () => {
           const progress = tl.progress();
-          this.prog = progress * 100
+          sn.prog = progress * 100
         },})
     tl.fromTo([img ],
     {
@@ -92,7 +120,7 @@ methods: {
       
         
     })
-    // this.prog = tl.progress();
+    // sn.prog = tl.progress();
   tl.fromTo([, title,btn, sub, ],
     {
       opacity: 0,
@@ -114,14 +142,16 @@ methods: {
       stagger: 0.1,
       delay: 5,
        onComplete: () => {
-        this.selected = this.selected === 0 ? 1 : 0;
+        sn.selected = sn.selected === 0 ? 1 : 0;
         },
         // onUpdate: () => {
         //   const progress = tl.progress();
-        //   this.prog = progress
+        //   sn.prog = progress
         // },
   })
-  },
+  }
+  preloadImages();
+  }
 },
 }
 </script>

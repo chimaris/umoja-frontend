@@ -1,7 +1,13 @@
 <template>
-    <div class="bg-black" style="overflow: hidden;">
+    <div class="bg-black" style="position: relative; overflow: hidden;">
 <!-- <h1>{{'scale:'+ (1+ (prog * 0.2))}}</h1> -->
-    <v-card flat style="overflow: hidden;position: relative;" color="black" class="cardo rounded-0" height="772" width="100%">
+<div v-if="loader" style="z-index: 9;position: absolute;left: 0;height:772px; width:100%;"  class="bg-black d-flex justify-center align-center rounded-0">
+
+<div>
+    <v-progress-linear color="#F38218" class="rounded-xl" style="width: 500px;" indeterminate height="5"></v-progress-linear>
+</div> 
+</div>
+    <v-card  flat style="overflow: hidden;position: relative;" color="black" class="cardo rounded-0" height="772" width="100%">
     <v-img cover  eager style="z-index: -1;position: absolute;height:772px; width:100%;" :style="'scale:'+ (1+ (prog * 0.2))+';opacity:'+0.3+(prog * 0.7)" :class="'img'+selected" :src="item.image"  class="bg-black rounded-0" />
    
         <v-container style="max-width:1200px;width: 100%;height: 772px; z-index: 99;"  class="d-flex align-center py-1">
@@ -65,7 +71,7 @@ export default {
     data() {
     return {
         prog:0,
-        showImg:true,
+        loader: true,
         carouseldata: [
             {
                 title: 'Rooted in Africa',
@@ -121,31 +127,51 @@ export default {
 methods: {
  
     async startall(){
-            const img = document.querySelector('.img'+this.selected);
+
+            const imageArray = this.carouseldata.map((item) => item.image);
+      let loadedImages = 0;
+const sn = this
+      function preloadImages() {
+        for (let i = 0; i < imageArray.length; i++) {
+          const tempImage = new Image();
+          tempImage.addEventListener('load', trackProgress, true);
+          tempImage.src = imageArray[i];
+        }
+      }
+
+      function trackProgress() {
+        loadedImages++;
+        if (loadedImages === imageArray.length) {
+          imagesLoaded();
+        }
+      }
+
+      function imagesLoaded() {
+        sn.loader = false;
+        console.log('All images loaded!');
+         const img = document.querySelector('.img'+sn.selected);
             const title = document.querySelector('.title');
             const sub = document.querySelector('.sub');
             const btn = document.querySelector('.btn');
-            const cardo = document.querySelector('.img'+this.selected);
             const btitle = document.querySelector('.btitle');
             const bcont = document.querySelector('.bcont');
             const btn2 = document.querySelector('.btn2');
             var tl = gsap.timeline({repeat: -1,  onUpdate: () => {
           const progress = tl.progress();
-          this.prog = progress
+          sn.prog = progress
         },
                 
             });
 
-            tl.fromTo([cardo, img],
+            tl.fromTo([img],
             {
                 opacity: 0,
-                xPercent: -30,
+                xPercent: -50,
                 scale: 1,
             },{
                 opacity: 1,
                 scale: 1,
                 xPercent: 0,
-                
                 onComplete: () => {
                     // this.animateImg()
                 }
@@ -191,7 +217,7 @@ methods: {
                 stagger: 0.1,
                 
             })
-            tl.to([cardo ],
+            tl.to([img ],
             {
                 visibility: 0,
                 xPercent: 120,
@@ -207,10 +233,12 @@ methods: {
                 onComplete: () => {
                     // this.showImg = false;
                    
-                    this.selected = this.selected === 4 ? 0 : this.selected + 1;
+                    sn.selected = sn.selected === 4 ? 0 : sn.selected + 1;
                 }
                 
             })
+        }
+        preloadImages();
         },
     },
 }
