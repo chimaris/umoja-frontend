@@ -45,7 +45,7 @@ font-weight: 500;border-radius: 6px;color: #F38218;
 letter-spacing: -0.12px;"><v-icon size="14" class="mr-2" style="transform: rotate(90deg);" icon="mdi mdi-tag"></v-icon>Delivery within 5 Working Days</div>
   </div>
 
-            
+     <v-btn to="/vendor_page" variant="outlined" class="bizbtn mt-8" rounded="xl" block size="large"><span>See Business Page</span></v-btn>       
             </v-card>
             <vendorloader  v-else />
 </template>
@@ -82,5 +82,15 @@ export default {
 };
 </script>
 <style>
-
+.parent-card:hover .bizbtn {
+   opacity: 1!important;
+   transform: translateY(0px)!important;
+   visibility: visible;
+  }
+.parent-card .bizbtn {
+   opacity: 0!important;
+   visibility: hidden;
+   transition: all 0.3s ease-in-out;
+   transform: translateY(20px)!important;
+  }
 </style>
