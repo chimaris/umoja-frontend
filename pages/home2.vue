@@ -653,7 +653,6 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 <script>
 import { gsap, Bounce, CSSPlugin } from 'gsap';
 
-
 export default {
   data() {
     return {
