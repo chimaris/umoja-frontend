@@ -117,7 +117,7 @@
           {title:'Sell', route:'/vendor/login', disabled: loggedIn},
           {title:'Discovery', route:'/discovery_page', disabled: false},
           {title:'Market Place', route:'/market_place', disabled: false},
-          {title:'CRM Solution', route:'/vendor/dashboard', disabled: false},
+          {title:'ERP Solution', route:'/vendor/dashboard', disabled: false},
           ]},
       cartStore() {
         return useCartStore();
