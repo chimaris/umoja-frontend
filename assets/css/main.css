@@ -10,8 +10,8 @@ div.rower{
     overflow-x: scroll;
     overflow-y: hidden;
     padding-bottom: 40px;
-    height: 486px;
-    position: absolute;
+    height: 486px;width: 100%;
+    position: relative;
     overflow-x: scroll;
     width: 100%;
     max-width: 1168px;

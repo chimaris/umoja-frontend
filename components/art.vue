@@ -26,15 +26,14 @@ font-weight: 500;
 letter-spacing: 4px;
 text-transform: uppercase;" class="sub mb-8">Unleashing Artistry Beyond Boundaries</p>
 <div class="btn" style="height: 65px;">
-
-    <v-btn  rounded="xl" color="orange" height="44" style="width: 225px;
+<v-btn  rounded="xl" color="orange" height="44" style="width: 225px;
 padding: 12px 20px;">Shop Now</v-btn>
 </div>
-    </div>
+</div>
 </div>
 </template>
 <script>
-import { gsap, Bounce, Back, CSSPlugin } from 'gsap';
+import { gsap, Back, CSSPlugin } from 'gsap';
 
 export default {
     data() {

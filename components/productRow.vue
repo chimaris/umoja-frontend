@@ -13,7 +13,7 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
     </v-btn>
         </div>
      
-        <div id="homepage" :style="vendorBol? 'height: 455px!important;' :showVendor? 'height: 545px!important;':  ''" style="   background: transparent!important;" class="rower mt-8">
+        <div id="homepage" :style="vendorBol? 'height: 455px!important;' :showVendor? 'height: 545px!important;':  ''" style="   background: transparent!important;" :class="maxwidth == '1400px'? 'maxw':''" class="rower mt-8">
       <div class="d-inline-block mr-4" style="width: 254px;" v-for="(n, i) in items" :key="i">
      <vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
      <product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
@@ -29,6 +29,9 @@ See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
         
 </template>
 <style>
+.maxw{
+  max-width: 1400px!important;
+}
 .divbtn{
     transition: all 0.3s ease-in-out;
 }

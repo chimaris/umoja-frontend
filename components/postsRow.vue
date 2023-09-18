@@ -12,7 +12,8 @@ letter-spacing: -0.24px;"> {{title}} </div>
 </v-btn>
 </div>
 <v-divider style="flex: auto;" class="mb-4"></v-divider>
-    <div dense id="homepage" style="    height: 572px!important;background-color: #fff;" class=" rower my-8">
+    <div dense id="homepage" style=" width: 100%;
+    position: relative;   height: 572px!important;background-color: #fff;" :style="'max-width:'+maxw2+'!important'" class=" rower my-8">
   <div class="d-inline-block mr-2" style="width: 275px;" v-for="(n, i) in items" :key="i" cols="6" lg="3">
  <postComponent  :index="i" :item="n" />
  
@@ -47,6 +48,9 @@ export default {
     computed: {
         maxw() {
             return this.maxwidth ? this.maxwidth : '1400px';
+        },
+        maxw2() {
+            return this.maxwidth ? '1340px' : '1168px';
         },
         vendorBol() {
             return this.vendor ? this.vendor : false;

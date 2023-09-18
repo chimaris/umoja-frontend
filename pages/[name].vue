@@ -301,7 +301,7 @@ export default {
                 leftimage: 'https://res.cloudinary.com/payhospi/image/upload/v1694074702/rectangle-22446menuimg_cdaffb.png',
                 rightimage: 'https://res.cloudinary.com/payhospi/image/upload/v1694074702/rectangle-22449menuim_rgo5y3.png',
                 vendor:{
-                    title :'🔥 Top Artist of the Week',
+                    title :'🔥 Best Selling Art Stores',
                     items:[
                        {
                             image:'https://res.cloudinary.com/payhospi/image/upload/v1694074693/rectangle-22439top_tpijcc.png',
@@ -524,7 +524,7 @@ export default {
                 leftimage: 'https://res.cloudinary.com/payhospi/image/upload/v1694074704/rectangle-22446decor1_rqmkk9.png',
                 rightimage: 'https://res.cloudinary.com/payhospi/image/upload/v1694074706/rectangle-22449deco2_ahqyc3.png',
                 vendor:{
-                    title :'🔥 Top Decor of the Week',
+                    title :'🔥 Best Selling Home Decoration Stores',
                     items:[
                         {
                             image:'https://res.cloudinary.com/payhospi/image/upload/v1694074687/rectangle-22439decpr3_q2sgqw.png',
@@ -750,7 +750,7 @@ export default {
                 leftimage: 'https://res.cloudinary.com/payhospi/image/upload/v1694074699/rectangle-22446cosme_px0esl.png',
                 rightimage: 'https://res.cloudinary.com/payhospi/image/upload/v1694074699/rectangle-22449cosme23_afjd41.png',
                 vendor:{
-                    title :'🔥 Top Product of the Week',
+                    title :'🔥 Best Selling Cosmetics Stores',
                     items:[
                         {
                             image:'https://res.cloudinary.com/payhospi/image/upload/v1694074690/rectangle-22439cosme1_hwu3gn.png',

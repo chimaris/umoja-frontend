@@ -1,11 +1,24 @@
 <template>
-    <v-container style=" position: relative;" :style="'max-width:'+maxw" class="pt-0 px-0 footbot pb-12" fluid>
+    <div v-if="showBaloon" class="  d-flex  w-100" style="margin-top:150px ;background: #D92334;height: 49px;position: relative;
+">
+  <p style="color: #FFF;width: 100%;height: 100%;
+  font-size: 16px;background: #D92334;
+  font-weight: 500;position: relative;text-align: center;
+  line-height: 81%; /* 12.96px */
+  letter-spacing: 0.48px;" class="d-flex justify-center align-center">
+  
+    Akwaaba dunia!
+  </p>
+  <img style="position: absolute;bottom: 0; left:0px;width: 128px;height: auto;" src="https://res.cloudinary.com/payhospi/image/upload/v1695047156/flag-2-b-gha-1hghc_nazbf1.png" alt="" />
 
-<v-card color="" flat class="rounded-xl px-3" height="auto" min-height="100vh">
+<img style="position: absolute;bottom: 0 ;right:0px;width: 128px;height: auto;" src="https://res.cloudinary.com/payhospi/image/upload/v1695048168/flag-2-b-gha-2_tjp2yv.png" alt="" />
+</div>
+    <v-container  style=" position: relative;" :style="'max-width:'+maxw" :class="showBaloon? '':'py-12'" class="pt-0 px-0 footbot" fluid>
+
+<v-card color="" :style="!showBaloon? 'margin-top:100px':''" flat class="rounded-xl px-3" height="auto" min-height="100vh">
  
-
-  <v-container  style="max-width:1400px" class="pt-12">
-    <v-divider class="my-12 " style="height:2px" color="#"></v-divider>
+  <v-container  style="max-width:1400px" :class="showBaloon? '':'pt-12'" >
+    <v-divider v-show="!showBaloon" class="mb-12 " style="height:2px" color="#"></v-divider>
 
 <v-row style="margin-bottom: 90px;" class="row0 mt-12">
   <v-col cols="12" class="pt-0 " lg="5">
@@ -122,6 +135,9 @@ export default {
   computed: {
   maxw() {
     return this.maxwidth? this.maxwidth : '1400px'
+  },
+  showBaloon() {
+    return this.$route.path == '/discovery_page' ? true : false;
   }
 },
   data() {
