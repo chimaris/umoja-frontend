@@ -727,6 +727,28 @@ export default {
         oos: true
     },
                     ]
+                }, {
+                    mainImg: 'https://res.cloudinary.com/payhospi/image/upload/v1694074722/rectangle-22448chair_o4slfz.png',
+                    title:'The Wooden Chair',
+                    items: [
+                    {
+        name: 'The African Chair - 02',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074683/rectangle-1899chair32_s5rvxi.png',
+        price: '150000.00',
+        subCategory: 'Chair Canvas',
+        location: 'Accra, Ghana',
+        likes: '66',
+        oos: true
+    },        {
+        name: 'The African Chair - 03',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074684/rectangle-1899chair54_cjabfa.png',
+        price: '15000.00',
+        subCategory: 'Decor Canvas',
+        location: 'Accra, Ghana',
+        likes: '66',
+        oos: true
+    },
+                    ]
                 }],
                 postadrow:{
                     title: '💰 Popular Collection',
@@ -954,7 +976,30 @@ export default {
                         },
                 ]
                     },
-                    newlylaunched: [{
+                newlylaunched: [{
+                    mainImg: 'https://res.cloudinary.com/payhospi/image/upload/v1694074709/rectangle-22448cosmeade_czirqy.png',
+                    title:'The Aloe - Ve Lotion',
+                    items: [
+                    {
+        name: 'The African Lotion - 02',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074685/rectangle-1899jkgg_mb8rbj.png',
+        price: '150000.00',
+        subCategory: 'Chair Canvas',
+        location: 'Accra, Ghana',
+        likes: '66',
+        oos: true
+    },        {
+        name: 'The African Lotion - 03',
+        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074684/rectangle-1899chair54_cjabfa.png',
+        price: '15000.00',
+        subCategory: 'Oil Canvas',
+        location: 'Accra, Ghana',
+        likes: '66',
+        oos: true
+    },
+                    ]
+                },
+                {
                     mainImg: 'https://res.cloudinary.com/payhospi/image/upload/v1694074709/rectangle-22448cosmeade_czirqy.png',
                     title:'The Aloe - Ve Lotion',
                     items: [

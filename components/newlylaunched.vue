@@ -20,7 +20,7 @@
 <div   :style="'background-color:' + (selectIndex === i ? '#F8B735' : '')+';height:'+ prog+'%;'" style="width: 5px ;" ></div>
 </div> </div>
             <v-col class=" pr-12" cols="12" md="6">
-                <v-img class="img bg-grey-lighten-2" style="border-radius: 15px;" cover :src="item[selectIndex].mainImg"  width="535" height="693" ></v-img>
+                <v-img class="img2 bg-grey-lighten-2" style="border-radius: 15px;" cover :src="item[selectIndex].mainImg"  width="535" height="693" ></v-img>
             </v-col>
             <v-col class="d-flex flex-column justify-space-between" cols="12" md="6">
               <div>
@@ -43,7 +43,7 @@ font-weight: 500;
 line-height: 140%; /* 22.4px */
 letter-spacing: -0.48px;" class="sub2">Lorem ipsum dolor sit amet consectetur et nibh id aliquam proin.</p>
             <div class="profile d-flex mt-4">
-            <v-avatar size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img></v-avatar>
+            <v-avatar  size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img></v-avatar>
             <div style="cursor: pointer;" @click="$router.push('/vendor_page')" class="ml-2 ">
                 <p style="color: #1E1E1E;
     font-size: 14px;
@@ -86,7 +86,7 @@ export default {
         animateCard(){
             // get all the card elements and animate them from bottom to top
 
-            const img = document.querySelector('.img');
+            const img2 = document.querySelector('.img2');
             const chip = document.querySelector('.chip');
             const title2 = document.querySelector('.title2');
             const sub2 = document.querySelector('.sub2');
@@ -99,7 +99,7 @@ export default {
           sn.prog = progress * 100
         },
             });
-            tl.fromTo([ img, chip, title2, sub2, profile, items ],
+            tl.fromTo([ img2, chip, title2, sub2, profile, items ],
             {
                  translateY: "100px",
                  opacity: 0,
@@ -114,7 +114,7 @@ export default {
                   
                 }
                 )
-                tl.to([ img, chip, title2, sub2, profile, items ],
+                tl.to([ img2, chip, title2, sub2, profile, items ],
                 {
                     translateY: "-50px",
                     opacity: 0,
