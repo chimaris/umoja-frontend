@@ -113,8 +113,8 @@
       urls() {
         const loggedIn = this.isLoggedIn;
         return [
-          {title:'Buy', route:'/user/login', disabled: loggedIn},
-          {title:'Sell', route:'/vendor/login', disabled: loggedIn},
+          {title:'Buy', route:'/user/login', disabled: false},
+          {title:'Sell', route:'/vendor/login', disabled: false},
           {title:'Discovery', route:'/discovery_page', disabled: false},
           {title:'Market Place', route:'/market_place', disabled: false},
           {title:'ERP Solution', route:'/vendor/dashboard', disabled: false},
