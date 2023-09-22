@@ -25,34 +25,10 @@
                 <v-col class=" pl-9 pa-4" cols="12" md="8">
                     <v-row style="min-height: 500px;">
                 <v-col cols="12" style="position: relative;" md="6">
-                    <!-- <div class="coloredcard bg-green" style="height: 524.781px!important;width:377.291px!important;
-border-radius: 16.127px;transform: rotate(5.682deg)" >
-                    </div>
-                    <v-img class="spiral" cover style="
-                        height: auto;
-    width: 34%;
-    position: absolute;
-    right: -21%;top: 10%; z-index: 99;
-                     "  src="https://res.cloudinary.com/payhospi/image/upload/v1693848065/group_bkfoar.png" 
-                  ></v-img>
-                    <v-img class="img" cover style=" position: absolute;    top: 11px;   border-radius: 16.127px;"  :src="items[selected].image" 
-                    width="432.291"
-height="524.781" ></v-img> -->
+               
                     </v-col>
                     <v-col style="position: relative;min-height:350px" cols="12" md="6">
-                    <!-- <div class="coloredcard3 bg-orange" style="width: 288.412px;
-height: 350.118px;position: absolute;bottom: -70px;left: 25%;
-transform: rotate(5.682deg);border-radius: 16.127px;" >
-                    
-                       
-                    </div> -->
-                    <!-- <v-img cover class="spiral3" style=" position: absolute; z-index: 99;      bottom: -22%;
-    left: 33%;    height: auto;
-    width: 34%;"  src=" https://res.cloudinary.com/payhospi/image/upload/v1693882765/frame_bmfaja.png" 
-       ></v-img>
-                    <v-img cover class="img3" style="width: 288.412px;
-height: 350.118px;position: absolute;border-radius: 16.127px;bottom: -70px;left: 25%;" :src="items[selected2].image" width="288.291px"
-height="350.781px"></v-img> -->
+              
 <div :ref="'refcard' + i" :class="i == 0? 'selected':'notselected'" v-for="(n, i) in items" :key="i" style="position: absolute;width: 100%;height: 100%;">
 
 <div class="coloredcard3 bg-orange" style="width: 288.412px;

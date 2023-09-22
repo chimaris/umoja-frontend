@@ -16,8 +16,9 @@
   style="width: 5px;"
   v-for="(n, i) in item"
   :key="i"
-></div>
-            </div>
+>
+<div   :style="'background-color:' + (selectIndex === i ? '#F8B735' : '')+';height:'+ prog+'%;'" style="width: 5px ;" ></div>
+</div> </div>
             <v-col class=" pr-12" cols="12" md="6">
                 <v-img class="img bg-grey-lighten-2" style="border-radius: 15px;" cover :src="item[selectIndex].mainImg"  width="535" height="693" ></v-img>
             </v-col>
@@ -72,6 +73,7 @@ export default {
     data() {
         return {
             select: '',
+            prog:0,
             selectIndex: 0
         }
     },
@@ -90,9 +92,12 @@ export default {
             const sub2 = document.querySelector('.sub2');
             const profile = document.querySelector('.profile');
             const items = document.querySelector('.items');
-
+            const sn = this
             var tl = gsap.timeline({
-                repeat: -1
+                repeat: -1,onUpdate: () => {
+          const progress = tl.progress();
+          sn.prog = progress * 100
+        },
             });
             tl.fromTo([ img, chip, title2, sub2, profile, items ],
             {
