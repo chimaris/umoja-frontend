@@ -66,7 +66,7 @@ letter-spacing: -0.16px;" class="mb-2"> Select African Country</p>
    </v-container>
 </v-img>
 <v-card  class="overflow-visible" flat tile color="" min-height="100vh" width="100%">
-    <v-container  style="max-width:1400px">
+    <v-container  style="padding-bottom:100px;max-width:1400px">
         <v-row>
           
             <v-col class="pt-0" cols="12" xs="12">
@@ -153,7 +153,7 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
                 </v-col>
             </v-row>
     </div>
-    <v-container class="px-3"  style="max-width:1400px">
+    <v-container class="px-3"  style="padding-top:0px; max-width:1400px">
         <PostsRow  :maxwidth="'1400px'" :showVendor="true" 
     :title="postRow.title" 
              :items="postRow.items"
@@ -314,7 +314,7 @@ export default {
         country: 'All of Africa',
         chip: 'POPULAR products',
         postRow: {
-                    title: 'Top Decor Posts',
+                    title: 'Top Posts',
                     items: [
                 {
                     

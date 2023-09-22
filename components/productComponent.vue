@@ -1,5 +1,5 @@
 <template>
-    <v-card max-width="254" width="100%" v-if="loaded" style="overflow: visible;    background: transparent!important;" flat class="bg-white parent-card  rounded-lg mb-2">
+    <v-card max-width="270" width="100%" v-if="loaded" style="overflow: visible;    background: transparent!important;" flat class="bg-white parent-card  rounded-lg mb-2">
         <v-img class="rounded-lg bg-grey-lighten-5" :cover="coverbol" width="100%" :height="short?'221px': '303px'" :src="item.image">
         <v-btn @click="toggleLike(item,index)" :ref="item.name+index"  rounded="xl" icon style="position: absolute;right:12px;top:12px;" class="pa-0"  flat size="x-small">
         <v-icon  size="15" :color="!(isLiked(index))? '#1C274C':'red '" :icon="!isLiked(index)? 'mdi mdi-heart-outline':'mdi mdi-heart'"></v-icon></v-btn>

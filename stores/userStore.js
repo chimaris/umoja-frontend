@@ -6,7 +6,7 @@ export const useUserStore = defineStore({
   id: 'user',
   state: () => ({
     user: null,
-    isLoggedIn: false,
+    isLoggedIn: true,
     users: [
         {
             email: 'demo@gmail.com',
