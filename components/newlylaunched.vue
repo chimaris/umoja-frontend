@@ -7,7 +7,7 @@
     position: absolute;
     transform: translate(-50%, 0%);
     z-index: 99;
-    left: calc(50% - 21px);
+    left: calc(50% - 18px);
     width: 5px;
     top: 10px;overflow: hidden;
     background-color: rgb(203, 203, 203);">
