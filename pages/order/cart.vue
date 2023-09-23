@@ -213,8 +213,8 @@ border-radius: 20px;" class=" d-flex align-center  pa-4">
 </v-row> 
 
 </v-container> 
-<product-row :showVendor="false" title="😎 Recently viewed" />
-<product-row :showVendor="false" title="🎩 Top Selling Items" />
+<product-row :maxwidth="'1400px'" :showVendor="false" title="😎 Recently viewed" />
+<product-row :maxwidth="'1400px'" :showVendor="false" title="🎩 Top Selling Items" />
 <Mainfooter />
 
    </div>
