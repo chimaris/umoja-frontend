@@ -132,34 +132,28 @@ selected3() {
 },
 beforeUnmount(){
   // Kill the GSAP instance
-  if (this.interval){
+  this.clearIntervalAndKillGSAP();
 
-      clearInterval(this.interval);
-  }
-  if (this.moveInvar) {
-      this.moveInvar.kill()
-    
-  }
-    
-  if (this.moveOutvar) {
-      this.moveOutvar.kill()
-    
-  }
-    
-  if (this.transcendvar) {
-    
-      this.transcendvar.kill()
-  }
 },
 mounted(){
     // clearInterval(this.interval);
   gsap.registerPlugin(CSSPlugin);
   this.$nextTick(()=>{
-
     this.imgloader()  
   })
         },
         methods: {
+            clearIntervalAndKillGSAP() {
+      clearInterval(this.interval);
+      this.killGSAP(this.moveInvar);
+      this.killGSAP(this.moveOutvar);
+      this.killGSAP(this.transcendvar);
+    },
+    killGSAP(instance) {
+      if (instance) {
+        instance.kill();
+      }
+    },
 imgloader(){
     const imageArray = this.items.map((item) => item.image);
     let loadedImages = 0;
@@ -213,9 +207,8 @@ const sub = document.querySelector('.sub');
 
 },
 async animateCards(){
-    this.anim23()
-       this.interval = await setInterval(() => {
-        
+    await this.anim23()
+       this.interval =  setInterval(() => {
             this.anim23()
         }, 4000);
 
@@ -234,12 +227,6 @@ async anim23(){
             await this.transcend(coloredcard2,img2, spiral2)
             await this.moveIn(coloredcard3,img3, spiral3)
             
-},
-startover(){
-    const sn = this
-    sn.selected = sn.selected === (this.items.length -1) ? 0 : sn.selected + 1;
-    sn.startall(sn.selected)
-    
 },
 async startall(x){
         const sn = this
@@ -265,9 +252,10 @@ async startall(x){
             opacity: 1,
             translateX:'0px',
             translateY:'100px',
-            ease: Back.easeOut,
-            stagger: 0.1,
+            ease: Back.easeOut.config(1.7),
+            stagger: 0.2,
             scale:1,
+            delay: 0.5,
             duration:1
             })
     },
@@ -313,7 +301,6 @@ async startall(x){
                     duration:0.5,
                     // delay: -1.4,
                     onComplete:()=>{
-                    // sn.startover()
                     sn.selected = sn.selected === (this.items.length - 1) ? 0 : sn.selected + 1;
 
                 }
