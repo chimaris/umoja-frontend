@@ -250,7 +250,7 @@ async startall(x){
             translateY:'350px',  
         },{
             opacity: 1,
-            translateX:'0px',
+            translateX:'40px',
             translateY:'100px',
             ease: Back.easeOut.config(1.7),
             stagger: 0.2,
@@ -265,7 +265,7 @@ async startall(x){
             {
                 opacity: 1,
                 scale: 1, 
-                translateX:'0px',
+                translateX:'40px',
                 translateY:'100px',
         
             },{
