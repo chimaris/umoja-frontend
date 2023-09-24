@@ -40,14 +40,27 @@
               
 <div :class="'selected' + i" class="" :ref="'refcard' + i" v-for="(n, i) in items" :key="i" style="position: absolute;width: 100%;height: 100%;">
 
-<div v-show="false" class="coloredcard3 bg-orange" style="opacity: 0;width: 288.412px;
+<div v-if="(i % 2) !== 0 " class="bgh coloredcard3 bg-green" style="opacity: 0;width: 288.412px;
+height: 350.118px;position: absolute;bottom: -0px;left: 25%;
+transform: rotate(-5.682deg);border-radius: 16.127px;" >
+
+
+</div>
+<div v-else class="bgh coloredcard3 bg-orange" style="opacity: 0;width: 288.412px;
 height: 350.118px;position: absolute;bottom: -0px;left: 25%;
 transform: rotate(5.682deg);border-radius: 16.127px;" >
 
 
 </div>
-<v-img cover class="spiral3" v-show="false" style="opacity: 0; position: absolute; z-index: 99;      bottom: -62px;
-left: 33%;    height: auto;
+<v-img v-if="(i % 2) !== 0 "  cover class="spiral3" style="opacity: 0; position: absolute; z-index: 99;   
+    top: 18%;
+    right: -29px;height: auto;
+width: 34%;"  src=" https://res.cloudinary.com/payhospi/image/upload/v1693882765/frame_bmfaja.png" 
+></v-img>
+<v-img v-else cover class="spiral3" style="opacity: 0; position: absolute; z-index: 99;    
+      bottom: -10%;
+    left: 24%;
+height: auto;
 width: 34%;"  src=" https://res.cloudinary.com/payhospi/image/upload/v1693882765/frame_bmfaja.png" 
 ></v-img>
 <v-img cover class="imgs3" style="opacity: 0; width: 288.412px;
@@ -204,7 +217,7 @@ async animateCards(){
        this.interval = await setInterval(() => {
         
             this.anim23()
-        }, 5000);
+        }, 4000);
 
 },
 async anim23(){
@@ -321,6 +334,9 @@ async startall(x){
 }
 </script>
 <style>
+.bgh{
+    background: linear-gradient(319deg, #00000065, transparent);
+}
 .notselected{
     opacity: 0;
     scale: 0;
