@@ -155,12 +155,12 @@ imgloader(){
     function trackProgress() {
         loadedImages++;
         if (loadedImages === imageArray.length) {
+            sn.loader = false;
             // sn.startall(0);
             const title = document.querySelector('.title');
 
 const sub = document.querySelector('.sub');
     const btn = document.querySelector('.btn');
-sn.loader = false;
     sn.$nextTick(()=>{
 
         gsap.fromTo([ title,sub, btn ],
@@ -204,7 +204,7 @@ async animateCards(){
        this.interval = await setInterval(() => {
         
             this.anim23()
-        }, 3000);
+        }, 5000);
 
 },
 async anim23(){
