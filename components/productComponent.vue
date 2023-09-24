@@ -5,7 +5,7 @@
         <v-icon  size="15" :color="!(isLiked(index))? '#1C274C':'red '" :icon="!isLiked(index)? 'mdi mdi-heart-outline':'mdi mdi-heart'"></v-icon></v-btn>
         </v-img>
          <p @click="$router.push('/product_page')" style="font-weight: 600;
-    font-size: 14px;
+    font-size: 14px; min-height: 36px;
     line-height: 18px;cursor: pointer;
     color: #000000;
     " class=" mt-2 text-wrap">{{filt(item.name)}}</p>
@@ -110,6 +110,7 @@ vendorShow() {
     mounted() {
         this.mockLoading();
     },
+
     methods: {
         mockLoading() {
             setTimeout(() => {

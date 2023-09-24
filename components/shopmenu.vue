@@ -34,7 +34,7 @@ letter-spacing: -1.2px;" :class="select == n.name? 'text-green': ''" @click="sel
 </ul>
                 </v-col>
                 <v-col style="display: flex;align-items: end;" cols="12" md="4">
-                    <v-img v-show="showImg" class="selected2"   eager style="width: 369px;
+                    <v-img v-show="showImg" class="selected23"   eager style="width: 369px;
 height: 388px;border-radius: 15px;" cover  :src="databank.menu[selectIndex].rightimage"></v-img>
                     </v-col>
                     </v-row>
@@ -68,7 +68,7 @@ export default {
             
             sn.loader = false;
             const selected = document.querySelector('.selecte');
-            const selected2 = document.querySelector('.selected2');
+            const selected2 = document.querySelector('.selected23');
             
             var tl = gsap.timeline();
             tl.to([ selected ],
