@@ -249,9 +249,9 @@ async startall(x){
             const img3 = document.querySelector('.selected'+ x +' .imgs3');
             const spiral3 = document.querySelector('.selected'+ x +' .spiral3');
             const coloredcard3 = document.querySelector('.selected'+ x +' .coloredcard3');
-            this.moveIn(coloredcard3,img3, spiral3)
-            this.transcend(coloredcard3,img3, spiral3)
-            this.moveOut(coloredcard3,img3, spiral3)
+            await this.moveIn(coloredcard3,img3, spiral3)
+            await this.transcend(coloredcard3,img3, spiral3)
+            await this.moveOut(coloredcard3,img3, spiral3)
 
 },
     moveIn(coloredcard3,img3, spiral3){
@@ -268,10 +268,7 @@ async startall(x){
             ease: Back.easeOut,
             stagger: 0.1,
             scale:1,
-            duration:1,
-            onStart:()=>{  
-                //   selectedDiv.classList.remove('notselected');
-                }
+            duration:1
             })
     },
     transcend(coloredcard3,img3, spiral3){
@@ -312,8 +309,8 @@ async startall(x){
                     translateY: '-300px',
                     translateX: '-1400px',
                     // ease: Back.easeOut,
-                    stagger: 0.1,
-                    duration:1,
+                    stagger: 0.03,
+                    duration:0.5,
                     // delay: -1.4,
                     onComplete:()=>{
                     // sn.startover()

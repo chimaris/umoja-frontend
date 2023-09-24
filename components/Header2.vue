@@ -31,7 +31,7 @@
 </v-slide-x-reverse-transition>
           </div>
           <v-slide-x-reverse-transition  leave-absolute origin="center center"> 
-           <v-text-field v-if="isActive" variant="outline" style="min-width: 500px;" class="search  "  hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Ankara"
+           <v-text-field v-if="isActive" variant="outline" :style="'min-width: '+inpwidth" class="search  "  hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Ankara"
            density="compact">
            <template v-slot:append-inner>
       <v-icon color="grey"
@@ -109,6 +109,9 @@
   },
   maxw() {
     return this.maxwidth? this.maxwidth : '1400px'
+  },
+  inpwidth() {
+    return this.maxwidth == undefined ? '500px' : '295px'
   },
       urls() {
         const loggedIn = this.isLoggedIn;
