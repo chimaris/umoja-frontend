@@ -293,7 +293,7 @@ async startall(x){
             {
                 scale: 1.15, 
                 duration: 8,
-                delay: -1
+                
         
             })
         },
