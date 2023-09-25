@@ -463,8 +463,8 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
   width: 30px;
   height: 10px;
   z-index: -1;
-  
-  &::after {
+}
+.blinking-circle::after {
     content: '';
     border-radius: 50%;
     padding: 4px;
@@ -478,7 +478,8 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
         background-color: #fff6e7;
 
     }
-    &::before {
+
+    .blinking-circle::before {
     content: '';
     position: absolute;
     display: block;
@@ -492,7 +493,7 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
     background-color: #2C6E63;
     animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
   }
-}
+
 
 @keyframes blink {
   0% {
