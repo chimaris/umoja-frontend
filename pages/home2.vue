@@ -465,33 +465,33 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
   z-index: -1;
 }
 .blinking-circle::after {
-    content: '';
-    border-radius: 50%;
-    padding: 4px;
+    content: ''!important;
+    border-radius: 50%!important;
+    padding: 4px!important;
       
-    top: -5px;
-        width: 100%;
-        height: 100%;
-        transform: translate3d(0, 0, 0);
-        box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.3);
-        position: absolute;
-        background-color: #fff6e7;
+    top: -5px!important;
+        width: 100%!important;
+        height: 100%!important;
+        transform: translate3d(0, 0, 0)!important;
+        box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.3)!important;
+        position: absolute!important;
+        background-color: #fff6e7!important;
 
     }
 
     .blinking-circle::before {
-    content: '';
-    position: absolute;
-    display: block;
-    width: 80px;z-index: -6;
-    height: 30px;
-    box-sizing: border-box;
-    margin-left: -26px;
-    transform: translate3d(0, 0, 0);
-    margin-top: -14px;
-    border-radius: 50%;
-    background-color: #2C6E63;
-    animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+    content: ''!important;
+    position: absolute!important;
+    display: block!important;
+    width: 80px!important;z-index: -6!important;
+    height: 30px!important;
+    box-sizing: border-box!important;
+    margin-left: -26px!important;
+    transform: translate3d(0, 0, 0)!important;
+    margin-top: -14px!important;
+    border-radius: 50%!important;
+    background-color: #2C6E63!important;
+    animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite!important;
   }
 
 
