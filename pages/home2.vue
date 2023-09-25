@@ -487,7 +487,6 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
     height: 30px!important;
     box-sizing: border-box!important;
     margin-left: -26px!important;
-    transform: translate3d(0, 0, 0)!important;
     margin-top: -14px!important;
     border-radius: 50%!important;
     background-color: #2C6E63!important;
