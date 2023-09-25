@@ -606,22 +606,20 @@ backdrop-filter: blur(28.7705px);
 
 }
 .howit .v-btn__content {
-        text-transform: none;
-    
+    text-transform: none;
 }
 .v-btn{
     letter-spacing: 0!important;
 }
 .africacard{
-    opacity: 1;
-    scale: 0;bottom: -70%;
+    scale: 0;bottom: -80px;
     border-radius: 50%;
-width: 250.88px;
-
-height: 176.08px;
+/*  width: 250.88px;
+height: 176.08px; */
 position: relative;
+transform: translate3d(0, 0, 0);
 overflow: visible!important;
-
+z-index: 9999;
 background: rgba(255, 255, 255, 0.9)!important;
 backdrop-filter: blur(28.7705px);
 border-radius: 23.0164px!important;

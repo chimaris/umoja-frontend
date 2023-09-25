@@ -46,7 +46,7 @@ How it works
 <div style="position: absolute;bottom: 0px; z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, transparent, #fff);"></div>      
     
 <v-img eager
-        style="  transform: translate3d(0, 0, 0)!important;position: relative;overflow:hidden;"
+        style="position: relative;overflow:hidden;"
         class="  mt-6"  min-height="50vh"
         contain min-width="700px"  id="img"
         height="auto" @load="startall()"
@@ -55,111 +55,252 @@ How it works
       >
 
 
-<div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes" :key="i"
+<div v-show="placescards"
           class="d-flex justify-center"
-          style="z-index:99;transform: translate3d(0, 0, 0); width: 250.88px; scale: 0.9; 
-         
- position: absolute"
- :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
+          style="width: 250.88px; scale: 0.9;  top: 24%;
+left: 10%; position: absolute"
         >
-        <div class="blinking-circle"></div>
-        <v-card @click="showCountry(n.country)"  flat class="transparent boxes1  africacard">
+        
+           
+          
 
-            <div class="pa-6 d-flex align-center justify-center w-100">
+        <div class="blinking-circle"></div>
+        <v-card   flat class="transparent box1 africacard">
+
+            <div class="pa-5 d-flex align-center justify-center w-100">
               <div>
                 <v-img
                   width="30px"
                   style="border-radius: 5px !important"
                   height="auto"
-                  :src="n.image"
+                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/NG_-_Nigeria_c8g2on.png"
                 />
-                <!-- {{ n.country }} -->
+              </div>
+              <p class="ml-3">Nigeria</p>
+            </div>
+            <v-divider></v-divider>
+
+            <div class="d-flex px-5 pt-4 pb-3 justify-center">
+              <div class="list">
+                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
+                  ><v-img
+                    :src="n"
+                  ></v-img
+                ></v-avatar>
+                <v-avatar class="pa-0" style="border:3px solid white" color="green">
+                  <span style="font-size: 12px">+300</span></v-avatar
+                >
               </div>
             </div>
-       
-            <div  class="pointer"></div>
-          </v-card> 
-        </div>
-<div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes2" :key="i"
-          class="d-flex justify-center"
-          style="z-index:99;transform: translate3d(0, 0, 0); width: 250.88px; scale: 0.9; 
-         
- position: absolute"
- :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
-        >
-        <div class="blinking-circle"></div>
-        <v-card @click="showCountry(n.country)"  flat class="transparent  boxes2 africacard">
 
-            <div class="pa-6 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important;transform: translate3d(0, 0, 0)!important"
-                  height="auto"
-                  :src="n.image"
-                />
-                
-              </div>
+            <div class="d-flex justify-center">
+              <v-btn size="small" color="blue" variant="text" flat>
+                <span
+                  style="
+                    font-size: 14px;
+                    text-transform: none;
+                    color: #0062bc;
+                  "
+                >
+                  See vendors in this area
+                </span>
+                <v-avatar class="ml-2" size="25" rounded="0"
+                  ><v-img
+                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
+                  ></v-img
+                ></v-avatar>
+              </v-btn>
             </div>
-       
             <div  class="pointer"></div>
-          </v-card> 
+          </v-card>
+          
+          
+            
+          
         </div>
-<div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes3" :key="i"
+        <div v-show="placescards"
           class="d-flex justify-center"
-          style="z-index:99;transform: translate3d(0, 0, 0); width: 250.88px; scale: 0.9; 
-         
- position: absolute"
- :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
+          style="width: 250.88px;    top: 10%;
+right: 23%;
+scale: 0.9; position: absolute"
         >
-        <div class="blinking-circle"></div>
-        <v-card @click="showCountry(n.country)"  flat class="transparent boxes3  africacard">
+        
+            <div class="blinking-circle"></div>
+           
+          
 
-            <div class="pa-6 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important"
-                  height="auto"
-                  :src="n.image"
-                />
-                
-              </div>
-            </div>
-       
-            <div  class="pointer"></div>
-          </v-card> 
-        </div>
-<div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes4" :key="i"
-          class="d-flex justify-center"
-          style="z-index:99;transform: translate3d(0, 0, 0); width: 250.88px; scale: 0.9; 
-         
- position: absolute"
- :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
-        >
-        <div class="blinking-circle"></div>
-        <v-card @click="showCountry(n.country)"  flat class="transparent boxes4  africacard">
-
-            <div class="pa-6 d-flex align-center justify-center w-100">
+        <v-card   flat class="transparent box2 africacard">
+            <div class="pa-5 d-flex align-center justify-center w-100">
               <div>
                 <v-img
                   width="30px"
                   style="border-radius: 5px !important"
                   height="auto"
-                  :src="n.image"
+                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229323/EG_-_Egypt_mlkkl6.png"
                 />
-                
+              </div>
+              <p class="ml-3">Egypt</p>
+            </div>
+            <v-divider></v-divider>
+
+            <div class="d-flex px-5 pt-4 pb-3 justify-center">
+              <div class="list">
+                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
+                  ><v-img
+                    :src="n"
+                  ></v-img
+                ></v-avatar>
+                <v-avatar class="pa-0" style="border:3px solid white" color="green">
+                  <span style="font-size: 12px">+300</span></v-avatar
+                >
               </div>
             </div>
-       
+
+            <div class="d-flex justify-center">
+              <v-btn size="small" color="blue" variant="text" flat>
+                <span
+                  style="
+                    font-size: 14px;
+                    text-transform: none;
+                    color: #0062bc;
+                  "
+                >
+                  See vendors in this area
+                </span>
+                <v-avatar class="ml-2" size="25" rounded="0"
+                  ><v-img
+                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
+                  ></v-img
+                ></v-avatar>
+              </v-btn>
+            </div>
             <div  class="pointer"></div>
-          </v-card> 
+          </v-card>
+          
+          
+            
+          
+        </div>
+        <div v-show="placescards"
+          class="d-flex justify-center"
+          style="width: 250.88px;    bottom: 22%;
+right: 42%;
+scale: 0.9; position: absolute"
+        >
+        
+           
+          
+
+        <v-card flat   class="transparent box3 africacard">
+            <div class="pa-5 d-flex align-center justify-center w-100">
+              <div>
+                <v-img
+                  width="30px"
+                  style="border-radius: 5px !important"
+                  height="auto"
+                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_9_cxzweo.png"
+                />
+              </div>
+              <p class="ml-3">South Africa</p>
+            </div>
+            <v-divider></v-divider>
+
+            <div class="d-flex px-5 pt-4 pb-3 justify-center">
+              <div class="list">
+                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
+                  ><v-img
+                    :src="n"
+                  ></v-img
+                ></v-avatar>
+                <v-avatar class="pa-0" style="border:3px solid white" color="green">
+                  <span style="font-size: 12px">+300</span></v-avatar
+                >
+              </div>
+            </div>
+
+            <div class="d-flex justify-center">
+              <v-btn size="small" color="blue" variant="text" flat>
+                <span
+                  style="
+                    font-size: 14px;
+                    text-transform: none;
+                    color: #0062bc;
+                  "
+                >
+                  See vendors in this area
+                </span>
+                <v-avatar class="ml-2" size="25" rounded="0"
+                  ><v-img
+                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
+                  ></v-img
+                ></v-avatar>
+              </v-btn>
+            </div>
+            <div  class="pointer"></div>
+          </v-card>
+          
+          
+            
+                      <div class="blinking-circle"></div>
+
         </div>
 
+        <div v-show="placescards"
+          class="d-flex justify-center"
+          style="width: 250.88px;       bottom: 25%;
+right: 0%;
+scale: 0.9; position: absolute"
+        >
+          <v-card  flat class="transparent box4 africacard">
+            <div class="pa-5 d-flex align-center justify-center w-100">
+              <div>
+                <v-img
+                  width="30px"
+                  style="border-radius: 5px !important"
+                  height="auto"
+                  src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_8_ftnhqn.png"
+                />
+              </div>
+              <p class="ml-3">Madagscar</p>
+            </div>
+            <v-divider></v-divider>
 
+            <div class="d-flex px-5 pt-4 pb-3 justify-center">
+              <div class="list">
+                <v-avatar style="padding:2px" color="white" size="48" :key="i" v-for="(n, i) in images"
+                  ><v-img
+                    :src="n"
+                  ></v-img
+                ></v-avatar>
+                <v-avatar class="pa-0" style="border:3px solid white" color="green">
+                  <span style="font-size: 12px">+300</span></v-avatar
+                >
+              </div>
+            </div>
 
-      
+            <div class="d-flex justify-center">
+              <v-btn size="small" color="blue" variant="text" flat>
+                <span
+                  style="
+                    font-size: 14px;
+                    text-transform: none;
+                    color: #0062bc;
+                  "
+                >
+                  See vendors in this area
+                </span>
+                <v-avatar class="ml-2" size="25" rounded="0"
+                  ><v-img
+                    src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684302533/Forward_ob8zzj.png"
+                  ></v-img
+                ></v-avatar>
+              </v-btn>
+            </div>
+            <div class="pointer"></div>
+          </v-card>
+          <div class="blinking-circle"></div>
 
+        </div>
       </v-img>
     </div>
 </div>
@@ -452,72 +593,31 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 
 
 .blinking-circle {
-  /* animation: blink 2s infinite; */
-  position: absolute;
-  transform: translate3d(0, 0, 0);
-  /* opacity: 0; */
-  left: 50%;
-  top: 120%;
-  transform: translateX(-50%) ;
-  opacity: 0;
-  width: 30px;
-  height: 10px;
-  z-index: -1;
-  
-  &::after {
-    content: '';
-    border-radius: 50%;
+  width: 38px;
+    height: 6px;
+    top: 105%;
     padding: 4px;
-      
-    top: -5px;
-        width: 100%;
-        height: 100%;
-        transform: translate3d(0, 0, 0);
-        box-shadow: 0px 3px 4px 1px rgba(0, 0, 0, 0.3);
-        position: absolute;
-        background-color: #fff6e7;
-
-    }
-    &::before {
-    content: '';
     position: absolute;
-    display: block;
-    width: 80px;z-index: -6;
-    height: 30px;
-    box-sizing: border-box;
-    margin-left: -26px;
-    transform: translate3d(0, 0, 0);
-    margin-top: -14px;
+    border: 4px solid white;
     border-radius: 50%;
+    z-index: -3;
     background-color: #2C6E63;
-    animation: pulse-ring 2.5s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
-  }
+    animation: blink 2.5s infinite;
 }
 
 @keyframes blink {
   0% {
-    scale: 1;
+    scale: 1.5;
   }
   50% {
-    scale: 0.7;
+    scale: 0.5;
   }
   100% {
-    scale: 1;
+    scale: 1.5;
   }
 }
 
-@keyframes pulse-ring {
-  0% {
-    transform: scale(.43);
-  }
-  50% {
-    transform: scale(.83);
-  }
-  95%, 100% {
-    opacity: 0;
-  }
-}
-
+/* img.v-img__img.v-img__img--contain:first-of-type */
   .background {
     animation: zoom-and-slide 20s infinite;
     will-change: transform;
@@ -551,162 +651,11 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 
 </style>
 <script>
-import { gsap, Bounce, Back, CSSPlugin } from 'gsap';
+import { gsap, Bounce, CSSPlugin } from 'gsap';
 
 export default {
   data() {
     return {
-      boxes:[
-        {
-          top:'42%',
-          left: '8%',
-          country: 'Cameroon',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/Flag_of_Cameroon.png'
-        },
-        {
-          top:'53%',
-          left: '14%',
-          country: 'Egypt',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Flag_of_Egypt_%28variant%29.png/250px-Flag_of_Egypt_%28variant%29.png'
-        },
-        {
-          top:'53%',
-          left: '6%',
-          country: 'Ghana',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Flag_of_Ghana.png'
-        },
-        {
-          top:'65%',
-          left: '9%',
-          country: 'Nigeria',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_Nigeria.svg/280px-Flag_of_Nigeria.svg.png'
-        },
-        {
-          top:'1.5%',
-          left: '3%',
-          country: `Cote D'Ivoire`,
-          image: 'https://cdn.countryflags.com/thumbs/cote-d-ivoire/flag-400.png'
-        },
-        {
-          top:'3.7%',
-          left: '10%',
-          country: 'Rwanda',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Flag_of_Rwanda.svg/80px-Flag_of_Rwanda.svg.png'
-        },
-           {
-        top:'13%',
-        left: '7%',
-        country: 'Namiba',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_Namibia.png'
-      },
-      {
-        top:'18%',
-        left: '0%',
-        country: 'Sierra Lone',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Flag_of_Sierra_Leone.svg/80px-Flag_of_Sierra_Leone.svg.png'
-      },
-      ],
-      boxes2:[
-      {
-        top:'0%',
-        right: '35%',
-        country: 'Chad',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Flag_of_Chad.svg/80px-Flag_of_Chad.svg.png'
-      },
-      {
-        top:'3%',
-        right: '24%',
-        country: 'Senegal',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Flag_of_Senegal.svg/80px-Flag_of_Senegal.svg.png'
-      },
-      {
-        top:'5%',
-        right: '13%',
-        country: 'Kenya',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Kenya_flag_300.png'
-      },
-      {
-        top:'11%',
-        right: '30%',
-        country: 'Ethiopia',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Flag_of_Ethiopia.svg/80px-Flag_of_Ethiopia.svg.png?20191111184610'
-      },
-   
-   
-      {
-        top:'22%',
-        right: '19%',
-        country: 'Burundi',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Flag_of_Burundi.svg/80px-Flag_of_Burundi.svg.png?20230803000809'
-      },
-      {
-        top:'20%',
-        right: '2%',
-        country: 'Burkina Faso',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Flag_of_Burkina_Faso.svg/80px-Flag_of_Burkina_Faso.svg.png'
-      },
-      {
-        top:'35%',
-        right: '-3%',
-        country: 'Djibouti',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Flag_of_Djibouti.svg/80px-Flag_of_Djibouti.svg.png?20230106121142'
-      },
-      {
-        bottom:'42%',
-        right: '8%',
-        country: 'Lesotho',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Flag_of_Lesotho.svg/80px-Flag_of_Lesotho.svg.png'
-      },
-      {
-        bottom:'23%',
-        right: '0%',
-        country: 'Mozambique',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Flag_of_Mozambique.svg/80px-Flag_of_Mozambique.svg.png'
-      },
-   
-  
-      ],
-      boxes3:[
-   
-      {
-        bottom: '60%',
-        left: '34%', 
-        country: 'Benin',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Flag_of_Benin.svg/80px-Flag_of_Benin.svg.png'
-      },
-      {
-        bottom: '60%',
-        right: '38%', 
-        country: 'Morocco',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flag_of_Morocco.svg/80px-Flag_of_Morocco.svg.png'
-      },
-      {
-        bottom: '49%',
-        left: '39%', 
-        country: 'Mauritius',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Mauritius.svg/80px-Flag_of_Mauritius.svg.png'
-      },
-      {
-        bottom: '40%',
-        right: '38%', 
-        country: 'Malawi',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Flag_of_Malawi.svg/80px-Flag_of_Malawi.svg.png'
-      },
-      {
-        bottom: '30%',
-        left: '40%', 
-        country: 'Cabo Verde',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Flag_of_Cape_Verde.svg/80px-Flag_of_Cape_Verde.svg.png'
-      },
-      {
-        bottom: '22%',
-        right: '40%',
-        country: 'South Sudan',
-        image: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Flag_of_South_Sudan.png'
-      },
-   
-
-      ], selectedCountry: '',
       items23: [
                     {
         name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
@@ -984,136 +933,21 @@ rating: 4,
 
     },
 methods: {
-  showCountry(x){
-    this.selectedCountry = x
-  },
   async startall(){
     this.placescards = true
-    const circles =  document.querySelectorAll('.blinking-circle')
-    const sn = this
-    gsap.to(circles,
-    {
-      
-      opacity: 1,
-      stagger: 0.2,
-      delay:1,
-      onComplete:()=>{
-        sn.animImg()
 
-      }
-      
-    })
+    this.$nextTick(() => {
     
-  // this.animateBox('.box1', 0);
-  // this.animateBox('.box2', 0.5);
-  // this.animateBox('.box3', 1);
-  // this.animateBox('.box4', 1.5);
-
-  },
-  animImg(){
+  this.animateBox('.box1', 0);
+  this.animateBox('.box2', 0.5);
+  this.animateBox('.box3', 1);
+  this.animateBox('.box4', 1.5);
   const box =  document.getElementById('img')
-  const boxes1 =  document.querySelectorAll('.boxes1')
-  const boxes2 =  document.querySelectorAll('.boxes2')
-  const boxes3 =  document.querySelectorAll('.boxes3')
-  var tl = gsap.timeline({repeat: -1, })
 
-    tl.fromTo([box],
-    {
-      scale: 1,
-      translateX: '0%',
-      // transformOrigin: ' center'
-    },{
-      scale: 1.2,
-      translateX: '10%',
-      // transformOrigin: 'left',
-      duration:5,
-    })
-    
-    
-    tl.to(boxes1,
-    {
-      
-      scale: 1,
-      stagger: 0.3,
-      bottom: '8px',
-      ease: Back.easeOut,
-      delay: -3
-      
-    })
-    
-    tl.to([box],
-    {
-      translateX: '-10%',
-      translateY: '20%',
-      scale: 1.2,
-      // transformOrigin: 'top right',
-      duration:5,
-      // delay: 5
-      
-    })
-    tl.to(boxes2,
-    {
-      
-      scale: 1,
-      stagger: 0.3,
-      bottom: '8px',
-      ease: Back.easeOut,
-      delay: -3
-      
-    })
-    tl.to([box],{
-      translateX: '0%',
-      translateY: '-15%',
-      scale: 1.3,
-      // transformOrigin: 'bottom center',
-      duration:5,
-      // delay: 10,
-    })
-    tl.to(boxes3,
-    {
-      
-      scale: 1,
-      stagger: 0.3,
-      bottom: '8px',
-      ease: Back.easeOut,
-      delay: -3
-      
-    })
-    tl.to([box],
-    {
-      translateX: '0%',
-      translateY: '0%',
-      scale: 1,
-      // delay: 15,
-      // transformOrigin: 'center center',
-      duration:5,
-    })
-    tl.to(boxes1,
-    {
-      
-      scale: 0,
-      stagger: 0.2,
-      yPercent: 80,
-      
-    })
-    tl.to(boxes2,
-    {
-      
-      scale: 0,
-      stagger: 0.2,
-      yPercent: 80,
-      delay: -0.2,
-      
-    })
-    tl.to(boxes3,
-    {
-      
-      scale: 0,
-      stagger: 0.2,
-      yPercent: 80,
-      delay: -0.2,
-      
-    })
+setTimeout(() => {
+  box.classList.add('background');
+}, 2000);
+});
   },
    animateBox(box, delay) {
    gsap.to(box,
@@ -1121,22 +955,7 @@ methods: {
       opacity: 1,
       scale: 1,
       borderRadius: '23.0164px',
-      bottom: '8px',
-      ease: Bounce.easeOut,
-      duration: 1.3,
-      delay,
-      
-    }
-  );
-},
-   animateBoxes(box) {
-   gsap.to(box,
-    {
-      opacity: 1,
-      scale: 1,
-      borderRadius: '23.0164px',
-      bottom: '8px',
-      stagger: 0.1,
+      bottom: '2px',
       ease: Bounce.easeOut,
       duration: 1.3,
       delay,
