@@ -223,9 +223,12 @@ async anim23(){
             const img3 = await document.querySelector('.selected'+ this.selected3 +' .imgs3');
             const spiral3 = await document.querySelector('.selected'+ this.selected3 +' .spiral3');
             const coloredcard3 = await document.querySelector('.selected'+ this.selected3 +' .coloredcard3');
+            const imggt3 = document.querySelector('.selected'+ this.selected3 +' .imgs3 .v-img__img.v-img__img--cover');
+            const imggt2 = document.querySelector('.selected'+ this.selected2 +' .imgs3 .v-img__img.v-img__img--cover');
+
             await this.moveOut(coloredcard,img, spiral)
-            await this.transcend(coloredcard2,img2, spiral2)
-            await this.moveIn(coloredcard3,img3, spiral3)
+            await this.transcend(coloredcard2,img2,imggt2, spiral2)
+            await this.moveIn(coloredcard3,img3,imggt3, spiral3)
             
 },
 async startall(x){
@@ -236,12 +239,13 @@ async startall(x){
             const img3 = document.querySelector('.selected'+ x +' .imgs3');
             const spiral3 = document.querySelector('.selected'+ x +' .spiral3');
             const coloredcard3 = document.querySelector('.selected'+ x +' .coloredcard3');
-            await this.moveIn(coloredcard3,img3, spiral3)
-            await this.transcend(coloredcard3,img3, spiral3)
+            const imggt3 = document.querySelector('.selected'+ this.selected3 +' .imgs3 .v-img__img.v-img__img--cover');
+            await this.moveIn(coloredcard3,img3, imggt3, spiral3)
+            await this.transcend(coloredcard3,img3, imggt3, spiral3)
             await this.moveOut(coloredcard3,img3, spiral3)
 
 },
-    moveIn(coloredcard3,img3, spiral3){
+    moveIn(coloredcard3,img3,imggt3, spiral3){
        this.moveInvar = gsap.fromTo([ coloredcard3,img3, spiral3 ],
         {
             opacity: 0,
@@ -258,8 +262,14 @@ async startall(x){
             delay: 0.5,
             duration:1
             })
+            gsap.to(imggt3 ,
+            {
+                scale: 1, 
+                delay: -1
+        
+            })
     },
-    transcend(coloredcard3,img3, spiral3){
+    transcend(coloredcard3,img3,imggt3, spiral3){
         const sn = this
        this.transcendvar = gsap.fromTo([ coloredcard3,img3, spiral3 ],
             {
@@ -278,6 +288,13 @@ async startall(x){
                 duration:1,
         
             
+            })
+             gsap.to(imggt3 ,
+            {
+                scale: 1.15, 
+                duration: 8,
+                delay: -1
+        
             })
         },
         moveOut(coloredcard3,img3, spiral3)
