@@ -63,7 +63,7 @@ How it works
  :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
         >
         <div class="blinking-circle"></div>
-        <div @click="showCountry(n.country)"  flat :class="n.class" class="transparent africacard">
+        <div @click="showCountry(n.country)"  flat :class="n.class" class=" africacard">
 
             <div class="pa-6 d-flex align-center justify-center w-100">
               <keep-alive>
