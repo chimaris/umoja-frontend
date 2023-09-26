@@ -937,6 +937,7 @@ methods: {
   },
   async startall(){
     if (this.placescards) {
+      // alert('already loaded')
       return
     }
     this.placescards = true
