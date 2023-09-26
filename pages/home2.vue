@@ -66,12 +66,15 @@ How it works
         <div @click="showCountry(n.country)"  flat :class="n.class" class="transparent africacard">
 
             <div class="pa-6 d-flex align-center justify-center w-100">
+              <keep-alive>
+
                 <v-img
-                  width="30px"
-                  style="border-radius: 5px !important;"
-                  height="auto"
-                  :src="n.image"
+                width="30px"
+                style="border-radius: 5px !important;"
+                height="auto"
+                :src="n.image"
                 />
+              </keep-alive>
                 
             </div>
        
