@@ -482,9 +482,9 @@ letter-spacing: -0.14px;">
   </div>
 </v-col>
 </v-row>
-<product-row :showVendor="true" title="🌓 Related Products" />
-<product-row :showVendor="false" title="🛍 More items from this seller" />
-<product-row :showVendor="true" title="😎 Recently viewed" />
+<product-row :maxwidth="'1400px'" :showVendor="true" title="🌓 Related Products" />
+<product-row :maxwidth="'1400px'" class="mt-12" :showVendor="false" title="🛍 More items from this seller" />
+<product-row :maxwidth="'1400px'" :showVendor="true" title="😎 Recently viewed" />
     </v-container>
 </template>
 <style>

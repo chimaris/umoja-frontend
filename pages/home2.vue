@@ -46,18 +46,19 @@ How it works
 <div style="position: absolute;bottom: 0px; z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, transparent, #fff);"></div>      
     
 <v-img eager
-        style="  transform: translate3d(0, 0, 0)!important;position: relative;overflow:hidden;"
+        style=" position: relative;overflow:hidden;"
         class="  mt-6"  min-height="50vh"
         contain min-width="700px"  id="img"
         height="auto" @load="startall()"
         width="100%"
+        lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_50/v1690528044/map-base-1_qyacm7.png"
         src="https://res.cloudinary.com/payhospi/image/upload/v1690528044/map-base-1_qyacm7.png"
-      >
+        >
 
 
 <div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes" :key="i"
           class="d-flex justify-center"
-          style="z-index:99;transform: translate3d(0, 0, 0); width: 250.88px; scale: 0.9; 
+          style="z-index:99; width: 250.88px; scale: 0.9; 
          
  position: absolute"
  :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
@@ -82,7 +83,7 @@ How it works
         </div>
 <div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes2" :key="i"
           class="d-flex justify-center"
-          style="z-index:99;transform: translate3d(0, 0, 0); width: 250.88px; scale: 0.9; 
+          style="z-index:99; width: 250.88px; scale: 0.9; 
          
  position: absolute"
  :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
@@ -94,7 +95,7 @@ How it works
               <div>
                 <v-img
                   width="30px"
-                  style="border-radius: 5px !important;transform: translate3d(0, 0, 0)!important"
+                  style="border-radius: 5px !important;"
                   height="auto"
                   :src="n.image"
                 />
@@ -107,7 +108,7 @@ How it works
         </div>
 <div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes3" :key="i"
           class="d-flex justify-center"
-          style="z-index:99;transform: translate3d(0, 0, 0); width: 250.88px; scale: 0.9; 
+          style="z-index:99; width: 250.88px; scale: 0.9; 
          
  position: absolute"
  :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
@@ -132,7 +133,7 @@ How it works
         </div>
 <div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes4" :key="i"
           class="d-flex justify-center"
-          style="z-index:99;transform: translate3d(0, 0, 0); width: 250.88px; scale: 0.9; 
+          style="z-index:99; width: 250.88px; scale: 0.9; 
          
  position: absolute"
  :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
@@ -1015,7 +1016,7 @@ methods: {
   const boxes1 =  document.querySelectorAll('.boxes1')
   const boxes2 =  document.querySelectorAll('.boxes2')
   const boxes3 =  document.querySelectorAll('.boxes3')
-  var tl = gsap.timeline({repeat: -1, })
+  var tl = gsap.timeline({repeat: -1 })
 
     tl.fromTo([box],
     {

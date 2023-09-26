@@ -617,7 +617,6 @@ backdrop-filter: blur(28.7705px);
 /*  width: 250.88px;
 height: 176.08px; */
 position: relative;
-transform: translate3d(0, 0, 0);
 overflow: visible!important;
 z-index: 9999;
 background: rgba(255, 255, 255, 0.9)!important;
