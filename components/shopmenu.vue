@@ -26,7 +26,7 @@ text-align: center;position: relative;
 font-size: 36px;
 font-weight: 500;
 line-height: 140%; /* 56px */
-letter-spacing: -1.2px;" :class="select == n.name? 'text-green': ''" @click="selectCategory(n.name, i)" class="py-4" v-for="(n, i) in databank.menu" :key="i">{{ n.name }}
+letter-spacing: -1.2px;" :class="select == n.name? 'text-green': ''" @click="$router.push('/market_place')" @mouseover="selectCategory(n.name, i)" class="py-4" v-for="(n, i) in databank.menu" :key="i">{{ n.name }}
 <img v-show="select == n.name" src="https://res.cloudinary.com/payhospi/image/upload/v1693888075/underline-10_jqkobi.svg" style="bottom:-10px;
     left: 50%;
     transform: translate(-50%, 0);position: absolute;"/>
@@ -44,6 +44,7 @@ height: 388px;border-radius: 15px;" cover  :src="databank.menu[selectIndex].righ
 </template>
 <script>
 import { gsap, Back } from 'gsap';
+import debounce from 'lodash/debounce';
 
 export default {
     data() {
@@ -57,7 +58,7 @@ export default {
         this.select = this.databank.menu[0].name
     },
     methods: {
-        selectCategory(n, i) {
+        selectCategory: debounce(function(n, i) {
            
             if (n == this.select) {
                 return
@@ -102,7 +103,7 @@ export default {
 
             }
             )
-        }
+        },100)
     }
 }
 </script>

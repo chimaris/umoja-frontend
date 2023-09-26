@@ -46,17 +46,16 @@ How it works
 <div style="position: absolute;bottom: 0px; z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, transparent, #fff);"></div>      
     
 <v-img eager
-        style=" position: relative;overflow:hidden;"
+        style=" position: relative;"
         class="  mt-6"  min-height="50vh"
         contain min-width="700px"  id="img"
         height="auto" @load="startall()"
         width="100%"
-        lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_50/v1690528044/map-base-1_qyacm7.png"
-        src="https://res.cloudinary.com/payhospi/image/upload/v1690528044/map-base-1_qyacm7.png"
+        src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_3000/v1690528044/map-base-1_qyacm7.png"
         >
 
 
-<div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes" :key="i"
+<div v-show="placescards" v-once @click="$router.push('/discovery_page')" v-for="(n, i) in boxes" :key="i"
           class="d-flex justify-center"
           style="z-index:99; width: 250.88px; scale: 0.9; 
          
@@ -64,35 +63,9 @@ How it works
  :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
         >
         <div class="blinking-circle"></div>
-        <v-card @click="showCountry(n.country)"  flat class="transparent boxes1  africacard">
+        <div @click="showCountry(n.country)"  flat :class="n.class" class="transparent africacard">
 
             <div class="pa-6 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important"
-                  height="auto"
-                  :src="n.image"
-                />
-                <!-- {{ n.country }} -->
-              </div>
-            </div>
-       
-            <div  class="pointer"></div>
-          </v-card> 
-        </div>
-<div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes2" :key="i"
-          class="d-flex justify-center"
-          style="z-index:99; width: 250.88px; scale: 0.9; 
-         
- position: absolute"
- :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
-        >
-        <div class="blinking-circle"></div>
-        <v-card @click="showCountry(n.country)"  flat class="transparent  boxes2 africacard">
-
-            <div class="pa-6 d-flex align-center justify-center w-100">
-              <div>
                 <v-img
                   width="30px"
                   style="border-radius: 5px !important;"
@@ -100,61 +73,10 @@ How it works
                   :src="n.image"
                 />
                 
-              </div>
             </div>
        
             <div  class="pointer"></div>
-          </v-card> 
-        </div>
-<div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes3" :key="i"
-          class="d-flex justify-center"
-          style="z-index:99; width: 250.88px; scale: 0.9; 
-         
- position: absolute"
- :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
-        >
-        <div class="blinking-circle"></div>
-        <v-card @click="showCountry(n.country)"  flat class="transparent boxes3  africacard">
-
-            <div class="pa-6 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important"
-                  height="auto"
-                  :src="n.image"
-                />
-                
-              </div>
-            </div>
-       
-            <div  class="pointer"></div>
-          </v-card> 
-        </div>
-<div v-show="placescards" @click="$router.push('/discovery_page')" v-for="(n, i) in boxes4" :key="i"
-          class="d-flex justify-center"
-          style="z-index:99; width: 250.88px; scale: 0.9; 
-         
- position: absolute"
- :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
-        >
-        <div class="blinking-circle"></div>
-        <v-card @click="showCountry(n.country)"  flat class="transparent boxes4  africacard">
-
-            <div class="pa-6 d-flex align-center justify-center w-100">
-              <div>
-                <v-img
-                  width="30px"
-                  style="border-radius: 5px !important"
-                  height="auto"
-                  :src="n.image"
-                />
-                
-              </div>
-            </div>
-       
-            <div  class="pointer"></div>
-          </v-card> 
+          </div> 
         </div>
 
 
@@ -561,73 +483,83 @@ export default {
         {
           top:'42%',
           left: '8%',
+          class: 'boxes1',
           country: 'Cameroon',
           image: 'https://upload.wikimedia.org/wikipedia/commons/0/0b/Flag_of_Cameroon.png'
         },
         {
           top:'53%',
           left: '14%',
+          class: 'boxes1',
           country: 'Egypt',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Flag_of_Egypt_%28variant%29.png/250px-Flag_of_Egypt_%28variant%29.png'
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Flag_of_Egypt_%28variant%29.png/80px-Flag_of_Egypt_%28variant%29.png'
         },
         {
           top:'53%',
           left: '6%',
+          class: 'boxes1',
           country: 'Ghana',
           image: 'https://upload.wikimedia.org/wikipedia/commons/4/40/Flag_of_Ghana.png'
         },
         {
           top:'65%',
           left: '9%',
+          class: 'boxes1',
           country: 'Nigeria',
-          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_Nigeria.svg/280px-Flag_of_Nigeria.svg.png'
+          image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/79/Flag_of_Nigeria.svg/80px-Flag_of_Nigeria.svg.png'
         },
         {
           top:'1.5%',
           left: '3%',
+          class: 'boxes1',
           country: `Cote D'Ivoire`,
           image: 'https://cdn.countryflags.com/thumbs/cote-d-ivoire/flag-400.png'
         },
         {
           top:'3.7%',
           left: '10%',
+          class: 'boxes1',
           country: 'Rwanda',
           image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Flag_of_Rwanda.svg/80px-Flag_of_Rwanda.svg.png'
         },
            {
         top:'13%',
         left: '7%',
+        class: 'boxes1',
         country: 'Namiba',
         image: 'https://upload.wikimedia.org/wikipedia/commons/0/09/Flag_of_Namibia.png'
       },
       {
         top:'18%',
         left: '0%',
+        class: 'boxes1',
         country: 'Sierra Lone',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/17/Flag_of_Sierra_Leone.svg/80px-Flag_of_Sierra_Leone.svg.png'
       },
-      ],
-      boxes2:[
       {
         top:'0%',
+        class: 'boxes2',
         right: '35%',
         country: 'Chad',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4b/Flag_of_Chad.svg/80px-Flag_of_Chad.svg.png'
       },
       {
         top:'3%',
+        class: 'boxes2',
         right: '24%',
         country: 'Senegal',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fd/Flag_of_Senegal.svg/80px-Flag_of_Senegal.svg.png'
       },
       {
         top:'5%',
+        class: 'boxes2',
         right: '13%',
         country: 'Kenya',
         image: 'https://upload.wikimedia.org/wikipedia/commons/3/3d/Kenya_flag_300.png'
       },
       {
         top:'11%',
+        class: 'boxes2',
         right: '30%',
         country: 'Ethiopia',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Flag_of_Ethiopia.svg/80px-Flag_of_Ethiopia.svg.png?20191111184610'
@@ -636,72 +568,81 @@ export default {
    
       {
         top:'22%',
+        class: 'boxes2',
         right: '19%',
         country: 'Burundi',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/50/Flag_of_Burundi.svg/80px-Flag_of_Burundi.svg.png?20230803000809'
       },
       {
         top:'20%',
+        class: 'boxes2',
         right: '2%',
         country: 'Burkina Faso',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Flag_of_Burkina_Faso.svg/80px-Flag_of_Burkina_Faso.svg.png'
       },
       {
         top:'35%',
+        class: 'boxes2',
         right: '-3%',
         country: 'Djibouti',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Flag_of_Djibouti.svg/80px-Flag_of_Djibouti.svg.png?20230106121142'
       },
       {
         bottom:'42%',
+        class: 'boxes2',
         right: '8%',
         country: 'Lesotho',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/4/4a/Flag_of_Lesotho.svg/80px-Flag_of_Lesotho.svg.png'
       },
       {
         bottom:'23%',
+        class: 'boxes2',
         right: '0%',
         country: 'Mozambique',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/Flag_of_Mozambique.svg/80px-Flag_of_Mozambique.svg.png'
       },
    
   
-      ],
-      boxes3:[
    
       {
         bottom: '60%',
         left: '34%', 
+        class: 'boxes3',
         country: 'Benin',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Flag_of_Benin.svg/80px-Flag_of_Benin.svg.png'
       },
       {
         bottom: '60%',
         right: '38%', 
+        class: 'boxes3',
         country: 'Morocco',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flag_of_Morocco.svg/80px-Flag_of_Morocco.svg.png'
       },
       {
         bottom: '49%',
         left: '39%', 
+        class: 'boxes3',
         country: 'Mauritius',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Mauritius.svg/80px-Flag_of_Mauritius.svg.png'
       },
       {
         bottom: '40%',
         right: '38%', 
+        class: 'boxes3',
         country: 'Malawi',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Flag_of_Malawi.svg/80px-Flag_of_Malawi.svg.png'
       },
       {
         bottom: '30%',
         left: '40%', 
+        class: 'boxes3',
         country: 'Cabo Verde',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Flag_of_Cape_Verde.svg/80px-Flag_of_Cape_Verde.svg.png'
       },
       {
         bottom: '22%',
         right: '40%',
+        class: 'boxes3',
         country: 'South Sudan',
         image: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Flag_of_South_Sudan.png'
       },
@@ -979,6 +920,9 @@ rating: 4,
         ]
     }
     },
+    beforeUnmount(){
+      this.timeline.kill()
+    },
     mounted(){
   
       gsap.registerPlugin(CSSPlugin);
@@ -989,6 +933,9 @@ methods: {
     this.selectedCountry = x
   },
   async startall(){
+    if (this.placescards) {
+      return
+    }
     this.placescards = true
     const circles =  document.querySelectorAll('.blinking-circle')
     const sn = this
@@ -1004,11 +951,6 @@ methods: {
       }
       
     })
-    
-  // this.animateBox('.box1', 0);
-  // this.animateBox('.box2', 0.5);
-  // this.animateBox('.box3', 1);
-  // this.animateBox('.box4', 1.5);
 
   },
   animImg(){
@@ -1016,9 +958,9 @@ methods: {
   const boxes1 =  document.querySelectorAll('.boxes1')
   const boxes2 =  document.querySelectorAll('.boxes2')
   const boxes3 =  document.querySelectorAll('.boxes3')
-  var tl = gsap.timeline({repeat: -1 })
+  this.timeline = gsap.timeline({repeat: -1 })
 
-    tl.fromTo([box],
+    this.timeline.fromTo([box],
     {
       scale: 1,
       translateX: '0%',
@@ -1031,10 +973,11 @@ methods: {
     })
     
     
-    tl.to(boxes1,
+    this.timeline.to(boxes1,
     {
       
       scale: 1,
+      opacity: 1,
       stagger: 0.3,
       bottom: '8px',
       ease: Back.easeOut,
@@ -1042,7 +985,7 @@ methods: {
       
     })
     
-    tl.to([box],
+    this.timeline.to([box],
     {
       translateX: '-10%',
       translateY: '20%',
@@ -1052,17 +995,18 @@ methods: {
       // delay: 5
       
     })
-    tl.to(boxes2,
+    this.timeline.to(boxes2,
     {
       
       scale: 1,
+      opacity: 1,
       stagger: 0.3,
       bottom: '8px',
       ease: Back.easeOut,
       delay: -3
       
     })
-    tl.to([box],{
+    this.timeline.to([box],{
       translateX: '0%',
       translateY: '-15%',
       scale: 1.3,
@@ -1070,17 +1014,18 @@ methods: {
       duration:5,
       // delay: 10,
     })
-    tl.to(boxes3,
+    this.timeline.to(boxes3,
     {
       
       scale: 1,
+      opacity: 1,
       stagger: 0.3,
       bottom: '8px',
       ease: Back.easeOut,
       delay: -3
       
     })
-    tl.to([box],
+    this.timeline.to([box],
     {
       translateX: '0%',
       translateY: '0%',
@@ -1089,62 +1034,37 @@ methods: {
       // transformOrigin: 'center center',
       duration:5,
     })
-    tl.to(boxes1,
+    this.timeline.to(boxes1,
     {
       
       scale: 0,
+      opacity: 0,
       stagger: 0.2,
       yPercent: 80,
       
     })
-    tl.to(boxes2,
+    this.timeline.to(boxes2,
     {
       
       scale: 0,
       stagger: 0.2,
+      opacity: 0,
       yPercent: 80,
       delay: -0.2,
       
     })
-    tl.to(boxes3,
+    this.timeline.to(boxes3,
     {
       
       scale: 0,
       stagger: 0.2,
+      opacity: 0,
       yPercent: 80,
       delay: -0.2,
       
     })
   },
-   animateBox(box, delay) {
-   gsap.to(box,
-    {
-      opacity: 1,
-      scale: 1,
-      borderRadius: '23.0164px',
-      bottom: '8px',
-      ease: Bounce.easeOut,
-      duration: 1.3,
-      delay,
-      
-    }
-  );
-},
-   animateBoxes(box) {
-   gsap.to(box,
-    {
-      opacity: 1,
-      scale: 1,
-      borderRadius: '23.0164px',
-      bottom: '8px',
-      stagger: 0.1,
-      ease: Bounce.easeOut,
-      duration: 1.3,
-      delay,
-      
-    }
-  );
-},
+
     openfaq(i){
         if(this.openid == i){
             this.openid = null
