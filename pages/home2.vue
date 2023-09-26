@@ -69,7 +69,7 @@ How it works
               <keep-alive>
 
                 <v-img
-                width="30px"
+                width="30px" eager
                 style="border-radius: 5px !important;"
                 height="auto"
                 :src="n.image"

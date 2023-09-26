@@ -619,8 +619,7 @@ height: 176.08px; */
 position: relative;
 overflow: visible!important;
 z-index: 9999;
-background: rgba(255, 255, 255, 0.9)!important;
-backdrop-filter: blur(28.7705px);
+background: rgba(255, 255, 255)!important;
 border-radius: 23.0164px!important;
 }
 .list .v-avatar.v-avatar--density-default {
