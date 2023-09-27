@@ -52,7 +52,7 @@ How it works
         contain min-width="700px"  
         height="auto" @load="startall()"
         width="1442px"
-        src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_3000/v1690528044/map-base-1_qyacm7.png"
+        src="https://res.cloudinary.com/payhospi/image/upload/v1695833095/map-base_1jhfvk_qb0c3b.png"
         >
 
 
@@ -64,7 +64,7 @@ How it works
  :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
         >
         <div class="blinking-circle"></div>
-        <keep-alive>
+        <!-- <keep-alive> -->
         <div @click="showCountry(n.country)"  flat :class="n.class" class="pa-6 d-flex align-center justify-center africacard">
 
 
@@ -78,7 +78,7 @@ How it works
                 
                 <div  class="pointer"></div>
               </div> 
-            </keep-alive>
+            <!-- </keep-alive> -->
         </div>
 
 
@@ -584,9 +584,9 @@ export default {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/31/Flag_of_Burkina_Faso.svg/80px-Flag_of_Burkina_Faso.svg.png'
       },
       {
-        top:'35%',
+        top:'7%',
         class: 'boxes2',
-        right: '-3%',
+        left: '37%',
         country: 'Djibouti',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/34/Flag_of_Djibouti.svg/80px-Flag_of_Djibouti.svg.png?20230106121142'
       },
@@ -608,8 +608,8 @@ export default {
   
    
       {
-        bottom: '60%',
-        left: '34%', 
+        bottom: '62%',
+        left: '29%', 
         class: 'boxes3',
         country: 'Benin',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Flag_of_Benin.svg/80px-Flag_of_Benin.svg.png'
@@ -622,29 +622,29 @@ export default {
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Flag_of_Morocco.svg/80px-Flag_of_Morocco.svg.png'
       },
       {
-        bottom: '49%',
-        left: '39%', 
+        bottom: '52%',
+        left: '34%', 
         class: 'boxes3',
         country: 'Mauritius',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Flag_of_Mauritius.svg/80px-Flag_of_Mauritius.svg.png'
       },
       {
-        bottom: '40%',
-        right: '38%', 
+        bottom: '48%',
+        right: '37%', 
         class: 'boxes3',
         country: 'Malawi',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/d/d1/Flag_of_Malawi.svg/80px-Flag_of_Malawi.svg.png'
       },
       {
-        bottom: '30%',
-        left: '40%', 
+        bottom: '37%',
+        left: '38%', 
         class: 'boxes3',
         country: 'Cabo Verde',
         image: 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/38/Flag_of_Cape_Verde.svg/80px-Flag_of_Cape_Verde.svg.png'
       },
       {
         bottom: '22%',
-        right: '40%',
+        right: '43%',
         class: 'boxes3',
         country: 'South Sudan',
         image: 'https://upload.wikimedia.org/wikipedia/commons/f/ff/Flag_of_South_Sudan.png'
