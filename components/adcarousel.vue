@@ -2,17 +2,17 @@
           <div :style="'background-color:'">
 
 <v-carousel style="overflow: visible;"
-height="429" class="promo"
+height="529" class="promo"
 :show-arrows="false" hide-delimiter-background="" cycle>
 <v-carousel-item 
 v-for="n in 6"
 >
 <v-row>
     <v-col class="px-0" cols="12" md="6" lg="6">
-        <v-img class="heroimg" eager width="100%" height="auto" :src="image" ></v-img>
+        <v-img class="heroimg" cover eager width="100%" height="100%" :src="image" ></v-img>
     </v-col>
     <v-col class="px-0" cols="12" md="6" lg="6">
-        <v-card rounded="0" width="100%" height="100%" min-height="429" :color="color" flat class=" d-flex align-center">
+        <v-card rounded="0" width="100%" height="100%" min-height="529" :color="color" flat class=" d-flex align-center">
             <v-container   style="max-width:1400px" class="px-12">
                 <p style="color: var(--magnetic-green-2, #CDD6D4);
 font-size: 12px;

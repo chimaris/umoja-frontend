@@ -74,7 +74,7 @@ export default {
             var tl = gsap.timeline();
             tl.to([ selected ],
             {
-                 translateX: "-600px",
+                 translateX: "-800px",
                  translateY: "119px",
                   rotate: "-45deg",
                   duration: 0.5,
@@ -83,7 +83,7 @@ export default {
             })
             tl.to([ selected2 ],
             {
-                 translateX: "600px",
+                 translateX: "800px",
                  translateY: "119px",
                   rotate: "45deg",
                   duration: 0.5,
