@@ -41,17 +41,17 @@ How it works
     </v-col>
 </v-row>
     </v-container>
-    <div style="position: relative;overflow: hidden;">
+    <div class="d-flex align-center  justify-center" style="position: relative;overflow: hidden;">
       <div style="position: absolute;top:0;z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, #FDF5E7, transparent);"></div>
 <div style="position: absolute;bottom: 0px; z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, transparent, #fff);"></div>      
-    <div id="img" >
+    <div id="img" style="width: 1442px;" class=" mx-auto">
 
 <v-img eager
         style=" position: relative;"
         class="  mt-6"  min-height="50vh"
         contain min-width="700px"  
         height="auto" @load="startall()"
-        width="100%"
+        width="1442px"
         src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_3000/v1690528044/map-base-1_qyacm7.png"
         >
 
