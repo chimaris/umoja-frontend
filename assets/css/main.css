@@ -601,8 +601,7 @@ transform: rotate(45deg);
 z-index:-1;left: calc(50% - 27.045px);
 border-radius: 9px;
 bottom: -11px;
-background: rgba(255, 255, 255, 0.8)!important;
-backdrop-filter: blur(28.7705px);
+background: rgba(255, 255, 255)!important;
 
 }
 .howit .v-btn__content {
@@ -613,13 +612,11 @@ backdrop-filter: blur(28.7705px);
 }
 .africacard{
     scale: 0;bottom: -80px;
-/*  width: 250.88px;
-height: 176.08px; */
-position: relative;
-overflow: visible!important;
-z-index: 9999;
-background: rgba(255, 255, 255)!important;
-border-radius: 23.0164px!important;
+    position: relative;
+    overflow: visible!important;
+    z-index: 99;
+    background: rgba(255, 255, 255)!important;
+    border-radius: 23.0164px!important;
 }
 .list .v-avatar.v-avatar--density-default {
     margin-left: -15px;

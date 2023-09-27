@@ -44,11 +44,12 @@ How it works
     <div style="position: relative;overflow: hidden;">
       <div style="position: absolute;top:0;z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, #FDF5E7, transparent);"></div>
 <div style="position: absolute;bottom: 0px; z-index: 99;width: 100%; height: 100px; background: linear-gradient(to bottom, transparent, #fff);"></div>      
-    
+    <div id="img" >
+
 <v-img eager
         style=" position: relative;"
         class="  mt-6"  min-height="50vh"
-        contain min-width="700px"  id="img"
+        contain min-width="700px"  
         height="auto" @load="startall()"
         width="100%"
         src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_3000/v1690528044/map-base-1_qyacm7.png"
@@ -63,30 +64,29 @@ How it works
  :style="  'top:'+ n.top+';left:'+ n.left+';right:'+ n.right+';bottom:'+ n.bottom"
         >
         <div class="blinking-circle"></div>
-        <div @click="showCountry(n.country)"  flat :class="n.class" class=" africacard">
+        <keep-alive>
+        <div @click="showCountry(n.country)"  flat :class="n.class" class="pa-6 d-flex align-center justify-center africacard">
 
-            <div class="pa-6 d-flex align-center justify-center w-100">
-              <keep-alive>
 
                 <v-img
-                width="30px" eager
-                style="border-radius: 5px !important;"
+                width="30px" 
+                style="border-radius: 5px!important;"
                 height="auto"
                 :src="n.image"
                 />
-              </keep-alive>
                 
-            </div>
-       
-            <div  class="pointer"></div>
-          </div> 
+                
+                <div  class="pointer"></div>
+              </div> 
+            </keep-alive>
         </div>
 
 
 
       
 
-      </v-img>
+      </v-img>    </div>
+
     </div>
 </div>
 <div>
@@ -962,7 +962,7 @@ methods: {
   const boxes1 =  document.querySelectorAll('.boxes1')
   const boxes2 =  document.querySelectorAll('.boxes2')
   const boxes3 =  document.querySelectorAll('.boxes3')
-  this.timeline = gsap.timeline({repeat: -1 })
+  this.timeline = gsap.timeline({repeat: -1, repeatDelay: 4 })
 
     this.timeline.fromTo([box],
     {
