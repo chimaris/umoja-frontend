@@ -924,7 +924,7 @@ rating: 4,
     }
     },
     beforeUnmount(){
-      this.timeline.kill()
+      // this.timeline.kill()
     },
     mounted(){
   
