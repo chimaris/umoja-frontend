@@ -1,6 +1,9 @@
 html{
     font-family: Faktum, Roboto, 'sans-serif'!important;
 }
+.nishi{
+    font-family: Nishi, Roboto, 'sans-serif'!important;
+}
  .rts .v-rating__item .v-btn{
     scale: 0.6;
     margin-left: px;

@@ -1,5 +1,5 @@
 <template>
-    <div @click="$router.push('/user/signup')" class="tophead heroimg">
+    <div @click="$router.push('/user/signup')" class="tophead heroimg" id="topbar">
     <p class="text-white text-center pa-4">Sign up and GET 20% OFF for your first order🎉. 
 <span class="pointhere">Sign up now
 </span></p>
@@ -51,7 +51,7 @@
   <v-avatar size="35">
     <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img>
   </v-avatar></v-btn>
-  <v-btn v-else rounded="xl" to="/user/profile" class="ml-4" icon flat color="transparent">
+  <v-btn v-else rounded="xl" to="/user/profile/Account Settings" class="ml-4" icon flat color="transparent">
     <v-avatar size="35">
     <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img>
   </v-avatar></v-btn>
@@ -77,7 +77,7 @@
       </v-container>
     </div>
        <!-- <v-card height="500px" class=" d-flex align-end">{{ hasScrolledPastPoint }}</v-card> -->
-
+<tutorial />
   </template>
   <style>
 
@@ -94,49 +94,49 @@
   import { useUserStore } from '~/stores/userStore';
 
   export default {
-      data() {
-      return {
-        theme: useTheme(),
-        btn_radio: null,
-        searchmenu: false,
-   
-      };
+    data() {
+        return {
+            theme: useTheme(),
+            btn_radio: null,
+            searchmenu: false,
+        };
     },
     props: ['maxwidth', 'sticky'],
-  computed: {
-    sticky() {
-    return this.sticky !== undefined ? this.sticky : false
-  },
-  maxw() {
-    return this.maxwidth? this.maxwidth : '1400px'
-  },
-  inpwidth() {
-    return this.maxwidth == undefined ? '500px' : '295px'
-  },
-      urls() {
-        const loggedIn = this.isLoggedIn;
-        return [
-          {title:'Buy', route:'/user/login', disabled: false},
-          {title:'Sell', route:'/vendor/login', disabled: false},
-          {title:'Discovery', route:'/discovery_page', disabled: false},
-          {title:'Market Place', route:'/market_place', disabled: false},
-          {title:'ERP Solution', route:'/vendor/dashboard', disabled: false},
-          ]},
-      cartStore() {
-        return useCartStore();
-      },      
-      userStore() {
-        return useUserStore();
-      },      
-      isLoggedIn() {
-        return this.userStore.getIsLoggedIn? this.userStore.getIsLoggedIn : false;
-      },      
+    computed: {
+        sticky() {
+            return this.sticky !== undefined ? this.sticky : false;
+        },
+        maxw() {
+            return this.maxwidth ? this.maxwidth : '1400px';
+        },
+        inpwidth() {
+            return this.maxwidth == undefined ? '500px' : '295px';
+        },
+        urls() {
+            const loggedIn = this.isLoggedIn;
+            return [
+                { title: 'Buy', route: '/user/login', disabled: false },
+                { title: 'Sell', route: '/vendor/login', disabled: false },
+                { title: 'Discovery', route: '/discovery_page', disabled: false },
+                { title: 'Market Place', route: '/market_place', disabled: false },
+                { title: 'ERP Solution', route: '/vendor/dashboard', disabled: false },
+            ];
+        },
+        cartStore() {
+            return useCartStore();
+        },
+        userStore() {
+            return useUserStore();
+        },
+        isLoggedIn() {
+            return this.userStore.getIsLoggedIn ? this.userStore.getIsLoggedIn : false;
+        },
     },
     methods: {
-      toggleTheme() {
-        this.theme.global.name.value = this.theme.global.current.value.dark ? 'light' : 'dark';
-      },
+        toggleTheme() {
+            this.theme.global.name.value = this.theme.global.current.value.dark ? 'light' : 'dark';
+        },
     },
-    }
+}
   
   </script>

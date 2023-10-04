@@ -118,7 +118,7 @@ letter-spacing: -0.14px;" class="pr-8">  {{ n.body }}</p>
 </div>
 
 <div>
-    <v-container  style="max-width:1200px">
+    <v-container  id="discovery" style="max-width:1200px">
         <div class="d-flex mb-12 align-center">
 <p class="d-block" style="color: var(--magnetic-green-4, #2C6E63);
 font-size: 14px;
@@ -130,7 +130,7 @@ text-transform: uppercase;"> Our shopping category  </p>
     <v-divider></v-divider>
 
         </div>
-        <v-row>
+        <v-row >
             <v-col cols="12" lg="5">
                 <p style="color: var(--carbon-5, #2A2A2A);
 
