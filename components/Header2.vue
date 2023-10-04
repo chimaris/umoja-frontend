@@ -77,7 +77,7 @@
       </v-container>
     </div>
        <!-- <v-card height="500px" class=" d-flex align-end">{{ hasScrolledPastPoint }}</v-card> -->
-<tutorial />
+<!-- <tutorial /> -->
   </template>
   <style>
 
