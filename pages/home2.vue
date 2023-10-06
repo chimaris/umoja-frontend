@@ -1,5 +1,5 @@
 <template>
-<Header2 :maxwidth="'1200px'"/>
+<Header2  :maxwidth="'1200px'"/>
 <div class="pt-12" style="background: #FDF5E7;" >
     <v-container  style="max-width:1200px" class="mt-4">
      
@@ -29,7 +29,7 @@ line-height: 20px; ">
 Start Exploring
 </span>  
     </v-btn>
-    <v-btn color="#333" class="ml-3" size="large" variant="outlined" flat rounded="xl" width="163px">
+    <v-btn v-if="!tutorialbol || (loading && !tutorialbol)" :loading="loading" @click="startTutorial()" color="#333" class="ml-3" size="large" variant="outlined" flat rounded="xl" width="163px">
       <span style="color:  #333;
 font-size: 14px;
 font-weight: 600;
@@ -71,7 +71,7 @@ How it works
                 <v-img
                 width="30px" 
                 style="border-radius: 5px!important;"
-                height="auto"
+                height="auto" eager
                 :src="n.image"
                 />
                 
@@ -269,7 +269,7 @@ letter-spacing: -0.96px;">Cosmetics</p>
             >
             <v-row>
                 <v-col class="px-0" cols="12" md="6" lg="6">
-                    <v-img class="heroimg" eager width="100%" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690541372/rectangle-69_jzdwc3.png" ></v-img>
+                    <v-img class="heroimg" cover eager width="100%" height="auto" min-height='429' src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690541372/rectangle-69_jzdwc3.png" ></v-img>
                 </v-col>
                 <v-col class="px-0" cols="12" md="6" lg="6">
                     <v-card rounded="0" width="100%" height="100%" min-height="429" color="green" flat class=" d-flex align-center">
@@ -478,6 +478,8 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 </style>
 <script>
 import { gsap, Bounce, Back, CSSPlugin } from 'gsap';
+import { useTutorialStore } from '~/stores/tutorialStore';
+import {Howl, Howler} from 'howler';
 
 export default {
   data() {
@@ -927,11 +929,40 @@ rating: 4,
       // this.timeline.kill()
     },
     mounted(){
-  
+        // this.tutorialStore.init()
       gsap.registerPlugin(CSSPlugin);
 
     },
 methods: {
+  voicenotesloader() {
+
+const voiceArray = this.databank.map((item) => item.audio);
+let loadedAudio = 0;
+const sn = this
+
+function trackProgress() {
+    loadedAudio++;
+    if (loadedAudio === voiceArray.length) {
+      sn.tutorialStore.resetLoading()
+      sn.tutorialStore.setTutorial()
+        // sn.startall(0);
+      
+    }
+}
+
+for (let i = 0; i < voiceArray.length; i++) {
+    const tempAudio = new Audio();
+    tempAudio.addEventListener('canplaythrough', trackProgress, false);
+    tempAudio.src = voiceArray[i];
+}
+
+},
+  startTutorial(){
+    this.tutorialStore.setLoading()
+      // Call the setTutorial action
+this.voicenotesloader()
+  },      
+  
   showCountry(x){
     this.selectedCountry = x
   },
@@ -1082,5 +1113,21 @@ var newText = text.length > 40 ? text.slice(0, 40) +'...' : text
 return newText
 }
 },
+
+    computed: {
+        databank(){
+                return this.tutorialStore.databank;
+        },
+        tutorialbol(){
+                return this.tutorialStore.tutorial;
+        },
+        loading(){
+                return this.tutorialStore.loading;
+        },
+        tutorialStore() {
+        return useTutorialStore();
+        
+        },
+}
 }
 </script>

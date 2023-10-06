@@ -14,7 +14,7 @@ letter-spacing: -0.03em;
 /* Carbon/4 */
 
 color: #333333;">Welcome Back</h1>
-            <p class="font-weight-medium mb-6 mt-1">Don't have an account? <span @click="$router.push('/vendor/registeration/form')" style="cursor: pointer;color:#0076FF">Sign Up</span></p>
+            <p class="font-weight-medium mb-6 mt-1">Don't have an account? <span @click="$router.push('/vendor/registeration/form/Companys Information')" style="cursor: pointer;color:#0076FF">Sign Up</span></p>
 
 
         <p class="inputLabel">Email Address</p>             
@@ -42,6 +42,7 @@ Login
         </v-card>
     </div>
    </div> 
+   <tutorial />
 </template>
 <script>
 export default {

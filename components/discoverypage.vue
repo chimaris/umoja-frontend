@@ -127,7 +127,7 @@ v-model="chip"
 <div style="padding: 100px 0;">
 <v-row>
                 <v-col class="px-0" cols="12" md="6" lg="6">
-                    <v-img eager width="100%" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/v1690560694/rectangle-69_u12j2b.png" ></v-img>
+                    <v-img eager cover width="100%" min-height="429"  height="auto" src="https://res.cloudinary.com/payhospi/image/upload/v1690560694/rectangle-69_u12j2b.png" ></v-img>
                 </v-col>
                 <v-col class="px-0" cols="12" md="6" lg="6">
                     <v-card rounded="0" width="100%" height="100%" min-height="429" color="#F8B735" flat class=" d-flex align-center">
@@ -184,7 +184,7 @@ Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
                     </v-col>
                 <v-col class="px-0" cols="12" md="6" lg="6">
               
-                    <v-img eager cover width="100%" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/v1690560991/rectangle-69_vgfhlc.png" ></v-img>
+                    <v-img min-height="429"  eager cover width="100%" height="auto" src="https://res.cloudinary.com/payhospi/image/upload/v1690560991/rectangle-69_vgfhlc.png" ></v-img>
                 </v-col>
             </v-row>
     </div>

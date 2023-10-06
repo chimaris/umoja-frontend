@@ -113,6 +113,7 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
       </v-col>
     </v-row>
   </div>
+  <tutorial />
 </template>
 <style>
 .maincont.v-col-md-12 {
@@ -123,14 +124,22 @@ color: #1A1D1F;" class="text-capitalize">{{ window }}</p>
 export default {
   data() {
     return {
-      window: "Homepage",
+     
       sidebar: true,
       edit: true,
     };
   },
+  computed: {
+    window: {
+      get() {
+        return this.$route.params.name ? this.$route.params.name : 'Homepage';
+      },
+     
+    },
+  },
   methods: {
     changePage(n) {
-      this.window = n;
+      this.$router.push(`/vendor/dashboard/${n}`);
     },
     sideFn() {
       this.sidebar = false;

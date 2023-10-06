@@ -1,5 +1,5 @@
 <template>
-    <div v-if="showBaloon" class="  d-flex  w-100" style="margin-top:150px ;background: #D92334;height: 49px;position: relative;
+    <div v-if="showBaloon"  class="  d-flex  w-100" style="margin-top:150px ;background: #D92334;height: 49px;position: relative;
 ">
   <p style="color: #FFF;width: 100%;height: 100%;
   font-size: 16px;background: #D92334;
@@ -13,7 +13,7 @@
 
 <img style="position: absolute;bottom: 0 ;right:0px;width: 128px;height: auto;" src="https://res.cloudinary.com/payhospi/image/upload/v1695048168/flag-2-b-gha-2_tjp2yv.png" alt="" />
 </div>
-    <v-container  style=" position: relative;" :style="'max-width:'+maxw" :class="showBaloon? '':'py-12'" class="pt-0 px-0 footbot" fluid>
+    <v-container id="footer" style=" position: relative;" :style="'max-width:'+maxw" :class="showBaloon? '':'py-12'" class="pt-0 px-0 footbot" fluid>
 
 <v-card color="" :style="!showBaloon? 'margin-top:100px':''" flat class="rounded-xl px-3" height="auto" min-height="100vh">
  

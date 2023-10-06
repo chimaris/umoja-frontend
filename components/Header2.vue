@@ -77,7 +77,7 @@
       </v-container>
     </div>
        <!-- <v-card height="500px" class=" d-flex align-end">{{ hasScrolledPastPoint }}</v-card> -->
-<!-- <tutorial /> -->
+<tutorial />
   </template>
   <style>
 
@@ -119,7 +119,7 @@
                 { title: 'Sell', route: '/vendor/login', disabled: false },
                 { title: 'Discovery', route: '/discovery_page', disabled: false },
                 { title: 'Market Place', route: '/market_place', disabled: false },
-                { title: 'ERP Solution', route: '/vendor/dashboard', disabled: false },
+                { title: 'ERP Solution', route: '/vendor/dashboard/Homepage', disabled: false },
             ];
         },
         cartStore() {
