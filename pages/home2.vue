@@ -34,7 +34,7 @@ Start Exploring
 font-size: 14px;
 font-weight: 600;
 line-height: 20px; ">
-How it works
+Tutorial
 </span>  
     </v-btn>
 </div>

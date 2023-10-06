@@ -199,13 +199,13 @@ watch: {
             } else {
                 sn.scrollHeights = sn.scrollTarget.scrollHeight
             }
-            let duration = 20; // Duration in seconds
+            let duration = 35; // Duration in seconds
             if (this.scrollHeights >= 8500) {
-        duration = 20;
+        duration = 35;
       } else if (this.scrollHeights >= 6000) {
-        duration = 15;
+        duration = 25;
       } else if (this.scrollHeights >= 3000) {
-        duration = 8;
+        duration = 14;
       } else {
         duration = 5;
       }
@@ -307,10 +307,10 @@ watch: {
                 onend: () => {
                     this.sound2.unload()
                     this.donezo.push(1)
-                    if (this.donezo.length >= 3) {
+                    if (this.donezo.length >= 2) {
                         setTimeout(() => {
                             this.nextRoute()
-                        }, 400);
+                        }, 2000);
                     }
                 }
             });
