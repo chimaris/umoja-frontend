@@ -115,7 +115,7 @@ vendorShow() {
         mockLoading() {
             setTimeout(() => {
                 this.loaded = true;
-            }, 2000);
+            }, 1000);
         },
         toggleLike(item, index) {
             this.likedStore.toggleLike(item, index);

@@ -1,6 +1,6 @@
 <template >
     <div v-show="tutorialbol" style="z-index: 99999; position: fixed;bottom: 40px;right: 30px;" class="scroll">
-        <div :ripple="false" @click="animateBtn(menubol)" :style="'width:' + ('64px')" style="cursor: pointer; z-index: 99;height: 200px; background-color: transparent;
+        <div :ripple="false"  :style="'width:' + ('64px')" style="cursor: pointer; z-index: 99;height: 200px; background-color: transparent;
  background-repeat: no-repeat;   background-position: right;overflow: hidden;
  position: relative; right: 3px; " class=" py-4 px-6 card d-flex  align-center">
             <img height="200" width="30" style="position: absolute;left: 0;"
@@ -22,12 +22,12 @@
     margin: auto;
     margin-top: 9px;">{{ count }}</h1>
             </div>
-            <div v-show="!timer" style="position: absolute;height: 150px;width: calc(100% - 48px);overflow-y: scroll;"
+            <div v-show="!timer" style="position: absolute;height: 150px;width: calc(500px - 48px);overflow-y: scroll;"
                 class="d-flex  align-end pa-3">
                 <p style="  width: 500px!important;   position: ;
     bottom: ; font-size: 20px;" v-html="text" class="rower nishi"> </p>
             </div>
-            <img height="200" width="30" style="position: absolute;right: 0;"
+            <img height="200" width="30" style="position: absolute;right: -2px;"
                 src="https://res.cloudinary.com/payhospi/image/upload/v1696060847/Paper_right_llq8uq.png" class="right" />
         </div>
 
@@ -330,7 +330,7 @@ watch: {
 
             const sn = this
             if (!this.sound) this.mksound()
-            this.text = '';
+            // this.text = '';
             const img = document.querySelector('.img');
             // const img2 = document.querySelector('.img2');
             const card = document.querySelector('.card');
@@ -347,7 +347,6 @@ watch: {
                             if (!sn.muted) sn.playVoiceNote(sn.res.audio)
                             sn.aimateText()
                         }
-                        
                     }});
 
             tl.fromTo([card],
