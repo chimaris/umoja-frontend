@@ -216,7 +216,6 @@ export const useTutorialStore = defineStore({
     },
     // Reset the tutorial state and remove it from localStorage
     resetTutorial() {
-        alert(9)
       this.tutorial = false;
      
       // localStorage.removeItem('tutorial');
