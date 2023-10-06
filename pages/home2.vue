@@ -29,7 +29,7 @@ line-height: 20px; ">
 Start Exploring
 </span>  
     </v-btn>
-    <v-btn v-if="!tutorialbol || (loading && !tutorialbol)" :loading="loading" @click="startTutorial()" color="#333" class="ml-3" size="large" variant="outlined" flat rounded="xl" width="163px">
+    <v-btn :disabled="!(!tutorialbol || (loading && !tutorialbol))" :loading="loading" @click="startTutorial()" color="#333" class="ml-3" size="large" variant="outlined" flat rounded="xl" width="163px">
       <span style="color:  #333;
 font-size: 14px;
 font-weight: 600;

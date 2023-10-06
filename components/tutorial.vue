@@ -126,10 +126,10 @@ export default {
 watch: {   
     tutorialbol(x) {
         if (this.$route.path == '/home2') {
-
+            
             if(x) this.startTutorial()
         }
-        this.tutorialStore.setTutorial()
+ 
 },
 },
     mounted() {
@@ -141,6 +141,7 @@ watch: {
     
      this.startTutorial()
  } 
+
  
     },
     methods: {
@@ -169,13 +170,14 @@ watch: {
         async resetTutorial() {
             await this.sound.stop(); // Call the setTutorial action
             await this.animateBtn(true)
-            this.tutorialStore.resetTutorial()
-
+            this.started = false
             await this.sound2.stop(); // Call the setTutorial action
             if (this.scrollTimeline)this.scrollTimeline.kill()
         },
         async startTutorial() {
             if (this.started) return
+            this.tutorialStore.setTutorial()
+
             this.started = true
             this.scrollTarget = document.documentElement; // You can also use document.body
             await gsap.to(this.scrollTarget, { scrollTop: 0, })
