@@ -211,7 +211,7 @@ watch: {
       } else {
         duration = 5;
       }
-            const delay = this.$route.path == '/home2' ? 4: 1;    // Delay in seconds
+            const delay = this.$route.path == '/home2' ? 4: 2;    // Delay in seconds
             // Create a GSAP timeline for the scrolling animation
             const scrollTimeline = gsap.timeline();
             this.scrollTimeline = scrollTimeline
@@ -314,9 +314,10 @@ watch: {
                     this.sound2.unload()
                     this.donezo.push(1)
                     if (this.donezo.length >= 2) {
+                        var timeout = this.donezo.length >= 3? 800: 2000
                         setTimeout(() => {
                             this.nextRoute()
-                        }, 2000);
+                        }, timeout);
                     }
                 }
             });
