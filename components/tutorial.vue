@@ -297,7 +297,7 @@ watch: {
         mksound() {
             this.sound = new Howl({
                 src: ['https://res.cloudinary.com/payhospi/video/upload/v1696066412/gamevideo-item-turning-page-paper-sound-effect-186184608_nw_prev33_ce5igm.wav'],
-                volume: 0.4,
+                volume: 0.3,
             });
         },
         playVoiceNote(x) {
@@ -315,7 +315,6 @@ watch: {
                 }
             });
             if (this.sound2)this.sound2.stop()
-           
             this.sound2.play()
         },
 
