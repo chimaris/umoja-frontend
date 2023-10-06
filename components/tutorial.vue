@@ -70,7 +70,7 @@ export default {
             sound2: null,
             started: false,
             scrollTarget: null,
-
+            done: false,
             donezo: [],
             scrollHeights: 0,
 
@@ -126,10 +126,10 @@ export default {
 watch: {   
     tutorialbol(x) {
         if (this.$route.path == '/home2') {
-            
-            if(x) this.startTutorial()
+
+            if(x) this.startTutorial(true)
         }
- 
+  
 },
 },
     mounted() {
@@ -141,21 +141,10 @@ watch: {
     
      this.startTutorial()
  } 
-
  
     },
     methods: {
-    
-       async animateTutorial(x) {
-            const sn = this
-            if (x) {
-                   
-                }else{
-                    ; // Call the setTutorial action
 
-                }
-     
-        },
         mute() {
             this.muted = !this.muted
             if (this.muted) {
@@ -171,13 +160,15 @@ watch: {
             await this.sound.stop(); // Call the setTutorial action
             await this.animateBtn(true)
             this.started = false
+            
             await this.sound2.stop(); // Call the setTutorial action
             if (this.scrollTimeline)this.scrollTimeline.kill()
         },
-        async startTutorial() {
+        async startTutorial(x) {
+            if (x) {
+        this.tutorialStore.setTutorial()
+    }
             if (this.started) return
-            this.tutorialStore.setTutorial()
-
             this.started = true
             this.scrollTarget = document.documentElement; // You can also use document.body
             await gsap.to(this.scrollTarget, { scrollTop: 0, })
@@ -341,6 +332,7 @@ watch: {
             var tl = gsap.timeline({   onComplete: () => {
                         sn.text = ''
                         if (x) {
+                         
                             sn.tutorialStore.resetTutorial()
                         }  else{
                             if (!sn.muted) sn.playVoiceNote(sn.res.audio)
