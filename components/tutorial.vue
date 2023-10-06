@@ -158,8 +158,8 @@ watch: {
 
         async resetTutorial() {
             await this.sound.stop(); // Call the setTutorial action
-            await this.animateBtn(true)
             this.started = false
+            await this.animateBtn(true)
             
             await this.sound2.stop(); // Call the setTutorial action
             if (this.scrollTimeline)this.scrollTimeline.kill()
@@ -333,7 +333,10 @@ watch: {
                         sn.text = ''
                         if (x) {
                          
-                            sn.tutorialStore.resetTutorial()
+                         if (!sn.started) {
+                            
+                             sn.tutorialStore.resetTutorial()
+                         }  
                         }  else{
                             if (!sn.muted) sn.playVoiceNote(sn.res.audio)
                             sn.aimateText()
