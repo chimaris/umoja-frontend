@@ -137,7 +137,7 @@ watch: {
                 src: ['https://res.cloudinary.com/payhospi/video/upload/v1696066412/gamevideo-item-turning-page-paper-sound-effect-186184608_nw_prev33_ce5igm.wav'],
             })
 //   this.voicenotesloader();
- if(this.tutorialbol && this.$route.path != '/home2'){
+ if(this.tutorialbol ){
     
      this.startTutorial()
  } 
@@ -167,11 +167,12 @@ watch: {
         },
 
         async resetTutorial() {
-            await this.sound.mute(); // Call the setTutorial action
+            await this.sound.stop(); // Call the setTutorial action
             await this.animateBtn(true)
-           
+            this.tutorialStore.resetTutorial()
+
             await this.sound2.stop(); // Call the setTutorial action
-            this.scrollTimeline.kill()
+            if (this.scrollTimeline)this.scrollTimeline.kill()
         },
         async startTutorial() {
             if (this.started) return
@@ -247,8 +248,8 @@ watch: {
             )
         },
         previous() {
-            this.scrollTimeline.kill()
-            this.sound2.stop()
+            if (this.scrollTimeline)this.scrollTimeline.kill()
+            if (this.sound2)this.sound2.stop()
         
             this.animateBtn(true)
             setTimeout(() => {
@@ -256,8 +257,8 @@ watch: {
             }, 700);
         },
         nextRoute() {
-            this.scrollTimeline.kill()
-            this.sound2.stop()
+            if (this.scrollTimeline)this.scrollTimeline.kill()
+            if (this.sound2)this.sound2.stop()
             this.animateBtn(true)
             setTimeout(() => {
                 this.$router.push(this.nextR.route)
@@ -320,7 +321,7 @@ watch: {
                     }
                 }
             });
-            this.sound2.stop()
+            if (this.sound2)this.sound2.stop()
            
             this.sound2.play()
         },
