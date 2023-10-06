@@ -209,7 +209,7 @@ watch: {
             if (this.scrollHeights >= 8500) {
         duration = 20;
       } else if (this.scrollHeights >= 6000) {
-        duration = 12;
+        duration = 15;
       } else if (this.scrollHeights >= 3000) {
         duration = 8;
       } else {
