@@ -69,6 +69,8 @@ export default {
             sound: null,
             sound2: null,
             started: false,
+            nextBolean: false,
+            prevBolean: false,
             scrollTarget: null,
             done: false,
             donezo: [],
@@ -241,6 +243,8 @@ watch: {
             )
         },
         previous() {
+            if (this.prevBolean) return
+            this.prevBolean = true
             if (this.scrollTimeline)this.scrollTimeline.kill()
             if (this.sound2)this.sound2.stop()
         
@@ -250,6 +254,8 @@ watch: {
             }, 700);
         },
         nextRoute() {
+            if (this.nextBolean) return
+            this.nextBolean = true
             if (this.scrollTimeline)this.scrollTimeline.kill()
             if (this.sound2)this.sound2.stop()
             this.animateBtn(true)
