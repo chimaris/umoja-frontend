@@ -377,9 +377,9 @@ watch: {
                     duration: 0.5,
                     delay: 0,
                     reversed: x,
-                    onStart: () => {
-                        if (!this.muted) this.sound.play()
-                    },
+                    // onStart: () => {
+                    //     // if (!this.muted) this.sound.play()
+                    // },
                     ease: Back.easeOut.config(1.7)
                 })
 
