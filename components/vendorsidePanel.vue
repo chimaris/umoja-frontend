@@ -1,7 +1,7 @@
 <template>
         
                 <v-card width="calc(100% - 5px)" height="100vh" class="rounded-0  p style-0" flat="" color="#F6F7F9" min="">
-                <div style="    position: absolute;
+                <div   style="    position: absolute;
     width: 100%;
     z-index: 99;
     left: 0px;
@@ -42,9 +42,9 @@ color: #596066;">Nweke Franklin</p>
         </v-list-item>
       </v-list>
     </v-menu>                  </v-slide-x-transition>
-  <div :style="!sidebar? 'height: 78vh':'height: 70vh'" class="scroll-container" style="top:32px;position: relative;overflow-y: scroll;">
+  <div :style="!sidebar? 'height: 78vh':'height: 70vh'" id="menuV" class="scroll-container"  style="top:32px;position: relative;overflow-y: scroll;">
 
-<div v-for="(item, i) in items" :key="i" class="pb-8">
+<div v-for="(item, i) in items" :key="i" class="pb-8" >
     <p v-show="sidebar" class="mb-3 px-8 text-capitalize style-1">{{item.name}}</p>
   <div  @click="selectItem(n.text)" class="align-center px-8 text-capitalize  py-2  style-2" v-for="(n, i) in item.list" :key="i">
     <div class="d-flex align-center justify-space-between">

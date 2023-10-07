@@ -7,7 +7,7 @@
         :md="!sidebar ? '3': '24'" 
         class="pb-0 pt-0 dash">
         <v-slide-x-transition>
-          <VendorsidePanel :window="window" :sidebar="sidebar" @sideFn="sideFn" @changePage="changePage" />
+          <VendorsidePanel  :window="window" :sidebar="sidebar" @sideFn="sideFn" @changePage="changePage" />
         </v-slide-x-transition>
       </v-col>
 
@@ -16,7 +16,7 @@
     height: 102vh;transition: all 0.2s ease-out;" class="dash maincont" :class="sidebar ? 'px-0 ' : 'px-0'" cols="12"
         :md="!sidebar ? '12' : '9'">
 
-        <v-card style="overflow: scroll;" min-height="100vh" height="100%" :class="!(window == 'dash') ? '' : 'pr-8 py-8'"
+        <v-card style="overflow: scroll;" id="mainsect" min-height="100vh" height="100%" :class="!(window == 'dash') ? '' : 'pr-8 py-8'"
           class=" " flat color="#fff" min>
           <div style="position: fixed;z-index: 99;width: 100%;">
             <div style="height: 67px;

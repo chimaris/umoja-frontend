@@ -207,6 +207,8 @@ watch: {
             await this.scrollTarget.scrollTo({ x: 0, y: 0, behavior: 'smooth' });
             const sn = this
             sn.scrollTarget = document.documentElement; // You can also use document.body
+            const menuV = document.getElementById('menuv'); // You can also use document.body
+            const mainsect = document.getElementById('mainsect'); // You can also use document.body
             gsap.to(sn.scrollTarget, { scrollTop: 0, })
             if (document.getElementById('footer') !== null) {
                 sn.scrollHeights = sn.scrollTarget.scrollHeight - (document.getElementById('footer').offsetHeight + 300)
@@ -235,14 +237,14 @@ watch: {
             const scrollTimeline = gsap.timeline();
             this.scrollTimeline = scrollTimeline
             // Add a scroll animation to the timeline
-            scrollTimeline.to(sn.scrollTarget,
+            scrollTimeline.to([sn.scrollTarget, mainsect, menuV],
                 {
                     scrollTop: sn.scrollHeights, // Scroll to the bottom
                     duration: duration,  // Duration of the scroll animation
                     delay: delay, // Easing function (optional)
 
                 });
-            scrollTimeline.to(this.scrollTarget,
+            scrollTimeline.to([this.scrollTarget, mainsect, menuV],
                 {
                     scrollTop: 0,
                     duration: 5,
