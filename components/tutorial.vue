@@ -1,5 +1,5 @@
 <template >
-    <div v-show="tutorialbol"  style="width: 100vw;height: 100vh;position: fixed;top: 0; left: 0;z-index: 9999;">
+    <div v-show="tutorialbol"  style=" box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;width: 100vw;height: 100vh;position: fixed;top: 0; left: 0;z-index: 9999;">
 
     </div>
     <div v-show="tutorialbol" style="z-index: 99999; position: fixed;bottom: 40px;right: 30px;" class="scroll">
