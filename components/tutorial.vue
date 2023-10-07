@@ -1,4 +1,7 @@
 <template >
+    <div v-show="tutorialbol"  style="width: 100vw;height: 100vh;position: fixed;top: 0; left: 0;z-index: 9999;">
+
+    </div>
     <div v-show="tutorialbol" style="z-index: 99999; position: fixed;bottom: 40px;right: 30px;" class="scroll">
         <div :ripple="false"  :style="'width:' + ('64px')" style="cursor: pointer; z-index: 99;height: 200px; background-color: transparent;
  background-repeat: no-repeat;   background-position: right;overflow: hidden;
@@ -217,15 +220,19 @@ watch: {
       } else {
         duration = 15;
       }
-            const delay = this.$route.path == '/home2' ? 18: 2;    // Delay in seconds
+            const delay = this.$route.path == '/home2' ? 18: 2; 
+            const from = this.$route.path == '/home2' ? 500: 0; 
+            if(this.$route.path == '/home2'){
+                setTimeout(() => {
+                    gsap.to(sn.scrollTarget, { scrollTop: 500, duration:1.5 })
+                    
+                }, 8000);   // Delay in seconds
+            }
             // Create a GSAP timeline for the scrolling animation
             const scrollTimeline = gsap.timeline();
             this.scrollTimeline = scrollTimeline
             // Add a scroll animation to the timeline
-            scrollTimeline.fromTo(sn.scrollTarget,
-                {
-                    scrollTop: 0,
-                },
+            scrollTimeline.to(sn.scrollTarget,
                 {
                     scrollTop: sn.scrollHeights, // Scroll to the bottom
                     duration: duration,  // Duration of the scroll animation
