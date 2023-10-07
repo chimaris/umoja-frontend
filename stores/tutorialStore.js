@@ -44,6 +44,12 @@ export const useTutorialStore = defineStore({
       function: `Discover Africa: On the Umoja Discovery Page, immerse yourself in African cultures. Filter by countries to learn about diverse cultures, with vendors sharing videos, images, and articles related to their businesses, fostering connections.`,
       audio: 'https://res.cloudinary.com/payhospi/video/upload/v1696590248/umoja%20audio/07_-_Discover_Africa_1_cicgvh.wav'
   },
+//   {
+//       description : `With the Umoja discovery page, we offer our users a creative platform, where they can explore more than just the vendor product but also learn about the different African cultures.`,
+//       route: `/market_place`,
+//       function: `Discover Africa: On the Umoja Discovery Page, immerse yourself in African cultures. Filter by countries to learn about diverse cultures, with vendors sharing videos, images, and articles related to their businesses, fostering connections.`,
+//       audio: 'https://res.cloudinary.com/payhospi/video/upload/v1696590248/umoja%20audio/07_-_Discover_Africa_1_cicgvh.wav'
+//   },
   {
       description : `For the user to explore and interact with our vendors in the Umoja platform, we provided our users with a personalized profile.`,
       route: `/user/profile/Account Settings`,

@@ -34,12 +34,12 @@
 
     </div>
     <div  style="z-index: 99999; position: fixed;bottom: 5px;right: 30px;"
-        class="d-flex justify-space-between btns ">
+        class="d-flex justify-space-between align-center btns ">
         <v-btn v-show="tutorialbol" size="x-small" @click="resetTutorial()" class="btns ml-2" rounded="xl" color="red"
             icon="mdi mdi-close"></v-btn>
         <!-- <v-btn v-show="tutorialbol" size="x-small" @click="mute()" class="btns ml-2" rounded="xl" color="black"
             :icon="muted ? 'mdi mdi-volume-high' : 'mdi mdi-volume-off'"></v-btn> -->
-        <v-btn v-show="tutorialbol" size="small" class="btns py-1 ml-2" @click="!scrollbol ? stopscroll() : continuescroll()" rounded="xl"
+        <v-btn v-show="tutorialbol" size="small" class="btns ml-2" @click="!scrollbol ? stopscroll() : continuescroll()" rounded="xl"
             :color="!scrollbol ? 'grey' : 'black'">{{!scrollbol? 'manual scrolling': 'auto scrolling'}}</v-btn>
         <v-btn v-show="tutorialbol" size="x-small" class="btns ml-2" @click="previous()" rounded="xl" color="black"
             icon="mdi mdi-arrow-left"></v-btn>
@@ -78,7 +78,13 @@ export default {
 
         }
     },
-
+beforeUnmount() {
+   if(this.sound) this.sound.stop()
+   if(this.sound) this.sound.unload()
+   if(this.sound2) this.sound2.stop()
+   if(this.sound2) this.sound2.unload()
+   if(this.scrollTimeline) this.scrollTimeline.kill()
+},
     computed: {
         tutorialbol() {
             return this.tutorialStore.tutorial;
@@ -197,21 +203,21 @@ watch: {
             sn.scrollTarget = document.documentElement; // You can also use document.body
             gsap.to(sn.scrollTarget, { scrollTop: 0, })
             if (document.getElementById('footer') !== null) {
-                sn.scrollHeights = sn.scrollTarget.scrollHeight - document.getElementById('footer').offsetHeight
+                sn.scrollHeights = sn.scrollTarget.scrollHeight - (document.getElementById('footer').offsetHeight + 300)
             } else {
                 sn.scrollHeights = sn.scrollTarget.scrollHeight
             }
-            let duration = 35; // Duration in seconds
+            let duration = 45; // Duration in seconds
             if (this.scrollHeights >= 8500) {
-        duration = 35;
+        duration = 45;
       } else if (this.scrollHeights >= 6000) {
-        duration = 25;
+        duration = 35;
       } else if (this.scrollHeights >= 3000) {
-        duration = 14;
+        duration = 20;
       } else {
-        duration = 5;
+        duration = 15;
       }
-            const delay = this.$route.path == '/home2' ? 4: 2;    // Delay in seconds
+            const delay = this.$route.path == '/home2' ? 18: 2;    // Delay in seconds
             // Create a GSAP timeline for the scrolling animation
             const scrollTimeline = gsap.timeline();
             this.scrollTimeline = scrollTimeline
@@ -239,7 +245,7 @@ watch: {
                             }, 800);
                         }
                     }
-                }
+                } 
             )
         },
         previous() {
