@@ -1,7 +1,10 @@
 <template >
-    <div v-show="tutorialbol"  style=" box-shadow: 0 0 200px rgba(0,0,0,0.9) inset;width: 100vw;height: 100vh;position: fixed;top: 0; left: 0;z-index: 9999;">
+    <v-fade-transition>
 
-    </div>
+        <div v-show="tutorialbol"  id="boxshadow" style=" box-shadow: 0 0 200px 20px rgba(0,0,0,0.9) inset;width: 100vw;height: 100vh;position: fixed;top: 0; left: 0;z-index: 9999;">
+            
+        </div>
+    </v-fade-transition>
     <div v-show="tutorialbol" style="z-index: 99999; position: fixed;bottom: 40px;right: 30px;" class="scroll">
         <div :ripple="false"  :style="'width:' + ('64px')" style="cursor: pointer; z-index: 99;height: 200px; background-color: transparent;
  background-repeat: no-repeat;   background-position: right;overflow: hidden;
