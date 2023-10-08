@@ -109,17 +109,18 @@ export default {
         },
         stageFn(item) {
             this.formSect = item.id;
+            // alert(9)
+            this.$router.push('/vendor/registeration/form/'+item.name)
             this.window = item.name;
             this.stage = item.name;
-            this.$router.push('/vendor/registeration/form/'+this.window)
 
         },
         submit() {
-
-        //    parseInt(this.window) + 1;
-            this.formSect = parseInt(this.formSect) + 1;
-            this.window =   this.stage = this.items[this.formSect - 1].name;
-this.$router.push('/vendor/registeration/form'+this.window)
+       
+            // this.formSect = parseInt(this.formSect) + 1;
+            this.window = this.stage = this.items[this.formSect].name;
+            // alert(this.stage)
+            this.$router.push('/vendor/registeration/form/'+this.stage)
             window.scrollTo(0, 0);
             
         }
