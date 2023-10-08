@@ -33,7 +33,7 @@ color: #333333;">Welcome Back</h1>
               Forgot Password?
               </v-btn>  
   
-          <v-btn to="/vendor/dashboard" block color="green" flat size="x-large" class="rounded-lg mt-6"> 
+          <v-btn to="/vendor/dashboard/Homepage" block color="green" flat size="x-large" class="rounded-lg mt-6"> 
             <span style="text-transform: none;">
 
 Login
