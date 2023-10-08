@@ -91,6 +91,7 @@ export default {
         };
     },
     mounted(){
+        window.scrollTo(0, 0);
         this.window = this.$route.params.name ? this.$route.params.name : 'Companys Information'
         this.getIdFromName(this.window)
     },
@@ -118,10 +119,9 @@ export default {
         submit() {
        
             // this.formSect = parseInt(this.formSect) + 1;
-            this.window = this.stage = this.items[this.formSect].name;
-            // alert(this.stage)
+            this.stage = this.items[this.formSect].name;
             this.$router.push('/vendor/registeration/form/'+this.stage)
-            window.scrollTo(0, 0);
+            // alert(this.stage)
             
         }
     }
