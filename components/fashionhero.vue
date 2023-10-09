@@ -52,12 +52,12 @@ transform: rotate(5.682deg);border-radius: 16.127px;" >
 
 
 </div>
-<v-img v-if="(i % 2) !== 0 "  cover class="spiral3" style="opacity: 0; position: absolute; z-index: 99;   
+<v-img v-if="(i % 2) !== 0 "  eager cover class="spiral3" style="opacity: 0; position: absolute; z-index: 99;   
     top: 18%;
     right: -29px;height: auto;
 width: 34%;"  src=" https://res.cloudinary.com/payhospi/image/upload/v1693882765/frame_bmfaja.png" 
 ></v-img>
-<v-img v-else cover class="spiral3" style="opacity: 0; position: absolute; z-index: 99;    
+<v-img v-else eager cover class="spiral3" style="opacity: 0; position: absolute; z-index: 99;    
       bottom: -10%;
     left: 24%;
 height: auto;
