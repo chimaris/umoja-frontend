@@ -4,7 +4,7 @@
 <div  class="mb-4 d-flex ">
 
      <v-avatar size="45">
-         <v-img :src="item.vendorImg"></v-img>
+         <v-img eager :src="item.vendorImg"></v-img>
      </v-avatar>
 
  <div  class="pl-1" style="min-width: 0;">
