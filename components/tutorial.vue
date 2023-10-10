@@ -227,12 +227,11 @@ watch: {
       }
             const delay = this.$route.path == '/home2' ? 18: 2; 
             const from = this.$route.path == '/home2' ? 500: 0; 
-            if(this.$route.path == '/home2' && this.started){
-                setTimeout(() => {
+            setTimeout(() => {
+                    if(this.$route.path == '/home2' && this.started){
                     gsap.to(sn.scrollTarget, { scrollTop: 500, duration:1.5 })
-                    
+                }
                 }, 8000);   // Delay in seconds
-            }
             // Create a GSAP timeline for the scrolling animation
             const scrollTimeline = gsap.timeline();
             this.scrollTimeline = scrollTimeline
