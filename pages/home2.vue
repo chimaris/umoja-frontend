@@ -29,12 +29,13 @@ line-height: 20px; ">
 Start Exploring
 </span>  
     </v-btn>
-    <v-btn :disabled="!(!tutorialbol || (loading && !tutorialbol))" :loading="loading" @click="startTutorial()" color="#333" class="ml-3" size="large" variant="outlined" flat rounded="xl" width="163px">
-      <span style="color:  #333;
+    <v-btn :disabled="!(!tutorialbol || (loading && !tutorialbol))" :loading="loading" @click="startTutorial()" color="#333" class=" ml-3" size="large" variant="outlined" flat rounded="xl" width="163px">
+      <span class="d-flex align-center" style="color:  #333;
 font-size: 14px;
 font-weight: 600;
 line-height: 20px; ">
 Tutorial
+<v-icon class="ml-1" size="25" color="#e37a16" icon="mdi mdi-play-circle"></v-icon>
 </span>  
     </v-btn>
 </div>
