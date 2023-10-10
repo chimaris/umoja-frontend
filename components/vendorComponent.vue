@@ -71,7 +71,7 @@ export default {
         mockLoading() {
             setTimeout(() => {
                 this.loaded = true;
-            }, 2000);
+            }, 800);
         },
    
         filt(text) {

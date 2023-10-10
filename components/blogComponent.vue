@@ -1,6 +1,6 @@
 <template>
     <v-card width="100%" v-if="loaded" style="overflow: visible;    background: transparent!important;" flat class="bg-white parent-card  rounded-lg mb-2">
-        <v-img class="rounded-lg bg-grey-lighten-5" cover  width="100%" height="267" :src="item.image">
+        <v-img eager class="rounded-lg bg-grey-lighten-5" cover  width="100%" height="267" :src="item.image">
      </v-img>
      <p class="d-flex my-4 align-center" style="color: var(--carbon-4, #333);
 font-size: 14px;
