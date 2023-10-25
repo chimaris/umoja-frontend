@@ -1,5 +1,5 @@
 <template>
-        <v-container style="height: 895px;" class="parent-container" :style="'max-width:'+maxw">
+        <v-container style="margin-bottom:50px ;" class="parent-container" :style="'max-width:'+maxw">
         <div class="d-flex my-8 align-center">
 <div class="" style="color: var(--magnetic-green-4, #000);
 font-size: 24px;
