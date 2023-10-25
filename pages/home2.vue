@@ -945,7 +945,7 @@ rating: 4,
       useHead({
         title: 'hi',
         meta: [
-            { name: 'viewport', content: 'width=1440, initial-scale=1' }
+            { name: 'viewport', content: 'width=1440, initial-scale=0' }
         ]
     })
       // const descriptionMeta = document.createElement('meta');
