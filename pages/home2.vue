@@ -944,7 +944,7 @@ rating: 4,
         this.demoblock = true
         alert('open in desktop to view the demo')
         useHead({
-          title: 'hi',
+          title: 'Umoja Demo',
           meta: [
               { name: 'viewport', content: 'width=1440, initial-scale=0' }
           ]
