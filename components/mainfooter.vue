@@ -15,7 +15,7 @@
 </div>
     <v-container id="footer" style=" position: relative;" :style="'max-width:'+maxw" :class="showBaloon? '':'py-12'" class="pt-0 px-0 footbot" fluid>
 
-<v-card color="" :style="!showBaloon? 'margin-top:100px':''" flat class="rounded-xl px-3" height="auto" min-height="100vh">
+<v-card color="" :style="!showBaloon? 'margin-top:100px':''" flat class="rounded-xl px-3" height="auto" min-height="1000px">
  
   <v-container  style="max-width:1400px" :class="showBaloon? '':'pt-12'" >
     <v-divider v-show="!showBaloon" class="mb-12 " style="height:2px" color="#"></v-divider>

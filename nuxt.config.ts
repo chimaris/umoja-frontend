@@ -21,6 +21,10 @@ export default defineNuxtConfig({
     ],
     app: {
         head: {
+          // meta: [
+          //   { charset: 'utf-8' },
+          //   { name: 'viewport', content: 'width=1440, initial-scale=1' },
+          // ],
           link: [
             {
               rel: 'preconnect',
@@ -38,6 +42,9 @@ export default defineNuxtConfig({
           ],
         }
       },
+      plugins:[
+        // {src: '~/plugins/headPlugin.js', mode: 'client'},
+      ],
       css: [
         '~/assets/css/fonts.css',
         '~/assets/css/main.css',

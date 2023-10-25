@@ -1,7 +1,7 @@
 <template>
       <v-container style=" position: relative;   max-width: ;" class="pt-0 footbot pb-5" fluid>
 
-<v-card color="#1E1E1E" flat class="rounded-xl px-2" height="auto" min-height="100vh">
+<v-card color="#1E1E1E" flat class="rounded-xl px-2" height="auto" min-height="1000px">
    
  
     <v-container style="

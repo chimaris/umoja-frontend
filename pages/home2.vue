@@ -49,7 +49,7 @@ Tutorial
 
 <v-img eager
         style=" position: relative;"
-        class="  mt-6"  min-height="50vh"
+        class="  mt-6"  min-height="550"
         contain min-width="700px"  
         height="auto" @load="startall()"
         width="1442px"
@@ -371,6 +371,7 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 </div>
 
 <mainfooter style="margin-top: 100px ;" :maxwidth="'1200px'" />
+<Demoblocker v-if="demoblock" />
 </template>
 <style>
 .divbtn{
@@ -477,14 +478,18 @@ line-height: 180%;" class="mt-4" v-if="openid == i">{{ n.body || 'Umoja has solu
 
 
 </style>
+
+
 <script>
 import { gsap, Bounce, Back, CSSPlugin } from 'gsap';
 import { useTutorialStore } from '~/stores/tutorialStore';
 import {Howl, Howler} from 'howler';
 
 export default {
+
   data() {
     return {
+      demoblock:false,
       boxes:[
         {
           top:'42%',
@@ -932,6 +937,32 @@ rating: 4,
     mounted(){
         // this.tutorialStore.init()
       gsap.registerPlugin(CSSPlugin);
+    // Set the document title
+    // document.title = 'My App';
+    if (this.$vuetify.display.smAndDown) {
+      this.demoblock = true
+      alert('open in desktop to view the demo')
+      useHead({
+        title: 'hi',
+        meta: [
+            { name: 'viewport', content: 'width=1440, initial-scale=1' }
+        ]
+    })
+      // const descriptionMeta = document.createElement('meta');
+      // descriptionMeta.name = 'viewport';
+      // descriptionMeta.content = 'width=1440, initial-scale=1';
+      
+      // // Find the head element and append the meta element to it
+      // const head = document.querySelector('head');
+      // if (head) {
+      //   head.appendChild(descriptionMeta);
+      // }
+    }
+  
+    },
+    beforeMount(){
+
+    // Create a meta element and set its attributes
 
     },
 methods: {
