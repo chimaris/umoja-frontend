@@ -934,19 +934,22 @@ rating: 4,
     beforeUnmount(){
       // this.timeline.kill()
     },
-    mounted(){
+    created(){
         // this.tutorialStore.init()
       gsap.registerPlugin(CSSPlugin);
     // Set the document title
     // document.title = 'My App';
-    if (this.$vuetify.display.smAndDown) {
-      this.demoblock = true
-      alert('open in desktop to view the demo')
-      useHead({
-        title: 'hi',
-        meta: [
-            { name: 'viewport', content: 'width=1440, initial-scale=0' }
-        ]
+    this.$nextTick(() => {
+      if (document.documentElement.clientWidth < 1024) {
+        this.demoblock = true
+        alert('open in desktop to view the demo')
+        useHead({
+          title: 'hi',
+          meta: [
+              { name: 'viewport', content: 'width=1440, initial-scale=0' }
+          ]
+      })
+    }
     })
       // const descriptionMeta = document.createElement('meta');
       // descriptionMeta.name = 'viewport';
@@ -957,7 +960,6 @@ rating: 4,
       // if (head) {
       //   head.appendChild(descriptionMeta);
       // }
-    }
   
     },
     beforeMount(){
