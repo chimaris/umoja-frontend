@@ -325,7 +325,7 @@
 									Lorem ipsum dolor sit amet consectetur. Duis pulvinar semper ornare quis.
 								</p>
 								<div class="d-flex mt-2 align-center justify-space-between">
-									<div class="d-flex">
+									<div class="d-flex align-center" style="height: 10px">
 										<v-icon icon="mdi mdi-heart-outline"></v-icon>
 										<div style="width: 40px" class="rounded-lg pa-1 ml-2 bg-grey-lighten-4"></div>
 										<v-icon class="ml-3" icon="mdi mdi-comment-outline"></v-icon>
@@ -333,7 +333,7 @@
 									</div>
 									<v-icon icon="mdi mdi-tray-arrow-up"></v-icon>
 								</div>
-								<p class="pt-2">Post Preview</p>
+								<p class="pt-2" style="font-weight: 600; font-size: 20px; color: #333333">Post Preview</p>
 							</div>
 						</v-col>
 						<v-col cols="12" sm="6" md="5">
@@ -348,21 +348,27 @@
 						<v-col cols="12" md="2">
 							<div style="overflow-y: auto; max-height: 400px; font-size: 16px; color: #333">
 								<!-- Content for Column 3 -->
-								<span class="mb-4">Time</span>
-								<v-radio-group v-model="selectedTime">
+								<span>Time</span>
+								<v-radio-group v-model="selectedTime" style="padding-top: 10px">
 									<v-radio v-for="(time, index) in times" :key="index" :label="time" :value="time" color="#00966D" style="font-weight: 600"></v-radio>
 								</v-radio-group>
 							</div>
 						</v-col>
 					</v-row>
 				</v-card-text>
-				<div class="d-flex justify-end pt-6">
-					<v-btn class="mx-2" style="border: 1px solid #e5e5e5" size="large" color="white" flat @click="dialog1 = false">
-						<span style="font-size: 14px; font-weight: 600; line-height: 20px"> Cancel </span>
-					</v-btn>
-					<v-btn size="large" style="border: 1px solid #e5e5e5" color="green" flat>
-						<span style="font-size: 14px; font-weight: 600; line-height: 20px"> Schedule Post </span>
-					</v-btn>
+				<div class="d-flex justify-space-between items-center mt-6" style="border-top: 1px solid #cecece; padding: 15px 30px">
+					<div class="d-flex align-center justify-space-between" style="color: #969696">
+						<v-icon icon="mdi mdi-account-search" style="padding-right: 20px"></v-icon>
+						<span>Support</span>
+					</div>
+					<div>
+						<v-btn class="mx-2" style="border: 1px solid #e5e5e5" size="large" color="white" flat @click="dialog1 = false">
+							<span style="font-size: 14px; font-weight: 600; line-height: 20px"> Cancel </span>
+						</v-btn>
+						<v-btn size="large" style="border: 1px solid #e5e5e5" color="green" flat>
+							<span style="font-size: 14px; font-weight: 600; line-height: 20px"> Schedule Post </span>
+						</v-btn>
+					</div>
 				</div>
 			</v-card>
 		</v-dialog>
