@@ -302,10 +302,10 @@
 		</div>
 
 		<v-dialog v-model="dialog1" max-width="900">
-			<v-card style="padding: 20px">
+			<v-card style="padding: 20px; border-radius: 15px">
 				<v-card-title>
 					<h3 style="font-size: 30px; font-weight: 600; color: #333">Schedule this post</h3>
-					<span style="font-size: 20px; color: #969696">Want to post later on? Choose when to publish your work</span>
+					<span style="font-size: 20px; color: #969696; font-weight: 400">Want to post later on? Choose when to publish your work</span>
 				</v-card-title>
 				<v-card-text>
 					<v-row>
@@ -348,9 +348,16 @@
 						<v-col cols="12" md="2">
 							<div style="overflow-y: auto; max-height: 400px; font-size: 16px; color: #333">
 								<!-- Content for Column 3 -->
-								<span>Time</span>
+								<span class="pl-2">Time</span>
 								<v-radio-group v-model="selectedTime" style="padding-top: 10px">
-									<v-radio v-for="(time, index) in times" :key="index" :label="time" :value="time" color="#00966D" style="font-weight: 600"></v-radio>
+									<v-radio
+										v-for="(time, index) in times"
+										:key="index"
+										:label="time"
+										:value="time"
+										color="#00966D"
+										style="font-weight: 600; font-size: 16px"
+									></v-radio>
 								</v-radio-group>
 							</div>
 						</v-col>
@@ -545,7 +552,7 @@
 .column-content {
 	padding: 16px;
 	border: 1px solid #ccc;
-	border-radius: 4px;
+	border-radius: 15px;
 }
 </style>
 <script>
