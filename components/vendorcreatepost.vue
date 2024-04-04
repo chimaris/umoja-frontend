@@ -338,11 +338,11 @@
 						</v-col>
 						<v-col cols="12" sm="6" md="5">
 							<div class="column-content" style="height: 406px">
-								<v-container>
-									<v-row justify="space-around">
-										<v-date-picker v-model="selectedDate" hide-header></v-date-picker>
-									</v-row>
-								</v-container>
+								<!-- <v-container> -->
+								<!-- <v-row justify="space-around"> -->
+								<v-date-picker v-model="selectedDate" hide-header></v-date-picker>
+								<!-- </v-row> -->
+								<!-- </v-container> -->
 							</div>
 						</v-col>
 						<v-col cols="12" md="2">
@@ -372,7 +372,7 @@
 						<v-btn class="mx-2" style="border: 1px solid #e5e5e5" size="large" color="white" flat @click="dialog1 = false">
 							<span style="font-size: 14px; font-weight: 600; line-height: 20px"> Cancel </span>
 						</v-btn>
-						<v-btn size="large" style="border: 1px solid #e5e5e5" color="green" flat>
+						<v-btn size="large" style="border: 1px solid #e5e5e5" color="green" flat @click="schedulePostHandler">
 							<span style="font-size: 14px; font-weight: 600; line-height: 20px"> Schedule Post </span>
 						</v-btn>
 					</div>
@@ -542,6 +542,29 @@
 				</v-window>
 			</v-sheet>
 		</v-dialog>
+
+		<v-dialog v-model="showAlert" persistent max-width="1100px">
+			<v-card style="bottom: 270px; right: -155px; box-shadow: none !important; width: 100%; background-color: #edf3f0">
+				<v-alert style="border-radius: 10px">
+					<div class="d-flex justify-between align-center">
+						<div class="d-flex align-center w-100">
+							<div style="background-color: #cbded6; padding: 9px 0px 9px 9px; border-radius: 50%; margin-right: 10px">
+								<v-icon class="mr-2" icon="mdi mdi-check-circle" size="20" color="#00966D"></v-icon>
+							</div>
+
+							<div style="font-size: 16px; color: #333333">
+								<h4 style="font-weight: 600">Post Scheduled Successfully</h4>
+								<span style="font-weight: 400">Your post will be published on 2024-01-01 at 13:45 (America/Buenos Aires)</span>
+							</div>
+						</div>
+						<v-btn style="color: #c20052; background-color: transparent" flat @click="showAlert = false">
+							Close
+							<v-icon class="ml-2" icon="mdi mdi-close-circle-outline"></v-icon>
+						</v-btn>
+					</div>
+				</v-alert>
+			</v-card>
+		</v-dialog>
 	</v-container>
 </template>
 <style>
@@ -574,6 +597,7 @@ export default {
 			radioship: true,
 			dialog: false,
 			dialog1: false,
+			showAlert: false,
 			editor: null,
 			tab: "Customer Details",
 			chip: "All",
@@ -701,6 +725,11 @@ export default {
 					this.times.push(`${formattedHour}:${formattedMinute} ${period}`);
 				}
 			}
+		},
+
+		schedulePostHandler() {
+			this.dialog1 = false;
+			this.showAlert = true;
 		},
 	},
 };
