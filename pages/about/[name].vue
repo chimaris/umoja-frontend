@@ -1,5 +1,5 @@
 <template>
-	<Header2 :sticky="true" :maxwidth="'1200px'" />
+	<Header2 />
 	<div
 		style="
 			position: sticky;
@@ -11,32 +11,28 @@
 			border-top: 1px solid #ededed;
 		"
 	>
-		<v-container style="max-width: 1200px; width: 100%" class="py-2">
+		<div style="width: 95%; margin: auto" class="py-2">
 			<div class="d-flex" style="">
 				<p
 					style="cursor: pointer; font-size: 14px"
 					:class="select == n ? 'text-green font-weight-bold' : ''"
 					@click="selectCategory(n)"
 					class="font-weight-medium text-capitalize py-3 px-2 mr-4 text-grey"
-					v-for="n in ['who we are', 'what we do', 'Our impact and goals']"
+					v-for="(n, i) in ['who we are', 'what we do', 'Our impact and goals']"
 					:key="n"
 				>
-					{{ n }}
+					{{ n }} <v-icon :style="i === 2 ? 'display : none' : ''" icon="mdi mdi-chevron-right"></v-icon>
 				</p>
 			</div>
-		</v-container>
+		</div>
 	</div>
-	<!-- 
-	<div v-if="select == 'who we are'" style="margin-bottom: 100px">
-		<hi>Who we are</hi>
-	</div> -->
+
 	<whoWeAre v-if="select == 'who we are'" style="margin-bottom: 100px" />
 	<div v-else-if="select == 'what we do'" style="margin-bottom: 100px">
 		<hi>What we do</hi>
 	</div>
-	<div v-else-if="select == 'Our impact and goals'" style="margin-bottom: 100px">
-		<hi>What we do</hi>
-	</div>
+	<our-impact-and-goal v-else-if="select == 'Our impact and goals'" style="margin-bottom: 100px" />
+	<whoWeAre v-else style="margin-bottom: 100px" />
 
 	<Mainfooter />
 </template>

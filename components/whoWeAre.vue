@@ -9,20 +9,31 @@
 				class="bg-black rounded-0 img"
 			/>
 
-			<v-container style="max-width: 1200px; width: 100%; height: 772px; z-index: 99" class="d-flex align-center py-1">
-				<div style="width: 536px">
-					<div style="width: 695px" class="btn">
-						<v-btn rounded="xl" color="#FAD096" height="44" style="width: 225px; padding: 12px 20px" flat
-							><span style="color: var(--carbon-6, #946d1f); text-align: center; font-weight: 600; font-size: 14px"> About Us </span>
-						</v-btn>
-					</div>
-					<p
-						class="title my-6"
-						style="color: #f8b735; font-size: 62px; width: 695px; font-weight: 600; line-height: 100%; /* 96px */ letter-spacing: -2.88px"
+			<v-container style="height: 772px; z-index: 99" class="d-flex align-center justify-center py-1 text-center">
+				<div style="width: 540px">
+					<v-chip
+						size="x-large"
+						style="
+							color: var(--carbon-6, #946d1f);
+							background-color: #fad096;
+							text-align: center;
+							font-weight: 500;
+							font-size: 16px;
+							width: 136px;
+							display: flex;
+							justify-content: center;
+							align-items: center;
+							margin: auto;
+							line-height: 20px;
+						"
 					>
+						About Us
+					</v-chip>
+
+					<p class="my-4" style="color: #f8b735; font-size: 48px; margin: auto; font-weight: 600; line-height: 57.6px; letter-spacing: -2.88px">
 						Experience the Essence of Africa with Umoja
 					</p>
-					<p class="my-6 sub" style="color: #fff; font-size: 24px; font-weight: 500">
+					<p class="my-4" style="color: #fff; font-size: 20px; font-weight: 400">
 						Welcome to Umoja Africa, your premier destination for authentic African products. Explore our curated selection and celebrate the rich
 						cultural heritage of Africa.
 					</p>
@@ -33,25 +44,43 @@
 	<div width="100%" style="width: 100%">
 		<v-sheet class="d-flex align-center justify-center flex-wrap text-center mx-auto px-4" height="250" max-width="800" width="100%" rounded>
 			<div>
-				<v-btn color="#2C6E63" variant="outlined" bg-color="#EDF0EF" class="rounded-pill">Our Story</v-btn>
+				<v-chip
+					size="x-large"
+					style="
+						color: #2c6e63;
+						background-color: #edf0ef;
+						text-align: center;
+						font-weight: 500;
+						font-size: 16px;
+						width: 136px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						margin: auto;
+						line-height: 20px;
+						padding: 10px;
+					"
+				>
+					Our Story
+				</v-chip>
 
-				<h2 style="font-size: 34px; font-weight: 600; line-height: 44px">We’re just getting started</h2>
+				<h2 style="font-size: 34px; font-weight: 600; line-height: 44px; letter-spacing: -3%">We’re just getting started</h2>
 
 				<p style="font-size: 20px; line-height: 30px; color: #475467">We are ready to start achieving remarkable results</p>
 			</div>
 		</v-sheet>
-		<div class="" style="width: 95%; margin: auto; height: 450px">
+		<div class="" style="width: 95%; margin: auto">
 			<v-row class="mb-6 h-100">
-				<v-col cols="12" md="3" lg="3" class="h-100">
-					<v-card class="h-100">
+				<v-col cols="12" md="3" lg="3">
+					<v-card style="border-radius: 15px">
 						<v-img
 							lazy-src="https://res.cloudinary.com/payhospi/image/upload/v1712605539/umoja/ceo.png"
 							src="https://res.cloudinary.com/payhospi/image/upload/v1712605539/umoja/ceo.png"
 							class="align-end"
-							gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
 							cover
+							height="100%"
 						>
-							<v-card-title class="text-white">
+							<v-card-title class="text-white" style="background: rgba(0, 0, 0, 0.42)">
 								<h3 style="font-weight: 600; font-size: 20px; color: #ebebeb">David Obukome Oteri</h3>
 								<span style="font-weight: 400; font-size: 14px; color: #ebebeb">CEO/founder Umoja GMBH</span>
 							</v-card-title>
@@ -60,19 +89,19 @@
 				</v-col>
 
 				<v-col cols="12" md="9" lg="9">
-					<v-sheet class="px-5" style="line-height: 32px; color: #333333; font-size: 18px">
+					<v-sheet class="px-5" style="line-height: 34px; color: #333333; font-size: 18px">
 						<p>
 							Africa has one of the largest numbers of entrepreneurs globally with over 50 million MSME’s but despite these developments,
 							entrepreneurship in Africa remains challenging and complex. There are several barriers that entrepreneurs must overcome, including lack
 							of access to the global markets, lack of supportive business infrastructure and resources.
 						</p>
 
-						<p class="my-5">
+						<p class="my-3">
 							This motivated me to establish Umoja GmbH to empower micro, small & mid-sized enterprises (MSMEs) with ties to Africa and create the
 							exposure, knowledge, resources, and support to enable them to showcase their creativity, potential, Culture and scale their business
 							globally
 						</p>
-						<p class="my-5">
+						<p class="my-3">
 							Each encounter with a local artisan, each conversation with a vendor, and each transaction completed on our platform is a testament to
 							our commitment to celebrating Africa's diversity. But our story is not just about commerce; it's about connection. It's about bridging
 							the gap between continents and cultures, and fostering a deeper understanding and appreciation for the tapestry of traditions that make
@@ -195,9 +224,27 @@
 			rounded
 		>
 			<div>
-				<v-btn color="#1273EB" variant="outlined" bg-color="#EDF0FC" class="rounded-pill mb-4">Our Values</v-btn>
+				<v-chip
+					size="x-large"
+					style="
+						color: #1273eb;
+						background-color: #edf0fc;
+						text-align: center;
+						font-weight: 500;
+						font-size: 16px;
+						width: 136px;
+						display: flex;
+						justify-content: center;
+						align-items: center;
+						margin: auto;
+						line-height: 20px;
+						padding: 10px;
+					"
+				>
+					Our Values
+				</v-chip>
 
-				<h2 style="font-size: 34px; font-weight: 600; line-height: 44px">
+				<h2 class="mt-4" style="font-size: 36px; font-weight: 600; line-height: 44px; letter-spacing: -2%">
 					What do we value? All sorts of things! But we particularly pride ourselves on:
 				</h2>
 			</div>
