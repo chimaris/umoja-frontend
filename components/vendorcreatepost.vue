@@ -301,7 +301,7 @@
 			</v-btn>
 		</div>
 
-		<v-dialog v-model="dialog1" max-width="900">
+		<v-dialog v-model="dialog1" persistent max-width="900">
 			<v-card style="padding: 20px; border-radius: 15px">
 				<v-card-title>
 					<h3 style="font-size: 30px; font-weight: 600; color: #333">Schedule this post</h3>
@@ -338,11 +338,23 @@
 						</v-col>
 						<v-col cols="12" sm="6" md="5">
 							<div class="column-content" style="height: 406px">
-								<!-- <v-container> -->
-								<!-- <v-row justify="space-around"> -->
-								<v-date-picker v-model="selectedDate" hide-header></v-date-picker>
-								<!-- </v-row> -->
-								<!-- </v-container> -->
+								<v-container class="p-0">
+									<v-row>
+										<VDatePicker
+											v-model="selectedDate"
+											mode="date"
+											expanded
+											trim-weeks
+											borderless
+											transparent
+											color="teal"
+											fillMode="solid"
+											content="red"
+											:locale="{ firstDayOfWeek: 2, masks: { weekdays: 'WWW' } }"
+											style="width: 100%; margin: auto"
+										/>
+									</v-row>
+								</v-container>
 							</div>
 						</v-col>
 						<v-col cols="12" md="2">
@@ -576,6 +588,25 @@
 	padding: 16px;
 	border: 1px solid #ccc;
 	border-radius: 15px;
+	/* background-color: transparent; */
+}
+
+.vc-weeks {
+	padding-top: 20px;
+}
+.vc-header {
+	border-bottom: 1px solid #ededed;
+	padding-bottom: 50px;
+}
+.vc-week,
+.vc-weekdays {
+	padding-bottom: 15px;
+}
+.vc-weekdays {
+	text-transform: uppercase;
+	font-size: 12px;
+	color: #969696;
+	font-weight: 300;
 }
 </style>
 <script>
@@ -730,6 +761,7 @@ export default {
 		schedulePostHandler() {
 			this.dialog1 = false;
 			this.showAlert = true;
+			console.log("New data", this.date);
 		},
 	},
 };

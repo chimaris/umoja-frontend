@@ -5,8 +5,9 @@ import { aliases, fa } from "vuetify/iconsets/fa";
 import "vuetify/styles";
 
 import { mdi } from "vuetify/iconsets/mdi";
-import "@mdi/font/css/materialdesignicons.css"; // Ensure you are using css-loader
-import "@fortawesome/fontawesome-free/css/all.css"; // Ensure your project is capable of handling css files
+import "@mdi/font/css/materialdesignicons.css";
+import "@fortawesome/fontawesome-free/css/all.css";
+
 const myCustomLightTheme: ThemeDefinition = {
 	dark: false,
 	colors: {

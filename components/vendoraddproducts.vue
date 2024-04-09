@@ -6,11 +6,10 @@
 			</div>
 		</div>
 
-		<v-sheet style="overflow: hidden" color="transparent" class="mt-2">
+		<!-- <v-sheet style="overflow: hidden" color="transparent" class="mt-2">
 			<v-tabs v-model="tab1" color="green" grow>
 				<v-tab v-for="item in ['General', 'Text', 'Price', 'Picture']" :key="item" :value="item" class="d-flex align-center">
 					{{ item }}
-					<!-- <v-badge v-if="item !== 'promo%'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" content="2" size="12"></v-badge> -->
 				</v-tab>
 			</v-tabs>
 			<v-divider></v-divider>
@@ -28,7 +27,7 @@
 					<h1>Hello Picture</h1>
 				</v-window-item>
 			</v-window>
-		</v-sheet>
+		</v-sheet> -->
 
 		<v-row>
 			<v-col cols="12" sm="8">

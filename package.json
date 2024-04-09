@@ -20,7 +20,9 @@
   },
   "dependencies": {
     "@chenfengyuan/vue-countdown": "^2.1.1",
+    "@date-io/dayjs": "^3.0.0",
     "@pinia/nuxt": "^0.4.11",
+    "@popperjs/core": "^2.11.8",
     "@tiptap/extension-link": "^2.0.3",
     "@tiptap/extension-text-align": "^2.0.3",
     "@tiptap/extension-underline": "^2.0.3",
@@ -28,11 +30,13 @@
     "@tiptap/starter-kit": "^2.0.3",
     "@tiptap/vue-3": "^2.0.3",
     "axios": "^1.4.0",
+    "dayjs": "^1.11.10",
     "gsap": "^3.12.2",
     "howler": "^2.2.4",
     "laue": "^0.2.1",
     "sass": "^1.57.1",
     "unhead": "^1.7.4",
+    "v-calendar": "^3.1.2",
     "vuetify": "^3.2.5"
   }
 }

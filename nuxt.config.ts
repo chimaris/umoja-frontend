@@ -43,6 +43,7 @@ export default defineNuxtConfig({
 		},
 	},
 	plugins: [
+		"~/plugins/vcalender.client.ts",
 		// {src: '~/plugins/headPlugin.js', mode: 'client'},
 	],
 	css: ["~/assets/css/fonts.css", "~/assets/css/main.css", "vuetify/lib/styles/main.sass", "@mdi/font/css/materialdesignicons.min.css"],
