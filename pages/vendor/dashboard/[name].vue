@@ -76,7 +76,7 @@
 						</v-window-item>
 
 						<v-window-item :value="'Homepage'">
-							<Vendorpreview />
+							<Vendorpreview @changePage="changePage" />
 						</v-window-item>
 						<v-window-item :value="'Dashboard'">
 							<Vendordashboard />
@@ -122,6 +122,9 @@
 						</v-window-item>
 						<v-window-item :value="'All Apps'">
 							<Vendorapps />
+						</v-window-item>
+						<v-window-item :value="'ProfileSetup'">
+							<VendorProfileSetup />
 						</v-window-item>
 					</v-window>
 				</v-card>

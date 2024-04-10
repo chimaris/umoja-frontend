@@ -130,8 +130,8 @@
 		<div class="" style="width: 100%; margin: auto">
 			<v-row class="">
 				<v-col cols="12" md="6" lg="6">
-					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center px-14">
-						<v-container style="max-width: 1400px" class="px-12">
+					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-14 pl-4">
+						<v-container style="max-width: 1400px" class="">
 							<v-avatar color="#F4EBFF">
 								<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
 							</v-avatar>
@@ -157,8 +157,8 @@
 			</v-row>
 			<v-row class="reverse-columns">
 				<v-col cols="12" md="6" lg="6">
-					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center px-14">
-						<v-container style="max-width: 1400px" class="px-12">
+					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-4 pl-14">
+						<v-container style="max-width: 1400px" class="">
 							<v-avatar color="#F4EBFF">
 								<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
 							</v-avatar>
@@ -185,8 +185,8 @@
 			</v-row>
 			<v-row class="">
 				<v-col cols="12" md="6" lg="6">
-					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center px-14">
-						<v-container style="max-width: 1400px" class="px-12">
+					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-14 pl-4">
+						<v-container style="max-width: 1400px" class="">
 							<v-avatar color="#F4EBFF">
 								<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
 							</v-avatar>
@@ -346,38 +346,40 @@
 				</p>
 			</div>
 		</v-sheet>
-		<div class="" style="width: 85%; margin: auto">
-			<v-row class="">
-				<v-col cols="12" md="6" lg="6">
-					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center">
-						<v-container style="max-width: 1400px" class="px-4">
-							<p style="color: #6941c6; font-weight: 600">Join our team</p>
-							<p class="my-4" style="color: #101828; font-size: 36px; font-weight: 600">We’re just getting started</p>
-							<p style="color: #475467; font-size: 20px; font-weight: 400" class="mb-8">
-								Our philosophy is simple — hire a team of diverse, passionate people and foster a culture that empowers you to do your best work.
-							</p>
-							<div class="pt-5">
-								<v-btn color="#344054" class="mr-3" size="large" variant="outlined" flat rounded="xl" width="193px">
-									<span style="color: #344054; font-size: 16px; font-weight: 600; line-height: 20px">Read our principles</span>
-								</v-btn>
-								<v-btn color="green" size="large" flat rounded="xl" width="193px">
-									<span style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px"> Start Exploring </span>
-								</v-btn>
+		<div>
+			<v-container style="max-width: 1400px" class="pl-4">
+				<v-row class="">
+					<v-col cols="12" md="6" lg="6">
+						<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center">
+							<div class="pr-16">
+								<p style="color: #6941c6; font-weight: 600">Join our team</p>
+								<p class="my-4" style="color: #101828; font-size: 36px; font-weight: 600">We’re just getting started</p>
+								<p style="color: #475467; font-size: 20px; font-weight: 400" class="mb-8">
+									Our philosophy is simple — hire a team of diverse, passionate people and foster a culture that empowers you to do your best work.
+								</p>
+								<div class="pt-5">
+									<v-btn color="#344054" class="mr-3" size="large" variant="outlined" flat rounded="xl" width="193px">
+										<span style="color: #344054; font-size: 16px; font-weight: 600; line-height: 20px">Read our principles</span>
+									</v-btn>
+									<v-btn color="green" size="large" flat rounded="xl" width="193px">
+										<span style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px"> Start Exploring </span>
+									</v-btn>
+								</div>
 							</div>
-						</v-container>
-					</v-card>
-				</v-col>
-				<v-col class="px-0" cols="12" md="6" lg="6">
-					<v-img
-						eager
-						cover
-						width="100%"
-						min-height="429"
-						height="auto"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1712601877/umoja/teams.png"
-					></v-img>
-				</v-col>
-			</v-row>
+						</v-card>
+					</v-col>
+					<v-col class="px-0" cols="12" md="6" lg="6">
+						<v-img
+							eager
+							cover
+							width="100%"
+							min-height="429"
+							height="auto"
+							src="https://res.cloudinary.com/payhospi/image/upload/v1712601877/umoja/teams.png"
+						></v-img>
+					</v-col>
+				</v-row>
+			</v-container>
 		</div>
 	</div>
 	<div class="bg-black">

@@ -52,12 +52,10 @@
 					</v-menu>
 
 					<v-btn rounded="xl" v-if="!isLoggedIn" to="/user/login" class="ml-4" icon flat color="transparent">
-						<v-avatar size="35">
-							<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img> </v-avatar
+						<v-avatar size="35"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img> </v-avatar
 					></v-btn>
 					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" class="ml-4" icon flat color="transparent">
-						<v-avatar size="35">
-							<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img> </v-avatar
+						<v-avatar size="35"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img> </v-avatar
 					></v-btn>
 					<v-btn to="/order/cart" class="ml-4 text-none" icon size="48" rounded="xl" flat color="transparent">
 						<v-badge offset-y="20" :dot="cartStore.totalCartItems == 0" :content="cartStore.totalCartItems" color="error">
@@ -123,7 +121,7 @@ export default {
 				{ title: "Discovery", route: "/discovery_page", disabled: false },
 				{ title: "Market Place", route: "/market_place", disabled: false },
 				{ title: "ERP Solution", route: "/vendor/dashboard/Homepage", disabled: false },
-				{ title: "About Us", route: "/about/whoWeAre", disabled: false },
+				{ title: "About Us", route: "/about/*", disabled: false },
 			];
 		},
 		cartStore() {
