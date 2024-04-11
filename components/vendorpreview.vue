@@ -88,7 +88,7 @@
 									</div>
 									<div class="pt-12 mt-12 justify-start align-center d-flex">
 										<v-btn
-											@click="choose('ProfileSetup')"
+											@click="choose('Profile Setup')"
 											style="border: 0.357149px solid #2c6e63"
 											flat
 											size="large"
