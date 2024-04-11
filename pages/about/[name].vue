@@ -11,20 +11,22 @@
 			border-top: 1px solid #ededed;
 		"
 	>
-		<div style="width: 95%; margin: auto" class="py-2">
-			<div class="d-flex" style="">
-				<p
-					style="cursor: pointer; font-size: 14px"
-					:class="select == n ? 'text-green font-weight-bold' : ''"
-					@click="selectCategory(n)"
-					class="font-weight-medium text-capitalize py-3 px-2 mr-4 text-grey"
-					v-for="(n, i) in ['who we are', 'what we do', 'Our impact and goals']"
-					:key="n"
-				>
-					{{ n }} <v-icon :style="i === 2 ? 'display : none' : ''" icon="mdi mdi-chevron-right"></v-icon>
-				</p>
+		<v-container style="max-width: 1400px; width: 100%" class="">
+			<div style="margin: auto" class="py-2">
+				<div class="d-flex" style="">
+					<p
+						style="cursor: pointer; font-size: 14px"
+						:class="select == n ? 'text-green font-weight-bold' : ''"
+						@click="selectCategory(n)"
+						class="font-weight-medium text-capitalize py-3 mr-4 text-grey"
+						v-for="(n, i) in ['who we are', 'what we do', 'Our impact and goals']"
+						:key="n"
+					>
+						{{ n }} <v-icon :style="i === 2 ? 'display : none' : ''" icon="mdi mdi-chevron-right"></v-icon>
+					</p>
+				</div>
 			</div>
-		</div>
+		</v-container>
 	</div>
 
 	<whoWeAre v-if="select == 'who we are'" style="margin-bottom: 100px" />
