@@ -123,7 +123,7 @@
 						<v-window-item :value="'All Apps'">
 							<Vendorapps />
 						</v-window-item>
-						<v-window-item :value="'ProfileSetup'">
+						<v-window-item :value="'Profile Setup'">
 							<VendorProfileSetup />
 						</v-window-item>
 					</v-window>

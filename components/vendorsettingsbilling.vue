@@ -21,7 +21,7 @@ font-weight: 600;">€10/Month</p>
 font-size: 16px;
 font-weight: 400;" class="mb-8">Our free plan has...</p>
 
-<div v-for="n in 4" class=" mb-4 d-flex align-center ">
+<div v-for="n in 4" :key="n" class=" mb-4 d-flex align-center ">
 <v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
 <p style="color: #333;
 font-size: 14px;
@@ -49,7 +49,7 @@ font-weight: 600;">€30/Month</p>
 font-size: 16px;
 font-weight: 400;" class="mb-8">Everything in our free plan plus...</p>
 
-<div v-for="n in 7" class=" mb-4 d-flex align-center ">
+<div v-for="n in 7" :key="n" class=" mb-4 d-flex align-center ">
 <v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
 <p style="color: #333;
 font-size: 14px;

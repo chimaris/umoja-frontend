@@ -40,7 +40,7 @@
 							<editvendoraccount @submit="submit" />
 						</v-window-item>
 						<v-window-item value="Subcription">
-							<business @submit="submit" />
+							<subscription @submit="submit" />
 						</v-window-item>
 					</v-window>
 				</v-card>
