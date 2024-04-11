@@ -43,8 +43,7 @@
 			</v-card>
 		</v-container>
 	</div>
-	<!-- <div width="100%" style="width: 100%"> -->
-	<v-container style="max-width: 1400px; width: 100%; margin: 100px auto">
+	<v-container style="max-width: 1400px; width: 100%; margin: 50px auto">
 		<v-sheet class="d-flex align-center justify-center flex-wrap text-center mx-auto px-4" height="250" max-width="800" width="100%" rounded>
 			<div>
 				<v-chip
@@ -72,8 +71,6 @@
 				<p style="font-size: 20px; line-height: 30px; color: #475467">We are ready to start achieving remarkable results</p>
 			</div>
 		</v-sheet>
-		<!-- <div class="" style="width: 100%; margin: auto"> -->
-		<!-- <v-container style="max-width: 1400px; width: 100%; margin: auto"> -->
 		<v-row class="mb-6 h-100">
 			<v-col cols="12" md="3" lg="3">
 				<v-card style="border-radius: 15px">
@@ -119,13 +116,10 @@
 				</v-sheet>
 			</v-col>
 		</v-row>
-		<!-- </v-container> -->
-		<!-- </div> -->
 	</v-container>
-	<!-- </div> -->
 
 	<v-container style="max-width: 1400px; width: 100%; margin: 100px auto">
-		<div width="100%" style="width: 100%; margin: 100px 0">
+		<div width="100%" style="width: 100%">
 			<v-sheet class="d-flex align-center justify-center text-center mx-auto px-4" height="250" max-width="800" width="100%" rounded>
 				<div>
 					<h2 style="font-size: 34px; font-weight: 600; line-height: 44px">We’re a mission driven company</h2>
@@ -141,7 +135,7 @@
 						<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-14 pl-0 ml-0">
 							<v-container style="max-width: 1400px; width: 100%" class="">
 								<v-avatar color="#F4EBFF">
-									<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon1.svg" alt="Icon" />
 								</v-avatar>
 								<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Empower Artisans and Vendors:</p>
 								<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
@@ -168,7 +162,7 @@
 						<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pl-14 pr-0 mr-0">
 							<v-container style="max-width: 1400px; width: 100%">
 								<v-avatar color="#F4EBFF">
-									<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon2.svg" alt="Icon" />
 								</v-avatar>
 								<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Promote Cultural Exchange:</p>
 								<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
@@ -191,12 +185,12 @@
 						></v-img>
 					</v-col>
 				</v-row>
-				<v-row class="">
+				<v-row>
 					<v-col cols="12" md="6" lg="6" class="pl-0">
 						<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-14 pl-0 ml-0">
 							<v-container style="max-width: 1400px; width: 100%">
 								<v-avatar color="#F4EBFF">
-									<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon3.svg" alt="Icon" />
 								</v-avatar>
 								<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Ensure Transparency and Trust:</p>
 								<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
@@ -266,13 +260,12 @@
 						<v-col cols="12" md="4" lg="4">
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
-									<v-avatar color="#F4EBFF">
-										<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
+										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon1.svg" alt="Icon" />
 									</v-avatar>
-									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Knowledge sharing</p>
+									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Empowerment</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
-										Share contents like articles, videos and posts of your business and products to foster a informative & cultural learning
-										environment.
+										 We empower individuals and communities to realize their full potential and create positive change.
 									</p>
 								</v-container>
 							</v-card>
@@ -280,12 +273,13 @@
 						<v-col cols="12" md="4" lg="4">
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
-									<v-avatar color="#F4EBFF">
-										<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
+										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon2.svg" alt="Icon" />
 									</v-avatar>
-									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Global outreach</p>
+									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Inclusivity</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
-										Through the Umoja platform, we are able to offer new perspectives, creativity and opportunities to the global audience.
+										We celebrate the richness and diversity of African culture, heritage, and traditions, fostering a welcoming and inclusive
+										environment for all stakeholders.
 									</p>
 								</v-container>
 							</v-card>
@@ -293,12 +287,13 @@
 						<v-col cols="12" md="4" lg="4">
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
-									<v-avatar color="#F4EBFF">
-										<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
+										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon3.svg" alt="Icon" />
 									</v-avatar>
-									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Manage your team with reports</p>
+									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Social Responsibility</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
-										Measure what matters with Untitled’s easy-to-use reports. You can filter, export, and drilldown on the data in a couple clicks.
+										We prioritize social responsibility, sustainability, and ethical practices in our operations, supply chain, and community
+										engagement efforts.
 									</p>
 								</v-container>
 							</v-card>
@@ -308,13 +303,13 @@
 						<v-col cols="12" md="4" lg="4">
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
-									<v-avatar color="#F4EBFF">
-										<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
+										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon4.svg" alt="Icon" />
 									</v-avatar>
-									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Connect with customers</p>
+									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Innovation</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
-										Solve a problem or close a sale in real-time with chat. If no one is available, customers are seamlessly routed to email without
-										confusion.
+										We leverage technology, data, and insights to drive innovation and deliver cutting-edge solutions that meet the evolving needs of
+										our customers and vendors.
 									</p>
 								</v-container>
 							</v-card>
@@ -322,12 +317,13 @@
 						<v-col cols="12" md="4" lg="4">
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
-									<v-avatar color="#F4EBFF">
-										<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
+										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon5.svg" alt="Icon" />
 									</v-avatar>
-									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Connect the tools you already use</p>
+									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Quality</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
-										Explore 100+ integrations that make your day-to-day workflow more efficient and familiar. Plus, our extensive developer tools.
+										We strive to deliver products, services, and experiences that meet the highest standards of craftsmanship, authenticity, and
+										customer satisfaction.
 									</p>
 								</v-container>
 							</v-card>
@@ -335,13 +331,12 @@
 						<v-col cols="12" md="4" lg="4">
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
-									<v-avatar color="#F4EBFF">
-										<v-icon icon="mdi mdi-clipboard-outline" color="#7F56D9"></v-icon>
+									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
+										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon6.svg" alt="Icon" />
 									</v-avatar>
-									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Our people make the difference</p>
+									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Customer Centricity</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
-										We’re an extension of your customer service team, and all of our resources are free. Chat to our friendly team 24/7 when you need
-										help.
+										We listen to our customer needs, preferences, and feedback, and strive to exceed their expectations at every touchpoint.
 									</p>
 								</v-container>
 							</v-card>
@@ -448,7 +443,7 @@
 		</v-container>
 	</div>
 	<div width="100%" style="width: 100%; background-color: #f8f8f8">
-		<v-container style="max-width: 1400px; width: 100%; margin: 100px auto">
+		<v-container style="max-width: 1400px; width: 100%; margin: 0 auto">
 			<v-sheet
 				class="d-flex align-center justify-center text-center mx-auto px-4"
 				style="background-color: transparent"

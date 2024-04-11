@@ -1,5 +1,4 @@
 <template>
-	<!-- <div style="width: 95%; margin: auto"> -->
 	<v-container style="max-width: 1400px; width: 100%">
 		<v-row style="margin: 40px 0 0 0">
 			<v-col cols="12" md="4" lg="4" class="px-0">
@@ -15,7 +14,7 @@
 	<v-container style="max-width: 1400px; width: 100%">
 		<v-row>
 			<v-col v-for="n in impacts" :key="n.title" cols="12" md="4" lg="4">
-				<v-card class="mx-auto" height="690" style="border-radius: 15px">
+				<v-card class="mx-auto" height="615" style="border-radius: 15px; box-shadow: none">
 					<v-img height="200px" :src="n.img" cover></v-img>
 					<div
 						class="d-flex flex-column justify-center items-center"
@@ -71,8 +70,6 @@
 			</v-col>
 		</v-row>
 	</div>
-
-	<!-- </div> -->
 </template>
 
 <script>
@@ -133,3 +130,11 @@ export default {
 	},
 };
 </script>
+
+<style>
+@media screen and (max-width: 768px) {
+	.impact[style*="padding"] {
+		padding: 0;
+	}
+}
+</style>
