@@ -11,7 +11,7 @@
 			border-top: 1px solid #ededed;
 		"
 	>
-		<v-container style="max-width: 1400px; width: 100%" class="">
+		<v-container style="max-width: 1400px; width: 100%">
 			<div style="margin: auto" class="py-2">
 				<div class="d-flex" style="">
 					<p
@@ -59,9 +59,7 @@ export default {
 				: "EDF0EF";
 		},
 	},
-	// mounted() {
-	// 	this.imgloader();
-	// },
+
 	methods: {
 		selectCategory(n) {
 			this.$router.push("/about/" + n);

@@ -1,8 +1,8 @@
 <template>
-	<v-container style="max-width: 1400px; width: 100%" class="">
-		<!-- <div style="width: 95%; margin: auto"> -->
+	<!-- <div style="width: 95%; margin: auto"> -->
+	<v-container style="max-width: 1400px; width: 100%">
 		<v-row style="margin: 40px 0 0 0">
-			<v-col cols="12" md="4" lg="4">
+			<v-col cols="12" md="4" lg="4" class="px-0">
 				<h3 style="font-size: 48px; font-weight: 700; line-height: 60.24px">Impact & Goals</h3>
 			</v-col>
 			<v-col>
@@ -11,49 +11,53 @@
 				</p>
 			</v-col>
 		</v-row>
-		<v-container style="max-width: 1400px; width: 100%" class="">
-			<v-row>
-				<v-col v-for="n in impacts" :key="n.title" cols="12" md="4" lg="4">
-					<v-card class="mx-auto" height="690" style="border-radius: 15px">
-						<v-img height="200px" :src="n.img" cover></v-img>
-						<div
-							class="d-flex flex-column justify-center items-center"
-							style="padding-left: 20px; height: 119px; color: white"
-							:style="{ 'background-color': n.color }"
-						>
-							<v-card-title style="font-size: 24px; font-weight: 500"> {{ n.title }}  </v-card-title>
-						</div>
+	</v-container>
+	<v-container style="max-width: 1400px; width: 100%">
+		<v-row>
+			<v-col v-for="n in impacts" :key="n.title" cols="12" md="4" lg="4">
+				<v-card class="mx-auto" height="690" style="border-radius: 15px">
+					<v-img height="200px" :src="n.img" cover></v-img>
+					<div
+						class="d-flex flex-column justify-center items-center"
+						style="padding-left: 20px; height: 119px; color: white"
+						:style="{ 'background-color': n.color }"
+					>
+						<v-card-title style="font-size: 24px; font-weight: 500"> {{ n.title }}  </v-card-title>
+					</div>
 
-						<div style="background-color: #f8f8f8; padding: 20px; height: 100%">
-							<v-card-text style="font-weight: 400; font-size: 16px; line-height: 25.6px">
-								{{ n.des }}
-							</v-card-text>
-						</div>
-					</v-card>
-				</v-col>
-			</v-row>
-		</v-container>
-
-		<v-row style="margin: 150px 0 0 0">
-			<v-col cols="12" md="6" lg="6">
-				<v-card flat style="color: #333333">
-					<h3 class="mb-4" style="font-size: 40px; font-weight: 600; line-height: 38px; letter-spacing: -3%">Our Goals</h3>
-					<p style="font-size: 18px; font-weight: 400" class="mb-8">
-						Measure what matters with Untitled’s easy-to-use reports. You can filter, export, and drilldown on the data in a couple clicks.
-					</p>
-					<div class="d-flex flex-column items-center gap-10">
-						<v-row v-for="goal of goals" :key="goal">
-							<v-col cols="1">
-								<v-avatar color="#EDF0EF" class="mr-4">
-									<v-icon icon="mdi mdi-check" color="#2C6E63"></v-icon>
-								</v-avatar>
-							</v-col>
-							<v-col cols="11" class="pt-5">
-								<span style="font-size: 18px">{{ goal }}</span>
-							</v-col>
-						</v-row>
+					<div style="background-color: #f8f8f8; padding: 20px; height: 100%">
+						<v-card-text style="font-weight: 400; font-size: 16px; line-height: 25.6px">
+							{{ n.des }}
+						</v-card-text>
 					</div>
 				</v-card>
+			</v-col>
+		</v-row>
+	</v-container>
+
+	<div style="max-width:1400px; 100%; margin: auto">
+		<v-row style="margin: 150px 0 0 0">
+			<v-col cols="12" md="6" lg="6" class="pl-0">
+				<v-container style="max-width: 1400px; width: 100%">
+					<v-card flat style="color: #333333">
+						<h3 class="mb-4" style="font-size: 40px; font-weight: 600; line-height: 38px; letter-spacing: -3%">Our Goals</h3>
+						<p style="font-size: 18px; font-weight: 400" class="mb-8">
+							Measure what matters with Untitled’s easy-to-use reports. You can filter, export, and drilldown on the data in a couple clicks.
+						</p>
+						<div class="d-flex flex-column items-center gap-10">
+							<v-row v-for="goal of goals" :key="goal">
+								<v-col cols="1">
+									<v-avatar color="#EDF0EF" class="mr-4">
+										<v-icon icon="mdi mdi-check" color="#2C6E63"></v-icon>
+									</v-avatar>
+								</v-col>
+								<v-col cols="11" class="pt-5">
+									<span style="font-size: 18px">{{ goal }}</span>
+								</v-col>
+							</v-row>
+						</div>
+					</v-card>
+				</v-container>
 			</v-col>
 			<v-col class="px-0" cols="12" md="6" lg="6">
 				<v-img
@@ -66,8 +70,9 @@
 				></v-img>
 			</v-col>
 		</v-row>
-		<!-- </div> -->
-	</v-container>
+	</div>
+
+	<!-- </div> -->
 </template>
 
 <script>
