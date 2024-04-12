@@ -117,9 +117,10 @@
 			</v-col>
 		</v-row>
 	</v-container>
-
-	<v-container style="max-width: 1400px; width: 100%; margin: 100px auto">
-		<div width="100%" style="width: 100%">
+	
+	<div style="margin: 100px auto">
+		<v-container style="max-width: 1400px; width: 100%">
+			<!-- <div width="100%" style="width: 100%"> -->
 			<v-sheet class="d-flex align-center justify-center text-center mx-auto px-4" height="250" max-width="800" width="100%" rounded>
 				<div>
 					<h2 style="font-size: 34px; font-weight: 600; line-height: 44px">We’re a mission driven company</h2>
@@ -129,94 +130,95 @@
 					</p>
 				</div>
 			</v-sheet>
-			<div style="width: 100%; margin: auto">
-				<v-row>
-					<v-col cols="12" md="6" lg="6" class="pl-0">
-						<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-14 pl-0 ml-0">
-							<v-container style="max-width: 1400px; width: 100%" class="">
-								<v-avatar color="#F4EBFF">
-									<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon1.svg" alt="Icon" />
-								</v-avatar>
-								<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Empower Artisans and Vendors:</p>
-								<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
-									At Umoja Africa, our foremost mission is to empower artisans and vendors across Africa. We provide them with a global platform to
-									showcase their talents and products, enabling them to reach a broader audience and expand their businesses. Through our platform, we
-									aim to uplift local economies and preserve traditional craftsmanship while fostering entrepreneurship and economic growth.
-								</p>
-							</v-container>
-						</v-card>
-					</v-col>
-					<v-col class="px-0" cols="12" md="6" lg="6">
-						<v-img
-							eager
-							cover
-							width="100%"
-							min-height="429"
-							height="auto"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1712605917/umoja/mission-pic1.png"
-						></v-img>
-					</v-col>
-				</v-row>
-				<v-row class="reverse-columns">
-					<v-col cols="12" md="6" lg="6" class="pr-0">
-						<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pl-14 pr-0 mr-0">
-							<v-container style="max-width: 1400px; width: 100%">
-								<v-avatar color="#F4EBFF">
-									<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon2.svg" alt="Icon" />
-								</v-avatar>
-								<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Promote Cultural Exchange:</p>
-								<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
-									We are committed to promoting cross-cultural understanding and appreciation through our platform. By featuring products from diverse
-									regions and communities across Africa, we encourage users to discover and learn about different cultures, traditions, and artistic
-									expressions. We believe that fostering cultural exchange leads to greater empathy, connection, and appreciation for Africa's rich
-									heritage.
-								</p>
-							</v-container>
-						</v-card>
-					</v-col>
-					<v-col class="px-0" cols="12" md="6" lg="6">
-						<v-img
-							eager
-							cover
-							width="100%"
-							min-height="429"
-							height="auto"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1712605947/umoja/mission-pic2.png"
-						></v-img>
-					</v-col>
-				</v-row>
-				<v-row>
-					<v-col cols="12" md="6" lg="6" class="pl-0">
-						<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-14 pl-0 ml-0">
-							<v-container style="max-width: 1400px; width: 100%">
-								<v-avatar color="#F4EBFF">
-									<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon3.svg" alt="Icon" />
-								</v-avatar>
-								<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Ensure Transparency and Trust:</p>
-								<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
-									Transparency and trust are fundamental principles guiding our operations. We prioritize transparency in all our transactions,
-									providing users with complete visibility into their e-commerce activities. Additionally, we empower users by offering them tools
-									such as customized vendor dashboards and order management systems, enabling them to manage their businesses efficiently and
-									effectively. Through transparency and trust, we aim to build trust and confidence in our platform while supporting the growth and
-									success of our users.
-								</p>
-							</v-container>
-						</v-card>
-					</v-col>
-					<v-col class="px-0" cols="12" md="6" lg="6">
-						<v-img
-							eager
-							cover
-							width="100%"
-							min-height="429"
-							height="auto"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1712605977/umoja/mission-pic3.png"
-						></v-img>
-					</v-col>
-				</v-row>
-			</div>
+		</v-container>
+
+		<div style="width: 100%; margin: auto">
+			<v-row>
+				<v-col cols="12" md="6" lg="6" class="pl-0">
+					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-14 pl-8">
+						<v-container style="max-width: 1400px; width: 100%" class="">
+							<v-avatar color="#F4EBFF">
+								<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon1.svg" alt="Icon" />
+							</v-avatar>
+							<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Empower Artisans and Vendors:</p>
+							<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
+								At Umoja Africa, our foremost mission is to empower artisans and vendors across Africa. We provide them with a global platform to
+								showcase their talents and products, enabling them to reach a broader audience and expand their businesses. Through our platform, we
+								aim to uplift local economies and preserve traditional craftsmanship while fostering entrepreneurship and economic growth.
+							</p>
+						</v-container>
+					</v-card>
+				</v-col>
+				<v-col class="px-0" cols="12" md="6" lg="6">
+					<v-img
+						eager
+						cover
+						width="100%"
+						min-height="429"
+						height="auto"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1712605917/umoja/mission-pic1.png"
+					></v-img>
+				</v-col>
+			</v-row>
+			<v-row class="reverse-columns">
+				<v-col cols="12" md="6" lg="6" class="pr-0">
+					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pl-14 pr-8">
+						<v-container style="max-width: 1400px; width: 100%">
+							<v-avatar color="#F4EBFF">
+								<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon2.svg" alt="Icon" />
+							</v-avatar>
+							<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Promote Cultural Exchange:</p>
+							<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
+								We are committed to promoting cross-cultural understanding and appreciation through our platform. By featuring products from diverse
+								regions and communities across Africa, we encourage users to discover and learn about different cultures, traditions, and artistic
+								expressions. We believe that fostering cultural exchange leads to greater empathy, connection, and appreciation for Africa's rich
+								heritage.
+							</p>
+						</v-container>
+					</v-card>
+				</v-col>
+				<v-col class="px-0" cols="12" md="6" lg="6">
+					<v-img
+						eager
+						cover
+						width="100%"
+						min-height="429"
+						height="auto"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1712605947/umoja/mission-pic2.png"
+					></v-img>
+				</v-col>
+			</v-row>
+			<v-row>
+				<v-col cols="12" md="6" lg="6" class="pl-0">
+					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-14 pl-8">
+						<v-container style="max-width: 1400px; width: 100%">
+							<v-avatar color="#F4EBFF">
+								<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon3.svg" alt="Icon" />
+							</v-avatar>
+							<p class="my-4" style="color: #333; font-size: 30px; font-weight: 600">Ensure Transparency and Trust:</p>
+							<p style="color: #333; font-size: 18px; font-weight: 400; letter-spacing: -0.2px" class="mb-8">
+								Transparency and trust are fundamental principles guiding our operations. We prioritize transparency in all our transactions,
+								providing users with complete visibility into their e-commerce activities. Additionally, we empower users by offering them tools such
+								as customized vendor dashboards and order management systems, enabling them to manage their businesses efficiently and effectively.
+								Through transparency and trust, we aim to build trust and confidence in our platform while supporting the growth and success of our
+								users.
+							</p>
+						</v-container>
+					</v-card>
+				</v-col>
+				<v-col class="px-0" cols="12" md="6" lg="6">
+					<v-img
+						eager
+						cover
+						width="100%"
+						min-height="429"
+						height="auto"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1712605977/umoja/mission-pic3.png"
+					></v-img>
+				</v-col>
+			</v-row>
 		</div>
-	</v-container>
+	</div>
 
 	<div width="100%" style="width: 100%; background-color: #f8f8f8">
 		<v-container style="max-width: 1400px; width: 100%">
