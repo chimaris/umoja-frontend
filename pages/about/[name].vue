@@ -12,57 +12,45 @@
 		"
 	>
 		<v-container style="max-width: 1400px; width: 100%">
-			<div style="margin: auto" class="py-2">
-				<div class="d-flex" style="">
-					<p
-						style="cursor: pointer; font-size: 14px"
-						:class="select == n ? 'text-green font-weight-bold' : ''"
-						@click="selectCategory(n)"
-						class="font-weight-medium text-capitalize py-3 mr-4 text-grey"
-						v-for="(n, i) in ['who we are', 'what we do', 'Our impact and goals']"
-						:key="n"
-					>
-						{{ n }} <v-icon :style="i === 2 ? 'display : none' : ''" icon="mdi mdi-chevron-right"></v-icon>
-					</p>
-				</div>
-			</div>
+			<v-breadcrumbs class="pl-0 py-0" :items="['who we are', 'what we do', 'Our impact and goals', '']">
+				<template v-slot:divider>
+					<v-icon icon="mdi mdi-chevron-right"></v-icon>
+				</template>
+				<template v-slot:title="{ item }">
+					<span @click="selectCategory(item)" :class="{ 'text-green font-weight-bold': select === item }" style="cursor: pointer; font-size: 14px">
+						{{ item }}
+					</span>
+				</template>
+			</v-breadcrumbs>
 		</v-container>
 	</div>
 
-	<whoWeAre v-if="select == 'who we are'" style="margin-bottom: 100px" />
-	<div v-else-if="select == 'what we do'" style="margin-bottom: 100px">
-		<hi>What we do</hi>
+	<div style="margin-bottom: 100px">
+		<whoWeAre v-if="select === 'who we are'" />
+		<div v-else-if="select === 'what we do'">
+			<v-container style="max-width: 1400px; width: 100%">
+				<hi>What we do page goes here</hi>
+			</v-container>
+		</div>
+		<our-impact-and-goal v-else-if="select === 'Our impact and goals'" />
+		<whoWeAre v-else />
 	</div>
-	<our-impact-and-goal v-else-if="select == 'Our impact and goals'" style="margin-bottom: 100px" />
-	<whoWeAre v-else style="margin-bottom: 100px" />
 
 	<Mainfooter />
 </template>
+
 <script>
 export default {
 	data() {
 		return {
-			showImg: false,
+			select: this.$route.params.name,
 		};
 	},
-	computed: {
-		select() {
-			return this.$route.params.name;
-		},
-		categoryColor() {
-			return this.select == "who we are"
-				? "EDF0EF"
-				: this.select == "what we do"
-				? "FDF1ED"
-				: this.select == "Our impact and goals"
-				? "EDEDED"
-				: "EDF0EF";
-		},
-	},
-
 	methods: {
-		selectCategory(n) {
-			this.$router.push("/about/" + n);
+		selectCategory(category) {
+			console.log(category);
+			this.select = category;
+			this.$router.push("/about/" + category);
 		},
 	},
 };
