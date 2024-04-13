@@ -1,6 +1,6 @@
 <template>
 	<!-- Edit Business Section -->
-	<v-sheet max-width="550" width="100%" style="margin: 0 auto; background-color: #f8f8f8">
+	<v-sheet v-if="editBusinessInfo" max-width="550" width="100%" style="margin: 0 auto; background-color: #f8f8f8">
 		<div style="background-color: #fff; padding: 40px; margin-bottom: 10px; border-radius: 15px">
 			<v-avatar color="#EDF0FC" size="x-large">
 				<v-icon icon="mdi mdi-account-plus" color="#1273EB"></v-icon>
@@ -41,7 +41,7 @@
 	</v-sheet>
 
 	<!-- View Business Section -->
-	<v-sheet class="px-6 pt-8" max-width="550" width="100%" style="padding: 40px; margin: auto; border-radius: 15px">
+	<v-sheet v-if="businessInfo" class="px-6 pt-8" max-width="550" width="100%" style="padding: 40px; margin: auto; border-radius: 15px">
 		<v-avatar class="mx-auto" style="border: 2.93049px solid #fce7ce" size="100">
 			<v-img class="bg-grey-lighten-3 rounded-xl" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684497818/Frame_481586_zfgoph.png"></v-img>
 		</v-avatar>
@@ -59,7 +59,7 @@
 			</p>
 		</v-sheet>
 		<div class="py-4 d-flex justify-space-between">
-			<v-btn size="x-large" style="border: 1px solid #969696" flat>
+			<v-btn size="x-large" style="border: 1px solid #969696" flat @click="showEditForm">
 				<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 24px"> Edit</span></v-btn
 			>
 
@@ -76,6 +76,8 @@ export default {
 		return {
 			rules: [(v) => v.length <= 25 || "Max 25 characters"],
 			value: "",
+			businessInfo: true,
+			editBusinessInfo: false,
 		};
 	},
 	computed: {
@@ -89,6 +91,10 @@ export default {
 	methods: {
 		submit() {
 			this.$emit("submit");
+		},
+		showEditForm() {
+			this.businessInfo = false;
+			this.editBusinessInfo = true;
 		},
 	},
 };

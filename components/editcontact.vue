@@ -1,6 +1,12 @@
 <template>
 	<!-- Edit Contact Section -->
-	<v-sheet class="pt-8" max-width="550" width="100%" style="padding: 40px; margin: 0 auto; border-radius: 15px; margin-bottom: 20px">
+	<v-sheet
+		v-if="editContactInfo"
+		class="pt-8"
+		max-width="550"
+		width="100%"
+		style="padding: 40px; margin: 0 auto; border-radius: 15px; margin-bottom: 20px"
+	>
 		<div style="background-color: #fff">
 			<v-avatar color="#EDF0FC" size="x-large">
 				<v-icon icon="mdi mdi-account-plus" color="#1273EB"></v-icon>
@@ -33,7 +39,7 @@
 			</div>
 		</div>
 	</v-sheet>
-	<v-sheet max-width="550" width="100%" style="margin: auto; background-color: #f8f8f8">
+	<v-sheet v-if="editContactInfo" max-width="550" width="100%" style="margin: auto; background-color: #f8f8f8">
 		<div style="background-color: #fff; padding: 40px; border-radius: 15px; margin-bottom: 20px">
 			<div class="d-flex align-center">
 				<v-avatar size="x-large" color="#EDF0FC" class="mr-4">
@@ -78,7 +84,7 @@
 	</v-sheet>
 
 	<!-- View Contact Section -->
-	<v-sheet max-width="550" width="100%" style="padding: 40px; margin: 0 auto; border-radius: 15px">
+	<v-sheet v-if="contactInfo" max-width="550" width="100%" style="padding: 40px; margin: 0 auto; border-radius: 15px">
 		<v-sheet>
 			<div class="mb-5">
 				<p class="mb-1 contact-label">Business Email</p>
@@ -128,7 +134,7 @@
 			</div>
 		</v-sheet>
 		<div class="py-4 d-flex justify-space-between">
-			<v-btn size="x-large" style="border: 1px solid #969696" flat>
+			<v-btn size="x-large" style="border: 1px solid #969696" flat @click="showEditForm">
 				<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 24px"> Edit</span></v-btn
 			>
 
@@ -143,12 +149,18 @@ export default {
 	data() {
 		return {
 			socialMedia: ["Instagram", "Facebook", "Youtube"],
+			contactInfo: true,
+			editContactInfo: false,
 		};
 	},
 
 	methods: {
 		submit() {
 			this.$emit("submit");
+		},
+		showEditForm() {
+			this.contactInfo = false;
+			this.editContactInfo = true;
 		},
 	},
 };
