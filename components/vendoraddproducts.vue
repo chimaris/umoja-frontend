@@ -481,7 +481,20 @@
 								</v-checkbox>
 							</div>
 						</div>
-						<div style="overflow: hidden" class="rounded-lg cardStyle px-0 mt-4 py-0">
+						<div class="my-4">
+							<p class="inputLabel">Shipping Method</p>
+							<!-- <v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select unit" density="comfortable">
+								
+							</v-select> -->
+							<span class="d-flex" style="align-items: center; gap: 10px; color: #2c6e63; font-size: 14px; font-weight: 600">
+								<v-avatar color="#F8F8F8" size="large">
+									<v-img width="25" height="25" src="https://res.cloudinary.com/payhospi/image/upload/v1713185792/umoja/logo.svg"></v-img>
+								</v-avatar>
+
+								Umoja Shipping
+							</span>
+						</div>
+						<div style="overflow: hidden" class="rounded-lg cardStyle px-0 py-0">
 							<div class="pa-4" style="background: #fff">
 								<v-radio hide-details density="compact" color="#00966D">
 									<template v-slot:label>
@@ -500,10 +513,174 @@
 							<p style="color: #333; font-size: 20px; font-weight: 600">Variants</p>
 						</div>
 						<v-divider class="my-4"></v-divider>
+						<!-- Edit color sections -->
+						<div>
+							<div>
+								<p class="inputLabel">Option Name</p>
+								<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select option" :items="variantOptions" density="comfortable">
+								</v-select>
+							</div>
+							<div>
+								<p class="inputLabel">Option Values</p>
+								<v-text-field placeholder="Eg. Blue, Black Red" density="comfortable" append-inner-icon="mdi mdi-alert-circle"> </v-text-field>
+							</div>
+							<v-btn size="large" style="border: 1px solid #969696" flat>
+								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Done</span></v-btn
+							>
+						</div>
+						<!-- View Color Section -->
+						<div>
+							<div class="d-flex justify-space-between align-center">
+								<span>Color</span>
+								<v-btn size="large" style="border: 1px solid #969696" flat>
+									<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
+								>
+							</div>
+							<div class="py-4">
+								<v-chip
+									v-for="color of ['blue', 'black', 'Brown', 'Yellow']"
+									:key="color"
+									color="#969696"
+									size="x-large"
+									density="compact"
+									style="border-radius: 15px; margin-right: 5px"
+								>
+									<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ color }}</span>
+								</v-chip>
+							</div>
+						</div>
+						<v-divider class="mb-3"></v-divider>
+
+						<!-- View Size Section -->
+						<div>
+							<div class="d-flex justify-space-between align-center">
+								<span>Size</span>
+								<v-btn size="large" style="border: 1px solid #969696" flat>
+									<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
+								>
+							</div>
+							<div class="py-4">
+								<v-chip
+									v-for="size of ['A5', 'B5']"
+									:key="size"
+									color="#969696"
+									size="x-large"
+									density="compact"
+									style="border-radius: 15px; margin-right: 5px"
+								>
+									<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ size }}</span>
+								</v-chip>
+							</div>
+						</div>
+						<v-divider class="mb-3"></v-divider>
+
+						<!-- View Style Section -->
+						<div>
+							<div class="d-flex justify-space-between align-center">
+								<span>Style</span>
+								<v-btn size="large" style="border: 1px solid #969696" flat>
+									<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
+								>
+							</div>
+							<div class="py-4">
+								<v-chip
+									v-for="style of ['Grid', 'Single lined', 'Blank']"
+									:key="style"
+									color="#969696"
+									size="x-large"
+									density="compact"
+									style="border-radius: 15px; margin-right: 5px"
+								>
+									<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ style }}</span>
+								</v-chip>
+							</div>
+						</div>
+					</v-sheet>
+					<v-sheet class="cardStyle mt-4 pb-8" width="800">
 						<p style="color: #1273eb; font-size: 14px; font-weight: 600" class="d-flex align-center">
 							<v-icon icon="mdi mdi-plus" class="mr-2"></v-icon> Add Options like size or color
 						</p>
 					</v-sheet>
+
+					<!-- Table sections -->
+					<v-card style="padding: 20px; border-radius: 15px; width: 800px">
+						<!-- Filtering Section -->
+						<div class="d-flex py-4" style="gap: 20px; color: #1273eb; font-size: 14px; font-weight: 600; line-height: 17px">
+							<span style="color: #000">Select</span>
+							<span>All</span>
+							<span>None</span>
+							<v-menu open-on-hover>
+								<template v-slot:activator="{ props }">
+									<span v-bind="props"> Color <v-icon icon="mdi mdi-chevron-down"></v-icon> </span>
+								</template>
+
+								<v-list>
+									<v-list-item v-for="(item, index) in ['blue', 'black']" :key="index">
+										<v-list-item-title>{{ item }}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+							<v-menu open-on-hover>
+								<template v-slot:activator="{ props }">
+									<span v-bind="props"> Size <v-icon icon="mdi mdi-chevron-down"></v-icon> </span>
+								</template>
+
+								<v-list>
+									<v-list-item v-for="(item, index) in ['A5', 'B5']" :key="index">
+										<v-list-item-title>{{ item }}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+							<v-menu open-on-hover>
+								<template v-slot:activator="{ props }">
+									<span v-bind="props"> Style <v-icon icon="mdi mdi-chevron-down"></v-icon> </span>
+								</template>
+
+								<v-list>
+									<v-list-item v-for="(item, index) in ['Grid', 'Single lined', 'Blank']" :key="index">
+										<v-list-item-title>{{ item }}</v-list-item-title>
+									</v-list-item>
+								</v-list>
+							</v-menu>
+						</div>
+
+						<!-- Table -->
+						<v-table style="height: 80%; !important; overflow: scroll;">
+							<thead style="color: #2c6e63">
+								<tr style="background: #edf0ef; border-radius: none">
+									<th style="width: 40px" class="font-weight-medium text-left">
+										<v-checkbox hide-details></v-checkbox>
+									</th>
+									<th style="font-size: 14px; width: 40%" class="font-weight-medium text-left">Variant</th>
+									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Price</th>
+									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Available</th>
+									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">SKU</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="item in 2" :key="item.sn">
+									<td class="text-grey-lighten-1 px-4">
+										<v-checkbox hide-details></v-checkbox>
+									</td>
+
+									<td class="tableThick px-4">Black</td>
+
+									<td class="tableThick px-1">
+										<span style="background-color: #f8f8f8; padding: 10px 14px; display: block; border-radius: 6px">€ 15.00</span>
+									</td>
+									<td class="tableThick px-1">
+										<span style="background-color: #f8f8f8; padding: 10px 14px; display: block; border-radius: 6px">5</span>
+									</td>
+
+									<td class="px-1">
+										<v-btn size="large" style="border: 1px solid #969696" flat>
+											<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
+										>
+									</td>
+								</tr>
+							</tbody>
+						</v-table>
+					</v-card>
 				</v-window-item>
 			</v-window>
 		</v-sheet>
@@ -523,6 +700,8 @@ export default {
 	data() {
 		return {
 			tags: ["Fashion", "Sneakers", "Unisex shoes", "Men shoes", "Black", "Fashion and style", "Ghana Ankara Material"],
+			variantOptions: ["Size", "Color", "Material", "Style"],
+			items1: [],
 			checkqty: true,
 			radioship: true,
 			editor: null,

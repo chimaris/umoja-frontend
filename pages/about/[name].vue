@@ -9,6 +9,7 @@
 			z-index: 999;
 			border-bottom: 1px solid #ededed;
 			border-top: 1px solid #ededed;
+			padding: 6px;
 		"
 	>
 		<v-container style="max-width: 1400px; width: 100%">
