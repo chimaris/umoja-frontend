@@ -1,6 +1,6 @@
 <template>
 	<!-- Edit Contact Section -->
-	<v-sheet max-width="550" width="100%" style="margin: auto; background-color: #f8f8f8">
+	<v-sheet v-show="editAccountInfo" max-width="550" width="100%" style="margin: auto; background-color: #f8f8f8">
 		<div style="background-color: #fff; padding: 40px; margin-bottom: 10px; border-radius: 15px">
 			<v-avatar size="x-large" color="#EDF0FC">
 				<v-icon icon="mdi mdi-account-circle" color="#1273EB"></v-icon>
@@ -31,7 +31,7 @@
 	</v-sheet>
 
 	<!-- View Contact Section -->
-	<v-sheet max-width="550" width="100%" style="padding-top: 10px; margin: auto; padding: 40px; border-radius: 15px">
+	<v-sheet v-show="accountInfo" max-width="550" width="100%" style="padding-top: 10px; margin: auto; padding: 40px; border-radius: 15px">
 		<v-sheet class="pt-8">
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Bank Name</p>
@@ -47,7 +47,7 @@
 			</div>
 		</v-sheet>
 		<div class="py-4 d-flex justify-space-between">
-			<v-btn size="x-large" style="border: 1px solid #969696" flat>
+			<v-btn size="x-large" style="border: 1px solid #969696" flat @click="showEditForm">
 				<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 24px"> Edit</span></v-btn
 			>
 
@@ -61,12 +61,19 @@
 export default {
 	name: "account",
 	data() {
-		return {};
+		return {
+			accountInfo: true,
+			editAccountInfo: false,
+		};
 	},
 
 	methods: {
 		submit() {
 			this.$emit("submit");
+		},
+		showEditForm() {
+			this.accountInfo = false;
+			this.editAccountInfo = true;
 		},
 	},
 };

@@ -1,6 +1,6 @@
 <template>
-	<!-- Edit Business Section -->
-	<v-sheet max-width="550" width="100%" style="margin: 0 auto; background-color: #f8f8f8">
+	<!-- Edit subscription Section -->
+	<v-sheet v-if="editSubscriptionInfo" max-width="550" width="100%" style="margin: 0 auto; background-color: #f8f8f8">
 		<div style="background-color: #fff; padding: 40px; margin-bottom: 10px; border-radius: 15px">
 			<v-avatar color="#EDF0FC" size="x-large">
 				<v-icon icon="mdi mdi-account-plus" color="#1273EB"></v-icon>
@@ -62,7 +62,7 @@
 	</v-sheet>
 
 	<!-- View Subscription Section -->
-	<v-sheet class="px-6 pt-8" max-width="550" width="100%" style="padding: 40px; margin: auto; border-radius: 15px">
+	<v-sheet v-if="subscriptionInfo" class="px-6 pt-8" max-width="550" width="100%" style="padding: 40px; margin: auto; border-radius: 15px">
 		<div>
 			<h1 style="font-weight: 600; font-size: 32px; color: ##333333">My Plan</h1>
 			<p style="font-weight: 500; font-size: 16px; line-height: 24px; color: #969696">Change your plan based on your needs</p>
@@ -102,27 +102,55 @@
 		</div>
 
 		<div class="py-4 d-flex justify-space-between">
-			<v-btn size="x-large" style="border: 1px solid #969696" flat>
+			<v-btn size="x-large" style="border: 1px solid #969696" flat @click="cancelSubscription">
 				<span style="color: #c20052; font-size: 16px; font-weight: 600; line-height: 24px"> Cancel Subscription</span></v-btn
 			>
 
-			<v-btn size="x-large" style="border: 1px solid #969696" flat>
+			<v-btn size="x-large" style="border: 1px solid #969696" flat @click="dialog = true">
 				<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 24px"> Finish</span></v-btn
 			>
 		</div>
 	</v-sheet>
+
+	<!-- Modal on successful registration -->
+	<v-dialog v-model="dialog" max-width="600px">
+		<v-card class="d-flex flex-column text-center pa-10" style="width: 550px; justify-content: center; align-items: center; border-radius: 15px">
+			<v-avatar color="#FEF6ED" size="x-large" class="mb-5"> 🎉</v-avatar>
+			<h3 style="font-size: 32px; font-weight: 600; line-height: 40px; color: #2a2a2a">Your profile setup has been successfully completed</h3>
+			<p class="mt-4" style="font-size: 16px; font-weight: 500; line-height: 22px; color: #333; width: 340px">
+				You can now use your new password to login to your account 🙌🏽.
+			</p>
+			<v-card-actions class="d-flex justify-space-between pt-10 w-100">
+				<v-btn size="large" style="border: 1px solid #969696" flat @click="dialog = true">
+					<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 20px; padding: 10px"> Go back to dashboard</span></v-btn
+				>
+				<v-btn flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px" size="large"
+					>View profile in settings</v-btn
+				>
+			</v-card-actions>
+		</v-card>
+	</v-dialog>
 </template>
+
 <script>
 export default {
 	name: "subcription",
 	data() {
 		return {
 			value: "",
+			dialog: false,
+			subscriptionInfo: true,
+			editSubscriptionInfo: false,
 		};
 	},
 	methods: {
 		submit() {
 			this.$emit("submit");
+		},
+
+		cancelSubscription() {
+			this.subscriptionInfo = false;
+			this.editSubscriptionInfo = true;
 		},
 	},
 };
