@@ -139,6 +139,56 @@
 					</tr>
 				</tbody>
 			</v-table>
+			<!-- <div
+				class="w-100 mt-4 d-flex justify-space-between align-center"
+				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px"
+			>
+				<div>
+					<span style="font-size: 14px; font-weight: 400">1 - 9 of 725 Pages</span>
+				</div>
+				<div class="d-flex align-center">
+					<span style="font-size: 12px; font-weight: 400">The Page you’re on</span>
+					<v-select append-inner-icon="mdi mdi-chevron-down" variant="outlined" placeholder="1" style="background-color: white"> </v-select>
+					|
+					<v-btn flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
+					<v-btn flat><v-icon icon="mdi mdi-redo"></v-icon></v-btn>
+				</div>
+			</div> -->
+			<div
+				class="w-100 mt-4 d-flex justify-space-between align-center"
+				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px"
+			>
+				<div style="display: flex; align-items: center">
+					<span style="font-size: 14px; font-weight: 400">1 - 9 of 725 Pages</span>
+				</div>
+				<div class="d-flex align-center" style="margin-left: auto">
+					<span style="font-size: 12px; font-weight: 400; margin-right: 10px">The Page you’re on</span>
+					<v-select
+						append-inner-icon="mdi mdi-chevron-down"
+						variant="outlined"
+						placeholder="1"
+						style="background-color: white; min-width: 40px"
+					></v-select>
+					<v-btn flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
+					<v-btn flat><v-icon icon="mdi mdi-redo"></v-icon></v-btn>
+				</div>
+			</div>
+		</div>
+
+		<!-- If there is no orders show this -->
+		<div v-if="items1.length === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
+			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
+				<v-img
+					:width="300"
+					cover
+					src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/order-empy-box.png"
+					style="filter: grayscale(100%) brightness(100%)"
+				></v-img>
+				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Your orders will show here</h2>
+				<p style="color: #969696; font-size: 16px; font-weight: 500">
+					This is where you'll fulfill orders, collect payments, and track order progress.
+				</p>
+			</v-sheet>
 		</div>
 	</v-container>
 </template>
