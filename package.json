@@ -31,9 +31,13 @@
 		"@tiptap/vue-3": "^2.0.3",
 		"axios": "^1.4.0",
 		"dayjs": "^1.11.10",
+		"flag-icon-css": "^4.1.7",
+		"flag-icons": "^7.2.1",
 		"gsap": "^3.12.2",
 		"howler": "^2.2.4",
 		"laue": "^0.2.1",
+		"libphonenumber-js": "^1.10.60",
+		"maz-ui": "^3.40.0",
 		"sass": "^1.57.1",
 		"v-calendar": "^3.1.2",
 		"vuetify": "^3.2.5"

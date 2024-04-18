@@ -118,8 +118,8 @@ letter-spacing: -0.42px;" class="px-2"> and above</span>
                     </div>
                     <div>
                         <v-row id="homepage" style="background-color: #fff;" class=" mt-2">
-        <v-col  v-for="(n, i) in items" :key="i" lg="3" cols="12" sm="6" md="4">
-          <product-component  :index="i" :item="n"/>
+        <v-col  v-for="(n, i) in productStore.products.main" :key="i" lg="3" cols="12" sm="6" md="4">
+          <product-component  :index="i" :item="n" @add-to-cart="AddToCart(n)"/>
         </v-col>
        </v-row> 
                     </div>
@@ -142,11 +142,19 @@ import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
+import { useCartStore } from '~/stores/cartStore';
+import { useProductStore } from '~/stores/productStore'
+import { useUserStore } from '~/stores/userStore'
+
+
 
 export default {
     components: {
     EditorContent,
     
+},
+created() {
+    this.productStore = useProductStore()
 },
     mounted() {
 
@@ -167,6 +175,7 @@ export default {
     },
     data() {
         return {
+            productStore: null,
             editor: null,
             categoryExpand: true,
             genderExpand: true,
@@ -185,110 +194,6 @@ export default {
             category: 'Fashion',
             categories: ['Fashion', 'Cosmetics', 'Art', 'Home Decoration'],
             discounts: ['10%', '20%', '30%', '45%', '50%', '60%', '75%'],
-            items:[
-            {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074696/rectangle-1899popular_us0ywj.png',
-        price: '150000.00',
-        subCategory: 'Organic cotton certified',
-        location: 'Lagos, Nigeria',
-        likes: '66',
-        oos: true},
-        {
-        name: 'Multi colored ankara scarf for women designed by Lumi Opeyemi.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png',
-        price: '57.00',
-        location: 'Madagascar',
-        likes: '456',
-        oos: true
-    },
-                    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074685/rectangle-1899-popular_q1v0dp.png',
-        price: '150000.00',
-        subCategory: 'Organic cotton certified',
-        location: 'Lagos, Nigeria',
-        likes: '66',
-        oos: true},
-                    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074686/rectangle-1899-pop_vbpz4e.png',
-        price: '150000.00',
-        subCategory: 'Organic cotton certified',
-        location: 'Lagos, Nigeria',
-        likes: '66',
-        oos: true},
-     
-                     
-    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074687/rectangle-1899cseme_z9iltx.png',
-        price: '150000.00',
-        subCategory: 'Organic cotton certified',
-        location: 'Lagos, Nigeria',
-        likes: '66',
-        oos: true},
-        {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png',
-        price: '115.32',
-        location: 'Accra, Ghana',
-        likes: '1.2k'
-    },
-                  
-                    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074688/rectangle-1899mkjhgse_v2blcw.png',
-        price: '150000.00',
-        subCategory: 'Organic cotton certified',
-        location: 'Lagos, Nigeria',
-        likes: '66',
-        oos: true},
-                    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074685/rectangle-1899csme432_mfrgkf.png',
-        price: '150000.00',
-        subCategory: 'Organic cotton certified',
-        location: 'Lagos, Nigeria',
-        likes: '66',
-        oos: true},
-                    
-    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria..',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png',
-        price: '57.00',
-        location: 'Mumbasa, Kenya',
-        likes: '456',
-    },
-    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074689/rectangle-1899-popular3_q0cyie.png',
-        price: '150000.00',
-        subCategory: 'Organic cotton certified',
-        location: 'Lagos, Nigeria',
-        likes: '66',
-        oos: true},
-
-
-    {
-        name: 'Orange colored ankara scarf for women designed by Lumi Opeyemi.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png',
-        price: '79.00',
-        location: 'Accra, Ghana',
-        likes: '66',
-        oos: true
-    },
-    {
-        name: 'Green and brown kente scarf material, Made in Lagos Nigeria.',
-        image: 'https://res.cloudinary.com/payhospi/image/upload/v1694074685/rectangle-1899mlkjh_wqnarx.png',
-        price: '150000.00',
-        subCategory: 'Organic cotton certified',
-        location: 'Lagos, Nigeria',
-        likes: '66',
-        oos: true},
-    
-     
-        ],
          africanCountries:[
   'Algeria',
   'Angola',
@@ -348,6 +253,15 @@ export default {
         }
     },
     methods: {
+        AddToCart(item) {
+            const userStore = useUserStore()
+            const cartStore = useCartStore()
+            if (userStore.getIsLoggedIn) {
+                cartStore.addItem(item)
+            } else {
+                this.$router.push('/user/login')
+            }
+        },
         selectCountry(item){
             this.country = item
         },
