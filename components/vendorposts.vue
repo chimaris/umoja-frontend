@@ -85,6 +85,107 @@
 
 							<v-divider></v-divider>
 							<div>
+								<h1 style="font-weight: 700; font-size: 24px; line-height: 27px; color: #000000" class="pa-6">Comments</h1>
+							</div>
+							<v-divider></v-divider>
+							<v-row style="background-color: #fff" class="mt-2 px-5">
+								<v-col v-for="(n, i) in items" :key="i" cols="12">
+									<v-card flat class="bg-white">
+										<div class="d-flex pb-4">
+											<v-avatar size="48" class="mr-5">
+												<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685880308/Frame_221_gj6tpk.png"></v-img>
+											</v-avatar>
+											<div class="w-100 d-flex justify-space-between">
+												<div>
+													<div class="d-flex">
+														<p style="font-weight: 700; font-size: 16px; line-height: 22px; color: #1e1e1e">Bonsu Thompson</p>
+														<p class="" style="font-weight: 400; font-size: 14px; line-height: 22px; color: #969696">
+															<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>23 Nov, 2022
+														</p>
+													</div>
+													<div class="d-flex">
+														<v-chip size="x-small" class="px-3" color="#936900" rounded="0">Stylist</v-chip>
+														<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
+															<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>042, Coal city state, Ghana
+														</p>
+													</div>
+												</div>
+												<div class="pr-2">
+													<v-icon icon="mdi mdi-dots-horizontal"></v-icon>
+												</div>
+											</div>
+										</div>
+										<div class="">
+											<p style="font-weight: 400; font-size: 14px; line-height: 19px; letter-spacing: 0.03em">
+												Lorem ipsum dolor sit amet consectetur. Nulla vitae mauris odio urna integer molestie laoreet. Enim viverra cursus imperdiet
+												aliquam. Sed ut commodo diam est aenean at.
+											</p>
+											<div class="d-flex justify-space-between align-center" style="color: #1e1e1e; font-size: 12px">
+												<div class="d-flex align-center py-2">
+													<span class="mr-6"> <v-icon class="mr-1" icon="mdi mdi-heart-outline"></v-icon>4 </span>
+													<span> <v-icon class="mr-1" icon="mdi mdi-message-text-outline"></v-icon>11 </span>
+												</div>
+												<span> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> </span>
+											</div>
+										</div>
+									</v-card>
+								</v-col>
+							</v-row>
+						</v-sheet>
+					</v-col>
+				</v-row>
+			</v-card>
+		</v-dialog>
+		<v-dialog v-model="dialog1" transition="dialog-bottom-transition" width="auto">
+			<v-card style="height: 70vh; overflow: hidden" max-width="700px" min-width="60vw" class="rounded-lg">
+				<v-row style="height: 70vh">
+					<v-col cols="12" class="px-0 py-0" md="6">
+						<v-img
+							cover
+							width="100%"
+							height="100%"
+							src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_600/v1685878571/Rectangle_1903_2x_ssbqbl.png"
+						></v-img>
+					</v-col>
+					<v-col cols="12" style="position: relative" class="px-0 py-0" md="6">
+						<v-sheet style="height: 100%; overflow: scroll; position: absolute; width: 100%" class="py-2">
+							<div class="d-flex px-6 pt-6 pb-4">
+								<v-avatar size="48" class="mr-5">
+									<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685880308/Frame_221_gj6tpk.png"></v-img>
+								</v-avatar>
+								<div class="w-100 d-flex justify-space-between">
+									<div>
+										<div class="d-flex">
+											<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">Bonsu Thompson</p>
+											<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
+												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>23 Nov, 2022
+											</p>
+										</div>
+										<div class="d-flex">
+											<v-chip size="x-small" class="px-3" color="#936900" rounded="0">Stylist</v-chip>
+											<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
+												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>042, Coal city state, Ghana
+											</p>
+										</div>
+									</div>
+									<div class="pr-2">
+										<v-icon icon="mdi mdi-dots-horizontal"></v-icon>
+									</div>
+								</div>
+							</div>
+							<div class="px-6">
+								<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
+									Lorem ipsum dolor sit amet consectetur. Nulla vitae mauris odio urna integer molestie laoreet. Enim viverra cursus imperdiet
+									aliquam. Sed ut commodo diam est aenean at.
+								</p>
+								<div class="d-flex align-center py-2">
+									<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-heart-outline"></v-icon> 1.2k likes </v-btn>
+									<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
+								</div>
+							</div>
+
+							<v-divider></v-divider>
+							<div>
 								<h1 style="font-weight: 700; font-size: 24px; line-height: 27px; color: #000000" class="pa-6">
 									Related Products ({{ items.length }})
 								</h1>

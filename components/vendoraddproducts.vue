@@ -197,7 +197,7 @@
 								<div>
 									<v-chip
 										size="small"
-										class="mr-1"
+										class="ma-1"
 										style="border: 0.5px solid var(--magnetic-green-3, #94aaa5); font-size: 12px"
 										close-icon="mdi mdi-close-circle-outline"
 										rounded="lg"
@@ -268,6 +268,50 @@
 					<v-btn flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
 						>Save and continue</v-btn
 					>
+
+					<v-dialog max-width="800" style="border: 1px solid #cecece; border-redius: 15px">
+						<template v-slot:activator="{ props: activatorProps }">
+							<v-btn v-bind="activatorProps" color="surface-variant" text="Edit Price" variant="flat"></v-btn>
+						</template>
+
+						<template v-slot:default="{ isActive }">
+							<v-card title="Edit Prices">
+								<v-divider class="my-4"></v-divider>
+
+								<v-card-text>
+									<div>
+										<p class="inputLabel">Apply a price to all variants</p>
+										<div class="d-flex">
+											<v-select class="mr-3" append-inner-icon="mdi mdi-chevron-down" placeholder="Enter price" density="comfortable"> </v-select>
+											<v-btn flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600; opacity: 0.5" size="large"
+												>Apply to all</v-btn
+											>
+										</div>
+									</div>
+									<v-divider class="my-4"></v-divider>
+									<div class="d-flex justify-space-between">
+										<span>Brown / A5 / Grid</span>
+										<div>
+											<v-text-field placeholder="€ 0.00" density="comfortable" class="align-end" style="width: 200px; text-align: right">
+											</v-text-field>
+											<p>$10.00 cost per item • Projected margin: 50%</p>
+										</div>
+									</div>
+								</v-card-text>
+
+								<v-card-actions>
+									<v-spacer></v-spacer>
+
+									<v-btn @click="isActive.value = false" size="large" style="border: 1px solid #969696" flat>
+										<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
+									>
+									<v-btn flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600; opacity: 0.5" size="large"
+										>Done</v-btn
+									>
+								</v-card-actions>
+							</v-card>
+						</template>
+					</v-dialog>
 				</v-window-item>
 				<v-window-item value="Picture">
 					<v-sheet class="cardStyle mt-4" width="800">
@@ -520,10 +564,19 @@
 								<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select option" :items="variantOptions" density="comfortable">
 								</v-select>
 							</div>
+
 							<div>
 								<p class="inputLabel">Option Values</p>
+								<v-text-field :model-value="n" v-for="n of ['Blue', 'Red', 'Yellow']" :key="n">
+									<template #append>
+										<v-chip style="background-color: #f7edee; border-radius: 6px">
+											<v-icon color="#C20052">mdi mdi-delete</v-icon>
+										</v-chip>
+									</template>
+								</v-text-field>
 								<v-text-field placeholder="Eg. Blue, Black Red" density="comfortable" append-inner-icon="mdi mdi-alert-circle"> </v-text-field>
 							</div>
+
 							<v-btn size="large" style="border: 1px solid #969696" flat>
 								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Done</span></v-btn
 							>
