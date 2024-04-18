@@ -1,5 +1,5 @@
 <template>
-	<div id="homepage" style="min-height: 100vh; width: 100%">
+	<div id="homepage" style="min-height: 100vh; width: 100%; position: relative">
 		<v-img
 			style="height: 185px; position: relative"
 			width="auto"
@@ -8,13 +8,23 @@
 			src="https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png"
 		>
 		</v-img>
+		<v-btn
+			size="x-large"
+			rounded="xl"
+			style="background-color: #000000; opacity: 0.7; top: -170px; left: 20px; z-index: 80"
+			@click="uploadModal = true"
+		>
+			<img src="https://res.cloudinary.com/payhospi/image/upload/v1713357603/umoja/edit-cover-icon.svg" class="mr-2" />
+			<span style="color: #edf0ef; font-size: 12px; font-weight: 400; line-height: 26px"> Edit Cover Photo</span></v-btn
+		>
+
 		<v-card class="overflow-visible pr-2" flat tile color="#Fff" min-height="100vh" width="100%">
 			<v-container style="max-width: 1300px">
 				<v-row>
 					<v-col md="4" cols="12" xs="12">
 						<v-card
 							variant="outlined"
-							style="border: 1px solid #cecece; margin-top: -45px; border-radius: 16px; z-index: 99"
+							style="border: 1px solid #cecece; top: -100px; border-radius: 16px; z-index: 99"
 							flat
 							class="pb-12 bg-white"
 							width="100%"
@@ -137,6 +147,30 @@
 			</v-container>
 		</v-card>
 	</div>
+
+	<v-dialog v-model="uploadModal" max-width="600" width="600">
+		<v-sheet width="100%" style="padding: 24px; margin: auto; border-radius: 15px">
+			<v-sheet class="pt-8 d-flex text-center flex-column justify-center align-center mx-auto">
+				<div @click="uploadFile" style="cursor: pointer">
+					<input type="file" ref="fileInput" style="display: none" @change="handleFileUpload" />
+					<v-avatar class="mb-5" color="#EDF3F0" size="x-large">
+						<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1713362071/umoja/nvlx2fessykgtjbrpeu2.svg"></v-img>
+					</v-avatar>
+					<h4 style="color: #333; font-size: 20px; font-weight: 500; line-height: 34px">Replace Banner Image</h4>
+					<p class="mb-5" style="color: #333; font-size: 16px; font-weight: 500">Optimal dimensions 3200 x 410px</p>
+				</div>
+
+				<div>
+					<v-btn class="mr-4" size="large" style="background-color: #2c6e63; padding: 10px 30px" flat @click="wecomeModal = false">
+						<span style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px"> Replace Image</span></v-btn
+					>
+					<v-btn size="large" style="border: 1px solid #c20052; padding: 10px 30px" flat @click="wecomeModal = false">
+						<span style="color: #c20052; font-size: 16px; font-weight: 600; line-height: 20px"> Remove Image</span></v-btn
+					>
+				</div>
+			</v-sheet>
+		</v-sheet>
+	</v-dialog>
 </template>
 <script>
 export default {
@@ -147,6 +181,7 @@ export default {
 			window: "products",
 			rating: 4,
 			tab: null,
+			uploadModal: false,
 			items: [
 				{
 					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
@@ -250,6 +285,14 @@ export default {
 		filt(text) {
 			var newText = text.length > 40 ? text.slice(0, 40) + "..." : text;
 			return newText;
+		},
+		uploadFile() {
+			this.$refs.fileInput.click();
+		},
+		handleFileUpload(event) {
+			const file = event.target.files[0];
+			console.log(file);
+			// Handle the file upload logic here
 		},
 	},
 };

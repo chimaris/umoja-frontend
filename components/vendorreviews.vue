@@ -284,6 +284,20 @@
 				</div>
 			</v-card>
 		</v-dialog>
+
+		<!-- If there is no reviews show this -->
+		<div v-if="items1.length === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
+			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
+				<v-img
+					:width="300"
+					cover
+					src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/review-empty-box.png"
+					style="filter: grayscale(100%) brightness(100%)"
+				></v-img>
+				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">All your reviews will show here</h2>
+				<p style="color: #969696; font-size: 16px; font-weight: 500">Capture high-quality product reviews foryour store</p>
+			</v-sheet>
+		</div>
 	</v-container>
 </template>
 
