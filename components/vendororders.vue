@@ -156,7 +156,7 @@
 			</div> -->
 			<div
 				class="w-100 mt-4 d-flex justify-space-between align-center"
-				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px"
+				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
 			>
 				<div style="display: flex; align-items: center">
 					<span style="font-size: 14px; font-weight: 400">1 - 9 of 725 Pages</span>
@@ -169,7 +169,14 @@
 						placeholder="1"
 						style="background-color: white; min-width: 40px"
 					></v-select>
-					<v-btn flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
+					<v-img
+						:width="10"
+						:height="40"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1713471908/umoja/vertical-line.svg"
+						class="mx-2"
+					></v-img>
+
+					<v-btn class="mr-1" flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
 					<v-btn flat><v-icon icon="mdi mdi-redo"></v-icon></v-btn>
 				</div>
 			</div>
