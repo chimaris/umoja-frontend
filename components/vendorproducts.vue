@@ -14,10 +14,16 @@
 					</v-text-field>
 				</div>
 				<div class="d-flex align-center">
-					<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
+					<v-btn id="activate" style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3" v-on="on">
 						Sort by
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
 					</v-btn>
+						<v-menu activator="#activate" open-on-hover  transition="slide-x-transition"   :close-on-content-click="false">
+							<v-list >
+								<v-list-item class="sort-options" style="cursor: pointer; font-weight: 500">Availability</v-list-item>
+								<v-list-item class="sort-options" style="cursor: pointer; font-weight: 500" >Sold</v-list-item>
+							</v-list>
+						</v-menu>
 					<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
 						Collection type
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
@@ -370,3 +376,8 @@ export default {
 	},
 };
 </script>
+<style scoped>
+	.sort-options:hover {
+		background-color: #e5e5e5;
+	}
+</style>

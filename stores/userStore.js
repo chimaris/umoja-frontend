@@ -1,13 +1,14 @@
 // userStore.js
 
 import { defineStore } from 'pinia';
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
 export const useUserStore = defineStore({
   id: 'user',
   state: () => ({
     loginError: '',
     signUpError: '',
-    user: null,
+    user: getLocalStorageItem("user", []),
     isLoggedIn: localStorage.getItem('isLoggedIn') === 'true' ,
     users: JSON.parse(localStorage.getItem('users')) || [] 
   }),
@@ -24,6 +25,7 @@ export const useUserStore = defineStore({
           if (user) {
             this.loginError = '';
             this.user = user;
+            setLocalStorageItem("user", this.user)
             this.isLoggedIn = true;
             localStorage.setItem('isLoggedIn', 'true');
             resolve(true); // Login successful
@@ -46,6 +48,7 @@ export const useUserStore = defineStore({
             this.signUpError = "";
             this.users.push({ first_name, last_name, email, password, dateRegistered });
             this.user = { first_name, last_name, email, password, dateRegistered };
+            setLocalStorageItem("user", this.user)
             this.isLoggedIn = true;
             localStorage.setItem('isLoggedIn', 'true');
             localStorage.setItem('users', JSON.stringify(this.users));
@@ -56,7 +59,7 @@ export const useUserStore = defineStore({
     },
     logout() {
       localStorage.removeItem('isLoggedIn');
-      this.user = null;
+      this.user = removeLocalStorageItem("user");
       this.isLoggedIn = false;
     }
   }
