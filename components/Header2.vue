@@ -9,7 +9,7 @@
 					<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
 						<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
 					</v-avatar>
-					<div class="d-flex">
+					<div class="d-none d-sm-flex">
 						<v-btn :to="n.route" variant="text" v-show="!n.disabled" class="mx-2" flat v-for="n in urls" :key="n.title">
 							{{ n.title }}
 						</v-btn>
@@ -21,8 +21,8 @@
 							<div class="d-flex align-center">
 								<div v-bind="props">
 									<v-slide-x-reverse-transition leave-absolute origin="center center">
-										<v-btn v-if="!isActive" icon size="48" v-bind="props" rounded="xl" flat color="transparent">
-											<v-avatar rounded="0" size="28">
+										<v-btn v-if="!isActive" icon size="24" v-bind="props" rounded="xl" flat color="transparent">
+											<v-avatar rounded="0" size="24">
 												<v-img
 													contain
 													src="https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png"
@@ -51,19 +51,22 @@
 						<dialogsearch />
 					</v-menu>
 
-					<v-btn rounded="xl" v-if="!isLoggedIn" to="/user/login" class="ml-4" icon flat color="transparent">
-						<v-avatar size="35"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img> </v-avatar
+					<v-btn rounded="xl" v-if="!isLoggedIn" to="/user/login" class="" icon flat color="transparent">
+						<v-avatar size="24"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img> </v-avatar
 					></v-btn>
-					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" class="ml-4" icon flat color="transparent">
-						<v-avatar size="35"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img> </v-avatar
+					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" class="" icon flat color="transparent">
+						<v-avatar size="24"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img> </v-avatar
 					></v-btn>
-					<v-btn to="/order/cart" class="ml-4 text-none" icon size="48" rounded="xl" flat color="transparent">
+					<v-btn to="/order/cart" class="text-none" icon size="48" rounded="xl" flat color="transparent">
 						<v-badge offset-y="20" :dot="cartStore.totalCartItems == 0" :content="cartStore.totalCartItems" color="error">
-							<v-avatar rounded="0" size="32">
+							<v-avatar rounded="0" size="24">
 								<v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png"></v-img>
 							</v-avatar>
 						</v-badge>
 					</v-btn>
+					<v-btn v-if="$vuetify.display.mobile" rounded="xl" class="" icon flat color="transparent">
+						<v-avatar size="24"> <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> </v-avatar
+					></v-btn>
 					<v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px">
 						<template v-slot:activator="{ props }">
 							<v-btn class="ml-4" icon size="48" v-bind="props" rounded="xl" flat color="transparent">
@@ -80,6 +83,34 @@
 			</div>
 		</v-container>
 	</div>
+
+	<!-- Responsive navbar -->
+	<v-layout v-if="$vuetify.display.mobile">
+		<v-navigation-drawer
+			v-model="drawer"
+			:location="$vuetify.display.mobile ? 'left' : undefined"
+			temporary
+			style="width: 100%; position: absolute; top: 80px"
+		>
+			<div class="d-flex align-center justify-space-between px-4">
+				<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
+					<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
+				</v-avatar>
+				<v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+			</div>
+			<v-divider></v-divider>
+			<v-list :items="urls"></v-list>
+
+			<template v-slot:append>
+				<div class="pa-4 pb-16">
+					<v-btn block color="#333" size="large" variant="outlined" flat rounded="xl">
+						<span class="d-flex align-center" style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Login </span>
+					</v-btn>
+				</div>
+			</template>
+		</v-navigation-drawer>
+	</v-layout>
+
 	<!-- <v-card height="500px" class=" d-flex align-end">{{ hasScrolledPastPoint }}</v-card> -->
 	<tutorial />
 </template>
@@ -100,6 +131,26 @@ export default {
 			theme: useTheme(),
 			btn_radio: null,
 			searchmenu: false,
+			drawer: false,
+			group: null,
+			items: [
+				{
+					title: "Foo",
+					value: "foo",
+				},
+				{
+					title: "Bar",
+					value: "bar",
+				},
+				{
+					title: "Fizz",
+					value: "fizz",
+				},
+				{
+					title: "Buzz",
+					value: "buzz",
+				},
+			],
 		};
 	},
 	props: ["maxwidth", "sticky"],

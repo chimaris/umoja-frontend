@@ -4,16 +4,33 @@
 		<v-container style="max-width: 1200px" class="mt-4">
 			<v-row class="pb-6">
 				<v-col cols="12" lg="7">
-					<p style="color: #1e1e1e; font-size: 64px; font-weight: 600; line-height: 120%; letter-spacing: -1.92px" class="bigTitle">
+					<p
+						:style="{
+							color: '#1e1e1e',
+							fontSize: $vuetify.display.mobile ? '40px' : '64px',
+							fontWeight: '600',
+							lineHeight: '120%',
+							letterSpacing: '-1.92px',
+						}"
+						class="bigTitle"
+					>
 						<span style="color: #2c6e63"> Explore </span> a new digital African marketplace from any part of the world!
 					</p>
 				</v-col>
 				<v-col cols="12" class="mt-3" lg="5">
-					<p style="color: #333; font-size: 20px; font-weight: 400; line-height: 180%; letter-spacing: -0.6px">
+					<p
+						:style="{
+							color: '#333',
+							fontSize: $vuetify.display.mobile ? '18px' : '20px',
+							fontWeight: '400',
+							lineHeight: '180%',
+							letterSpacing: '-1.6px',
+						}"
+					>
 						The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.
 					</p>
-					<div class="pt-5">
-						<v-btn to="/discovery_page" color="green" size="large" flat rounded="xl" width="163px">
+					<div class="pt-5 d-flex" :style="{ justifyContent: $vuetify.display.mobile ? 'space-between' : 'flex-start', display: flex }">
+						<v-btn to="/discovery_page" color="green" size="large" flat rounded="xl" :style="{ width: $vuetify.display.mobile ? '45%' : '163px' }">
 							<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Start Exploring </span>
 						</v-btn>
 						<v-btn
@@ -26,7 +43,7 @@
 							variant="outlined"
 							flat
 							rounded="xl"
-							width="163px"
+							:style="{ width: $vuetify.display.mobile ? '45%' : '163px' }"
 						>
 							<span class="d-flex align-center" style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px">
 								Tutorial
@@ -110,7 +127,7 @@
 
 	<div>
 		<v-container id="discovery" style="max-width: 1200px">
-			<div class="d-flex mb-12 align-center">
+			<div class="d-flex mb-8 align-center">
 				<p
 					class="d-block"
 					style="
@@ -131,14 +148,13 @@
 			<v-row>
 				<v-col cols="12" lg="5">
 					<p
-						style="
-							color: var(--carbon-5, #2a2a2a);
-
-							font-size: 48px;
-							font-weight: 600;
-							line-height: 120%; /* 57.6px */
-							letter-spacing: -1.44px;
-						"
+						:style="{
+							color: 'var(--carbon-5, #2a2a2a)',
+							fontSize: $vuetify.display.mobile ? '36px' : '48px',
+							fontWeight: '600',
+							lineHeight: '120%',
+							letterSpacing: '-1.44px',
+						}"
 					>
 						Discover a dynamic Marketplace
 					</p>
@@ -1003,24 +1019,23 @@ export default {
 		// this.timeline.kill()
 	},
 	created() {
-		// this.tutorialStore.init()
-		gsap.registerPlugin(CSSPlugin);
-		// Set the document title
-		// document.title = 'My App';
-		this.$nextTick(() => {
-			if (document.documentElement.clientWidth < 1024) {
-				this.demoblock = true;
-				alert("open in desktop to view the demo");
-				useHead({
-					title: "Umoja Demo",
-					meta: [{ name: "viewport", content: "width=1440, initial-scale=0" }],
-				});
-			}
-		});
+		// // this.tutorialStore.init()
+		// gsap.registerPlugin(CSSPlugin);
+		// // Set the document title
+		// // document.title = 'My App';
+		// this.$nextTick(() => {
+		// 	if (document.documentElement.clientWidth < 1024) {
+		// 		this.demoblock = true;
+		// 		alert("open in desktop to view the demo");
+		// 		useHead({
+		// 			title: "Umoja Demo",
+		// 			meta: [{ name: "viewport", content: "width=1440, initial-scale=0" }],
+		// 		});
+		// 	}
+		// });
 		// const descriptionMeta = document.createElement('meta');
 		// descriptionMeta.name = 'viewport';
 		// descriptionMeta.content = 'width=1440, initial-scale=1';
-
 		// // Find the head element and append the meta element to it
 		// const head = document.querySelector('head');
 		// if (head) {

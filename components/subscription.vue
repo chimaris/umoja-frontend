@@ -113,7 +113,7 @@
 	</v-sheet>
 
 	<!-- Modal on successful registration -->
-	<v-dialog v-model="dialog" max-width="600px">
+	<!-- <v-dialog v-model="dialog" max-width="600px">
 		<v-card class="d-flex flex-column text-center pa-10" style="width: 550px; justify-content: center; align-items: center; border-radius: 15px">
 			<v-avatar color="#FEF6ED" size="x-large" class="mb-5"> 🎉</v-avatar>
 			<h3 style="font-size: 32px; font-weight: 600; line-height: 40px; color: #2a2a2a">Your profile setup has been successfully completed</h3>
@@ -129,7 +129,7 @@
 				>
 			</v-card-actions>
 		</v-card>
-	</v-dialog>
+	</v-dialog> -->
 </template>
 
 <script>
