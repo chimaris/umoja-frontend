@@ -1,5 +1,5 @@
 <template>
-	<div id="homepage" style="min-height: 100vh; width: 100%; position: relative">
+	<div id="homepage" style="min-height: 100vh; width: 100%">
 		<v-img
 			style="height: 185px; position: relative"
 			width="auto"
@@ -8,23 +8,13 @@
 			src="https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png"
 		>
 		</v-img>
-		<v-btn
-			size="x-large"
-			rounded="xl"
-			style="background-color: #000000; opacity: 0.7; top: -170px; left: 20px; z-index: 80"
-			@click="uploadModal = true"
-		>
-			<img src="https://res.cloudinary.com/payhospi/image/upload/v1713357603/umoja/edit-cover-icon.svg" class="mr-2" />
-			<span style="color: #edf0ef; font-size: 12px; font-weight: 400; line-height: 26px"> Edit Cover Photo</span></v-btn
-		>
-
 		<v-card class="overflow-visible pr-2" flat tile color="#Fff" min-height="100vh" width="100%">
 			<v-container style="max-width: 1300px">
 				<v-row>
 					<v-col md="4" cols="12" xs="12">
 						<v-card
 							variant="outlined"
-							style="border: 1px solid #cecece; top: -100px; border-radius: 16px; z-index: 99"
+							style="border: 1px solid #cecece; margin-top: -45px; border-radius: 16px; z-index: 99"
 							flat
 							class="pb-12 bg-white"
 							width="100%"
@@ -38,7 +28,7 @@
 										></v-img>
 									</v-avatar>
 									<h3 class="py-4" style="font-size: 24px; font-weight: 800; line-height: 30px">
-										Thatdesignpro <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
+										{{ vendor.companyInfo.businessName }} <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
 									</h3>
 									<v-btn color="orange" width="80%" flat> Follow</v-btn>
 								</div>
@@ -59,7 +49,7 @@
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
-										<h1>🇬🇭</h1>
+										<span style="font-size: 1.5rem;" :class="getCountryIconClass"></span>
 									</div>
 								</div>
 								<v-divider></v-divider>
@@ -67,24 +57,21 @@
 									<v-avatar rounded="0" size="19"
 										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 									></v-avatar>
-									<p class="textClass px-4">Shop 24b Drip King Plaza, Victoria Island Lagos state, Nigeria</p>
+									<p class="textClass px-4"><span v-if="vendor.contactInfo?.complexBuilding">{{ vendor.contactInfo?.complexBuilding }},</span> {{ vendor.contactInfo?.Address }}, {{ vendor.contactInfo?.city }}, {{ vendor.contactInfo?.state }} {{ vendor.contactInfo?.Country }}</p>
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="px-6 pt-8">
-									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">(Fabric)</span></h3>
+									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor.companyInfo?.selectedCompanyCategory }})</span></h3>
 
 									<p class="textClass text-left mt-4 mb-8">
-										Lorem ipsum dolor sit amet consectetur. Sit et vulputate et euismod mi enim. Tellus sagittis augue proin ipsum posuere.
-										Suspendisse consectetur id mollis curabitur amet.
-										<br />
-										<br />
-										Pellentesque enim orci aenean interdum morbi suspendisse. Dictumst aliquam donec in risus semper arcu faucibus.
+										{{ vendor.businessInfo?.businessBio }}
 									</p>
 
 									<p style="font-weight: 700; font-size: 12px; line-height: 20px; color: #969696">ON THE WEB</p>
 									<div class="pt-4 justify-start align-center d-flex">
 										<v-btn
 											size="small"
+											@click="openSocialMedia(n.icon, n.handle)"
 											style="border: 0.357149px solid #2c6e63"
 											class="green-hover rounded-xl mr-4"
 											variant="outlined"
@@ -110,7 +97,7 @@
 											<v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon> Edit Profile
 										</v-btn>
 									</div>
-									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: MARCH 24, 2020</p>
+									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ vendor.dateRegistered }}</p>
 								</v-sheet>
 							</v-sheet>
 						</v-card>
@@ -147,33 +134,30 @@
 			</v-container>
 		</v-card>
 	</div>
-
-	<v-dialog v-model="uploadModal" max-width="600" width="600">
-		<v-sheet width="100%" style="padding: 24px; margin: auto; border-radius: 15px">
-			<v-sheet class="pt-8 d-flex text-center flex-column justify-center align-center mx-auto">
-				<div @click="uploadFile" style="cursor: pointer">
-					<input type="file" ref="fileInput" style="display: none" @change="handleFileUpload" />
-					<v-avatar class="mb-5" color="#EDF3F0" size="x-large">
-						<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1713362071/umoja/nvlx2fessykgtjbrpeu2.svg"></v-img>
-					</v-avatar>
-					<h4 style="color: #333; font-size: 20px; font-weight: 500; line-height: 34px">Replace Banner Image</h4>
-					<p class="mb-5" style="color: #333; font-size: 16px; font-weight: 500">Optimal dimensions 3200 x 410px</p>
-				</div>
-
-				<div>
-					<v-btn class="mr-4" size="large" style="background-color: #2c6e63; padding: 10px 30px" flat @click="wecomeModal = false">
-						<span style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px"> Replace Image</span></v-btn
-					>
-					<v-btn size="large" style="border: 1px solid #c20052; padding: 10px 30px" flat @click="wecomeModal = false">
-						<span style="color: #c20052; font-size: 16px; font-weight: 600; line-height: 20px"> Remove Image</span></v-btn
-					>
-				</div>
-			</v-sheet>
-		</v-sheet>
-	</v-dialog>
 </template>
 <script>
+import { useVendorStore } from '~/stores/vendorStore';
+import { countryCodes } from '~/utils/countryapi';
+
 export default {
+	setup(props, ctx) {
+		const vendorStore = useVendorStore()
+		const vendor = vendorStore.getVendor
+
+		const choose = (x) => {
+			ctx.emit("changePage", x);
+		};
+
+		const openSocialMedia = (icon, handle) => {
+      	window.open(`https://${icon}.com/${handle}`, '_blank');
+    	};
+		return {
+			vendorStore,
+			vendor,
+			choose,
+			openSocialMedia
+		}
+	},
 	data() {
 		return {
 			placescards: false,
@@ -181,7 +165,6 @@ export default {
 			window: "products",
 			rating: 4,
 			tab: null,
-			uploadModal: false,
 			items: [
 				{
 					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
@@ -250,20 +233,33 @@ export default {
 			],
 		};
 	},
+
 	computed: {
+		getCountryIconClass() {
+			const countryCode = this.getCountryCode();
+      		if (!countryCode) {
+			console.error("Invalid or missing country code");
+			return ''; // Or provide a default class
+			}
+			return `fi fi-${countryCode.toLowerCase()}`;
+		},
 		buttons() {
 			return [
 				{
 					icon: "youtube",
+					handle: this.vendor.contactInfo?.youtubeHandle
 				},
 				{
 					icon: "twitter",
+					handle: this.vendor.contactInfo?.twitterHandle
 				},
 				{
 					icon: "facebook",
+					handle: this.vendor.contactInfo?.facebookHandle
 				},
 				{
-					icon: "linkedin",
+					icon: "instagram",
+					handle: this.vendor.contactInfo?.instagramHandle
 				},
 			];
 		},
@@ -279,23 +275,21 @@ export default {
 		},
 	},
 	methods: {
-		choose(x) {
-			this.$emit("changePage", x);
+		getCountryCode() {
+			if (!this.vendor || !this.vendor.companyInfo || !this.vendor.companyInfo.selectedBusinessCountry) {
+        	console.error("Missing or invalid vendor data");
+        	return null;
+      		}
+      		const country = this.vendor.companyInfo.selectedBusinessCountry;
+      		return countryCodes[country];
+    	}
 		},
 		filt(text) {
 			var newText = text.length > 40 ? text.slice(0, 40) + "..." : text;
 			return newText;
 		},
-		uploadFile() {
-			this.$refs.fileInput.click();
-		},
-		handleFileUpload(event) {
-			const file = event.target.files[0];
-			console.log(file);
-			// Handle the file upload logic here
-		},
-	},
-};
+	};
+
 </script>
 <style>
 .v-carousel.promo .v-btn.v-btn--icon {

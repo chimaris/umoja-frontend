@@ -136,7 +136,7 @@
 		</v-carousel>
 		<v-row style="background-color: #fff" class="mt-8">
 			<v-col v-for="(n, i) in items" :key="i" lg="4" xs="6" sm="4" md="6">
-				<product-component :index="i" :item="n" />
+				<product-component :index="i" :item="n" @add-to-cart="AddToCart(n)"/>
 			</v-col>
 		</v-row>
 	</div>
@@ -144,12 +144,23 @@
 <style></style>
 <script>
 import VueCountdown from "@chenfengyuan/vue-countdown";
+import { useVendorStore } from "~/stores/vendorStore";
+import { useCartStore } from "~/stores/cartStore";
 
 export default {
 	components: {
 		VueCountdown,
 	},
 	methods: {
+		AddToCart(item) {
+            const vendorStore = useVendorStore()
+            const cartStore = useCartStore()
+            if (vendorStore. getVendorIsLoggedIn) {
+                cartStore.addItem(item)
+            } else {
+                this.$router.push('/vendor/login')
+            }
+        },
 		filt(text) {
 			var newText = text.length > 40 ? text.slice(0, 40) + "..." : text;
 			return newText;
@@ -171,13 +182,15 @@ export default {
 			window: "products",
 			rating: 4,
 			items: [
-				{
+				{	
+					id: 55,
 					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png",
 					price: "115.32",
 					likes: "1.2k",
 				},
-				{
+				{	
+					id: 56,
 					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png",
 					price: "57.00",
@@ -186,37 +199,43 @@ export default {
 				},
 
 				{
+					id: 57,
 					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
 					price: "57.00",
 					likes: "456",
 				},
 				{
+					id: 58,
 					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
 					price: "79.00",
 					likes: "66",
 					oos: true,
 				},
-				{
+				{	
+					id: 59,
 					name: "Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png",
 					price: "179.00",
 					likes: "966",
 				},
 				{
+					id: 60,
 					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png",
 					price: "57.00",
 					likes: "456",
 				},
 				{
+					id: 61,
 					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
 					price: "57.00",
 					likes: "456",
 				},
 				{
+					id: 62,
 					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
 					price: "79.00",
@@ -224,12 +243,14 @@ export default {
 					oos: true,
 				},
 				{
+					id: 63,
 					name: "Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png",
 					price: "179.00",
 					likes: "966",
 				},
 				{
+					id: 64,
 					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
 					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png",
 					price: "57.00",

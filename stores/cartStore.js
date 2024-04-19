@@ -53,7 +53,9 @@ export const useCartStore = defineStore('cart', {
         }
       }
     },
-
+    clearItem(itemId) {
+      this.items = this.items.filter(item => item.id !== itemId);
+    },
     clearCart() {
       this.items = [];
     },

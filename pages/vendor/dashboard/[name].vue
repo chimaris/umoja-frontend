@@ -56,7 +56,7 @@
 								<v-btn class="mr-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
 
 								<v-btn
-									@click="window = window == 'Add Products' || window == 'Import Product' ? 'Products' : 'Orders'"
+									@click="handleClick"
 									size="large"
 									v-bind="props"
 									style="border: 1px solid #e5e5e5"
@@ -138,28 +138,46 @@
 	max-width: calc(100% - 85px);
 }
 </style>
-<script>
-export default {
-	data() {
-		return {
-			sidebar: true,
-			edit: true,
-		};
-	},
-	computed: {
-		window: {
-			get() {
-				return this.$route.params.name ? this.$route.params.name : "Homepage";
-			},
-		},
-	},
-	methods: {
-		changePage(n) {
-			this.$router.push(`/vendor/dashboard/${n}`);
-		},
-		sideFn() {
-			this.sidebar = false;
-		},
-	},
-};
+
+<script setup>
+definePageMeta({
+middleware: "vendor-auth"
+})
+
+
+import { ref, computed } from 'vue';
+import { useVendorStore } from '~/stores/vendorStore';
+import { useRouter, useRoute } from '#vue-router';
+
+
+const sidebar = ref(true);
+const edit = ref(true);
+const router = useRouter();
+const route = useRoute()
+const vendor = ref([])
+
+const window = ref(route.params.name ? route.params.name : "Homepage");
+
+const handleClick = () => {
+      if (window.value === 'Add Products' || window.value === 'Import Product') {
+        // Update the window value to 'Products' if it meets the condition, otherwise set it to 'Orders'
+        window.value = 'Products';
+      } else {
+        window.value = 'Orders';
+      }
+    };
+
+function changePage(n) {
+  router.push(`/vendor/dashboard/${n}`);
+}
+
+function sideFn() {
+  sidebar.value = false;
+}
+
+onMounted(() => {
+  const vendorStore = useVendorStore();
+  vendor.value = vendorStore.getVendor;
+  router.currentRoute.value.params.name = vendor.value.ownerInfo.firstName;
+  })
 </script>

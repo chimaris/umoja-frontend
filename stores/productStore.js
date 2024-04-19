@@ -1,12 +1,14 @@
 import { defineStore } from 'pinia';
-import { mainProducts, row } from './mockData';
+import { mainProducts, row, vendorPro, hotDeals } from './mockData';
 
 export const useProductStore = defineStore('productStore', {
   state: () => ({
     products: {
       main: mainProducts,
       row: row,
+      hotDeals: hotDeals,
       popular: [],
+      vendorProducts: vendorPro,
       recently_viewed: [],
       sale: [],
       customArray: [], // You can add more arrays based on your needs

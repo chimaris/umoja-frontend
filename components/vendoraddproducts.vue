@@ -739,137 +739,72 @@
 		</v-sheet>
 	</v-container>
 </template>
-<script>
+<script setup>
+import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 
-export default {
-	components: {
-		EditorContent,
-	},
-	data() {
-		return {
-			tags: ["Fashion", "Sneakers", "Unisex shoes", "Men shoes", "Black", "Fashion and style", "Ghana Ankara Material"],
-			variantOptions: ["Size", "Color", "Material", "Style"],
-			items1: [],
-			checkqty: true,
-			radioship: true,
-			editor: null,
-			tab: "Customer Details",
-			chip: "All",
-			chosen: "",
-			tab1: null,
-			window: "General",
 
-			notes: [
-				{
-					name: "Benjamin Franklin O.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png",
-				},
-				{
-					name: "Nweke Franklin",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png",
-				},
-				{
-					name: "Nweke Franklin",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png",
-				},
-			],
-			summary: [
-				{
-					title: "Total Quantity",
-					value: "4 Items",
-				},
-				{
-					title: "Grand Total",
-					value: "€ 1,829.00",
-				},
-				{
-					title: "Sub-Total",
-					value: "€ 1,817.00",
-				},
-				{
-					title: "Shipping International",
-					value: "€ 12.00",
-				},
-				{
-					title: "Taxes",
-					value: "€ 0.00",
-				},
-			],
-			items: [
-				{
-					sn: "#23942",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-				},
-				{
-					sn: "#23442",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-				},
-				{
-					sn: "#26042",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-				},
-			],
-		};
-	},
-	computed: {
-		orderDetails() {
-			return [
-				{
-					title: "Name",
-					value: "Benjamin Franklin O.",
-				},
-				{
-					title: "Email",
-					value: "sylvesterfranklin007@gmail.com",
-				},
-				{
-					title: "Phone",
-					value: "+145789900",
-				},
-				{
-					title: "Billing",
-					value: "Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)",
-				},
-				{
-					title: "Shipping",
-					value: "Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)",
-				},
-				{
-					title: "Shipping Company",
-					value: "Umoja Free Shipping",
-					img: "https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png",
-				},
-			];
-		},
-	},
-	mounted() {
-		this.items = this.items1;
+const tags = ref(["Fashion", "Sneakers", "Unisex shoes", "Men shoes", "Black", "Fashion and style", "Ghana Ankara Material"]);
+const variantOptions = ref(["Size", "Color", "Material", "Style"]);
+const items1 = ref([]);
+const checkqty = ref(true);
+const radioship = ref(true);
+const editor = ref(null);
+const tab = ref("Customer Details");
+const chip = ref("All");
+const chosen = ref("");
+const tab1 = ref(null);
+const window = ref("General");
 
-		this.editor = new Editor({
-			extensions: [
-				StarterKit,
-				Link,
-				Underline,
-				TextAlign.configure({
-					types: ["heading", "paragraph"],
-				}),
-			],
-			content: "<p>This sneakers is made from one of the best  ankara material in Ghana</p>",
-		});
-	},
-	beforeUnmount() {
-		this.editor.destroy();
-	},
-};
+const notes = ref([
+    { name: "Benjamin Franklin O.", image: "https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png" },
+    { name: "Nweke Franklin", image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png" },
+    { name: "Nweke Franklin", image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png" }
+]);
+const summary = ref([
+    { title: "Total Quantity", value: "4 Items" },
+    { title: "Grand Total", value: "€ 1,829.00" },
+    { title: "Sub-Total", value: "€ 1,817.00" },
+    { title: "Shipping International", value: "€ 12.00" },
+    { title: "Taxes", value: "€ 0.00" }
+]);
+const items = ref([
+    { sn: "#23942", name: "Leather crop top & pants......", date: "17 May", total: "€2,349‎" },
+    { sn: "#23442", name: "Leather crop top & pants......", date: "17 May", total: "€2,349‎" },
+    { sn: "#26042", name: "Leather crop top & pants......", date: "17 May", total: "€2,349‎" }
+]);
+
+const orderDetails = computed(() => [
+    { title: "Name", value: "Benjamin Franklin O." },
+    { title: "Email", value: "sylvesterfranklin007@gmail.com" },
+    { title: "Phone", value: "+145789900" },
+    { title: "Billing", value: "Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)" },
+    { title: "Shipping", value: "Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)" },
+    { title: "Shipping Company", value: "Umoja Free Shipping", img: "https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png" }
+]);
+
+let editorInstance;
+
+onMounted(() => {
+    editorInstance = new Editor({
+        extensions: [
+            StarterKit,
+            Link,
+            Underline,
+            TextAlign.configure({
+                types: ["heading", "paragraph"],
+            }),
+        ],
+        content: "<p>This sneakers is made from one of the best  ankara material in Ghana</p>",
+    });
+});
+
+onBeforeUnmount(() => {
+    editorInstance.destroy();
+});
+
 </script>
