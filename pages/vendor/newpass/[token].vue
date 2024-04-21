@@ -123,7 +123,7 @@ const confirmpasswordRules = [
       loading.value = true;
       try {
         const response = await api({
-          url: 'auth/reset_customer_password',
+          url: 'auth/reset_vendor_password',
           method: 'post',
           data: {token, email, password, password_confirmation}
         });
