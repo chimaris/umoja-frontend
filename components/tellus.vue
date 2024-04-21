@@ -32,7 +32,7 @@
 			<p class="inputLabel">Business Website <span><i class="mdi mdi-information" style="color: #1C274C"></i></span></p>
 
 			<v-text-field :rules="inputRules" v-model="businessWebsite" placeholder="http://www." density="comfortable"> </v-text-field>
-
+			<p class="inputLabel">Add business images <span style="color: #969696;">(at least 5-10 pictures)</span></p>
 			<div 
 			@dragenter.prevent
 			@dragleave.prevent
@@ -55,7 +55,7 @@
 				</li>
 			</ul>
 			<ul>
-				<li v-for="(file, index) in upLoadedFiles" :key="index" class="d-flex align-center py-2 rounded-lg px-4" style="border: 1px solid #EAECF0; justify-content: space-between; ">
+				<li v-for="(file, index) in upLoadedFiles" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between; ">
 					<fileUploaded :file="file" />
 				</li>
 			</ul>
@@ -82,42 +82,22 @@
 				@change="fetchStates(selectedBusinessCountry)"
 			>
 			</v-select>
-			<div class="d-flex mb-2" >
-				<p class="inputLabel">State</p>
-				<v-spacer></v-spacer>
-				<v-progress-circular v-if="loadingStates"
-						:width="2"
-						color="green"
-						indeterminate
-					></v-progress-circular>
-				</div>
+			<p class="inputLabel">State</p>
 			<v-select 
 			v-model="selectedState" 
+			:loading="loadingStates"
 			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select State" 
 			density="comfortable" 
 			:items="states"
 			@change="fetchCities(selectedBusinessCountry, selectedState)"
 			:rules="inputRules"> 
-				<v-progress-circular
-					:width="3"
-					color="green"
-					indeterminate
-				></v-progress-circular>
 			</v-select>
-			
 
-			<div class="d-flex mb-2">
 				<p class="inputLabel">City</p>
-				<v-spacer></v-spacer>
-				<v-progress-circular v-if="loadingCities"
-							:width="3"
-							color="green"
-							indeterminate
-				></v-progress-circular>
-			</div>
 			<v-select 
 			v-model="selectedCity" 
+			:loading="loadingCities"
 			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select" density="comfortable" 
 			:items="cities"
@@ -149,7 +129,7 @@ const businessAddress = ref("");
 const selectedBusinessCountry = ref("");
 const selectedState = ref("");
 const selectedCity = ref("");
-
+const businessImages = ref([])
 
 const errorMessage = ref("")
 const formError = ref("")
@@ -180,11 +160,11 @@ const submit = () => {
 		selectedCompanyCategory: selectedCompanyCategory.value,
 		businessName: businessName.value,
 		businessWebsite: businessWebsite.value,
-		files: files.value,
+		business_image: businessImages.value.join(', '),
 		businessAddress: businessAddress.value,
 		selectedBusinessCountry: selectedBusinessCountry.value,
 		selectedState: selectedState.value,
-		selectedCountry: selectedCity.value
+		selectedCity: selectedCity.value
 	}
 	if (!isFormValid()) {
 		formError.value = "Please fill in all required fields."
@@ -193,8 +173,8 @@ const submit = () => {
 	formError.value = ""
 	if (!vendorStore.isCompanyInfoComplete) {
 		vendorStore.setCompanyInfo(companyInfo)
-		console.log(vendorStore.companyInfo)
 		vendorStore.markSectionComplete('isCompanyInfoComplete')
+		console.log(vendorStore.companyInfo)
 	}
 	emit('submit')
 			
@@ -213,23 +193,31 @@ watchEffect(() => {
 });
 
 function isFormValid() {
+	if (businessImages.value.length < 5) {
+		errorMessage.value = 'You must upload a minimum of 5 images!!'
+	}
 	if (
 		selectedCountry.value &&
 		selectedCompanyCategory.value &&
 		businessName.value &&
 		businessWebsite.value &&
-		businessAddress.value &&
+		businessAddress.value && 
 		selectedBusinessCountry.value &&
 		selectedCity.value &&
 		selectedState.value &&
-		files.value.length > 0
+		businessImages.value.length >= 5
 	) {
+		errorMessage.value = ''
 		return true
 	}else {
 		return false
 	}
 }
 function upLoadFile() {
+	    if (upLoadedFiles.value.length == 10) {
+			errorMessage.value = "Maximum number of files images allowed is 10"
+			return;
+		}
 		const file = document.querySelector(".droppedFile").files[0]
 		if(!file) return;
 		
@@ -254,82 +242,102 @@ function upLoadFile() {
 			errorMessage.value = "";
 			const filename = file.name
 			const formData = new FormData();
-			formData.append("file", file);
-			const form = {name: filename, loading: 0}
-			// files.value = [...files.value, form]
+			formData.append('business_image', file)
 			files.value.push({name: filename, loading: 0})
 			showProgress.value = true;
-			console.log(files.value)
-			console.log(showProgress.value)
-		};
+
+			axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			onUploadProgress: ({loaded, total}) => {
+				files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles.value.push({name: filename, size: fileSize});
+					files.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				const businessImg = response.data.business_image
+				businessImages.value = [...businessImages.value, businessImg]
+			})
+			.catch(error => {
+				if (error.response) {
+				this.error = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+				this.error = 'No response received from server. Please try again later.';
+				} else {
+				this.error = 'An error occurred. Please try again later.';
+				}
+			});
+			};
 
 		img.onerror = function () {
 			errorMessage.value = "Failed to load the image"
 		};
 
 
-		// axios.post("", formData, {
-		// 	onUploadProgress: ({loaded, total}) => {
-		// 		files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
-		// 		if (loaded == total) {
-		// 			const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-		// 			upLoadedFiles.value.push({name: filename, size: fileSize});
-		// 			this.files = [];
-		// 			this.showProgress = false
-		// 		}
-		// 	}
-		// }).catch(console.error) 
+	
 }
 
 function drop(e) {
-	const file= e.dataTransfer.files[0]
-	if(!file) return;
-
-	const allowedFiles = [".gif", ".png", ".jpeg", ".jpg", ".svg"]
-	const maxAllowedWidth = 800;
-  const maxAllowedHeight = 400;
-	const fileExtension = file.name.split(".").pop().toLowerCase();
-	
-	if (!allowedFiles.includes("." + fileExtension)) {
-				errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-        return;
-    }
-	errorMessage.value = ""
-
-	const img = new Image();
-	img.src = URL.createObjectURL(file);
-	img.onload = function () {
-		if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
-			errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+	if (upLoadedFiles.value.length >= 10) {
+			errorMessage.value = "Maximum number of files images allowed is 10"
 			return;
 		}
-		errorMessage.value = "";
-		const filename = file.name
-		const formData = new FormData();
-		formData.append("file", file);
-		const form = {name: filename, loading: 0}
-		// files.value = [...files.value, form]
-		files.value.push({name: filename, loading: 0})
-		showProgress.value = true;
-		console.log(files.value)
-		console.log(showProgress.value)
-	};
+	const file= e.dataTransfer.files[0]
+	if(!file) return;
+		
+		const allowedFiles = [".gif", ".png", ".jpeg", ".jpg", ".svg"]
+		const maxAllowedWidth = 800;
+		const maxAllowedHeight = 400;
+		const fileExtension = file.name.split(".").pop().toLowerCase();
+		
+		if (!allowedFiles.includes("." + fileExtension)) {
+					errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
+					return;
+			}
+		errorMessage.value = ""
 
-	img.onerror = function () {
-		errorMessage.value = "Failed to load the image"
-	};
+		const img = new Image();
+		img.src = URL.createObjectURL(file);
+		img.onload = function () {
+			if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
+				errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+				return;
+			}
+			errorMessage.value = "";
+			const filename = file.name
+			const formData = new FormData();
+			formData.append('business_image', file)
+			files.value.push({name: filename, loading: 0})
+			showProgress.value = true;
 
-			// axios.post("", formData, {
-		// 	onUploadProgress: ({loaded, total}) => {
-		// 		files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
-		// 		if (loaded == total) {
-		// 			const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-		// 			upLoadedFiles.value.push({name: filename, size: fileSize});
-		// 			this.files = [];
-		// 			this.showProgress = false
-		// 		}
-		// 	}
-		// }).catch(console.error) 
+			axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			onUploadProgress: ({loaded, total}) => {
+				files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles.value.push({name: filename, size: fileSize});
+					files.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				const businessImg = response.data.business_image
+				businessImages.value = [...businessImages.value, businessImg]
+			})
+			.catch(error => {
+				// Handle errors here
+				console.error(error);
+			});
+			};
+
+		img.onerror = function () {
+			errorMessage.value = "Failed to load the image"
+		};
+
 	}
 
 	

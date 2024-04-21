@@ -20,7 +20,6 @@
   
 		<p class="inputLabel">Phone Number</p>
 		<MazPhoneNumberInput style="width: 100%;"
-		  v-model="phoneNumber"
 		  show-code-on-list
 		  :success="results?.isValid"
 		  @update="results = $event"
@@ -122,11 +121,11 @@
   const firstName = ref('');
   const lastName = ref('');
   const email = ref('');
-  const phoneNumber = ref('');
   const selectedGender = ref('');
   const selectedDateOfBirth = ref(new Date().toISOString().substr(0, 10));
   const selectedFormOfId = ref('');
   const idNumber = ref('');
+  const picture_vendor_id_number = ref("")
   
   
   const gender = ref(['Male', 'Female']);
@@ -154,7 +153,7 @@
 	  formattedDate.value &&
 	  selectedFormOfId.value &&
 	  idNumber.value &&
-	  files.value.length > 0
+	  picture_vendor_id_number.value
 	) {
 	  return true
 	} else {
@@ -167,12 +166,12 @@
 	  firstName: firstName.value,
 	  lastName: lastName.value,
 	  email: email.value,
-	  phoneNumber: phoneNumber.value,
+	  phoneNumber: results.value.phoneNumber,
 	  Gender: selectedGender.value,
-	  dateofBirth: selectedDateOfBirth.value,
+	  dateofBirth: formattedDate.value,
 	  formofId: selectedFormOfId.value,
 	  idNumber: idNumber.value,
-	  files: files.value
+	  picture_vendor_id_number: picture_vendor_id_number.value
 	}
 	if (!isFormValid()) {
 	  formError.value = "Please fill in all required fields."
@@ -181,15 +180,18 @@
 	formError.value = ""
 	if (!vendorStore.isOwnerInfoComplete) {
 		vendorStore.setOwnerInfo(ownerInfo)
-		console.log(vendorStore.ownerInfo)
 		vendorStore.markSectionComplete('isOwnerInfoComplete')
 	}
 	emit('submit');
   };
   
   function upLoadFile() {
-		  const file = document.querySelector(".droppedFile").files[0]
-		  if(!file) return;
+	if (picture_vendor_id_number.value) {
+			errorMessage.value = "You can not upload more than one document"
+			return;
+		}
+	const file = document.querySelector(".droppedFile").files[0]
+	if(!file) return;
 		  
 	  const allowedFiles = [".pdf", ".png", ".jpeg", ".jpg"]
 	  const maxAllowedWidth = 800;
@@ -209,6 +211,7 @@
 		return;
 	  }
 	  errorMessage.value = ""
+	  
   
 	  const img = new Image();
 	  img.src = URL.createObjectURL(file);
@@ -220,77 +223,114 @@
 		errorMessage.value = "";
 		const filename = file.name
 		const formData = new FormData();
-		formData.append("file", file);
-		const form = {name: filename, loading: 30}
+		formData.append("picture_vendor_id_number", file);
+		const form = {name: filename, loading: 0}
 		files.value = [...files.value, form]
-		// files.value.push(form)
 		showProgress.value = true;
-		console.log(files.value)
-		console.log(showProgress.value)
-	  };
+
+		axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			onUploadProgress: ({loaded, total}) => {
+				files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles.value.push({name: filename, size: fileSize});
+					files.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				picture_vendor_id_number.value = response.data.picture_vendor_id_number
+
+			})
+			.catch(error => {
+				if (error.response) {
+					errorMessage.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+					errorMessage.value = 'No response received from server. Please try again later.';
+				} else {
+					errorMessage.value = 'An error occurred. Please try again later.';
+				}
+			});
+			};
   
 	  img.onerror = function () {
 		errorMessage.value = "Failed to load the image"
 	  };
   
-  
-		  // axios.post("", formData, {
-		  // 	onUploadProgress: ({loaded, total}) => {
-		  // 		files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
-		  // 		if (loaded == total) {
-		  // 			const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-		  // 			upLoadedFiles.value.push({name: filename, size: fileSize});
-		  // 			this.files = [];
-		  // 			this.showProgress = false
-		  // 		}
-		  // 	}
-		  // }).catch(console.error) 
   }
   
   function drop(e) {
+	 if (picture_vendor_id_number.value) {
+			errorMessage.value = "You can not upload more than one document"
+			return;
+		}
 	  const file= e.dataTransfer.files[0]
 	  if(!file) return;
-  
+		  
 	  const allowedFiles = [".pdf", ".png", ".jpeg", ".jpg"]
 	  const maxAllowedWidth = 800;
-	const maxAllowedHeight = 400;
-	const maxFileSize = 2 * 1024 * 1024;
+	  const maxAllowedHeight = 400;
+	  const maxFileSize = 2 * 1024 * 1024;
 	  const fileExtension = file.name.split(".").pop().toLowerCase();
 	  
 	  if (!allowedFiles.includes("." + fileExtension)) {
-				  errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-		  return;
-	  }
+			errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
+			return;
+		}
   
 		errorMessage.value = ""
   
-	if (file.size > maxFileSize) {
-	  errorMessage.value = "File size exceeds the maximum allowed size of 2MB";
-	  return;
-	}
+	  if (file.size > maxFileSize) {
+		errorMessage.value = "File size exceeds the maximum allowed size of 2MB";
+		return;
+	  }
 	  errorMessage.value = ""
+	  
   
 	  const img = new Image();
 	  img.src = URL.createObjectURL(file);
 	  img.onload = function () {
-		  if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
-			  errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
-			  return;
-		  }
-		  errorMessage.value = "";
-		  const filename = file.name
-		  const formData = new FormData();
-		  formData.append("file", file);
-		  const form = {name: filename, loading: 0}
-		  files.value = JSON.parse(JSON.stringify([...files.value, form]))
-		  // files.value.push(form)
-		  showProgress.value = true;
-		  console.log(files.value)
-		  console.log(showProgress.value)
-	  };
+		if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
+		  errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+		  return;
+		}
+		errorMessage.value = "";
+		const filename = file.name
+		const formData = new FormData();
+		formData.append("picture_vendor_id_number", file);
+		const form = {name: filename, loading: 0}
+		files.value = [...files.value, form]
+		showProgress.value = true;
+
+		axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			onUploadProgress: ({loaded, total}) => {
+				files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles.value.push({name: filename, size: fileSize});
+					files.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				picture_vendor_id_number.value = response.data.picture_vendor_id_number
+
+			})
+			.catch(error => {
+				if (error.response) {
+				errorMessage.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+				errorMessage.value = 'No response received from server. Please try again later.';
+				} else {
+				errorMessage.value = 'An error occurred. Please try again later.';
+				}
+			});
+			};
   
 	  img.onerror = function () {
-		  errorMessage.value = "Failed to load the image"
+		errorMessage.value = "Failed to load the image"
 	  };
 	  }
   

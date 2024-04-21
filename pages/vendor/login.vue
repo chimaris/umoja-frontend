@@ -41,10 +41,12 @@
                </v-btn>  
                <p style="color: red; font-size: 16px">{{ vendorStore.loginError }}</p>
            <v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mt-6"> 
-             <span style="text-transform: none;">
- 
- Login
-           </span>
+             <span class="mr-4" style="text-transform: none;">Login</span>
+             <v-progress-circular v-if="vendorStore.loading"
+				indeterminate
+				:width="2"
+				:size="25" 
+    		 ></v-progress-circular>
          </v-btn>
  </v-form>
          </v-card>
@@ -74,9 +76,6 @@
              const vendorName = vendorStore.vendor.ownerInfo.firstName
              router.push(`/vendor/dashboard/${vendorName}`);
              vendorStore.loginError = "";
-         } else {
-             // Show error message
-             console.error('Login failed');
          }
          } catch (error) {
          console.error('An error occurred during login:', error);
