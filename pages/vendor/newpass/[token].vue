@@ -110,7 +110,7 @@ const confirmpasswordRules = [
       const token = route.params.token
       if(email.value && password.value && c_password.value) {
         try {
-          const resetPass = await resetPassWord({token, email: email.value, password: password.value, password_confirmation: c_password.value })
+          const resetPass = await resetPassWord({token: token, email: email.value, password: password.value, password_confirmation: c_password.value })
           if (resetPass) {
             showModal.value = true
           }

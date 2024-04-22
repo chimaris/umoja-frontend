@@ -128,7 +128,6 @@
           password,
           password_confirmation
         });
-        console.log(response)
         error.value = "";
         return true
       } catch (error) {
