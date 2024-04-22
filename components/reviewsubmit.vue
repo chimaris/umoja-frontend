@@ -114,7 +114,7 @@ async function handleSubmission() {
         		vendorStore.saveVendor(vendorId, dateRegistered); 
 			}
 		} catch (error) {
-			console.error("eee");
+			console.error(error);
 		}
 	} else {
 		formError.value = "Please make sure you have filled all the form inputs!!";

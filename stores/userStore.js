@@ -98,6 +98,17 @@ export const useUserStore = defineStore({
         this.loading = false;
       } 
     },
+    async socialLogin(provider) {
+      return new Promise((resolve, reject) => {
+        axios.get(`https://umoja-production-9636.up.railway.app/api/auth/${provider}/redirect`)
+                  .then((response) => {
+                    resolve(response);
+                  })
+                  .catch((error) => {
+                    reject(error)
+                  })
+      })
+    },
     logout() {
       localStorage.removeItem('isLoggedIn');
       this.user = removeLocalStorageItem("user");
