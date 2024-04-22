@@ -86,6 +86,7 @@ import { passwordRules, emailRules} from '~/utils/formrules'
 import {vendorUseApi} from '~/composables/vendorApi'
 import {ref} from '@vue/composition-api'
 import { useRoute } from 'vue-router';
+import axios from 'axios'
 
 const confirmpasswordRules = [
   v => !!v || 'Confirm Password is required',

@@ -83,6 +83,7 @@ import { ref, computed, watch, onMounted } from '@vue/composition-api';
 import { useRouter, useRoute } from 'vue-router';
 import {passwordRules} from '~/utils/formrules'
 import { vendorUseApi } from '~/composables/vendorApi';
+import axios from 'axios'
 
 
 
