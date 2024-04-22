@@ -23,7 +23,7 @@
 							<div class="d-flex align-center">
 								<div v-bind="props">
 									<v-slide-x-reverse-transition leave-absolute origin="center center">
-										<v-btn v-if="!isActive" icon size="24" v-bind="props" rounded="xl" flat color="transparent">
+										<v-btn v-if="!isActive" icon size="24" v-bind="props" rounded="xl" flat color="transparent" class="mr-2">
 											<v-avatar rounded="0" size="24">
 												<v-img
 													contain
@@ -66,9 +66,10 @@
 							</v-avatar>
 						</v-badge>
 					</v-btn>
-					<v-btn v-if="$vuetify.display.mobile" rounded="xl" class="" icon flat color="transparent">
-						<v-avatar size="24"> <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> </v-avatar
+					<v-btn v-if="$vuetify.display.mobile" rounded="xl" class="" icon flat color="transparent" @click.stop="drawer = !drawer">
+						<v-avatar size="24"> <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1713788195/umoja/menu.svg"></v-img> </v-avatar
 					></v-btn>
+
 					<v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px">
 						<template v-slot:activator="{ props }">
 							<v-btn class="ml-4" icon size="48" v-bind="props" rounded="xl" flat color="transparent">
@@ -99,10 +100,23 @@
 					<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
 				</v-avatar>
 				<v-icon icon="mdi mdi-close" @click.stop="drawer = !drawer"></v-icon>
-				<!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
 			</div>
 			<v-divider></v-divider>
-			<v-list :items="urls"></v-list>
+
+			<v-list :items="urls" class="d-flex flex-column align-start">
+				<v-btn
+					:to="n.route"
+					v-for="n in urls"
+					variant="text"
+					v-show="!n.disabled"
+					class=""
+					flat
+					:key="n.title"
+					style="font-weight: 700; font-size: 16px; line-height: 22.4px; color: #2a2a2a"
+				>
+					{{ n.title }}
+				</v-btn>
+			</v-list>
 
 			<template v-slot:append>
 				<div class="pa-4 pb-16">

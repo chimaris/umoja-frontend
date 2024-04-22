@@ -21,7 +21,7 @@
 			</v-btn>
 		</div>
 
-		<div class="rower h-auto pb-2">
+		<div class="rower h-auto pb-2 mt-10 mb-5">
 			<v-chip-group v-model="category" block color="green" class="d-inline-block">
 				<v-chip
 					:value="n"
@@ -33,7 +33,7 @@
 					class="px-5 py-4"
 					variant="outlined"
 					grow
-					active-class="bordergreen text--green"
+					active-class="bordergreen text--green "
 				>
 					<span style="font-size: 14px; font-weight: 500; letter-spacing: -0.42px">{{ n }}</span>
 				</v-chip>
@@ -53,7 +53,7 @@
 
 		<!-- For mobile View -->
 		<div class="d-block d-md-none">
-			<v-row dense cla>
+			<v-row dense>
 				<v-col v-for="(n, i) in items" :key="i" cols="6" :md="6" :lg="3">
 					<vendor-component v-if="vendorBol" :category="category" :index="i" :item="n" />
 					<product-component v-else :cover="coverbol" :category="category" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
@@ -66,7 +66,7 @@
 				</v-col>
 			</v-row>
 
-			<v-btn block class="d-flex d-md-none" color="#333" size="large" style="" variant="outlined" rounded="xl">
+			<v-btn block class="d-flex d-md-none" color="#333" size="x-large" style="" variant="outlined" rounded="xl">
 				See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 			</v-btn>
 		</div>
