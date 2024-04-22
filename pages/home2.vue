@@ -104,14 +104,14 @@
 		</div>
 	</div>
 	<div>
-		<v-container style="max-width: 1200px" class="py-12 my-12">
+		<v-container style="max-width: 1200px" class="py-12 mt-10 mb-5">
 			<v-row>
 				<v-col v-for="n in points" :key="n.icon" cols="12" lg="3" md="6">
-					<div class="d-flex">
+					<div class="d-flex mb-5 mb-md-0">
 						<v-avatar class="mr-3" size="60" style="border: 1px solid var(--magnetic-green-4, #2c6e63)">
 							<v-icon color="#2C6E63" :icon="'mdi mdi-' + n.icon"></v-icon>
 						</v-avatar>
-						<div>
+						<div :style="{ width: $vuetify.display.mobile ? '210px' : '' }">
 							<p style="color: #333; font-size: 16px; font-weight: 600; line-height: 120%; /* 19.2px */ letter-spacing: -0.16px" class="mb-2">
 								{{ n.title }}
 							</p>
@@ -326,7 +326,7 @@
 		<vendorRowCategorized
 			:vendorlist="vendor.items"
 			:category="select"
-			style="margin-top: 50px"
+			:style="{ marginTop: $vuetify.display.mobile ? '10px' : '50px' }"
 			:vendor="true"
 			:maxwidth="'1200px'"
 			:showVendor="true"

@@ -74,7 +74,7 @@
 				</v-col>
 			</v-row>
 
-			<v-btn block class="d-flex d-md-none" color="#333" size="large" style="" variant="outlined" rounded="xl">
+			<v-btn block class="d-flex d-md-none mt-10" color="#333" size="x-large" style="" variant="outlined" rounded="xl">
 				See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 			</v-btn>
 		</div>
