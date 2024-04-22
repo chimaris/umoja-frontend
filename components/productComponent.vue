@@ -44,7 +44,7 @@
 			style="font-size: 10px; font-weight: 500; border-radius: 6px; letter-spacing: 0.5px"
 			>FREE DELIVERY</v-chip
 		>
-		<div v-if="vendorShow">
+		<div v-if="vendorShow" class="d-none d-md-block">
 			<div class="d-flex mt-2">
 				<v-avatar size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img></v-avatar>
 				<div style="cursor: pointer" @click="$router.push('/vendor_page')" class="ml-2">
@@ -54,7 +54,7 @@
 			</div>
 			<v-divider color="#a4a4a4" class="my-4"></v-divider>
 		</div>
-		<div class="d-flex align-end justify-space-between">
+		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
 			<div :class="showdisco ? 'mt-0' : ''">
 				<h1 style="font-size: 20px; color: #1a1d1f" class="priceClass mb-1">€{{ item.price }}</h1>
 				<div v-if="showdisco" class="d-flex align-center">
@@ -73,7 +73,7 @@
 				color="green"
 				variant="outlined"
 				flat
-				class="parent-btn ml-2"
+				class="parent-btn ml-2 mt-2 mt-md-0"
 			>
 				<span style="color: #1a1d1f; font-weight: 600" class="smallBtn">{{ "Add to Cart" }}</span>
 			</v-btn>
@@ -83,7 +83,6 @@
 </template>
 <script>
 import { useLikedStore } from "~/stores/likedStore";
-
 
 export default {
 	props: ["item", "short", "category", "cover", "index", "showVendor", "showdisco"],
@@ -127,7 +126,7 @@ export default {
 
 	methods: {
 		addToCart(item) {
-			this.$emit('add-to-cart', item);
+			this.$emit("add-to-cart", item);
 		},
 		mockLoading() {
 			setTimeout(() => {

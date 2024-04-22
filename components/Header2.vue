@@ -1,6 +1,8 @@
 <template>
 	<div @click="$router.push('/user/signup')" class="tophead heroimg" id="topbar">
-		<p class="text-white text-center pa-4">Sign up and GET 20% OFF for your first order🎉. <span class="pointhere">Sign up now </span></p>
+		<p class="text-white text-center pa-4" :style="{ fontSize: $vuetify.display.mobile ? '12px' : '16px' }">
+			Sign up and GET 20% OFF for your first order🎉. <span class="pointhere">Sign up now </span>
+		</p>
 	</div>
 	<div :style="sticky ? ' position: relative;' : ' position: sticky;'" class="topbar">
 		<v-container class="py-0" :style="'max-width:' + maxw">
@@ -90,13 +92,14 @@
 			v-model="drawer"
 			:location="$vuetify.display.mobile ? 'left' : undefined"
 			temporary
-			style="width: 100%; position: absolute; top: 80px"
+			style="width: 100%; position: absolute; top: 50px"
 		>
 			<div class="d-flex align-center justify-space-between px-4">
 				<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
 					<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
 				</v-avatar>
-				<v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+				<v-icon icon="mdi mdi-close" @click.stop="drawer = !drawer"></v-icon>
+				<!-- <v-app-bar-nav-icon variant="text" @click.stop="drawer = !drawer"></v-app-bar-nav-icon> -->
 			</div>
 			<v-divider></v-divider>
 			<v-list :items="urls"></v-list>

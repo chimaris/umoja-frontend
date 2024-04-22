@@ -336,7 +336,7 @@
 	<div>
 		<product-row :cover="false" :maxwidth="'1200px'" :items="items23" :showVendor="true" title=" 🔥 Hot Deals " />
 
-		<div style="padding: 150px 0px">
+		<div style="padding: 150px 0px" class="d-none d-md-block">
 			<v-carousel style="overflow: visible" height="429" class="promo" :show-arrows="false" hide-delimiter-background="" cycle>
 				<v-carousel-item v-for="n in 6">
 					<v-row>
@@ -381,7 +381,7 @@
 		<product-row :items="items2" :cover="false" :maxwidth="'1200px'" :showVendor="true" title="💰 Most Selling Products" />
 		<PopularTwoRow :showBid="twocardrow.showBid" :maxwidth="'1200px'" :items="twocardrow.items" :title="twocardrow.title" />
 	</div>
-	<div class="bg-black">
+	<div class="bg-black py-16 py-md-0">
 		<v-container style="height: 774px" class="d-flex align-center justify-center">
 			<div class="text-center">
 				<v-img
@@ -409,11 +409,11 @@
 				<p class="mt-4" style="color: #969696; font-size: 20px; font-weight: 400; line-height: 180%; /* 36px */ letter-spacing: -0.6px">
 					GET 20% OFF for your first order buy subscribing to our news letter
 				</p>
-				<div style="max-width: 545px" class="mx-auto d-flex mt-8 py-3">
+				<div style="max-width: 545px" class="mx-auto d-flex flex-column flex-md-row mt-8 py-3">
 					<v-text-field
 						style="background: rgba(248, 248, 248, 0.1); border-radius: 50px; overflow: hidden"
 						prepend-inner-icon="mdi mdi-email-outline"
-						class="mr-3"
+						class="mr-md-3 mb-4 mb-md-0"
 						:rules="[required]"
 						v-model="name"
 						hide-details=""
@@ -421,7 +421,7 @@
 						density="comfortable"
 					>
 					</v-text-field>
-					<v-btn color="green" rounded="xl" size="x-large" flat width="134">Subscribe</v-btn>
+					<v-btn color="green" rounded="xl" size="x-large" flat :style="{ width: $vuetify.display.mobile ? '100%' : '134px' }">Subscribe</v-btn>
 				</div>
 				<p style="color: var(--carbon-1, #ededed); font-size: 14px; font-weight: 400; line-height: 180%; /* 25.2px */ letter-spacing: -0.42px">
 					You will be able to unsubscribe at anytime. Read our privacy policy
