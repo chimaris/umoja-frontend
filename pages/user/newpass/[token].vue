@@ -86,6 +86,7 @@
   import { useRoute } from 'vue-router';
   import {ref} from '@vue/composition-api'
   import {useApi} from '~/composables/useApi'
+  import axios from 'axios';
 
   const confirmpasswordRules = [
 	  v => !!v || 'Confirm Password is required',
@@ -108,7 +109,7 @@
     const token = route.params.token
     if(email.value && password.value && c_password.value) {
       try {
-        const resetPass = await resetPassWord({token, email: email.value, password: password.value, password_confirmation: c_password.value })
+        const resetPass = await resetPassWord({token: token, email: email.value, password: password.value, password_confirmation: c_password.value })
         if (resetPass) {
           showModal.value = true
         }
@@ -121,11 +122,13 @@
    async function resetPassWord({token, email, password, password_confirmation}) {
       loading.value = true;
       try {
-        const response = await api({
-          url: 'auth/reset_customer_password',
-          method: 'post',
-          data: {token, email, password, password_confirmation}
+        const response = await axios.post('https://umoja-production-9636.up.railway.app/api/auth/reset_customer_password', {
+          token,
+          email,
+          password,
+          password_confirmation
         });
+        console.log(response)
         error.value = "";
         return true
       } catch (error) {

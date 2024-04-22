@@ -121,11 +121,12 @@ const confirmpasswordRules = [
 
      async function resetPassWord({token, email, password, password_confirmation}) {
       loading.value = true;
-      try {
-        const response = await api({
-          url: 'auth/reset_vendor_password',
-          method: 'post',
-          data: {token, email, password, password_confirmation}
+        try {
+        const response = await axios.post('https://umoja-production-9636.up.railway.app/api/auth/reset_vendor_password', {
+          token,
+          email,
+          password,
+          password_confirmation
         });
         error.value = "";
         return true

@@ -107,11 +107,10 @@ import { vendorUseApi } from '~/composables/vendorApi';
 
   async function setPassWord({password, password_confirmation, token}) {
       loading.value = true;
-      try {
-        const response = await api({
-          url: `auth/password_setup/${token}`,
-          method: 'post',
-          data: {password, password_confirmation}
+        try {
+        const response = await axios.post(`https://umoja-production-9636.up.railway.app/api/auth/password_setup/${token}`, {
+          password,
+          password_confirmation
         });
         error.value = "";
         return true
@@ -132,7 +131,7 @@ import { vendorUseApi } from '~/composables/vendorApi';
       const token = route.params.token
         if (password.value && c_password.value) {
             try{
-                const setPass = await setPassWord({password: password.value, password_confirmation: c_password.value, token}) 
+                const setPass = await setPassWord({password: password.value, password_confirmation: c_password.value, token: token}) 
                 if (setPass) {
                     showModal.value = true
                 }
