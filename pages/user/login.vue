@@ -61,8 +61,22 @@
 								</div>
 								<div class="d-flex justify-space-between py-0 mb-4">
 									<v-btn flat style="background-color: #ededed" class="text-green green-hover" width="30%" icon="mdi mdi-apple"></v-btn>
-									<v-btn flat style="background-color: #ededed" class="text-green green-hover" width="30%" icon="mdi mdi-google"></v-btn>
-									<v-btn flat style="background-color: #ededed" class="text-green green-hover" width="30%" icon="mdi mdi-facebook"></v-btn>
+									<v-btn
+										@click="socialMediaLogin('google')"
+										flat
+										style="background-color: #ededed"
+										class="text-green green-hover"
+										width="30%"
+										icon="mdi mdi-google"
+									></v-btn>
+									<v-btn
+										@click="socialMediaLogin('facebook')"
+										flat
+										style="background-color: #ededed"
+										class="text-green green-hover"
+										width="30%"
+										icon="mdi mdi-facebook"
+									></v-btn>
 								</div>
 								<p class="font-weight-regular mb-12 mt-6">
 									Don't have an account? <span @click="$router.push('/user/signup')" style="cursor: pointer; color: #0076ff">Sign Up</span>
@@ -89,6 +103,8 @@
 import { useUserStore } from "~/stores/userStore";
 import { emailRules, passwordRules } from "~/utils/formrules";
 import { useRouter } from "#vue-router";
+import axios from "axios";
+import { useApi } from "#imports";
 export default {
 	setup() {
 		const userStore = useUserStore();
@@ -130,6 +146,15 @@ export default {
 				} catch (error) {
 					console.error("An error occurred during login:", error);
 				}
+			}
+		},
+
+		async socialMediaLogin(provider) {
+			try {
+				const response = await this.userStore.socialLogin(provider);
+				console.log(response);
+			} catch (error) {
+				console.log(error);
 			}
 		},
 	},

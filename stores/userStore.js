@@ -13,7 +13,8 @@ export const useUserStore = defineStore({
     error: '',
     loginError: '',
     signUpError: '',
-    isLoggedIn: !!getLocalStorageItem('token'),
+    isLoggedIn: !!localStorage.getItem("token"),
+    token: localStorage.getItem("token"),
     users: JSON.parse(localStorage.getItem('users')) || [] ,
   }),
   getters: {
@@ -30,9 +31,10 @@ export const useUserStore = defineStore({
         });
         this.loginError = '';
         const {access_token} = response.data;
-        setLocalStorageItem('token', access_token);
+        localStorage.setItem('token', access_token)
         if (rememberMe) {
-          setLocalStorageItem("refreshToken", response.data.refreshToken); 
+          const { refreshToken } = response.data;
+          localStorage.setItem("refreshToken", refreshToken);
         }
         return true;
       } catch(error) {
@@ -59,7 +61,7 @@ export const useUserStore = defineStore({
         });
         this.signUpError = '';
         const {access_token} = response.data;
-        setLocalStorageItem('token', access_token);
+        localStorage.setItem('token', access_token);
         return true
       } catch (error) {
         if (error.response) {
@@ -95,6 +97,17 @@ export const useUserStore = defineStore({
       }finally {
         this.loading = false;
       } 
+    },
+    async socialLogin(provider) {
+      return new Promise((resolve, reject) => {
+        axios.get(`https://umoja-production-9636.up.railway.app/api/auth/${provider}/redirect`)
+                  .then((response) => {
+                    resolve(response);
+                  })
+                  .catch((error) => {
+                    reject(error)
+                  })
+      })
     },
     logout() {
       localStorage.removeItem('isLoggedIn');

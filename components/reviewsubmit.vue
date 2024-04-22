@@ -108,20 +108,17 @@ async function handleSubmission() {
 			if (isRegistered) {
 				showModal.value = true;
 				vendorStore.signupError = "";
+
+				const vendorId = generateId();
+        		const dateRegistered = formatDate();
+        		vendorStore.saveVendor(vendorId, dateRegistered); 
 			}
 		} catch (error) {
-			console.error("eee");
+			console.error(error);
 		}
 	} else {
 		formError.value = "Please make sure you have filled all the form inputs!!";
 	}
 }
 </script>
-<!-- try {                                 
-  const vendorId = generateId();
-  const dateRegistered = formatDate();
-  vendorStore.saveVendor(vendorId, dateRegistered); 
-  router.push({ path: "/vendor/setpass", query: { vendorId: vendorId.toString() } });
-} catch (error) {
-  formError.value = error.message; // Display the error message from the thrown error
-} -->
+

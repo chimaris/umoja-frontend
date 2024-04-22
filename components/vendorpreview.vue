@@ -28,7 +28,7 @@
 										></v-img>
 									</v-avatar>
 									<h3 class="py-4" style="font-size: 24px; font-weight: 800; line-height: 30px">
-										{{ vendor.companyInfo.businessName }} <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
+										{{ vendor?.companyInfo?.businessName }} <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
 									</h3>
 									<v-btn color="orange" width="80%" flat> Follow</v-btn>
 								</div>
@@ -57,14 +57,14 @@
 									<v-avatar rounded="0" size="19"
 										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 									></v-avatar>
-									<p class="textClass px-4"><span v-if="vendor.contactInfo?.complexBuilding">{{ vendor.contactInfo?.complexBuilding }},</span> {{ vendor.contactInfo?.Address }}, {{ vendor.contactInfo?.city }}, {{ vendor.contactInfo?.state }} {{ vendor.contactInfo?.Country }}</p>
+									<p class="textClass px-4"><span v-if="vendor.contactInfo?.complexBuilding">{{ vendor?.contactInfo?.complexBuilding }},</span> {{ vendor?.contactInfo?.Address }}, {{ vendor.contactInfo?.city }}, {{ vendor.contactInfo?.state }} {{ vendor.contactInfo?.Country }}</p>
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="px-6 pt-8">
-									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor.companyInfo?.selectedCompanyCategory }})</span></h3>
+									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor?.companyInfo?.selectedCompanyCategory }})</span></h3>
 
 									<p class="textClass text-left mt-4 mb-8">
-										{{ vendor.businessInfo?.businessBio }}
+										{{ vendor?.businessInfo?.businessBio }}
 									</p>
 
 									<p style="font-weight: 700; font-size: 12px; line-height: 20px; color: #969696">ON THE WEB</p>
@@ -97,7 +97,7 @@
 											<v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon> Edit Profile
 										</v-btn>
 									</div>
-									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ vendor.dateRegistered }}</p>
+									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ vendor?.dateRegistered }}</p>
 								</v-sheet>
 							</v-sheet>
 						</v-card>
