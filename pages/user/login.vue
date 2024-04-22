@@ -39,7 +39,7 @@
 		 ></v-text-field>
 	 <v-row>
 	 <v-col cols="6" class="py-0">
-		 <v-checkbox color="green">
+		 <v-checkbox color="green" v-model="rememberMe" @click="rememberMe = !rememberMe">
 		<template v-slot:label>
 		  <div class="font-weight-medium">
 			Remember me 
@@ -48,7 +48,7 @@
 	  </v-checkbox>
 	 </v-col>
 		 <v-col cols="6" class="d-flex justify-end py-0 align-center">
-			 <v-btn to="/vendor/forgot"
+			 <v-btn to="/user/forgot"
 			   style="color:#0076FF;text-decoration:none"
 				 variant="text" class="px-0 mb-4"
 			   >
@@ -58,10 +58,12 @@
 	 </v-row>
 	 <p v-if="userStore.loginError" style="color: red;">{{ userStore.loginError }}</p>
 		 <v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mt-3"> 
-			 <span>
- 
- Sign in
-		   </span>
+			 <span class="mr-4"> Sign in</span>
+			 <v-progress-circular v-if="userStore.loading"
+				indeterminate
+				:width="2"
+				:size="25" 
+    		 ></v-progress-circular>
 		 </v-btn> 
  </v-form>
 		 <div class="d-flex py-5 justify-space-between align-center"><v-divider></v-divider>
@@ -98,7 +100,19 @@
  <script>
    import { useUserStore } from '~/stores/userStore';
    import {emailRules, passwordRules} from '~/utils/formrules'
+   import { useRouter } from '#vue-router';
  export default {
+	setup() {
+		const userStore = useUserStore();
+		const router = useRouter();
+
+		return {
+			userStore,
+			emailRules,
+			passwordRules,
+			router
+		}
+	},
 	 data() {
 	 return {
 		 images:[ 'https://res.cloudinary.com/dkbt6at26/image/upload/c_fit,w_1000/v1684229355/portrait-scary-african-shaman-female-with-petrified-cracked-skin-dreadlocks-holds-traditional-mask-dark-background-make-up-concept_1_dr3e2c.png',
@@ -107,6 +121,7 @@
 	],
 	email: '',
 	password: '',
+	rememberMe: false,
 	visible: false
 	 }
  },
@@ -114,7 +129,7 @@
   async handleLogin() {
 	 if (this.email && this.password) {
 		 try {
-		 const isLoggedIn = await this.userStore.login({ email: this.email, password: this.password });
+		 const isLoggedIn = await this.userStore.login({ email: this.email, password: this.password, rememberMe: this.rememberMe });
 		 if (isLoggedIn) {
 			 this.$router.push('/home2');
 			 this.userStore.loginError = "";

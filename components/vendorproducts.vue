@@ -14,10 +14,16 @@
 					</v-text-field>
 				</div>
 				<div class="d-flex align-center">
-					<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
+					<v-btn id="activate" style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3" v-on="on">
 						Sort by
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
 					</v-btn>
+						<v-menu activator="#activate" open-on-hover  transition="slide-x-transition"   :close-on-content-click="false">
+							<v-list >
+								<v-list-item class="sort-options" style="cursor: pointer; font-weight: 500">Availability</v-list-item>
+								<v-list-item class="sort-options" style="cursor: pointer; font-weight: 500" >Sold</v-list-item>
+							</v-list>
+						</v-menu>
 					<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
 						Collection type
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
@@ -206,6 +212,15 @@
 </template>
 <script>
 export default {
+	setup(props, ctx) {
+		const choose = (x) => {
+			ctx.emit("changePage", x);
+		}
+
+		return {
+			choose
+		};
+	},
 	data() {
 		return {
 			dialog: true,
@@ -217,186 +232,185 @@ export default {
 				{ name: "Archived", prop: "status", value: 1 },
 			],
 			items1: [
-				// {
-				// 	sn: "#23942",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Okoli Bonaventure",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 1,
-				// 	status: 2,
-				// 	items_no: 7,
-				// 	delivery_method: "Umoja Delivery",
-				// },
-				// {
-				// 	sn: "#876567",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "David",
-				// 	delivery: 0,
-				// 	payment_status: 0,
-				// 	status: 2,
-				// 	items_no: 1,
-				// 	delivery_method: "Fedex Delivery",
-				// },
-				// {
-				// 	sn: "#3456456",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Frank",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 1,
-				// 	status: 2,
-				// 	items_no: 4,
-				// 	delivery_method: "DHL Delivery",
-				// },
-				// {
-				// 	sn: "#65459",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Okoli Bonaventure",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 1,
-				// 	status: 1,
-				// 	items_no: 7,
-				// 	delivery_method: "Umoja Delivery",
-				// },
-				// {
-				// 	sn: "#098765",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Okoli Bonaventure",
-				// 	delivery: 0,
-				// 	payment_status: 1,
-				// 	status: 1,
-				// 	items_no: 7,
-				// 	delivery_method: "Umoja Delivery",
-				// },
-				// {
-				// 	sn: "#65456",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "David",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 0,
-				// 	status: 2,
-				// 	items_no: 1,
-				// 	delivery_method: "DHL Delivery",
-				// },
-				// {
-				// 	sn: "#239042",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Frank",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 1,
-				// 	status: 2,
-				// 	items_no: 4,
-				// 	delivery_method: "Umoja Delivery",
-				// },
-				// {
-				// 	sn: "#9867763",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Okoli Bonaventure",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 1,
-				// 	status: 1,
-				// 	items_no: 7,
-				// 	delivery_method: "DHL Delivery",
-				// },
-				// {
-				// 	sn: "#98755765",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "David",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 0,
-				// 	status: 1,
-				// 	items_no: 1,
-				// 	delivery_method: "Umoja Delivery",
-				// },
-				// {
-				// 	sn: "#7646439",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Frank",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 1,
-				// 	status: 1,
-				// 	items_no: 4,
-				// 	delivery_method: "Umoja Delivery",
-				// },
-				// {
-				// 	sn: "#9876765",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Okoli Bonaventure",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 1,
-				// 	status: 1,
-				// 	items_no: 7,
-				// 	delivery_method: "Fedex Delivery",
-				// },
-				// {
-				// 	sn: "#9876765",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "David",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 0,
-				// 	status: 0,
-				// 	items_no: 1,
-				// 	delivery_method: "Fedex Delivery",
-				// },
-				// {
-				// 	sn: "#12t65345",
-				// 	name: "Leather crop top & pants......",
-				// 	date: "17 May",
-				// 	total: "€2,349‎",
-				// 	date: "May 29, 2023",
-				// 	customer: "Frank",
-				// 	delivery: "€ 24.08",
-				// 	payment_status: 1,
-				// 	status: 1,
-				// 	items_no: 4,
-				// 	delivery_method: "Umoja Delivery",
-				// },
+				{
+					sn: "#23942",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Okoli Bonaventure",
+					delivery: "€ 24.08",
+					payment_status: 1,
+					status: 2,
+					items_no: 7,
+					delivery_method: "Umoja Delivery",
+				},
+				{
+					sn: "#876567",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "David",
+					delivery: 0,
+					payment_status: 0,
+					status: 2,
+					items_no: 1,
+					delivery_method: "Fedex Delivery",
+				},
+				{
+					sn: "#3456456",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Frank",
+					delivery: "€ 24.08",
+					payment_status: 1,
+					status: 2,
+					items_no: 4,
+					delivery_method: "DHL Delivery",
+				},
+				{
+					sn: "#65459",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Okoli Bonaventure",
+					delivery: "€ 24.08",
+					payment_status: 1,
+					status: 1,
+					items_no: 7,
+					delivery_method: "Umoja Delivery",
+				},
+				{
+					sn: "#098765",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Okoli Bonaventure",
+					delivery: 0,
+					payment_status: 1,
+					status: 1,
+					items_no: 7,
+					delivery_method: "Umoja Delivery",
+				},
+				{
+					sn: "#65456",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "David",
+					delivery: "€ 24.08",
+					payment_status: 0,
+					status: 2,
+					items_no: 1,
+					delivery_method: "DHL Delivery",
+				},
+				{
+					sn: "#239042",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Frank",
+					delivery: "€ 24.08",
+					payment_status: 1,
+					status: 2,
+					items_no: 4,
+					delivery_method: "Umoja Delivery",
+				},
+				{
+					sn: "#9867763",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Okoli Bonaventure",
+					delivery: "€ 24.08",
+					payment_status: 1,
+					status: 1,
+					items_no: 7,
+					delivery_method: "DHL Delivery",
+				},
+				{
+					sn: "#98755765",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "David",
+					delivery: "€ 24.08",
+					payment_status: 0,
+					status: 1,
+					items_no: 1,
+					delivery_method: "Umoja Delivery",
+				},
+				{
+					sn: "#7646439",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Frank",
+					delivery: "€ 24.08",
+					payment_status: 1,
+					status: 1,
+					items_no: 4,
+					delivery_method: "Umoja Delivery",
+				},
+				{
+					sn: "#9876765",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Okoli Bonaventure",
+					delivery: "€ 24.08",
+					payment_status: 1,
+					status: 1,
+					items_no: 7,
+					delivery_method: "Fedex Delivery",
+				},
+				{
+					sn: "#9876765",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "David",
+					delivery: "€ 24.08",
+					payment_status: 0,
+					status: 0,
+					items_no: 1,
+					delivery_method: "Fedex Delivery",
+				},
+				{
+					sn: "#12t65345",
+					name: "Leather crop top & pants......",
+					date: "17 May",
+					total: "€2,349‎",
+					date: "May 29, 2023",
+					customer: "Frank",
+					delivery: "€ 24.08",
+					payment_status: 1,
+					status: 1,
+					items_no: 4,
+					delivery_method: "Umoja Delivery",
+				},
 			],
-			items: [],
+			items: []
+			
 		};
 	},
 	mounted() {
 		this.items = this.items1;
 	},
 	methods: {
-		choose(x) {
-			this.$emit("changePage", x);
-		},
+		
 		sort(x, y) {
 			var itm = this.items1;
 			this.items = itm.filter((item) => {
@@ -406,3 +420,8 @@ export default {
 	},
 };
 </script>
+<style scoped>
+	.sort-options:hover {
+		background-color: #e5e5e5;
+	}
+</style>

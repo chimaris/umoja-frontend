@@ -79,7 +79,12 @@
 			</v-checkbox>
 			<p v-if="userStore.signUpError" style="color: red;">{{ userStore.signUpError }}</p>
 			<v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mt-6"> 
-			  <span style="text-transform: none;">Create an account</span>
+			  <span class="mr-4" style="text-transform: none;">Create an account</span>
+			  <v-progress-circular v-if="userStore.loading"
+				indeterminate
+				:width="2"
+				:size="25" 
+    		   ></v-progress-circular>
 			</v-btn>
 		  </v-form>
 		</v-card>
@@ -91,7 +96,6 @@
    import { useUserStore } from '~/stores/userStore';
    import { useRouter } from 'vue-router';
    import {emailRules, passwordRules, firstNameRules, lastNameRules} from '~/utils/formrules'
-   import {formatDate} from '~/utils/date';
   
    const userStore = useUserStore()
    const router = useRouter()
@@ -119,7 +123,7 @@
    async function handleSubmit() {
 	if (first_name.value && last_name.value && email.value && password.value && agree.value && confirmPassword.value) {
 	  try {
-		const isSignedUp = await userStore.signup({ first_name: first_name.value, last_name: last_name.value, email: email.value, password: password.value, dateRegistered: formatDate()});
+		const isSignedUp = await userStore.signup({ first_name: first_name.value, last_name: last_name.value, email: email.value, password: password.value, password_confirmation: confirmPassword.value, terms_accepted: 1});
 		if (isSignedUp) {
 		  router.push('/home2');
 		  userStore.signUpError = "";

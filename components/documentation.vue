@@ -15,7 +15,7 @@
 			<v-select
 				v-model="selectedUtilityBill"
 				:items="typeOfUtilityBills"
-				append-inner-icon=""
+				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select a utility bill"
 				density="comfortable"
 				:rules="inputRules"
@@ -42,7 +42,7 @@
           @dragleave.prevent
           @dragover.prevent
           @drop.prevent="drop1"
-          @change="upLoadFile1"
+          @change="upLoadFile1()"
           class="d-flex align-center"
         >
           <label for="utility-file">
@@ -57,13 +57,13 @@
 
 			<p style="color: red; font-size: 14px;" class="mb-8">{{ errorMessage1 }}</p>
 			<ul class="my-7" v-if="showProgress">
-        <li v-for="(file, index) in utilityDoc" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
+        <li v-for="(file, index) in files1" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
           <fileUploading :file="file" />
         </li>
       </ul>
 
       <ul v-if="showProgress">
-        <li v-for="(file, index) in upLoadedFiles" :key="index" class="d-flex align-center py-2 rounded-lg px-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
+        <li v-for="(file, index) in upLoadedFiles1" :key="index" class="d-flex align-center py-2 rounded-lg px-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
           <fileUploaded :file="file"/>
         </li>
       </ul>
@@ -88,7 +88,7 @@
           @dragleave.prevent
           @dragover.prevent
           @drop.prevent="drop"
-          @change="upLoadFile"
+          @change="upLoadFile()"
           class="d-flex align-center"
         >
           <label for="bn-file">
@@ -104,13 +104,13 @@
 			<p style="color: red; font-size: 14px;" class="mb-8">{{ errorMessage2 }}</p>
 
 			<ul class="my-7" v-if="showProgress">
-        <li v-for="(file, index) in bnDocument" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
+        <li v-for="(file, index) in files2" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
           <fileUploading :file="file" />
         </li>
       </ul>
 
       <ul v-if="showProgress">
-        <li v-for="(file, index) in upLoadedFiles" :key="index" class="d-flex align-center py-2 rounded-lg px-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
+        <li v-for="(file, index) in upLoadedFiles2" :key="index" class="d-flex align-center py-2 rounded-lg px-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
           <fileUploaded :file="file"/>
         </li>
       </ul>
@@ -134,8 +134,15 @@ const bnNumber = ref("");
 const taxIdNumber = ref("");
 const selectedUtilityBill = ref("");
 
-const bnDocument = ref([])
-const utilityDoc = ref([])
+
+
+const utility_photo = ref("")
+const business_number_photo = ref("")
+
+const files1 = ref([])
+const files2 = ref([])
+const upLoadedFiles1 = ref([])
+const upLoadedFiles2 = ref([])
 
 const emit = defineEmits(['submit']);
 const formError = ref("")
@@ -149,8 +156,8 @@ function isFormValid() {
 		bnNumber &&
 		taxIdNumber &&
 		selectedUtilityBill &&
-		bnDocument.value.length > 0 &&
-		utilityDoc.value.length > 0
+		utility_photo.value &&
+		business_number_photo.value
 	) {
 		return true;
 	}else {
@@ -163,8 +170,8 @@ const submit = () => {
 		BN_Number: bnNumber.value,
 		Tax_ID: taxIdNumber.value,
 		Utility_Bill: selectedUtilityBill.value,
-		BN_Doc: bnDocument.value,
-		Utility_Doc: utilityDoc.value
+		utility_photo: utility_photo.value,
+		business_number_photo: business_number_photo.value
 	}
 	if (!isFormValid()) {
 		formError.value = "Please fill in all required fields."
@@ -179,6 +186,10 @@ const submit = () => {
 	emit('submit')
 };
 function upLoadFile1() {
+		if (utility_photo.value) {
+			errorMessage1.value = "You can not upload more than one document";
+			return;
+		}
 		const file = document.querySelector(".utility").files[0]
 		if(!file) return;
 		
@@ -211,10 +222,35 @@ function upLoadFile1() {
       errorMessage1.value = "";
       const filename = file.name
       const formData = new FormData();
-      formData.append("file", file);
-      const form = {name: filename, loading: 30}
-      utilityDoc.value = [...utilityDoc.value, form]
+      formData.append("utility_photo", file);
+      const form = {name: filename, loading: 0}
+      files1.value = [...files1.value, form]
       showProgress.value = true;
+
+	  axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			onUploadProgress: ({loaded, total}) => {
+				files1.value[files1.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles1.value.push({name: filename, size: fileSize});
+					files1.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				utility_photo.value = response.data.utility_photo
+
+			})
+			.catch(error => {
+				if (error.response) {
+					errorMessage1.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+					errorMessage1.value = 'No response received from server. Please try again later.';
+				} else {
+					errorMessage1.value = 'An error occurred. Please try again later.';
+				}
+			});
     };
 
     img.onerror = function () {
@@ -222,64 +258,86 @@ function upLoadFile1() {
     };
 
 
-		// axios.post("", formData, {
-		// 	onUploadProgress: ({loaded, total}) => {
-		// 		files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
-		// 		if (loaded == total) {
-		// 			const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-		// 			upLoadedFiles.value.push({name: filename, size: fileSize});
-		// 			this.files = [];
-		// 			this.showProgress = false
-		// 		}
-		// 	}
-		// }).catch(console.error) 
 }
 
 function drop1(e) {
-	const file= e.dataTransfer.files[0]
-	if(!file) return;
-
-	const allowedFiles = [".pdf", ".png", ".jpeg", ".jpg"]
-	const maxAllowedWidth = 800;
-  const maxAllowedHeight = 400;
-  const maxFileSize = 2 * 1024 * 1024;
-	const fileExtension = file.name.split(".").pop().toLowerCase();
-	
-	if (!allowedFiles.includes("." + fileExtension)) {
-				errorMessage1.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-        return;
-    }
-
-  	errorMessage1.value = ""
-
-  if (file.size > maxFileSize) {
-    errorMessage1.value = "File size exceeds the maximum allowed size of 2MB";
-    return;
-  }
-	errorMessage1.value = ""
-
-	const img = new Image();
-	img.src = URL.createObjectURL(file);
-	img.onload = function () {
-		if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
-			errorMessage1.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+	if (utility_photo.value) {
+			errorMessage1.value = "You can not upload more than one document";
 			return;
 		}
-		errorMessage1.value = "";
-		const filename = file.name
-		const formData = new FormData();
-		formData.append("file", file);
-		const form = {name: filename, loading: 0}
-		utilityDoc.value = JSON.parse(JSON.stringify([...utilityDoc.value, form]))
-		showProgress.value = true;
-	};
+	const file= e.dataTransfer.files[0]
+	if(!file) return;
+		
+    const allowedFiles = [".pdf", ".png", ".jpeg", ".jpg"]
+    const maxAllowedWidth = 800;
+    const maxAllowedHeight = 400;
+    const maxFileSize = 2 * 1024 * 1024;
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    
+    if (!allowedFiles.includes("." + fileExtension)) {
+          errorMessage1.value = "Please upload files having extensions: " + allowedFiles.join(', ');
+          return;
+      }
 
-	img.onerror = function () {
-		errorMessage1.value = "Failed to load the image"
-	};
+      errorMessage1.value = ""
+
+    if (file.size > maxFileSize) {
+      errorMessage1.value = "File size exceeds the maximum allowed size of 2MB";
+      return;
+    }
+    errorMessage1.value = ""
+
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = function () {
+      if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
+        errorMessage1.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+        return;
+      }
+      errorMessage1.value = "";
+      const filename = file.name
+      const formData = new FormData();
+      formData.append("utility_photo", file);
+      const form = {name: filename, loading: 0}
+      files1.value = [...files1.value, form]
+      showProgress.value = true;
+
+	  axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			onUploadProgress: ({loaded, total}) => {
+				files1.value[files1.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles1.value.push({name: filename, size: fileSize});
+					files1.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				utility_photo.value = response.data.utility_photo
+
+			})
+			.catch(error => {
+				if (error.response) {
+					errorMessage1.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+					errorMessage1.value = 'No response received from server. Please try again later.';
+				} else {
+					errorMessage1.value = 'An error occurred. Please try again later.';
+				}
+			});
+    };
+
+    img.onerror = function () {
+      errorMessage1.value = "Failed to load the image"
+    };
 	}
 
 	function upLoadFile() {
+		if (business_number_photo.value) {
+			errorMessage2.value = "You can not upload more than one document";
+			return;
+		}
 		const file = document.querySelector(".bn-doc").files[0]
 		if(!file) return;
 		
@@ -312,72 +370,112 @@ function drop1(e) {
       errorMessage2.value = "";
       const filename = file.name
       const formData = new FormData();
-      formData.append("file", file);
-      const form = {name: filename, loading: 30}
-      bnDocument.value = [...bnDocument.value, form]
+      formData.append("business_number_photo", file);
+      const form = {name: filename, loading: 0}
+      files2.value = [...files2.value, form]
       showProgress.value = true;
+
+	  axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			onUploadProgress: ({loaded, total}) => {
+				files2.value[files2.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles2.value.push({name: filename, size: fileSize});
+					files2.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				business_number_photo.value = response.data.business_number_photo;
+			})
+			.catch(error => {
+				if (error.response) {
+					errorMessage2.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+					errorMessage2.value = 'No response received from server. Please try again later.';
+				} else {
+					errorMessage2.value = 'An error occurred. Please try again later.';
+				}
+			});
     };
 
     img.onerror = function () {
       errorMessage2.value = "Failed to load the image"
     };
 
-
-		// axios.post("", formData, {
-		// 	onUploadProgress: ({loaded, total}) => {
-		// 		bnDocument.value[bnDocument.value.length - 1].loading = Math.floor((loaded / total) * 100);
-		// 		if (loaded == total) {
-		// 			const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-		// 			upLoadedFiles.value.push({name: filename, size: fileSize});
-		// 			bnDocument.value = [];
-		// 			showProgress.value = false
-		// 		}
-		// 	}
-		// }).catch(console.error) 
 }
 
 function drop(e) {
-	const file= e.dataTransfer.files[0]
-	if(!file) return;
-
-	const allowedFiles = [".pdf", ".png", ".jpeg", ".jpg"]
-	const maxAllowedWidth = 800;
-  const maxAllowedHeight = 400;
-  const maxFileSize = 2 * 1024 * 1024;
-	const fileExtension = file.name.split(".").pop().toLowerCase();
-	
-	if (!allowedFiles.includes("." + fileExtension)) {
-				errorMessage2.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-        return;
-    }
-
-  	errorMessage2.value = ""
-
-  if (file.size > maxFileSize) {
-    errorMessage2.value = "File size exceeds the maximum allowed size of 2MB";
-    return;
-  }
-	errorMessage2.value = ""
-
-	const img = new Image();
-	img.src = URL.createObjectURL(file);
-	img.onload = function () {
-		if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
-			errorMessage2.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+	if (business_number_photo.value) {
+			errorMessage2.value = "You can not upload more than one document";
 			return;
 		}
-		errorMessage2.value = "";
-		const filename = file.name
-		const formData = new FormData();
-		formData.append("file", file);
-		const form = {name: filename, loading: 0}
-		bnDocument.value = JSON.parse(JSON.stringify([...bnDocument.value, form]))
-		showProgress.value = true;
-	};
+	const file= e.dataTransfer.files[0]
+	if(!file) return;
+		
+    const allowedFiles = [".pdf", ".png", ".jpeg", ".jpg"]
+    const maxAllowedWidth = 800;
+    const maxAllowedHeight = 400;
+    const maxFileSize = 2 * 1024 * 1024;
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    
+    if (!allowedFiles.includes("." + fileExtension)) {
+          errorMessage2.value = "Please upload files having extensions: " + allowedFiles.join(', ');
+          return;
+      }
 
-	img.onerror = function () {
-		errorMessage2.value = "Failed to load the image"
-	};
+      errorMessage2.value = ""
+
+    if (file.size > maxFileSize) {
+      errorMessage2.value = "File size exceeds the maximum allowed size of 2MB";
+      return;
+    }
+    errorMessage2.value = ""
+
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = function () {
+      if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
+        errorMessage2.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+        return;
+      }
+      errorMessage2.value = "";
+      const filename = file.name
+      const formData = new FormData();
+      formData.append("business_number_photo", file);
+      const form = {name: filename, loading: 0}
+      files2.value = [...files2.value, form]
+      showProgress.value = true;
+
+	  axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			onUploadProgress: ({loaded, total}) => {
+				files2.value[files2.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles2.value.push({name: filename, size: fileSize});
+					files2.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				business_number_photo.value = response.data.business_number_photo;
+			})
+			.catch(error => {
+				if (error.response) {
+					errorMessage2.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+					errorMessage2.value = 'No response received from server. Please try again later.';
+				} else {
+					errorMessage2.value = 'An error occurred. Please try again later.';
+				}
+			});
+    };
+
+    img.onerror = function () {
+      errorMessage2.value = "Failed to load the image"
+    };
 	}
 
 </script>

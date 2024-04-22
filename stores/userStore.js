@@ -1,62 +1,104 @@
 // userStore.js
 
 import { defineStore } from 'pinia';
+import axios from 'axios';
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
+import { useApi } from '~/composables/useApi';
 
+const api = useApi()
 export const useUserStore = defineStore({
   id: 'user',
   state: () => ({
+    loading: false,
+    error: '',
     loginError: '',
     signUpError: '',
-    user: null,
-    isLoggedIn: localStorage.getItem('isLoggedIn') === 'true' ,
-    users: JSON.parse(localStorage.getItem('users')) || [] 
+    isLoggedIn: !!getLocalStorageItem('token'),
+    users: JSON.parse(localStorage.getItem('users')) || [] ,
   }),
   getters: {
-    getUser: (state) => state.user,
     getIsLoggedIn: (state) => state.isLoggedIn
   },
-  actions: {
-    login({ email, password }) {
-      // Simulate a login process
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const user = this.users.find((user) => user.email === email && user.password === password);
-          if (user) {
-            this.loginError = '';
-            this.user = user;
-            this.isLoggedIn = true;
-            localStorage.setItem('isLoggedIn', 'true');
-            resolve(true); // Login successful
+  actions: {   
+    async login({email, password, rememberMe}) {
+      this.loading = true;
+      try {
+          const response = await api({
+          url: 'auth/customer_login', 
+          method: 'post',
+          data: { email, password}
+        });
+        this.loginError = '';
+        const {access_token} = response.data;
+        setLocalStorageItem('token', access_token);
+        if (rememberMe) {
+          setLocalStorageItem("refreshToken", response.data.refreshToken); 
+        }
+        return true;
+      } catch(error) {
+        console.error("invalid")
+          if (error.response) {
+            this.loginError = error.response.data.message || 'An error occurred during signup.';
+          } else if (error.request) {
+            this.loginError = 'No response received from server. Please try again later.';
           } else {
-            this.loginError = 'Invalid email or password';
-            resolve(false); // Login failed
+            this.loginError = 'An error occurred. Please try again later.';
           }
-        }, 500); // Simulate a delay (e.g., API request)
-      });
-    },    
-    signup({ first_name, last_name, email, password, dateRegistered}) {
-      // Simulate a signup process
-      return new Promise((resolve) => {
-        setTimeout(() => {
-          const existingUser = this.users.find(user => user.email === email);
-          if (existingUser) {
-            this.signUpError = "Email Already exists";
-            resolve(false); // Signup failed
-          } else {
-            this.signUpError = "";
-            this.users.push({ first_name, last_name, email, password, dateRegistered });
-            this.user = { first_name, last_name, email, password, dateRegistered };
-            this.isLoggedIn = true;
-            localStorage.setItem('isLoggedIn', 'true');
-            localStorage.setItem('users', JSON.stringify(this.users));
-            resolve(true); // Signup successful
-          }
-        }, 500); // Simulate a delay (e.g., API request)
-      });
+          return false;
+      } finally {
+        this.loading = false;
+      }
+    },
+    async signup({first_name, last_name, email, password, password_confirmation, terms_accepted}) {
+      this.loading = true;
+      try {
+        const response = await api({
+          url: 'auth/register_customer', 
+          method: 'post',
+          data: {first_name, last_name, email, password, password_confirmation,terms_accepted}
+        });
+        this.signUpError = '';
+        const {access_token} = response.data;
+        setLocalStorageItem('token', access_token);
+        return true
+      } catch (error) {
+        if (error.response) {
+          this.signUpError = error.response.data.message || 'An error occurred during signup.';
+        } else if (error.request) {
+          this.signUpError = 'No response received from server. Please try again later.';
+        } else {
+          this.signUpError = 'An error occurred. Please try again later.';
+        }
+        return false;
+      }finally {
+        this.loading = false;
+      }  
+    },
+    async forgotPassword(email) {
+      this.loading = true;
+      try {
+        const response = await api({
+          url: 'auth/forget_customer_password', 
+          method: 'post',
+          data: {email}
+        });
+        return true
+      } catch (error) {
+        if (error.response) {
+          this.error = error.response.data.message || 'An error occurred during forgot password request.';
+        } else if (error.request) {
+          this.error = 'No response received from server. Please try again later.';
+        } else {
+          this.error = 'An error occurred. Please try again later.';
+        }
+        return false;
+      }finally {
+        this.loading = false;
+      } 
     },
     logout() {
       localStorage.removeItem('isLoggedIn');
-      this.user = null;
+      this.user = removeLocalStorageItem("user");
       this.isLoggedIn = false;
     }
   }

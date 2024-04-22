@@ -32,7 +32,7 @@
 						</div>
 						<div>
 							<p class="inputLabel">Unit Per Item</p>
-							<v-text-field type="number" placeholder="Eg. 1, 2, 3" density="comfortable"> </v-text-field>
+							<v-text-field :rules="nonNegValue" type="number" placeholder="Eg. 1, 2, 3" density="comfortable"> </v-text-field>
 						</div>
 						<div>
 							<p class="inputLabel">Material</p>
@@ -84,6 +84,7 @@
 										persistent-hint
 										placeholder="Ankara Sneakers made with Ghanian Leather "
 										density="comfortable"
+										:rules="productRules"
 									>
 									</v-text-field>
 								</div>
@@ -192,7 +193,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Tags</p>
-									<v-text-field placeholder="Find or create tags" density="comfortable"> </v-text-field>
+									<v-text-field @keyup.enter="handleTagInput(e)" v-model="newTag" placeholder="Find or create tags" density="comfortable"> </v-text-field>
 								</div>
 								<div>
 									<v-chip
@@ -236,10 +237,18 @@
 									<v-text-field placeholder="€ 0.00" density="comfortable"> </v-text-field
 								></v-col>
 								<v-col>
-									<p class="inputLabel">Compare-at price (Optional)</p>
-
-									<v-text-field placeholder="€ 0.00" density="comfortable"> </v-text-field
-								></v-col>
+									<p >Compare-at price (Optional)</p>
+									<v-tooltip text="" location="end" depressed class="elevation-24" >
+										<template v-slot:activator="{ props }">
+										<v-text-field v-bind="props" placeholder="€ 0.00" density="comfortable"></v-text-field>
+										</template>
+										<template v-slot:default="{ attrs }">
+										<div class="tooltip-content" v-bind="attrs">
+											To display a markdown, enter a value higher than your price. Often shown with a strike through (e.g. <span class="strike-through">€25.00</span>).
+										</div>
+										</template>
+									</v-tooltip>
+								</v-col>
 							</v-row>
 							<v-checkbox hide-details density="compact" color="#00966D">
 								<template v-slot:label>
@@ -759,6 +768,34 @@ const chip = ref("All");
 const chosen = ref("");
 const tab1 = ref(null);
 const window = ref("General");
+const newTag = ref("")
+
+const nonNegValue = [
+	v => v >=0 || "Value must be a non-negative number"
+]
+const productRules = [
+	v => !!v || 'Product name must be provided!!',
+	v => v.length <= 20 || 'Product name cannot exceed 20 characters'
+]
+const descRule = [
+	v => !!v || 'Description of product must be provided!!',
+	v => v.length <= 100 || 'Product description cannot exceed 100 characters'
+]
+
+const addTag = (newTag) => {
+	  const trimmedNewTag = newTag.trim().toLowerCase();
+
+		if (trimmedNewTag !== '' && tags.value.some(tag => tag.toLowerCase() === trimmedNewTag)) {
+			return; 
+		}
+        tags.value.push(newTag.trim());
+    
+};
+
+const handleTagInput = (event) => {
+        addTag(newTag.value);
+        newTag.value = ''; // Clear the input field after adding the tag
+};
 
 const notes = ref([
     { name: "Benjamin Franklin O.", image: "https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png" },
@@ -808,3 +845,14 @@ onBeforeUnmount(() => {
 });
 
 </script>
+<style scoped>
+	.tooltip-content {
+		max-width: 200px; /* Set the maximum width of the tooltip */
+		color: black; /* Set text color */
+		text-align: right; /* Align text to the right */
+		}
+
+	.strike-through {
+	text-decoration: line-through; /* Add a strike-through effect */
+	}
+</style>
