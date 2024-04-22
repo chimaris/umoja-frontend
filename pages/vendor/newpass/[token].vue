@@ -127,7 +127,7 @@ const confirmpasswordRules = [
           method: 'post',
           data: {token, email, password, password_confirmation}
         });
-        this.error = true;
+        error.value = "";
         return true
       } catch (error) {
             if (error.response) {

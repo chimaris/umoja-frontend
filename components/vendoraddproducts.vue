@@ -193,7 +193,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Tags</p>
-									<v-text-field @keyup.enter="handleTagInput(e)" v-model="newTag" placeholder="Find or create tags" density="comfortable"> </v-text-field>
+									<v-text-field @keyup.enter="handleTagInput()" v-model="newTag" placeholder="Find or create tags" density="comfortable"> </v-text-field>
 								</div>
 								<div>
 									<v-chip
@@ -748,103 +748,184 @@
 		</v-sheet>
 	</v-container>
 </template>
-<script setup>
+<script>
+import { Editor, EditorContent } from '@tiptap/vue-3'
+import StarterKit from '@tiptap/starter-kit'
+import TextAlign from '@tiptap/extension-text-align'
+import Underline from '@tiptap/extension-underline'
+import Link from '@tiptap/extension-link'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
-import { Editor, EditorContent } from "@tiptap/vue-3";
-import StarterKit from "@tiptap/starter-kit";
-import TextAlign from "@tiptap/extension-text-align";
-import Underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
 
+export default {
+	setup() {
+		const nonNegValue = [
+		v => v >=0 || "Value must be a non-negative number"
+		]
+		const productRules = [
+			v => !!v || 'Product name must be provided!!',
+			v => v.length <= 20 || 'Product name cannot exceed 20 characters'
+		]
+		const descRule = [
+			v => !!v || 'Description of product must be provided!!',
+			v => v.length <= 100 || 'Product description cannot exceed 100 characters'
+		]
+		const tags = ref(["Fashion", "Sneakers", "Unisex shoes", "Men shoes", "Black", "Fashion and style", "Ghana Ankara Material"]);
+		const newTag = ref("");
+		const window = ref("General");
 
-const tags = ref(["Fashion", "Sneakers", "Unisex shoes", "Men shoes", "Black", "Fashion and style", "Ghana Ankara Material"]);
-const variantOptions = ref(["Size", "Color", "Material", "Style"]);
-const items1 = ref([]);
-const checkqty = ref(true);
-const radioship = ref(true);
-const editor = ref(null);
-const tab = ref("Customer Details");
-const chip = ref("All");
-const chosen = ref("");
-const tab1 = ref(null);
-const window = ref("General");
-const newTag = ref("")
+		const addTag = (newTag) => {
+			const trimmedNewTag = newTag.trim().toLowerCase();
 
-const nonNegValue = [
-	v => v >=0 || "Value must be a non-negative number"
-]
-const productRules = [
-	v => !!v || 'Product name must be provided!!',
-	v => v.length <= 20 || 'Product name cannot exceed 20 characters'
-]
-const descRule = [
-	v => !!v || 'Description of product must be provided!!',
-	v => v.length <= 100 || 'Product description cannot exceed 100 characters'
-]
+				if (trimmedNewTag !== '' && tags.value.some(tag => tag.toLowerCase() === trimmedNewTag)) {
+					return; 
+				}
+				tags.value.push(newTag.trim());
+		};
 
-const addTag = (newTag) => {
-	  const trimmedNewTag = newTag.trim().toLowerCase();
-
-		if (trimmedNewTag !== '' && tags.value.some(tag => tag.toLowerCase() === trimmedNewTag)) {
-			return; 
+		const handleTagInput = () => {
+				addTag(newTag.value);
+				newTag.value = ''; // Clear the input field after adding the tag
+		};
+		return {
+			nonNegValue,
+			productRules,
+			descRule,
+			addTag,
+			handleTagInput,
+			tags,
+			newTag,
+			window
 		}
-        tags.value.push(newTag.trim());
-    
-};
+	},
+    components: {
+        EditorContent,
+    },
+    data() {
+        return {
+           
+            checkqty: true,
+            radioship:true,
+			tab1: null,
+			items1: [],
+			variantOptions: ["Size", "Color", "Material", "Style"],
+            editor: null,
+            tab: 'Customer Details',
+            chip: 'All',
+            chosen: '',
+            notes: [{
+                name: 'Benjamin Franklin O.',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png'
+            },
+            {
+                name: 'Nweke Franklin',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png'
+            },
+            {
+                name: 'Nweke Franklin',
+                image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png'
+            },
 
-const handleTagInput = (event) => {
-        addTag(newTag.value);
-        newTag.value = ''; // Clear the input field after adding the tag
-};
+            ],
+            summary: [
+                {
+                    title: 'Total Quantity',
+                    value: '4 Items'
+                },
+                {
+                    title: 'Grand Total',
+                    value: '€ 1,829.00'
+                }, {
+                    title: 'Sub-Total',
+                    value: '€ 1,817.00'
+                },
+                {
+                    title: 'Shipping International',
+                    value: '€ 12.00'
+                },
+                {
+                    title: 'Taxes',
+                    value: '€ 0.00'
+                }
+            ],
+            items: [
+                {
+                    sn: '#23942',
+                    name: 'Leather crop top & pants......',
+                    date: '17 May',
+                    total: '€2,349‎',
+                },
+                {
+                    sn: '#23442',
+                    name: 'Leather crop top & pants......',
+                    date: '17 May',
+                    total: '€2,349‎',
+                },
+                {
+                    sn: '#26042',
+                    name: 'Leather crop top & pants......',
+                    date: '17 May',
+                    total: '€2,349‎',
+                },
 
-const notes = ref([
-    { name: "Benjamin Franklin O.", image: "https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png" },
-    { name: "Nweke Franklin", image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png" },
-    { name: "Nweke Franklin", image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png" }
-]);
-const summary = ref([
-    { title: "Total Quantity", value: "4 Items" },
-    { title: "Grand Total", value: "€ 1,829.00" },
-    { title: "Sub-Total", value: "€ 1,817.00" },
-    { title: "Shipping International", value: "€ 12.00" },
-    { title: "Taxes", value: "€ 0.00" }
-]);
-const items = ref([
-    { sn: "#23942", name: "Leather crop top & pants......", date: "17 May", total: "€2,349‎" },
-    { sn: "#23442", name: "Leather crop top & pants......", date: "17 May", total: "€2,349‎" },
-    { sn: "#26042", name: "Leather crop top & pants......", date: "17 May", total: "€2,349‎" }
-]);
 
-const orderDetails = computed(() => [
-    { title: "Name", value: "Benjamin Franklin O." },
-    { title: "Email", value: "sylvesterfranklin007@gmail.com" },
-    { title: "Phone", value: "+145789900" },
-    { title: "Billing", value: "Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)" },
-    { title: "Shipping", value: "Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)" },
-    { title: "Shipping Company", value: "Umoja Free Shipping", img: "https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png" }
-]);
+            ],
+        }
+    },
+    computed: {
+        orderDetails() {
+            return [
+                {
+                    title: 'Name',
+                    value: 'Benjamin Franklin O.'
+                },
+                {
+                    title: 'Email',
+                    value: 'sylvesterfranklin007@gmail.com'
+                },
+                {
+                    title: 'Phone',
+                    value: '+145789900'
+                },
+                {
+                    title: 'Billing',
+                    value: 'Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)'
+                },
+                {
+                    title: 'Shipping',
+                    value: 'Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)'
+                },
+                {
+                    title: 'Shipping Company',
+                    value: 'Umoja Free Shipping',
+                    img: 'https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png'
+                },
+            ]
+        }
+    },
+    mounted() {
+        this.items = this.items1;
 
-let editorInstance;
-
-onMounted(() => {
-    editorInstance = new Editor({
-        extensions: [
-            StarterKit,
-            Link,
-            Underline,
-            TextAlign.configure({
-                types: ["heading", "paragraph"],
-            }),
-        ],
-        content: "<p>This sneakers is made from one of the best  ankara material in Ghana</p>",
-    });
-});
-
-onBeforeUnmount(() => {
-    editorInstance.destroy();
-});
-
+        this.editor = new Editor({
+            extensions: [
+                StarterKit,
+                Link,
+                Underline,
+                TextAlign.configure({
+                    types: ['heading', 'paragraph'],
+                }),
+            ],
+            content: '<p>This sneakers is made from one of the best  ankara material in Ghana</p>',
+        })
+    },
+    beforeUnmount() {
+        this.editor.destroy()
+    },
+}
 </script>
+
+
+
+
 <style scoped>
 	.tooltip-content {
 		max-width: 200px; /* Set the maximum width of the tooltip */

@@ -11,7 +11,7 @@ export const useVendorStore = defineStore('vendor', {
     loginError: "",
     signupError: "",
     error: "",
-    vendorIsLoggedIn: !!getLocalStorageItem('vendorToken'),
+    vendorIsLoggedIn: !!localStorage.getItem('vendorToken'),
     companyInfo: {},
     ownerInfo: {},
     businessDocumentation: {},
@@ -30,7 +30,6 @@ export const useVendorStore = defineStore('vendor', {
     },
     areAllFormsSubmitted() {
       return this.isCompanyInfoComplete && this.isOwnerInfoComplete && this.isBusinessDocumentationComplete;
-      // Add other sections as needed
     },
     setCompanyInfo(data) {
       this.companyInfo = data;
@@ -128,7 +127,7 @@ export const useVendorStore = defineStore('vendor', {
         });
         this.loginError = '';
         const {access_token} = response.data;
-        setLocalStorageItem('vendorToken', access_token);
+        localStorage.setItem('vendorToken', access_token);
         return true;
       } catch(error) {
           if (error.response) {

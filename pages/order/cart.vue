@@ -244,7 +244,7 @@ border-radius: 20px;" class=" d-flex align-center  pa-4">
 
 <script setup>
 definePageMeta({
-middleware: ["auth", "vendor-auth"]
+middleware: ["auth"]
 })
 import { ref, computed, watch, nextTick } from 'vue';
 import { useCartStore } from '~/stores/cartStore';

@@ -85,6 +85,7 @@
 			<p class="inputLabel">State</p>
 			<v-select 
 			v-model="selectedState" 
+			color="green"
 			:loading="loadingStates"
 			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select State" 
@@ -98,6 +99,7 @@
 			<v-select 
 			v-model="selectedCity" 
 			:loading="loadingCities"
+			color="green"
 			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select" density="comfortable" 
 			:items="cities"

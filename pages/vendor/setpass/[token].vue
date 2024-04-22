@@ -113,7 +113,7 @@ import { vendorUseApi } from '~/composables/vendorApi';
           method: 'post',
           data: {password, password_confirmation}
         });
-        this.error = true;
+        error.value = "";
         return true
       } catch (error) {
             if (error.response) {

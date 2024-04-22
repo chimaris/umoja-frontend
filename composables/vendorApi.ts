@@ -2,8 +2,8 @@ import axios from 'axios'
 import { getLocalStorageItem, setLocalStorageItem } from '~/utils/storage';
 
 export const vendorUseApi = () => {
-    const token = getLocalStorageItem("vendorToken", null);
-    const refreshToken = getLocalStorageItem('vendorRefreshToken', null)
+    const token = localStorage.getItem('vendorToken') || null ;
+    const refreshToken = localStorage.getItem('vendorRefreshToken') || null;
     const baseURL = 'https://umoja-production-9636.up.railway.app/api/';
 
     const instance = axios.create({
@@ -22,7 +22,7 @@ export const vendorUseApi = () => {
                 try {
                     const response = await axios.post(`${baseURL}/auth/refresh_token`, { refresh_token: refreshToken });
                     const newToken = response.data.access_token;
-                    setLocalStorageItem("vendorToken", newToken); // Update the token in local storage
+                    localStorage.setItem("vendorToken", newToken)
                     originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
                     return axios(originalRequest);
                 } catch (refreshError) {
