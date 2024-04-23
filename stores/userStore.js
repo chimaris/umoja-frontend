@@ -109,12 +109,11 @@ export const useUserStore = defineStore({
         console.error(error)
       }
     },
-    async socialLoginCallBack(provider, payload) {
+    async socialLoginCallBack(provider) {
       try {
         const response = await api({
           url: `auth/${provider}/callback`,
           method: 'get',
-          params: payload
         });
         const {access_token} = response.data;
         localStorage.setItem('token', access_token);
