@@ -28,7 +28,6 @@
             console.error("Error during Login", error)
         }
         const code = route.query.code;
-        console.log(code, provider)
     }
 
     onMounted(async () => {

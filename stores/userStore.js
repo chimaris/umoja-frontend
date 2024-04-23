@@ -38,7 +38,6 @@ export const useUserStore = defineStore({
         }
         return true;
       } catch(error) {
-        console.error("invalid")
           if (error.response) {
             this.loginError = error.response.data.message || 'An error occurred during signup.';
           } else if (error.request) {
@@ -115,7 +114,8 @@ export const useUserStore = defineStore({
         const {access_token} = response.data;
         localStorage.setItem('token', access_token);
         this.isLoggedIn = true
-        console.log(response.data)
+        
+        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
         return true;
       }catch(error) {
         console.error(error)
