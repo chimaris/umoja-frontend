@@ -38,7 +38,6 @@ export const useUserStore = defineStore({
         }
         return true;
       } catch(error) {
-        console.error("invalid")
           if (error.response) {
             this.loginError = error.response.data.message || 'An error occurred during signup.';
           } else if (error.request) {
