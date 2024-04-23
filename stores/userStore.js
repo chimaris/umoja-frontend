@@ -99,15 +99,31 @@ export const useUserStore = defineStore({
       } 
     },
     async socialLogin(provider) {
-      return new Promise((resolve, reject) => {
-        axios.get(`https://umoja-production-9636.up.railway.app/api/auth/${provider}/redirect`)
-                  .then((response) => {
-                    resolve(response);
-                  })
-                  .catch((error) => {
-                    reject(error)
-                  })
-      })
+      try {
+        const response = await api({
+          url: `auth/${provider}/redirect`,
+          method: 'get'
+        });
+        return response;
+      }catch(error) {
+        console.error(error)
+      }
+    },
+    async socialLoginCallBack(provider, payload) {
+      try {
+        const response = await api({
+          url: `auth/${provider}/callback`,
+          method: 'get',
+          params: payload
+        });
+        const {access_token} = response.data;
+        localStorage.setItem('token', access_token);
+        this.isLoggedIn = true
+        console.log(response.data)
+        return true;
+      }catch(error) {
+        console.error(error)
+      }
     },
     logout() {
       localStorage.removeItem('isLoggedIn');

@@ -152,7 +152,7 @@ export default {
 		async socialMediaLogin(provider) {
 			try {
 				const response = await this.userStore.socialLogin(provider);
-				console.log(response);
+				window.location.href = response.data.url;;
 			} catch (error) {
 				console.log(error);
 			}
