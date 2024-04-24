@@ -38,7 +38,6 @@ export const useUserStore = defineStore({
         }
         return true;
       } catch(error) {
-        console.error("invalid")
           if (error.response) {
             this.loginError = error.response.data.message || 'An error occurred during signup.';
           } else if (error.request) {
@@ -99,15 +98,28 @@ export const useUserStore = defineStore({
       } 
     },
     async socialLogin(provider) {
-      return new Promise((resolve, reject) => {
-        axios.get(`https://umoja-production-9636.up.railway.app/api/auth/${provider}/redirect`)
-                  .then((response) => {
-                    resolve(response);
-                  })
-                  .catch((error) => {
-                    reject(error)
-                  })
-      })
+      try {
+        const response = await api({
+          url: `auth/${provider}/redirect`,
+          method: 'get'
+        });
+        return response;
+      }catch(error) {
+        console.error(error)
+      }
+    },
+    async socialLoginCallBack(provider) {
+      try {
+        const response = await axios.get(`https://umoja-store.netlify.app/auth/${provider}/callback`) 
+        const {access_token} = response.data;
+        localStorage.setItem('token', access_token);
+        this.isLoggedIn = true
+        
+        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+        return true;
+      }catch(error) {
+        console.error(error)
+      }
     },
     logout() {
       localStorage.removeItem('isLoggedIn');

@@ -9,17 +9,17 @@
 				</p>
 				<v-row>
 					<v-col cols="6">
-						<v-btn size="x-large" flat variant="outlined" block>
+						<v-btn @click="socialMediaLogin('google')" size="x-large" flat variant="outlined" block>
 							<v-avatar rounded="0" size="24" class="mr-2">
 								<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686302222/flat-color-icons_google_vhnhqm.png"></v-img> </v-avatar
 							><span style="font-size: 12px; font-weight: 500">Sign Up with Google</span>
 						</v-btn>
 					</v-col>
 					<v-col cols="6">
-						<v-btn size="x-large" flat color="black" block>
+						<v-btn @click="socialMediaLogin('facebook')" size="x-large" flat color="black" block>
 							<v-avatar rounded="0" size="24" class="mr-2">
 								<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686302222/bi_apple_qka2so.png"></v-img> </v-avatar
-							><span style="font-size: 12px; font-weight: 500">Sign Up with Apple</span>
+							><span style="font-size: 12px; font-weight: 500">Sign Up with Facebook</span>
 						</v-btn>
 					</v-col>
 				</v-row>
@@ -103,6 +103,15 @@ const agree = ref(false);
 const agreeRule = [(v) => !!v || "You must agree to the terms and conditions"];
 
 const confirmpasswordRules = [(v) => !!v || "Confirm Password is required", (v) => v === password.value || "Passwords do not match"];
+
+async function socialMediaLogin(provider) {
+			try {
+				const response = await userStore.socialLogin(provider);
+				window.location.href = response.data.url;;
+			} catch (error) {
+				console.log(error);
+			}
+		}
 
 async function handleSubmit() {
 	if (first_name.value && last_name.value && email.value && password.value && agree.value && confirmPassword.value) {

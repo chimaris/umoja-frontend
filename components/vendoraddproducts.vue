@@ -23,24 +23,24 @@
 					<v-sheet class="cardStyle mt-5" width="800">
 						<div>
 							<p class="inputLabel">Product Number (SKU)</p>
-							<v-text-field placeholder="Enter product number (optional) " density="comfortable" append-inner-icon="mdi mdi-alert-circle">
+							<v-text-field v-model="productNumber" placeholder="Enter product number (optional) " density="comfortable" append-inner-icon="mdi mdi-alert-circle">
 							</v-text-field>
 						</div>
 						<div>
 							<p class="inputLabel">Unit</p>
-							<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select unit" density="comfortable"> </v-select>
+							<v-select v-model="unit" :rules="inputRules" :items="units" append-inner-icon="mdi mdi-chevron-down" placeholder="Select unit" density="comfortable"> </v-select>
 						</div>
 						<div>
 							<p class="inputLabel">Unit Per Item</p>
-							<v-text-field :rules="nonNegValue" type="number" placeholder="Eg. 1, 2, 3" density="comfortable"> </v-text-field>
+							<v-text-field v-model="unitperItem" :rules="nonNegValue" type="number" placeholder="Eg. cotton, leather, wood" density="comfortable"> </v-text-field>
 						</div>
 						<div>
 							<p class="inputLabel">Material</p>
-							<v-text-field placeholder="Enter product material" density="comfortable"> </v-text-field>
+							<v-text-field v-model="material" placeholder="Enter product material" density="comfortable"> </v-text-field>
 						</div>
 						<div>
 							<p class="inputLabel">Condition</p>
-							<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select product condition" density="comfortable"> </v-select>
+							<v-select v-model="condition" :items="conditions" append-inner-icon="mdi mdi-chevron-down" placeholder="Select product condition" density="comfortable"> </v-select>
 						</div>
 					</v-sheet>
 					<v-sheet class="cardStyle my-4" width="800">
@@ -68,7 +68,7 @@
 						</template>
 					</v-checkbox> -->
 					</v-sheet>
-					<v-btn flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
+					<v-btn @click="saveGeneral" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
 						>Save and continue</v-btn
 					>
 				</v-window-item>
@@ -754,10 +754,13 @@ import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
+import {inputRules} from '~/utils/formrules'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import {useVendorProductStore} from '~/stores/vendorProducts'
 
 export default {
 	setup() {
+		const vendorProducts = useVendorProductStore()
 		const nonNegValue = [
 		v => v >=0 || "Value must be a non-negative number"
 		]
@@ -786,6 +789,7 @@ export default {
 				addTag(newTag.value);
 				newTag.value = ''; // Clear the input field after adding the tag
 		};
+
 		return {
 			nonNegValue,
 			productRules,
@@ -794,7 +798,9 @@ export default {
 			handleTagInput,
 			tags,
 			newTag,
-			window
+			window,
+			vendorProducts
+			
 		}
 	},
     components: {
@@ -802,7 +808,14 @@ export default {
     },
     data() {
         return {
-           
+			newProduct: [],
+			productNumber: "",
+			unit: "",
+			unitperItem: "",
+			material: "",
+			condition: "",
+			conditions: ["New", "Used - Like New", "Used - Like Good", "Used - Good", "Used - Acceptable", "Refurbished"],
+			units : ['Pieces(pcs)', 'Dozen', 'Pound', 'Gallon', 'Pack', 'Bundle', 'Kilograms(kg)', 'Grams(g)', 'Liter(L)', 'Mililiter(mL)', 'Meters(m)', 'Centimeters(cm)'],
             checkqty: true,
             radioship:true,
 			tab1: null,
@@ -902,6 +915,20 @@ export default {
             ]
         }
     },
+	methods: {
+		saveGeneral() {
+			const data = {
+				productNumber: this.productNumber,
+				unit: this.unit,
+				unitperItem :this.unitperItem,
+				material: this.material,
+				Condition: this.condition
+			}
+			if (this.unit && this.unitperItem) {
+				this.vendorProducts.saveGeneralInfo(data)
+			}
+		}
+	},
     mounted() {
         this.items = this.items1;
 
