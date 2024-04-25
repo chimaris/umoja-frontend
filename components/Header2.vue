@@ -66,7 +66,7 @@
 							</v-avatar>
 						</v-badge>
 					</v-btn>
-					<v-btn v-if="$vuetify.display.mobile" rounded="xl" class="" icon flat color="transparent" @click.stop="drawer = !drawer">
+					<v-btn v-if="$vuetify.display.mobile" rounded="xl" class="" icon flat color="transparent" @click.stop="openNav">
 						<v-avatar size="24"> <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1713788195/umoja/menu.svg"></v-img> </v-avatar
 					></v-btn>
 
@@ -99,7 +99,7 @@
 				<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
 					<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
 				</v-avatar>
-				<v-icon icon="mdi mdi-close" @click.stop="drawer = !drawer"></v-icon>
+				<v-icon icon="mdi mdi-close" @click.stop="drawer = false"></v-icon>
 			</div>
 			<v-divider></v-divider>
 
@@ -205,6 +205,13 @@ export default {
 	methods: {
 		toggleTheme() {
 			this.theme.global.name.value = this.theme.global.current.value.dark ? "light" : "dark";
+		},
+		openNav() {
+			this.drawer = true;
+			window.scrollTo({
+				top: 0,
+				behavior: "instant",
+			});
 		},
 	},
 };
