@@ -30,7 +30,7 @@
 						The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.
 					</p>
 					<div class="pt-5 d-flex" :style="{ justifyContent: $vuetify.display.mobile ? 'space-between' : 'flex-start', display: flex }">
-						<v-btn to="/discovery_page" color="green" size="large" flat rounded="xl" :style="{ width: $vuetify.display.mobile ? '48%' : '163px' }">
+						<v-btn to="/discovery_page" color="green" size="large" flat rounded="xl" :style="{ width: $vuetify.display.mobile ? '49%' : '163px' }">
 							<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Start Exploring </span>
 						</v-btn>
 						<v-btn
@@ -43,7 +43,7 @@
 							variant="outlined"
 							flat
 							rounded="xl"
-							:style="{ width: $vuetify.display.mobile ? '48%' : '163px' }"
+							:style="{ width: $vuetify.display.mobile ? '49%' : '163px' }"
 						>
 							<span class="d-flex align-center" style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px">
 								Tutorial
@@ -162,14 +162,8 @@
 				<v-col cols="12" lg="7">
 					<p
 						class="mt-2"
-						style="
-							color: var(--carbon-4, #333);
-							font-size: 20px;
-							font-weight: 400;
-							max-width: 398px;
-							line-height: 180%; /* 36px */
-							letter-spacing: -0.6px;
-						"
+						style="color: var(--carbon-4, #333); font-weight: 400; max-width: 398px; line-height: 180%; /* 36px */ letter-spacing: -0.6px"
+						:style="{ fontSize: $vuetify.display.mobile ? '18px' : '20px' }"
 					>
 						Umoja provides a unique experience, connecting a variety of buyers and sellers to a digital african market.
 					</p>

@@ -6,8 +6,8 @@
 				<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" style="font-weight: 600; letter-spacing: -0.72px">Happy shopping Frank</p>
 				<p
 					:style="{ fontSize: $vuetify.display.mobile ? '14px' : '16px' }"
-					style="color: #969696; font-size: 16px; font-weight: 500; letter-spacing: -0.48px"
-					class="mt-1"
+					style="color: #969696; font-weight: 500; letter-spacing: -0.48px"
+					class="mt-1 mr-10"
 				>
 					Get lots of products with attractive offers up to 50% Discount
 				</p>
@@ -169,12 +169,18 @@
 					</div>
 				</div>
 				<!-- Responsive fILTER dRAWER -->
-				<v-layout v-show="$vuetify.display.mobile">
+				<v-layout
+					id="displayNone"
+					:class="$vuetify.display.mobile ? 'd-block' : 'd-none'"
+					:style="{ display: $vuetify.display.mobile ? 'block' : 'none' }"
+				>
 					<v-navigation-drawer
 						v-model="filterDrawer"
 						:location="$vuetify.display.mobile ? 'right' : undefined"
 						temporary
 						style="width: 85%; position: absolute; top: 350px"
+						:class="$vuetify.display.mobile ? 'd-block' : 'd-none'"
+						:style="{ display: $vuetify.display.mobile ? 'block' : 'none' }"
 					>
 						<div class="d-flex align-center justify-space-between px-4 pt-4">
 							<p style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>
@@ -194,6 +200,9 @@
 }
 .prat .v-label {
 	opacity: 1 !important;
+}
+#displayNone {
+	display: none;
 }
 </style>
 <script>
