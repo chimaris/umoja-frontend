@@ -170,7 +170,12 @@
 				</div>
 				<!-- Responsive fILTER dRAWER -->
 				<v-layout v-show="$vuetify.display.mobile">
-					<v-navigation-drawer v-model="filterDrawer" :location="$vuetify.display.mobile ? 'right' : undefined" temporary style="width: 85%">
+					<v-navigation-drawer
+						v-model="filterDrawer"
+						:location="$vuetify.display.mobile ? 'right' : undefined"
+						temporary
+						style="width: 85%; position: absolute; top: 350px"
+					>
 						<div class="d-flex align-center justify-space-between px-4 pt-4">
 							<p style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>
 							<v-icon class="d-block d-md-none" icon="mdi mdi-close" @click.stop="filterDrawer = false"></v-icon>
