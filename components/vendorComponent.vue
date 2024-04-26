@@ -7,28 +7,29 @@
 		class="bg-white parent-card rounded-lg mb-2"
 	>
 		<v-img eager class="bg-grey-lighten-5" cover style="border-radius: 16px" width="100%" height="237" :src="item.image"> </v-img>
-		<div class="px-4">
+		<div class="px-md-4">
 			<v-avatar style="margin-top: -37px" :size="$vuetify.display.mobile ? 43 : 67">
 				<v-img eager class="bg-grey-lighten-2" cover style="border-radius: 16px" width="100%" height="237" :src="item.vendorImage"> </v-img>
 			</v-avatar>
 			<p
 				@click="$router.push('/vendor_page')"
-				style="font-weight: 600; font-size: 20px; line-height: normal; cursor: pointer; color: #000000"
-				class="mt-4"
+				style="font-weight: 600; line-height: normal; cursor: pointer; color: #000000"
+				:style="{ fontSize: $vuetify.display.mobile ? '16px' : '20px' }"
+				class="mt-0 mt-md-4"
 			>
 				{{ item.vendorName }}
 			</p>
 			<div class="d-block mt-1">
 				<div class="d-flex align-center">
 					<p
-						:style="{ fontSize: $vuetify.display.mobile ? '10px' : '14px' }"
+						:style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px' }"
 						style="color: #969696; font-weight: 500; line-height: 140%"
 						class="text-capitalize"
 					>
 						{{ category }}
 					</p>
 					<v-icon class="mx-1" size="5" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
-					<p :style="{ fontSize: $vuetify.display.mobile ? '10px' : '14px' }" style="color: #969696; font-weight: 500; line-height: 140%">
+					<p :style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px' }" style="color: #969696; font-weight: 500; line-height: 140%">
 						{{ item.subCategory }}
 					</p>
 				</div>
@@ -37,14 +38,16 @@
 				<v-rating readonly model-value="4" color="grey-lighten-2" active-color="#E7CE5D" class="rts" density="compact" size="x-small"></v-rating
 				><span style="margin-left: 3px; margin-top: 3px">(101)</span>
 			</p>
-			<div
-				variant="text"
-				size="x-small"
+			<span
 				:style="{ fontSize: $vuetify.display.mobile ? '10px' : '12px' }"
 				style="font-weight: 500; border-radius: 6px; color: #f38218; letter-spacing: -0.12px"
+				class="d-flex items-center"
 			>
-				<v-icon size="14" class="mr-2" style="transform: rotate(90deg)" icon="mdi mdi-tag"></v-icon>Delivery within 5 Working Days
-			</div>
+				<span style="width: 10px">
+					<v-img height="14" width="10" src="https://res.cloudinary.com/payhospi/image/upload/v1714122594/umoja/Vector_fl2a3t.png"> </v-img>
+				</span>
+				<span class="ml-1">Delivery within 5 Working Days</span>
+			</span>
 		</div>
 
 		<v-btn to="/vendor_page" variant="outlined" class="bizbtn mt-8" rounded="xl" block size="large"><span>See Business Page</span></v-btn>

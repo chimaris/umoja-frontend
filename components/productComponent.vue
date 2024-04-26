@@ -67,7 +67,7 @@
 			<v-btn
 				@click="addToCart(item)"
 				rounded="xl"
-				style="border: 1px solid #ced2d6; border-radius: 6px"
+				style="border: 0.66px solid #ced2d6; border-radius: 6px"
 				:width="$vuetify.display.mobile ? '100%' : 106"
 				:height="$vuetify.display.mobile ? 50 : 28"
 				color="green"
@@ -75,7 +75,9 @@
 				flat
 				class="parent-btn ml-0 ml-md-2 mt-2 mt-md-0"
 			>
-				<span style="color: #1a1d1f; font-weight: 600" class="smallBtn">{{ "Add to Cart" }}</span>
+				<span style="color: #1a1d1f; font-weight: 600" :style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px' }" class="smallBtn">{{
+					"Add to Cart"
+				}}</span>
 			</v-btn>
 		</div>
 	</v-card>

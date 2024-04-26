@@ -1,5 +1,5 @@
 <template>
-	<v-container class="parent-container" style="margin-bottom: 50px" :style="'padding-top:100px;max-width:' + maxw">
+	<v-container class="parent-container" style="margin-bottom: 50px" :style="'max-width:' + maxw">
 		<div class="d-flex my-8 align-center">
 			<div
 				class=""
