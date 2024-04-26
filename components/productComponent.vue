@@ -56,11 +56,9 @@
 		</div>
 		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
 			<div :class="showdisco ? 'mt-0' : ''">
-				<h1 :style="{ fontSize: $vuetify.display.mobile ? '12px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">€{{ item.price }}</h1>
+				<h1 :style="{ fontSize: $vuetify.display.mobile ? '14px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">€{{ item.price }}</h1>
 				<div v-if="showdisco" class="d-flex align-center">
-					<p style="color: var(--carbon-3, #969696); font-size: 12px; font-weight: 600; line-height: 17.673px; text-decoration: line-through">
-						€15,000.00
-					</p>
+					<p style="color: var(--carbon-3, #969696); font-weight: 600; line-height: 17.673px; text-decoration: line-through">€15,000.00</p>
 					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg"> 20% OFF </v-chip>
 				</div>
 			</div>

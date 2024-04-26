@@ -76,7 +76,7 @@
 										v-for="b in n.items"
 										:key="b.name"
 									>
-										<v-btn :to="b.route.toLowerCase()" variant="text" class="ml-0 pl-0" flat>
+										<v-btn :to="b.route.toLowerCase()" variant="text" class="ml-0 pl-0 text-left justify-start" flat>
 											{{ b.name }}
 										</v-btn>
 									</p>

@@ -81,7 +81,14 @@
 									Products
 								</p>
 
-								<v-btn size="small" class="font-weight-medium textClass px-4" style="font-size: 14px" rounded flat variant="text" color="#1273EB"
+								<v-btn
+									size="small"
+									class="font-weight-medium textClass px-md-4 mx-0 px-0"
+									style="font-size: 14px"
+									rounded
+									flat
+									variant="text"
+									color="#1273EB"
 									>Explore the product market place <v-icon class="ml-2" icon="mdi mdi-arrow-right"></v-icon
 								></v-btn>
 							</div>
@@ -114,6 +121,8 @@
 									</div>
 								</div>
 							</div>
+
+							<!-- FOR MOBILE -->
 							<div :class="$vuetify.display.mobile ? 'd-block pb-8' : 'd-md-none'">
 								<v-menu location="bottom" offset="10px" max-height="400">
 									<template v-slot:activator="{ props }">
@@ -157,13 +166,16 @@
 									<product-component :item="n" :index="i" />
 								</v-col>
 							</v-row>
+							<v-btn block class="d-flex d-md-none mt-10" color="#333" size="x-large" style="" variant="outlined" rounded="xl">
+								See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
+							</v-btn>
 						</v-sheet>
 					</v-col>
 				</v-row>
 			</v-container>
 		</v-card>
-		<v-container class="px-3" style="padding-top: 0px; max-width: 1400px">
-			<div style="padding: 100px 0">
+		<v-container class="px-0 mx-auto" style="padding-top: 0px; max-width: 1400px">
+			<div style="padding: 50px 0">
 				<v-row>
 					<v-col class="px-0" cols="6" md="6" lg="6">
 						<v-img
@@ -215,8 +227,8 @@
 		<v-container class="px-3" style="padding-top: 0px; max-width: 1400px">
 			<PostsRow :maxwidth="'1400px'" :showVendor="true" :title="postRow.title" :items="postRow.items" />
 		</v-container>
-		<v-container class="px-3" style="padding-top: 0px; max-width: 1400px">
-			<div style="padding: 0 0 100px 0">
+		<v-container class="px-0 mx-auto" style="padding-top: 0px; max-width: 1400px">
+			<div style="padding: 100px 0">
 				<v-row>
 					<v-col class="px-0" cols="6" md="6" lg="6">
 						<v-card
@@ -288,7 +300,7 @@
 								Top Articles
 							</p>
 
-							<v-btn size="small" class="font-weight-medium textClass px-4" rounded flat variant="text" color="#1273EB"
+							<v-btn size="small" class="font-weight-medium textClass px-md-4 px-0" rounded flat variant="text" color="#1273EB"
 								>See all articles <v-icon class="ml-2" icon="mdi mdi-arrow-right"></v-icon
 							></v-btn>
 						</div>
@@ -330,6 +342,11 @@
 					</div>
 				</v-col>
 			</v-row>
+			<div>
+				<v-btn block class="d-flex d-md-none mt-10" color="#333" size="x-large" style="" variant="outlined" rounded="xl">
+					See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
+				</v-btn>
+			</div>
 		</v-container>
 	</div>
 </template>
