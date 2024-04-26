@@ -10,7 +10,7 @@
 			class="d-flex bg-grey align-center"
 			:src="getImageSource"
 		>
-			<v-container style="max-width: 1400px; width: 100%" class="">
+			<v-container style="max-width: 1400px; width: 100%">
 				<div class="w-100 d-flex justify-md-end">
 					<v-card flat style="border-radius: 15px; padding: 40px !important" :max-width="$vuetify.display.mobile ? '100%' : 420">
 						<h1 style="color: var(--carbon-4, #333); font-size: 48px; font-weight: 600; line-height: 120%" class="mb-1">Get 5% Cash Back on €20</h1>
@@ -22,7 +22,7 @@
 						</v-btn>
 					</v-card>
 				</div>
-				<div :style="{ marginTop: $vuetify.display.mobile ? '50px' : '0' }">
+				<div :style="{ marginTop: $vuetify.display.mobile ? '100px' : '0' }">
 					<p style="color: #fff; font-size: 16px; font-weight: 600; letter-spacing: -0.16px" class="mb-2">Select African Country</p>
 					<v-menu location="bottom" offset="10px" width="150px" max-height="400">
 						<template v-slot:activator="{ props }">
