@@ -197,15 +197,23 @@
 							eager
 							cover
 							width="100%"
-							min-height="429"
+							:min-height="$vuetify.display.mobile ? 195 : 429"
 							height="auto"
 							src="https://res.cloudinary.com/payhospi/image/upload/v1690560694/rectangle-69_u12j2b.png"
 						></v-img>
 					</v-col>
 
 					<v-col class="px-0" cols="6" md="6" lg="6">
-						<v-card rounded="0" width="100%" height="100%" min-height="429" color="#F8B735" flat class="d-flex align-center">
-							<v-container style="max-width: 1400px" class="px-6 px-md-12">
+						<v-card
+							rounded="0"
+							width="100%"
+							height="100%"
+							:min-height="$vuetify.display.mobile ? 195 : 429"
+							color="#F8B735"
+							flat
+							class="d-flex align-center"
+						>
+							<v-container style="max-width: 1400px" class="px-4 px-md-12">
 								<p
 									:style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }"
 									style="color: var(--magnetic-green-2, #333); font-weight: 500; letter-spacing: 3.66px; text-transform: uppercase"
@@ -243,12 +251,12 @@
 							width="100%"
 							style="border: none !important"
 							height="100%"
-							min-height="429"
+							:min-height="$vuetify.display.mobile ? 195 : 429"
 							color="green"
 							flat
 							class="cardStyle py-0 d-flex align-center"
 						>
-							<v-container style="max-width: 1400px" class="px-8 px-md-12">
+							<v-container style="max-width: 1400px" class="px-4 px-md-12">
 								<p
 									:style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }"
 									style="color: var(--magnetic-green-2, #fff); font-weight: 500; letter-spacing: 3.66px; text-transform: uppercase"
@@ -273,7 +281,7 @@
 					</v-col>
 					<v-col class="px-0" cols="6" md="6" lg="6">
 						<v-img
-							min-height="429"
+							:min-height="$vuetify.display.mobile ? 195 : 429"
 							eager
 							cover
 							width="100%"
