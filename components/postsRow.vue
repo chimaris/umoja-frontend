@@ -15,7 +15,7 @@
 			>
 				{{ title }}
 			</div>
-			<v-btn class="" color="blue" size="small" style="" variant="text" rounded="xl">
+			<v-btn class="mx-0 px-0" color="blue" size="small" style="" variant="text" rounded="xl">
 				See all posts <v-icon class="ml-1" icon="mdi mdi-arrow-right"></v-icon>
 			</v-btn>
 		</div>
@@ -47,6 +47,9 @@
 					<postComponent :index="i" :item="n" />
 				</v-col>
 			</v-row>
+			<v-btn block class="d-flex d-md-none mt-10" color="#333" size="x-large" style="" variant="outlined" rounded="xl">
+				See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
+			</v-btn>
 		</div>
 	</v-container>
 </template>
