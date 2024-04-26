@@ -40,30 +40,14 @@ export const useVendorStore = defineStore('vendor', {
     setBusinessDocumentation(data) {
       this.businessDocumentation = data;
     },
-    saveVendor(vendorId, dateRegistered) {
-      const emailExists = this.vendors.some(vendor => vendor.ownerInfo.email === this.ownerInfo.email);
-      if (emailExists) {
-        throw new Error("Email already exists")
-      } else {
-          const vendorData = {
-            vendorId,
-            dateRegistered,
-            companyInfo: this.companyInfo,
-            ownerInfo: this.ownerInfo,
-            businessDocumentation: this.businessDocumentation
-          };
-          this.vendors.push(vendorData);
-          setLocalStorageItem('vendors', this.vendors)
-      } 
-    },
-    saveVendorProfileInfo(vendor) {
-      const vendorIndex = this.vendors.findIndex(v => v.vendorId === vendor.vendorId);
-      if (vendorIndex !== -1) {
-          this.vendors[vendorIndex] = vendor;
-          setLocalStorageItem("vendor", this.vendor)
-          setLocalStorageItem('vendors', this.vendors);
-      }
-  },
+  //   saveVendorProfileInfo(vendor) {
+  //     const vendorIndex = this.vendors.findIndex(v => v.vendorId === vendor.vendorId);
+  //     if (vendorIndex !== -1) {
+  //         this.vendors[vendorIndex] = vendor;
+  //         setLocalStorageItem("vendor", this.vendor)
+  //         setLocalStorageItem('vendors', this.vendors);
+  //     }
+  // },
   async registerVendor() {
     this.loading = true;
     this.signupError = ""
@@ -104,7 +88,6 @@ export const useVendorStore = defineStore('vendor', {
       this.signupError = "";
       return true
     } catch (error) {
-      console.log(error)
         if (error.response) {
           this.signupError = error.response.data.message || 'An error occurred during registration.';
         } else if (error.request) {
@@ -125,9 +108,18 @@ export const useVendorStore = defineStore('vendor', {
           method: 'post',
           data: { email, password}
         });
-        this.loginError = '';
         const {access_token} = response.data;
         localStorage.setItem('vendorToken', access_token);
+        
+        const id = response.data.user_id
+        const profileResponse = await api ({
+          url: `users/${id}`,
+          method: 'get'
+        });
+        this.vendor = profileResponse.data.data;
+        setLocalStorageItem('vendor', this.vendor)
+
+        this.vendorIsLoggedIn = true;
         return true;
       } catch(error) {
           if (error.response) {

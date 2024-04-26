@@ -97,9 +97,6 @@ const vendorStore = useVendorStore();
 const router = useRouter();
 const formError = ref("");
 
-function generateId() {
-	return Math.floor(Math.random() * 23456789);
-}
 
 async function handleSubmission() {
 	if (isCompanyInfo.value && isOwnerInfo.value && isBusinessDocumentation.value && isConfirmation.value && vendorStore.areAllFormsSubmitted()) {
@@ -108,10 +105,6 @@ async function handleSubmission() {
 			if (isRegistered) {
 				showModal.value = true;
 				vendorStore.signupError = "";
-
-				const vendorId = generateId();
-        		const dateRegistered = formatDate();
-        		vendorStore.saveVendor(vendorId, dateRegistered); 
 			}
 		} catch (error) {
 			console.error(error);

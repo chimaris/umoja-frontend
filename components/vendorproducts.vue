@@ -1,9 +1,10 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div v-if="items1.length > 0" class="d-flex align-center justify-space-between">
+		<div v-if="vendorProducts.Products.length > 0" class="d-flex align-center justify-space-between">
 			<div class="d-flex w-100 align-center">
 				<div class="d-flex align-center">
 					<v-text-field
+					    v-model="searchQuery"
 						style="width: 235px; border: 1px solid #cecece; border-radius: 6px"
 						variant="outlined"
 						density="compact"
@@ -28,7 +29,7 @@
 						Collection type
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
 					</v-btn>
-					<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
+					<v-btn @click="filterAction(price, low)" style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
 						Price Range
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
 					</v-btn>
@@ -56,7 +57,7 @@
 			</div>
 		</div>
 
-		<div v-if="items1.length > 0" class="mt-5">
+		<div v-if="vendorProducts.Products.length > 0" class="mt-5">
 			<v-tabs v-model="tab" class="orders" color="green">
 				<v-tab @click.stop="sort(item.prop, item.value)" v-for="item in tabs" :key="item" :value="item" class="d-flex text-capitalize align-center">
 					{{ item.name }}
@@ -85,7 +86,7 @@
 				</thead>
 				<tbody>
 					<!-- @click="chosen = item.sn" -->
-					<tr :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="item in items" :key="item.sn">
+					<tr :style="chosen == item.id ? 'background:#DFDFDF' : ''" v-for="item in filteredProducts" :key="item.id">
 						<td class="text-grey-lighten-1 pl-4 px-1">
 							<v-checkbox hide-details></v-checkbox>
 						</td>
@@ -96,15 +97,15 @@
 										<div v-bind="props" class="d-flex align-center pr-4 pl-2">
 											<v-avatar color="grey-lighten-4" class="rounded-lg pa-1 mr-3 ml-0" size="50"
 												><v-img
-													src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"
+													:src="item.photo.split(',')[0]"
 												></v-img
 											></v-avatar>
 											<div>
 												<p class="mb-1" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">
-													Ghana multi-colored kente...
+													{{ item.name }}
 												</p>
 												<p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate">
-													The Ghana kente material comes with a...
+													{{ item.description }}
 												</p>
 											</div>
 										</div></template
@@ -113,16 +114,16 @@
 										<v-row class="d-flex align-start">
 											<v-avatar color="grey-lighten-4" class="pa-1" size="70" rounded="lg">
 												<v-img
-													src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"
+													:src="item.photo.split(',')[1]"
 												></v-img>
 											</v-avatar>
 											<v-col class="py-0">
 												<p style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px">
-													Multicolored Ankara Material made in the Suberbs of Africa
+													{{item.name}}
 												</p>
-												<p style="color: #cdd6d4; font-size: 12px; font-weight: 500; line-height: 20px">Fashion and Style</p>
+												<p style="color: #cdd6d4; font-size: 12px; font-weight: 500; line-height: 20px">{{ item.category_name }}</p>
 
-												<p style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px" class="mt-1">€ 235.00 per yard</p>
+												<p style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px" class="mt-1">€ {{item.price}}.00 per {{ item.unit }}</p>
 											</v-col>
 										</v-row>
 									</v-card>
@@ -132,10 +133,10 @@
 
 						<td style="height: 100px" class="align-center d-flex px-1">
 							<v-chip style="color: #333; font-size: 10px; font-weight: 500" rounded="lg" class="" size="small" color="grey" variant="tonal">
-								Fashion and style
+								{{item.category_name}}
 							</v-chip>
 							<v-chip style="color: #333; font-size: 10px; font-weight: 500" rounded="lg" class="mx-2" size="small" color="grey" variant="tonal">
-								Clothes
+								{{ item.sub_category_name }}
 							</v-chip>
 						</td>
 						<td class="tableThick px-1">
@@ -147,16 +148,16 @@
 						</td>
 						<td class="tableLight px-1">
 							<v-chip style="color: #333; font-size: 10px; font-weight: 500" rounded="lg" class="" size="small" color="green" variant="tonal">
-								Active
+								{{ item.status }}
 							</v-chip>
 						</td>
-						<td class="tableThick px-1">{{ item.total }}</td>
+						<td class="tableThick px-1">€{{ item.price }}</td>
 						<td class="tableThick px-1">
-							<p>36 in stock</p>
+							<p>{{ item.made_with_ghana_leather }} in stock</p>
 							<p style="color: #969696; font-weight: 400">for 3 variants</p>
 						</td>
 
-						<td class="tableLight px-1"><p style="color: #333; font-size: 14px; font-style: normal; font-weight: 600">UY3749</p></td>
+						<td class="tableLight px-1"><p style="color: #333; font-size: 14px; font-style: normal; font-weight: 600">{{ item.sku }}</p></td>
 						<td class="text-grey-lighten-1 text-center px-1">
 							<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="menubar text-grey-darken-3"> Edit </v-btn>
 						</td>
@@ -175,7 +176,7 @@
 
 		<!-- If there is no Product show this -->
 		<div
-			v-if="items1.length === 0"
+			v-if="vendorProducts.Products.length === 0"
 			class="d-flex flex-column justify-center align-center"
 			style="max-height: 100%; height: 90vh; border: 1px solid #cecece; border-radius: 15px"
 		>
@@ -208,206 +209,85 @@
 				</div>
 			</v-sheet>
 		</div>
+	<v-dialog v-model="vendorProducts.newProductAdded" max-width="1200">
+		<v-card style="width: 100%; border-radius: 5px; background-color: #EDF3F0; position: absolute; left: 170px; top: -300px">
+			<div class="d-flex align-center justify-between pa-10" style="width: 100%; border-radius: 30px">
+				<div class="d-flex align-center justify-center" style="background-color:#CBDED6; width: 50px; height: 50px; border-radius: 50%">
+					<v-icon color="green" size="24">mdi mdi-checkbox-marked-circle</v-icon>
+				</div>
+				<div class="ml-5" style="flex: 1">
+					<h4 style="font-size: 20px">Product Added Successfully</h4>
+					<p style="font-size: 18px">You have successfully added <span style="color:
+#2C6E63">{{ vendorProducts.newProductName }} <span>{{ vendorProducts.newProductsku }}</span></span></p>
+				</div>
+				<div @click="vendorProducts.newProductAdded = false" style="color: red" class="d-flex align-center">
+					<span style="font-size: 18px">Close</span>
+					<v-icon class="ml-1" size="24" style="cursor: pointer;">mdi mdi-close-circle-outline</v-icon>
+				</div>
+			</div>
+		</v-card>
+	</v-dialog>
 	</v-container>
 </template>
 <script>
+import {useVendorProductStore} from '~/stores/vendorProducts'
 export default {
 	setup(props, ctx) {
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		}
-
+		const vendorProducts = useVendorProductStore()
 		return {
-			choose
+			choose,
+			vendorProducts
 		};
 	},
 	data() {
 		return {
 			dialog: true,
+			searchQuery: "",
 			tab: "",
 			tabs: [
-				{ name: "All Products", prop: null, value: null },
-				{ name: "Active", prop: "status", value: 0 },
-				{ name: "Drafts", prop: "payment_status", value: 0 },
-				{ name: "Archived", prop: "status", value: 1 },
+				{ name: "All Products", prop: null, filterBy: null },
+				{ name: "Active", prop: "status", filterBy: 'Active' },
+				{ name: "Drafts", prop: "status", filterBy: 'Draft' },
+				{ name: "Archived", prop: "status", filterBy: null },
 			],
-			items1: [
-				{
-					sn: "#23942",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#876567",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: 0,
-					payment_status: 0,
-					status: 2,
-					items_no: 1,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#3456456",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 4,
-					delivery_method: "DHL Delivery",
-				},
-				{
-					sn: "#65459",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#098765",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: 0,
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#65456",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: "€ 24.08",
-					payment_status: 0,
-					status: 2,
-					items_no: 1,
-					delivery_method: "DHL Delivery",
-				},
-				{
-					sn: "#239042",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 4,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#9867763",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "DHL Delivery",
-				},
-				{
-					sn: "#98755765",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: "€ 24.08",
-					payment_status: 0,
-					status: 1,
-					items_no: 1,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#7646439",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 4,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#9876765",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#9876765",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: "€ 24.08",
-					payment_status: 0,
-					status: 0,
-					items_no: 1,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#12t65345",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 4,
-					delivery_method: "Umoja Delivery",
-				},
-			],
+			items1: [],
 			items: []
-			
 		};
 	},
-	mounted() {
-		this.items = this.items1;
+
+	computed: {
+  filteredProducts() {
+    let result = this.vendorProducts.Products;
+
+    // Filter based on the selected tab
+    if (this.tab) {
+      const prop = this.tab.prop;
+      const value = this.tab.filterBy;
+      result = result.filter(item => {
+        if (prop === null) {
+          return true; // Show all products for "All Products" tab
+        } else {
+          return item[prop] === value; // Filter products based on the selected tab
+        }
+      });
+    }
+
+    // Further filter based on the search query
+    if (this.searchQuery) {
+      result = result.filter(product => {
+        return product.name.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+               product.description.toLowerCase().includes(this.searchQuery.toLowerCase());
+      });
+    }
+
+    return result;
+  }
+},
+	created() {
+		this.vendorProducts.getAllProduct()
 	},
 	methods: {
 		
@@ -417,6 +297,12 @@ export default {
 				return item[x] == y;
 			});
 		},
+		filterAction(property, value) {
+			if (property === 'price') {
+            this.filteredProducts.sort((a, b) => a.price - b.price);
+        }
+			
+		}
 	},
 };
 </script>

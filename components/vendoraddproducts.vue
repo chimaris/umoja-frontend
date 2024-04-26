@@ -9,7 +9,7 @@
 		<v-sheet style="" color="transparent" class="mt-2">
 			<v-tabs v-model="tab1" color="green">
 				<v-tab
-					v-for="item in ['General', 'Text', 'Price', 'Picture', 'Inventory', 'Shipping', 'Variants']"
+					v-for="item in tabs"
 					:key="item"
 					:value="item"
 					class="d-flex text-capitalize align-center"
@@ -20,7 +20,8 @@
 			<v-divider></v-divider>
 			<v-window v-model="tab1">
 				<v-window-item value="General">
-					<v-sheet class="cardStyle mt-5" width="800">
+					<v-form @submit.prevent="saveGeneral">
+						<v-sheet class="cardStyle mt-5" width="800">
 						<div>
 							<p class="inputLabel">Product Number (SKU)</p>
 							<v-text-field v-model="productNumber" placeholder="Enter product number (optional) " density="comfortable" append-inner-icon="mdi mdi-alert-circle">
@@ -32,11 +33,11 @@
 						</div>
 						<div>
 							<p class="inputLabel">Unit Per Item</p>
-							<v-text-field v-model="unitperItem" :rules="nonNegValue" type="number" placeholder="Eg. cotton, leather, wood" density="comfortable"> </v-text-field>
+							<v-text-field v-model="unitperItem" :rules="nonNegValue" placeholder="Eg. 1, 2, 3, 4" type="number"  density="comfortable"> </v-text-field>
 						</div>
 						<div>
 							<p class="inputLabel">Material</p>
-							<v-text-field v-model="material" placeholder="Enter product material" density="comfortable"> </v-text-field>
+							<v-text-field v-model="material" placeholder="Eg. cotton, leather, wood" density="comfortable"> </v-text-field>
 						</div>
 						<div>
 							<p class="inputLabel">Condition</p>
@@ -48,7 +49,7 @@
 							<p style="color: #333; font-size: 20px; font-weight: 600">Selling Type</p>
 						</div>
 						<v-divider class="my-4"></v-divider>
-						<v-checkbox v-model="radioship" hide-details density="compact" color="#00966D">
+						<v-checkbox @click="storeOption = !storeOption" v-model="storeOption" hide-details density="compact" color="#00966D">
 							<template v-slot:label>
 								<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
 									In-store selling only
@@ -68,13 +69,15 @@
 						</template>
 					</v-checkbox> -->
 					</v-sheet>
-					<v-btn @click="saveGeneral" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
+					<v-btn type="submit"  flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
 						>Save and continue</v-btn
 					>
+					</v-form>
 				</v-window-item>
 				<v-window-item value="Text">
-					<v-row class="mt-5">
-						<v-col cols="12" sm="8" height="100">
+					<v-form @submit.prevent="saveText" @keydown.enter.prevent="">
+						<v-row class="mt-5">
+							<v-col cols="12" sm="8" height="100">
 							<v-sheet class="cardStyle">
 								<div class="mb-5">
 									<p class="inputLabel">Product Name</p>
@@ -82,9 +85,9 @@
 									<v-text-field
 										hint="Do not exceed 20 characters when entering the product name."
 										persistent-hint
-										placeholder="Ankara Sneakers made with Ghanian Leather "
-										density="comfortable"
+										placeholder="Enter product name"
 										:rules="productRules"
+										v-model="productName"
 									>
 									</v-text-field>
 								</div>
@@ -156,15 +159,16 @@
 											</div>
 										</div>
 										<div style="min-height: 162px" class="bg-grey-lighten-4 pa-4">
-											<editor-content :editor="editor" />
+											<editor-content :editor="editor"  v-model="editorContent" />
 										</div>
 									</v-card>
+									<p style="color: #B00020; font-size: 14px; margin: 5px 0;" >{{descError}}</p>
 									<p style="color: #969696; font-size: 12px; font-weight: 400">Do not exceed 100 characters when giving the product description</p>
 								</div>
 								<div>
 									<p class="inputLabel mt-4">Product Specifications (Main features)</p>
-									<v-textarea variant="filled" hint="Each product feature should be separated with a comma (,)" persistent-hint></v-textarea>
-									<!-- <p style="color: #969696; font-size: 12px; font-weight: 400">Each product feature should be separated with a comma (,)</p> -->
+									<v-textarea :rules="inputRules" v-model="productSpec" variant="filled" hint="Each product feature should be separated with a comma (,)" persistent-hint></v-textarea>
+									
 								</div>
 							</v-sheet>
 						</v-col>
@@ -173,7 +177,7 @@
 								<div class="d-flex align-center">
 									<p style="color: #333; font-size: 20px; font-weight: 600">Product status</p>
 								</div>
-								<v-select class="mt-4" append-inner-icon="mdi mdi-chevron-down" placeholder="Active" density="comfortable"> </v-select>
+								<v-select class="mt-4" :items="['Active', 'Draft']" v-model = "productStat" append-inner-icon="mdi mdi-chevron-down" placeholder="Active" density="comfortable"> </v-select>
 							</v-sheet>
 							<v-sheet class="cardStyle mt-4">
 								<div class="d-flex align-center mb-6">
@@ -181,15 +185,15 @@
 								</div>
 								<div>
 									<p class="inputLabel">Category</p>
-									<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Fashion and style" density="comfortable"> </v-select>
+									<v-select  @change="fetchSubCategories()" :items="Categories.map(category => category.name)" v-model="selectedCategory" :rules="inputRules" append-inner-icon="mdi mdi-chevron-down" placeholder="Fashion and style" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Sub Category</p>
-									<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Sneakers" density="comfortable"> </v-select>
+									<v-select :loading="isFetching" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="selectedSubCategory" :rules="inputRules" append-inner-icon="mdi mdi-chevron-down" placeholder="Sneakers" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Gender</p>
-									<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Unisex" density="comfortable"> </v-select>
+									<v-select v-model="selectedGender" :items="['Men', 'Women', 'Unisex']" append-inner-icon="mdi mdi-chevron-down" placeholder="Unisex" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Tags</p>
@@ -202,45 +206,48 @@
 										style="border: 0.5px solid var(--magnetic-green-3, #94aaa5); font-size: 12px"
 										close-icon="mdi mdi-close-circle-outline"
 										rounded="lg"
-										v-for="n in tags"
-										:key="n"
+										v-for="tag in tags"
+										:key="tag"
 										closable
+										@click:close="removeTag(tag)"
 									>
-										{{ n }}
+										{{ tag }}
 									</v-chip>
 								</div>
 							</v-sheet>
 						</v-col>
 					</v-row>
-					<v-btn flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
+					<v-btn type = "submit" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
 						>Save and continue</v-btn
 					>
+					</v-form>
+						
 				</v-window-item>
 				<v-window-item value="Price">
-					<v-sheet class="cardStyle px-0 my-4" width="800">
+					<v-form @submit.prevent="savePrice" @keydown.enter.prevent="">
+						<v-sheet class="cardStyle px-0 my-4" width="800">
 						<div class="px-5">
 							<div class="d-flex align-center">
 								<p style="color: #333; font-size: 20px; font-weight: 600">Item Price</p>
 							</div>
 							<div class="mt-6">
 								<p class="inputLabel">Ust Index (Optional)</p>
-								<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="19%" density="comfortable"> </v-select>
+								<v-select append-inner-icon="mdi mdi-chevron-down" v-model="ustIndex" :items="['0%', '5%', '19%', '20%']" placeholder="Eg. 19%" density="comfortable"> </v-select>
 							</div>
 							<v-row>
 								<v-col>
 									<p class="inputLabel">Price</p>
-									<v-text-field placeholder="€ 0.00" density="comfortable"> </v-text-field
+									<v-text-field :rules="numRules" v-model="price" placeholder="€ 0.00" density="comfortable"> </v-text-field
 								></v-col>
 								<v-col>
 									<p class="inputLabel">Commission</p>
-
-									<v-text-field placeholder="€ 0.00" density="comfortable"> </v-text-field
+									<v-text-field :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="commission" placeholder="€ 0.00" density="comfortable"> </v-text-field
 								></v-col>
 								<v-col>
 									<p >Compare-at price (Optional)</p>
 									<v-tooltip text="" location="end" depressed class="elevation-24" >
 										<template v-slot:activator="{ props }">
-										<v-text-field v-bind="props" placeholder="€ 0.00" density="comfortable"></v-text-field>
+										<v-text-field v-bind="props" :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="prevPrice" placeholder="€ 0.00" density="comfortable"></v-text-field>
 										</template>
 										<template v-slot:default="{ attrs }">
 										<div class="tooltip-content" v-bind="attrs">
@@ -250,80 +257,39 @@
 									</v-tooltip>
 								</v-col>
 							</v-row>
-							<v-checkbox hide-details density="compact" color="#00966D">
+							<v-checkbox v-model="chargeTax" @click="chargeTax = !chargeTax" hide-details density="compact" color="#00966D">
 								<template v-slot:label>
 									<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
 										Charge tax on this product
 									</div>
 								</template>
 							</v-checkbox>
+							<p style="color: #B00020; font-size: 12px;">{{checkError}}</p>
 						</div>
 						<v-divider class="my-4"></v-divider>
 						<v-row class="px-5">
 							<v-col>
 								<p class="inputLabel">Cost per item</p>
-								<v-text-field placeholder="€ 0.00" density="comfortable"> </v-text-field>
+								<v-text-field v-model="itemCost" placeholder="€ 0.00" :rules="numRules"  density="comfortable"> </v-text-field>
 							</v-col>
 							<v-col>
 								<p class="inputLabel">Profit</p>
-								<v-text-field placeholder="€ 0.00" density="comfortable"> </v-text-field>
+								<v-text-field :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="profit" placeholder="€ 0.00" density="comfortable"> </v-text-field>
 							</v-col>
 							<v-col>
 								<p class="inputLabel">Margin</p>
-								<v-text-field placeholder="€ 0.00" density="comfortable"> </v-text-field>
+								<v-text-field :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="margin" placeholder="€ 0.00" density="comfortable"> </v-text-field>
 							</v-col>
 						</v-row>
 					</v-sheet>
-					<v-btn flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
+					<v-btn flat type="submit" style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
 						>Save and continue</v-btn
 					>
-
-					<v-dialog max-width="800" style="border: 1px solid #cecece; border-redius: 15px">
-						<template v-slot:activator="{ props: activatorProps }">
-							<v-btn v-bind="activatorProps" color="surface-variant" text="Edit Price" variant="flat"></v-btn>
-						</template>
-
-						<template v-slot:default="{ isActive }">
-							<v-card title="Edit Prices">
-								<v-divider class="my-4"></v-divider>
-
-								<v-card-text>
-									<div>
-										<p class="inputLabel">Apply a price to all variants</p>
-										<div class="d-flex">
-											<v-select class="mr-3" append-inner-icon="mdi mdi-chevron-down" placeholder="Enter price" density="comfortable"> </v-select>
-											<v-btn flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600; opacity: 0.5" size="large"
-												>Apply to all</v-btn
-											>
-										</div>
-									</div>
-									<v-divider class="my-4"></v-divider>
-									<div class="d-flex justify-space-between">
-										<span>Brown / A5 / Grid</span>
-										<div>
-											<v-text-field placeholder="€ 0.00" density="comfortable" class="align-end" style="width: 200px; text-align: right">
-											</v-text-field>
-											<p>$10.00 cost per item • Projected margin: 50%</p>
-										</div>
-									</div>
-								</v-card-text>
-
-								<v-card-actions>
-									<v-spacer></v-spacer>
-
-									<v-btn @click="isActive.value = false" size="large" style="border: 1px solid #969696" flat>
-										<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
-									>
-									<v-btn flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600; opacity: 0.5" size="large"
-										>Done</v-btn
-									>
-								</v-card-actions>
-							</v-card>
-						</template>
-					</v-dialog>
+					</v-form>
 				</v-window-item>
-				<v-window-item value="Picture">
-					<v-sheet class="cardStyle mt-4" width="800">
+				<v-window-item value="Picture" >
+					<v-form @submit.prevent="savePictures" @keydown.enter.prevent="">
+						<v-sheet class="cardStyle mt-4" width="800">
 						<div class="d-flex mb-4 align-center">
 							<p style="color: #333; font-size: 20px; font-weight: 600">Product Image</p>
 							<div class="ml-1">
@@ -331,45 +297,111 @@
 								<v-tooltip activator="parent" location="end" class="text-red"> Image</v-tooltip>
 							</div>
 						</div>
-
+					
 						<v-row>
-							<v-col cols="12" md="4">
-								<v-img
+							<v-col class="text-center" v-if="imagePreviews[0]" cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 1)">
+								<div style="width: 100%;">
+									<v-img
 									contain
 									width="100%"
 									class="bg-grey-lighten-4 rounded-lg"
 									height="298"
-									src="https://res.cloudinary.com/payhospi/image/upload/v1688130445/ankara-sneakers-1500-x_lnanzk.png"
+									:src="imagePreviews[0]"
 								></v-img>
+								</div>
+								<div>
+									<p class="mt-4" style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
+									<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product1" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
+									<input style="display: none" id="product1" type="file" @change="handleFileInputChange($event, 1)"/>
+								</div>
 							</v-col>
-							<v-col cols="12" md="4">
+							<v-col v-else  cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 1)">
 								<div class="d-flex justify-center align-center pa-2 rounded-lg" style="height: 298px; width: 100%; border: 3.4px dashed #e1e1e1">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
 											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
 										</v-avatar>
 										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
-										<p style=" #333; font-size: 14px; font-weight: 400">select <span style="color: #1273eb"> click to browse </span></p>
+										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product1" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
+										<input style="display: none" id="product1" type="file" @change="handleFileInputChange($event, 1)"/>
+									</div>
+								</div>
+							</v-col>
+							<!-- second product -->
+							<v-col class="text-center" v-if="imagePreviews[1]" cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 2)">
+								<div style="width: 100%;">
+									<v-img
+									contain
+									width="100%"
+									class="bg-grey-lighten-4 rounded-lg"
+									height="298"
+									:src="imagePreviews[1]"
+								></v-img>
+								</div>
+								<div>
+									<p class="mt-4" style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
+									<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product2" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
+									<input style="display: none" id="product2" type="file" @change="handleFileInputChange($event, 2)"/>
+								</div>
+							</v-col>
+							<v-col v-else  cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 2)">
+								<div class="d-flex justify-center align-center pa-2 rounded-lg" style="height: 298px; width: 100%; border: 3.4px dashed #e1e1e1">
+									<div class="text-center">
+										<v-avatar size="41" class="mb-2" rounded="lg">
+											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
+										</v-avatar>
+										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
+										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product2" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
+										<input style="display: none" id="product2" type="file" @change="handleFileInputChange($event, 2)"/>
 									</div>
 								</div>
 							</v-col>
 							<v-col cols="12" md="4">
-								<div class="d-flex justify-center mb-4 align-center pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1">
+								<!-- 3rd product -->
+								<div v-if="imagePreviews[2]" class="d-flex  flex-column justify-center mb-10 align-center pa-2 rounded-lg" style="height: 141px; width: 100%;" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 3)">
+									<v-img
+									contain
+									width="100%"
+									class="bg-grey-lighten-4 rounded-lg"
+									height="298"
+									:src="imagePreviews[2]"
+								></v-img>
+								<p class="mt-3" style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
+								<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product3" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
+								<input  style="display: none" id="product3" type="file" @change="handleFileInputChange($event, 3)" />
+								</div>
+								<div v-else class="d-flex justify-center mb-4 align-center pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 3)">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
+											
 											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
 										</v-avatar>
 										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
-										<p style=" #333; font-size: 14px; font-weight: 400">select <span style="color: #1273eb"> click to browse </span></p>
+										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product3" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
+										<input style="display: none" id="product3" type="file" @change="handleFileInputChange($event, 3)"/>
 									</div>
 								</div>
-								<div class="d-flex justify-center align-center mt-2 pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1">
+								<!-- 4th product -->
+								<div v-if="imagePreviews[3]" class="d-flex justify-center flex-column mt-5 mb-4 align-center pa-2 rounded-lg" style="height: 141px; width: 100%;" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 4)">
+									<v-img
+									contain
+									width="100%"
+									class="bg-grey-lighten-4 rounded-lg"
+									height="298"
+									:src="imagePreviews[3]"
+								></v-img>
+								<p class="mt-3" style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
+								<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product4" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
+								<input style="display: none" id="product4" type="file" @change="handleFileInputChange($event, 4)" />
+								</div>
+								<div v-else class="d-flex justify-center align-center mt-2 pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 4)">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
 											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
 										</v-avatar>
 										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
-										<p style=" #333; font-size: 14px; font-weight: 400">select <span style="color: #1273eb"> click to browse </span></p>
+										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product4" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
+										<input style="display: none" id="product4" type="file" @change="handleFileInputChange($event, 4)" />
 									</div>
 								</div>
 							</v-col>
@@ -379,370 +411,358 @@
 							Pictures must be in certain dimensions. Notice that the product shows all the details.
 						</p>
 					</v-sheet>
-					<v-btn flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
-						>Save and continue</v-btn
-					>
+					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureError}}</p>
+					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{vendorProducts.pictureError}}</p>
+					<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						<span class="mr-4">Save and continue</span>
+						<v-progress-circular v-if="vendorProducts.loading" indeterminate :width="2" :size="25"></v-progress-circular>
+					</v-btn>
+					</v-form>
 				</v-window-item>
-				<v-window-item value="Inventory">
-					<v-sheet class="cardStyle mt-4" width="800">
-						<div class="d-flex mb-4 align-center">
-							<p style="color: #333; font-size: 20px; font-weight: 600">Inventory</p>
-							<div class="ml-1">
-								<v-icon size="16" icon="mdi mdi-information"> </v-icon>
-								<v-tooltip activator="parent" location="end" class="text-red"> inventory</v-tooltip>
-							</div>
-						</div>
-						<v-checkbox v-model="checkqty" density="compact" color="#00966D">
-							<template v-slot:label>
-								<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">Track Quantity</div>
-							</template>
-						</v-checkbox>
-						<p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px">Quantity</p>
-						<div class="d-flex align-center justify-space-between">
-							<p style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 400; line-height: 24px">
-								Ankara Sneakers made with Ghanian Leather
-							</p>
-							<div class="d-flex pa-1" style="border-radius: 6px; border: 1px solid #cecece; width: 141px">
-								<v-text-field density="compact" hide-details variant="outline" value="0"></v-text-field>
-								<div>
-									<v-btn
-										size="x-small"
-										height="18px"
-										color="grey-lighten-3"
-										flat
-										class="pa-0 mb-1 d-flex align-center text-grey-darken-2 rounded-lg"
-										icon="mdi mdi-menu-up"
-									></v-btn>
-									<v-btn
-										size="x-small"
-										height="18px"
-										color="grey-lighten-3"
-										flat
-										class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
-										icon="mdi mdi-menu-down"
-									></v-btn>
+				<v-window-item value="Inventory" >
+					<v-form @submit.prevent="saveInventory" @keydown.enter.prevent="">
+						<v-sheet class="cardStyle mt-4" width="800">
+							<div class="d-flex mb-4 align-center">
+								<p style="color: #333; font-size: 20px; font-weight: 600">Inventory</p>
+								<div class="ml-1">
+									<v-icon size="16" icon="mdi mdi-information"> </v-icon>
+									<v-tooltip activator="parent" location="end" class="text-red"> inventory</v-tooltip>
 								</div>
 							</div>
-						</div>
-						<v-divider class="my-4"></v-divider>
-						<div class="d-flex align-center justify-space-between">
-							<p style="color: #333; font-size: 14px; font-weight: 400; line-height: 24px">Minimum Stock Notification</p>
-							<div class="d-flex pa-1" style="border-radius: 6px; border: 1px solid #cecece; width: 141px">
-								<v-text-field density="compact" hide-details variant="outline" value="0"></v-text-field>
-								<div>
-									<v-btn
-										size="x-small"
-										height="18px"
-										color="grey-lighten-3"
-										flat
-										class="pa-0 mb-1 d-flex align-center text-grey-darken-2 rounded-lg"
-										icon="mdi mdi-menu-up"
-									></v-btn>
-									<v-btn
-										size="x-small"
-										height="18px"
-										color="grey-lighten-3"
-										flat
-										class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
-										icon="mdi mdi-menu-down"
-									></v-btn>
+							<v-checkbox v-model="trackQty" @click="trackQty = !trackQty" density="compact" color="#00966D">
+								<template v-slot:label>
+									<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">Track Quantity</div>
+								</template>
+							</v-checkbox>
+							<p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px">Quantity</p>
+							<div class="d-flex align-center justify-space-between">
+								<p v-if ="vendorProducts.textInfo" style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 400; line-height: 24px">
+									{{vendorProducts.textInfo.productName}}
+								</p>
+								<p v-else style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 400; line-height: 24px">
+									Product Quantity
+								</p>
+								<div class="d-flex pa-1" style="border-radius: 6px; border: 1px solid #cecece; width: 141px">
+									<v-text-field density="compact" hide-details variant="outline" v-model="productQty"></v-text-field>
+									<div>
+										<v-btn
+											@click="productQty ++;"
+											size="x-small"
+											height="18px"
+											color="grey-lighten-3"
+											flat
+											class="pa-0 mb-1 d-flex align-center text-grey-darken-2 rounded-lg"
+											icon="mdi mdi-menu-up"
+										></v-btn>
+										<v-btn
+											:disabled= "productQty <= 0"
+											@click="productQty --;"
+											size="x-small"
+											height="18px"
+											color="grey-lighten-3"
+											flat
+											class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+											icon="mdi mdi-menu-down"
+										></v-btn>
+									</div>
 								</div>
 							</div>
-						</div>
-						<v-divider class="my-4"></v-divider>
-
-						<v-checkbox hide-details density="compact" color="#00966D">
-							<template v-slot:label>
-								<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium w-50">
-									<h4>Continue selling when out of stock</h4>
-									<span
-										>This won't affect Umoja POS. Staff will see a warning, but can complete sales when available inventory reaches zero and
-										below.</span
-									>
+							<v-divider class="my-4"></v-divider>
+							<div class="d-flex align-center justify-space-between">
+								<p style="color: #333; font-size: 14px; font-weight: 400; line-height: 24px">Minimum Stock Notification</p>
+								<div class="d-flex pa-1" style="border-radius: 6px; border: 1px solid #cecece; width: 141px">
+									<v-text-field density="compact" hide-details variant="outline" v-model="minimumQty"></v-text-field>
+									<div>
+										<v-btn
+										   @click="minimumQty ++;"
+											size="x-small"
+											height="18px"
+											color="grey-lighten-3"
+											flat
+											class="pa-0 mb-1 d-flex align-center text-grey-darken-2 rounded-lg"
+											icon="mdi mdi-menu-up"
+										></v-btn>
+										<v-btn
+											:disabled= "minimumQty <= 0"
+											@click="minimumQty --;"
+											size="x-small"
+											height="18px"
+											color="grey-lighten-3"
+											flat
+											class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+											icon="mdi mdi-menu-down"
+										></v-btn>
+									</div>
 								</div>
-							</template>
-						</v-checkbox>
-						<v-checkbox hide-details density="compact" color="#00966D">
-							<template v-slot:label>
-								<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
-									This product has a SKU or barcode
-								</div>
-							</template>
-						</v-checkbox>
-						<div>
-							<p class="inputLabel mt-4">Storage location</p>
-							<v-text-field placeholder="Enter product number (optional) " density="comfortable" append-inner-icon="mdi mdi-alert-circle">
-							</v-text-field>
-						</div>
-					</v-sheet>
+							</div>
+							<v-divider class="my-4"></v-divider>
+	
+							<v-checkbox v-model="continueSellingNoStock" @click="continueSellingNoStock = !continueSellingNoStock" hide-details density="compact" color="#00966D">
+								<template v-slot:label>
+									<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium w-50">
+										<h4>Continue selling when out of stock</h4>
+										<span
+											>This won't affect Umoja POS. Staff will see a warning, but can complete sales when available inventory reaches zero and
+											below.</span
+										>
+									</div>
+								</template>
+							</v-checkbox>
+							<v-checkbox v-model="hasSkuBarCode" @click="hasSkuBarCode = !hasSkuBarCode" hide-details density="compact" color="#00966D">
+								<template v-slot:label>
+									<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
+										This product has a SKU or barcode
+									</div>
+								</template>
+							</v-checkbox>
+							<div>
+								<p class="inputLabel mt-4">Storage location</p>
+								<v-text-field v-model="storageAddress" placeholder="Add your storage Address " density="comfortable" append-inner-icon="mdi mdi-alert-circle">
+								</v-text-field>
+							</div>
+						</v-sheet>
+						<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						Save and continue
+					</v-btn>
+					</v-form>
 				</v-window-item>
 				<v-window-item value="Shipping">
-					<v-sheet class="cardStyle mt-4" width="800">
-						<div class="d-flex mb-4 align-center">
-							<p style="color: #333; font-size: 20px; font-weight: 600">Shipping</p>
-						</div>
-
-						<div style="overflow: hidden" class="cardStyle rounded-lg px-0 py-0">
-							<div class="pa-4" style="background: #edf3f0">
-								<v-radio v-model="radioship" hide-details density="compact" color="#00966D">
-									<template v-slot:label>
-										<div style="color: #00966d; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
-											Physical Product
-										</div>
-									</template>
-								</v-radio>
+					<v-form @submit.prevent="saveShipping" @keydown.enter.prevent="">
+						<v-sheet class="cardStyle mt-4" width="800">
+							<div class="d-flex mb-4 align-center">
+								<p style="color: #333; font-size: 20px; font-weight: 600">Shipping</p>
 							</div>
-							<div class="pa-4">
-								<p class="inputLabel">Shipping weight</p>
-								<div class="d-flex my-2">
-									<v-text-field
-										style="max-width: 180px"
-										class="mr-3 rounded-lg bg-grey-lighten-3"
-										density="compact"
-										hide-details
-										variant="outline"
-										value="0.00"
-									></v-text-field>
-									<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px; width: 121px">
-										<v-text-field density="compact" hide-details variant="outline" value="lb"></v-text-field>
-										<div>
-											<v-btn
-												size="x-small"
-												height="18px"
-												color="grey-lighten-3"
-												flat
-												class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
-												icon="mdi mdi-menu-up"
-											></v-btn>
-											<v-btn
-												size="x-small"
-												height="18px"
-												color="grey-lighten-3"
-												flat
-												class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
-												icon="mdi mdi-menu-down"
-											></v-btn>
+	
+							<div style="overflow: hidden" class="cardStyle rounded-lg px-0 py-0">
+								<div class="pa-4" style="background: #edf3f0">
+									<v-radio v-model="physicalProduct" @click="physicalProduct = !physicalProduct" hide-details density="compact" color="#00966D">
+										<template v-slot:label>
+											<div style="color: #00966d; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
+												Physical Product
+											</div>
+										</template>
+									</v-radio>
+								</div>
+								<div class="d-flex align-center">
+									<div class="pa-4">
+									<p class="inputLabel">Gross Weight</p>
+									<div class="d-flex my-2">
+										<v-text-field
+											style="min-width: 180px"
+											class="mr-3 rounded-lg bg-grey-lighten-3"
+											density="compact"
+											hide-details
+											variant="outline"
+											v-model="grossWeight"
+										></v-text-field>
+										<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px; width: 80px">
+											<v-text-field density="compact" hide-details variant="outline" value="lb"></v-text-field>
+											<div>
+												<v-btn
+													 @click="grossWeight ++;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-up"
+												></v-btn>
+												<v-btn
+													@click="grossWeight = grossWeight <= 0 ? grossWeight : grossWeight - 1"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-down"
+												></v-btn>
+											</div>
 										</div>
 									</div>
 								</div>
-								<v-checkbox hide-details density="compact" color="#00966D">
-									<template v-slot:label>
-										<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
-											This product ships internationally
+								<div class="pa-4">
+									<p class="inputLabel">Net Weight</p>
+									<div class="d-flex my-2">
+										<v-text-field
+											style="min-width: 180px"
+											class="mr-3 rounded-lg bg-grey-lighten-3"
+											density="compact"
+											hide-details
+											variant="outline"
+											v-model="netWeight"
+										></v-text-field>
+										<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px; width: 80px">
+											<v-text-field density="compact" hide-details variant="outline" value="lb"></v-text-field>
+											<div>
+												<v-btn
+													 @click="netWeight ++;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-up"
+												></v-btn>
+												<v-btn
+													@click="netWeight = netWeight <= 0 ? netWeight : netWeight - 1;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-down"
+												></v-btn>
+											</div>
 										</div>
-									</template>
-								</v-checkbox>
-							</div>
-						</div>
-						<div class="my-4">
-							<p class="inputLabel">Shipping Method</p>
-							<!-- <v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select unit" density="comfortable">
-								
-							</v-select> -->
-							<span class="d-flex" style="align-items: center; gap: 10px; color: #2c6e63; font-size: 14px; font-weight: 600">
-								<v-avatar color="#F8F8F8" size="large">
-									<v-img width="25" height="25" src="https://res.cloudinary.com/payhospi/image/upload/v1713185792/umoja/logo.svg"></v-img>
-								</v-avatar>
-
-								Umoja Shipping
-							</span>
-						</div>
-						<div style="overflow: hidden" class="rounded-lg cardStyle px-0 py-0">
-							<div class="pa-4" style="background: #fff">
-								<v-radio hide-details density="compact" color="#00966D">
-									<template v-slot:label>
-										<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
-											Digital product or services
+									</div>
+								</div>
+								</div>
+								<v-checkbox v-model="shipsInternational" @click="shipsInternational = !shipsInternational" class="pa-4" hide-details density="compact" color="#00966D">
+										<template v-slot:label>
+											<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
+												This product ships internationally
+											</div>
+										</template>
+									</v-checkbox>
+									<div class="d-flex align-center">
+									<div class="pa-4">
+									<p class="inputLabel">Length</p>
+									<div class="d-flex my-2">
+										<v-text-field
+											style="min-width: 120px"
+											class="mr-3 rounded-lg bg-grey-lighten-3"
+											density="compact"
+											hide-details
+											variant="outline"
+											v-model="length"
+										></v-text-field>
+										<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px; width: 80px">
+											<v-text-field density="compact" hide-details variant="outline" value="lb"></v-text-field>
+											<div>
+												<v-btn
+													 @click="length ++;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-up"
+												></v-btn>
+												<v-btn
+													@click="length = length <= 0 ? length : length - 1;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-down"
+												></v-btn>
+											</div>
 										</div>
-									</template>
-								</v-radio>
+									</div>
+								</div>
+								<div class="pa-4">
+									<p class="inputLabel">Width</p>
+									<div class="d-flex my-2">
+										<v-text-field
+											style="min-width: 120px"
+											class="mr-3 rounded-lg bg-grey-lighten-3"
+											density="compact"
+											hide-details
+											variant="outline"
+											v-model="width"
+										></v-text-field>
+										<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px; width: 80px">
+											<v-text-field density="compact" hide-details variant="outline" value="lb"></v-text-field>
+											<div>
+												<v-btn
+													 @click="width ++;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-up"
+												></v-btn>
+												<v-btn
+													@click="width = width  <= 0 ? width  : width  - 1;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-down"
+												></v-btn>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="pa-4">
+									<p class="inputLabel">Height</p>
+									<div class="d-flex my-2">
+										<v-text-field
+											style="min-width: 120px"
+											class="mr-3 rounded-lg bg-grey-lighten-3"
+											density="compact"
+											hide-details
+											variant="outline"
+											v-model="height"
+										></v-text-field>
+										<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px; width: 80px">
+											<v-text-field density="compact" hide-details variant="outline" value="lb"></v-text-field>
+											<div>
+												<v-btn
+													 @click="height++;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-up"
+												></v-btn>
+												<v-btn
+													@click="height= height <= 0 ? height : height - 1;"
+													size="x-small"
+													height="18px"
+													color="grey-lighten-3"
+													flat
+													class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+													icon="mdi mdi-menu-down"
+												></v-btn>
+											</div>
+										</div>
+									</div>
+								</div>
+								</div>
 							</div>
-						</div>
-					</v-sheet>
-				</v-window-item>
-				<v-window-item value="Variants">
-					<v-sheet class="cardStyle mt-4 pb-8" width="800">
-						<div class="d-flex align-center">
-							<p style="color: #333; font-size: 20px; font-weight: 600">Variants</p>
-						</div>
-						<v-divider class="my-4"></v-divider>
-						<!-- Edit color sections -->
-						<div>
-							<div>
-								<p class="inputLabel">Option Name</p>
-								<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select option" :items="variantOptions" density="comfortable">
+							<div class="my-4">
+								<p class="inputLabel">Shipping Method</p>
+								<v-select
+									v-model="shippingOption"
+									:items="shippingOptions"
+									label="Select shipping option">	
 								</v-select>
 							</div>
-
-							<div>
-								<p class="inputLabel">Option Values</p>
-								<v-text-field :model-value="n" v-for="n of ['Blue', 'Red', 'Yellow']" :key="n">
-									<template #append>
-										<v-chip style="background-color: #f7edee; border-radius: 6px">
-											<v-icon color="#C20052">mdi mdi-delete</v-icon>
-										</v-chip>
-									</template>
-								</v-text-field>
-								<v-text-field placeholder="Eg. Blue, Black Red" density="comfortable" append-inner-icon="mdi mdi-alert-circle"> </v-text-field>
+							<div style="overflow: hidden" class="rounded-lg cardStyle px-0 py-0">
+								<div class="pa-4" style="background: #fff">
+									<v-radio v-model="digitalProduct" @click="digitalProduct = !digitalProduct" hide-details density="compact" color="#00966D">
+										<template v-slot:label>
+											<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
+												Digital product or services
+											</div>
+										</template>
+									</v-radio>
+								</div>
 							</div>
-
-							<v-btn size="large" style="border: 1px solid #969696" flat>
-								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Done</span></v-btn
-							>
-						</div>
-						<!-- View Color Section -->
-						<div>
-							<div class="d-flex justify-space-between align-center">
-								<span>Color</span>
-								<v-btn size="large" style="border: 1px solid #969696" flat>
-									<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
-								>
-							</div>
-							<div class="py-4">
-								<v-chip
-									v-for="color of ['blue', 'black', 'Brown', 'Yellow']"
-									:key="color"
-									color="#969696"
-									size="x-large"
-									density="compact"
-									style="border-radius: 15px; margin-right: 5px"
-								>
-									<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ color }}</span>
-								</v-chip>
-							</div>
-						</div>
-						<v-divider class="mb-3"></v-divider>
-
-						<!-- View Size Section -->
-						<div>
-							<div class="d-flex justify-space-between align-center">
-								<span>Size</span>
-								<v-btn size="large" style="border: 1px solid #969696" flat>
-									<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
-								>
-							</div>
-							<div class="py-4">
-								<v-chip
-									v-for="size of ['A5', 'B5']"
-									:key="size"
-									color="#969696"
-									size="x-large"
-									density="compact"
-									style="border-radius: 15px; margin-right: 5px"
-								>
-									<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ size }}</span>
-								</v-chip>
-							</div>
-						</div>
-						<v-divider class="mb-3"></v-divider>
-
-						<!-- View Style Section -->
-						<div>
-							<div class="d-flex justify-space-between align-center">
-								<span>Style</span>
-								<v-btn size="large" style="border: 1px solid #969696" flat>
-									<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
-								>
-							</div>
-							<div class="py-4">
-								<v-chip
-									v-for="style of ['Grid', 'Single lined', 'Blank']"
-									:key="style"
-									color="#969696"
-									size="x-large"
-									density="compact"
-									style="border-radius: 15px; margin-right: 5px"
-								>
-									<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ style }}</span>
-								</v-chip>
-							</div>
-						</div>
-					</v-sheet>
-					<v-sheet class="cardStyle mt-4 pb-8" width="800">
-						<p style="color: #1273eb; font-size: 14px; font-weight: 600" class="d-flex align-center">
-							<v-icon icon="mdi mdi-plus" class="mr-2"></v-icon> Add Options like size or color
-						</p>
-					</v-sheet>
-
-					<!-- Table sections -->
-					<v-card style="padding: 20px; border-radius: 15px; width: 800px">
-						<!-- Filtering Section -->
-						<div class="d-flex py-4" style="gap: 20px; color: #1273eb; font-size: 14px; font-weight: 600; line-height: 17px">
-							<span style="color: #000">Select</span>
-							<span>All</span>
-							<span>None</span>
-							<v-menu open-on-hover>
-								<template v-slot:activator="{ props }">
-									<span v-bind="props"> Color <v-icon icon="mdi mdi-chevron-down"></v-icon> </span>
-								</template>
-
-								<v-list>
-									<v-list-item v-for="(item, index) in ['blue', 'black']" :key="index">
-										<v-list-item-title>{{ item }}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-							<v-menu open-on-hover>
-								<template v-slot:activator="{ props }">
-									<span v-bind="props"> Size <v-icon icon="mdi mdi-chevron-down"></v-icon> </span>
-								</template>
-
-								<v-list>
-									<v-list-item v-for="(item, index) in ['A5', 'B5']" :key="index">
-										<v-list-item-title>{{ item }}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-							<v-menu open-on-hover>
-								<template v-slot:activator="{ props }">
-									<span v-bind="props"> Style <v-icon icon="mdi mdi-chevron-down"></v-icon> </span>
-								</template>
-
-								<v-list>
-									<v-list-item v-for="(item, index) in ['Grid', 'Single lined', 'Blank']" :key="index">
-										<v-list-item-title>{{ item }}</v-list-item-title>
-									</v-list-item>
-								</v-list>
-							</v-menu>
-						</div>
-
-						<!-- Table -->
-						<v-table style="height: 80%; !important; overflow: scroll;">
-							<thead style="color: #2c6e63">
-								<tr style="background: #edf0ef; border-radius: none">
-									<th style="width: 40px" class="font-weight-medium text-left">
-										<v-checkbox hide-details></v-checkbox>
-									</th>
-									<th style="font-size: 14px; width: 40%" class="font-weight-medium text-left">Variant</th>
-									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Price</th>
-									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Available</th>
-									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">SKU</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="item in 2" :key="item.sn">
-									<td class="text-grey-lighten-1 px-4">
-										<v-checkbox hide-details></v-checkbox>
-									</td>
-
-									<td class="tableThick px-4">Black</td>
-
-									<td class="tableThick px-1">
-										<span style="background-color: #f8f8f8; padding: 10px 14px; display: block; border-radius: 6px">€ 15.00</span>
-									</td>
-									<td class="tableThick px-1">
-										<span style="background-color: #f8f8f8; padding: 10px 14px; display: block; border-radius: 6px">5</span>
-									</td>
-
-									<td class="px-1">
-										<v-btn size="large" style="border: 1px solid #969696" flat>
-											<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
-										>
-									</td>
-								</tr>
-							</tbody>
-						</v-table>
-					</v-card>
+						</v-sheet>
+						<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{shippingError}}</p>
+						<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+							Save and continue
+						</v-btn>
+					</v-form>
+				</v-window-item>
+				<v-window-item value="Variants">
+					<variants/>
 				</v-window-item>
 			</v-window>
 		</v-sheet>
@@ -754,25 +774,93 @@ import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
 import Link from '@tiptap/extension-link'
-import {inputRules} from '~/utils/formrules'
-import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
+import {inputRules, numRules} from '~/utils/formrules'
+import { ref, computed, onMounted, watchEffect } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
+import {vendorUseApi} from '~/composables/vendorApi'
+import Compressor from 'compressorjs';
 
 export default {
+
 	setup() {
+		const subCategories = ref([])
+		const selectedCategory = ref("")
+		const Categories = ref([])
+		const isFetching =  ref(false)
+
+		watchEffect(() => {
+    	fetchSubCategories(selectedCategory.value);
+		});
+
+		onMounted(() => {
+			fetchCategories()
+		})
+
+		function getCategoryId(selectedCat) {
+			const category = Categories.value.findIndex(category => category.name === selectedCat);
+			if (category === -1) {
+				return
+			}
+			const category_id = Categories.value[category].id
+			return category_id
+		}
+		function getCategoryName(selectedCat) {
+			const category = Categories.value.findIndex(category => category.name === selectedCat);
+			if (category === -1) {
+				return
+			}
+			const category_name = Categories.value[category].name
+			return category_name
+		}
+		function getSubCategoryId(subCategory) {
+			const subCat = subCategories.value.findIndex(subCat => subCat.subcategory_name === subCategory);
+			if (subCat === -1) {
+				return
+			}
+
+			const subCategory_id = subCategories.value[subCat].id
+			return subCategory_id
+		}
+		async function fetchSubCategories() {
+			const api = vendorUseApi()
+			isFetching.value = true;
+			const category_id = getCategoryId(selectedCategory.value)
+			const category_name = getCategoryName(selectedCategory.value)
+			try {
+				const response = await api({
+					url: `admin/sub_categories/category/${category_id}`,
+					data: {
+						name: category_name,
+						category_id: category_id,
+						photo: ""
+					}
+				});
+				const subCategory = response.data.data;
+   				subCategories.value = subCategory
+				return
+			} catch(error) {
+				console.error(error)
+				return [];
+			} finally {
+				isFetching.value = false;
+			}
+		}
+		const tab1 = ref('General');
 		const vendorProducts = useVendorProductStore()
 		const nonNegValue = [
-		v => v >=0 || "Value must be a non-negative number"
+		v => v > 0 || "Value must be a non-negative number",
+		v => !!v || "Field is required",
+		v => v !== 0 || "Unit per item cannot be 0"
 		]
 		const productRules = [
 			v => !!v || 'Product name must be provided!!',
-			v => v.length <= 20 || 'Product name cannot exceed 20 characters'
+			v => v.length <= 50 || 'Product name cannot exceed 50 characters'
 		]
 		const descRule = [
 			v => !!v || 'Description of product must be provided!!',
 			v => v.length <= 100 || 'Product description cannot exceed 100 characters'
 		]
-		const tags = ref(["Fashion", "Sneakers", "Unisex shoes", "Men shoes", "Black", "Fashion and style", "Ghana Ankara Material"]);
+		const tags = ref([]);
 		const newTag = ref("");
 		const window = ref("General");
 
@@ -784,11 +872,44 @@ export default {
 				}
 				tags.value.push(newTag.trim());
 		};
-
+		const removeTag = (tag) => {
+			const index = tags.value.indexOf(tag);
+			if (index !== -1) {
+				tags.value.splice(index, 1);
+			}
+		};
 		const handleTagInput = () => {
 				addTag(newTag.value);
 				newTag.value = ''; // Clear the input field after adding the tag
 		};
+
+		
+
+		const tabs = ['General', 'Text', 'Price', 'Picture', 'Inventory', 'Shipping', 'Variants']
+
+		const nextTab = () => {
+			const currentIndex = tabs.indexOf(tab1.value);
+			if (currentIndex !== tabs.length - 1) {
+				tab1.value = tabs[currentIndex + 1]
+			}
+	
+		}
+	
+		async function fetchCategories() {
+			const api = vendorUseApi()
+			try {
+				const response = await api({
+					url: 'admin/categories',
+					method: 'get'
+				});
+				const categoryNames = response.data.data;
+				Categories.value = categoryNames;
+	
+			}catch(error) {
+				console.error(error)
+			}
+			
+		}
 
 		return {
 			nonNegValue,
@@ -799,7 +920,19 @@ export default {
 			tags,
 			newTag,
 			window,
-			vendorProducts
+			vendorProducts,
+			tabs,
+			tab1,
+			nextTab,
+			removeTag,
+			selectedCategory,
+			subCategories,
+			Categories,
+			getCategoryName,
+			getCategoryId,
+			getSubCategoryId,
+			fetchSubCategories,
+			fetchCategories,
 			
 		}
 	},
@@ -808,6 +941,41 @@ export default {
     },
     data() {
         return {
+		
+			descError: "",
+			shippingError: "",
+			physicalProduct: false,
+			digitalProduct: false,
+			shipsInternational: false,
+			shippingOption: "",
+			length: 0,
+			width: 0,
+			height: 0,
+			grossWeight: 0,
+			netWeight: 0,
+			trackQty: false,
+			continueSellingNoStock: false,
+			hasSkuBarCode: false,
+			storageAddress: "",
+			minimumQty: 0,
+			productQty: 0,
+			imagePreviews: [],
+			checkError: "",
+			pictureError: "",
+			chargeTax: false,
+			ustIndex: "",
+			price: "",
+			commission: "",
+			prevPrice: "",
+			itemCost: "",
+			profit: "",
+			margin: "",
+			productSpec: "",
+			editorContent: "",
+			productStat: "",
+			selectedGender: "",
+			productName: "",
+			selectedSubCategory: "",
 			newProduct: [],
 			productNumber: "",
 			unit: "",
@@ -816,9 +984,7 @@ export default {
 			condition: "",
 			conditions: ["New", "Used - Like New", "Used - Like Good", "Used - Good", "Used - Acceptable", "Refurbished"],
 			units : ['Pieces(pcs)', 'Dozen', 'Pound', 'Gallon', 'Pack', 'Bundle', 'Kilograms(kg)', 'Grams(g)', 'Liter(L)', 'Mililiter(mL)', 'Meters(m)', 'Centimeters(cm)'],
-            checkqty: true,
-            radioship:true,
-			tab1: null,
+            storeOption: false,
 			items1: [],
 			variantOptions: ["Size", "Color", "Material", "Style"],
             editor: null,
@@ -839,6 +1005,7 @@ export default {
             },
 
             ],
+			shippingOptions: ["Umoja Shipping", "DHL", "Fedex",],
             summary: [
                 {
                     title: 'Total Quantity',
@@ -884,7 +1051,11 @@ export default {
             ],
         }
     },
+	
     computed: {
+		categoryNames() {
+      		return this.Categories.map(category => category.name);
+       },
         orderDetails() {
             return [
                 {
@@ -916,19 +1087,186 @@ export default {
         }
     },
 	methods: {
+
+		drop(event, index) {
+	     const file= event.dataTransfer.files[0]
+		 if (!file) return; 
+
+			const allowedFiles = [".svg", ".png", ".jpeg", ".jpg"]
+			const maxFileSize = 2 * 1024 * 1024;
+			const fileExtension = file.name.split(".").pop().toLowerCase();
+    
+		if (!allowedFiles.includes("." + fileExtension)) {
+			this.pictureError = "Please upload files having extensions: " + allowedFiles.join(', ');
+			return;
+		}
+
+      	this.pictureError = ""
+
+		if (file.size > maxFileSize) {
+		this.pictureError = "File size exceeds the maximum allowed size of 5MB";
+		return;
+		}
+		const reader = new FileReader();
+		reader.onload = () => {
+			this.imagePreviews[index - 1] = reader.result
+		};
+		reader.readAsDataURL(file);
+     },
+
+		handleFileInputChange(event, index) {
+      const file = event.target.files[0]; // Get the first selected file
+      if (!file) return; // Return if no file is selected
+	  		const allowedFiles = [".svg", ".png", ".jpeg", ".jpg"]
+			const maxFileSize = 2 * 1024 * 1024;
+			const fileExtension = file.name.split(".").pop().toLowerCase();
+    
+		if (!allowedFiles.includes("." + fileExtension)) {
+			this.pictureError = "Please upload files having extensions: " + allowedFiles.join(', ');
+			return;
+		}
+
+      	this.pictureError = ""
+
+		if (file.size > maxFileSize) {
+		this.pictureError = "File size exceeds the maximum allowed size of 2MB";
+		return;
+		}
+      const reader = new FileReader();
+
+      // Define onload event handler
+      reader.onload = () => {
+        // Update imagePreviews array with Base64 data of the selected file
+		
+		this.imagePreviews[index - 1] = reader.result
+      };
+
+      // Read the selected file as a data URL
+      reader.readAsDataURL(file);
+    },
+		updateSubcategories() {
+      		this.selectedSubCategory = null;
+    	},
 		saveGeneral() {
 			const data = {
 				productNumber: this.productNumber,
 				unit: this.unit,
 				unitperItem :this.unitperItem,
 				material: this.material,
-				Condition: this.condition
+				Condition: this.condition,
+				storeOption: this.storeOption ? 1 : 0,
 			}
-			if (this.unit && this.unitperItem) {
+			if (this.unit && this.unitperItem && this.unitperItem > 0) {
 				this.vendorProducts.saveGeneralInfo(data)
+				this.nextTab()
 			}
-		}
+		},
+		saveText() {
+			this.descError = ""
+			const data = {
+				productName: this.productName,
+				productStatus: this.productStat,
+				productSpec: this.productSpec,
+				Category: this.getCategoryId(this.selectedCategory).toString(),
+				SubCategory: this.getSubCategoryId(this.selectedSubCategory).toString(),
+				Gender: this.selectedGender,
+				Description: this.editorContent,
+				Tags: this.tags
+			}
+			if (this.editorContent.length <= 20) {
+				this.descError = "Product description must exceed 20 characters!!"
+				return
+			}
+			if (this.editorContent.length > 100) {
+				this.descError = "Product description cannot exceed 100 characters!!"
+				return
+			}
+			if (this.productName && this.editorContent && this.productSpec && this.selectedCategory && this.selectedSubCategory) {
+				this.vendorProducts.saveTextInfo(data)
+				this.descError = ""
+				this.nextTab()
+			}
+			
+		},
+		savePrice() {
+			const data = {
+				ustIndex: this.ustIndex,
+				price: this.price,
+				commission: this.commission,
+				comparePrice: this.prevPrice,
+				chargeTax: this.chargeTax ? 1 : 0,
+				costPerItem: this.itemCost,
+				profit: this.profit,
+				margin: this.margin
+			}
+			if (this.price && this.itemCost) {
+				this.checkError = ""
+				this.vendorProducts.savePriceInfo(data)
+				this.nextTab()
+			}
+		},
+		async savePictures() {
+			if (this.imagePreviews.length >= 4) {
+				this.pictureError = "";
+				const response = await this.vendorProducts.handlephotoUpload(this.imagePreviews, this.pictureError);
+				if (response) {
+					this.nextTab();
+				}
+
+			} else {
+				this.pictureError = "a minimum of 4 product images must be provided";
+			}
+		},
+		saveInventory(){
+			const data = {
+				trackQty: this.trackQty ? 1 : 0,
+				productQty: this.productQty,
+				minimumQty: this.minimumQty,
+				continueSellingNoStock: this.continueSellingNoStock ? 1 : 0,
+				hasSkuBarCode: this.hasSkuBarCode ? 1 : 0,
+				storageAddress: this.storageAddress
+			}
+			this.vendorProducts.saveInventoryInfo(data)
+			this.nextTab()
+		},
+		saveShipping() {
+			this.shippingError = ""
+			if (this.digitalProduct && this.physicalProduct) {
+				this.shippingError = "Product cannot be digital and physical, select one!!!"
+				return
+			}
+			if (this.physicalProduct) {
+				if (
+					!this.grossWeight || !this.netWeight || !this.length || !this.width || !this.height || !this.shippingOption
+				) {
+					this.shippingError = "Please fill in all compulsory fields.";
+					return
+				} 
+			}
+			if (this.digitalProduct) {
+				if (this.grossWeight || this.netWeight || this.length || this.width || this.height || this.shippingOption || this.shipsInternational) {
+					this.shippingError = "These fields are not required for digital products"
+					return
+				}
+			}
+
+			const data = {
+						physicalProduct: this.physicalProduct,
+						netWeight: this.netWeight,
+						grossWeight: this.grossWeight,
+						shipsInternational: this.shipsInternational ? 1 : 0,
+						length: this.length,
+						height: this.height,
+						width: this.width,
+						digitalProduct: this.digitalProduct ? 1 : 0,
+						shippingOption: this.shippingOption
+					}
+			this.vendorProducts.saveShippingInfo(data)
+			console.log(this.shippingOption)
+			this.nextTab()
+		},
 	},
+
     mounted() {
         this.items = this.items1;
 
@@ -941,8 +1279,11 @@ export default {
                     types: ['heading', 'paragraph'],
                 }),
             ],
-            content: '<p>This sneakers is made from one of the best  ankara material in Ghana</p>',
         })
+
+		this.editor.on('update', ({ editor }) => {
+      	this.editorContent = editor.getText() // or use getText() for plain text
+    	});
     },
     beforeUnmount() {
         this.editor.destroy()
