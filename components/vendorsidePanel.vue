@@ -27,7 +27,7 @@ line-height: 24px;">Umoja</p>
 font-size: 12px;
 line-height: 18px;
 display: flex;
-color: #596066;">{{ vendor.ownerInfo.lastName }} {{ vendor.ownerInfo.firstName }}</p>
+color: #596066;">{{ vendor.last_name }} {{ vendor.first_name }}</p>
 </div>
 <v-spacer></v-spacer>
 <v-icon color="green" icon="mdi mdi-chevron-down"></v-icon>

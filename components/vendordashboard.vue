@@ -4,7 +4,7 @@
  <div class="pb-5 d-flex align-center justify-space-between">
   <p style="font-weight: 600;
 font-size: 24px;
-line-height: 30px;">Hi {{vendor.ownerInfo.firstName}} {{ vendor.ownerInfo.lastName }}, Welcome back </p>
+line-height: 30px;">Hi {{vendor.first_name}} {{ vendor.last_name }}, Welcome back </p>
 
   <div class="d-flex align-center">
     <v-menu width="200">

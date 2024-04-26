@@ -29,6 +29,7 @@ export const useUserStore = defineStore({
           method: 'post',
           data: { email, password}
         });
+       
         this.loginError = '';
         const {access_token} = response.data;
         localStorage.setItem('token', access_token)

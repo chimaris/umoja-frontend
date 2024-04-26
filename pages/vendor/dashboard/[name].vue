@@ -154,7 +154,9 @@ const sidebar = ref(true);
 const edit = ref(true);
 const router = useRouter();
 const route = useRoute()
-const vendor = ref([])
+const vendorStore  = useVendorStore();
+const vendor = vendorStore.getVendor;
+
 
 const window = ref(route.params.name ? route.params.name : "Homepage");
 
@@ -176,8 +178,6 @@ function sideFn() {
 }
 
 onMounted(() => {
-  const vendorStore = useVendorStore();
-  vendor.value = vendorStore.getVendor;
-  router.currentRoute.value.params.name = vendor.value.ownerInfo.firstName;
+  route.params.name = vendor.first_name
   })
 </script>
