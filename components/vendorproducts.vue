@@ -29,7 +29,7 @@
 						Collection type
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
 					</v-btn>
-					<v-btn @click="filterAction(price, low)" style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
+					<v-btn @click="togglePriceSort" style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
 						Price Range
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
 					</v-btn>
@@ -101,10 +101,10 @@
 												></v-img
 											></v-avatar>
 											<div>
-												<p class="mb-1" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">
+												<p class="mb-1" style="font-weight: 600; white-space: nowrap; font-size: 16px !important; line-height: 20px; color: #333333">
 													{{ item.name }}
 												</p>
-												<p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate">
+												<p style="font-weight: 400; max-width: 300px; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; line-height: 18px; color: #969696" class="text-truncate">
 													{{ item.description }}
 												</p>
 											</div>
@@ -244,6 +244,7 @@ export default {
 	},
 	data() {
 		return {
+			sortByPrice: null,
 			dialog: true,
 			searchQuery: "",
 			tab: "",
@@ -283,6 +284,17 @@ export default {
       });
     }
 
+	// filter by price
+	if (this.sortByPrice) {
+      result = result.slice().sort((a, b) => {
+        if (this.sortByPrice === 'highToLow') {
+          return b.price - a.price;
+        } else {
+          return a.price - b.price;
+        }
+      });
+    }
+
     return result;
   }
 },
@@ -297,12 +309,17 @@ export default {
 				return item[x] == y;
 			});
 		},
-		filterAction(property, value) {
-			if (property === 'price') {
-            this.filteredProducts.sort((a, b) => a.price - b.price);
-        }
-			
+		togglePriceSort() {
+		this.sortByPrice = this.sortByPrice === 'highToLow' ? 'lowToHigh' : 'highToLow';
+		
+		this.vendorProducts.Products.sort((a, b) => {
+		if (this.sortByPrice === 'highToLow') {
+			return b.price - a.price; // For descending order
+		} else {
+			return a.price - b.price; // For ascending order
 		}
+    });
+  },
 	},
 };
 </script>
