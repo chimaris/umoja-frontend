@@ -33,7 +33,7 @@
 		</p>
 		<p style="font-weight: 600; font-size: 10px; line-height: 10px; color: #000000" class="d-flex mb-1 pb-0 pt-1 align-center">
 			<v-rating readonly model-value="4" color="grey-lighten-2" active-color="#E7CE5D" class="rts" density="compact" size="x-small"></v-rating
-			><span style="margin-left: 3px; margin-top: 3px">(65)</span>
+			><span style="margin-left: 3px; margin-top: 3px" :style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }">(65)</span>
 		</p>
 		<v-chip
 			v-if="item.deliv"
@@ -56,7 +56,7 @@
 		</div>
 		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
 			<div :class="showdisco ? 'mt-0' : ''">
-				<h1 style="font-size: 20px; color: #1a1d1f" class="priceClass mb-1">€{{ item.price }}</h1>
+				<h1 :style="{ fontSize: $vuetify.display.mobile ? '12px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">€{{ item.price }}</h1>
 				<div v-if="showdisco" class="d-flex align-center">
 					<p style="color: var(--carbon-3, #969696); font-size: 12px; font-weight: 600; line-height: 17.673px; text-decoration: line-through">
 						€15,000.00
@@ -67,15 +67,17 @@
 			<v-btn
 				@click="addToCart(item)"
 				rounded="xl"
-				style="border: 1px solid #ced2d6; border-radius: 6px"
-				width="106"
-				height="28"
+				style="border: 0.66px solid #ced2d6; border-radius: 6px"
+				:width="$vuetify.display.mobile ? '100%' : 106"
+				:height="$vuetify.display.mobile ? 50 : 28"
 				color="green"
 				variant="outlined"
 				flat
-				class="parent-btn ml-2 mt-2 mt-md-0"
+				class="parent-btn ml-0 ml-md-2 mt-2 mt-md-0"
 			>
-				<span style="color: #1a1d1f; font-weight: 600" class="smallBtn">{{ "Add to Cart" }}</span>
+				<span style="color: #1a1d1f; font-weight: 600" :style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px' }" class="smallBtn">{{
+					"Add to Cart"
+				}}</span>
 			</v-btn>
 		</div>
 	</v-card>

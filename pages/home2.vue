@@ -30,7 +30,7 @@
 						The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.
 					</p>
 					<div class="pt-5 d-flex" :style="{ justifyContent: $vuetify.display.mobile ? 'space-between' : 'flex-start', display: flex }">
-						<v-btn to="/discovery_page" color="green" size="large" flat rounded="xl" :style="{ width: $vuetify.display.mobile ? '45%' : '163px' }">
+						<v-btn to="/discovery_page" color="green" size="large" flat rounded="xl" :style="{ width: $vuetify.display.mobile ? '48%' : '163px' }">
 							<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Start Exploring </span>
 						</v-btn>
 						<v-btn
@@ -38,12 +38,12 @@
 							:loading="loading"
 							@click="startTutorial()"
 							color="#333"
-							class="ml-3"
+							:class="$vuetify.display.mobile ? 'ml-0' : 'ml-3'"
 							size="large"
 							variant="outlined"
 							flat
 							rounded="xl"
-							:style="{ width: $vuetify.display.mobile ? '45%' : '163px' }"
+							:style="{ width: $vuetify.display.mobile ? '48%' : '163px' }"
 						>
 							<span class="d-flex align-center" style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px">
 								Tutorial
@@ -198,7 +198,7 @@
 								position: absolute;
 								width: 100%;
 								bottom: 0;
-								height: 122px;
+								height: 83px;
 								align-items: center;
 								padding: 10px 30px;
 								display: flex;
@@ -208,7 +208,7 @@
 								flex-shrink: 0;
 							"
 						>
-							<p style="color: #fff; font-size: 32px; font-weight: 500; letter-spacing: -0.96px">Fashion</p>
+							<p style="color: #fff; font-size: 24px; font-weight: 500; letter-spacing: -0.96px">Fashion</p>
 						</div>
 					</v-img>
 				</v-col>
@@ -290,6 +290,7 @@
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
+								cover
 								lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529527/rectangle-65_czgty7.png"
 								src="https://res.cloudinary.com/payhospi/image/upload/v1690529527/rectangle-65_czgty7.png"
 							>
@@ -302,7 +303,7 @@
 										position: absolute;
 										width: 100%;
 										bottom: 0;
-										height: 122px;
+										height: 83px;
 										align-items: center;
 										padding: 10px 30px;
 										display: flex;
@@ -312,7 +313,7 @@
 										flex-shrink: 0;
 									"
 								>
-									<p style="color: #fff; font-size: 32px; font-weight: 500; letter-spacing: -0.96px">Art</p>
+									<p style="color: #fff; font-size: 24px; font-weight: 500; letter-spacing: -0.96px">Art</p>
 								</div>
 							</v-img>
 						</v-col>
@@ -1211,6 +1212,12 @@ export default {
 		},
 		tutorialStore() {
 			return useTutorialStore();
+		},
+
+		imageSource() {
+			return this.$vuetify.display.mobile
+				? "https://res.cloudinary.com/payhospi/image/upload/v1714119150/umoja/Rectangle_65_tiw4ej.png"
+				: "https://res.cloudinary.com/payhospi/image/upload/v1690529527/rectangle-65_czgty7.png";
 		},
 	},
 };
