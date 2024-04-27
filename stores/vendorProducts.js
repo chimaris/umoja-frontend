@@ -33,7 +33,6 @@ export const useVendorProductStore = defineStore('vendor-product', {
             method: 'get'
           });
           this.Products = response.data.data;
-          console.log(this.Products)
         }catch(error) {
           console.error(error)
         }

@@ -231,12 +231,18 @@
 </template>
 <script>
 import {useVendorProductStore} from '~/stores/vendorProducts'
+import { onBeforeMount } from 'vue';
 export default {
 	setup(props, ctx) {
+		const vendorProducts = useVendorProductStore()
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		}
-		const vendorProducts = useVendorProductStore()
+
+		onBeforeMount(async () => {
+      		await vendorProducts.getAllProduct();
+    	});
+		
 		return {
 			choose,
 			vendorProducts
@@ -298,9 +304,7 @@ export default {
     return result;
   }
 },
-	created() {
-		this.vendorProducts.getAllProduct()
-	},
+	
 	methods: {
 		
 		sort(x, y) {

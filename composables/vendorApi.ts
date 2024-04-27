@@ -13,26 +13,26 @@ export const vendorUseApi = () => {
         }
     });
 
-    instance.interceptors.response.use(
-        response => response,
-        async error => {
-            const originalRequest = error.config;
-            if (error.response.status === 401 && !originalRequest._retry && refreshToken) {
-                originalRequest._retry = true;
-                try {
-                    const refreshResponse = await instance.post('/auth/refresh_token', { refresh_token: refreshToken });
-                    const newToken = refreshResponse.data.access_token;
-                    localStorage.setItem('vendorToken', newToken);
-                    originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
-                    return instance(originalRequest);
-                } catch (refreshError) {
-                    console.error('Failed to refresh token:', refreshError);
+    // instance.interceptors.response.use(
+    //     response => response,
+    //     async error => {
+    //         const originalRequest = error.config;
+    //         if (error.response.status === 401 && !originalRequest._retry && refreshToken) {
+    //             originalRequest._retry = true;
+    //             try {
+    //                 const refreshResponse = await instance.post('/auth/refresh_token', { refresh_token: refreshToken });
+    //                 const newToken = refreshResponse.data.access_token;
+    //                 localStorage.setItem('vendorToken', newToken);
+    //                 originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
+    //                 return instance(originalRequest);
+    //             } catch (refreshError) {
+    //                 console.error('Failed to refresh token:', refreshError);
                
-                }
-            }
-            return Promise.reject(error);
-        }
-    );
+    //             }
+    //         }
+    //         return Promise.reject(error);
+    //     }
+    // );
 
     return instance;
 };
