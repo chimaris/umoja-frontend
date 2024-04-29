@@ -169,18 +169,15 @@
 					</div>
 				</div>
 				<!-- Responsive fILTER dRAWER -->
-				<v-layout
-					id="displayNone"
-					:class="$vuetify.display.mobile ? 'd-block' : 'd-none'"
-					:style="{ display: $vuetify.display.mobile ? 'block' : 'none' }"
-				>
+				<!-- :class="$vuetify.display.mobile ? 'd-block' : 'd-none'" -->
+
+				<v-layout id="displayNone" class="d-inline d-md-none">
 					<v-navigation-drawer
 						v-model="filterDrawer"
 						:location="$vuetify.display.mobile ? 'right' : undefined"
 						temporary
+						scrim
 						style="width: 85%; position: absolute; top: 350px"
-						:class="$vuetify.display.mobile ? 'd-block' : 'd-none'"
-						:style="{ display: $vuetify.display.mobile ? 'block' : 'none' }"
 					>
 						<div class="d-flex align-center justify-space-between px-4 pt-4">
 							<p style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>
@@ -201,9 +198,9 @@
 .prat .v-label {
 	opacity: 1 !important;
 }
-#displayNone {
+/* #displayNone {
 	display: none;
-}
+} */
 </style>
 <script>
 import { Editor, EditorContent } from "@tiptap/vue-3";
