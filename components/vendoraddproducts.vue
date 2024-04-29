@@ -983,7 +983,7 @@ export default {
 			material: "",
 			condition: "",
 			conditions: ["New", "Used - Like New", "Used - Like Good", "Used - Good", "Used - Acceptable", "Refurbished"],
-			units : ['Piece', 'Dozen', 'Pound', 'Gallon', 'Pack', 'Bundle', 'Kilograms(kg)', 'Grams(g)', 'Liter(L)', 'Mililiter(mL)', 'Meters(m)', 'Centimeters(cm)'],
+			units : ['Piece', 'Pair', 'Dozen', 'Pound', 'Gallon', 'Pack', 'Bundle', 'Kilograms(kg)', 'Grams(g)', 'Liter(L)', 'Mililiter(mL)', 'Meters(m)', 'Centimeters(cm)'],
             storeOption: false,
 			items1: [],
 			variantOptions: ["Size", "Color", "Material", "Style"],

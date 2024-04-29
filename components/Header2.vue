@@ -59,7 +59,7 @@
 					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" class="" icon flat color="transparent">
 						<v-avatar size="24"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img> </v-avatar
 					></v-btn>
-					<v-btn to="/order/cart" class="text-none" icon size="48" rounded="xl" flat color="transparent">
+					<v-btn @click="toCart()" class="text-none" icon size="48" rounded="xl" flat color="transparent">
 						<v-badge offset-y="20" :dot="cartStore.totalCartItems == 0" :content="cartStore.totalCartItems" color="error">
 							<v-avatar rounded="0" size="24">
 								<v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png"></v-img>
@@ -140,6 +140,7 @@
 <script>
 import { useTheme } from "vuetify";
 import { useCartStore } from "~/stores/cartStore";
+import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
 
 export default {
@@ -195,6 +196,9 @@ export default {
 		cartStore() {
 			return useCartStore();
 		},
+		router() {
+			return useRouter()
+		},
 		userStore() {
 			return useUserStore();
 		},
@@ -203,6 +207,12 @@ export default {
 		},
 	},
 	methods: {
+		toCart() {
+			if (this.cartStore.totalCartItems === 0) {
+				return
+			}
+			this.$router.push('/order/cart')
+		},
 		toggleTheme() {
 			this.theme.global.name.value = this.theme.global.current.value.dark ? "light" : "dark";
 		},

@@ -1,18 +1,18 @@
 <template>
     <v-col cols="12" lg="4">
 
-<v-card style="border-radius: 15px;
+<v-card  style="border-radius: 15px;
 border: 1px solid var(--carbon-2, #CECECE);" flat class="pa-4">
-<v-row dense>
+<v-row dense v-if="!viewAll">
     <v-col cols="3">
-        <v-avatar color="grey-lighten-2" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" ><v-img cover src="https://res.cloudinary.com/payhospi/image/upload/v1691574327/s-2-gs-x-1-po-l_ckeqxo.png"></v-img></v-avatar>
+        <v-avatar color="grey-lighten-2" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" ><v-img cover :src="cartStore.checkoutItems[0].image"></v-img></v-avatar>
     </v-col>
     <v-col cols="6">
-             <div class="px-2" >
-            <p class="mb-1" style="font-weight: 600;
+             <div class="px-2" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" >
+            <p class="mb-1 text-truncate" style="font-weight: 600;
 font-size: 16px!important;
 line-height: 20px;
-color: #333333;">The Benin stone ... </p>
+color: #333333;">{{cartStore.checkoutItems[0].name}} </p>
             <p style="font-weight: 500;
 font-size: 14px;
 line-height: 18px;
@@ -20,28 +20,58 @@ color: #969696;" class="text-truncate">Category: Stone, Art, Sculpting, Carving.
             <p style="font-weight: 500;
 font-size: 14px;
 line-height: 18px;
-color: #969696;" class="mt-4 text-truncate">X2</p>
+color: #969696;" class="mt-4 text-truncate">X{{ cartStore.checkoutItems[0].quantity }}</p>
           </div> </v-col>
     <v-col cols="3">
 
             <p class="mb-1 text-right" style="font-weight: 600;
 font-size: 16px!important;
 line-height: 20px;
-color: #333333;">€ 5,829.00 </p>
+color: #333333;">€ {{(cartStore.checkoutItems[0].quantity * cartStore.checkoutItems[0].price).toLocaleString('en-US')}} </p>
         </v-col>
 </v-row>
-
-    <div class=" pt-4 d-flex align-center justify-space-between">
-        <div class="d-flex align-center" style="color: var(--carbon-4, #333);
-
+<template v-if="viewAll">
+    <v-row dense v-for="item in cartStore.checkoutItems" :key="item.id">
+    <v-col cols="3">
+        <v-avatar color="grey-lighten-2" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" ><v-img cover :src="item.image"></v-img></v-avatar>
+    </v-col>
+    <v-col cols="6">
+             <div class="px-2" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" >
+            <p class="mb-1 text-truncate" style="font-weight: 600;
+font-size: 16px!important;
+line-height: 20px;
+color: #333333;">{{item.name}} </p>
+            <p style="font-weight: 500;
 font-size: 14px;
-font-weight: 600;">
-<v-icon size="18" class="mr-2" icon="mdi mdi-shopping"></v-icon> +4 items
+line-height: 18px;
+color: #969696;" class="text-truncate">Category: Stone, Art, Sculpting, Carving.</p>
+            <p style="font-weight: 500;
+font-size: 14px;
+line-height: 18px;
+color: #969696;" class="mt-4 text-truncate">X{{ item.quantity }}</p>
+          </div> </v-col>
+    <v-col cols="3">
+
+            <p class="mb-1 text-right" style="font-weight: 600;
+font-size: 16px!important;
+line-height: 20px;
+color: #333333;">€ {{(item.price * item.quantity).toLocaleString('en-US')}} </p>
+        </v-col>
+</v-row>
+</template>
+
+<div v-if="!viewAll" class=" pt-4 d-flex align-center justify-space-between">
+        <div  class="d-flex align-center" style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 600;">
+            <v-icon size="18" class="mr-2" icon="mdi mdi-shopping"></v-icon> +{{ cartStore.totalCheckoutItems - 1 }} items
         </div>
-        <a style="color: #1273EB;
-font-size: 14px;
-font-weight: 600;">View all items</a>
+        <a  @click="viewAll = !viewAll" style="color: #1273EB; font-size: 14px; cursor: pointer; font-weight: 600;">View all items</a>
     </div>
+<div v-if="viewAll" class=" pt-4 d-flex align-center justify-space-between">
+    <div  class="d-flex align-center" style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 600;">
+        <v-icon size="18" class="mr-2" icon="mdi mdi-shopping"></v-icon> {{ cartStore.totalCheckoutItems  }} items
+    </div>
+    <a @click="viewAll = !viewAll" style="color: #1273EB; font-size: 14px; cursor: pointer; font-weight: 600;">View Less</a>
+</div>
 
 <hr  class="dashed-2 my-6" />
 
@@ -85,7 +115,7 @@ font-size: 14px;
 color: #969696;">Subtotal</p>
     <p style="color: var(--carbon-4, #333);
 font-size: 16px;
-font-weight: 600;" class="">€ 5,829.00</p>
+font-weight: 600;" class="">€ {{ cartStore.checkoutTotalCost }}</p>
 </div>
 <div class="d-flex  pb-3 align-center justify-space-between">
 <p style="font-weight: 500;
@@ -101,7 +131,7 @@ font-size: 14px;
 color: #969696;">Shipment cost</p>
     <p style="color: var(--carbon-4, #333);
 font-size: 16px;
-font-weight: 600;" class="">€ 22.50</p>
+font-weight: 600;" class="">€ 0.00</p>
 </div>
 <hr  class="dashed-2 my-6" />
 <div class="d-flex  pb-3 align-center justify-space-between">
@@ -110,24 +140,38 @@ font-size: 14px;
 color: #969696;">Grand Total</p>
     <p style="color: var(--carbon-4, #333);
 font-size: 24px;
-font-weight: 600;" class="">€ 5,829.00 </p>
+font-weight: 600;" class="">€ {{ cartStore.checkoutTotalCost }} </p>
 </div>
 
 </div>
-<v-btn :to="route" flat block size="x-large" class="mt-8" rounded="xl" color="green"> <span style="font-size: 14px;
+<v-btn @click="emit('handleSubmit')" flat block size="x-large" class="mt-8" rounded="xl" color="green"> <span style="font-size: 14px;
 font-style: normal;
-font-weight: 600;">{{ text }}</span> </v-btn>
+font-weight: 600;">{{text}}</span> </v-btn>
 </v-card>
 
 </v-col>
 </template>
-<script>
-export default {
-    props:['route', 'text'],
-  data() {
-    return {
 
+<script setup>
+import { useCartStore } from '~/stores/cartStore';
+import { onMounted, ref, defineProps, defineEmits } from 'vue';
+
+
+const cartStore = useCartStore()
+const viewAll = ref(false)
+
+const emit = defineEmits(['handleSubmit']);
+
+const props = defineProps({
+    text: {
+        type: String,
+        required: true
+    },
+    route: {
+        type: String,
+        required: true
     }
-}
-}
+})
+
+
 </script>

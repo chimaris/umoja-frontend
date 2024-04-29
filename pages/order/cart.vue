@@ -36,7 +36,7 @@ line-height: 40px;">Cart ({{ cartStore.totalCartItems }})</h1>
      <th style="
  width: 50px;
 " class="  font-weight-medium px-1  text-left">
-        <v-checkbox color="green" v-model="selectAll" hide-details ></v-checkbox>
+        <v-checkbox color="green" v-model="selectAll" @click="selectAllItems" hide-details ></v-checkbox>
      </th>
      <th  style="font-size: 14px;width: 100px;" class="  font-weight-medium  text-left">
        Product Details
@@ -55,10 +55,10 @@ line-height: 40px;">Cart ({{ cartStore.totalCartItems }})</h1>
  <tbody>
      <!-- @click="chosen = item.sn" -->
      <tr   v-for="item in cartStore.items"
-     :key="item.sn"
+     :key="item.id"
      >
      <td  class="text-grey-lighten-1 pl-1 ">   
-            <v-checkbox color="green" v-model="item.selected" hide-details></v-checkbox>
+            <v-checkbox color="green" v-model="item.selected" @click="selectItem(item.id)" hide-details></v-checkbox>
      </td>
      <td style="position:relative;font-size: 14px;height: 100px;" 
       >
@@ -119,7 +119,7 @@ color: #969696;" class="text-truncate">Location: {{item.location}}</p>
      <td  class="tableLight text-right px-1"><p style="color: #333;
 font-size: 16px;
 font-style: normal;
-font-weight: 600;">€ {{item.price * item.quantity}} </p></td>
+font-weight: 600;">€ {{(item.price * item.quantity).toLocaleString('en-US')}} </p></td>
  
 </tr>
 </tbody>
@@ -180,7 +180,7 @@ font-weight: 600;" class="">€ {{ cartStore.totalCost}} </p>
 </div>
 
 </div>
-<v-btn to="/order/checkout" flat block size="x-large" class="mt-8" rounded="xl" color="green"><span style="font-size: 14px;
+<v-btn @click="handleCheckout" :disabled="!isAnyItemSelected" flat block size="x-large" class="mt-8" rounded="xl" color="green"><span style="font-size: 14px;
 font-style: normal;
 font-weight: 600;"> Checkout Now</span></v-btn>
 </v-card>
@@ -247,6 +247,7 @@ definePageMeta({
 middleware: ["auth"]
 })
 import { ref, computed, watch, nextTick } from 'vue';
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 import { useCartStore } from '~/stores/cartStore';
 import { useRouter } from '#vue-router';
 
@@ -254,7 +255,7 @@ const cartStore = useCartStore();
 const router = useRouter();
 
 // Reactive data
-const selectAll = ref(false);
+const selectAll = ref(getLocalStorageItem('selectAll', false));
 const placescards = ref(false);
 const mods = ref(1);
 const tab = ref(null);
@@ -282,6 +283,29 @@ function confirmRemoval() {
   }
 }
 
+function selectItem(id) {
+  cartStore.handleSelect(id)
+  if (selectAll.value) {
+    selectAll.value = false
+    setLocalStorageItem("selectAll", selectAll.value)
+  }
+}
+
+function handleCheckout() {
+  cartStore.checkoutProducts()
+  router.push('/order/checkout')
+}
+
+function selectAllItems() {
+  selectAll.value = !selectAll.value
+  setLocalStorageItem("selectAll", selectAll.value)
+    if (selectAll.value) {
+      cartStore.selectAllItems()
+    } else {
+      cartStore.deSelectAllItems()
+    }
+}
+
 function showClearCart() {
   isConfirmClear.value = true
 }
@@ -303,6 +327,11 @@ const buttons = computed(() => [
   { icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png' }
 ]);
 
+const isAnyItemSelected = computed(() => {
+  // return cartStore.items.some(item => item.selected);
+  return cartStore.totalCheckoutItems > 0;
+});
+
 const cols = computed(() => {
   const { lg, sm, md } = $vuetify.display;
   return lg
@@ -319,9 +348,9 @@ function filt(text) {
   return text.length > 50 ? text.slice(0, 50) + '...' : text;
 }
 
-watch(() => cartStore.totalCartItems, (newVal) => {
-  if (newVal === 0) {
-    router.push('/market_place');
-  }
-}, { immediate: true });
+// watch(() => cartStore.totalCartItems, (newVal) => {
+//   if (newVal === 0) {
+//     router.push('/market_place');
+//   }
+// }, { immediate: true });
 </script>
