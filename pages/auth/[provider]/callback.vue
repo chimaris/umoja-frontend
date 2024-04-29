@@ -1,11 +1,13 @@
 <template>
-    <h1>Logging in ....................</h1>
-	
-			 <p style="font-weight: 400;
- font-size: 14px;
- line-height: 17px;
- color: #CECECE;" class="font-weight-regular pt-12 mb-4">©2022 Umoja. All Rights Reserved.</p>
- 
+    
+    <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)">
+        <v-progress-circular
+      :width="10"
+      :size="200"
+      color="green"
+      indeterminate
+    ></v-progress-circular>
+    </div>
  </template>
  <script setup>
    import { useUserStore } from '~/stores/userStore';

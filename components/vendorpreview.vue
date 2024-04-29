@@ -21,14 +21,14 @@
 						>
 							<v-sheet max-width="455" class="mx-auto" width="100%" style="padding-top: 20px">
 								<div class="text-center pa-4">
-									<v-avatar class="mx-auto" style="border: 2.93049px solid #fce7ce" size="100">
+									<v-avatar class="mx-auto"  size="100">
 										<v-img
 											class="bg-grey-lighten-3 rounded-xl"
-											src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684497818/Frame_481586_zfgoph.png"
+											src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"
 										></v-img>
 									</v-avatar>
 									<h3 class="py-4" style="font-size: 24px; font-weight: 800; line-height: 30px">
-										{{ vendor?.companyInfo?.businessName }} <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
+										{{ vendor.vendor_details?.business_name }} <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
 									</h3>
 									<v-btn color="orange" width="80%" flat> Follow</v-btn>
 								</div>
@@ -40,7 +40,7 @@
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Followers</p>
 										</div>
-										<p class="priceClass">2,800</p>
+										<p class="priceClass">0</p>
 									</div>
 									<div class="px-4 align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
@@ -61,7 +61,7 @@
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="px-6 pt-8">
-									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor?.companyInfo?.selectedCompanyCategory }})</span></h3>
+									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor.vendor_details?.business_type }})</span></h3>
 
 									<p class="textClass text-left mt-4 mb-8">
 										{{ vendor?.businessInfo?.businessBio }}
@@ -97,7 +97,7 @@
 											<v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon> Edit Profile
 										</v-btn>
 									</div>
-									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ vendor?.dateRegistered }}</p>
+									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ getdateRegistered() }}</p>
 								</v-sheet>
 							</v-sheet>
 						</v-card>
@@ -276,13 +276,21 @@ export default {
 	},
 	methods: {
 		getCountryCode() {
-			if (!this.vendor || !this.vendor.companyInfo || !this.vendor.companyInfo.selectedBusinessCountry) {
-        	console.error("Missing or invalid vendor data");
-        	return null;
-      		}
-      		const country = this.vendor.companyInfo.selectedBusinessCountry;
+			
+      		const country = this.vendor.vendor_details.rep_country;
       		return countryCodes[country];
-    	}
+    	},
+		getdateRegistered() {
+			const dateString = this.vendor.created;
+			const date = new Date(dateString)
+
+			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+			const month = months[date.getMonth()];
+			const day = date.getDate();
+			const year = date.getFullYear();
+  
+    		return `${month} ${day}, ${year}`;
+		}
 		},
 		filt(text) {
 			var newText = text.length > 40 ? text.slice(0, 40) + "..." : text;

@@ -27,9 +27,7 @@
 							</v-avatar>
 						</v-col>
 						<v-col cols="10">
-							<p
-								style="font-weight: 500; font-size: 12px; color: #969696; border: 1px dotted #cecece; border-radius: 6px; padding: 15px; width: 100%"
-							>
+							<p style="font-weight: 500; font-size: 12px; color: #969696; border: 1px dotted #cecece; border-radius: 6px; padding: 15px; width: 100%">
 								<v-label style="color: #1273eb; font-size: 12px; font-weight: 600" for='profile'>Click to Upload</v-label> or drag and drop <br />
 								SVG, PNF, JPG, or GIF (max 800X400px)
 							</p>
@@ -51,17 +49,17 @@
 				</div>
 			</div>
 		</div>
-		<v-btn @click="submit" flat style="background-color: #2c6e63; color: #fff" size="large">Save and continue</v-btn>
+		<v-btn class="my-5" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="large">Save and continue</v-btn>
 	</v-sheet>
 
 	<!-- View Business Section -->
 	<v-sheet class="px-6 pt-8" max-width="550" width="100%" style="padding: 40px; margin: auto; border-radius: 15px">
-		<v-avatar class="mx-auto" style="border: 2.93049px solid #fce7ce" size="100">
-			<v-img class="bg-grey-lighten-3 rounded-xl" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684497818/Frame_481586_zfgoph.png"></v-img>
+		<v-avatar class="mx-auto"  size="100">
+			<v-img class="bg-grey-lighten-3 rounded-xl" src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img>
 		</v-avatar>
 
 		<v-sheet class="pt-8">
-			<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{vendor.companyInfo.selectedCompanyCategory}})</span></h3>
+			<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{vendor.vendor_details.business_type}})</span></h3>
 
 			<p contenteditable="true" @input="businessBio = $event.target.innerText" class="editable text-left mt-2 mb-8" style="font-weight: 400; font-size: 14px; line-height: 19.6px; color: #333333" v-if="isEditing">{{ businessBio }}</p>
 			<p :disabled="disableTextarea" @click="isEditing = true" v-else>{{ businessBio }}</p>

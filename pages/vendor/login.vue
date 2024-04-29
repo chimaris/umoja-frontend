@@ -67,7 +67,7 @@ async function handleLogin() {
 		try {
 			const isLoggedIn = await vendorStore.login({ email: email.value, password: password.value });
 			if (isLoggedIn) {
-				router.push(`/vendor/dashboard/name`);
+				router.push(`/vendor/dashboard/Homepage`);
 				vendorStore.loginError = "";
 			}
 		} catch (error) {
