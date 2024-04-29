@@ -55,6 +55,9 @@ import { useVendorStore } from "~/stores/vendorStore";
 import { useRouter } from "#vue-router";
 import { passwordRules, emailRules } from "~/utils/formrules";
 
+definePageMeta({
+	middleware: ["is-vendor-auth"]
+});
 const email = ref("");
 const password = ref("");
 const visible = ref(false);

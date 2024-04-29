@@ -1,14 +1,22 @@
 // stores/cartStore.js
 import { defineStore } from 'pinia';
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    items: [],
+    items: getLocalStorageItem('cartItems', []),
+    checkoutItems: getLocalStorageItem('checkoutItems', []),
+    shippingDetails: [],
   }),
 
   getters: {
     totalCost() {
-      return this.items.reduce((total, item) => total + item.price * item.quantity, 0);
+      const total = this.items.reduce((total, item) => total + item.price * item.quantity, 0);
+      return total.toLocaleString('en-US');
+    },
+    checkoutTotalCost() {
+      const totalCost = this.checkoutItems.reduce((total, item) => total + item.price * item.quantity, 0);
+      return totalCost.toLocaleString('en-US');
     },
 
     totalItems() {
@@ -17,6 +25,9 @@ export const useCartStore = defineStore('cart', {
     totalCartItems() {
       return this.items.length;
     },
+    totalCheckoutItems() {
+      return this.checkoutItems.length
+    }
   },
 
   actions: {
@@ -26,8 +37,10 @@ export const useCartStore = defineStore('cart', {
       if (existingItem) {
         existingItem.quantity++;
       } else {
-        this.items.push({ ...item, quantity: 1 });
+        this.items.push({ ...item, quantity: 1, selected: false });
       }
+
+      setLocalStorageItem('cartItems', this.items)
     },
     setItemQuantity(itemId, newQuantity) {
         const itemIndex = this.items.findIndex((i) => i.id === itemId);
@@ -36,7 +49,41 @@ export const useCartStore = defineStore('cart', {
           this.items[itemIndex].quantity = newQuantity;
         }
       },
-  
+      checkoutProducts() {
+        // this.checkoutItems = [...this.checkoutItems, ...this.items.filter(item => item.selected)]
+        const selectedItems = this.items.filter(item => item.selected);
+        this.checkoutItems.push(...selectedItems)
+        setLocalStorageItem('checkoutItems', this.checkoutItems)
+
+        this.items = this.items.filter(item => !item.selected);
+        setLocalStorageItem('cartItems', this.items);
+      },
+      selectAllItems() {
+        this.items.forEach(item => item.selected = true)
+        setLocalStorageItem('cartItems', this.items)
+      },
+      deSelectAllItems() {
+        this.items.forEach(item => item.selected = false)
+        setLocalStorageItem('cartItems', this.items)
+      },
+      saveShippingDetails(details) {
+        this.shippingDetails = details
+      },
+      handleSelect(id) {
+        const itemIndex = this.items.findIndex(item => item.id == id)
+        if (itemIndex == -1) {
+          return
+        }
+
+        if (this.items[itemIndex].selected) {
+          this.items[itemIndex].selected = false
+        }else {
+          this.items[itemIndex].selected = true
+        }
+        
+        setLocalStorageItem('cartItems', this.items)
+      },
+      
     getItemQuantity(itemId) {
         const item = this.items.find((i) => i.id === itemId);
         return item ? item.quantity : 0;

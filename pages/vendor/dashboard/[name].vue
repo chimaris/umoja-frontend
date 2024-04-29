@@ -177,7 +177,4 @@ function sideFn() {
   sidebar.value = false;
 }
 
-onMounted(() => {
-  route.params.name = vendor.first_name
-  })
 </script>
