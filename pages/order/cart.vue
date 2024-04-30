@@ -31,7 +31,7 @@
 											<th style="width: 50px" class="font-weight-medium px-1 text-left">
 												<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
 											</th>
-											<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left">Product Details</th>
+											<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left">Select all</th>
 											<th style="font-size: 14px" class="text-center px-1 font-weight-medium">Quantity</th>
 
 											<th style="font-size: 14px" class="text-right px-1 font-weight-medium">Price</th>
