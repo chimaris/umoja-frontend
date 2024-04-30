@@ -49,7 +49,6 @@ export default {
 	},
 	methods: {
 		selectCategory(category) {
-			console.log(category);
 			this.select = category;
 			this.$router.push("/about/" + category);
 		},
