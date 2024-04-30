@@ -24,7 +24,7 @@
 										density="compact"
 										style="border-radius: 15px; margin-right: 5px"
 									>
-										<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ color.name }}</span>
+										<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ color }}</span>
 									</v-chip>
 								</div>
 								<v-divider class="mb-3"></v-divider> 
@@ -42,7 +42,7 @@
 
 								<div  style="width: 100%; gap: 15px" class="mb-5 d-flex align-center" v-for="(value, index) of colorOptions" :key="value">
 									<div style="background-color: #F8F8F8;  font-size: 16px; font-weight: 500; border-radius: 12px; padding: 16px; flex: 1;">
-										{{ value.name }}
+										{{ value }}
 									</div>
 									<div @click="deleteColor(index)" style="background-color: #f7edee; border-radius: 6px; padding: 7px 14px ">
 										<v-icon style="cursor: pointer;  color: #C20052; font-size:23px;">mdi mdi-delete</v-icon>
@@ -69,7 +69,7 @@
 										density="compact"
 										style="border-radius: 15px; margin-right: 5px"
 									>
-										<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ size.name }}</span>
+										<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ size }}</span>
 									</v-chip>
 								</div>
 								<v-divider class="mb-3"></v-divider>
@@ -87,7 +87,7 @@
 
 								<div  style="width: 100%; gap: 15px" class="mb-5 d-flex align-center" v-for="(value, index) of sizeOptions" :key="value">
 									<div style="background-color: #F8F8F8;  font-size: 16px; font-weight: 500; border-radius: 12px; padding: 16px; flex: 1;">
-										{{ value.name }}
+										{{ value }}
 									</div>
 									<div @click="deleteSize(index)" style="background-color: #f7edee; border-radius: 6px; padding: 7px 14px ">
 										<v-icon style="cursor: pointer;  color: #C20052; font-size:23px;">mdi mdi-delete</v-icon>
@@ -115,7 +115,7 @@
 										density="compact"
 										style="border-radius: 15px; margin-right: 5px"
 									>
-										<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ style.name }}</span>
+										<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ style }}</span>
 									</v-chip>
 								</div>
 								<v-divider class="mb-3"></v-divider>
@@ -133,7 +133,7 @@
 
 								<div  style="width: 100%; gap: 15px" class="mb-5 d-flex align-center" v-for="(value, index) of styleOptions" :key="value">
 									<div style="background-color: #F8F8F8;  font-size: 16px; font-weight: 500; border-radius: 12px; padding: 16px; flex: 1;">
-										{{ value.name }}
+										{{ value }}
 									</div>
 									<div @click="deleteStyle(index)" style="background-color: #f7edee; border-radius: 6px; padding: 7px 14px ">
 										<v-icon style="cursor: pointer;  color: #C20052; font-size:23px;">mdi mdi-delete</v-icon>
@@ -160,7 +160,7 @@
 										density="compact"
 										style="border-radius: 15px; margin-right: 5px"
 									>
-										<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ material.name }}</span>
+										<span style="text-align: center; color: #333; font-size: 14px; font-weight: 500">{{ material }}</span>
 									</v-chip>
 								</div>
 								<v-divider class="mb-3"></v-divider>
@@ -178,7 +178,7 @@
 
 								<div  style="width: 100%; gap: 15px" class="mb-5 d-flex align-center" v-for="(value, index) of materialOptions" :key="value">
 									<div style="background-color: #F8F8F8;  font-size: 16px; font-weight: 500; border-radius: 12px; padding: 16px; flex: 1;">
-										{{ value.name }}
+										{{ value }}
 									</div>
 									<div @click="deleteMaterial(index)" style="background-color: #f7edee; border-radius: 6px; padding: 7px 14px ">
 										<v-icon style="cursor: pointer;  color: #C20052; font-size:23px;">mdi mdi-delete</v-icon>
@@ -204,7 +204,7 @@
 
 								<div  style="width: 100%; gap: 15px" class="mb-5 d-flex align-center" v-for="(value, index) of optionValues" :key="value">
 									<div style="background-color: #F8F8F8; font-size: 16px; font-weight: 500; border-radius: 12px; padding: 16px; flex: 1;">
-										{{ value.name }}
+										{{ value }}
 									</div>
 									<div @click="deleteValue(index)" style="background-color: #f7edee; border-radius: 6px; padding: 7px 14px ">
 										<v-icon style="cursor: pointer;  color: #C20052; font-size:23px;">mdi mdi-delete</v-icon>
@@ -245,44 +245,35 @@
 									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Price</th>
 									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Available</th>
 									<th style="font-size: 14px" class="text-left px-1 font-weight-medium">SKU</th>
+									<th  @click="showEditPrice = true" style="font-size: 14px; cursor: pointer;" class="text-left px-1 font-weight-medium">Edit All</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="item in  filterVariantsByOption()" :key="item.sn">
+								<tr :style="chosen == index ? 'background:#DFDFDF' : ''" v-for="(variant, index) in allVariants" :key="index">
 									<td class="text-grey-lighten-1 px-4">
-										<v-checkbox hide-details></v-checkbox>
+										<v-checkbox  hide-details></v-checkbox>
 									</td>
 
-									<td class="tableThick px-4">{{item.name}}</td>
+									<td class="tableThick px-4">{{variant.name}}</td>
 
 									<td class="tableThick px-1">
-										<span style="background-color: #f8f8f8; padding: 10px 14px; display: block; border-radius: 6px">{{item.price}}</span>
+										<span style="background-color: #f8f8f8; padding: 10px 14px; display: block; border-radius: 6px">{{formattedPrice(variant.price)}}</span>
 									</td>
 									<td class="tableThick px-1">
-										<span style="background-color: #f8f8f8; outline: none; padding: 10px 14px; display: block; border-radius: 6px">{{item.quantity}}</span>
+										<span style="background-color: #f8f8f8; outline: none; padding: 10px 14px; display: block; border-radius: 6px">{{variant.quantity}}</span>
 									</td>
-
+									<td class="tableThick px-1">
+										<span style="background-color: #f8f8f8; outline: none; min-height: 40px; padding: 10px 14px; display: block; border-radius: 6px">{{variant.sku}}</span>
+									</td>
 									<td class="px-1">
-										<v-btn @click="showEditPrice = true" size="large" style="border: 1px solid #969696" flat>
+										<v-btn @click="handleEditSingle(variant)" size="large" style="border: 1px solid #969696" flat>
 											<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Edit</span></v-btn
 										>
 									</td>
 								</tr>
-							</tbody>
-						</v-table> 
-	</v-card> 
-	<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{vendorProducts.productError}}</p>
-    <p style="color: #B00020; font-size: 14px; margin-top: 20px">{{error}}</p>
-    <v-btn @click="addProduct"  class="my-6" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
-		<span class="mr-4"> Add Product</span>
-		<v-progress-circular v-if="vendorProducts.loading" indeterminate :width="2" :size="25"></v-progress-circular>
-	</v-btn>
-						<!-- edit price  -->
-	<v-dialog persistent v-model="showEditPrice" max-width="800" style="border: 1px solid #cecece; border-radius: 15px">
-
+						<v-dialog persistent v-model="showEditPrice" max-width="800" style="border: 1px solid #cecece; border-radius: 15px">
 							<v-card title="Edit Prices">
 								<v-divider class="my-4"></v-divider>
-
 								<v-card-text>
 									<div>
 										<p class="inputLabel">Apply a price to all variants</p>
@@ -321,12 +312,57 @@
 									>
 								</v-card-actions>
 							</v-card>
-	</v-dialog>
+						</v-dialog>
+						<v-dialog persistent v-model="showEditSinglePrice" max-width="800" style="border: 1px solid #cecece; border-radius: 15px">
+							<v-card title="Edit Price">
+								<v-divider class="my-4"></v-divider>
+
+								<v-card-text>
+									<div>
+										<div class="d-flex justify-space-between" >
+										<span>{{selectedVariant.name}}</span>
+										<div>
+											<v-text-field v-model="selectedVariant.price" placeholder="€ 0.00" density="comfortable" class="align-end" style="width: 200px; text-align: right">
+												
+											</v-text-field>
+											<p v-if="vendorProducts.priceInfo.costPerItem">${{vendorProducts.priceInfo.costPerItem}} cost per item • Projected margin: {{vendorProducts.priceInfo.margin}}%</p>
+											<p v-else>$0.00 cost per item • Projected margin: 0%</p>
+										</div>
+										</div>
+										<v-divider class="my-4"></v-divider>
+									</div>
+								</v-card-text>
+
+								<v-card-actions>
+									<v-spacer></v-spacer>
+
+									<v-btn @click="showEditSinglePrice = false" size="large" style="border: 1px solid #969696" flat>
+										<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
+									>
+									<v-btn @click="savePrice(selectedVariant)" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600;" size="large"
+										>Done</v-btn
+									>
+								</v-card-actions>
+							</v-card>
+						</v-dialog>
+							</tbody>
+						</v-table> 
+	</v-card> 
+	<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{vendorProducts.productError}}</p>
+    <p style="color: #B00020; font-size: 14px; margin-top: 20px">{{error}}</p>
+    <v-btn @click="addProduct"  class="my-6" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+		<span class="mr-4"> Add Product</span>
+		<v-progress-circular v-if="vendorProducts.loading" indeterminate :width="2" :size="25"></v-progress-circular>
+	</v-btn>
+						<!-- edit price  -->
+
+	
 </template>
 
 <script>
 
 import {inputRules, numRules} from '~/utils/formrules'
+import {formattedPrice} from '~/utils/price'
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import Variants from './variants.vue'
@@ -366,18 +402,89 @@ export default {
 			sizeOptions: [],
 			styleOptions: [],
 			materialOptions: [],
+			selectedVariant: "",
+			showEditSinglePrice: false,
 			optionName: "",
 			optionValues: [],
 			showOptions: false,
 			variantOptions: ["Size", "Color", "Material", "Style"],
         }
     },
-    computed: {
-		allVariants() {
-        return [...this.sizeOptions, ...this.colorOptions, ...this.materialOptions, ...this.styleOptions];
-    	},
-    },
+	computed: {
+  allVariants() {
+    const variants = [];
+    if (this.colorOptions.length > 0) {
+      this.colorOptions.forEach(color => {
+        if (this.sizeOptions.length > 0) {
+          this.sizeOptions.forEach(size => {
+            if (this.styleOptions.length > 0) {
+              this.styleOptions.forEach(style => {
+                if (this.materialOptions.length > 0) {
+                  this.materialOptions.forEach(material => {
+                    const variantName = `${color}/${size}/${style}/${material}`;
+                    variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
+                  });
+                } else {
+                  const variantName = `${color}/${size}/${style}`;
+                  variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
+                }
+              });
+            } else {
+              if (this.materialOptions.length > 0) {
+                this.materialOptions.forEach(material => {
+                  const variantName = `${color}/${size}/${material}`;
+                  variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
+                });
+              } else {
+                const variantName = `${color}/${size}`;
+                variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
+              }
+            }
+          });
+        } else {
+          if (this.styleOptions.length > 0) {
+            this.styleOptions.forEach(style => {
+              if (this.materialOptions.length > 0) {
+                this.materialOptions.forEach(material => {
+                  const variantName = `${color}/${style}/${material}`;
+                  variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
+                });
+              } else {
+                const variantName = `${color}/${style}`;
+                variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
+              }
+            });
+          } else {
+            if (this.materialOptions.length > 0) {
+              this.materialOptions.forEach(material => {
+                const variantName = `${color}/${material}`;
+                variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
+              });
+            } else {
+              const variantName = `${color}`;
+              variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
+            }
+          }
+        }
+      });
+    }
+    return variants;
+  }
+},
+
 	methods: {
+		savePrice(selectedVariant){
+			const index = this.allVariants.findIndex(variant => variant.name == selectedVariant.name)
+			if (index !== -1) {
+				this.allVariants[index].price = selectedVariant.price
+				console.log(this.allVariants)
+				this.showEditSinglePrice = false;
+			}
+		},
+		handleEditSingle(item) {
+			this.selectedVariant = item;
+			this.showEditSinglePrice = true;
+		},
 		filterVariantsByOption() {
         if (this.optionFilter === 'Color') {
             return this.allVariants.filter(variant => this.colorOptions.includes(variant));
@@ -398,9 +505,9 @@ export default {
 
 		filteredValues.forEach(value => {
 			// Check if the value already exists in optionValues
-			if (!this.optionValues.some(option => option.name === value)) {
+			if (!this.optionValues.some(option => option === value)) {
 			// If not, add it to optionValues
-			this.optionValues.push({name: value, price: '€0.00', quantity: 0});
+			this.optionValues.push(value);
 			}
 		});
 		this.inputValues = ""
@@ -410,8 +517,8 @@ export default {
 		const filteredValues = values.filter(value => value !== '');
 
 		filteredValues.forEach(value => {
-			if (!this.colorOptions.some(option => option.name === value)) {
-			this.colorOptions.push({name: value, price: '€0.00', quantity: 0, optionName: 'Color'});
+			if (!this.colorOptions.some(option => option === value)) {
+			this.colorOptions.push(value);
 			}
 		});
 		this.colorVariant = ""
@@ -421,8 +528,8 @@ export default {
 		const filteredValues = values.filter(value => value !== '');
 
 		filteredValues.forEach(value => {
-			if (!this.materialOptions.some(option => option.name === value)) {
-			this.materialOptions.push({name: value, price: '€0.00', quantity: 0, optionName: 'Material'});
+			if (!this.materialOptions.some(option => option === value)) {
+			this.materialOptions.push(value);
 			}
 		});
 		this.materialVariant= ""
@@ -432,8 +539,8 @@ export default {
 		const filteredValues = values.filter(value => value !== '');
 
 		filteredValues.forEach(value => {
-			if (!this.sizeOptions.some(option => option.name === value)) {
-			this.sizeOptions.push({name: value, price: '€0.00', quantity: 0, optionName: 'Size'});
+			if (!this.sizeOptions.some(option => option === value)) {
+			this.sizeOptions.push(value);
 			}
 		});
 		this.sizeVariant = ""
@@ -443,8 +550,8 @@ export default {
 		const filteredValues = values.filter(value => value !== '');
 
 		filteredValues.forEach(value => {
-			if (!this.styleOptions.some(option => option.name === value)) {
-			this.styleOptions.push({name: value, price: '€0.00', quantity: 0, optionName: 'Style'});
+			if (!this.styleOptions.some(option => option === value)) {
+			this.styleOptions.push(value);
 			}
 		});
 		this.styleVariant= ""
@@ -465,34 +572,54 @@ export default {
 		this.sizeOptions.splice(index, 1);
 	},
 	saveOptionValues() {
-			this.optionValueError = ""
+		this.optionValueError = "";
+
+			// Check if Option Name and Values are provided
 			if (!this.optionName || this.optionValues.length <= 0) {
-				this.optionValueError = "Please enter Option Name and Values!! make sure you click enter to save option values "
-				return
-			} 
-			if (this.optionName == "Size") {
-				this.sizeOptions = [...this.sizeOptions, ...this.optionValues]
-                this.sizeOptions.forEach(option => {
-                    option.optionName = 'Size'
-                });
+			this.optionValueError = "Please enter Option Name and Values!! make sure you click enter to save option values ";
+			return;
 			}
-			if (this.optionName == "Color") {
-				this.colorOptions = [...this.colorOptions, ...this.optionValues]
-                this.colorOptions.forEach(option => {
-                    option.optionName = 'Color'
-                });
+
+			// Check if any of the option values already exist in the corresponding options array
+			const existingValues = this.optionValues.filter(value => {
+			if (this.optionName === "Size") {
+				return this.sizeOptions.includes(value);
+			} else if (this.optionName === "Color") {
+				return this.colorOptions.includes(value);
+			} else if (this.optionName === "Material") {
+				return this.materialOptions.includes(value);
+			} else if (this.optionName === "Style") {
+				return this.styleOptions.includes(value);
 			}
-			if (this.optionName == "Material") {
-				this.materialOptions = [...this.materialOptions, ...this.optionValues]
-                this.materialOptions.forEach(option => {
-                    option.optionName = 'Material'
-                });
+			return false;
+			});
+
+			if (existingValues.length > 0) {
+			this.optionValueError = `The following values already exist for ${this.optionName}: ${existingValues.join(', ')}`;
+			setTimeout(() => {
+			// Remove existing values from optionValues array
+			existingValues.forEach(value => {
+			const index = this.optionValues.indexOf(value);
+			if (index !== -1) {
+				this.optionValues.splice(index, 1);
 			}
-			if (this.optionName == "Style") {
-				this.styleOptions = [...this.styleOptions, ...this.optionValues]
-                this.styleOptions.forEach(option => {
-                    option.optionName = 'Style'
-                });
+			});
+			// Clear inputValues
+			this.inputValues = "";
+			this.optionValueError = "";
+			}, 2000);
+			return;
+			}
+
+			// Add new option values to the corresponding options array
+			if (this.optionName === "Size") {
+			this.sizeOptions = [...this.sizeOptions, ...this.optionValues];
+			} else if (this.optionName === "Color") {
+			this.colorOptions = [...this.colorOptions, ...this.optionValues];
+			} else if (this.optionName === "Material") {
+			this.materialOptions = [...this.materialOptions, ...this.optionValues];
+			} else if (this.optionName === "Style") {
+			this.styleOptions = [...this.styleOptions, ...this.optionValues];
 			}
 
 			this.showValues = true;
@@ -503,10 +630,11 @@ export default {
 	
 		},
         applyVariantPrice() {
-            if (!isNaN(this.allVariantPrice)) {
+            if (this.allVariantPrice) {
             this.allVariants.forEach(variant => {
-            variant.price = `€${this.allVariantPrice}.00`;
+            variant.price = this.allVariantPrice;
         });
+		this.allVariantPrice = ""
         }
 	},
 	async addProduct() {
@@ -531,8 +659,8 @@ export default {
     ) {
 		const response =  await this.vendorProducts.addVendorProduct();
 		if (response) {
-			this.$router.push('/vendor/dashboard/Products');
 			this.vendorProducts.newProductAdded = true;
+			this.$router.push('/vendor/dashboard/Products');
 		}
        
     } else { 

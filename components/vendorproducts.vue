@@ -123,7 +123,7 @@
 												</p>
 												<p style="color: #cdd6d4; font-size: 12px; font-weight: 500; line-height: 20px">{{ item.category_name }}</p>
 
-												<p style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px" class="mt-1">€ {{item.price}}.00 per {{ item.unit }}</p>
+												<p style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px" class="mt-1">{{formattedPrice(item.price)}} per {{ item.unit }}</p>
 											</v-col>
 										</v-row>
 									</v-card>
@@ -140,10 +140,10 @@
 							</v-chip>
 						</td>
 						<td class="tableThick px-1">
-							<div class="h-100 d-flex align-center">
-								<v-icon icon="mdi mdi-circle" class="mx-1" color="black" size="12"></v-icon>
-								<v-icon icon="mdi mdi-circle" class="mx-1" color="yellow" size="12"></v-icon>
-								<v-icon icon="mdi mdi-circle" class="mx-1" color="brown" size="12"></v-icon>
+							<div v-if="item.variations.length > 0" class="h-100 d-flex align-center">
+								<v-icon v-for="(color, index) in getFirstThreeColors(item.variations)" :key=index icon="mdi mdi-circle" class="mx-1" :color="`${color}`" size="12"></v-icon>
+								<!-- <v-icon icon="mdi mdi-circle" class="mx-1" color="yellow" size="12"></v-icon>
+								<v-icon icon="mdi mdi-circle" class="mx-1" color="brown" size="12"></v-icon> -->
 							</div>
 						</td>
 						<td class="tableLight px-1">
@@ -151,10 +151,10 @@
 								{{ item.status }}
 							</v-chip>
 						</td>
-						<td class="tableThick px-1">€{{ item.price }}</td>
+						<td class="tableThick px-1">{{ formattedPrice(item.price) }}</td>
 						<td class="tableThick px-1">
 							<p>{{ item.made_with_ghana_leather }} in stock</p>
-							<p style="color: #969696; font-weight: 400">for 3 variants</p>
+							<p style="color: #969696; font-weight: 400">for {{item.variations.length}} variants</p>
 						</td>
 
 						<td class="tableLight px-1"><p style="color: #333; font-size: 14px; font-style: normal; font-weight: 600">{{ item.sku }}</p></td>
@@ -231,6 +231,7 @@
 </template>
 <script>
 import {useVendorProductStore} from '~/stores/vendorProducts'
+import {formattedPrice} from '~/utils/price'
 import { onBeforeMount } from 'vue';
 export default {
 	setup(props, ctx) {
@@ -306,7 +307,21 @@ export default {
 },
 	
 	methods: {
-		
+		getFirstThreeColors(variations) {
+        const uniqueColors = new Set();
+        const firstThreeColors = [];
+        for (const variation of variations) {
+            const color = variation.name.split('/')[0]; // Extracting the color part
+            if (!uniqueColors.has(color)) {
+                uniqueColors.add(color);
+                firstThreeColors.push(color);
+                // if (firstThreeColors.length === 3) {
+                //     break; // Stop when we have found three different colors
+                // }
+            }
+        }
+        return firstThreeColors;
+    },
 		sort(x, y) {
 			var itm = this.items1;
 			this.items = itm.filter((item) => {

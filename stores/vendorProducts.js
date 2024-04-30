@@ -84,14 +84,26 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   unit_per_item: this.generalInfo.unitperItem
                 }
               });
-              console.log(response)
+              const productId = response.data.product.id;
+              if (this.variantsInfo && this.variantsInfo.length > 0) {
+              for (const variant of this.variantsInfo) {
+                const variantResponse = await api({
+                  url: `vendor/products/${productId}/variations`,
+                  method: 'post',
+                  data: {
+                    name: variant.name,
+                    sku: variant.sku,
+                    no_available: variant.quantity,
+                    price: variant.price,
+                  }
+                });
+              }}
               this.newProductName = this.textInfo.productName;
               this.newProductsku = this.generalInfo.productNumber;
               this.productError = "";
               return true
             
            }catch(error) {
-            console.error("bikonu", error)
             if (error.response) {
               this.productError = error.response.data.message || 'An error occurred during add product.';
             } else if (error.request) {

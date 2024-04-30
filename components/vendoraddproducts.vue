@@ -163,7 +163,7 @@
 										</div>
 									</v-card>
 									<p style="color: #B00020; font-size: 14px; margin: 5px 0;" >{{descError}}</p>
-									<p style="color: #969696; font-size: 12px; font-weight: 400">Do not exceed 100 characters when giving the product description</p>
+									<p style="color: #969696; font-size: 12px; font-weight: 400">Do not exceed 200 characters when giving the product description</p>
 								</div>
 								<div>
 									<p class="inputLabel mt-4">Product Specifications (Main features)</p>
@@ -858,7 +858,7 @@ export default {
 		]
 		const descRule = [
 			v => !!v || 'Description of product must be provided!!',
-			v => v.length <= 100 || 'Product description cannot exceed 100 characters'
+			v => v.length <= 200 || 'Product description cannot exceed 200 characters'
 		]
 		const tags = ref([]);
 		const newTag = ref("");
@@ -1177,8 +1177,8 @@ export default {
 				this.descError = "Product description must exceed 20 characters!!"
 				return
 			}
-			if (this.editorContent.length > 100) {
-				this.descError = "Product description cannot exceed 100 characters!!"
+			if (this.editorContent.length > 200) {
+				this.descError = "Product description cannot exceed 200 characters!!"
 				return
 			}
 			if (this.productName && this.editorContent && this.productSpec && this.selectedCategory && this.selectedSubCategory) {
