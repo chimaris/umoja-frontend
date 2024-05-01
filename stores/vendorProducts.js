@@ -14,6 +14,10 @@ export const useVendorProductStore = defineStore('vendor-product', {
         inventoryInfo:  getLocalStorageItem("inventory", []),
         shippingInfo: getLocalStorageItem("shipping", []),
         variantsInfo: getLocalStorageItem("variant", []),
+        colorInfo: getLocalStorageItem("color", []),
+        sizeInfo: getLocalStorageItem("size", []),
+        styleInfo: getLocalStorageItem("style", []),
+        materialInfo: getLocalStorageItem("material", []),
         newProductAdded: false,
         newProductName: "",
         newProductsku: "",
@@ -55,6 +59,10 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   product_spec:this.textInfo.productSpec,
                   status: this.textInfo.productStatus,
                   tags: this.textInfo.Tags,
+                  sizes: this.sizeInfo,
+                  colors: this.colorInfo,
+                  materials: this.materialInfo,
+                  styles: this.styleInfo,
                   category_id: this.textInfo.Category,
                   sub_category_id: this.textInfo.SubCategory,
                   gender: this.textInfo.Gender,
@@ -201,6 +209,22 @@ export const useVendorProductStore = defineStore('vendor-product', {
             this.variantsInfo = info
             setLocalStorageItem('variant', this.variantsInfo)
           },
+          saveColorOptions(info) {
+            this.colorInfo = info
+            setLocalStorageItem('color', this.colorInfo)
+          },
+          saveSizeOptions(info) {
+            this.sizeInfo = info;
+            setLocalStorageItem('size', this.sizeInfo)
+          },
+          saveStyleOptions(info) {
+            this.styleInfo = info;
+            setLocalStorageItem('style', this.styleInfo)
+          },
+          saveMaterialOptions(info) {
+            this.materialInfo = info;
+            setLocalStorageItem('material', this.materialInfo)
+          }
 
     }
 })

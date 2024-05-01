@@ -141,7 +141,7 @@
 						</td>
 						<td class="tableThick px-1">
 							<div v-if="item.variations.length > 0" class="h-100 d-flex align-center">
-								<v-icon v-for="(color, index) in getFirstThreeColors(item.variations)" :key=index icon="mdi mdi-circle" class="mx-1" :color="`${color}`" size="12"></v-icon>
+								<v-icon v-for="(color, index) in item.colors" :key=index icon="mdi mdi-circle" class="mx-1" :color="`${color}`" size="12"></v-icon>
 								<!-- <v-icon icon="mdi mdi-circle" class="mx-1" color="yellow" size="12"></v-icon>
 								<v-icon icon="mdi mdi-circle" class="mx-1" color="brown" size="12"></v-icon> -->
 							</div>
@@ -240,9 +240,9 @@ export default {
 			ctx.emit("changePage", x);
 		}
 
-		onBeforeMount(async () => {
-      		await vendorProducts.getAllProduct();
-    	});
+		// onBeforeMount(async () => {
+      	// 	await vendorProducts.getAllProduct();
+    	// });
 		
 		return {
 			choose,

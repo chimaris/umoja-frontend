@@ -151,7 +151,7 @@ color: #333333;" class="">{{n.name}}</p>
      </v-checkbox>
 </v-card>
 </v-col>
-<Cartsummary :route="'/order/summary'" :text="'Proceed'" />
+<Cartsummary :route="'/order/summary'" :text="'Proceed'"  @handleSubmit="handlePayment()"/>
 </v-row> 
 
     </v-container>  
@@ -261,6 +261,9 @@ buttons(){
     },
   },
   methods: {
+    handlePayment() {
+        this.$router.push('/order/summary')
+    },
 filt(text){
 
 var newText = text.length > 50 ? text.slice(0, 50) +'...' : text

@@ -1,35 +1,22 @@
 <template>
     <v-col cols="12" lg="4">
 
-<v-card  style="border-radius: 15px;
-border: 1px solid var(--carbon-2, #CECECE);" flat class="pa-4">
-<v-row dense v-if="!viewAll">
-    <v-col cols="3">
-        <v-avatar color="grey-lighten-2" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" ><v-img cover :src="cartStore.checkoutItems[0].image"></v-img></v-avatar>
-    </v-col>
-    <v-col cols="6">
-             <div class="px-2" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis;" >
-            <p class="mb-1 text-truncate" style="font-weight: 600;
-font-size: 16px!important;
-line-height: 20px;
-color: #333333;">{{cartStore.checkoutItems[0].name}} </p>
-            <p style="font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-color: #969696;" class="text-truncate">Category: Stone, Art, Sculpting, Carving.</p>
-            <p style="font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-color: #969696;" class="mt-4 text-truncate">X{{ cartStore.checkoutItems[0].quantity }}</p>
-          </div> </v-col>
-    <v-col cols="3">
-
-            <p class="mb-1 text-right" style="font-weight: 600;
-font-size: 16px!important;
-line-height: 20px;
-color: #333333;">€ {{(cartStore.checkoutItems[0].quantity * cartStore.checkoutItems[0].price).toLocaleString('en-US')}} </p>
+<v-card  style="border-radius: 15px; border: 1px solid var(--carbon-2, #CECECE);" flat class="pa-4">
+    <v-row dense v-if="!viewAll">
+        <v-col cols="3">
+            <v-avatar color="grey-lighten-2" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" ><v-img cover :src="cartStore.checkoutItems[0].image"></v-img></v-avatar>
         </v-col>
-</v-row>
+        <v-col cols="5">
+            <div class="px-2" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis;" >
+                <p class="mb-1 text-truncate" style="font-weight: 600; font-size: 16px!important; line-height: 20px; color: #333333;">{{cartStore.checkoutItems[0].name}} </p>
+                <p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696;" class="text-truncate">Category: Stone, Art, Sculpting, Carving.</p>
+                <p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696;" class="mt-4 text-truncate">X{{ cartStore.checkoutItems[0].quantity }}</p>
+            </div> 
+        </v-col>
+        <v-col cols="4">
+            <p class="mb-1 text-right" style="font-weight: 600; font-size: 16px!important; line-height: 20px; color: #333333;">{{formattedPrice((cartStore.checkoutItems[0].quantity * cartStore.checkoutItems[0].price))}} </p>
+        </v-col>
+    </v-row>
 <template v-if="viewAll">
     <v-row dense v-for="item in cartStore.checkoutItems" :key="item.id">
     <v-col cols="3">
@@ -55,7 +42,7 @@ color: #969696;" class="mt-4 text-truncate">X{{ item.quantity }}</p>
             <p class="mb-1 text-right" style="font-weight: 600;
 font-size: 16px!important;
 line-height: 20px;
-color: #333333;">€ {{(item.price * item.quantity).toLocaleString('en-US')}} </p>
+color: #333333;">{{formattedPrice((item.price * item.quantity))}} </p>
         </v-col>
 </v-row>
 </template>
@@ -155,6 +142,7 @@ font-weight: 600;">{{text}}</span> </v-btn>
 <script setup>
 import { useCartStore } from '~/stores/cartStore';
 import { onMounted, ref, defineProps, defineEmits } from 'vue';
+import {formattedPrice} from '~/utils/price'
 
 
 const cartStore = useCartStore()

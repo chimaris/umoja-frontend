@@ -3,6 +3,7 @@
 						<div class="d-flex align-center">
 							<p style="color: #333; font-size: 20px; font-weight: 600">Variants</p>
 						</div>
+						<small style="color: #969696; font-size: 12px;">Always provide color variation.</small>
 						<v-divider class="my-4"></v-divider>
 						
 						
@@ -271,37 +272,74 @@
 										>
 									</td>
 								</tr>
-						<v-dialog persistent v-model="showEditPrice" max-width="800" style="border: 1px solid #cecece; border-radius: 15px">
-							<v-card title="Edit Prices">
+						<v-dialog persistent v-model="showEditPrice" max-width="800"  >
+							<v-card style="padding-bottom: 70px;" title="Edit Prices">
 								<v-divider class="my-4"></v-divider>
 								<v-card-text>
-									<div>
-										<p class="inputLabel">Apply a price to all variants</p>
-										<div class="d-flex">
-											<v-text-field class="mr-3" :rules="numRules" v-model="allVariantPrice" append-inner-icon="mdi mdi-chevron-down" placeholder="Enter price" density="comfortable"> </v-text-field>
-											<v-btn @click="applyVariantPrice" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600; " size="large"
-												:style="{ opacity: allVariantPrice ? 1 : 0.5 }"
-												>Apply to all</v-btn
-											>
+									<div style="display: flex; column-gap: 20px; flex-wrap: wrap; align-items: center; ">
+										<div style="flex: 1; min-width: 500px;">
+											<p class="inputLabel">Apply a price to all variants</p>
+											<div class="d-flex">
+												<v-text-field class="mr-3" :rules="numRules" v-model="allVariantPrice" placeholder="Enter price" density="comfortable"> </v-text-field>
+												<v-btn @click="applyVariantPrice" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600; " size="large"
+													:style="{ opacity: allVariantPrice ? 1 : 0.5 }"
+													>Apply to all</v-btn
+												>
+											</div>
 										</div>
+										<div style="flex: 1; min-width: 300px;">
+											<p class="inputLabel">Apply quantity to all variants</p>
+											<div class="d-flex">
+												<v-text-field class="mr-3" :rules="numRules" v-model="allVariantQuantity" placeholder="Enter quantity" density="comfortable"> </v-text-field>
+												<v-btn @click="applyVariantQuantity" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600; " size="large"
+													:style="{ opacity: allVariantQuantity ? 1 : 0.5 }"
+													>Apply to all</v-btn
+												>
+											</div>
+										</div>
+										<div style="flex: 1; min-width: 300px;">
+											<p class="inputLabel">Apply sku to all variants</p>
+											<div class="d-flex">
+												<v-text-field class="mr-3" v-model="allVariantSku"  placeholder="Enter sku" density="comfortable"> </v-text-field>
+												<v-btn @click="applyVariantSku" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 14px; font-weight: 600; " size="large"
+													:style="{ opacity: allVariantSku ? 1 : 0.5 }"
+													>Apply to all</v-btn
+												>
+											</div>
+										</div>
+
 									</div>
+									<v-divider class="my-2"></v-divider>
+									<v-table>
+										<thead>
+											<tr>
+												<th style="font-size: 14px; width: 40%" class="font-weight-medium text-left">Variant</th>
+												<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Available</th>
+												<th style="font-size: 14px" class="text-left px-1 font-weight-medium">SKU</th>
+												<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Price</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr v-for="variant in allVariants" :key=variant>
+												<td>{{variant.name}}</td>
+												<td>
+													<v-text-field class="py-5" v-model="variant.quantity" placeholder="€ 0.00" density="comfortable"></v-text-field>
+												</td>
+												<td>
+													<v-text-field class="py-5" v-model="variant.sku" density="comfortable"></v-text-field>
+												</td>
+												<td>
+													<v-text-field class="py-5" v-model="variant.price" placeholder="€ 0.00" density="comfortable"></v-text-field>
+												</td>
+											</tr>
+										</tbody>
+									</v-table>
+									<p style="text-align: end" v-if="vendorProducts.priceInfo.costPerItem">${{vendorProducts.priceInfo.costPerItem}} cost per item • Projected margin: {{vendorProducts.priceInfo.margin}}%</p>
+									<p style="text-align: end" v-else>$0.00 cost per item • Projected margin: 0%</p>
 									<v-divider class="my-4"></v-divider>
-									<div v-for="variant in allVariants" :key=variant>
-										<div class="d-flex justify-space-between" >
-										<span>{{variant.name}}</span>
-										<div>
-											<v-text-field v-model="variant.price" placeholder="€ 0.00" density="comfortable" class="align-end" style="width: 200px; text-align: right">
-                                                
-											</v-text-field>
-											<p v-if="vendorProducts.priceInfo.costPerItem">${{vendorProducts.priceInfo.costPerItem}} cost per item • Projected margin: {{vendorProducts.priceInfo.margin}}%</p>
-											<p v-else>$0.00 cost per item • Projected margin: 0%</p>
-										</div>
-										</div>
-										<v-divider class="my-4"></v-divider>
-									</div>
 								</v-card-text>
 
-								<v-card-actions>
+								<v-card-actions style="position: fixed; bottom: 0; left: 0; right: 0; background-color: #ffffff; height: 70px;">
 									<v-spacer></v-spacer>
 
 									<v-btn @click="showEditPrice = false" size="large" style="border: 1px solid #969696" flat>
@@ -314,23 +352,38 @@
 							</v-card>
 						</v-dialog>
 						<v-dialog persistent v-model="showEditSinglePrice" max-width="800" style="border: 1px solid #cecece; border-radius: 15px">
-							<v-card title="Edit Price">
+							<v-card title="Edit Variant">
 								<v-divider class="my-4"></v-divider>
 
 								<v-card-text>
-									<div>
-										<div class="d-flex justify-space-between" >
-										<span>{{selectedVariant.name}}</span>
-										<div>
-											<v-text-field v-model="selectedVariant.price" placeholder="€ 0.00" density="comfortable" class="align-end" style="width: 200px; text-align: right">
-												
-											</v-text-field>
-											<p v-if="vendorProducts.priceInfo.costPerItem">${{vendorProducts.priceInfo.costPerItem}} cost per item • Projected margin: {{vendorProducts.priceInfo.margin}}%</p>
-											<p v-else>$0.00 cost per item • Projected margin: 0%</p>
-										</div>
-										</div>
-										<v-divider class="my-4"></v-divider>
-									</div>
+									<v-table>
+										<thead>
+											<tr>
+												<th style="font-size: 14px; width: 40%" class="font-weight-medium text-left">Variant</th>
+												<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Available</th>
+												<th style="font-size: 14px" class="text-left px-1 font-weight-medium">SKU</th>
+												<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Price</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>{{selectedVariant.name}}</td>
+												<td>
+													<v-text-field class="pa-5" v-model="selectedVariant.quantity" placeholder="€ 0.00" density="comfortable"></v-text-field>
+												</td>
+												<td>
+													<v-text-field v-model="selectedVariant.sku" density="comfortable"></v-text-field>
+												</td>
+												<td>
+													<v-text-field v-model="selectedVariant.price" placeholder="€ 0.00" density="comfortable"></v-text-field>
+												</td>
+											</tr>
+										</tbody>
+									</v-table>
+									
+									<p style="text-align: end" v-if="vendorProducts.priceInfo.costPerItem">${{vendorProducts.priceInfo.costPerItem}} cost per item • Projected margin: {{vendorProducts.priceInfo.margin}}%</p>
+									<p style="text-align: end" v-else>$0.00 cost per item • Projected margin: 0%</p>
+									<v-divider class="my-4"></v-divider>
 								</v-card-text>
 
 								<v-card-actions>
@@ -354,7 +407,6 @@
 		<span class="mr-4"> Add Product</span>
 		<v-progress-circular v-if="vendorProducts.loading" indeterminate :width="2" :size="25"></v-progress-circular>
 	</v-btn>
-						<!-- edit price  -->
 
 	
 </template>
@@ -384,6 +436,8 @@ export default {
         return {
             error: "",
             allVariantPrice: "",
+			allVariantQuantity: "",
+			allVariantSku: "",
 			colorVariant: "",
 			styleVariant:"",
 			sizeVariant:"",
@@ -477,6 +531,8 @@ export default {
 			const index = this.allVariants.findIndex(variant => variant.name == selectedVariant.name)
 			if (index !== -1) {
 				this.allVariants[index].price = selectedVariant.price
+				this.allVariants[index].quantity = selectedVariant.quantity
+				this.allVariants[index].sku = selectedVariant.sku
 				console.log(this.allVariants)
 				this.showEditSinglePrice = false;
 			}
@@ -637,6 +693,22 @@ export default {
 		this.allVariantPrice = ""
         }
 	},
+	applyVariantSku() {
+            if (this.allVariantSku) {
+            this.allVariants.forEach(variant => {
+			variant.sku = this.allVariantSku;
+        });
+		this.allVariantSku = ""
+        }
+	},
+	applyVariantQuantity() {
+            if (this.allVariantQuantity) {
+            this.allVariants.forEach(variant => {
+			variant.quantity = this.allVariantQuantity;
+        });
+		this.allVariantQuantity = ""
+        }
+	},
 	async addProduct() {
 		this.error = "";
     if (this.allVariants.length < 1) {
@@ -646,6 +718,10 @@ export default {
         return;
     } else {
         this.vendorProducts.saveVariantsInfo(this.allVariants);
+		this.vendorProducts.saveColorOptions(this.colorOptions);
+		this.vendorProducts.saveSizeOptions(this.sizeOptions);
+		this.vendorProducts.saveStyleOptions(this.styleOptions);
+		this.vendorProducts.saveMaterialOptions(this.materialOptions);
     }
 
     if (
