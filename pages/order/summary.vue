@@ -40,7 +40,7 @@ line-height: 20px;">Thanks for your order</p>
             <p style="color: #969696;
 font-size: 14px;
 font-weight: 500;
-line-height: 20px; ">The order confirmation has been sent to thatdesignpro@gmail.com</p>
+line-height: 20px; ">The order confirmation has been sent to {{cartStore.shippingDetails.email}}</p>
         </div>
         <hr  class="dashed-2 my-4" />
 <div>
@@ -51,7 +51,7 @@ line-height: 20px;" class="mb-2">Transaction Date</p>
     <p style="color: var(--carbon-3, #969696);
 font-size: 14px;
 font-weight: 500;
-line-height: 20px;">Thursday, October 16, 2023 (GMT+7)</p>
+line-height: 20px;">{{getCurrentTransactionDate()}}</p>
 </div>
 <hr  class="dashed-2 my-4" />
 <div>
@@ -66,17 +66,9 @@ line-height: 20px;">Mastercard ending with 2546</p>
 </div>
 <hr  class="dashed-2 my-4" />
 <div>
-    <p style="color: var(--carbon-6, #1E1E1E);
-font-size: 14px;
-font-weight: 600;
-line-height: 20px;" class="mb-2">Shipping Method</p>
-    <p style="color: var(--carbon-3, #969696);
-font-size: 14px;
-font-weight: 500;
-line-height: 20px;" class="mb-2">Express delivery (1-3 business days)</p>
-<a style="color: var(--deep-sky-blue-4, #1273EB);
-font-size: 12px;
-font-weight: 600;" href="">TRACK ORDER</a>
+    <p style="color: var(--carbon-6, #1E1E1E); font-size: 14px; font-weight: 600; line-height: 20px;" class="mb-2">Shipping Method</p>
+    <p v-if="cartStore.shippingDetails.shippingOption" style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px;" class="mb-2">{{cartStore.shippingDetails.shippingOption.title}} ({{cartStore.shippingDetails.shippingOption.duration}})</p>
+    <a style="color: var(--deep-sky-blue-4, #1273EB); font-size: 12px; font-weight: 600;" href="">TRACK ORDER</a>
 </div>
 <hr  class="dashed-2 my-4" />
 <v-row dense v-if="!viewAll">
@@ -103,7 +95,7 @@ color: #969696;" class="mt-4 text-truncate">X{{ cartStore.checkoutItems[0].quant
             <p class="mb-1 text-right" style="font-weight: 600;
 font-size: 16px!important;
 line-height: 20px;
-color: #333333;">€ {{(cartStore.checkoutItems[0].quantity * cartStore.checkoutItems[0].price).toLocaleString('en-US') }} </p>
+color: #333333;">{{formattedPrice((cartStore.checkoutItems[0].quantity * cartStore.checkoutItems[0].price))}} </p>
         </v-col>
 </v-row>
 <template v-if="viewAll">
@@ -131,7 +123,7 @@ color: #969696;" class="mt-4 text-truncate">X{{ item.quantity }}</p>
             <p class="mb-1 text-right" style="font-weight: 600;
 font-size: 16px!important;
 line-height: 20px;
-color: #333333;">€ {{(item.price * item.quantity).toLocaleString('en-US')}} </p>
+color: #333333;">{{formattedPrice((item.price * item.quantity))}} </p>
         </v-col>
 </v-row>
 </template>
@@ -201,7 +193,7 @@ font-weight: 600;" class="">€ {{ cartStore.checkoutTotalCost }} </p>
 </div>
 
 </div>
-<v-btn to="/" flat block size="x-large" class="mt-8" rounded="xl" color="green"> <span style="font-size: 14px;
+<v-btn to="/market_place" flat block size="x-large" class="mt-8" rounded="xl" color="green"> <span style="font-size: 14px;
 font-style: normal;
 font-weight: 600;">Continue Shopping </span> </v-btn>
 </v-card>    </div>
@@ -211,6 +203,8 @@ font-weight: 600;">Continue Shopping </span> </v-btn>
 </template>
 <script>
 import { useCartStore } from '~/stores/cartStore';
+import {getCurrentTransactionDate} from '~/utils/date'
+import {formattedPrice} from '~/utils/price'
 export default {
   data() {
     return {

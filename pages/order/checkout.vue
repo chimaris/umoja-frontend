@@ -404,10 +404,11 @@ buttons(){
         if (!this.selectedShippingValue && !this.selectedAddressIndex) {
             return
         }
+        const shippingIndex = this.shippingTypes.findIndex(option => option.title == this.selectedShippingValue)
         const data = {
             discountCode : "",
             ...this.shippingAddress[this.selectedAddressIndex],
-            shippingOption: this.selectedShippingValue
+            shippingOption: this.shippingTypes[shippingIndex]
         }
         this.cartStore.saveShippingDetails(data)
         this.$router.push('/order/payment')

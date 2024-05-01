@@ -7,3 +7,31 @@ export function formatDate() {
   
     return `${month} ${day}, ${year}`;
   }
+
+export function getCurrentTransactionDate() {
+      const currentDate = new Date();
+      
+      // Days of the week
+      const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      
+      // Months
+      const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+      
+      // Get the day of the week, month, and year
+      const dayOfWeek = daysOfWeek[currentDate.getDay()];
+      const month = months[currentDate.getMonth()];
+      const dayOfMonth = currentDate.getDate();
+      const year = currentDate.getFullYear();
+      
+      // Get the time zone offset in minutes
+      const timeZoneOffset = currentDate.getTimezoneOffset();
+      // Convert the time zone offset to hours and add it to the current date
+      const timeZoneOffsetHours = Math.abs(timeZoneOffset / 60);
+      const timeZoneOffsetMinutes = Math.abs(timeZoneOffset % 60);
+      const timeZone = `GMT${timeZoneOffset < 0 ? '+' : '-'}${timeZoneOffsetHours}:${timeZoneOffsetMinutes}`;
+      
+      // Construct the transaction date string
+      const transactionDate = `${dayOfWeek}, ${month} ${dayOfMonth}, ${year} (${timeZone})`;
+      
+      return transactionDate;
+    }

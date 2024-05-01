@@ -163,7 +163,7 @@
 										</div>
 									</v-card>
 									<p style="color: #B00020; font-size: 14px; margin: 5px 0;" >{{descError}}</p>
-									<p style="color: #969696; font-size: 12px; font-weight: 400">Do not exceed 200 characters when giving the product description</p>
+									<p style="color: #969696; font-size: 12px; font-weight: 400">Do not exceed 500 characters when giving the product description</p>
 								</div>
 								<div>
 									<p class="inputLabel mt-4">Product Specifications (Main features)</p>
@@ -241,7 +241,7 @@
 								></v-col>
 								<v-col>
 									<p class="inputLabel">Commission</p>
-									<v-text-field :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="commission" placeholder="€ 0.00" density="comfortable"> </v-text-field
+									<v-text-field v-model="commission"  placeholder="€ 0.00" density="comfortable"> </v-text-field
 								></v-col>
 								<v-col>
 									<p >Compare-at price (Optional)</p>
@@ -965,7 +965,6 @@ export default {
 			chargeTax: false,
 			ustIndex: "",
 			price: "",
-			commission: "",
 			prevPrice: "",
 			itemCost: "",
 			profit: "",
@@ -1056,6 +1055,9 @@ export default {
 		categoryNames() {
       		return this.Categories.map(category => category.name);
        },
+	   commission(){
+			return ((2/100) * this.price).toFixed(2)
+	   },
         orderDetails() {
             return [
                 {
@@ -1177,8 +1179,8 @@ export default {
 				this.descError = "Product description must exceed 20 characters!!"
 				return
 			}
-			if (this.editorContent.length > 200) {
-				this.descError = "Product description cannot exceed 200 characters!!"
+			if (this.editorContent.length > 500) {
+				this.descError = "Product description cannot exceed 500 characters!!"
 				return
 			}
 			if (this.productName && this.editorContent && this.productSpec && this.selectedCategory && this.selectedSubCategory) {

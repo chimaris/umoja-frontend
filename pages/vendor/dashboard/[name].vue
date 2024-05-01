@@ -145,7 +145,8 @@ middleware: "vendor-auth"
 })
 
 
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted,  onBeforeMount } from 'vue';
+import {useVendorProductStore} from '~/stores/vendorProducts'
 import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
 
@@ -156,6 +157,7 @@ const router = useRouter();
 const route = useRoute()
 const vendorStore  = useVendorStore();
 const vendor = vendorStore.getVendor;
+const vendorProducts = useVendorProductStore()
 
 
 const window = ref(route.params.name ? route.params.name : "Homepage");
@@ -177,4 +179,10 @@ function sideFn() {
   sidebar.value = false;
 }
 
+onMounted(async () => {
+    await vendorProducts.getAllProduct();
+});
+// onMounted(() => {
+//   route.params.name = vendor.first_name
+//   })
 </script>

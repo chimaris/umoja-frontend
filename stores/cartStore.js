@@ -6,7 +6,7 @@ export const useCartStore = defineStore('cart', {
   state: () => ({
     items: getLocalStorageItem('cartItems', []),
     checkoutItems: getLocalStorageItem('checkoutItems', []),
-    shippingDetails: [],
+    shippingDetails: getLocalStorageItem("shipping-details", []),
   }),
 
   getters: {
@@ -68,6 +68,7 @@ export const useCartStore = defineStore('cart', {
       },
       saveShippingDetails(details) {
         this.shippingDetails = details
+        setLocalStorageItem("shipping-details", this.shippingDetails)
       },
       handleSelect(id) {
         const itemIndex = this.items.findIndex(item => item.id == id)
