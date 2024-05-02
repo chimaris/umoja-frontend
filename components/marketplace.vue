@@ -177,7 +177,7 @@
 						:location="$vuetify.display.mobile ? 'right' : undefined"
 						temporary
 						scrim
-						style="width: 85%; position: absolute; top: 350px"
+						style="width: 85%; top: 40%"
 						class="d-block d-md-none"
 					>
 						<div class="d-flex align-center justify-space-between px-4 pt-4">
