@@ -112,15 +112,15 @@ export const useVendorStore = defineStore('vendor', {
         localStorage.setItem('vendorToken', access_token);
         
         const id = response.data.user_id
-        if (id) {
           const profileResponse = await api ({
             url: `users/${id}`,
-            method: 'get'
+            method: 'get',
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+            }
           });
           this.vendor = profileResponse.data.data;
           setLocalStorageItem('vendor', this.vendor)
-        }
-        
         
 
         this.vendorIsLoggedIn = true;
