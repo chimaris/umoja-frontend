@@ -30,8 +30,9 @@ export const idRules = [
 	v => /^[0-9]+$/.test(v) || 'Only numbers are allowed',
   ];
 export const numRules = [
+    v => !!v || 'Field Cannot be Empty',
 		v => /^[0-9]+$/.test(v) || 'Only numbers are allowed',
-		v => !!v || 'Field Cannot be Empty',
+
 ]
 
 export const phoneRules = [

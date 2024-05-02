@@ -3,7 +3,6 @@
 						<div class="d-flex align-center">
 							<p style="color: #333; font-size: 20px; font-weight: 600">Variants</p>
 						</div>
-						<small style="color: #969696; font-size: 12px;">Always provide color variation.</small>
 						<v-divider class="my-4"></v-divider>
 						
 						
@@ -465,65 +464,42 @@ export default {
         }
     },
 	computed: {
-  allVariants() {
-    const variants = [];
-    if (this.colorOptions.length > 0) {
-      this.colorOptions.forEach(color => {
-        if (this.sizeOptions.length > 0) {
-          this.sizeOptions.forEach(size => {
-            if (this.styleOptions.length > 0) {
-              this.styleOptions.forEach(style => {
-                if (this.materialOptions.length > 0) {
-                  this.materialOptions.forEach(material => {
-                    const variantName = `${color}/${size}/${style}/${material}`;
-                    variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
-                  });
-                } else {
-                  const variantName = `${color}/${size}/${style}`;
-                  variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
-                }
-              });
-            } else {
-              if (this.materialOptions.length > 0) {
-                this.materialOptions.forEach(material => {
-                  const variantName = `${color}/${size}/${material}`;
-                  variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
-                });
-              } else {
-                const variantName = `${color}/${size}`;
-                variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
-              }
-            }
-          });
-        } else {
-          if (this.styleOptions.length > 0) {
-            this.styleOptions.forEach(style => {
-              if (this.materialOptions.length > 0) {
-                this.materialOptions.forEach(material => {
-                  const variantName = `${color}/${style}/${material}`;
-                  variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
-                });
-              } else {
-                const variantName = `${color}/${style}`;
-                variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
-              }
-            });
-          } else {
-            if (this.materialOptions.length > 0) {
-              this.materialOptions.forEach(material => {
-                const variantName = `${color}/${material}`;
-                variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
-              });
-            } else {
-              const variantName = `${color}`;
-              variants.push({ name: variantName, price: 0, quantity: 0, sku: "", selected: false });
-            }
-          }
-        }
-      });
-    }
-    return variants;
-  }
+		allVariants() {
+		const variants = [];
+
+		// Check if any of the option arrays are non-empty
+		const hasOptions = this.colorOptions.length > 0 || this.sizeOptions.length > 0 || this.styleOptions.length > 0 || this.materialOptions.length > 0;
+
+		if (!hasOptions) {
+			return variants;
+		}
+
+		// Otherwise, proceed to generate variants based on available options
+		const optionArrays = [this.colorOptions, this.sizeOptions, this.styleOptions, this.materialOptions];
+
+		function generateVariants(index, currentVariantName) {
+			if (index >= optionArrays.length) {
+			variants.push({ name: currentVariantName, price: 0, quantity: 0, sku: "", selected: false });
+			} else {
+			const currentOptions = optionArrays[index];
+			if (currentOptions.length > 0) {
+				currentOptions.forEach(option => {
+				const variantName = currentVariantName ? `${currentVariantName}/${option}` : `${option}`;
+				generateVariants(index + 1, variantName);
+				});
+			} else {
+				generateVariants(index + 1, currentVariantName);
+			}
+			}
+		}
+
+		generateVariants(0, "");
+
+		return variants;
+		}
+
+
+
 },
 
 	methods: {
