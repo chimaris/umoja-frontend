@@ -133,23 +133,23 @@
 						</li>
 					</ul>
 				</v-col>
-				<v-col cols="6" md="4">
-					<v-img
-						v-show="showImg"
-						class="selecte"
-						eager
-						cover
-						style="width: 220px; height: 200px; border-radius: 15px"
-						:src="databank.menu[selectIndex].leftimage"
-					></v-img>
-				</v-col>
-				<v-col style="display: flex; align-items: end" cols="6" md="4">
+				<v-col cols="6" md="4" class="pr-1" width="48%">
 					<v-img
 						v-show="showImg"
 						class="selected23"
 						eager
 						cover
-						style="width: 220px; height: 200px; border-radius: 15px"
+						style="width: 200px; height: 200px; border-radius: 15px"
+						:src="databank.menu[selectIndex].leftimage"
+					></v-img>
+				</v-col>
+				<v-col style="display: flex; align-items: end" cols="6" md="4" class="pl-1" width="48%">
+					<v-img
+						v-show="showImg"
+						class="selected23"
+						eager
+						cover
+						style="width: 200px; height: 200px; border-radius: 15px"
 						:src="databank.menu[selectIndex].rightimage"
 					></v-img>
 				</v-col>

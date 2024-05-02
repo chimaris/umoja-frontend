@@ -1,11 +1,29 @@
 <template>
-	<div class="d-flex align-center bg-black text-center justify-center" style="position: relative; height: 825px">
-		<div style="position: absolute; height: 825px; width: 100%">
-			<div style="position: relative; height: 825px; width: 100%">
-				<div style="height: 275px; position: relative" v-for="(n, i) in images" :key="i">
+	<div
+		class="d-flex align-center bg-black text-center justify-center"
+		style="position: relative; overflow-x: hidden"
+		:style="{ height: $vuetify.display.mobile ? '557px' : '825px' }"
+	>
+		<div style="position: absolute; width: 100%" :style="{ height: $vuetify.display.mobile ? '557px' : '825px' }">
+			<div style="position: relative; width: 100%" :style="{ height: $vuetify.display.mobile ? '557px' : '825px' }">
+				<div :style="{ height: $vuetify.display.mobile ? '185px' : '275px' }" style="position: relative" v-for="(n, i) in images" :key="i">
 					<div style="height: 275px" :class="'photobanner' + i" class="d-flex justify-start">
-						<v-img height="275px" contain :width="i == 0 && j == 0 ? '460' : 'auto'" :src="n" v-for="(n, j) in n.images" :key="j"></v-img>
-						<v-img height="275px" :width="i == 0 && k == 0 ? '460' : 'auto'" contain :src="n" v-for="(n, k) in n.images" :key="k"></v-img>
+						<v-img
+							:height="$vuetify.display.mobile ? '185' : '275px'"
+							contain
+							:width="i == 0 && j == 0 ? '460' : 'auto'"
+							:src="n"
+							v-for="(n, j) in n.images"
+							:key="j"
+						></v-img>
+						<v-img
+							:height="$vuetify.display.mobile ? '185' : '275px'"
+							:width="i == 0 && k == 0 ? '460' : 'auto'"
+							contain
+							:src="n"
+							v-for="(n, k) in n.images"
+							:key="k"
+						></v-img>
 					</div>
 				</div>
 			</div>

@@ -3,7 +3,7 @@
 		<div class="d-flex my-4 justify-space-between align-center">
 			<div
 				class=""
-				:style="{ fontSize: $vuetify.display.mobile ? '32px' : '40px' }"
+				:style="{ fontSize: $vuetify.display.mobile ? '30px' : '40px' }"
 				style="
 					color: var(--magnetic-green-4, #000);
 					font-weight: 600;
