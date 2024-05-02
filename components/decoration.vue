@@ -3,14 +3,22 @@
 		<!-- <h1>{{'scale:'+ (1+ (prog * 0.2))}}</h1> -->
 		<div
 			v-if="loader"
-			style="z-index: 9; position: absolute; left: 0; height: 772px; width: 100%"
+			style="z-index: 9; position: absolute; left: 0; width: 100%"
+			:style="{ height: $vuetify.display.mobile ? '587px' : '772px' }"
 			class="bg-black d-flex justify-center align-center rounded-0"
 		>
 			<div>
 				<v-progress-linear color="#F38218" class="rounded-xl" style="width: 500px" indeterminate height="5"></v-progress-linear>
 			</div>
 		</div>
-		<v-card flat style="overflow: hidden; position: relative" color="black" class="cardo rounded-0" height="772" width="100%">
+		<v-card
+			flat
+			style="overflow: hidden; position: relative"
+			color="black"
+			class="cardo rounded-0"
+			:height="$vuetify.display.mobile ? 587 : 772"
+			width="100%"
+		>
 			<v-img
 				cover
 				eager
@@ -21,7 +29,7 @@
 				class="bg-black rounded-0"
 			/>
 
-			<v-container style="max-width: 1200px; width: 100%; height: 772px; z-index: 99" class="d-flex align-center py-1">
+			<v-container style="max-width: 1200px; width: 100%; height: 772px; z-index: 99" class="d-flex align-start align-md-center py-10 py-md-1">
 				<div class="mx-auto mx-md-0 text-center text-md-left" :style="{ width: $vuetify.display.mobile ? '335px' : '536px' }">
 					<p
 						class="title"
@@ -105,9 +113,9 @@ export default {
 					image: "https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694077483/rectangle-22455decor_npteeu.png",
 				},
 				{
-					title: "Some title here",
+					title: "",
 					color: "radial-gradient(50% 50% at 50% 50%, #348C5B 0%, #29593E 100%)",
-					sub: "Lorem ipsum, dolor sit amet consectetur",
+					sub: "",
 					image: "https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1400/v1694074749/rectangle-22456dec_dmg2jw.png",
 					bcont: `Woven baskets are both functional and decorative. They can be used for storage, as planters, or simply as artistic pieces. Offering a variety of sizes and styles would cater to different customer preferences.`,
 					btitle: "Woven Baskets and Storage",

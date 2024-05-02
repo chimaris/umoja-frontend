@@ -38,7 +38,7 @@
 									GET 20% OFF for your first order
 								</p>
 								<v-btn color="white" class="green-hover" size="large" variant="outlined" rounded="xl">
-									Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
+									Discover now<v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 								</v-btn>
 							</v-container>
 						</v-card>
