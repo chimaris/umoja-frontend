@@ -235,16 +235,57 @@ letter-spacing: -0.14px;
     <v-spacer></v-spacer>
     <p style="" class=" addressName mb-2">€{{n.cost}}</p>
 
-</v-card>
-    </v-card>
+							<v-text-field placeholder="Enter your phone number (only digits)" density="comfortable"> </v-text-field>
+							<p class="inputLabel">Street Name and House Number*<span class="mb-2">*</span></p>
 
 </v-col>
 <Cartsummary :route="'/order/payment'" :text="'Continue to Payment'" @handleSubmit="handlePayment()"/>
 </v-row> 
 
-    </v-container>  
-  </div>
-<Mainfooter />
+									<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select City" density="comfortable"> </v-select>
+								</v-col>
+								<v-col cols="12" md="6">
+									<p class="inputLabel mb-8"></p>
+
+									<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select region" density="comfortable"> </v-select>
+								</v-col>
+							</v-row>
+							<p class="inputLabel">Postal code<span class="mb-2">*</span></p>
+							<v-text-field placeholder="Enter your zipcode" density="comfortable"> </v-text-field>
+
+							<v-btn class="textClass px-8" rounded="xl" color="green" flat>Use this address</v-btn>
+							<v-btn variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>
+						</v-card>
+					</v-card>
+					<v-card flat class="cardStyle bg-white rounded-lg my-4 py-6 pa-4">
+						<v-card
+							flat
+							:color="n.cost == '0.00' ? '#EDF3F0' : ''"
+							class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex"
+							v-for="n in shippingTypes"
+							:key="n"
+						>
+							<div class="align-center d-flex">
+								<v-icon
+									size="20"
+									:color="n.cost == '0.00' ? '#2C6E63' : ''"
+									:icon="n.cost == '0.00' ? 'mdi mdi-radiobox-marked' : 'mdi mdi-circle-outline'"
+								></v-icon>
+								<div class="text-capitalize px-4">
+									<p style="" class="addressName mb-2">{{ n.title }}</p>
+									<p class="adddressPhone mb-1">{{ n.duration }}</p>
+								</div>
+							</div>
+							<v-spacer></v-spacer>
+							<p style="" class="addressName mb-2">€{{ n.cost }}</p>
+						</v-card>
+					</v-card>
+				</v-col>
+				<Cartsummary :route="'/order/payment'" :text="'Continue to Payment'" />
+			</v-row>
+		</v-container>
+	</div>
+	<Mainfooter />
 </template>
 <script>
 import { useCartStore } from '~/stores/cartStore';

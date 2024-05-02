@@ -4,32 +4,26 @@
 			<div style="position: relative; height: 825px; width: 100%">
 				<div style="height: 275px; position: relative" v-for="(n, i) in images" :key="i">
 					<div style="height: 275px" :class="'photobanner' + i" class="d-flex justify-start">
-						<v-img
-							height="275px"
-							contain
-							:width="i == 0 && j == 0 ? '460' : 'auto'"
-							width="auto"
-							:src="n"
-							v-for="(n, j) in n.images"
-							:key="j"
-						></v-img>
-						<v-img
-							height="275px"
-							:width="i == 0 && k == 0 ? '460' : 'auto'"
-							contain
-							width="auto"
-							:src="n"
-							v-for="(n, k) in n.images"
-							:key="k"
-						></v-img>
+						<v-img height="275px" contain :width="i == 0 && j == 0 ? '460' : 'auto'" :src="n" v-for="(n, j) in n.images" :key="j"></v-img>
+						<v-img height="275px" :width="i == 0 && k == 0 ? '460' : 'auto'" contain :src="n" v-for="(n, k) in n.images" :key="k"></v-img>
 					</div>
 				</div>
 			</div>
 		</div>
 		<div class="w-100 h-100" style="position: absolute; background-color: black; opacity: 0.7"></div>
-		<div style="z-index: 99" class="mb-8">
-			<p class="title" style="color: #fff; font-size: 120px; opacity: 0; font-weight: 600; letter-spacing: -3.6px">Art is Life</p>
-			<p style="color: #fff; font-size: 20px; opacity: 0; font-weight: 500; letter-spacing: 4px; text-transform: uppercase" class="sub mb-8">
+		<div style="z-index: 99" class="mb-8" :style="{ width: $vuetify.display.mobile ? '267px' : '697px' }">
+			<p
+				class="title"
+				:style="{ fontSize: $vuetify.display.mobile ? '48px' : '120px' }"
+				style="color: #fff; opacity: 0; font-weight: 600; letter-spacing: -3.6px"
+			>
+				Art is Life
+			</p>
+			<p
+				:style="{ fontSize: $vuetify.display.mobile ? '13px' : '20px' }"
+				style="color: #fff; opacity: 0; font-weight: 500; letter-spacing: 4px; text-transform: uppercase"
+				class="sub mb-8"
+			>
 				Unleashing Artistry Beyond Boundaries
 			</p>
 			<div class="btn" style="height: 65px">

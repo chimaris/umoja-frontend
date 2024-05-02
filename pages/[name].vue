@@ -2,12 +2,12 @@
 	<Header2 :sticky="true" :maxwidth="'1200px'" />
 	<div style="position: sticky; top: 0px; backdrop-filter: blur(7px); background: rgba(255, 255, 255, 0.906); z-index: 999">
 		<v-container style="max-width: 1200px; width: 100%" class="py-1">
-			<div class="d-flex">
+			<div class="d-inline-block">
 				<p
 					style="cursor: pointer; font-size: 14px"
 					:class="select == n ? 'text-green font-weight-bold' : ''"
 					@click="selectCategory(n)"
-					class="font-weight-medium text-capitalize py-3 px-4 mr-4 text-grey"
+					class="font-weight-medium text-capitalize py-3 px-4 text-grey d-inline-block"
 					v-for="n in ['fashion', 'art', 'cosmetics', 'home decoration']"
 					:key="n"
 				>

@@ -1,36 +1,60 @@
 <template>
-  <Header2 />
-        
-    <v-container  style="max-width:1400px ;width: 100%;">
-        <v-breadcrumbs class="breadcrumbstick pl-0" v-model="item" active-class="text--green" :items="items">
-      <template v-slot:divider>
-        <v-icon color="#969696" icon="mdi mdi-chevron-right"></v-icon>
-      </template>
-      <template v-slot:title="{ item }">
-     <span v-if="item.highlight" style="color:  #2C6E63;
-font-size: 14px;
-font-weight: 600;
-line-height: 20px; /* 142.857% */
-letter-spacing: -0.14px;
-">
-         {{ item.title }}
-     </span>
-     <span v-else style="color:  #969696;
-font-size: 14px;
-font-weight: 500;
-opacity: 1!important;
-line-height: 20px; /* 142.857% */
-letter-spacing: -0.14px;
-">
-         {{ item.title }}
-     </span>
-    </template>
-    </v-breadcrumbs>
-    <v-divider class="mb-8"></v-divider>
-    <div class="d-flex justify-center">
+	<Header2 />
 
-     <v-card max-width="669"  flat class="cardStyle pa-6">
-        <div class="text-center">
+	<v-container style="max-width: 1400px; width: 100%">
+		<v-breadcrumbs class="breadcrumbstick pl-0" v-model="item" active-class="text--green" :items="items">
+			<template v-slot:divider>
+				<v-icon color="#969696" icon="mdi mdi-chevron-right"></v-icon>
+			</template>
+			<template v-slot:title="{ item }">
+				<span
+					v-if="item.highlight"
+					style="color: #2c6e63; font-size: 14px; font-weight: 600; line-height: 20px; /* 142.857% */ letter-spacing: -0.14px"
+				>
+					{{ item.title }}
+				</span>
+				<span
+					v-else
+					style="color: #969696; font-size: 14px; font-weight: 500; opacity: 1 !important; line-height: 20px; /* 142.857% */ letter-spacing: -0.14px"
+				>
+					{{ item.title }}
+				</span>
+			</template>
+		</v-breadcrumbs>
+		<v-divider class="mb-8"></v-divider>
+		<div class="d-flex justify-center">
+			<v-card max-width="669" flat class="cardStyle pa-6">
+				<div class="text-center">
+					<v-icon color="#00966D" class="my-4" size="55" icon="mdi mdi-check-circle-outline"></v-icon>
+					<p class="mb-4" style="font-size: 20px; font-weight: 600; line-height: 20px">Thanks for your order</p>
+					<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 20px">
+						The order confirmation has been sent to thatdesignpro@gmail.com
+					</p>
+				</div>
+				<hr class="dashed-2 my-4" />
+				<div>
+					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Transaction Date</p>
+					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px">Thursday, October 16, 2023 (GMT+7)</p>
+				</div>
+				<hr class="dashed-2 my-4" />
+				<div>
+					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Payment Method</p>
+					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px">Mastercard ending with 2546</p>
+				</div>
+				<hr class="dashed-2 my-4" />
+				<div>
+					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Shipping Method</p>
+					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px" class="mb-2">
+						Express delivery (1-3 business days)
+					</p>
+					<a style="color: var(--deep-sky-blue-4, #1273eb); font-size: 12px; font-weight: 600" href="">TRACK ORDER</a>
+				</div>
+				<hr class="dashed-2 my-4" />
+				<v-row dense>
+					<v-col cols="9" class="d-flex">
+						<v-avatar color="grey-lighten-2" style="border-radius: 15px" class="ml-0" size="100"
+							><v-img cover src="https://res.cloudinary.com/payhospi/image/upload/v1691574327/s-2-gs-x-1-po-l_ckeqxo.png"></v-img
+						></v-avatar>
 
             <v-icon color="#00966D" class="my-4" size="55" icon="mdi mdi-check-circle-outline"></v-icon>
             <p class="mb-4" style="
@@ -141,8 +165,14 @@ color: #333333;">{{formattedPrice((item.price * item.quantity))}} </p>
         <a @click="viewAll = !viewAll" style="color: #1273EB; font-size: 14px; cursor: pointer; font-weight: 600;">View Less</a>
     </div>
 
-<hr  class="dashed-2 my-6" />
-<div  style="color: var(--carbon-4, #333);
+						font-size: 14px;
+						font-weight: 600;
+					"
+					class="d-flex justify-space-between align-center"
+				>
+					<span>Subtotal</span>
+					<span>€ 5,829.00 </span>
+				</div>
 
 font-size: 14px;
 font-weight: 600;" class="d-flex justify-space-between align-center">

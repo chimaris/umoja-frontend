@@ -13,12 +13,18 @@
 		"
 	>
 		<v-container style="max-width: 1400px; width: 100%">
-			<v-breadcrumbs class="pl-0 py-0" :items="['who we are', 'what we do', 'Our impact and goals', '']">
+			<v-breadcrumbs class="pl-0 py-0 w-full" :items="['who we are', 'what we do', 'Our impact and goals']">
 				<template v-slot:divider>
 					<v-icon icon="mdi mdi-chevron-right"></v-icon>
 				</template>
 				<template v-slot:title="{ item }">
-					<span @click="selectCategory(item)" :class="{ 'text-green font-weight-bold': select === item }" style="cursor: pointer; font-size: 14px">
+					<span
+						@click="selectCategory(item)"
+						class="d-inline-block text-truncate"
+						:class="{ 'text-green font-weight-bold': select === item }"
+						style="cursor: pointer; font-size: 14px; max-width: 100px"
+						:style="{ 'max-width': $vuetify.display.mobile ? '70%' : '100%' }"
+					>
 						{{ item }}
 					</span>
 				</template>
@@ -49,7 +55,6 @@ export default {
 	},
 	methods: {
 		selectCategory(category) {
-			console.log(category);
 			this.select = category;
 			this.$router.push("/about/" + category);
 		},
