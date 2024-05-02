@@ -1,6 +1,6 @@
 <template>
 	<v-divider></v-divider>
-	<v-container class="pt-0" style="max-width: 1400px">
+	<v-container class="pt-0">
 		<div style="height: 122px" class="align-center justify-space-between d-flex">
 			<div>
 				<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" style="font-weight: 600; letter-spacing: -0.72px">Happy shopping Frank</p>
@@ -172,20 +172,15 @@
 				<!-- :class="$vuetify.display.mobile ? 'd-block' : 'd-none'" -->
 
 				<v-layout class="d-block d-md-none">
-					<v-navigation-drawer
-						v-model="filterDrawer"
-						:location="$vuetify.display.mobile ? 'right' : undefined"
-						temporary
-						scrim
-						style="width: 85%; top: 40%"
-						class="d-block d-md-none"
-					>
-						<div class="d-flex align-center justify-space-between px-4 pt-4">
-							<p style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>
-							<v-icon class="d-block d-md-none" icon="mdi mdi-close" @click.stop="filterDrawer = false"></v-icon>
-						</div>
+					<v-navigation-drawer v-model="filterDrawer" :location="$vuetify.display.mobile ? 'right' : undefined" permanent style="width: 85%; top: 0%">
+						<div style="height: auto">
+							<div class="d-flex align-center justify-space-between px-4 pt-4">
+								<p style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>
+								<v-icon class="d-block d-md-none" icon="mdi mdi-close" @click.stop="filterDrawer = false"></v-icon>
+							</div>
 
-						<filter-card />
+							<filter-card />
+						</div>
 					</v-navigation-drawer>
 				</v-layout>
 			</v-col>
