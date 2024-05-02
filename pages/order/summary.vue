@@ -56,40 +56,6 @@
 							><v-img cover src="https://res.cloudinary.com/payhospi/image/upload/v1691574327/s-2-gs-x-1-po-l_ckeqxo.png"></v-img
 						></v-avatar>
 
-<<<<<<< HEAD
-						<div class="px-3">
-							<p class="mb-1" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">The Benin stone ...</p>
-							<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate">
-								Category: Stone, Art, Sculpting, Carving.
-							</p>
-							<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="mt-4 text-truncate">X2</p>
-						</div>
-					</v-col>
-					<v-col cols="3">
-						<p class="mb-1 text-right" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">€ 5,829.00</p>
-					</v-col>
-				</v-row>
-
-				<div class="pt-4 d-flex align-center justify-space-between">
-					<div
-						class="d-flex align-center"
-						style="
-							color: var(--carbon-4, #333);
-
-							font-size: 14px;
-							font-weight: 600;
-						"
-					>
-						<v-icon size="18" class="mr-2" icon="mdi mdi-shopping"></v-icon> +4 items
-					</div>
-					<a style="color: #1273eb; font-size: 14px; font-weight: 600">View all items</a>
-				</div>
-
-				<hr class="dashed-2 my-6" />
-				<div
-					style="
-						color: var(--carbon-4, #333);
-=======
             <v-icon color="#00966D" class="my-4" size="55" icon="mdi mdi-check-circle-outline"></v-icon>
             <p class="mb-4" style="
 font-size: 20px;
@@ -198,7 +164,6 @@ color: #333333;">{{formattedPrice((item.price * item.quantity))}} </p>
         </div>
         <a @click="viewAll = !viewAll" style="color: #1273EB; font-size: 14px; cursor: pointer; font-weight: 600;">View Less</a>
     </div>
->>>>>>> c2c9a7469c3172189d31a3bdc6f0b674b6035791
 
 						font-size: 14px;
 						font-weight: 600;
@@ -209,38 +174,6 @@ color: #333333;">{{formattedPrice((item.price * item.quantity))}} </p>
 					<span>€ 5,829.00 </span>
 				</div>
 
-<<<<<<< HEAD
-				<hr class="dashed-2 my-6" />
-
-				<div class="mb-3">
-					<div class="d-flex pb-3 align-center justify-space-between">
-						<p style="font-weight: 500; font-size: 14px; color: #969696">Applied discount code</p>
-						<v-chip rounded="lg">
-							<span style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 600"> 20% OFF </span>
-						</v-chip>
-					</div>
-					<div class="d-flex pb-3 align-center justify-space-between">
-						<p style="font-weight: 500; font-size: 14px; color: #969696">Discount</p>
-						<p style="color: var(--carbon-4, #333); font-size: 16px; font-weight: 600" class="">€ 0.00</p>
-					</div>
-					<div class="d-flex pb-3 align-center justify-space-between">
-						<p style="font-weight: 500; font-size: 14px; color: #969696">Shipment cost</p>
-						<p style="color: var(--carbon-4, #333); font-size: 16px; font-weight: 600" class="">€ 22.50</p>
-					</div>
-					<hr class="dashed-2 my-6" />
-					<div class="d-flex pb-3 align-center justify-space-between">
-						<p style="font-weight: 500; font-size: 14px; color: #969696">Grand Total</p>
-						<p style="color: var(--carbon-4, #333); font-size: 24px; font-weight: 600" class="">€ 5,829.00</p>
-					</div>
-				</div>
-				<v-btn to="/" flat block size="x-large" class="mt-8" rounded="xl" color="green">
-					<span style="font-size: 14px; font-style: normal; font-weight: 600">Continue Shopping </span>
-				</v-btn>
-			</v-card>
-		</div>
-	</v-container>
-	<Mainfooter />
-=======
 font-size: 14px;
 font-weight: 600;" class="d-flex justify-space-between align-center">
 <span>Subtotal</span>
@@ -297,108 +230,12 @@ font-weight: 600;">Continue Shopping </span> </v-btn>
 
     </v-container>  
     <Mainfooter />
->>>>>>> c2c9a7469c3172189d31a3bdc6f0b674b6035791
 </template>
 <script>
 import { useCartStore } from '~/stores/cartStore';
 import {getCurrentTransactionDate} from '~/utils/date'
 import {formattedPrice} from '~/utils/price'
 export default {
-<<<<<<< HEAD
-	data() {
-		return {
-			placescards: false,
-			mods: 1,
-			tab: null,
-			chip: "POPULAR products",
-			items: [
-				{
-					title: "Cart",
-					disabled: false,
-					href: "/order/cart",
-				},
-				{
-					title: "Checkout",
-					disabled: false,
-					href: "/order/checkout",
-				},
-				{
-					title: "Payment",
-					disabled: false,
-					highlight: true,
-				},
-			],
-			paymenthods: [
-				{
-					name: "Google Pay",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684927396/gpay-new-logo-png-removebg-preview_1_wn3n7e.png",
-				},
-				{
-					name: "Apple Pay",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684926118/icon_q5y7el.png",
-				},
-				{
-					name: "Stripe",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684926107/Stripe_berhja.png",
-				},
-			],
-		};
-	},
-	computed: {
-		orderSummary() {
-			return [
-				{
-					name: "Items (3):",
-					value: "$1384.32",
-				},
-				{
-					name: "Shipping & handling:",
-					value: "$0.00",
-				},
-				{
-					name: "Before tax:",
-					value: "$100.00",
-				},
-				{
-					name: "Tax collected",
-					value: "$45.32",
-				},
-			];
-		},
-		buttons() {
-			return [
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png",
-				},
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png",
-				},
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png",
-				},
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png",
-				},
-			];
-		},
-		cols() {
-			const { lg, sm, md } = this.$vuetify.display;
-			return lg
-				? [4, 6, 6, 6, 4, 8, 4, 3, 10, 2]
-				: md
-				? [4, 6, 6, 12, 6, 8, 4, 3, 10, 2]
-				: sm
-				? [6, 12, 12, 12, 12, 12, 12, 12, 12]
-				: [6, 12, 12, 12, 12, 12, 12, 12, 12];
-		},
-	},
-	methods: {
-		filt(text) {
-			var newText = text.length > 50 ? text.slice(0, 50) + "..." : text;
-			return newText;
-		},
-	},
-=======
   data() {
     return {
         viewAll: false,
@@ -498,6 +335,5 @@ var newText = text.length > 50 ? text.slice(0, 50) +'...' : text
 
 }
   },
->>>>>>> c2c9a7469c3172189d31a3bdc6f0b674b6035791
 };
 </script>

@@ -107,71 +107,49 @@
 							<v-col cols="12" md="6">
 								<p class="inputLabel mb-8"></p>
 
-<<<<<<< HEAD
-								<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select region" density="comfortable"> </v-select>
+								<v-card flat class="cardStyle bg-white rounded-lg my-4 pa-4">
+									<p class="chkt mb-">Billing Address</p>
+									<v-checkbox hide-details="" class="my-4" color="green">
+										<template v-slot:label>
+											<div style="font-size: 14px" class="font-weight-medium">Same as my shipping address</div>
+										</template>
+									</v-checkbox>
+									<p class="inputLabel">Phone Number*</p>
+
+									<v-text-field placeholder="Enter your phone number" density="comfortable"> </v-text-field>
+									<p class="inputLabel">Street Name and House Number*</p>
+
+									<v-text-field placeholder="Enter your street address" density="comfortable"> </v-text-field>
+									<v-row class="">
+										<v-col cols="12" md="6">
+											<p class="inputLabel">City</p>
+
+											<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select City" density="comfortable"> </v-select>
+										</v-col>
+										<v-col cols="12" md="6">
+											<p class="inputLabel mb-8"></p>
+
+											<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select region" density="comfortable"> </v-select>
+										</v-col>
+									</v-row>
+									<p class="inputLabel">Zipcode</p>
+
+									<v-text-field placeholder="Enter your zipcode" density="comfortable"> </v-text-field>
+									<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select country" density="comfortable"> </v-select>
+									<v-btn class="textClass px-8" color="green" flat>Use this card</v-btn>
+									<v-btn variant="tonal" class="textClass ml-2 px-8" color="green" flat>Cancel</v-btn>
+								</v-card>
+								<v-card flat class="cardStyle bg-white rounded-lg pa-4">
+									<p class="chkt mb-">Remember my information</p>
+									<v-checkbox hide-details="" color="green">
+										<template v-slot:label>
+											<div style="font-size: 14px" class="font-weight-medium">Save my information for future checkout</div>
+										</template>
+									</v-checkbox>
+								</v-card>
 							</v-col>
+							<Cartsummary :route="'/order/summary'" :text="'Proceed'" @handleSubmit="handlePayment()" />
 						</v-row>
-						<p class="inputLabel">Zipcode</p>
-=======
-<v-card flat class="cardStyle bg-white rounded-lg my-4 pa-4">
-    <p class="chkt mb-">Billing Address</p>
-    <v-checkbox hide-details="" class="my-4" color="green">
-       <template v-slot:label>
-         <div style="font-size: 14px;" class="font-weight-medium">
-            Same as my shipping address
-             
-         </div>
-       </template>
-     </v-checkbox>
-     <p class="inputLabel">Phone Number*</p>             
-         
-         <v-text-field placeholder="Enter your phone number" density="comfortable"  >
-         </v-text-field>
-     <p class="inputLabel">Street Name and House Number*</p>             
-         
-         <v-text-field placeholder="Enter your street address" density="comfortable"  >
-         </v-text-field>
-         <v-row class="">
-                 <v-col cols="12" md="6"> 
-        <p class="inputLabel">City</p>             
-        
-        <v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select City" density="comfortable"  >
-         </v-select>
-        
-        </v-col>
-                 <v-col cols="12" md="6">
-                     <p class="inputLabel mb-8"></p>             
-            
-      <v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select region" density="comfortable"  >
-         </v-select>
-        </v-col>
-                
-            </v-row> 
-            <p class="inputLabel">Zipcode</p>             
-   
-            <v-text-field placeholder="Enter your zipcode" density="comfortable"  >
-</v-text-field>
-<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select country" density="comfortable"  >
-         </v-select>
-<v-btn class="textClass px-8" color="green" flat>Use this card</v-btn>          
-         <v-btn variant="tonal" class="textClass ml-2 px-8" color="green" flat>Cancel</v-btn>          
-         
-</v-card>
-<v-card flat class="cardStyle bg-white rounded-lg  pa-4">
-    <p class="chkt mb-">Remember my information</p>
-    <v-checkbox hide-details="" color="green">
-       <template v-slot:label>
-         <div style="font-size: 14px;" class="font-weight-medium">
-            Save my information for future checkout
-             
-         </div>
-       </template>
-     </v-checkbox>
-</v-card>
-</v-col>
-<Cartsummary :route="'/order/summary'" :text="'Proceed'"  @handleSubmit="handlePayment()"/>
-</v-row> 
->>>>>>> c2c9a7469c3172189d31a3bdc6f0b674b6035791
 
 						<v-text-field placeholder="Enter your zipcode" density="comfortable"> </v-text-field>
 						<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select country" density="comfortable"> </v-select>
@@ -195,7 +173,6 @@
 </template>
 <script>
 export default {
-<<<<<<< HEAD
 	data() {
 		return {
 			placescards: false,
@@ -297,123 +274,13 @@ export default {
 		},
 	},
 	methods: {
+		handlePayment() {
+			this.$router.push("/order/summary");
+		},
 		filt(text) {
 			var newText = text.length > 50 ? text.slice(0, 50) + "..." : text;
 			return newText;
 		},
 	},
-=======
-  data() {
-    return {
-        placescards:false,
-        mods:1,
-        tab: null,
-        chip: 'POPULAR products',
-        shippingTypes:[
-        {
-            title: 'Free Shipping',
-            duration: '7-30 Business Days',
-            cost: '0.00',
-        },
-        {
-            title: 'Regular Shipping',
-            duration: '3-14 Business Days',
-            cost: '7.50',
-        },
-        {
-            title: 'Express Shipping',
-            duration: '1-3 Business Days',
-            cost: '22.50',
-        },
-        ],
-        items: [
-                {
-                    title: 'Cart',
-                    disabled: false,
-                    href: '/order/cart',
-                },
-                {
-                    title: 'Checkout',
-                    disabled: false,
-                    href: '/order/checkout',
-                },
-                {
-                    title: 'Payment',
-                    disabled: false,
-                    highlight: true
-                },
-            ],
-     paymenthods:[
-        {
-            name: 'Paypal',
-            image: 'https://res.cloudinary.com/payhospi/image/upload/v1691582666/pay-pal-1_dtxv1k.png'
-        },
-        {
-            name: 'Neteller',
-            image: 'https://res.cloudinary.com/payhospi/image/upload/v1691582681/neteller-1_mjjfeu.png'
-        },
-     ]
-    };
-  },
-  computed: {
-    orderSummary(){
-        return [
-            {
-                name: 'Items (3):',
-                value: '$1384.32',
-            },
-            {
-                name: 'Shipping & handling:',
-                value: '$0.00',
-            },
-            {
-                name: 'Before tax:',
-                value: '$100.00',
-            },
-            {
-                name: 'Tax collected',
-                value: '$45.32',
-            },
-        ]
-    },
-buttons(){
-    return [{
-        icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png',
-
-    },
-    {
-        icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png',
-    },
-    {
-        icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png',
-    },
-    {
-        icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png',
-    },
-]
-},
-  cols() {
-      const { lg, sm, md } = this.$vuetify.display;
-      return lg
-        ? [4, 6, 6, 6, 4, 8, 4, 3, 10, 2]
-        : md
-        ? [4, 6, 6, 12, 6, 8, 4, 3, 10, 2]
-        : sm
-        ? [6, 12, 12, 12, 12, 12, 12, 12, 12]
-        : [6, 12, 12, 12, 12, 12, 12, 12, 12];
-    },
-  },
-  methods: {
-    handlePayment() {
-        this.$router.push('/order/summary')
-    },
-filt(text){
-
-var newText = text.length > 50 ? text.slice(0, 50) +'...' : text
-   return newText
-
-}
-  },
->>>>>>> c2c9a7469c3172189d31a3bdc6f0b674b6035791
 };
 </script>
