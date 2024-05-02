@@ -140,10 +140,8 @@
 							</v-chip>
 						</td>
 						<td class="tableThick px-1">
-							<div v-if="item.variations.length > 0" class="h-100 d-flex align-center">
+							<div v-if="item.variations.length > 0" class=" d-flex align-center" style="flex-wrap: wrap; gap: 1px; max-width: 90px">
 								<v-icon v-for="(color, index) in item.colors" :key=index icon="mdi mdi-circle" class="mx-1" :color="`${color}`" size="12"></v-icon>
-								<!-- <v-icon icon="mdi mdi-circle" class="mx-1" color="yellow" size="12"></v-icon>
-								<v-icon icon="mdi mdi-circle" class="mx-1" color="brown" size="12"></v-icon> -->
 							</div>
 						</td>
 						<td class="tableLight px-1">

@@ -15,6 +15,10 @@ export const useProductStore = defineStore('productStore', {
     },
   }),
   actions: {
+    async fetchProducts() {
+      const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');
+      console.log(response);
+    },
     // Method to add a product to a specific array
     addProductToArray(product, arrayName) {
       if (this.products[arrayName]) {

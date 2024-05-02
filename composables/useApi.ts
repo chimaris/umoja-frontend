@@ -14,17 +14,17 @@ export const useApi = () => {
         }
     });
 
-    instance.interceptors.response.use(
-        response => response,
-        error => {
-            if (error.response.status === 401) {
-                // Redirect to login page
-                alert("Your session has expired, please login again")
-                router.push('/user/login');
-            }
-            return Promise.reject(error);
-        }
-    );
+    // instance.interceptors.response.use(
+    //     response => response,
+    //     error => {
+    //         if (error.response.status === 401) {
+    //             // Redirect to login page
+    //             alert("Your session has expired, please login again")
+    //             router.push('/user/login');
+    //         }
+    //         return Promise.reject(error);
+    //     }
+    // );
 
 
     return instance;
