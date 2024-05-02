@@ -1,5 +1,6 @@
 import { defineStore } from 'pinia';
 import { mainProducts, row, vendorPro, hotDeals } from './mockData';
+import axios from 'axios';
 
 export const useProductStore = defineStore('productStore', {
   state: () => ({
