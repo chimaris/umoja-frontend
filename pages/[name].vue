@@ -7,7 +7,7 @@
 					style="cursor: pointer; font-size: 14px"
 					:class="select == n ? 'text-green font-weight-bold' : ''"
 					@click="selectCategory(n)"
-					class="font-weight-medium text-capitalize py-3 px-4 text-grey d-inline-block"
+					class="font-weight-medium text-capitalize py-3 px-1 px-md-4 text-grey d-inline-block"
 					v-for="n in ['fashion', 'art', 'cosmetics', 'home decoration']"
 					:key="n"
 				>
