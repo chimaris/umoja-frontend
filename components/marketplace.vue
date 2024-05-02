@@ -178,6 +178,7 @@
 						temporary
 						scrim
 						style="width: 85%; position: absolute; top: 350px"
+						class="d-block d-md-none"
 					>
 						<div class="d-flex align-center justify-space-between px-4 pt-4">
 							<p style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>
