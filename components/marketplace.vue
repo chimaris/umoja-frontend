@@ -171,7 +171,7 @@
 				<!-- Responsive fILTER dRAWER -->
 				<!-- :class="$vuetify.display.mobile ? 'd-block' : 'd-none'" -->
 
-				<v-layout id="displayNone" class="d-inline d-md-none">
+				<v-layout class="d-block d-md-none">
 					<v-navigation-drawer
 						v-model="filterDrawer"
 						:location="$vuetify.display.mobile ? 'right' : undefined"
@@ -198,9 +198,6 @@
 .prat .v-label {
 	opacity: 1 !important;
 }
-/* #displayNone {
-	display: none;
-} */
 </style>
 <script>
 import { Editor, EditorContent } from "@tiptap/vue-3";
