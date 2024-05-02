@@ -3,6 +3,8 @@ export const emailRules = [
     v => /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(v) || 'Enter a valid email address',
    ]
 
+
+
 export  const passwordRules = [
     v => !!v || 'Password is required',
     v => (v && v.length >= 8) || 'Password must be at least 8 characters long',
@@ -28,6 +30,12 @@ export const idRules = [
 	v => /^[0-9]+$/.test(v) || 'Only numbers are allowed',
   ];
 export const numRules = [
+    v => !!v || 'Field Cannot be Empty',
 		v => /^[0-9]+$/.test(v) || 'Only numbers are allowed',
-		v => !!v || 'Field Cannot be Empty',
+
+]
+
+export const phoneRules = [
+  v => /^\d{11}$/.test(v) || 'Enter a valid phone Number',
+  v => !!v || 'Field Cannot be Empty',
 ]

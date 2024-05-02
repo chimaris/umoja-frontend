@@ -107,6 +107,9 @@ import axios from "axios";
 import { useApi } from "#imports";
 export default {
 	setup() {
+		definePageMeta({
+			middleware: ["is-auth"]
+		});
 		const userStore = useUserStore();
 		const router = useRouter();
 

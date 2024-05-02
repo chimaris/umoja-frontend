@@ -4,13 +4,13 @@
 			<v-col
 				cols="12"
 				lg="24"
-				:class="!(window == 'dash') ? 'px-0' : ''"
+				:class="!(currentPage == 'dash') ? 'px-0' : ''"
 				style="background-color: #f6f7f9; position: absolute; top: 0; left: 0; z-index: 99"
 				:md="!sidebar ? '3' : '24'"
 				class="pb-0 pt-0 dash"
 			>
 				<v-slide-x-transition>
-					<VendorsidePanel :window="window" :sidebar="sidebar" @sideFn="sideFn" @changePage="changePage" />
+					<VendorsidePanel :window="currentPage" :sidebar="sidebar" @sideFn="sideFn" @changePage="changePage" />
 				</v-slide-x-transition>
 			</v-col>
 
@@ -26,7 +26,7 @@
 					id="mainsect"
 					min-height="100vh"
 					height="100%"
-					:class="!(window == 'dash') ? '' : 'pr-8 py-8'"
+					:class="!(currentPage == 'dash') ? '' : 'pr-8 py-8'"
 					class=" "
 					flat
 					color="#fff"
@@ -45,12 +45,12 @@
 							"
 						>
 							<div
-								v-if="window != 'Order details' && window != 'Add Products' && window != 'createorder' && window !== 'Import Product'"
+								v-if="currentPage != 'Order details' && currentPage != 'Add Products' && currentPage != 'createorder' && currentPage !== 'Import Product'"
 								class="h-100 d-flex align-center"
 							>
 								<v-btn class="mx-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
 
-								<p style="font-weight: 600; font-size: 24px; line-height: 32px; color: #1a1d1f" class="text-capitalize">{{ window }}</p>
+								<p style="font-weight: 600; font-size: 24px; line-height: 32px; color: #1a1d1f" class="text-capitalize">{{ currentPage }}</p>
 							</div>
 							<div v-else class="h-100 px-8 d-flex align-center">
 								<v-btn class="mr-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
@@ -64,13 +64,13 @@
 									class="text-grey-darken-3"
 								>
 									<v-icon size="16" class="mr-2" icon="mdi mdi-arrow-left-top"></v-icon>
-									Back to {{ window !== "Add Products" && window !== "Import Product" ? "Orders" : "Products" }}
+									Back to {{ currentPage !== "Add Products" && currentPage !== "Import Product" ? "Orders" : "Products" }}
 								</v-btn>
 							</div>
 						</div>
 					</div>
 					<!-- :value=" -->
-					<v-window :touch="false" style="padding-top: 67px" v-model="window">
+					<v-window :touch="false" style="padding-top: 67px" v-model="currentPage">
 						<v-window-item :value="'Order details'">
 							<Vendororderdetails />
 						</v-window-item>
@@ -145,7 +145,8 @@ middleware: "vendor-auth"
 })
 
 
-import { ref, computed } from 'vue';
+import { ref, computed, onMounted,  onBeforeMount } from 'vue';
+import {useVendorProductStore} from '~/stores/vendorProducts'
 import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
 
@@ -156,16 +157,27 @@ const router = useRouter();
 const route = useRoute()
 const vendorStore  = useVendorStore();
 const vendor = vendorStore.getVendor;
+const vendorProducts = useVendorProductStore()
 
 
-const window = ref(route.params.name ? route.params.name : "Homepage");
+const currentPage = ref(route.params.name ? route.params.name : "Homepage");
+
+const handleSessionExpired = () => {
+  localStorage.removeItem('vendorToken');
+  vendorStore.vendorIsLoggedIn = false;
+};
+
+window.addEventListener('sessionExpired', handleSessionExpired);
+onUnmounted(() => {
+      window.removeEventListener('sessionExpired', handleSessionExpired);
+    });
 
 const handleClick = () => {
-      if (window.value === 'Add Products' || window.value === 'Import Product') {
-        // Update the window value to 'Products' if it meets the condition, otherwise set it to 'Orders'
-        window.value = 'Products';
+      if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product') {
+        // Update the currentPage value to 'Products' if it meets the condition, otherwise set it to 'Orders'
+        currentPage.value = 'Products';
       } else {
-        window.value = 'Orders';
+        currentPage.value = 'Orders';
       }
     };
 
@@ -177,7 +189,10 @@ function sideFn() {
   sidebar.value = false;
 }
 
-onMounted(() => {
-  route.params.name = vendor.first_name
-  })
+onMounted(async () => {
+    await vendorProducts.getAllProduct();
+});
+// onMounted(() => {
+//   route.params.name = vendor.first_name
+//   })
 </script>

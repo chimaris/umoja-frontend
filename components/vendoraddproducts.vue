@@ -163,7 +163,7 @@
 										</div>
 									</v-card>
 									<p style="color: #B00020; font-size: 14px; margin: 5px 0;" >{{descError}}</p>
-									<p style="color: #969696; font-size: 12px; font-weight: 400">Do not exceed 100 characters when giving the product description</p>
+									<p style="color: #969696; font-size: 12px; font-weight: 400">Do not exceed 500 characters when giving the product description</p>
 								</div>
 								<div>
 									<p class="inputLabel mt-4">Product Specifications (Main features)</p>
@@ -189,7 +189,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Sub Category</p>
-									<v-select :loading="isFetching" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="selectedSubCategory" :rules="inputRules" append-inner-icon="mdi mdi-chevron-down" placeholder="Sneakers" density="comfortable"> </v-select>
+									<v-select :loading="isFetching" color="green" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="selectedSubCategory" :rules="inputRules" append-inner-icon="mdi mdi-chevron-down" placeholder="Sneakers" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Gender</p>
@@ -224,7 +224,6 @@
 						
 				</v-window-item>
 				<v-window-item value="Price">
-					<v-form @submit.prevent="savePrice" @keydown.enter.prevent="">
 						<v-sheet class="cardStyle px-0 my-4" width="800">
 						<div class="px-5">
 							<div class="d-flex align-center">
@@ -241,7 +240,7 @@
 								></v-col>
 								<v-col>
 									<p class="inputLabel">Commission</p>
-									<v-text-field :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="commission" placeholder="€ 0.00" density="comfortable"> </v-text-field
+									<v-text-field v-model="commission"  placeholder="€ 0.00" density="comfortable"> </v-text-field
 								></v-col>
 								<v-col>
 									<p >Compare-at price (Optional)</p>
@@ -264,7 +263,6 @@
 									</div>
 								</template>
 							</v-checkbox>
-							<p style="color: #B00020; font-size: 12px;">{{checkError}}</p>
 						</div>
 						<v-divider class="my-4"></v-divider>
 						<v-row class="px-5">
@@ -274,18 +272,18 @@
 							</v-col>
 							<v-col>
 								<p class="inputLabel">Profit</p>
-								<v-text-field :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="profit" placeholder="€ 0.00" density="comfortable"> </v-text-field>
+								<v-text-field  v-model="profit" placeholder="€ 0.00" density="comfortable"> </v-text-field>
 							</v-col>
 							<v-col>
 								<p class="inputLabel">Margin</p>
-								<v-text-field :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="margin" placeholder="€ 0.00" density="comfortable"> </v-text-field>
+								<v-text-field  v-model="margin" placeholder="€ 0.00" density="comfortable"> </v-text-field>
 							</v-col>
 						</v-row>
 					</v-sheet>
-					<v-btn flat type="submit" style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
+					<p class="my-2" style="color: #B00020; font-size: 14px;">{{checkError}}</p>
+					<v-btn flat @click="savePrice" style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
 						>Save and continue</v-btn
 					>
-					</v-form>
 				</v-window-item>
 				<v-window-item value="Picture" >
 					<v-form @submit.prevent="savePictures" @keydown.enter.prevent="">
@@ -858,7 +856,7 @@ export default {
 		]
 		const descRule = [
 			v => !!v || 'Description of product must be provided!!',
-			v => v.length <= 100 || 'Product description cannot exceed 100 characters'
+			v => v.length <= 200 || 'Product description cannot exceed 200 characters'
 		]
 		const tags = ref([]);
 		const newTag = ref("");
@@ -965,11 +963,8 @@ export default {
 			chargeTax: false,
 			ustIndex: "",
 			price: "",
-			commission: "",
 			prevPrice: "",
 			itemCost: "",
-			profit: "",
-			margin: "",
 			productSpec: "",
 			editorContent: "",
 			productStat: "",
@@ -983,7 +978,7 @@ export default {
 			material: "",
 			condition: "",
 			conditions: ["New", "Used - Like New", "Used - Like Good", "Used - Good", "Used - Acceptable", "Refurbished"],
-			units : ['Piece', 'Dozen', 'Pound', 'Gallon', 'Pack', 'Bundle', 'Kilograms(kg)', 'Grams(g)', 'Liter(L)', 'Mililiter(mL)', 'Meters(m)', 'Centimeters(cm)'],
+			units : ['Piece', 'Pair', 'Dozen', 'Pound', 'Gallon', 'Pack', 'Bundle', 'Kilograms(kg)', 'Grams(g)', 'Liter(L)', 'Mililiter(mL)', 'Meters(m)', 'Centimeters(cm)'],
             storeOption: false,
 			items1: [],
 			variantOptions: ["Size", "Color", "Material", "Style"],
@@ -1056,6 +1051,19 @@ export default {
 		categoryNames() {
       		return this.Categories.map(category => category.name);
        },
+	   commission(){
+			return ((2/100) * this.price).toFixed(2)
+	   },
+	   profit(){
+			return (this.price - this.itemCost).toFixed(2)
+	   },
+	   margin(){
+		if ((!this.price) || (!this.itemCost)) {
+    		return "0.00%"; // or any default value you prefer
+		} else {
+   			 return (((this.price - this.itemCost) / this.price) * 100).toFixed(2);
+		}
+	   },
         orderDetails() {
             return [
                 {
@@ -1093,7 +1101,7 @@ export default {
 		 if (!file) return; 
 
 			const allowedFiles = [".svg", ".png", ".jpeg", ".jpg"]
-			const maxFileSize = 2 * 1024 * 1024;
+			const maxFileSize = 5 * 1024 * 1024;
 			const fileExtension = file.name.split(".").pop().toLowerCase();
     
 		if (!allowedFiles.includes("." + fileExtension)) {
@@ -1118,7 +1126,7 @@ export default {
       const file = event.target.files[0]; // Get the first selected file
       if (!file) return; // Return if no file is selected
 	  		const allowedFiles = [".svg", ".png", ".jpeg", ".jpg"]
-			const maxFileSize = 2 * 1024 * 1024;
+			const maxFileSize = 5 * 1024 * 1024;
 			const fileExtension = file.name.split(".").pop().toLowerCase();
     
 		if (!allowedFiles.includes("." + fileExtension)) {
@@ -1129,7 +1137,7 @@ export default {
       	this.pictureError = ""
 
 		if (file.size > maxFileSize) {
-		this.pictureError = "File size exceeds the maximum allowed size of 2MB";
+		this.pictureError = "File size exceeds the maximum allowed size of 5MB";
 		return;
 		}
       const reader = new FileReader();
@@ -1177,8 +1185,8 @@ export default {
 				this.descError = "Product description must exceed 20 characters!!"
 				return
 			}
-			if (this.editorContent.length > 100) {
-				this.descError = "Product description cannot exceed 100 characters!!"
+			if (this.editorContent.length > 500) {
+				this.descError = "Product description cannot exceed 500 characters!!"
 				return
 			}
 			if (this.productName && this.editorContent && this.productSpec && this.selectedCategory && this.selectedSubCategory) {
@@ -1189,6 +1197,7 @@ export default {
 			
 		},
 		savePrice() {
+			this.checkError = ""
 			const data = {
 				ustIndex: this.ustIndex,
 				price: this.price,
@@ -1199,7 +1208,18 @@ export default {
 				profit: this.profit,
 				margin: this.margin
 			}
+		
+			
 			if (this.price && this.itemCost) {
+				if (Number(this.price) > Number(this.prevPrice)) {
+				this.checkError = "Compare at price cannot be less than the price"
+				return
+				}
+				if (Number(this.price) < Number(this.itemCost)) {
+				this.checkError = "Cost per item cannot be more than the price"
+				console.log(this.price, this.itemCost)
+				return
+			}
 				this.checkError = ""
 				this.vendorProducts.savePriceInfo(data)
 				this.nextTab()
@@ -1262,7 +1282,6 @@ export default {
 						shippingOption: this.shippingOption
 					}
 			this.vendorProducts.saveShippingInfo(data)
-			console.log(this.shippingOption)
 			this.nextTab()
 		},
 	},

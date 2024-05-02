@@ -1,9 +1,10 @@
 import axios from 'axios';
-import { getLocalStorageItem, setLocalStorageItem } from '~/utils/storage';
+import { useRouter } from 'vue-router';
+
+const router = useRouter()
 
 export const vendorUseApi = () => {
     const token = localStorage.getItem('vendorToken') || null;
-    const refreshToken = localStorage.getItem('vendorRefreshToken') || null;
     const baseURL = 'https://umoja-production-9636.up.railway.app/api/';
 
     const instance = axios.create({
@@ -13,26 +14,17 @@ export const vendorUseApi = () => {
         }
     });
 
-    // instance.interceptors.response.use(
-    //     response => response,
-    //     async error => {
-    //         const originalRequest = error.config;
-    //         if (error.response.status === 401 && !originalRequest._retry && refreshToken) {
-    //             originalRequest._retry = true;
-    //             try {
-    //                 const refreshResponse = await instance.post('/auth/refresh_token', { refresh_token: refreshToken });
-    //                 const newToken = refreshResponse.data.access_token;
-    //                 localStorage.setItem('vendorToken', newToken);
-    //                 originalRequest.headers['Authorization'] = `Bearer ${newToken}`;
-    //                 return instance(originalRequest);
-    //             } catch (refreshError) {
-    //                 console.error('Failed to refresh token:', refreshError);
-               
-    //             }
-    //         }
-    //         return Promise.reject(error);
-    //     }
-    // );
+    instance.interceptors.response.use(
+        response => response,
+        error => {
+            if (error.response.status === 401) {
+                // Redirect to login page
+                const sessionExpiredEvent = new Event('sessionExpired');
+                window.dispatchEvent(sessionExpiredEvent);
+            }
+            return Promise.reject(error);
+        }
+    );
 
     return instance;
 };
