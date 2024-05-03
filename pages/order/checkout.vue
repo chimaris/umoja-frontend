@@ -49,7 +49,7 @@ letter-spacing: -0.14px;
     <template v-for="(item, index) in cartStore.shippingAdress" :key="index">
         <v-card flat class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" >
        <div  class=" align-center d-flex">
-        <input type="radio" :id="'address_' + index" :value="index" v-model="selectedAddressIndex" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">
+        <input type="radio" :id="'address_' + index" :value="item.id" v-model="selectedAddress" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">
            <label :for="'address_' + index" class="text-capitalize px-4">
                <p style="" class=" addressName mb-2">{{item.full_name}}</p>
                <p class="adddressPhone mb-1">{{item.shipping_address}}, {{item.shipping_city}}, {{item.shipping_region}} {{item.shipping_country}}</p>
@@ -286,7 +286,17 @@ setup() {
         shippingTypes.value = response.data.data;
         await cartStore.fetchShippingAdress();
         
-    })
+    });
+
+    watch(
+	() => cartStore.totalCheckoutItems,
+	(newVal) => {
+		if (newVal === 0) {
+			router.push("/order/cart");
+		}
+	},
+	{ immediate: true }
+    );
     return {
         cartStore,
         shippingCountry,
@@ -298,7 +308,7 @@ setup() {
   data() {
     return {
         addressError: "",
-        selectedAddressIndex: null,
+        selectedAddress: null,
         selectedShippingValue: "",
         editAddressIndex: null,
         email: "",
@@ -400,16 +410,17 @@ buttons(){
         : [6, 12, 12, 12, 12, 12, 12, 12, 12];
     },
   },
+  
   methods: {
     handlePayment() {
-        if (!this.selectedShippingValue && !this.selectedAddressIndex) {
+        if (!this.selectedShippingValue && !this.selectedAddress) {
             return
         }
-        const shippingIndex = this.shippingTypes.findIndex(option => option.title == this.selectedShippingValue)
+
         const data = {
             discountCode : "",
-            ...this.shippingAddress[this.selectedAddressIndex],
-            shippingOption: this.shippingTypes[shippingIndex]
+            shippingOptionId: this.selectedShippingValue,
+            shippingAddressId: this.selectedAddress
         }
         this.cartStore.saveShippingDetails(data)
         this.$router.push('/order/payment')
@@ -479,5 +490,6 @@ var newText = text.length > 50 ? text.slice(0, 50) +'...' : text
 
 }
   },
+  
 };
 </script>

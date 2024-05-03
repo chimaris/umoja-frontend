@@ -5,29 +5,29 @@
     <v-row dense v-if="!viewAll">
         <v-col cols="3">
             <v-avatar color="grey-lighten-2" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" >
-                <v-img v-if="cartStore.checkoutItems[0].product.photo == null" cover src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"></v-img>
-                <v-img v-else-if="cartStore.checkoutItems[0].product.photo.includes(',')" cover :src="cartStore.checkoutItems[0].product.photo.split(',')[0]"></v-img>
-                <v-img v-else cover :src="cartStore.checkoutItems[0].product.photo"></v-img>
+                <v-img v-if="cartStore.checkoutItems[0].photo == null" cover src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"></v-img>
+                <v-img v-else-if="cartStore.checkoutItems[0].photo.includes(',')" cover :src="cartStore.checkoutItems[0].photo.split(',')[0]"></v-img>
+                <v-img v-else cover :src="cartStore.checkoutItems[0].photo"></v-img>
             </v-avatar>
         </v-col>
         <v-col cols="5">
             <div class="px-2" style="max-width: 250px; overflow: hidden; text-overflow: ellipsis;" >
-                <p class="mb-1 text-truncate" style="font-weight: 600; font-size: 16px!important; line-height: 20px; color: #333333;">{{cartStore.checkoutItems[0].product.name}} </p>
+                <p class="mb-1 text-truncate" style="font-weight: 600; font-size: 16px!important; line-height: 20px; color: #333333;">{{cartStore.checkoutItems[0].name}} </p>
                 <p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696;" class="text-truncate">Category: {{cartStore.checkoutItems[0].category_name}}</p>
                 <p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696;" class="mt-4 text-truncate">X{{ cartStore.checkoutItems[0].quantity }}</p>
             </div> 
         </v-col>
         <v-col cols="4">
-            <p class="mb-1 text-right" style="font-weight: 600; font-size: 16px!important; line-height: 20px; color: #333333;">{{formattedPrice((cartStore.checkoutItems[0].quantity * cartStore.checkoutItems[0].product.price))}} </p>
+            <p class="mb-1 text-right" style="font-weight: 600; font-size: 16px!important; line-height: 20px; color: #333333;">{{formattedPrice((cartStore.checkoutItems[0].quantity * cartStore.checkoutItems[0].price))}} </p>
         </v-col>
     </v-row>
 <template v-if="viewAll">
     <v-row dense v-for="item in cartStore.checkoutItems" :key="item.id">
     <v-col cols="3">
         <v-avatar color="grey-lighten-2" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" >
-            <v-img v-if="item.product.photo == null" cover src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"></v-img>
-            <v-img v-else-if="item.product.photo.includes(',')" cover :src="item.product.photo.split(',')[0]"></v-img>
-            <v-img v-else cover :src="item.product.photo"></v-img>
+            <v-img v-if="item.photo == null" cover src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"></v-img>
+            <v-img v-else-if="item.photo.includes(',')" cover :src="item.photo.split(',')[0]"></v-img>
+            <v-img v-else cover :src="item.photo"></v-img>
         </v-avatar>
     </v-col>
     <v-col cols="6">
@@ -35,7 +35,7 @@
             <p class="mb-1 text-truncate" style="font-weight: 600;
 font-size: 16px!important;
 line-height: 20px;
-color: #333333;">{{item.product.name}} </p>
+color: #333333;">{{item.name}} </p>
             <p style="font-weight: 500;
 font-size: 14px;
 line-height: 18px;
@@ -50,7 +50,7 @@ color: #969696;" class="mt-4 text-truncate">X{{ item.quantity }}</p>
             <p class="mb-1 text-right" style="font-weight: 600;
 font-size: 16px!important;
 line-height: 20px;
-color: #333333;">{{formattedPrice((item.product.price * item.quantity))}} </p>
+color: #333333;">{{formattedPrice((item.price * item.quantity))}} </p>
         </v-col>
 </v-row>
 </template>

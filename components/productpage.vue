@@ -29,7 +29,7 @@
 								<v-carousel v-model="carousel" class="caro mb-2" style="border-radius: 6px" hide-delimiters height="349px">
 									<v-carousel-item v-if="product.photo.includes(',')"
 										:value="n"
-										v-for="n in product.photo.split(',')"
+										v-for="(n, index) in product.photo.split(',')" :key="index"
 										cover
 										height="349px"
 										:src="n"
@@ -101,14 +101,14 @@
 								>
 									{{formattedPrice(product.price)}}
 								</p>
-								<div v-if= "product.sizes.length >  0" class="d-flex mb-2 align-center">
+								<div v-if= "product.sizes && product.sizes.length > 0" class="d-flex mb-2 align-center">
 									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">Available Sizes</p>
 									<v-btn class="ml-1" variant="text" color="#969696"
 										><span style="font-size:14px, font-weight: 500">Size Guide</span> <v-icon class="ml-1" icon="mdi mdi-arrow-right"></v-icon
 									></v-btn>
 								</div>
 								<div style="max-width: 295px">
-									<v-row dense v-if= "product.sizes.length >  0">
+									<v-row dense v-if= "product.sizes && product.sizes.length > 0">
 										<v-col cols="4" v-for="(n, i) in product.sizes">
 											<p
 												:class="size == n ? 'greenbox' : ''"
@@ -123,12 +123,12 @@
 										</v-col>
 									</v-row>
 								</div>
-								<div v-if="product.colors.length >  0" class="d-flex mt-4 align-center">
+								<div v-if="product.colors && product.colors.length > 0" class="d-flex mt-4 align-center">
 									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">
 										Available colors
 									</p>
 								</div>
-								<div v-if="product.colors.length >  0" class="d-flex my-2">
+								<div v-if="product.colors && product.colors.length > 0" class="d-flex my-2">
 									<div
 										:class="color == i ? 'addborder' : ''"
 										@click="color = i"
@@ -147,8 +147,7 @@
 
 						<!-- Set Product Quality for Mobile View -->
 						<div class="py-6 d-block d-md-none">
-							<productsetloader v-if="loading" />
-							<div v-else>
+							<div >
 								<v-card flat class="pa-0 cardStyle">
 									<div style="background-color: #edf3f0; height: 40px" class="d-flex align-center justify-center w-100">
 										<p style="color: #00966d; font-size: 14px; font-weight: 600; line-height: 140%">Available</p>
@@ -156,11 +155,12 @@
 									<div class="px-6 py-4">
 										<p style="font-size: 20px; font-weight: 500">Set Quantity</p>
 										<div class="d-flex justify-space-between align-center my-2">
-											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">2</span></p>
+											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">{{quantity}}</span></p>
 
 											<v-btn-group border rounded="xl" divided density="compact">
 												<v-btn
-													@click="removeItem({ id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...' })"
+													@click="quantity --"
+													:disabled = "quantity <= 1"
 													class="dark-hover"
 													rounded="0"
 												>
@@ -168,10 +168,10 @@
 												</v-btn>
 
 												<v-btn :ripple="false" rounded="0">
-													{{ getItemQuantity(1) }}
+													{{quantity}}
 												</v-btn>
 												<v-btn
-													@click="addToCart({ id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...' })"
+													@click="quantity ++"
 													class="green-hover"
 													rounded="0"
 												>
@@ -184,8 +184,10 @@
 											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Total</p>
 											<p style="color: #1e1e1e; font-size: 24px; font-weight: 600; line-height: 140%">€ 5000.00</p>
 										</div>
-										<v-btn to="/order/cart" block class="mb-2" size="large" flat color="green" rounded="xl"
-											><span style="color: #edf0ef; font-size: 14px; font-weight: 600">Add to Cart</span></v-btn
+										<v-btn @click="addToCart()" block class="mb-2" size="large" flat color="green" rounded="xl"
+											><span style="color: #edf0ef; font-size: 14px; font-weight: 600">
+												{{isInCart() ? "Added to Cart" : "Add to cart"}}
+											</span></v-btn
 										>
 										<v-btn
 											class="dark-hover"
@@ -246,8 +248,7 @@
 
 						<!-- Set Delivery Options for Mobile View -->
 						<div class="py-6 d-block d-md-none">
-							<productsetloader v-if="loading" />
-							<div v-else>
+							<div>
 								<v-card flat class="mt-4 py-9 cardStyle">
 									<div class="d-flex justify-space-between align-center">
 										<p style="color: #1e1e1e; font-size: 14px; font-weight: 600">Ship to</p>
@@ -737,25 +738,24 @@ export default {
 	methods: {
 		isInCart() {
 			const cartStore = useCartStore();
-			const index = cartStore.items.findIndex(item => item.product.id == this.product.id)
+			const index = cartStore.items.findIndex(item => item.id == this.product.id)
 			if (index !== -1) {
 				return true
 			}else {
 				return false
 			}
 		},
-		async addToCart() {
+		addToCart() {
 			const userStore = useUserStore();
 			
 			const cartStore = useCartStore();
 			if (userStore.getIsLoggedIn) {
-				const index = cartStore.items.findIndex(cart => cart.product.id == this.product.id)
+				const index = cartStore.items.findIndex(cart => cart.id == this.product.id)
 				if (index !== -1) {
-					const cartId = cartStore.items[index].id;
-					await cartStore.removeItem(this.product.id, cartId)
+					cartStore.clearItem(this.product.id)
 					return
 				}
-				await cartStore.addItem(this.product.id, this.quantity);
+				cartStore.addItem(this.product, this.quantity);
 			} else {
 				this.$router.push("/user/login");
 			}

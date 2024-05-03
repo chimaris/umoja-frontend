@@ -85,7 +85,7 @@
 						</v-card>
 					</v-card>
 
-					<v-card flat class="cardStyle bg-white rounded-lg my-4 pa-4">
+					 <v-card flat class="cardStyle bg-white rounded-lg my-4 pa-4">
 						<p class="chkt mb-">Billing Address</p>
 						<v-checkbox hide-details="" class="my-4" color="green">
 							<template v-slot:label>
@@ -104,51 +104,6 @@
 
 								<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select City" density="comfortable"> </v-select>
 							</v-col>
-							<v-col cols="12" md="6">
-								<p class="inputLabel mb-8"></p>
-
-								<v-card flat class="cardStyle bg-white rounded-lg my-4 pa-4">
-									<p class="chkt mb-">Billing Address</p>
-									<v-checkbox hide-details="" class="my-4" color="green">
-										<template v-slot:label>
-											<div style="font-size: 14px" class="font-weight-medium">Same as my shipping address</div>
-										</template>
-									</v-checkbox>
-									<p class="inputLabel">Phone Number*</p>
-
-									<v-text-field placeholder="Enter your phone number" density="comfortable"> </v-text-field>
-									<p class="inputLabel">Street Name and House Number*</p>
-
-									<v-text-field placeholder="Enter your street address" density="comfortable"> </v-text-field>
-									<v-row class="">
-										<v-col cols="12" md="6">
-											<p class="inputLabel">City</p>
-
-											<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select City" density="comfortable"> </v-select>
-										</v-col>
-										<v-col cols="12" md="6">
-											<p class="inputLabel mb-8"></p>
-
-											<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select region" density="comfortable"> </v-select>
-										</v-col>
-									</v-row>
-									<p class="inputLabel">Zipcode</p>
-
-									<v-text-field placeholder="Enter your zipcode" density="comfortable"> </v-text-field>
-									<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select country" density="comfortable"> </v-select>
-									<v-btn class="textClass px-8" color="green" flat>Use this card</v-btn>
-									<v-btn variant="tonal" class="textClass ml-2 px-8" color="green" flat>Cancel</v-btn>
-								</v-card>
-								<v-card flat class="cardStyle bg-white rounded-lg pa-4">
-									<p class="chkt mb-">Remember my information</p>
-									<v-checkbox hide-details="" color="green">
-										<template v-slot:label>
-											<div style="font-size: 14px" class="font-weight-medium">Save my information for future checkout</div>
-										</template>
-									</v-checkbox>
-								</v-card>
-							</v-col>
-							<Cartsummary :route="'/order/summary'" :text="'Proceed'" @handleSubmit="handlePayment()" />
 						</v-row>
 
 						<v-text-field placeholder="Enter your zipcode" density="comfortable"> </v-text-field>
@@ -165,7 +120,7 @@
 						</v-checkbox>
 					</v-card>
 				</v-col>
-				<Cartsummary :route="'/order/summary'" :text="'Proceed'" />
+				<Cartsummary :route="'/order/summary'" :text="'Proceed'" @handleSubmit="handlePayment()"/>
 			</v-row>
 		</v-container>
 	</div>

@@ -6,8 +6,8 @@ import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from
 const api = useApi()
 export const useCartStore = defineStore('cart', {
   state: () => ({
-    items: [],
-    checkoutItems: getLocalStorageItem('checkoutItem', []),
+    items: getLocalStorageItem('cartItem', []),
+    checkoutItems: getLocalStorageItem('allcheckoutItem', []),
     shippingDetails: getLocalStorageItem("shipping-details", []),
     addressError: "",
     loading: false,
@@ -19,11 +19,11 @@ export const useCartStore = defineStore('cart', {
 
   getters: {
     totalCost() {
-      const total = this.items.reduce((total, item) => total + item.product.price * item.quantity, 0);
+      const total = this.items.reduce((total, item) => total + item.price * item.quantity, 0);
       return total.toLocaleString('en-US');
     },
     checkoutTotalCost() {
-      const totalCost = this.checkoutItems.reduce((total, item) => total + item.product.price * item.quantity, 0);
+      const totalCost = this.checkoutItems.reduce((total, item) => total + item.price * item.quantity, 0);
       return totalCost.toLocaleString('en-US');
     },
 
@@ -39,69 +39,43 @@ export const useCartStore = defineStore('cart', {
   },
 
   actions: {
-    async addItem(id, quantity) {
-      const tokens = localStorage.getItem('vendorToken') || localStorage.getItem('token') || "";
-      try {
-        const response = await api ({
-          url: `customer/products/${id}/addcart`,
-          method: 'post',
-          data: {quantity: quantity}
-        });
-        this.fetchCartItems()
-      }catch(error) {
-        console.error(error)
+    addItem(item, quantity) {
+      const existingItem = this.items.find((i) => i.id === item.id);
+
+      if (existingItem) {
+        existingItem.quantity++;
+      } else {
+        this.items.push({ ...item, quantity: quantity, selected: false });
       }
+      setLocalStorageItem('cartItem', this.items)
     
     },
-    async fetchCartItems() {
-      const response = await api ({
-        url:'customer/cartItems',
-        method: 'get',
-      });
-      this.items = response.data.data
+    clearItem(itemId) {
+      this.items = this.items.filter(item => item.id !== itemId);
     },
-    async removeItem(item, id) {
-      try {
-        const response = await api ({
-          url: `customer/products/${item}/cartItems/${id}`,
-          method: 'post',
-          data: {
-            _method: 'DELETE'
-          }
-        });
-        this.fetchCartItems();
-      }catch(error) {
-        console.error(error)
+    removeItem(item) {
+      const existingItemIndex = this.items.findIndex((i) => i.id === item.id);
+
+      if (existingItemIndex !== -1) {
+        const existingItem = this.items[existingItemIndex];
+        if (existingItem.quantity > 1) {
+          existingItem.quantity--;
+        } else {
+          this.items.splice(existingItemIndex, 1);
+        }
       }
     },
-    async reduceItem(item) {
-      try {
-        const response = await api ({
-          url: `customer/cartItems/${item.id}`,
-          method: 'post',
-          data: {
-            _method: 'PUT',
-            quantity: item.quantity - 1
-          }
-        });
-        this.fetchCartItems();
-      }catch(error) {
-        console.error(error)
-      }
+    async reduceItem(itemId) {
+      const newQuantity = this.getItemQuantity(itemId) - 1;
+      const itemIndex = this.items.findIndex((i) => i.id === itemId);
+  
+        if (itemIndex !== -1) {
+          this.items[itemIndex].quantity = newQuantity;
+        }
     },
     async clearCart() {
-      try {
-        const response = await api ({
-          url: 'customer/cartItems/clear',
-          method: 'post',
-          data: {
-            _method: 'DELETE'
-          }
-        });
-        this.fetchCartItems();
-      }catch(error) {
-        console.error(error)
-      }
+      this.items = [];
+      setLocalStorageItem('cartItem', this.items)
     },
     async applyDiscountCode(code) {
       this.load = true
@@ -111,7 +85,6 @@ export const useCartStore = defineStore('cart', {
           method: "post",
           data: {code: code}
         });
-        console.log(response)
       }catch(error){
         if (error.response) {
           this.discountError = error.response.data.message || 'An error occurred while applying discount code.';
@@ -208,16 +181,17 @@ export const useCartStore = defineStore('cart', {
         // this.checkoutItems = [...this.checkoutItems, ...this.items.filter(item => item.selected)]
         const selectedItems = this.items.filter(item => item.selected);
         this.checkoutItems.push(...selectedItems)
-        setLocalStorageItem('checkoutItem', this.checkoutItems)
+        setLocalStorageItem('allcheckoutItem', this.checkoutItems)
         this.items = this.items.filter(item => !item.selected);
+        setLocalStorageItem('cartItem', this.items)
       },
       selectAllItems() {
         this.items.forEach(item => item.selected = true)
-        setLocalStorageItem('cartItems', this.items)
+        setLocalStorageItem('cartItem', this.items)
       },
       deSelectAllItems() {
         this.items.forEach(item => item.selected = false)
-        setLocalStorageItem('cartItems', this.items)
+        setLocalStorageItem('cartItem', this.items)
       },
       saveShippingDetails(details) {
         this.shippingDetails = details
@@ -235,15 +209,12 @@ export const useCartStore = defineStore('cart', {
           this.items[itemIndex].selected = true
         }
         
-        setLocalStorageItem('cartItems', this.items)
+        setLocalStorageItem('cartItem', this.items)
       },
       
     getItemQuantity(itemId) {
         const item = this.items.find((i) => i.id === itemId);
         return item ? item.quantity : 0;
-      },
-    clearItem(itemId) {
-      this.items = this.items.filter(item => item.id !== itemId);
-    },
+      }
   },
 });

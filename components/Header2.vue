@@ -42,6 +42,8 @@
 										prepend-inner-icon="mdi mdi-magnify"
 										placeholder="Ankara"
 										density="compact"
+										v-model="searchTerm"
+										@keydown.enter="searchProduct()"
 									>
 										<template v-slot:append-inner>
 											<v-icon color="grey" @click="searchmenu = false" icon="mdi mdi-close-circle" />
@@ -142,10 +144,13 @@ import { useTheme } from "vuetify";
 import { useCartStore } from "~/stores/cartStore";
 import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
+import { useProductStore } from "~/stores/productStore";
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
 export default {
 	data() {
 		return {
+			searchTerm: "",
 			theme: useTheme(),
 			btn_radio: null,
 			searchmenu: false,
@@ -196,6 +201,9 @@ export default {
 		cartStore() {
 			return useCartStore();
 		},
+		productStore(){
+			return useProductStore()
+		},
 		router() {
 			return useRouter()
 		},
@@ -207,6 +215,27 @@ export default {
 		},
 	},
 	methods: {
+		async searchProduct() {
+			if (this.searchTerm) {
+				this.productStore.products.main = this.productStore.products.main.filter(product => {
+        		return product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+               product.description.toLowerCase().includes(this.searchTerm.toLowerCase());
+      			});
+				this.updateRecentSearches(this.searchTerm)
+				this.searchTerm = "",
+				this.searchmenu = false
+			}
+		},
+		updateRecentSearches(searchTerm) {
+			const maxRecentSearches = 6;
+			this.productStore.recentSearches.unshift(searchTerm);
+
+			if (this.productStore.recentSearches.length > maxRecentSearches) {
+				this.productStore.recentSearches.pop(); // Remove the oldest search term from the end
+			}
+
+			setLocalStorageItem("recentSearches", this.productStore.recentSearches)
+    	},
 		toCart() {
 			if (this.cartStore.totalCartItems === 0) {
 				return

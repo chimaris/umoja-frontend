@@ -29,7 +29,7 @@
 									<thead>
 										<tr style="border-radius: 6px" class="rounded-lg">
 											<th style="width: 50px" class="font-weight-medium px-1 text-left">
-												<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
+												<v-checkbox color="green" @click="selectAllItems" v-model="selectAll" hide-details></v-checkbox>
 											</th>
 											<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left">Select all</th>
 											<th style="font-size: 14px" class="text-center px-1 font-weight-medium">Quantity</th>
@@ -59,24 +59,24 @@
         >
           <v-avatar color="grey-lighten-4" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" >
        
-            <v-img v-if="item.product.photo == null" cover src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"></v-img>
-            <v-img v-else-if="item.product.photo.includes(',')" cover :src="item.product.photo.split(',')[0]"></v-img>
-            <v-img v-else cover :src="item.product.photo"></v-img>
+            <v-img v-if="item.photo == null" cover src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"></v-img>
+            <v-img v-else-if="item.photo.includes(',')" cover :src="item.photo.split(',')[0]"></v-img>
+            <v-img v-else cover :src="item.photo"></v-img>
             
           </v-avatar>
           <div>
             <p class="mb-1" style="font-weight: 600;
   font-size: 16px!important;
   line-height: 20px;
-  color: #333333;">{{item.product.name}}</p>
+  color: #333333;">{{item.name}}</p>
             <p style="font-weight: 500;
   font-size: 14px;
   line-height: 18px;
-  color: #969696;" class="text-truncate">Category:{{item.product.category_name}}</p>
+  color: #969696;" class="text-truncate">Category:{{item.category_name}}</p>
             <p style="font-weight: 500;
   font-size: 14px;
   line-height: 18px;
-  color: #969696;" class="text-truncate">Location: {{item.product.vendor_state}}, {{item.product.vendor_country}}</p>
+  color: #969696;" class="text-truncate">Location: {{item.vendor_state}}, {{item.vendor_country}}</p>
   <v-chip size="x-small" color="green" style="font-weight: 500;" class="mt-1" rounded="lg">IN STOCK</v-chip>
           </div>
         </div>
@@ -94,19 +94,19 @@
          rounded="lg"
         divided density="compact"
       >
-        <v-btn class="dark-hover" rounded="0" :disabled="cartStore.getItemQuantity(item.id) <= 1"  @click="cartStore.reduceItem(item)">
+        <v-btn class="dark-hover" rounded="0" :disabled="cartStore.getItemQuantity(item.id) <= 1"  @click="cartStore.reduceItem(item.id)">
           <v-icon icon="mdi mdi-minus "></v-icon>
         </v-btn>
   
         <v-btn  :ripple="false" rounded="0">
          {{ cartStore.getItemQuantity(item.id) }}
         </v-btn>
-        <v-btn class="green-hover" rounded="0" @click="cartStore.addItem(item.product.id)">
+        <v-btn class="green-hover" rounded="0" @click="cartStore.addItem(item)">
           <v-icon icon="mdi mdi-plus"></v-icon>
         </v-btn>
   </v-btn-group>     
   </div>
-  <v-btn @click="showConfirmModal(item.product.id, item.id)"  color="#333" variant="text" class="red-hover mt-2"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
+  <v-btn @click="showConfirmModal(item.id)"  color="#333" variant="text" class="red-hover mt-2"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
   </div>
   
           </td>
@@ -115,7 +115,7 @@
        <td  class="tableLight text-right px-1"><p style="color: #333;
   font-size: 16px;
   font-style: normal;
-  font-weight: 600;">{{formattedPrice((item.product.price * item.quantity))}} </p></td>
+  font-weight: 600;">{{formattedPrice((item.price * item.quantity))}} </p></td>
    
        </tr>
      </template>
@@ -264,19 +264,21 @@ const tab = ref(null);
 
 const isModalVisible = ref(false);
 const itemIdToRemove = ref(null);
-const cartItemToRemove = ref(null);
 const isConfirmClear = ref(false)
 
-function showConfirmModal(productId, cartId){
+function showConfirmModal(productId){
   itemIdToRemove.value = productId;
-  cartItemToRemove.value = cartId
   isModalVisible.value = true
 }
-async function confirmRemoval() {
-  if (itemIdToRemove.value !== null && cartItemToRemove.value !== null) {
-    await cartStore.removeItem(itemIdToRemove.value, cartItemToRemove.value);
+function confirmRemoval() {
+  if (itemIdToRemove.value !== null) {
+	const productIndex = cartStore.items.findIndex(cart => cart.id == itemIdToRemove.value)
+	if (productIndex !== -1) {
+		const product = cartStore.items[productIndex]
+		cartStore.removeItem(product);
+	}
+ 
     itemIdToRemove.value = null;
-    cartItemToRemove.value = null // Reset the item ID after removal
 
 		isModalVisible.value = false;
 
@@ -298,7 +300,10 @@ function selectItem(id) {
 
 function handleCheckout() {
 	cartStore.checkoutProducts();
-	router.push("/order/checkout");
+	if (cartStore.totalCheckoutItems !== 0) {
+		router.push("/order/checkout");
+	}
+	
 }
 
 function selectAllItems() {
@@ -316,8 +321,7 @@ function showClearCart() {
 }
 
 async function confirmClearCart() {
-  await cartStore.clearCart()
-
+  	cartStore.clearCart()
 	isConfirmClear.value = false;
 
 	nextTick(() => {
@@ -353,13 +357,5 @@ function filt(text) {
 	return text.length > 50 ? text.slice(0, 50) + "..." : text;
 }
 
-watch(
-	() => cartStore.totalCartItems,
-	(newVal) => {
-		if (newVal === 0) {
-			router.push("/market_place");
-		}
-	},
-	{ immediate: true }
-);
+
 </script>

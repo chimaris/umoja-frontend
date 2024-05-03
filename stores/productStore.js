@@ -1,8 +1,12 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
+import { useApi } from '~/composables/useApi';
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
+const api = useApi()
 export const useProductStore = defineStore('productStore', {
   state: () => ({
+    recentSearches: getLocalStorageItem("recentSearches", []),
     allProducts: [],
     products: {
       main: [],
@@ -42,6 +46,19 @@ export const useProductStore = defineStore('productStore', {
         }
       }
     },
+    async  searchProducts(searchTerm) {
+      try {
+          const response = await api({
+              url: `search?search_global=${searchTerm}`
+          });
+          console.log(response.data)
+          this.products.main = response.data.products.data
+          return true;
+      } catch (error) {
+          console.error('Error searching products:', error);
+          throw error;
+      }
+  },
     addProductsToSection(section, products) {
         this.products.section = products;
       },

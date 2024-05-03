@@ -172,7 +172,7 @@ export default {
 	methods: {
 		isInCart(product) {
 			const cartStore = useCartStore();
-			const index = cartStore.items.findIndex(item => item.product.id == product.id)
+			const index = cartStore.items.findIndex(item => item.id == product.id)
 			if (index !== -1) {
 				return true
 			}else {
@@ -192,13 +192,12 @@ export default {
 			
 			const cartStore = useCartStore();
 			if (userStore.getIsLoggedIn) {
-				const index = cartStore.items.findIndex(cart => cart.product.id == item.id)
+				const index = cartStore.items.findIndex(cart => cart.id == item.id)
 				if (index !== -1) {
-					const cartId = cartStore.items[index].id;
-					await cartStore.removeItem(item.id, cartId)
+					cartStore.clearItem(item.id)
 					return
 				}
-				await cartStore.addItem(item.id, 1);
+				cartStore.addItem(item, 1);
 			} else {
 				this.$router.push("/user/login");
 			}
