@@ -50,7 +50,6 @@
 								line-height: 180%; /* 57.6px */
 								letter-spacing: -0.14px;
 							"
-							class="bigTitle"
 						>
 							Connect, Learn, Experience a unique African marketplace. Vendors and users connect in the Umoja digital African market.
 						</p>
