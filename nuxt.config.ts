@@ -30,7 +30,6 @@ export default defineNuxtConfig({
 		injectUseThemeHandler: true,
 		devtools: true,
 	  },
-
 	css: ["~/assets/css/fonts.css",
 		  "~/assets/css/main.css", 
 		  "vuetify/lib/styles/main.sass", 

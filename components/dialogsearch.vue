@@ -38,7 +38,7 @@ font-weight: 600;">🔎 Recent Searches</p>
 </v-btn>
     </div>
 <div>
-    <div v-for="n in searches2" class="py-4 d-flex">
+    <div v-for="(n, index) in productStore.recentSearches" :key="index" class="py-4 d-flex">
         <v-icon size="20" color="grey" class="mr-2" icon="mdi mdi-clock"></v-icon>
         <span style="color: #1E1E1E;
 font-size: 14px;
@@ -69,17 +69,23 @@ font-weight: 600;">😎 Recently viewed</p>
 </v-card>
 </template>
 <script>
+import { useProductStore } from "~/stores/productStore";
 export default {
+    
     // props:['route', 'text'],
   data() {
     return {
         searches: ['The Fisherman Dress', 'The messeus hat', 'Multicolored Ankara Material ', 'The Fisherman Dress', 'The Nawi Women Gown', 'Woman King Sculpture','Jaeger Hook', 'Za Dress'],
-        searches2: ['The Fisherman Dress', 'The messeus hat', 'Multicolored Ankara Material ', 'The Fisherman Dress', 'The Nawi Women Gown'],
         recentitems: [
             'https://res.cloudinary.com/payhospi/image/upload/v1691574327/s-2-gs-x-1-po-l_ckeqxo.png',
             'https://res.cloudinary.com/payhospi/image/upload/v1689252826/matskirt_ecf6ym.png',
             'https://res.cloudinary.com/payhospi/image/upload/v1688130445/ankara-sneakers-1500-x_lnanzk.png'
         ]
+    }
+},
+computed: {
+    productStore(){
+        return useProductStore()
     }
 }
 }

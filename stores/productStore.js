@@ -1,15 +1,19 @@
 import { defineStore } from 'pinia';
-import { mainProducts, row, vendorPro, hotDeals } from './mockData';
 import axios from 'axios';
+import { useApi } from '~/composables/useApi';
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
+const api = useApi()
 export const useProductStore = defineStore('productStore', {
   state: () => ({
+    recentSearches: getLocalStorageItem("recentSearches", []),
+    allProducts: [],
     products: {
-      main: mainProducts,
-      row: row,
-      hotDeals: hotDeals,
+      main: [],
+      row: [],
+      hotDeals: [],
       popular: [],
-      vendorProducts: vendorPro,
+      vendorProducts: [],
       recently_viewed: [],
       sale: [],
       customArray: [], // You can add more arrays based on your needs
@@ -18,7 +22,11 @@ export const useProductStore = defineStore('productStore', {
   actions: {
     async fetchProducts() {
       const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');
-      console.log(response);
+      this.products.row = response.data.data.slice(0, 15);
+      this.products.main = response.data.data
+      this.allProducts = response.data.data
+      this.products.vendorProducts = response.data.data.slice(0, 20);
+      this.products.hotDeals = response.data.data.slice(0, 10);
     },
     // Method to add a product to a specific array
     addProductToArray(product, arrayName) {
@@ -38,6 +46,19 @@ export const useProductStore = defineStore('productStore', {
         }
       }
     },
+    async  searchProducts(searchTerm) {
+      try {
+          const response = await api({
+              url: `search?search_global=${searchTerm}`
+          });
+          console.log(response.data)
+          this.products.main = response.data.products.data
+          return true;
+      } catch (error) {
+          console.error('Error searching products:', error);
+          throw error;
+      }
+  },
     addProductsToSection(section, products) {
         this.products.section = products;
       },

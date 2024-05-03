@@ -1304,9 +1304,6 @@ export default {
       	this.editorContent = editor.getText() // or use getText() for plain text
     	});
     },
-    beforeUnmount() {
-        this.editor.destroy()
-    },
 }
 </script>
 

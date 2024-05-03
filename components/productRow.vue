@@ -69,7 +69,6 @@
 						:showVendor="showVendor"
 						:showdisco="showdisco"
 						:item="n"
-						@add-to-cart="AddToCart(n)"
 					/>
 				</v-col>
 			</v-row>
@@ -147,15 +146,6 @@ export default {
 		};
 	},
 	methods: {
-		AddToCart(item) {
-			const userStore = useUserStore();
-			const cartStore = useCartStore();
-			if (userStore.getIsLoggedIn) {
-				cartStore.addItem(item);
-			} else {
-				this.$router.push("/user/login");
-			}
-		},
 		filt(text) {
 			var newText = text.length > 50 ? text.slice(0, 50) + "..." : text;
 			return newText;
