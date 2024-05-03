@@ -52,76 +52,84 @@ line-height: 40px;">Cart ({{ cartStore.totalCartItems }})</h1>
    </tr>
  </thead>
  
- <tbody>
+ <tbody >
      <!-- @click="chosen = item.sn" -->
-     <tr   v-for="item in cartStore.items"
-     :key="item.id"
-     >
-     <td  class="text-grey-lighten-1 pl-1 ">   
-            <v-checkbox color="green" v-model="item.selected" @click="selectItem(item.id)" hide-details></v-checkbox>
-     </td>
-     <td style="position:relative;font-size: 14px;height: 100px;" 
-      >
-      <div style="position: ;top: 24px; width: ;">
-
-    <div  v-bind="props"
-      class=" d-flex align-start pr-4 pl-1"
-      >
-        <v-avatar color="grey-lighten-4" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" ><v-img cover :src="item.image"></v-img></v-avatar>
-        <div>
-          <p class="mb-1" style="font-weight: 600;
-font-size: 16px!important;
-line-height: 20px;
-color: #333333;">{{item.name}}</p>
-          <p style="font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-color: #969696;" class="text-truncate">Category:{{item.subCategory}}</p>
-          <p style="font-weight: 500;
-font-size: 14px;
-line-height: 18px;
-color: #969696;" class="text-truncate">Location: {{item.location}}</p>
-<v-chip size="x-small" color="green" style="font-weight: 500;" class="mt-1" rounded="lg">IN STOCK</v-chip>
+     <template v-if="cartStore.items.length >= 1">
+       <tr   v-for="item in cartStore.items"
+       :key="item.id"
+       >
+       <td  class="text-grey-lighten-1 pl-1 ">   
+              <v-checkbox color="green" v-model="item.selected" @click="selectItem(item.id)" hide-details></v-checkbox>
+       </td>
+       <td style="position:relative;font-size: 14px;height: 100px;" 
+        >
+        <div style="position: ;top: 24px; width: ;">
+  
+      <div  v-bind="props"
+        class=" d-flex align-start pr-4 pl-1"
+        >
+          <v-avatar color="grey-lighten-4" style="border-radius: 15px;" class="  mr-3 ml-0" size="100" >
+       
+            <v-img v-if="item.product.photo == null" cover src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"></v-img>
+            <v-img v-else-if="item.product.photo.includes(',')" cover :src="item.product.photo.split(',')[0]"></v-img>
+            <v-img v-else cover :src="item.product.photo"></v-img>
+            
+          </v-avatar>
+          <div>
+            <p class="mb-1" style="font-weight: 600;
+  font-size: 16px!important;
+  line-height: 20px;
+  color: #333333;">{{item.product.name}}</p>
+            <p style="font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #969696;" class="text-truncate">Category:{{item.product.category_name}}</p>
+            <p style="font-weight: 500;
+  font-size: 14px;
+  line-height: 18px;
+  color: #969696;" class="text-truncate">Location: {{item.product.vendor_state}}, {{item.product.vendor_country}}</p>
+  <v-chip size="x-small" color="green" style="font-weight: 500;" class="mt-1" rounded="lg">IN STOCK</v-chip>
+          </div>
         </div>
-      </div>
-      </div>
-
-     
-
-  </td>
+        </div>
   
- <td style="height: 189px;" class=" align-center d-flex px-1">  
-  <div class="text-center w-100  py-8 ">
-          <div class="d-flex w-100 justify-center align-center ">
-              <v-btn-group
-      border width="122"
-       rounded="lg"
-      divided density="compact"
-    >
-      <v-btn class="dark-hover" rounded="0" :disabled="cartStore.getItemQuantity(item.id) <= 1"  @click="cartStore.removeItem(item)">
-        <v-icon icon="mdi mdi-minus "></v-icon>
-      </v-btn>
-
-      <v-btn  :ripple="false" rounded="0">
-       {{ cartStore.getItemQuantity(item.id) }}
-      </v-btn>
-      <v-btn class="green-hover" rounded="0" @click="cartStore.addItem(item)">
-        <v-icon icon="mdi mdi-plus"></v-icon>
-      </v-btn>
-</v-btn-group>     
-</div>
-<v-btn @click="showConfirmModal(item.id)"  color="#333" variant="text" class="red-hover mt-2"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
-</div>
-
-        </td>
-
+       
   
-     <td  class="tableLight text-right px-1"><p style="color: #333;
-font-size: 16px;
-font-style: normal;
-font-weight: 600;">€ {{(item.price * item.quantity).toLocaleString('en-US')}} </p></td>
- 
-</tr>
+    </td>
+    
+   <td style="height: 189px;" class=" align-center d-flex px-1">  
+    <div class="text-center w-100  py-8 ">
+            <div class="d-flex w-100 justify-center align-center ">
+                <v-btn-group
+        border width="122"
+         rounded="lg"
+        divided density="compact"
+      >
+        <v-btn class="dark-hover" rounded="0" :disabled="cartStore.getItemQuantity(item.id) <= 1"  @click="cartStore.reduceItem(item)">
+          <v-icon icon="mdi mdi-minus "></v-icon>
+        </v-btn>
+  
+        <v-btn  :ripple="false" rounded="0">
+         {{ cartStore.getItemQuantity(item.id) }}
+        </v-btn>
+        <v-btn class="green-hover" rounded="0" @click="cartStore.addItem(item.product.id)">
+          <v-icon icon="mdi mdi-plus"></v-icon>
+        </v-btn>
+  </v-btn-group>     
+  </div>
+  <v-btn @click="showConfirmModal(item.product.id, item.id)"  color="#333" variant="text" class="red-hover mt-2"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn>
+  </div>
+  
+          </td>
+  
+    
+       <td  class="tableLight text-right px-1"><p style="color: #333;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;">{{formattedPrice((item.product.price * item.quantity))}} </p></td>
+   
+       </tr>
+     </template>
 </tbody>
 </v-table>
 <v-dialog v-model="isModalVisible" persistent max-width="400">
@@ -180,7 +188,7 @@ font-weight: 600;" class="">€ {{ cartStore.totalCost}} </p>
 </div>
 
 </div>
-<v-btn @click="handleCheckout" :disabled="!isAnyItemSelected" flat block size="x-large" class="mt-8" rounded="xl" color="green"><span style="font-size: 14px;
+<v-btn @click="handleCheckout" flat block size="x-large" class="mt-8" rounded="xl" color="green"><span style="font-size: 14px;
 font-style: normal;
 font-weight: 600;"> Checkout Now</span></v-btn>
 </v-card>
@@ -250,6 +258,7 @@ import { ref, computed, watch, nextTick } from 'vue';
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 import { useCartStore } from '~/stores/cartStore';
 import { useRouter } from '#vue-router';
+import {formattedPrice} from '~/utils/price'
 
 const cartStore = useCartStore();
 const router = useRouter();
@@ -262,16 +271,19 @@ const tab = ref(null);
 
 const isModalVisible = ref(false);
 const itemIdToRemove = ref(null);
+const cartItemToRemove = ref(null);
 const isConfirmClear = ref(false)
 
-function showConfirmModal(itemId){
-  itemIdToRemove.value = itemId;
+function showConfirmModal(productId, cartId){
+  itemIdToRemove.value = productId;
+  cartItemToRemove.value = cartId
   isModalVisible.value = true
 }
-function confirmRemoval() {
-  if (itemIdToRemove.value !== null) {
-    cartStore.clearItem(itemIdToRemove.value);
-    itemIdToRemove.value = null; // Reset the item ID after removal
+async function confirmRemoval() {
+  if (itemIdToRemove.value !== null && cartItemToRemove.value !== null) {
+    await cartStore.removeItem(itemIdToRemove.value, cartItemToRemove.value);
+    itemIdToRemove.value = null;
+    cartItemToRemove.value = null // Reset the item ID after removal
 
     isModalVisible.value = false;
 
@@ -310,8 +322,8 @@ function showClearCart() {
   isConfirmClear.value = true
 }
 
-function confirmClearCart() {
-  cartStore.clearCart()
+async function confirmClearCart() {
+  await cartStore.clearCart()
 
   isConfirmClear.value = false 
 
@@ -327,10 +339,7 @@ const buttons = computed(() => [
   { icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png' }
 ]);
 
-const isAnyItemSelected = computed(() => {
-  // return cartStore.items.some(item => item.selected);
-  return cartStore.totalCheckoutItems > 0;
-});
+
 
 const cols = computed(() => {
   const { lg, sm, md } = $vuetify.display;

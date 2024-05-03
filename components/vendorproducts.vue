@@ -170,6 +170,37 @@
 					</tr>
 				</tbody>
 			</v-table>
+			<div
+				class="w-100 mt-4 d-flex justify-space-between align-center"
+				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
+			>
+				<div style="display: flex; align-items: center">
+					<span style="font-size: 14px; font-weight: 400">{{vendorProducts.from}} - {{vendorProducts.toPage}} of {{vendorProducts.pagesNo}} Pages</span>
+				</div>
+				<div class="d-flex align-center" style="margin-left: auto">
+					<span style="font-size: 12px; font-weight: 400; margin-right: 10px">The Page you’re on</span>
+					<v-select
+						append-inner-icon="mdi mdi-chevron-down"
+						variant="outlined"
+						placeholder="1"
+						style="background-color: white; min-width: 40px"
+						:items = pageOptions
+						v-model = "selectedPage"
+					>
+					</v-select>
+					
+					<v-img
+						:width="10"
+						:height="40"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1713471908/umoja/vertical-line.svg"
+						class="mx-2"
+					></v-img>
+
+					<v-btn :disabled = "vendorProducts.currentPage == 1" @click="selectedPage --;"  class="mr-1" flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
+					<v-btn :disabled = "vendorProducts.currentPage == vendorProducts.pagesNo" @click="selectedPage ++;" flat><v-icon icon="mdi mdi-redo"></v-icon></v-btn>
+				</div>
+			</div>
+
 		</div>
 
 		<!-- If there is no Product show this -->
@@ -207,6 +238,7 @@
 				</div>
 			</v-sheet>
 		</div>
+		
 	<v-dialog v-model="vendorProducts.newProductAdded" max-width="1200">
 		<v-card style="width: 100%; border-radius: 5px; background-color: #EDF3F0; position: absolute; left: 170px; top: -300px">
 			<div class="d-flex align-center justify-between pa-10" style="width: 100%; border-radius: 30px">
@@ -230,25 +262,37 @@
 <script>
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import {formattedPrice} from '~/utils/price'
-import { onBeforeMount } from 'vue';
+import { onBeforeMount, onMounted, ref, watchEffect } from 'vue';
 export default {
 	setup(props, ctx) {
+		const selectedPage = ref(1)
+
 		const vendorProducts = useVendorProductStore()
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		}
 
+		
+		onMounted(async () => {
+			await vendorProducts.getAllProduct(selectedPage.value);
+		});
+
+		watchEffect(async () => {
+			await vendorProducts.getAllProduct(selectedPage.value);
+		})
 		// onBeforeMount(async () => {
       	// 	await vendorProducts.getAllProduct();
     	// });
 		
 		return {
 			choose,
-			vendorProducts
+			vendorProducts,
+			selectedPage 
 		};
 	},
 	data() {
 		return {
+
 			sortByPrice: null,
 			dialog: true,
 			searchQuery: "",
@@ -265,6 +309,10 @@ export default {
 	},
 
 	computed: {
+		pageOptions() {
+            // Generate an array of numbers from 1 to vendorProducts.pagesNo
+            return Array.from({ length: this.vendorProducts.pagesNo }, (_, index) => index + 1);
+        },
   filteredProducts() {
     let result = this.vendorProducts.Products;
 

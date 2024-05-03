@@ -10,7 +10,7 @@
 				class="pb-0 pt-0 dash"
 			>
 				<v-slide-x-transition>
-					<VendorsidePanel :window="currentPage" :sidebar="sidebar" @sideFn="sideFn" @changePage="changePage" />
+					<VendorsidePanel :currentPage="currentPage" :sidebar="sidebar" @sideFn="sideFn" @changePage="changePage" />
 				</v-slide-x-transition>
 			</v-col>
 
@@ -132,6 +132,16 @@
 		</v-row>
 	</div>
 	<tutorial />
+	<v-dialog v-model="isSessionExpired" max-width="400">
+	<v-card>
+		<v-card-title class="text-h5">Session Expired</v-card-title>
+		<v-card-text>Your login session has expired. Please login again.</v-card-text>
+		<v-card-actions>
+		<v-spacer></v-spacer>
+		<v-btn @click="reLogin" class="bg-green" color="white rounded-lg" text >Login</v-btn>
+		</v-card-actions>
+	</v-card>
+	</v-dialog>
 </template>
 <style>
 .maincont.v-col-md-12 {
@@ -158,15 +168,21 @@ const route = useRoute()
 const vendorStore  = useVendorStore();
 const vendor = vendorStore.getVendor;
 const vendorProducts = useVendorProductStore()
-
+const isSessionExpired = ref(false)
 
 const currentPage = ref(route.params.name ? route.params.name : "Homepage");
 
 const handleSessionExpired = () => {
-  localStorage.removeItem('vendorToken');
-  vendorStore.vendorIsLoggedIn = false;
+  isSessionExpired.value = true;
+ 
+  
 };
-
+function reLogin () {
+	localStorage.removeItem('vendorToken');
+ 	 vendorStore.vendorIsLoggedIn = false;
+	router.push('/vendor/login');
+	isSessionExpired.value = false
+}
 window.addEventListener('sessionExpired', handleSessionExpired);
 onUnmounted(() => {
       window.removeEventListener('sessionExpired', handleSessionExpired);
@@ -189,9 +205,6 @@ function sideFn() {
   sidebar.value = false;
 }
 
-onMounted(async () => {
-    await vendorProducts.getAllProduct();
-});
 // onMounted(() => {
 //   route.params.name = vendor.first_name
 //   })

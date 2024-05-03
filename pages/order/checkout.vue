@@ -45,15 +45,15 @@ letter-spacing: -0.14px;
         
 <v-divider class="my-8"></v-divider>
 <h1 class="chkt">Shipping Address</h1>
-<template v-if="shippingAddress.length > 0">
-    <template v-for="(item, index) in shippingAddress" :key="index">
+<template v-if="cartStore.shippingAdress.length > 0">
+    <template v-for="(item, index) in cartStore.shippingAdress" :key="index">
         <v-card flat class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" >
        <div  class=" align-center d-flex">
         <input type="radio" :id="'address_' + index" :value="index" v-model="selectedAddressIndex" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">
            <label :for="'address_' + index" class="text-capitalize px-4">
-               <p style="" class=" addressName mb-2">{{item.fullName}}</p>
-               <p class="adddressPhone mb-1">{{item.streetName}}, {{item.shippingCity}}, {{item.shippingState}} {{item.shippingCountry}}</p>
-               <p class="adddressPhone ">{{item.phoneNumber}}</p>
+               <p style="" class=" addressName mb-2">{{item.full_name}}</p>
+               <p class="adddressPhone mb-1">{{item.shipping_address}}, {{item.shipping_city}}, {{item.shipping_region}} {{item.shipping_country}}</p>
+               <p class="adddressPhone ">{{item.phone_number}}</p>
             </label>
         </div>
         <v-spacer></v-spacer>
@@ -65,7 +65,7 @@ letter-spacing: -0.14px;
             <v-col class="pb-0" cols="12">
                 <p class="inputLabel">Full Name<span class="mb-2">*</span></p>             
                 <v-text-field 
-                    v-model="item.fullName" 
+                    v-model="item.full_name" 
                     placeholder="Enter your full name"
                     :rules="inputRules" 
                     density="comfortable">
@@ -81,7 +81,7 @@ letter-spacing: -0.14px;
             <v-col cols="12" md="6">
                 <p class="inputLabel">Confirmation email<span class="mb-2">*</span></p>             
                 <v-text-field  
-                    v-model="item.confirmationEmail" 
+                    v-model="item.email" 
                     :rules="[v => item.email == v || 'Must be the same as email address', v => !!v || 'Field Cannot be Empty']" 
                     placeholder="Enter your confirmation email" 
                     density="comfortable">
@@ -89,12 +89,12 @@ letter-spacing: -0.14px;
             </v-col>
         </v-row>                
         <p class="inputLabel">Phone Number<span class="mb-2">*</span></p>             
-        <v-text-field :rules="phoneRules" v-model="item.phoneNumber" placeholder="Enter your phone number (only digits)" density="comfortable"  >
+        <v-text-field :rules="phoneRules" v-model="item.phone_number" placeholder="Enter your phone number (only digits)" density="comfortable"  >
         </v-text-field>
         <p class="inputLabel">Street Name and House Number*<span class="mb-2">*</span></p>             
         <v-text-field 
             placeholder="Enter your Street Name and House Number" 
-            v-model="item.streetName"
+            v-model="item.shipping_address"
             :rules="inputRules"
             density="comfortable"  >
         </v-text-field>
@@ -102,7 +102,7 @@ letter-spacing: -0.14px;
             <v-col cols="12" md="6">
                 <p class="inputLabel">State<span class="mb-2">*</span></p>                  
                 <v-select 
-                    v-model="item.shippingState"
+                    v-model="item.shipping_region"
                     color="green"
                     :items="states" 
                     @change="fetchCities(shippingCountry, shippingState)"
@@ -117,7 +117,7 @@ letter-spacing: -0.14px;
             <v-col cols="12" md="6"> 
                 <p class="inputLabel">City<span class="mb-2">*</span></p>             
                 <v-select 
-                    v-model="item.shippingCity" 
+                    v-model="item.shipping_city" 
                     :items="cities"
                     color="green"
                     :loading="loadingCities"
@@ -129,10 +129,14 @@ letter-spacing: -0.14px;
                 </v-select>
             </v-col>
         </v-row>   
+        <p style="color: red; font-size: 16px;">{{cartStore.addressError}}</p>   
         <p class="inputLabel">Postal code<span class="mb-2">*</span></p>             
-        <v-text-field v-model="item.postalCode" placeholder="Enter your zipcode" density="comfortable"  >
+        <v-text-field v-model="item.shipping_postal_code" placeholder="Enter your zipcode" density="comfortable"  >
         </v-text-field>             
-        <v-btn type="submit" class="textClass px-8" rounded="xl" color="green"  flat>Save Changes</v-btn>          
+        <v-btn type="submit" class="textClass px-8" rounded="xl" color="green"  flat>
+            <span class="mr-4"> Save Changes</span>
+		    <v-progress-circular v-if="cartStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
+        </v-btn>          
         <v-btn @click="editAddressIndex = null" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>
         </v-form>  
     </template>
@@ -214,8 +218,12 @@ letter-spacing: -0.14px;
     <p class="inputLabel">Postal code<span class="mb-2">*</span></p>             
     <v-text-field v-model="postalCode" placeholder="Enter your zipcode" density="comfortable"  >
     </v-text-field>  
-    <p style="color: red; font-size: 16px;">{{addressError}}</p>           
-    <v-btn type="submit" class="textClass px-8" rounded="xl" color="green"  flat>Use this address</v-btn>          
+    <p style="color: red; font-size: 16px;">{{cartStore.addressError}}</p>           
+    <v-btn type="submit" class="textClass px-8" rounded="xl" color="green"  flat>
+        
+        <span class="mr-4"> Use this address</span>
+		<v-progress-circular v-if="cartStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
+    </v-btn>          
     <v-btn @click="addAddress = false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>
 </v-form>          
          
@@ -226,14 +234,14 @@ letter-spacing: -0.14px;
     <v-card flat :color="n.cost == '0.00'? '#EDF3F0': ''"   class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" v-for="n in shippingTypes" :key="n">
    <div  class=" align-center d-flex">
 
-       <input type="radio" :id="'shipping_' + index" :value="n.title" v-model="selectedShippingValue" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">
+       <input type="radio" :id="'shipping_' + index" :value="n.id" v-model="selectedShippingValue" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">
        <div class="text-capitalize px-4">
-           <p style="" class=" addressName mb-2">{{n.title}}</p>
+           <p style="" class=" addressName mb-2">{{n.type}}</p>
            <p class="adddressPhone mb-1">{{n.duration}}</p>
         </div>
     </div>
     <v-spacer></v-spacer>
-    <p style="" class=" addressName mb-2">€{{n.cost}}</p>
+    <p style="" class=" addressName mb-2">{{formattedPrice(n.amount)}}</p>
 
 </v-card>
     </v-card>
@@ -251,7 +259,8 @@ import { useCartStore } from '~/stores/cartStore';
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi';
 import {emailRules, inputRules, phoneRules} from '~/utils/formrules'
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
-import {watchEffect, ref} from 'vue';
+import {watchEffect, ref, onMounted} from 'vue';
+import {formattedPrice} from '~/utils/price'
 
 export default {
 setup() {
@@ -263,6 +272,7 @@ setup() {
     const shippingState = ref("")
     const shippingCity = ref("")
     const shippingCountry = ref("")
+    const shippingTypes = ref();
 
     watchEffect(() => {
 	    fetchStates(shippingCountry.value)
@@ -271,11 +281,18 @@ setup() {
     watchEffect(() => {
 	    fetchCities(shippingCountry.value, shippingState.value);
     });
+    onMounted(async () => {
+        const response = await cartStore.shippingMethods();
+        shippingTypes.value = response.data.data;
+        await cartStore.fetchShippingAdress();
+        
+    })
     return {
         cartStore,
         shippingCountry,
         shippingCity,
-        shippingState
+        shippingState,
+        shippingTypes
     }
 },
   data() {
@@ -300,23 +317,7 @@ setup() {
             v => !!v || 'Confirm your email address',
             v => this.email == v || 'Must be the same as email address'
         ],
-        shippingTypes:[
-        {
-            title: 'Free Shipping',
-            duration: '7-30 Business Days',
-            cost: '0.00',
-        },
-        {
-            title: 'Regular Shipping',
-            duration: '3-14 Business Days',
-            cost: '7.50',
-        },
-        {
-            title: 'Express Shipping',
-            duration: '1-3 Business Days',
-            cost: '22.50',
-        },
-        ],
+        
         items: [
                 {
                     title: 'Cart',
@@ -413,43 +414,28 @@ buttons(){
         this.cartStore.saveShippingDetails(data)
         this.$router.push('/order/payment')
     },
-    updateShippingAddress(address) {
+    async updateShippingAddress(address) {
         if (
-            !address.fullName &&
+            !address.full_name &&
             !address.email &&
-            !address.confirmationEmail &&
-            !address.phoneNumber &&
-            !address.streetName &&
-            !address.shippingState &&
-            !address.shippingCity
+            !address.phone_number &&
+            !address.shipping_address &&
+            !address.shipping_region &&
+            !address.shipping_city
         ) {
             return
         }
-        const index = this.shippingAddress.findIndex(item => item.id == address.id)
-        if (index !== -1) {
-            const data = {
-            id: address.id,
-            fullName: address.fullName, 
-            email: address.email,
-            confirmationEmail: address.confirmationEmail,
-            phoneNumber: address.phoneNumber,
-            streetName: address.streetName,
-            shippingState: address.shippingState,
-            shippingCity: address.shippingCity,
-            shippingCountry: address.shippingCountry,
-            postalCode: address.postalCode
-            }
-            this.shippingAddress[index] = data;
-            setLocalStorageItem("shippingAddresses", this.shippingAddress)
+        const response = await this.cartStore.updateShippingAddress(address);
+        if (response){
             this.editAddressIndex = null;
-        }
+            await this.cartStore.fetchShippingAdress();
 
-       
+        }
     },
     toggleEditAddress(index) {
       this.editAddressIndex = index;
     },
-    addShippingAddress() {
+    async addShippingAddress() {
         if (
             this.fullName && 
             this.email && 
@@ -460,23 +446,20 @@ buttons(){
             this.shippingCity
             ) {
                 const data = {
-                    id: Math.floor(Math.random() * 1234567890),
-                    fullName: this.fullName, 
-                    email: this.email,
-                    confirmationEmail: this.confirmationEmail,
-                    phoneNumber: this.phoneNumber,
-                    streetName: this.streetName,
-                    shippingState: this.shippingState,
-                    shippingCity: this.shippingCity,
-                    shippingCountry: this.shippingCountry,
-                    postalCode: this.postalCode
+                    shipping_full_name: this.fullName, 
+                    shipping_email: this.email,
+                    shipping_phone_number: this.phoneNumber,
+                    shipping_address: this.streetName,
+                    shipping_region: this.shippingState,
+                    shipping_city: this.shippingCity,
+                    shipping_country: this.shippingCountry,
+                    shipping_postal_code: this.postalCode
                 }
-                
-
-                this.shippingAddress = [...this.shippingAddress, data];
-                setLocalStorageItem("shippingAddresses", this.shippingAddress)
-
+            const response = await this.cartStore.createShippingAddress(data);
+            if (response) {
+                await this.cartStore.fetchShippingAdress();
                 this.addAddress = false;
+            }
 
                 this.fullName = "";
                 this.email = "";
@@ -486,6 +469,7 @@ buttons(){
                 this.shippingState = "";
                 this.shippingCity = "";
                 this.postalCode = "";
+                this.shippingCountry = "";
             }
     },
 filt(text){

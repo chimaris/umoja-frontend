@@ -151,9 +151,9 @@ vendor: vendorStore.getVendor
 };
 },
 mounted(){
-this.selectedItem = this.window
+this.selectedItem = this.currentPage
 },
-props: ['window', 'sidebar'],
+props: ['currentPage', 'sidebar'],
 data() {
 return {
 list: '',
