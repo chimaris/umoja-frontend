@@ -5,8 +5,9 @@
 		v-if="loaded"
 		style="overflow: visible; background: transparent !important"
 		flat
-		class="bg-white parent-card rounded-lg mb-2">
-		<v-img @click="$router.push(`/product_page/${item.id}`)" v-if="item.photo == null"  class="rounded-lg bg-grey-lighten-5" :cover="coverbol" eager width="100%" :height="short ? '221px' : '303px'" src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png">
+		class="bg-white parent-card rounded-lg mb-2"
+	>
+		<v-img class="rounded-lg bg-grey-lighten-5" :cover="coverbol" v-if="item.photo == null" @click="$router.push(`/product_page/${item.id}`)" eager width="100%" :height="short ? '221px' : '303px'" src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png">
 			<v-btn
 				@click="toggleLike(item, index)"
 				:ref="item.name + index"
@@ -20,7 +21,7 @@
 				<v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon
 			></v-btn>
 		</v-img>
-		<v-img @click="$router.push(`/product_page/${item.id}`)" v-else-if="item.photo.includes(',')"  class="rounded-lg bg-grey-lighten-5" :cover="coverbol" eager width="100%" :height="short ? '221px' : '303px'" :src="item.photo.split(',')[0]">
+		<v-img class="rounded-lg bg-grey-lighten-5" :cover="coverbol" v-else-if="item.photo.includes(',')" @click="$router.push(`/product_page/${item.id}`)" eager width="100%" :height="short ? '221px' : '303px'" :src="item.photo.split(',')[0]">
 			<v-btn
 				@click="toggleLike(item, index)"
 				:ref="item.name + index"
@@ -34,7 +35,7 @@
 				<v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon
 			></v-btn>
 		</v-img>
-		<v-img @click="$router.push(`/product_page/${item.id}`)" v-else class="rounded-lg bg-grey-lighten-5" :cover="coverbol" eager width="100%" :height="short ? '221px' : '303px'" :src="item.photo">
+		<v-img class="rounded-lg bg-grey-lighten-5" :cover="coverbol" v-else @click="$router.push(`/product_page/${item.id}`)" eager width="100%" :height="short ? '221px' : '303px'" :src="item.photo">
 			<v-btn
 				@click="toggleLike(item, index)"
 				:ref="item.name + index"
@@ -43,19 +44,32 @@
 				style="position: absolute; right: 12px; top: 12px"
 				class="pa-0"
 				flat
-				size="x-small">
+				size="x-small"
+			>
 				<v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon
 			></v-btn>
 		</v-img>
+		<div
+			@click="$router.push('/vendor_page')"
+			class="mt-2"
+			:style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px', fontWeight: $vuetify.display.mobile ? 500 : 600 }"
+			style="cursor: pointer; color: #1e1e1e; letter-spacing: -0.14px"
+		>
+			<span class="mr-2">
+				{{ item.vendor_firstname}} {{ item.vendor_lastname }} 
+				<span style="font-size: 1rem; margin-left: 5px;" :class="getCountryIconClass(item.vendor_country)"></span>
+			</span>
+			<v-icon icon="mdi mdi-information-outline" color="#969696" />
+		</div>
 		<p
 			@click="$router.push(`/product_page/${item.id}`)"
 			style="font-weight: 600; font-size: 14px; min-height: 36px; line-height: 18px; cursor: pointer; color: #000000"
-			class="mt-2 text-wrap"
+			class="mt-1 text-wrap"
 		>
 			{{ filt(item.name) }}
 		</p>
 		<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">
-			{{ item.sub_category_name }}
+			{{ item.category_name  }}
 		</p>
 		<p style="font-weight: 600; font-size: 10px; line-height: 10px; color: #000000" class="d-flex mb-1 pb-0 pt-1 align-center">
 			<v-rating readonly model-value="4" color="grey-lighten-2" active-color="#E7CE5D" class="rts" density="compact" size="x-small"></v-rating
@@ -70,20 +84,18 @@
 			style="font-size: 10px; font-weight: 500; border-radius: 6px; letter-spacing: 0.5px"
 			>FREE DELIVERY</v-chip
 		>
-		<div v-if="vendorShow" class="d-none d-md-block">
+		<!-- <div v-if="vendorShow" class="d-none d-md-block">
 			<div class="d-flex mt-2">
 				<v-avatar size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img></v-avatar>
 				<div style="cursor: pointer" @click="$router.push('/vendor_page')" class="ml-2">
-					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">{{ item.vendor_firstname
-					 }} {{ item.vendor_lastname }}</p>
-					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">{{ item.
-					vendor_state }}, {{item.vendor_country}}<span style="font-size: 1rem; margin-left: 5px;" :class="getCountryIconClass(item.vendor_country)"></span></p>
+					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">Genevieve Obukeme</p>
+					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">Accra, Ghana🇬🇭</p>
 				</div>
 			</div>
 			<v-divider color="#a4a4a4" class="my-4"></v-divider>
-		</div>
+		</div> -->
 		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
-			<div :class="showdisco ? 'mt-0' : ''">
+			<div :class="showdisco ? 'mt-0' : 'mt-3'">
 				<h1 :style="{ fontSize: $vuetify.display.mobile ? '14px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">{{ formattedPrice(item.price) }}</h1>
 				<div v-if="showdisco" class="d-flex align-center">
 					<p style="color: var(--carbon-3, #969696); font-weight: 600; line-height: 17.673px; text-decoration: line-through">€15,000.00</p>
@@ -102,13 +114,12 @@
 				class="parent-btn ml-0 ml-md-2 mt-2 mt-md-0"
 			>
 				<span style="color: #1a1d1f; font-weight: 600" :style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px' }" class="smallBtn">
-				{{
-					isInCart(item) ? "Added to Cart" : "Add to cart"
-				}}</span>
+				{{isInCart(item) ? "Added to Cart" : "Add to cart"}}
+				</span>
 			</v-btn>
 		</div>
 	</v-card>
-	<productloader :vendorShow="vendorShow" :short="short" v-else />
+	<productloader :vendorShow="vendorShow" :short="short" v-else />
 </template>
 <script>
 import { useLikedStore } from "~/stores/likedStore";

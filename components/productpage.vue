@@ -38,6 +38,7 @@
 									<v-carousel-item v-else
 										:value="n"
 										v-for="n in 4"
+										:key="n"
 										cover
 										height="349px"
 										:src="product.photo"
@@ -76,7 +77,10 @@
 								</v-row>
 							</v-col>
 							<v-col cols="12" lg="6">
-								<p style="color: #333; font-size: 28px; font-weight: 600; line-height: 140%; /* 39.2px */ letter-spacing: -0.84px">
+								<p
+									:style="{ fontSize: $vuetify.display.mobile ? '20px' : '28px' }"
+									style="color: #333; font-weight: 600; line-height: 140%; /* 39.2px */ letter-spacing: -0.84px"
+								>
 									{{product.name}}
 								</p>
 								<div class="d-flex align-center">
@@ -90,11 +94,17 @@
 									></v-rating>
 									<p style="color: #1e1e1e; font-size: 14px; font-weight: 500; letter-spacing: 0.7px" class="mt-2 ml-3">4.0</p>
 								</div>
-								<p style="color: var(--carbon-6, #1e1e1e); font-size: 36px; font-weight: 600; line-height: 140%" class="my-4">{{formattedPrice(product.price)}}</p>
+								<p
+									:style="{ fontSize: $vuetify.display.mobile ? '24px' : '36px' }"
+									style="color: var(--carbon-6, #1e1e1e); font-weight: 600; line-height: 140%"
+									class="my-4"
+								>
+									{{formattedPrice(product.price)}}
+								</p>
 								<div v-if= "product.sizes.length >  0" class="d-flex mb-2 align-center">
 									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">Available Sizes</p>
 									<v-btn class="ml-1" variant="text" color="#969696"
-										><span>Size Guide</span> <v-icon class="ml-1" icon="mdi mdi-arrow-right"></v-icon
+										><span style="font-size:14px, font-weight: 500">Size Guide</span> <v-icon class="ml-1" icon="mdi mdi-arrow-right"></v-icon
 									></v-btn>
 								</div>
 								<div style="max-width: 295px">
@@ -106,6 +116,7 @@
 												v-ripple
 												class="caroimg green-hover w-100 d-flex align-center justify-center"
 												style="height: 40px; border-radius: 6px; border: 1px solid var(--carbon-1, #ededed)"
+												:style="{ fontSize: $vuetify.display.mobile ? '14px' : '16px' }"
 											>
 												{{ n }}
 											</p>
@@ -133,8 +144,84 @@
 								</div>
 							</v-col>
 						</v-row>
+
+						<!-- Set Product Quality for Mobile View -->
+						<div class="py-6 d-block d-md-none">
+							<productsetloader v-if="loading" />
+							<div v-else>
+								<v-card flat class="pa-0 cardStyle">
+									<div style="background-color: #edf3f0; height: 40px" class="d-flex align-center justify-center w-100">
+										<p style="color: #00966d; font-size: 14px; font-weight: 600; line-height: 140%">Available</p>
+									</div>
+									<div class="px-6 py-4">
+										<p style="font-size: 20px; font-weight: 500">Set Quantity</p>
+										<div class="d-flex justify-space-between align-center my-2">
+											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">2</span></p>
+
+											<v-btn-group border rounded="xl" divided density="compact">
+												<v-btn
+													@click="removeItem({ id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...' })"
+													class="dark-hover"
+													rounded="0"
+												>
+													<v-icon icon="mdi mdi-minus "></v-icon>
+												</v-btn>
+
+												<v-btn :ripple="false" rounded="0">
+													{{ getItemQuantity(1) }}
+												</v-btn>
+												<v-btn
+													@click="addToCart({ id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...' })"
+													class="green-hover"
+													rounded="0"
+												>
+													<v-icon icon="mdi mdi-plus"></v-icon>
+												</v-btn>
+											</v-btn-group>
+										</div>
+										<v-divider class="my-4"></v-divider>
+										<div class="d-flex justify-space-between align-center mb-4 my-2">
+											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Total</p>
+											<p style="color: #1e1e1e; font-size: 24px; font-weight: 600; line-height: 140%">€ 5000.00</p>
+										</div>
+										<v-btn to="/order/cart" block class="mb-2" size="large" flat color="green" rounded="xl"
+											><span style="color: #edf0ef; font-size: 14px; font-weight: 600">Add to Cart</span></v-btn
+										>
+										<v-btn
+											class="dark-hover"
+											block
+											style="border-color: #333; color: #333; font-size: 14px; font-weight: 600"
+											border
+											size="large"
+											variant="outline"
+											flat
+											color="#333333"
+											rounded="xl"
+										>
+											<span style="font-size: 14px; font-weight: 600">Buy Now</span></v-btn
+										>
+										<div class="d-flex mt-4 justify-space-between">
+											<v-btn width="48%" variant="text" class="">
+												<v-icon icon="mdi mdi-heart-outline" class="mr-2" size="17"></v-icon>
+												<span style="font-size: 14px; font-weight: 600">Favorite</span>
+											</v-btn>
+											<v-divider inset="" vertical=""></v-divider>
+											<v-btn width="48%" variant="text" class="">
+												<v-icon icon="mdi mdi-share-variant-outline" class="mr-2" size="17"></v-icon>
+												<span style="font-size: 14px; font-weight: 600">Share</span>
+											</v-btn>
+										</div>
+									</div>
+								</v-card>
+							</div>
+						</div>
+
 						<v-divider color="#EDEDED" class="my-6"></v-divider>
-						<p style="color: #000; font-size: 28px; font-weight: 600; line-height: 140%; /* 39.2px */ letter-spacing: -0.84px" class="mb-4">
+						<p
+							:style="{ fontSize: $vuetify.display.mobile ? '20px' : '28px' }"
+							style="color: #000; font-weight: 600; line-height: 140%; /* 39.2px */ letter-spacing: -0.84px"
+							class="mb-4"
+						>
 							Product Description
 						</p>
 
@@ -157,14 +244,70 @@
 							</li>
 						</ul>
 
+						<!-- Set Delivery Options for Mobile View -->
+						<div class="py-6 d-block d-md-none">
+							<productsetloader v-if="loading" />
+							<div v-else>
+								<v-card flat class="mt-4 py-9 cardStyle">
+									<div class="d-flex justify-space-between align-center">
+										<p style="color: #1e1e1e; font-size: 14px; font-weight: 600">Ship to</p>
+										<p style="color: #1273eb; font-size: 14px; font-weight: 500">
+											<v-icon class="mb-1 mr-1" size="14" color="black" icon="mdi mdi-map-marker"></v-icon>United States 🇺🇸
+										</p>
+									</div>
+									<v-divider color="#EDEDED" class="my-4"></v-divider>
+
+									<div>
+										<p style="color: var(--carbon-6, #1e1e1e); font-size: 20px; font-weight: 600; line-height: 140%">Delivery Options</p>
+										<div
+											style="
+												color: var(--carbon-6, #1e1e1e);
+												font-size: 14px;
+
+												line-height: 140%;
+											"
+										>
+											<p style="font-weight: 600" class="mt-4">Normal Shipping: EUR 75.23</p>
+											<p>From Ghana to United States of America via <strong> Umoja standard shipping </strong></p>
+											<p>Etimated delivery <strong> August 23 -28 </strong></p>
+										</div>
+										<v-divider color="#EDEDED" class="my-4"></v-divider>
+										<div
+											style="
+												color: var(--carbon-6, #1e1e1e);
+												font-size: 14px;
+
+												line-height: 140%;
+											"
+										>
+											<p style="font-weight: 600" class="mt-4">Instant Shipping: EUR 250.23</p>
+											<p>From Ghana to United States of America via <strong> DHL shipping </strong></p>
+											<p>Etimated delivery <strong> August 20 -22 </strong></p>
+										</div>
+										<v-divider color="#EDEDED" class="my-4"></v-divider>
+
+										<div style="font-size: 14px; font-weight: 500; line-height: 140%; /* 19.6px */ letter-spacing: -0.14px">
+											<v-row dense v-for="(item, index) in productDetails" :key="index" class="">
+												<v-col cols="3" :style="{ color: item.labelColor }">{{ item.label }}</v-col>
+												<v-col cols="8" :style="{ color: item.valueColor }">{{ item.value }}</v-col>
+											</v-row>
+										</div>
+									</div>
+								</v-card>
+							</div>
+						</div>
+
 						<v-divider color="#EDEDED" class="my-6"></v-divider>
 						<div>
-							<p style="color: #000; font-size: 28px; font-weight: 600; line-height: 140%; /* 39.2px */ letter-spacing: -0.84px">
+							<p
+								:style="{ fontSize: $vuetify.display.mobile ? '24px' : '28px' }"
+								style="color: #000; font-weight: 600; line-height: 140%; /* 39.2px */ letter-spacing: -0.84px"
+							>
 								Item Rating/Reviews
 							</p>
 							<div class="d-flex mt-6">
 								<div class="">
-									<p style="color: #000; font-size: 48px; font-weight: 600">4.5</p>
+									<p :style="{ fontSize: $vuetify.display.mobile ? '32px' : '48px' }" style="color: #000; font-weight: 600">4.5</p>
 									<v-rating
 										class="rti"
 										:model-value="4"
@@ -188,32 +331,34 @@
 								</v-card>
 							</div>
 						</div>
-						<div class="d-flex justify-space-between align-center mt-8">
+						<div class="d-block d-md-flex justify-space-between align-center mt-8">
 							<p style="font-size: 14px; font-weight: 500; line-height: 140%; letter-spacing: -0.14px">
 								All Reviews <span style="color: #969696">(120)</span>
 							</p>
-							<v-chip-group
-								variant="outlined"
-								mandatory
-								style="font-size: 14px; line-height: 17px; font-weight: 500; letter-spacing: 0.03em; color: #333333"
-								class="text-grey"
-								v-model="chip"
-								selected-class=" chipselected3"
-							>
-								<v-chip
-									:class="chip == tag.name ? 'chipselected3' : ' '"
-									style="font-size: 14px; font-weight: 500"
-									size=""
-									class="pa-2 px-4"
-									v-for="tag in tags"
-									:key="tag.name"
+							<div class="rower h-auto pb-2 mt-5 mt-md-10 mb-5">
+								<v-chip-group
+									variant="outlined"
+									mandatory
+									style="font-size: 14px; line-height: 17px; font-weight: 500; letter-spacing: 0.03em; color: #333333"
+									class="text-grey d-inline-block"
+									v-model="chip"
+									selected-class=" chipselected3"
 								>
-									{{ tag.name }} <v-icon size="21" v-if="tag.image" class="ml-2" :icon="'mdi mdi-' + tag.image"></v-icon>
-								</v-chip>
-							</v-chip-group>
+									<v-chip
+										:class="chip == tag.name ? 'chipselected3' : ' '"
+										style="font-size: 14px; font-weight: 500"
+										size=""
+										class="pa-2 px-4"
+										v-for="tag in tags"
+										:key="tag.name"
+									>
+										{{ tag.name }} <v-icon size="21" v-if="tag.image" class="ml-2" :icon="'mdi mdi-' + tag.image"></v-icon>
+									</v-chip>
+								</v-chip-group>
+							</div>
 						</div>
 						<div>
-							<div v-for="(n, i) in 3" class="d-flex mt-8">
+							<div v-for="(n, i) in 3" :key="n" class="d-flex mt-8">
 								<v-avatar color="grey-lighten-4" class="pa-1 mr-3" size="50"
 									><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687517181/Rectangle_1923_oguuzi.png"></v-img
 								></v-avatar>
@@ -225,7 +370,7 @@
 												<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696">🇺🇸 USA, New York City</p>
 											</div>
 										</div>
-										<div class="d-flex reviews2 pr-1 align-center">
+										<div class="d-none d-md-flex reviews2 pr-1 align-center">
 											<v-rating
 												:model-value="4"
 												color="grey-lighten-2"
@@ -259,7 +404,7 @@
 								</div>
 							</div>
 							<div class="my-8">
-								<p style="font-size: 20px; font-weight: 600" class="inputLabel d-flex align-center">
+								<p :style="{ fontSize: $vuetify.display.mobile ? '18px' : '20px' }" style="font-weight: 600" class="inputLabel d-flex align-center">
 									Review this product <v-icon size="18" class="ml-2" icon="mdi mdi-information"></v-icon>
 								</p>
 								<v-card height="auto" class="mx-auto pt-2 coolTable pb-0 mb-1" width="100%" style="overflow: hidden" flat>
@@ -336,7 +481,7 @@
 				</div>
 			</v-col>
 			<v-col cols="12" lg="4">
-				<div class="py-6">
+				<div class="py-6 d-none d-md-block">
 					<div>
 						<v-card flat class="pa-0 cardStyle">
 							<div style="background-color: #edf3f0; height: 40px" class="d-flex align-center justify-center w-100">

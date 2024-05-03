@@ -3,14 +3,22 @@
 		<!-- <h1>{{'scale:'+ (1+ (prog * 0.2))}}</h1> -->
 		<div
 			v-if="loader"
-			style="z-index: 9; position: absolute; left: 0; height: 772px; width: 100%"
+			style="z-index: 9; position: absolute; left: 0; width: 100%"
+			:style="{ height: $vuetify.display.mobile ? '587px' : '772px' }"
 			class="bg-black d-flex justify-center align-center rounded-0"
 		>
 			<div>
 				<v-progress-linear color="#F38218" class="rounded-xl" style="width: 500px" indeterminate height="5"></v-progress-linear>
 			</div>
 		</div>
-		<v-card flat style="overflow: hidden; position: relative" color="black" class="cardo rounded-0" height="772" width="100%">
+		<v-card
+			flat
+			style="overflow: hidden; position: relative"
+			color="black"
+			class="cardo rounded-0"
+			:height="$vuetify.display.mobile ? 587 : 772"
+			width="100%"
+		>
 			<v-img
 				cover
 				eager
@@ -21,16 +29,23 @@
 				class="bg-black rounded-0"
 			/>
 
-			<v-container style="max-width: 1200px; width: 100%; height: 772px; z-index: 99" class="d-flex align-center py-1">
-				<div style="width: 536px">
+			<v-container style="max-width: 1200px; width: 100%; height: 772px; z-index: 99" class="d-flex align-start align-md-center py-10 py-md-1">
+				<div class="mx-auto mx-md-0 text-center text-md-left" :style="{ width: $vuetify.display.mobile ? '335px' : '536px' }">
 					<p
 						class="title"
-						style="color: #fff; font-size: 96px; width: 695px; font-weight: 600; line-height: 100%; /* 96px */ letter-spacing: -2.88px"
+						:style="{ fontSize: $vuetify.display.mobile ? '48px' : '96px' }"
+						style="color: #fff; font-weight: 600; line-height: 100%; /* 96px */ letter-spacing: -2.88px"
 					>
 						{{ item.title }}
 					</p>
-					<p class="my-6 sub" style="color: #fff; font-size: 24px; font-weight: 500">{{ item.sub }}</p>
-					<div style="width: 695px" v-show="selected == 0" class="btn">
+					<p
+						class="my-6 sub"
+						:style="{ fontSize: $vuetify.display.mobile ? '18px' : '24px', fontWeight: $vuetify.display.mobile ? 400 : 500 }"
+						style="color: #fff"
+					>
+						{{ item.sub }}
+					</p>
+					<div v-show="selected == 0" class="btn">
 						<v-btn rounded="xl" color="#F38218" height="44" style="width: 225px; padding: 12px 20px" flat
 							><span style="color: var(--carbon-6, #ffffff); text-align: center; font-weight: 600; font-size: 14px">
 								Shop Now <v-icon class="arrow ml-3" icon="mdi mdi-arrow-right"></v-icon>
@@ -41,22 +56,28 @@
 			</v-container>
 			<div
 				class="align-center d-flex justify-space-between"
+				:style="{ padding: $vuetify.display.mobile ? '0px 10px' : '0px 40px' }"
 				style="
 					height: 144px;
 					position: absolute;
 					bottom: 0px;
 					left: 0px;
 					right: 0px;
-					padding: 0px 40px;
 					color: #fff;
 					background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000 100%);
 				"
 			>
 				<div>
 					<p style="font-size: 16px; font-weight: 600" class="btitle mb-2">{{ item.btitle }}</p>
-					<p style="width: 537px; font-size: 14px; font-weight: 400; line-height: 140%; /* 19.6px */" class="bcont">{{ item.bcont }}</p>
+					<p
+						:style="{ width: $vuetify.display.mobile ? '100%' : '537px' }"
+						style="font-size: 14px; font-weight: 400; line-height: 140%; /* 19.6px */"
+						class="bcont"
+					>
+						{{ item.bcont }}
+					</p>
 				</div>
-				<v-btn
+				<!-- <v-btn
 					class="btn2"
 					v-show="selected !== 0"
 					rounded="xl"
@@ -67,7 +88,7 @@
 					><span style="color: var(--carbon-6, #ffffff); text-align: center; font-weight: 600; font-size: 14px">
 						Shop Now <v-icon class="arrow ml-3" icon="mdi mdi-arrow-right"></v-icon>
 					</span>
-				</v-btn>
+				</v-btn> -->
 			</div>
 		</v-card>
 	</div>

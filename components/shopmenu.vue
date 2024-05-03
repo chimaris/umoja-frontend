@@ -19,7 +19,7 @@
 				src="https://res.cloudinary.com/payhospi/image/upload/v1693848059/vector_xfq7us.png"
 			/>
 		</div>
-		<v-container style="max-width: 1200px; width: 100%" class="">
+		<v-container style="max-width: 1200px; width: 100%" class="d-none d-md-block">
 			<v-row style="min-height: 756px; position: relative" class="py-12">
 				<v-col cols="12" md="4">
 					<v-img
@@ -82,6 +82,74 @@
 						eager
 						style="width: 369px; height: 388px; border-radius: 15px"
 						cover
+						:src="databank.menu[selectIndex].rightimage"
+					></v-img>
+				</v-col>
+			</v-row>
+		</v-container>
+		<v-container style="max-width: 1200px; width: 100%" class="d-block d-md-none">
+			<v-row style="min-height: 756px; position: relative" class="py-12">
+				<v-col cols="12" md="4">
+					<p
+						style="
+							color: #000;
+							text-align: center;
+							font-size: 16px;
+							font-weight: 500;
+							line-height: 20px; /* 125% */
+							letter-spacing: 1.6px;
+							text-transform: uppercase;
+						"
+					>
+						Shop By categories
+					</p>
+
+					<ul class="text-center my-8" style="list-style: none">
+						<li
+							style="
+								cursor: pointer;
+								font-size: 14px;
+								color: var(--carbon-6, #1e1e1e);
+								text-align: center;
+								position: relative;
+								font-size: 36px;
+								font-weight: 500;
+								line-height: 140%; /* 56px */
+								letter-spacing: -1.2px;
+							"
+							:class="select == n.name ? 'text-green' : ''"
+							@click="$router.push('/market_place')"
+							@mouseover="selectCategory(n.name, i)"
+							class="py-4"
+							v-for="(n, i) in databank.menu"
+							:key="i"
+						>
+							{{ n.name }}
+							<img
+								v-show="select == n.name"
+								src="https://res.cloudinary.com/payhospi/image/upload/v1693888075/underline-10_jqkobi.svg"
+								style="bottom: -10px; left: 50%; transform: translate(-50%, 0); position: absolute"
+							/>
+						</li>
+					</ul>
+				</v-col>
+				<v-col cols="6" md="4" class="pr-1" width="48%">
+					<v-img
+						v-show="showImg"
+						class="selected23"
+						eager
+						cover
+						style="width: 200px; height: 200px; border-radius: 15px"
+						:src="databank.menu[selectIndex].leftimage"
+					></v-img>
+				</v-col>
+				<v-col style="display: flex; align-items: end" cols="6" md="4" class="pl-1" width="48%">
+					<v-img
+						v-show="showImg"
+						class="selected23"
+						eager
+						cover
+						style="width: 200px; height: 200px; border-radius: 15px"
 						:src="databank.menu[selectIndex].rightimage"
 					></v-img>
 				</v-col>

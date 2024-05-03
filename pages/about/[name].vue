@@ -12,13 +12,19 @@
 			padding: 6px;
 		"
 	>
-		<v-container style="max-width: 1400px; width: 100%">
-			<v-breadcrumbs class="pl-0 py-0" :items="['who we are', 'what we do', 'Our impact and goals', '']">
+		<v-container style="max-width: 1400px; width: 100%; overflow: hidden">
+			<v-breadcrumbs class="pl-0 py-0 w-full" :items="['who we are', 'what we do', 'Our impact and goals', '']">
 				<template v-slot:divider>
 					<v-icon icon="mdi mdi-chevron-right"></v-icon>
 				</template>
 				<template v-slot:title="{ item }">
-					<span @click="selectCategory(item)" :class="{ 'text-green font-weight-bold': select === item }" style="cursor: pointer; font-size: 14px">
+					<span
+						@click="selectCategory(item)"
+						class="d-inline-block text-truncate"
+						:class="{ 'text-green font-weight-bold': select === item }"
+						style="cursor: pointer; font-size: 14px"
+						:style="{ 'max-width': $vuetify.display.mobile ? '100px' : '100%' }"
+					>
 						{{ item }}
 					</span>
 				</template>
@@ -28,16 +34,12 @@
 
 	<div style="margin-bottom: 100px">
 		<whoWeAre v-if="select === 'who we are'" />
-		<div v-else-if="select === 'what we do'">
-			<v-container style="max-width: 1400px; width: 100%">
-				<hi>What we do page goes here</hi>
-			</v-container>
-		</div>
+		<whatWeDo v-else-if="select === 'what we do'" />
 		<our-impact-and-goal v-else-if="select === 'Our impact and goals'" />
 		<whoWeAre v-else />
 	</div>
 
-	<Mainfooter />
+	<mainfooter :maxwidth="'1200px'" />
 </template>
 
 <script>
@@ -49,7 +51,6 @@ export default {
 	},
 	methods: {
 		selectCategory(category) {
-			console.log(category);
 			this.select = category;
 			this.$router.push("/about/" + category);
 		},

@@ -50,7 +50,16 @@
 			</span>
 		</div>
 
-		<v-btn to="/vendor_page" variant="outlined" class="bizbtn mt-8" rounded="xl" block size="large"><span>See Business Page</span></v-btn>
+		<v-btn
+			to="/vendor_page"
+			variant="outlined"
+			class="bizbtn mt-8"
+			style="border: 0.66px solid #ced2d6; color: #1a1d1f; font-size: 12px; font-weight: 600; line-height: 13.11px"
+			rounded="xl"
+			block
+			size="large"
+			><span>See Business Page</span></v-btn
+		>
 	</v-card>
 	<vendorloader v-else />
 </template>

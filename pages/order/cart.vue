@@ -1,49 +1,38 @@
 <template>
-  <Header2 />
-  <v-divider></v-divider>
-  <div style="background-color;">
-
-  <v-container class="mt-4" style="max-width: 1400px;width: 100%;">
-      <v-row>
-              <v-col cols="12" lg="8" >  
-<v-card class="overflow-visible" flat  color="#F7F7F7" min-height="" width="100%">
-      <v-card flat style="border-radius: 10px;" class="pt-2 pb-4 px-4">
-         <div class="d-flex align-center justify-space-between">
-
-             <h1 style="font-weight: 600;
-font-size: 32px;
-line-height: 40px;">Cart ({{ cartStore.totalCartItems }})</h1>
-  <v-btn @click="showClearCart()"  color="#333" class="red-hover" variant="text"><span class="smallBtn"></span>  <v-icon size="15" class="mr-1 " icon="mdi mdi-trash-can-outline"></v-icon>Remove all</v-btn>
-
-
-</div>
-<v-dialog v-model="isConfirmClear" persistent max-width="400">
-  <v-card>
-    <v-card-title class="text-h5">Confirm Removal</v-card-title>
-    <v-card-text>Are you sure you want to clear the cart?</v-card-text>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn  class=" bg-green" color="white rounded-lg" text @click="confirmClearCart">Yes</v-btn>
-      <v-btn  class=" bg-red" color="white rounded-lg" text @click="isConfirmClear = false">No</v-btn>
-      
-    </v-card-actions>
-  </v-card>
-</v-dialog>
-<v-sheet>
-  <v-table class="mt-4" style="height: 80%; overflow: scroll;">
- <thead>
-   <tr style="border-radius: 6px;" class="  rounded-lg">
-     <th style="
- width: 50px;
-" class="  font-weight-medium px-1  text-left">
-        <v-checkbox color="green" v-model="selectAll" @click="selectAllItems" hide-details ></v-checkbox>
-     </th>
-     <th  style="font-size: 14px;width: 100px;" class="  font-weight-medium  text-left">
-       Product Details
-     </th>
-     <th style="font-size: 14px;" class=" text-center px-1  font-weight-medium">
-       Quantity
-     </th>
+	<Header2 />
+	<v-divider></v-divider>
+	<div style="background-color;">
+		<v-container class="mt-4" style="max-width: 1400px; width: 100%">
+			<v-row>
+				<v-col cols="12" lg="8">
+					<v-card class="overflow-visible" flat color="#F7F7F7" min-height="" width="100%">
+						<v-card flat style="border-radius: 10px" class="pt-2 pb-4 px-4">
+							<div class="d-flex align-center justify-space-between">
+								<h1 style="font-weight: 600; font-size: 32px; line-height: 40px">Cart ({{ cartStore.totalCartItems }})</h1>
+								<v-btn @click="showClearCart()" color="#333" class="red-hover" variant="text"
+									><span class="smallBtn"></span> <v-icon size="15" class="mr-1" icon="mdi mdi-trash-can-outline"></v-icon>Remove all</v-btn
+								>
+							</div>
+							<v-dialog v-model="isConfirmClear" persistent max-width="400">
+								<v-card>
+									<v-card-title class="text-h5">Confirm Removal</v-card-title>
+									<v-card-text>Are you sure you want to clear the cart?</v-card-text>
+									<v-card-actions>
+										<v-spacer></v-spacer>
+										<v-btn class="bg-green" color="white rounded-lg" text @click="confirmClearCart">Yes</v-btn>
+										<v-btn class="bg-red" color="white rounded-lg" text @click="isConfirmClear = false">No</v-btn>
+									</v-card-actions>
+								</v-card>
+							</v-dialog>
+							<v-sheet>
+								<v-table class="mt-4" style="height: 80%; overflow: scroll">
+									<thead>
+										<tr style="border-radius: 6px" class="rounded-lg">
+											<th style="width: 50px" class="font-weight-medium px-1 text-left">
+												<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
+											</th>
+											<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left">Select all</th>
+											<th style="font-size: 14px" class="text-center px-1 font-weight-medium">Quantity</th>
 
      <th style="font-size: 14px;" class=" text-right px-1  font-weight-medium">
       Price
@@ -200,54 +189,58 @@ font-weight: 600;
 line-height: 20px; /* 100% */
 letter-spacing: -0.2px;" class="mb-4">Returns are easy</p>
 
-<p style="color:#969696;
-font-size: 14px;
-font-weight: 500;
-">Free return within 15 days for Official Store items and 7 days for other eligible items See more</p>
-</v-card>
-<v-img style="position: relative;border-radius: 10px;" class="mt-6  shine pt-10 bg-grey-lighten-1 pa-6 rounded-lg" width="100%" max-height="674px" cover eager src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png" height="100%">
-  <div  class=" ">
-              <h1 style="font-size: 50.4px;
-line-height: 53px;" class=" mb-0 text-white font-weight-bold">Nawi’s long
-scarf</h1>
-              <p class="textClass mb-4 text-white">known to be used by the Nawi people</p>
-              <div>
-                <v-btn  rounded="xl" flat to="/vendor/profile" color="orange" 
-            ><span class="smallBtn">
-              See product
-          </span>
-      </v-btn>
-          <v-btn to="/user/login"  flat variant="text"  class="ml-2 text-white howit"><span style="text-decoration:underline">
-              <span class="smallBtn">
-              Not now
-          </span>
-          </span>
-          </v-btn>
-              </div>
-          </div>
-          <div v-if="false" class="pa-6" style="position: absolute;bottom:0;left: 0;width: 100%;">
-              <v-card style="
-background: rgba(0, 0, 0, 0.7);
-backdrop-filter: blur(25px); bottom: 0;
-/* Note: backdrop-filter has minimal browser support */
+						<p style="color: #969696; font-size: 14px; font-weight: 500">
+							Free return within 15 days for Official Store items and 7 days for other eligible items See more
+						</p>
+					</v-card>
+					<v-img
+						style="position: relative; border-radius: 10px"
+						class="mt-6 shine pt-10 bg-grey-lighten-1 pa-6 rounded-lg"
+						width="100%"
+						max-height="674px"
+						cover
+						eager
+						src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png"
+						height="100%"
+					>
+						<div class=" ">
+							<h1 style="font-size: 50.4px; line-height: 53px" class="mb-0 text-white font-weight-bold">Nawi’s long scarf</h1>
+							<p class="textClass mb-4 text-white">known to be used by the Nawi people</p>
+							<div>
+								<v-btn rounded="xl" flat to="/vendor/profile" color="orange"><span class="smallBtn"> See product </span> </v-btn>
+								<v-btn to="/user/login" flat variant="text" class="ml-2 text-white howit"
+									><span style="text-decoration: underline">
+										<span class="smallBtn"> Not now </span>
+									</span>
+								</v-btn>
+							</div>
+						</div>
+						<div v-if="false" class="pa-6" style="position: absolute; bottom: 0; left: 0; width: 100%">
+							<v-card
+								style="
+									background: rgba(0, 0, 0, 0.7);
+									backdrop-filter: blur(25px);
+									bottom: 0;
+									/* Note: backdrop-filter has minimal browser support */
 
-border-radius: 20px;" class=" d-flex align-center  pa-4">
-<v-avatar size="50" class="mr-4"><v-img class="bg-grey-lighten-2" src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img></v-avatar> 
-<p class="text-white">@nawi_the_skulptur_queen</p>
-</v-card>     
-          </div>
-     
-</v-img>
-</v-col>
-</v-row> 
-
-</v-container> 
-<product-row :maxwidth="'1400px'" :showVendor="false" title="😎 Recently viewed" />
-<product-row :maxwidth="'1400px'" :showVendor="false" title="🎩 Top Selling Items" />
-<Mainfooter />
-
- </div>
-
+									border-radius: 20px;
+								"
+								class="d-flex align-center pa-4"
+							>
+								<v-avatar size="50" class="mr-4"
+									><v-img class="bg-grey-lighten-2" src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img
+								></v-avatar>
+								<p class="text-white">@nawi_the_skulptur_queen</p>
+							</v-card>
+						</div>
+					</v-img>
+				</v-col>
+			</v-row>
+		</v-container>
+		<product-row :maxwidth="'1400px'" :showVendor="false" title="😎 Recently viewed" />
+		<product-row :maxwidth="'1400px'" :showVendor="false" title="🎩 Top Selling Items" />
+		<Mainfooter />
+	</div>
 </template>
 
 <script setup>
@@ -264,7 +257,7 @@ const cartStore = useCartStore();
 const router = useRouter();
 
 // Reactive data
-const selectAll = ref(getLocalStorageItem('selectAll', false));
+const selectAll = ref(getLocalStorageItem("selectAll", false));
 const placescards = ref(false);
 const mods = ref(1);
 const tab = ref(null);
@@ -285,81 +278,88 @@ async function confirmRemoval() {
     itemIdToRemove.value = null;
     cartItemToRemove.value = null // Reset the item ID after removal
 
-    isModalVisible.value = false;
+		isModalVisible.value = false;
 
-    if (cartStore.totalCartItems === 0) {
-      nextTick(() => {
-        router.push('/market_place');
-      });
-    }
-  }
+		if (cartStore.totalCartItems === 0) {
+			nextTick(() => {
+				router.push("/market_place");
+			});
+		}
+	}
 }
 
 function selectItem(id) {
-  cartStore.handleSelect(id)
-  if (selectAll.value) {
-    selectAll.value = false
-    setLocalStorageItem("selectAll", selectAll.value)
-  }
+	cartStore.handleSelect(id);
+	if (selectAll.value) {
+		selectAll.value = false;
+		setLocalStorageItem("selectAll", selectAll.value);
+	}
 }
 
 function handleCheckout() {
-  cartStore.checkoutProducts()
-  router.push('/order/checkout')
+	cartStore.checkoutProducts();
+	router.push("/order/checkout");
 }
 
 function selectAllItems() {
-  selectAll.value = !selectAll.value
-  setLocalStorageItem("selectAll", selectAll.value)
-    if (selectAll.value) {
-      cartStore.selectAllItems()
-    } else {
-      cartStore.deSelectAllItems()
-    }
+	selectAll.value = !selectAll.value;
+	setLocalStorageItem("selectAll", selectAll.value);
+	if (selectAll.value) {
+		cartStore.selectAllItems();
+	} else {
+		cartStore.deSelectAllItems();
+	}
 }
 
 function showClearCart() {
-  isConfirmClear.value = true
+	isConfirmClear.value = true;
 }
 
 async function confirmClearCart() {
   await cartStore.clearCart()
 
-  isConfirmClear.value = false 
+	isConfirmClear.value = false;
 
-  nextTick(() => {
-        router.push('/market_place');
-      });
+	nextTick(() => {
+		router.push("/market_place");
+	});
 }
 // Computed properties
 const buttons = computed(() => [
-  { icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png' },
-  { icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png' },
-  { icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png' },
-  { icon: 'https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png' }
+	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png" },
+	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png" },
+	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png" },
+	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png" },
 ]);
 
-
+const isAnyItemSelected = computed(() => {
+	// return cartStore.items.some(item => item.selected);
+	return cartStore.totalCheckoutItems > 0;
+});
 
 const cols = computed(() => {
-  const { lg, sm, md } = $vuetify.display;
-  return lg
-      ? [4, 6, 6, 6, 4, 8, 4, 3, 10, 2]
-      : md
-      ? [4, 6, 6, 12, 6, 8, 4, 3, 10, 2]
-      : sm
-      ? [6, 12, 12, 12, 12, 12, 12, 12, 12]
-      : [6, 12, 12, 12, 12, 12, 12, 12, 12];
+	const { lg, sm, md } = $vuetify.display;
+	return lg
+		? [4, 6, 6, 6, 4, 8, 4, 3, 10, 2]
+		: md
+		? [4, 6, 6, 12, 6, 8, 4, 3, 10, 2]
+		: sm
+		? [6, 12, 12, 12, 12, 12, 12, 12, 12]
+		: [6, 12, 12, 12, 12, 12, 12, 12, 12];
 });
 
 // Methods
 function filt(text) {
-  return text.length > 50 ? text.slice(0, 50) + '...' : text;
+	return text.length > 50 ? text.slice(0, 50) + "..." : text;
 }
 
-// watch(() => cartStore.totalCartItems, (newVal) => {
-//   if (newVal === 0) {
-//     router.push('/market_place');
-//   }
-// }, { immediate: true });
+watch(
+	() => cartStore.totalCartItems,
+	(newVal) => {
+		if (newVal === 0) {
+			router.push("/market_place");
+		}
+	},
+	{ immediate: true }
+);
 </script>

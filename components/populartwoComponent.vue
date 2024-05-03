@@ -25,7 +25,7 @@
 						<span style="color: #1273eb; font-weight: 600"> Nweke Franklin O. </span>
 					</p>
 				</div>
-				<div v-if="showBid">
+				<!-- <div v-if="showBid">
 					<p
 						@click="$router.push('/product_page')"
 						style="font-weight: 600; font-size: 20px; line-height: 18px; cursor: pointer; color: #000000"
@@ -34,7 +34,7 @@
 						€ 2430.00
 					</p>
 					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: 1.26px; text-transform: uppercase" class="mt-1">Current Bid</p>
-				</div>
+				</div> -->
 			</div>
 
 			<div class="d-flex mt-4 align-end">
