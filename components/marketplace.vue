@@ -172,7 +172,7 @@
 				<!-- :class="$vuetify.display.mobile ? 'd-block' : 'd-none'" -->
 
 				<v-layout class="d-block d-md-none">
-					<v-navigation-drawer v-model="filterDrawer" :location="$vuetify.display.mobile ? 'right' : undefined" permanent style="width: 85%; top: 0%">
+					<v-navigation-drawer v-model="filterDrawer" :location="$vuetify.display.mobile ? 'right' : undefined" temporary style="width: 85%; top: 0%">
 						<div style="height: auto">
 							<div class="d-flex align-center justify-space-between px-4 pt-4">
 								<p style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>

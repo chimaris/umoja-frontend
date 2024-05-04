@@ -22,7 +22,7 @@
 	<Decoration v-else-if="select == 'home decoration'" style="margin-bottom: 100px" />
 	<Cosmetics v-else-if="select == 'cosmetics'" style="margin-bottom: 100px" />
 
-	<shopmenu :showImg="showImg" :databank="databank" />
+	<!-- <shopmenu :showImg="showImg" :databank="databank" /> -->
 
 	<product-row
 		:vendorlist="databank.vendor.items"

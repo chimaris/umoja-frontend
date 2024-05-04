@@ -41,9 +41,11 @@
 						<v-btn width="225" height="44" rounded="xl" flat style="" color="green"> Shop Now</v-btn>
 					</div>
 				</v-col>
+
 				<v-col class="pl-9 pa-4" cols="12" md="8">
 					<v-row style="min-height: 554px">
 						<v-col cols="12" style="position: relative" md="6"> </v-col>
+
 						<v-col style="position: relative; min-height: 350px" cols="12" md="6">
 							<div
 								:class="'selected' + i"
@@ -81,6 +83,7 @@
 										border-radius: 16.127px;
 									"
 								></div>
+								
 								<v-img
 									v-if="i % 2 !== 0"
 									eager
@@ -354,6 +357,7 @@ export default {
 	},
 };
 </script>
+
 <style>
 .bgh {
 	background: linear-gradient(319deg, #00000065, transparent);
@@ -362,4 +366,5 @@ export default {
 	opacity: 0;
 	scale: 0;
 }
+
 </style>

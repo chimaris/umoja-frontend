@@ -49,7 +49,7 @@
 			</div>
 		</v-container>
 		<v-container style="max-width: 1200px; width: 100%" class="text-center">
-			<img class="" style="width: 300px; height: 300px" :src="item.image" />
+			<img class="" style="width: auto; height: 300px" :src="item.image" />
 		</v-container>
 	</v-card>
 	<div style="width: 100%; height: 5px; position: sticky; bottom: 0">
