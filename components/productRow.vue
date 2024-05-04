@@ -71,8 +71,16 @@
 				</v-col>
 			</v-row>
 
-			<v-btn block class="d-flex d-md-none mt-10" color="#333" size="x-large" style="" variant="outlined" rounded="xl">
-				See All <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
+			<v-btn
+				block
+				class="d-flex d-md-none mt-8"
+				color="#333"
+				size="large"
+				style="border: 1px solid #333; font-weight: 500; color: #333"
+				variant="outlined"
+				rounded="xl"
+			>
+				<span style="font-size: 14px">See All</span> <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
 			</v-btn>
 		</div>
 	</v-container>
