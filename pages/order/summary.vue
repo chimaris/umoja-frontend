@@ -191,6 +191,11 @@ import { getCurrentTransactionDate } from "~/utils/date";
 import { formattedPrice } from "~/utils/price";
 
 export default {
+	setup(){
+		definePageMeta({
+        middleware: ["auth"]
+    	});
+	},
 	data() {
 		return {
 			viewAll: false,

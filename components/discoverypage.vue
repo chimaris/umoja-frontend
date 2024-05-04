@@ -528,7 +528,7 @@ export default {
 			return useProductStore();
 		},
 		items() {
-			return this.productStore.getProductsArray("main");
+			return this.productStore.filteredProducts();
 		},
 		buttons() {
 			return [

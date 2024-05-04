@@ -222,7 +222,6 @@ letter-spacing: -0.14px;
     <v-btn type="submit" class="textClass px-8" rounded="xl" color="green"  flat>
         
         <span class="mr-4"> Use this address</span>
-		<v-progress-circular v-if="cartStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
     </v-btn>          
     <v-btn @click="addAddress = false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>
 </v-form>          

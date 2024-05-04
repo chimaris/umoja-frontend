@@ -38,7 +38,6 @@
 					:showVendor="showVendor"
 					:showdisco="showdisco"
 					:item="n"
-					@add-to-cart="AddToCart(n)"
 				/>
 			</div>
 
@@ -52,7 +51,6 @@
 					:showVendor="showVendor"
 					:showdisco="showdisco"
 					:item="n"
-					@add-to-cart="AddToCart(n)"
 				/>
 			</div>
 		</div>

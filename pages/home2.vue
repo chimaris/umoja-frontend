@@ -329,7 +329,7 @@
 		/>
 	</div>
 	<div>
-		<product-row :cover="false" :maxwidth="'1200px'" :items="items23" :showVendor="true" title=" 🔥 Hot Deals " />
+		<product-row :cover="false" :maxwidth="'1200px'" :items="productStore.products.hotDeals" :showVendor="true" title=" 🔥 Hot Deals " />
 
 		<div style="padding: 150px 0px" class="d-none d-md-block">
 			<v-carousel style="overflow: visible" height="429" class="promo" :show-arrows="false" hide-delimiter-background="" cycle>
@@ -373,7 +373,7 @@
 			</v-carousel>
 		</div>
 
-		<product-row :items="items2" :cover="false" :maxwidth="'1200px'" :showVendor="true" title="💰 Most Selling Products" />
+		<product-row :items="productStore.products.hotDeals" :cover="false" :maxwidth="'1200px'" :showVendor="true" title="💰 Most Selling Products" />
 		<PopularTwoRow :showBid="twocardrow.showBid" :maxwidth="'1200px'" :items="twocardrow.items" :title="twocardrow.title" />
 	</div>
 	<div class="bg-black py-16 py-md-0">
@@ -561,6 +561,7 @@
 import { gsap, Bounce, Back, CSSPlugin } from "gsap";
 import { useTutorialStore } from "~/stores/tutorialStore";
 import { Howl, Howler } from "howler";
+import { useProductStore } from "~/stores/productStore";
 
 export default {
 	data() {
@@ -732,100 +733,6 @@ export default {
 				},
 			],
 			selectedCountry: "",
-			items23: [
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694169115/h-796-d-416305-eb-4758-b-6-bbba-310-e-078-fb-7-u-1gf_ps19db.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1691574327/s-2-gs-x-1-po-l_ckeqxo.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cosahoes_oifr7p.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694169115/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cohff_d1hbgf.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-			],
-			items2: [
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-796-d-416305-eb-4758-b-6-bbba-310-e-078-fb-7-u-2capjy_a5tncs.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694170676/s-2-gs-x-1-po-lshoeuhyf_acrhye.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694170674/ankara-sneakers-1500-xchapkufk_ykmili.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cosahoes_oifr7p.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694170674/ankara-sneakers-1500-xchapkufk_ykmili.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694170675/h-468-a-70379-a-6043119-f-5077-bf-8-ba-35-a-7-cosahoes_oifr7p.png",
-					price: "150000.00",
-					subCategory: "Organic cotton certified",
-					location: "Lagos, Nigeria",
-					likes: "66",
-					oos: true,
-				},
-			],
 			twocardrow: {
 				showBid: false,
 				title: "⚡️ Popular Products of the Week",
@@ -1195,6 +1102,9 @@ export default {
 	},
 
 	computed: {
+		productStore(){
+			return useProductStore()
+		},
 		databank() {
 			return this.tutorialStore.databank;
 		},
