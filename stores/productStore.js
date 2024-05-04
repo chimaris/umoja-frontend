@@ -7,6 +7,7 @@ const api = useApi()
 export const useProductStore = defineStore('productStore', {
   state: () => ({
     recentSearches: getLocalStorageItem("recentSearches", []),
+    searchTerm: "",
     allProducts: [],
     products: {
       main: [],
@@ -20,6 +21,34 @@ export const useProductStore = defineStore('productStore', {
     },
   }),
   actions: {
+    filteredProducts() {
+      let result = this.products.main
+
+      if (this.searchTerm) {
+        result = this.allProducts.filter(product => {
+        return product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+             product.description.toLowerCase().includes(this.searchTerm.toLowerCase());
+          });
+      this.updateRecentSearches(this.searchTerm)
+      }
+
+      return result
+    },
+    updateRecentSearches(searchTerm) {
+			const maxRecentSearches = 6;
+			this.recentSearches.unshift(searchTerm);
+
+			if (this.recentSearches.length > maxRecentSearches) {
+				this.recentSearches.pop(); // Remove the oldest search term from the end
+				
+			}
+
+			setLocalStorageItem("recentSearches", this.recentSearches)
+    	},
+      clearSearchHistory() {
+        this.recentSearches = [];
+        setLocalStorageItem("recentSearches", this.recentSearches)
+      },
     async fetchProducts() {
       const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');
       this.products.row = response.data.data.slice(0, 15);

@@ -10,6 +10,7 @@ export const useCartStore = defineStore('cart', {
     checkoutItems: getLocalStorageItem('allcheckoutItem', []),
     shippingDetails: getLocalStorageItem("shipping-details", []),
     addressError: "",
+    billingError: "",
     loading: false,
     shippingAdress: getLocalStorageItem("shippingAdress", []),
     discountError: "",
@@ -107,6 +108,49 @@ export const useCartStore = defineStore('cart', {
       return response
     }catch(error) {
       console.error(error);
+    }
+   },
+   async createBillingAddress(data){
+    this.billingError = ""
+        try {
+          const response = await api ({
+            url: 'customer/billingAddresses',
+            method: 'post',
+            data: data
+          });
+          return response
+      }catch (error) {
+        if (error.response) {
+          this.billingError = error.response.data.message || 'An error occurred while adding billing address.';
+        } else if (error.request) {
+          this.billingError = 'No response received from server. Please try again later.';
+        } else {
+          this.billingError = 'An error occurred. Please try again later.';
+        }
+        return false;
+      }
+   },
+   async editBillingAddress(data, id){
+    this.billingError = ""
+    try {
+      const response = await api({
+        url: `customer/billingAddresses/${id}`,
+        method: 'post',
+        data: {
+          _method: 'PUT',
+          ...data
+        }
+      });
+      return true
+    }catch (error) {
+      if (error.response) {
+        this.billingError = error.response.data.message || 'An error occurred while adding billing address.';
+      } else if (error.request) {
+        this.billingError = 'No response received from server. Please try again later.';
+      } else {
+        this.billingError = 'An error occurred. Please try again later.';
+      }
+      return false;
     }
    },
    async createShippingAddress(data) {

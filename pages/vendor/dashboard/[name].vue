@@ -192,7 +192,9 @@ const handleClick = () => {
       if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product') {
         // Update the currentPage value to 'Products' if it meets the condition, otherwise set it to 'Orders'
         currentPage.value = 'Products';
+		router.push('/vendor/dashboard/Products')
       } else {
+		router.push('/vendor/dashboard/Orders')
         currentPage.value = 'Orders';
       }
     };

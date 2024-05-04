@@ -28,7 +28,7 @@ font-weight: 600;" class="pa-6 pb-4">🔥 Popular Products </p>
 font-size: 20px;
 font-weight: 600;">🔎 Recent Searches</p>
 
-<v-btn variant="text" color="#C20052">
+<v-btn @click="productStore.clearSearchHistory()" variant="text" color="#C20052">
    <span style="font-size: 14px;font-weight: 500;
 ">
 
