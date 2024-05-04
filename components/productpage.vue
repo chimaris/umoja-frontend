@@ -9,7 +9,7 @@
 					v-if="item.disabled"
 					style="color: #2c6e63; font-size: 14px; font-weight: 600; line-height: 20px; /* 142.857% */ letter-spacing: -0.14px"
 				>
-					{{ item.title }}
+					{{ product.name }}
 				</span>
 				<span
 					v-else
@@ -23,23 +23,30 @@
 		<v-row>
 			<v-col cols="12" lg="8">
 				<div class="py-6">
-					<productpageloader v-if="loading" />
-					<div v-else>
+					<div>
 						<v-row>
 							<v-col cols="12" lg="6">
 								<v-carousel v-model="carousel" class="caro mb-2" style="border-radius: 6px" hide-delimiters height="349px">
-									<v-carousel-item
+									<v-carousel-item v-if="product.photo.includes(',')"
+										:value="n"
+										v-for="(n, index) in product.photo.split(',')" :key="index"
+										cover
+										height="349px"
+										:src="n"
+									>
+									</v-carousel-item>
+									<v-carousel-item v-else
 										:value="n"
 										v-for="n in 4"
 										:key="n"
 										cover
 										height="349px"
-										src="https://res.cloudinary.com/payhospi/image/upload/v1691080529/rectangle-1900_lpn3bj.png"
+										:src="product.photo"
 									>
 									</v-carousel-item>
 								</v-carousel>
-								<v-row dense>
-									<v-col v-for="n in 4" :key="n" cols="3">
+								<v-row dense v-if="product.photo.includes(',')">
+									<v-col v-for="n in product.photo.split(',')" cols="3">
 										<v-img
 											v-ripple="{ class: 'text-grey' }"
 											class="bg-grey-lighten-4 caroimg"
@@ -47,7 +54,22 @@
 											style="border-radius: 6px !important"
 											cover
 											height="103px"
-											src="https://res.cloudinary.com/payhospi/image/upload/v1691080529/rectangle-1900_lpn3bj.png"
+											:src="n"
+										>
+											<v-overlay persistent="" scrim="green" opacity="0" :model-value="carousel == n" contained></v-overlay>
+										</v-img>
+									</v-col>
+								</v-row>
+								<v-row dense v-else>
+									<v-col v-for="n in 4" cols="3">
+										<v-img
+											v-ripple="{ class: 'text-grey' }"
+											class="bg-grey-lighten-4 caroimg"
+											@click="carousel = n"
+											style="border-radius: 6px !important"
+											cover
+											height="103px"
+											:src="product.photo"
 										>
 											<v-overlay persistent="" scrim="green" opacity="0" :model-value="carousel == n" contained></v-overlay>
 										</v-img>
@@ -59,7 +81,7 @@
 									:style="{ fontSize: $vuetify.display.mobile ? '20px' : '28px' }"
 									style="color: #333; font-weight: 600; line-height: 140%; /* 39.2px */ letter-spacing: -0.84px"
 								>
-									Green and brown kente scarf material, Made in Lagos Nigeria.
+									{{product.name}}
 								</p>
 								<div class="d-flex align-center">
 									<v-rating
@@ -77,17 +99,17 @@
 									style="color: var(--carbon-6, #1e1e1e); font-weight: 600; line-height: 140%"
 									class="my-4"
 								>
-									€ 2500.00
+									{{formattedPrice(product.price)}}
 								</p>
-								<div class="d-flex mb-2 align-center">
-									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">Available Size</p>
+								<div v-if= "product.sizes && product.sizes.length > 0" class="d-flex mb-2 align-center">
+									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">Available Sizes</p>
 									<v-btn class="ml-1" variant="text" color="#969696"
 										><span style="font-size:14px, font-weight: 500">Size Guide</span> <v-icon class="ml-1" icon="mdi mdi-arrow-right"></v-icon
 									></v-btn>
 								</div>
 								<div style="max-width: 295px">
-									<v-row dense>
-										<v-col cols="4" v-for="(n, i) in ['XXS', 'XL', 'XS', 'S', 'M', 'L', 'XXL', '3XL', '4XL']" :key="n">
+									<v-row dense v-if= "product.sizes && product.sizes.length > 0">
+										<v-col cols="4" v-for="(n, i) in product.sizes">
 											<p
 												:class="size == n ? 'greenbox' : ''"
 												@click="size = n"
@@ -101,17 +123,17 @@
 										</v-col>
 									</v-row>
 								</div>
-								<div class="d-flex mt-4 align-center">
+								<div v-if="product.colors && product.colors.length > 0" class="d-flex mt-4 align-center">
 									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">
-										Color: <span style="color: #969696">Yellow</span>
+										Available colors
 									</p>
 								</div>
-								<div class="d-flex my-2">
+								<div v-if="product.colors && product.colors.length > 0" class="d-flex my-2">
 									<div
 										:class="color == i ? 'addborder' : ''"
 										@click="color = i"
 										class="caroimg d-flex mr-2"
-										v-for="(n, i) in ['#25476D', '#274F59', '#D5943A', '#A83837', '#373A6D']"
+										v-for="(n, i) in product.colors"
 										:key="i"
 										:style="'background:' + n"
 										style="border-radius: 50%; overflow: hidden; height: 26px; width: 26px"
@@ -125,8 +147,7 @@
 
 						<!-- Set Product Quality for Mobile View -->
 						<div class="py-6 d-block d-md-none">
-							<productsetloader v-if="loading" />
-							<div v-else>
+							<div >
 								<v-card flat class="pa-0 cardStyle">
 									<div style="background-color: #edf3f0; height: 40px" class="d-flex align-center justify-center w-100">
 										<p style="color: #00966d; font-size: 14px; font-weight: 600; line-height: 140%">Available</p>
@@ -134,11 +155,12 @@
 									<div class="px-6 py-4">
 										<p style="font-size: 20px; font-weight: 500">Set Quantity</p>
 										<div class="d-flex justify-space-between align-center my-2">
-											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">2</span></p>
+											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">{{quantity}}</span></p>
 
 											<v-btn-group border rounded="xl" divided density="compact">
 												<v-btn
-													@click="removeItem({ id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...' })"
+													@click="quantity --"
+													:disabled = "quantity <= 1"
 													class="dark-hover"
 													rounded="0"
 												>
@@ -146,10 +168,10 @@
 												</v-btn>
 
 												<v-btn :ripple="false" rounded="0">
-													{{ getItemQuantity(1) }}
+													{{quantity}}
 												</v-btn>
 												<v-btn
-													@click="addToCart({ id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...' })"
+													@click="quantity ++"
 													class="green-hover"
 													rounded="0"
 												>
@@ -162,8 +184,10 @@
 											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Total</p>
 											<p style="color: #1e1e1e; font-size: 24px; font-weight: 600; line-height: 140%">€ 5000.00</p>
 										</div>
-										<v-btn to="/order/cart" block class="mb-2" size="large" flat color="green" rounded="xl"
-											><span style="color: #edf0ef; font-size: 14px; font-weight: 600">Add to Cart</span></v-btn
+										<v-btn @click="addToCart()" block class="mb-2" size="large" flat color="green" rounded="xl"
+											><span style="color: #edf0ef; font-size: 14px; font-weight: 600">
+												{{isInCart() ? "Added to Cart" : "Add to cart"}}
+											</span></v-btn
 										>
 										<v-btn
 											class="dark-hover"
@@ -205,25 +229,26 @@
 
 						<p style="color: #333; font-size: 16px; font-weight: 600; line-height: 180%; /* 28.8px */ letter-spacing: -0.48px">Description:</p>
 						<p style="color: #333; font-size: 14px; font-weight: 400; line-height: 180%">
-							Lorem ipsum dolor sit amet consectetur. In dolor pharetra duis eget eu aliquet volutpat. Pulvinar mauris nulla amet sagittis vitae lacus
-							egestas lacus diam. Urna netus sollicitudin augue neque id enim mattis tellus quisque. Risus nibh feugiat id rhoncus volutpat elit in.
-							Pellentesque sit at lectus nec habitant nunc leo. Viverra rhoncus enim praesent fringilla interdum sed commodo semper elementum. Est
-							tortor congue diam egestas. Faucibus quam ac posuere sed neque euismod mi. Semper vitae in ultrices nunc nibh a massa.
+							{{product.description}}
 						</p>
 
 						<v-divider color="#EDEDED" class="my-6"></v-divider>
 
 						<p style="color: #333; font-size: 16px; font-weight: 600; line-height: 180%; /* 28.8px */ letter-spacing: -0.48px">Specification:</p>
-						<ul style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
-							<li v-for="(item, index) in specs" :key="index">
-								<span>{{ item.label }}:</span> {{ item.value }}
+						<ul v-if="product.product_spec.includes(',')" style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
+							<li v-for="(item, index) in product.product_spec.split(',')" :key="index">
+								<span>{{item}}</span>
+							</li>
+						</ul>
+						<ul v-else style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
+							<li>
+								<span>{{product.product_spec}}</span>
 							</li>
 						</ul>
 
 						<!-- Set Delivery Options for Mobile View -->
 						<div class="py-6 d-block d-md-none">
-							<productsetloader v-if="loading" />
-							<div v-else>
+							<div>
 								<v-card flat class="mt-4 py-9 cardStyle">
 									<div class="d-flex justify-space-between align-center">
 										<p style="color: #1e1e1e; font-size: 14px; font-weight: 600">Ship to</p>
@@ -458,8 +483,7 @@
 			</v-col>
 			<v-col cols="12" lg="4">
 				<div class="py-6 d-none d-md-block">
-					<productsetloader v-if="loading" />
-					<div v-else>
+					<div>
 						<v-card flat class="pa-0 cardStyle">
 							<div style="background-color: #edf3f0; height: 40px" class="d-flex align-center justify-center w-100">
 								<p style="color: #00966d; font-size: 14px; font-weight: 600; line-height: 140%">Available</p>
@@ -467,24 +491,25 @@
 							<div class="px-6 py-4">
 								<p style="font-size: 20px; font-weight: 500">Set Quantity</p>
 								<div class="d-flex justify-space-between align-center my-2">
-									<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">2</span></p>
+									<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">{{ quantity }}</span></p>
 
 									<v-btn-group border rounded="xl" divided density="compact">
 										<v-btn
-											@click="removeItem({ id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...' })"
 											class="dark-hover"
 											rounded="0"
+											@click="quantity --"
+											:disabled = "quantity <= 1"
 										>
 											<v-icon icon="mdi mdi-minus "></v-icon>
 										</v-btn>
 
 										<v-btn :ripple="false" rounded="0">
-											{{ getItemQuantity(1) }}
+											{{quantity}}
 										</v-btn>
 										<v-btn
-											@click="addToCart({ id: 1, price: 800, quantity: 1, name: 'Green and brown kente scarf...' })"
 											class="green-hover"
 											rounded="0"
+											@click="quantity ++"
 										>
 											<v-icon icon="mdi mdi-plus"></v-icon>
 										</v-btn>
@@ -493,10 +518,12 @@
 								<v-divider class="my-4"></v-divider>
 								<div class="d-flex justify-space-between align-center mb-4 my-2">
 									<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Total</p>
-									<p style="color: #1e1e1e; font-size: 24px; font-weight: 600; line-height: 140%">€ 5000.00</p>
+									<p style="color: #1e1e1e; font-size: 24px; font-weight: 600; line-height: 140%">{{formattedPrice(quantity * product.price)}}</p>
 								</div>
-								<v-btn to="/order/cart" block class="mb-2" size="large" flat color="green" rounded="xl"
-									><span style="color: #edf0ef; font-size: 14px; font-weight: 600">Add to Cart</span></v-btn
+								<v-btn @click="addToCart()" block class="mb-2" size="large" flat color="green" rounded="xl"
+									><span style="color: #edf0ef; font-size: 14px; font-weight: 600">
+										{{isInCart() ? "Added to Cart" : "Add to cart"}}
+									</span></v-btn
 								>
 								<v-btn
 									class="dark-hover"
@@ -607,19 +634,29 @@
 }
 </style>
 <script>
+import {formattedPrice} from '~/utils/price'
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import { useCartStore } from "~/stores/cartStore";
+import { useUserStore } from "~/stores/userStore";
+import {ref} from "vue";
 
 export default {
+	setup(){
+		const quantity = ref(1);
+
+		return {
+			quantity
+		}
+	},
+	props: ["product"],
 	components: {
 		EditorContent,
 	},
 	mounted() {
-		this.mockLoading();
 		this.editor = new Editor({
 			extensions: [
 				StarterKit,
@@ -637,7 +674,6 @@ export default {
 	},
 	data() {
 		return {
-			loading: true,
 			productDetails: [
 				{ label: "Payment", labelColor: "#969696", value: "Secure transaction", valueColor: "#1273EB" },
 				{ label: "Ships from", labelColor: "#969696", value: "Umoja", valueColor: "#000" },
@@ -675,37 +711,12 @@ export default {
 					name: "1 Star",
 				},
 			],
-			specs: [
-				{ label: "Material", value: "Polyester" },
-				{ label: "Type", value: "Wax fabric" },
-				{ label: "Yarn Type", value: "Combed" },
-				{ label: "Pattern", value: "Printed" },
-				{ label: "Style", value: "Plain" },
-				{ label: "Width", value: '43/44"' },
-				{ label: "Technics", value: "Woven" },
-				{ label: "Feature", value: "Anti-UV, Flame Retardant, Fusible, Shrink-Resistant, Tear-Resistant" },
-				{
-					label: "Use",
-					value: "Bag, Bedding, Cover, Curtain, Dress, Garment, Home Textile, Industry, Interlining, Military, Pillow, Shirt, Tent, Wedding",
-				},
-				{ label: "Weight", value: "141-149g/yard" },
-				{ label: "Certification", value: "ISO9001" },
-				{ label: "Name", value: "African wax fabric" },
-				{ label: "Technology", value: "Wax printed" },
-				{ label: "Other authentication", value: "ISO14001" },
-				{ label: "Origin", value: "China" },
-				{ label: "Use", value: "Clothes" },
-				{ label: "Colour fastness", value: "3.5-4" },
-				{ label: "Quality", value: "High" },
-				{ label: "Main place of export", value: "Africa" },
-				{ label: "Popularity", value: "Best-known" },
-			],
 			item: "Green and brown kente scarf...",
 			items: [
 				{
 					title: "Market Place",
 					disabled: false,
-					href: "/",
+					href: "/market_place",
 				},
 				{
 					title: "Fashion",
@@ -725,20 +736,29 @@ export default {
 		},
 	},
 	methods: {
-		mockLoading() {
-			setTimeout(() => {
-				this.loading = false;
-			}, 2000);
-		},
-		getItemQuantity(itemId) {
+		isInCart() {
 			const cartStore = useCartStore();
-			return cartStore.getItemQuantity(itemId);
+			const index = cartStore.items.findIndex(item => item.id == this.product.id)
+			if (index !== -1) {
+				return true
+			}else {
+				return false
+			}
 		},
-		addToCart(item) {
-			this.cartStore.addItem(item);
-		},
-		removeItem(item) {
-			this.cartStore.removeItem(item);
+		addToCart() {
+			const userStore = useUserStore();
+			
+			const cartStore = useCartStore();
+			if (userStore.getIsLoggedIn) {
+				const index = cartStore.items.findIndex(cart => cart.id == this.product.id)
+				if (index !== -1) {
+					cartStore.clearItem(this.product.id)
+					return
+				}
+				cartStore.addItem(this.product, this.quantity);
+			} else {
+				this.$router.push("/user/login");
+			}
 		},
 	},
 };

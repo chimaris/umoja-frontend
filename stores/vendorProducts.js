@@ -24,19 +24,27 @@ export const useVendorProductStore = defineStore('vendor-product', {
         loading: false,
         productError: "",
         pictureError : "",
+        pagesNo: null,
+        currentPage: null,
+        from: null,
+        toPage: null,
        
     }),
     getters: {
         getProducts: (state) => state.Products
     },
     actions: {
-      async getAllProduct() {
+      async getAllProduct(page) {
         try {
           const response = await api({
-            url: 'vendor/products',
+            url: `vendor/products/?page=${page}`,
             method: 'get'
           });
           this.Products = response.data.data;
+          this.pagesNo = response.data.meta.last_page;
+          this.from = response.data.meta.from;
+          this.toPage = response.data.meta.to;
+          this.currentPage = response.data.meta.current_page;
         }catch(error) {
           console.error(error)
         }
@@ -143,8 +151,8 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   // Compress the image using Compressor.js
                   const compressedImage = await new Promise((resolve, reject) => {
                     new Compressor(blob, {
-                      quality: 0.5,
-                      maxWidth: 800,
+                      quality: 1,
+                      maxWidth: 1000,
                       maxHeight: 600,
 
                       success(result) {

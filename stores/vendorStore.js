@@ -161,10 +161,12 @@ export const useVendorStore = defineStore('vendor', {
         this.loading = false;
       } 
     },
-    logout() {
-      removeLocalStorageItem('vendorIsLoggedIn');
-      this.vendor = null;
-      this.vendorIsLoggedIn = false;
+    async logout() {
+       await api({
+        url: 'auth/logout',
+        method: 'post'
+       });
+       return true
     }
   }
 });

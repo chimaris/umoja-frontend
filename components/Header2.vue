@@ -42,6 +42,7 @@
 										prepend-inner-icon="mdi mdi-magnify"
 										placeholder="Ankara"
 										density="compact"
+										v-model="productStore.searchTerm"
 									>
 										<template v-slot:append-inner>
 											<v-icon color="grey" @click="searchmenu = false" icon="mdi mdi-close-circle" />
@@ -137,6 +138,8 @@ import { useTheme } from "vuetify";
 import { useCartStore } from "~/stores/cartStore";
 import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
+import { useProductStore } from "~/stores/productStore";
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
 export default {
 	data() {
@@ -190,6 +193,9 @@ export default {
 		},
 		cartStore() {
 			return useCartStore();
+		},
+		productStore(){
+			return useProductStore()
 		},
 		router() {
 			return useRouter();

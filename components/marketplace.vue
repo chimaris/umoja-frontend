@@ -162,8 +162,8 @@
 					</div>
 					<div>
 						<v-row id="homepage" style="background-color: #fff" class="mt-2">
-							<v-col v-for="(n, i) in productStore.products.main" :key="i" lg="3" cols="6" sm="6" md="4">
-								<product-component :index="i" :item="n" @add-to-cart="AddToCart(n)" />
+							<v-col v-for="(n, i) in productStore.filteredProducts()" :key="i" lg="3" cols="6" sm="6" md="4">
+								<product-component :index="i" :item="n" />
 							</v-col>
 						</v-row>
 					</div>
@@ -309,15 +309,6 @@ export default {
 		};
 	},
 	methods: {
-		AddToCart(item) {
-			const userStore = useUserStore();
-			const cartStore = useCartStore();
-			if (userStore.getIsLoggedIn) {
-				cartStore.addItem(item);
-			} else {
-				this.$router.push("/user/login");
-			}
-		},
 		selectCountry(item) {
 			this.country = item;
 		},

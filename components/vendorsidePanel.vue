@@ -10,7 +10,8 @@ padding-top: 32px;">
 
     <v-slide-x-transition>
 
-    <v-menu v-if="sidebar">
+    <v-menu v-if="sidebar" :close-on-content-click="false">
+      
 <template v-slot:activator="{ props }">
 <div class="px-8">
 
@@ -37,8 +38,14 @@ color: #596066;">{{ vendor.last_name }} {{ vendor.first_name }}</p>
 </template>
 
 <v-list>
-<v-list-item v-for="(item, index) in ['Account','Settings', 'Logout']" :key="index">
-<v-list-item-title>{{ item }}</v-list-item-title>
+<v-list-item style="cursor: pointer">
+Account
+</v-list-item>
+<v-list-item style="cursor: pointer">
+Settings
+</v-list-item>
+<v-list-item style="cursor: pointer" @click="logOut">
+Logout
 </v-list-item>
 </v-list>
 </v-menu>                  </v-slide-x-transition>
@@ -147,13 +154,14 @@ const vendorStore = useVendorStore();
 
 return {
 integratedApps: appStore.integratedApps,
+vendorStore,
 vendor: vendorStore.getVendor
 };
 },
 mounted(){
-this.selectedItem = this.window
+this.selectedItem = this.currentPage
 },
-props: ['window', 'sidebar'],
+props: ['currentPage', 'sidebar'],
 data() {
 return {
 list: '',
@@ -208,6 +216,12 @@ subapps: [
 }
 },
 methods:{
+  async logOut(){
+    const response = await this.vendorStore.logout();
+    if (response) {
+      this.$router.push('/vendor/login')
+    }
+  },
 selectItem(n){
 if (n == 'All Apps') {
 this.openapps = !this.openapps
