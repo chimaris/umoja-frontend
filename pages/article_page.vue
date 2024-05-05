@@ -1,5 +1,5 @@
 <template>
 	<Header2 />
-	<postPage />
+	<articlePage />
 	<Mainfooter :showBaloon="true" />
 </template>
