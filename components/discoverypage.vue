@@ -160,7 +160,15 @@
 									</v-list>
 								</v-menu>
 							</div>
-
+							<div v-if="productStore.searching" style="width: 100%; text-align: center; margin-bottom: 20px;">
+							<v-progress-circular
+							color="green"
+							indeterminate
+							></v-progress-circular>
+							</div>
+							<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px;">
+								<p>{{ productStore.searchError }}</p>
+							</div>
 							<v-row style="" class="">
 								<v-col cols="6" v-for="(n, i) in items" sm="4" :key="i" lg="24" md="3">
 									<product-component :item="n" :index="i" />

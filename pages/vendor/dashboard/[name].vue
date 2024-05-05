@@ -132,7 +132,7 @@
 		</v-row>
 	</div>
 	<tutorial />
-	<v-dialog v-model="isSessionExpired" max-width="400">
+	<v-dialog v-model="isSessionExpired" max-width="400" persistent>
 	<v-card>
 		<v-card-title class="text-h5">Session Expired</v-card-title>
 		<v-card-text>Your login session has expired. Please login again.</v-card-text>

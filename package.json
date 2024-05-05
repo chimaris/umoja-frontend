@@ -31,6 +31,7 @@
 		"@tiptap/pm": "^2.0.3",
 		"@tiptap/starter-kit": "^2.0.3",
 		"@tiptap/vue-3": "^2.0.3",
+		"apexcharts": "^3.49.0",
 		"axios": "^1.4.0",
 		"compressorjs": "^1.2.1",
 		"dayjs": "^1.11.10",
@@ -41,10 +42,12 @@
 		"image-conversion": "^2.1.1",
 		"laue": "^0.2.1",
 		"libphonenumber-js": "^1.10.60",
+		"lodash": "^4.17.21",
 		"maz-ui": "^3.40.0",
 		"sass": "^1.57.1",
 		"v-calendar": "^3.1.2",
 		"vue-sonner": "^1.1.2",
+		"vue3-apexcharts": "^1.5.2",
 		"vuetify": "^3.2.5"
 	}
 }

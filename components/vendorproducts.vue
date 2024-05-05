@@ -353,21 +353,6 @@ export default {
 },
 	
 	methods: {
-		getFirstThreeColors(variations) {
-        const uniqueColors = new Set();
-        const firstThreeColors = [];
-        for (const variation of variations) {
-            const color = variation.name.split('/')[0]; // Extracting the color part
-            if (!uniqueColors.has(color)) {
-                uniqueColors.add(color);
-                firstThreeColors.push(color);
-                // if (firstThreeColors.length === 3) {
-                //     break; // Stop when we have found three different colors
-                // }
-            }
-        }
-        return firstThreeColors;
-    },
 		sort(x, y) {
 			var itm = this.items1;
 			this.items = itm.filter((item) => {
