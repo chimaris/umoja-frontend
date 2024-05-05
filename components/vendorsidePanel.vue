@@ -45,7 +45,7 @@ Account
 Settings
 </v-list-item>
 <v-list-item style="cursor: pointer" @click="logOut">
-Logout
+  Logout
 </v-list-item>
 </v-list>
 </v-menu>                  </v-slide-x-transition>

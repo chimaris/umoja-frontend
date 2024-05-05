@@ -2,13 +2,18 @@ import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useApi } from '~/composables/useApi';
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
+import { debounce } from 'lodash';
 
 const api = useApi()
 export const useProductStore = defineStore('productStore', {
   state: () => ({
     recentSearches: getLocalStorageItem("recentSearches", []),
+    productFrom: "",
+    productTo: "",
+    totalProducts: '',
+    searchError: "",
     searchTerm: "",
-    allProducts: [],
+    searching: false,
     products: {
       main: [],
       row: [],
@@ -17,23 +22,51 @@ export const useProductStore = defineStore('productStore', {
       vendorProducts: [],
       recently_viewed: [],
       sale: [],
-      customArray: [], // You can add more arrays based on your needs
+      customArray: [],
+       // You can add more arrays based on your needs
     },
   }),
   actions: {
     filteredProducts() {
       let result = this.products.main
 
-      if (this.searchTerm) {
-        result = this.allProducts.filter(product => {
-        return product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-             product.description.toLowerCase().includes(this.searchTerm.toLowerCase());
-          });
-      this.updateRecentSearches(this.searchTerm)
+      if (!this.searchTerm) {
+        result = this.products.main
       }
-
       return result
     },
+    search: debounce(async function(searchTerm) {
+      
+      if (searchTerm) {
+        try{
+          this.updateRecentSearches(searchTerm);
+            this.searching = true
+            this.searchError = ""
+            const response = await api({
+              url: `search?search_global=${searchTerm}`,
+              method: 'get'
+            });
+            if (response.data.products.data.length <= 0){
+              this.searchError = "Sorry the product you are looking for is not available"
+            }
+            this.products.main = response.data.products.data
+            return true
+        }catch(error){
+          if (error.response) {
+            this.searchError = error.response.data.message || 'An error while searching.';
+          } else if (error.request) {
+            this.searchError = 'No response received from server. Please try again later.';
+          } else {
+            this.searchError = 'An error occurred. Please try again later.';
+          }
+          return false;
+        }finally {
+          this.searching = false
+        }
+        
+      }
+    }, 2000),
+    // ... other actions ...
     updateRecentSearches(searchTerm) {
 			const maxRecentSearches = 6;
 			this.recentSearches.unshift(searchTerm);
@@ -53,9 +86,11 @@ export const useProductStore = defineStore('productStore', {
       const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');
       this.products.row = response.data.data.slice(0, 15);
       this.products.main = response.data.data
-      this.allProducts = response.data.data
       this.products.vendorProducts = response.data.data.slice(0, 20);
       this.products.hotDeals = response.data.data.slice(0, 10);
+      this.productFrom = response.data.meta.from;
+      this.productTo = response.data.meta.to;
+      this.totalProducts = response.data.meta.total
     },
     // Method to add a product to a specific array
     addProductToArray(product, arrayName) {
@@ -75,19 +110,6 @@ export const useProductStore = defineStore('productStore', {
         }
       }
     },
-    async  searchProducts(searchTerm) {
-      try {
-          const response = await api({
-              url: `search?search_global=${searchTerm}`
-          });
-          console.log(response.data)
-          this.products.main = response.data.products.data
-          return true;
-      } catch (error) {
-          console.error('Error searching products:', error);
-          throw error;
-      }
-  },
     addProductsToSection(section, products) {
         this.products.section = products;
       },

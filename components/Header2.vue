@@ -43,6 +43,7 @@
 										placeholder="Ankara"
 										density="compact"
 										v-model="productStore.searchTerm"
+										@input="productStore.search(productStore.searchTerm)"
 									>
 										<template v-slot:append-inner>
 											<v-icon color="grey" @click="searchmenu = false" icon="mdi mdi-close-circle" />
@@ -149,6 +150,7 @@ import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from
 export default {
 	data() {
 		return {
+			searchQuery: "",
 			theme: useTheme(),
 			btn_radio: null,
 			searchmenu: false,
@@ -213,6 +215,11 @@ export default {
 		},
 	},
 	methods: {
+		searchProduct() {
+			if (this.searchQuery) {
+				this.productStore.searchTerm = this.searchQuery
+			}
+		},
 		toCart() {
 			if (this.cartStore.totalCartItems === 0) {
 				return

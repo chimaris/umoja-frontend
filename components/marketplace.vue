@@ -84,7 +84,7 @@
 						</div>
 
 						<p class="mt-4" :style="{ fontSize: $vuetify.display.mobile ? '14px' : '15.281px' }" style="font-weight: 500; letter-spacing: -0.153px">
-							Showing 1 - 60 items out of a total of 1.2k for “fashion”
+							Showing {{productStore.productFrom}} - {{ productStore.productTo }} items out of a total of {{ productStore.totalProducts }} for “fashion”
 						</p>
 					</div>
 
@@ -159,6 +159,15 @@
 								</div>
 							</v-chip>
 						</v-chip-group>
+					</div>
+					<div v-if="productStore.searching" style="width: 100%; text-align: center; margin-bottom: 20px;">
+						<v-progress-circular
+						color="green"
+						indeterminate
+						></v-progress-circular>
+					</div>
+					<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px;">
+						<p>{{ productStore.searchError }}</p>
 					</div>
 					<div>
 						<v-row id="homepage" style="background-color: #fff" class="mt-2">

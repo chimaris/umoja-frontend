@@ -83,7 +83,7 @@ color: #969696;">vs last 7 days</p>
            <h4 class="mb-2 timernum d-flex align-center text-left">Revenue Growth <span class="ml-2 lightText">(EUR)</span></h4> 
            <p class="lightText2">Revenue growth analytics of the week </p>
            <!-- <revenuegraph /> -->
-           <v-img class="mt-12 mb-5" src="https://res.cloudinary.com/payhospi/image/upload/v1686320933/Group_427320557_ys3qve.png" width="100%" height="auto"></v-img>
+           <apexchart type="line" color="green" :options="chartOptions" :series="series"></apexchart>
   </v-card>
     </v-col>
     <v-col cols="12" lg="6">
@@ -493,6 +493,41 @@ export default {
   },
   data() {
     return {
+      series: [
+        {
+          name: 'Revenue Growth',
+          data: [300, 400, 350, 500, 490, 600, 700]
+        }
+      ],
+      chartOptions: {
+        chart: {
+          type: 'line'
+        },
+        xaxis: {
+          categories: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+          labels: {
+            style: {
+              fontSize: '16px',
+              fontWeight: 'bold',
+            }
+          }
+        },
+        stroke: {
+          colors: ['#2C6E63'] // Define the color for the line
+        },
+        yaxis: {
+          labels: {
+            formatter: function (value) {
+              return '£' + value + 'k';
+            },
+            style: {
+              fontSize: '16px',
+              fontWeight: 'bold',
+            }
+          }
+        }
+      },
+
         menu:true,
         rating:4,
         show_more:false,
