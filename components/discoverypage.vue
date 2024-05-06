@@ -82,6 +82,7 @@
 								</p>
 
 								<v-btn
+									@click="$router.push('/market_place')"
 									size="small"
 									class="font-weight-medium textClass px-md-4 mx-0 px-0"
 									style="font-size: 14px"
@@ -308,7 +309,14 @@
 								Top Articles
 							</p>
 
-							<v-btn size="small" class="font-weight-medium textClass px-md-4 px-0" rounded flat variant="text" color="#1273EB"
+							<v-btn
+								@click="$router.push('/article_page')"
+								size="small"
+								class="font-weight-medium textClass px-md-4 px-0"
+								rounded
+								flat
+								variant="text"
+								color="#1273EB"
 								>See all articles <v-icon class="ml-2" icon="mdi mdi-arrow-right"></v-icon
 							></v-btn>
 						</div>
@@ -352,6 +360,7 @@
 			</v-row>
 			<div>
 				<v-btn
+					@click="$router.push('/article_page')"
 					block
 					class="d-flex d-md-none mt-8"
 					color="#333"

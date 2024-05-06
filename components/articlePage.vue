@@ -7,7 +7,7 @@
 		</v-row>
 	</div>
 	<v-container style="max-width: 1400px; width: 100%">
-		<div style="height: 122px" class="align-center justify-space-between d-flex">
+		<div class="align-center justify-space-between d-flex py-5 py-md-10">
 			<div>
 				<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '32px' }" style="font-weight: 600; line-height: 40.16px">Articles</p>
 			</div>
@@ -79,6 +79,19 @@
 					></v-btn>
 				</div>
 			</v-col>
+			<v-container style="max-width: 1400px">
+				<v-btn
+					class="mt-10 mx-auto"
+					block
+					color="#333"
+					size="large"
+					variant="outlined"
+					rounded="xl"
+					style="border: 1px solid #cecece; font-size: 14px; font-weight: 600"
+				>
+					Load More
+				</v-btn>
+			</v-container>
 		</v-row>
 	</v-container>
 </template>

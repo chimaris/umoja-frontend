@@ -1,32 +1,28 @@
 <template>
 	<div>
 		<v-row class="p-0">
-			<v-col cols="12" md="6" class="pl-0 pr-0 mx-0">
-				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl1 + ')' }">
+			<v-col cols="12" md="6" class="py-0 px-0 mx-0" order="12" order-md="1">
+				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl1 + ')', height: $vuetify.display.mobile ? '203px' : '' }">
 					<div class="mx-auto text-center" :style="{ width: $vuetify.display.mobile ? '300px' : '418px' }">
-						<p
-							:style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }"
-							style="color: #fff; font-weight: 500; letter-spacing: 4px"
-							class="mb-8"
-						>
+						<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" style="color: #fff; font-weight: 500" class="mb-4">
 							Whats stopping you from posting about your business?
 						</p>
-						<div class="btn" style="height: 65px">
-							<v-btn rounded="xl" color="#FFFFFF" height="44" style="width: 225px; padding: 12px 20px">
-								Make a post now
-								<v-img sizes="17" src="https://res.cloudinary.com/payhospi/image/upload/v1714745945/umoja/star_outlined.svg"></v-img>
-							</v-btn>
-						</div>
+						<!-- <div class="btn" style="height: 65px"> -->
+						<v-btn rounded="xl" color="#FFFFFF" height="44" style="width: 225px; padding: 10px 20px">
+							Make a post now
+							<v-img width="24" height="24" src="https://res.cloudinary.com/payhospi/image/upload/v1714745945/umoja/star_outlined.svg"></v-img>
+						</v-btn>
+						<!-- </div> -->
 					</div>
 				</div>
 			</v-col>
-			<v-col cols="12" md="6" class="pl-0 pr-0 mx-0">
+			<v-col cols="12" md="6" class="py-0 px-0 mx-0" order="1" order-md="12">
 				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl2 + ')' }"></div>
 			</v-col>
 		</v-row>
 	</div>
 	<v-container style="max-width: 1400px; width: 100%">
-		<div style="height: 122px" class="align-center justify-space-between d-flex">
+		<div class="align-center justify-space-between d-flex py-5 py-md-10">
 			<div>
 				<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '32px' }" style="font-weight: 600; line-height: 40.16px">Posts</p>
 			</div>
@@ -73,6 +69,17 @@
 						<postComponent :index="i" :item="n" />
 					</v-col>
 				</v-row>
+				<v-btn
+					class="mt-10"
+					block
+					color="#333"
+					size="large"
+					variant="outlined"
+					rounded="xl"
+					style="border: 1px solid #cecece; font-size: 14px; font-weight: 600"
+				>
+					Load More
+				</v-btn>
 			</v-col>
 			<v-col cols="12" md="1" class="d-none d-md-block"> </v-col>
 
@@ -85,12 +92,14 @@
 								<v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img>
 							</v-avatar>
 
-							<div class="pl-1" style="min-width: 0">
+							<div class="pl-2" style="min-width: 0">
 								<div class="d-flex justify-space-between align-center">
-									<div class="">
-										<p style="color: #1e1e1e; font-size: 13px; font-weight: 600; line-height: 140%">Da Creative Zik</p>
-										<p>Fashion</p>
-										<span>View Business Profile</span>
+									<div>
+										<p style="font-size: 16px; font-weight: 600; line-height: 20.08px">Da Creative Zik</p>
+										<p style="color: #969696; font-size: 14px; font-weight: 400; line-height: 17.57px">Fashion</p>
+										<span style="color: #1273eb; font-size: 12px; font-weight: 500; line-height: 15.06px; text-decoration: underline"
+											>View Business Profile</span
+										>
 									</div>
 								</div>
 							</div>
@@ -99,6 +108,17 @@
 							><span style="color: #edf0ef; font-size: 14px; font-weight: 600">Follow </span></v-btn
 						>
 					</div>
+					<v-btn
+						class="mt-10"
+						block
+						color="#333"
+						size="large"
+						variant="outlined"
+						rounded="xl"
+						style="border: 1px solid #cecece; font-size: 14px; font-weight: 600"
+					>
+						Load More
+					</v-btn>
 				</v-sheet>
 			</v-col>
 		</v-row>
@@ -233,6 +253,8 @@ export default {
 	height: 325px;
 	background-size: cover;
 	background-position: center;
+	display: flex;
+	flex-direction: column;
 	justify-content: center;
 	align-items: center;
 }
