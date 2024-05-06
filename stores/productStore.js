@@ -66,7 +66,7 @@ export const useProductStore = defineStore('productStore', {
         }
         
       }
-    }, 1000),
+    }, 500),
     // ... other actions ...
     updateRecentSearches(searchTerm) {
 			const maxRecentSearches = 6;

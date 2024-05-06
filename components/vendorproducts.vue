@@ -1,6 +1,6 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div v-if="vendorProducts.Products.length > 0" class="d-flex align-center justify-space-between">
+		<div v-if="filteredProductsData.length > 0" class="d-flex align-center justify-space-between">
 			<div class="d-flex w-100 align-center">
 				<div class="d-flex align-center">
 					<v-text-field
@@ -12,6 +12,14 @@
 						prepend-inner-icon="mdi mdi-magnify"
 						placeholder="Search "
 					>
+					<template v-slot:append-inner>
+						<v-progress-circular v-if="loading"
+						color="grey"
+						:size="24"
+						:width="3"
+						indeterminate
+						></v-progress-circular>
+					</template>
 					</v-text-field>
 				</div>
 				<div class="d-flex align-center">
@@ -57,7 +65,7 @@
 			</div>
 		</div>
 
-		<div v-if="vendorProducts.Products.length > 0" class="mt-5">
+		<div v-if="filteredProductsData.length > 0" class="mt-5">
 			<v-tabs v-model="tab" class="orders" color="green">
 				<v-tab @click.stop="sort(item.prop, item.value)" v-for="item in tabs" :key="item" :value="item" class="d-flex text-capitalize align-center">
 					{{ item.name }}
@@ -86,7 +94,7 @@
 				</thead>
 				<tbody>
 					<!-- @click="chosen = item.sn" -->
-					<tr :style="chosen == item.id ? 'background:#DFDFDF' : ''" v-for="item in filteredProducts" :key="item.id">
+					<tr :style="chosen == item.id ? 'background:#DFDFDF' : ''" v-for="item in filteredProductsData" :key="item.id">
 						<td class="text-grey-lighten-1 pl-4 px-1">
 							<v-checkbox hide-details></v-checkbox>
 						</td>
@@ -157,10 +165,15 @@
 
 						<td class="tableLight px-1"><p style="color: #333; font-size: 14px; font-style: normal; font-weight: 600">{{ item.sku }}</p></td>
 						<td class="text-grey-lighten-1 text-center px-1">
-							<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="menubar text-grey-darken-3"> Edit </v-btn>
+							<v-btn @click="editProduct(item)" style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="menubar text-grey-darken-3"> Edit </v-btn>
 						</td>
-						<td class="um px-1"><v-icon icon="mdi mdi-dots-horizontal"></v-icon></td>
-
+						<td v-if="tab.name === 'Archived'" class="um px-1">
+							<v-btn @click="handleRestore(item)"  style="border: 1px solid #e5e5e5" color="green" variant="outlined" size="default" class="menubar text-grey-darken-3"> Restore </v-btn>
+						</td>
+						<td v-else class="um px-1">
+							<v-btn @click="handleDelete(item)"  style="border: 1px solid #e5e5e5" color="green" variant="outlined" size="default" class="menubar text-grey-darken-3"> Delete </v-btn>
+						</td>
+					
 						<!-- <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">
            <span v-if="chosen !== item.sn ">
                {{ item.total }}
@@ -169,8 +182,64 @@
        </td> -->
 					</tr>
 				</tbody>
+				<v-dialog persistent v-model="showDeleteModal" max-width="400">
+								<v-card>
+									<v-card-title>Archive Product</v-card-title>
+									<v-card-text>
+										This product will be archived and after 30 days it will be deleted.
+									</v-card-text>
+									<v-card-actions style="display: flex; justify-content: flex-end;">
+										<v-btn @click="archiveProduct()" color="green" text>Archive</v-btn>
+										<v-btn @click="deleteProduct()" color="green" text>Delete Permanently</v-btn>
+										<v-btn @click="showDeleteModal = false" text>Cancel</v-btn>
+									</v-card-actions>
+								</v-card>
+				</v-dialog>
+				<v-dialog persistent v-model="showRestore" max-width="400">
+								<v-card>
+									<v-card-title>Delete Product</v-card-title>
+									<v-card-text>
+										This product will be restored and removed from archive.
+									</v-card-text>
+									<v-card-actions style="display: flex; justify-content: flex-end;">
+										<v-btn @click="restoreProduct()" color="green" text>Restore</v-btn>
+										<v-btn @click="showRestore = false" text>Cancel</v-btn>
+									</v-card-actions>
+								</v-card>
+				</v-dialog>
+				<v-dialog persistent v-model="vendorProducts.successArchive" max-width="400">
+								<v-card>
+									<v-card-text>
+										Product has been Archived Successfully
+									</v-card-text>
+									<v-card-actions style="display: flex; justify-content: flex-end;">
+										<v-btn @click="vendorProducts.successArchive = false" text>OK</v-btn>
+									</v-card-actions>
+								</v-card>
+				</v-dialog>
+				<v-dialog persistent v-model="vendorProducts.successRestore" max-width="400">
+								<v-card>
+									<v-card-text>
+										Product has been restored Successfully
+									</v-card-text>
+									<v-card-actions style="display: flex; justify-content: flex-end;">
+										<v-btn @click="vendorProducts.successRestore = false" text>OK</v-btn>
+									</v-card-actions>
+								</v-card>
+				</v-dialog>
+				<v-dialog persistent v-model="vendorProducts.successDelete" max-width="400">
+								<v-card>
+									<v-card-text>
+										Product has been deleted permanently
+									</v-card-text>
+									<v-card-actions style="display: flex; justify-content: flex-end;">
+										<v-btn @click="vendorProducts.successDelete = false" text>OK</v-btn>
+									</v-card-actions>
+								</v-card>
+				</v-dialog>
+				
 			</v-table>
-			<div
+			<div v-if="filteredProductsData.length > 0"
 				class="w-100 mt-4 d-flex justify-space-between align-center"
 				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
 			>
@@ -263,23 +332,91 @@
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import {formattedPrice} from '~/utils/price'
 import { onBeforeMount, onMounted, ref, watchEffect } from 'vue';
+import {useEditVendorStore} from '~/stores/editProduct';
+import {vendorUseApi} from '~/composables/vendorApi';
+import { debounce } from 'lodash';
+
 export default {
 	setup(props, ctx) {
 		const selectedPage = ref(1)
 
+		const tabs = [
+				{ name: "All Products", prop: null, filterBy: null },
+				{ name: "Active", prop: "status", filterBy: 'active' },
+				{ name: "Drafts", prop: "status", filterBy: 'draft' },
+				{ name: "Archived", prop: "archive", filterBy: 'archive' },
+			]
+
 		const vendorProducts = useVendorProductStore()
+		const filteredProductsData = ref([])
+		const tab = ref("")
+		const searchQuery = ref("")
+		const loading = ref(false)
+	
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		}
-
+		
 		
 		onMounted(async () => {
-			await vendorProducts.getAllProduct(selectedPage.value);
+			await fetchFilteredProducts();
+		});
+		watch(() => tab.value, () => {
+			fetchFilteredProducts();
 		});
 
-		watchEffect(async () => {
-			await vendorProducts.getAllProduct(selectedPage.value);
-		})
+		watch(() => selectedPage.value, () => {
+			fetchFilteredProducts();
+		});
+		watch(() => searchQuery.value, () => {
+			fetchFilteredProducts();
+		});
+		const editProduct = (product) => {
+			choose('Edit Product')
+			useEditVendorStore().setCurrentProduct(product)
+		}
+		async function fetchFilteredProducts() {
+			try {
+			filteredProductsData.value = await filterproductBy();
+			} catch (error) {
+			console.error(error);
+			}
+		} 
+		async function  filterproductBy() {
+			try {
+			const api = vendorUseApi();
+			let url = `vendor/products/?${tab.value.prop}=${tab.value.filterBy}&page=${selectedPage.value}`;
+			
+			// Check if the tab name is "Archived" and set the parameter accordingly
+			if (tab.value.name === "All Products") {
+				url=`vendor/products/?page=${selectedPage.value}`
+			}
+			if (tab.value.name === "Archived") {
+				url = `vendor/products/?archive=true&page=${selectedPage.value}`;
+			}
+			if (searchQuery.value.trim()) {
+				loading.value = true
+				 url = `vendor/products/?search_global=${searchQuery.value}&page=${selectedPage.value}`;
+			}
+
+			const response = await api({
+				url: url,
+				method: 'get'
+			});
+			// Update vendorProducts with the response data
+			vendorProducts.Products = response.data.data;
+			vendorProducts.pagesNo = response.data.meta.last_page;
+			vendorProducts.from = response.data.meta.from;
+			vendorProducts.toPage = response.data.meta.to;
+			vendorProducts.currentPage = response.data.meta.current_page;
+			} catch (error) {
+			console.error(error);
+			}finally {
+				loading.value = false
+			}
+
+			return vendorProducts.Products;
+		}
 		// onBeforeMount(async () => {
       	// 	await vendorProducts.getAllProduct();
     	// });
@@ -287,24 +424,27 @@ export default {
 		return {
 			choose,
 			vendorProducts,
-			selectedPage 
+			selectedPage,
+			editProduct,
+			tabs,
+			filteredProductsData,
+			tab,
+			fetchFilteredProducts,
+			filterproductBy,
+			searchQuery,
+			loading
 		};
 	},
 	data() {
 		return {
-
+			showRestore: false,
+			itemToArchive: null,
 			sortByPrice: null,
+			showDeleteModal: false,
 			dialog: true,
-			searchQuery: "",
-			tab: "",
-			tabs: [
-				{ name: "All Products", prop: null, filterBy: null },
-				{ name: "Active", prop: "status", filterBy: 'Active' },
-				{ name: "Drafts", prop: "status", filterBy: 'Draft' },
-				{ name: "Archived", prop: "status", filterBy: null },
-			],
 			items1: [],
-			items: []
+			items: [],
+		
 		};
 	},
 
@@ -314,20 +454,6 @@ export default {
             return Array.from({ length: this.vendorProducts.pagesNo }, (_, index) => index + 1);
         },
   filteredProducts() {
-    let result = this.vendorProducts.Products;
-
-    // Filter based on the selected tab
-    if (this.tab) {
-      const prop = this.tab.prop;
-      const value = this.tab.filterBy;
-      result = result.filter(item => {
-        if (prop === null) {
-          return true; // Show all products for "All Products" tab
-        } else {
-          return item[prop] === value; // Filter products based on the selected tab
-        }
-      });
-    }
 
     // Further filter based on the search query
     if (this.searchQuery) {
@@ -349,10 +475,55 @@ export default {
     }
 
     return result;
-  }
-},
-	
+  }},
+
 	methods: {
+		async archiveProduct(){
+			this.showDeleteModal = false;
+			try {
+				const response = await this.vendorProducts.archiveProduct(this.itemToArchive)
+				if (response){
+					await this.fetchFilteredProducts();
+					this.vendorProducts.successArchive = true
+				}
+			}catch(error) {
+				console.error(error)
+			}	
+		},
+		async deleteProduct(){
+			this.showDeleteModal = false;
+			try {
+				const response = await this.vendorProducts.deleteProductPerm(this.itemToArchive)
+				if (response){
+					await this.fetchFilteredProducts();
+					this.vendorProducts.successDelete = true
+				}
+			}catch(error) {
+				console.error(error)
+			}	
+		},
+		async restoreProduct() {
+			this.showRestore = false;
+			console.log(this.itemToArchive.id)
+			try{
+				const response = await this.vendorProducts.restoreArchived(this.itemToArchive)
+				if (response){
+					await this.fetchFilteredProducts();
+					this.vendorProducts.successRestore = true
+				}
+			}catch(error) {
+				console.error(error)
+			}
+		},
+		handleDelete(item){
+			this.itemToArchive = item;
+			this.showDeleteModal = true;
+			
+		},
+		handleRestore(item){
+			this.itemToArchive = item;
+			this.showRestore = true
+		},
 		sort(x, y) {
 			var itm = this.items1;
 			this.items = itm.filter((item) => {

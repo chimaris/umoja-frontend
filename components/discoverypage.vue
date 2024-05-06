@@ -160,6 +160,7 @@
 									</v-list>
 								</v-menu>
 							</div>
+
 							<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px;">
 								<p>{{ productStore.searchError }}</p>
 							</div>

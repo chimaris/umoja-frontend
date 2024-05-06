@@ -45,7 +45,7 @@
 							"
 						>
 							<div
-								v-if="currentPage != 'Order details' && currentPage != 'Add Products' && currentPage != 'createorder' && currentPage !== 'Import Product'"
+								v-if="currentPage != 'Order details' && currentPage != 'Add Products' && currentPage != 'createorder' && currentPage !== 'Import Product' && currentPage !== 'Edit Product'"
 								class="h-100 d-flex align-center"
 							>
 								<v-btn class="mx-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
@@ -64,7 +64,7 @@
 									class="text-grey-darken-3"
 								>
 									<v-icon size="16" class="mr-2" icon="mdi mdi-arrow-left-top"></v-icon>
-									Back to {{ currentPage !== "Add Products" && currentPage !== "Import Product" ? "Orders" : "Products" }}
+									Back to {{ currentPage !== "Add Products" && currentPage !== "Edit Product" && currentPage !== "Import Product" ? "Orders" : "Products" }}
 								</v-btn>
 							</div>
 						</div>
@@ -86,6 +86,9 @@
 						</v-window-item>
 						<v-window-item :value="'Add Products'">
 							<Vendoraddproducts />
+						</v-window-item>
+						<v-window-item :value="'Edit Product'">
+							<VendorEditProduct />
 						</v-window-item>
 						<v-window-item :value="'Import Product'">
 							<Vendorimportproduct />
@@ -189,7 +192,7 @@ onUnmounted(() => {
     });
 
 const handleClick = () => {
-      if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product') {
+      if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product') {
         // Update the currentPage value to 'Products' if it meets the condition, otherwise set it to 'Orders'
         currentPage.value = 'Products';
 		router.push('/vendor/dashboard/Products')
