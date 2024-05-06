@@ -43,10 +43,16 @@
 										placeholder="Ankara"
 										density="compact"
 										v-model="productStore.searchTerm"
-										@input="productStore.search(productStore.searchTerm)"
+										@input="productStore.search()"
 									>
 										<template v-slot:append-inner>
-											<v-icon color="grey" @click="searchmenu = false" icon="mdi mdi-close-circle" />
+											<v-progress-circular v-if="productStore.searching"
+											color="grey"
+											:size="24"
+											:width="3"
+											indeterminate
+											></v-progress-circular>
+											<v-icon v-else color="grey" @click="searchmenu = false" icon="mdi mdi-close-circle" />
 										</template>
 									</v-text-field>
 								</v-slide-x-reverse-transition>

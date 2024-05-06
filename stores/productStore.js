@@ -9,6 +9,7 @@ export const useProductStore = defineStore('productStore', {
   state: () => ({
     recentSearches: getLocalStorageItem("recentSearches", []),
     productFrom: "",
+    allProducts: [],
     productTo: "",
     totalProducts: '',
     searchError: "",
@@ -35,15 +36,15 @@ export const useProductStore = defineStore('productStore', {
       }
       return result
     },
-    search: debounce(async function(searchTerm) {
+    search: debounce(async function() {
       
-      if (searchTerm) {
+      if (this.searchTerm.trim()) {
         try{
-          this.updateRecentSearches(searchTerm);
+          this.updateRecentSearches(this.searchTerm);
             this.searching = true
             this.searchError = ""
             const response = await api({
-              url: `search?search_global=${searchTerm}`,
+              url: `search?search_global=${this.searchTerm}`,
               method: 'get'
             });
             if (response.data.products.data.length <= 0){
@@ -65,7 +66,7 @@ export const useProductStore = defineStore('productStore', {
         }
         
       }
-    }, 2000),
+    }, 1000),
     // ... other actions ...
     updateRecentSearches(searchTerm) {
 			const maxRecentSearches = 6;
@@ -86,6 +87,7 @@ export const useProductStore = defineStore('productStore', {
       const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');
       this.products.row = response.data.data.slice(0, 15);
       this.products.main = response.data.data
+      this.allProducts = response.data.data
       this.products.vendorProducts = response.data.data.slice(0, 20);
       this.products.hotDeals = response.data.data.slice(0, 10);
       this.productFrom = response.data.meta.from;
