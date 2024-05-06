@@ -15,7 +15,7 @@
 			>
 				{{ title }}
 			</div>
-			<v-btn class="mx-0 px-0" color="blue" size="small" style="" variant="text" rounded="xl">
+			<v-btn @click="$router.push('/post_page')" class="mx-0 px-0" color="blue" size="small" style="" variant="text" rounded="xl">
 				See all posts <v-icon class="ml-1" icon="mdi mdi-arrow-right"></v-icon>
 			</v-btn>
 		</div>
@@ -48,6 +48,7 @@
 				</v-col>
 			</v-row>
 			<v-btn
+				@click="$router.push('/post_page')"
 				block
 				class="d-flex d-md-none mt-8"
 				color="#333"

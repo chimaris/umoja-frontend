@@ -1102,8 +1102,8 @@ export default {
 	},
 
 	computed: {
-		productStore(){
-			return useProductStore()
+		productStore() {
+			return useProductStore();
 		},
 		databank() {
 			return this.tutorialStore.databank;

@@ -1,5 +1,10 @@
 <template>
-	<v-sheet min-height="100vh" class="d-flex justify-center align-center" style="overflow: hidden" color="#CDD6D4">
+	<v-sheet
+		:min-height="$vuetify.display.mobile ? 'auto' : '100vh'"
+		class="d-flex justify-center align-center"
+		style="overflow: hidden"
+		color="#CDD6D4"
+	>
 		<div
 			v-if="loader"
 			style="z-index: 9; position: absolute; left: 0; height: 772px; width: 100%"
@@ -42,8 +47,8 @@
 					</div>
 				</v-col>
 
-				<v-col class="pl-9 pa-4" cols="12" md="8">
-					<v-row style="min-height: 554px">
+				<v-col class="pl-9 pa-4 d-none d-md-block" cols="12" md="8">
+					<v-row :style="{ minHeight: $vuetify.display.mobile ? 'auto' : '554px' }">
 						<v-col cols="12" style="position: relative" md="6"> </v-col>
 
 						<v-col style="position: relative; min-height: 350px" cols="12" md="6">
@@ -83,7 +88,7 @@
 										border-radius: 16.127px;
 									"
 								></div>
-								
+
 								<v-img
 									v-if="i % 2 !== 0"
 									eager
@@ -366,5 +371,4 @@ export default {
 	opacity: 0;
 	scale: 0;
 }
-
 </style>

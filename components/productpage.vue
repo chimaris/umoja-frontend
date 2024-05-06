@@ -6,12 +6,14 @@
 			</template>
 			<template v-slot:title="{ item }">
 				<span
+					class="d-inline-block text-truncate"
 					v-if="item.disabled"
 					style="color: #2c6e63; font-size: 14px; font-weight: 600; line-height: 20px; /* 142.857% */ letter-spacing: -0.14px"
 				>
 					{{ product.name }}
 				</span>
 				<span
+					class="d-inline-block text-truncate"
 					v-else
 					style="color: #969696; font-size: 14px; font-weight: 500; opacity: 1 !important; line-height: 20px; /* 142.857% */ letter-spacing: -0.14px"
 				>
@@ -27,23 +29,17 @@
 						<v-row>
 							<v-col cols="12" lg="6">
 								<v-carousel v-model="carousel" class="caro mb-2" style="border-radius: 6px" hide-delimiters height="349px">
-									<v-carousel-item v-if="product.photo.includes(',')"
+									<v-carousel-item
+										v-if="product.photo.includes(',')"
 										:value="n"
-										v-for="(n, index) in product.photo.split(',')" :key="index"
+										v-for="(n, index) in product.photo.split(',')"
+										:key="index"
 										cover
 										height="349px"
 										:src="n"
 									>
 									</v-carousel-item>
-									<v-carousel-item v-else
-										:value="n"
-										v-for="n in 4"
-										:key="n"
-										cover
-										height="349px"
-										:src="product.photo"
-									>
-									</v-carousel-item>
+									<v-carousel-item v-else :value="n" v-for="n in 4" :key="n" cover height="349px" :src="product.photo"> </v-carousel-item>
 								</v-carousel>
 								<v-row dense v-if="product.photo.includes(',')">
 									<v-col v-for="n in product.photo.split(',')" cols="3">
@@ -81,7 +77,7 @@
 									:style="{ fontSize: $vuetify.display.mobile ? '20px' : '28px' }"
 									style="color: #333; font-weight: 600; line-height: 140%; /* 39.2px */ letter-spacing: -0.84px"
 								>
-									{{product.name}}
+									{{ product.name }}
 								</p>
 								<div class="d-flex align-center">
 									<v-rating
@@ -99,16 +95,16 @@
 									style="color: var(--carbon-6, #1e1e1e); font-weight: 600; line-height: 140%"
 									class="my-4"
 								>
-									{{formattedPrice(product.price)}}
+									{{ formattedPrice(product.price) }}
 								</p>
-								<div v-if= "product.sizes && product.sizes.length > 0" class="d-flex mb-2 align-center">
+								<div v-if="product.sizes && product.sizes.length > 0" class="d-flex mb-2 align-center">
 									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">Available Sizes</p>
 									<v-btn class="ml-1" variant="text" color="#969696"
 										><span style="font-size:14px, font-weight: 500">Size Guide</span> <v-icon class="ml-1" icon="mdi mdi-arrow-right"></v-icon
 									></v-btn>
 								</div>
 								<div style="max-width: 295px">
-									<v-row dense v-if= "product.sizes && product.sizes.length > 0">
+									<v-row dense v-if="product.sizes && product.sizes.length > 0">
 										<v-col cols="4" v-for="(n, i) in product.sizes">
 											<p
 												:class="size == n ? 'greenbox' : ''"
@@ -124,9 +120,7 @@
 									</v-row>
 								</div>
 								<div v-if="product.colors && product.colors.length > 0" class="d-flex mt-4 align-center">
-									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">
-										Available colors
-									</p>
+									<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 140%">Available colors</p>
 								</div>
 								<div v-if="product.colors && product.colors.length > 0" class="d-flex my-2">
 									<div
@@ -147,7 +141,7 @@
 
 						<!-- Set Product Quality for Mobile View -->
 						<div class="py-6 d-block d-md-none">
-							<div >
+							<div>
 								<v-card flat class="pa-0 cardStyle">
 									<div style="background-color: #edf3f0; height: 40px" class="d-flex align-center justify-center w-100">
 										<p style="color: #00966d; font-size: 14px; font-weight: 600; line-height: 140%">Available</p>
@@ -155,26 +149,19 @@
 									<div class="px-6 py-4">
 										<p style="font-size: 20px; font-weight: 500">Set Quantity</p>
 										<div class="d-flex justify-space-between align-center my-2">
-											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">{{quantity}}</span></p>
+											<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">
+												Quantity: <span style="color: #000">{{ quantity }}</span>
+											</p>
 
 											<v-btn-group border rounded="xl" divided density="compact">
-												<v-btn
-													@click="quantity --"
-													:disabled = "quantity <= 1"
-													class="dark-hover"
-													rounded="0"
-												>
+												<v-btn @click="quantity--" :disabled="quantity <= 1" class="dark-hover" rounded="0">
 													<v-icon icon="mdi mdi-minus "></v-icon>
 												</v-btn>
 
 												<v-btn :ripple="false" rounded="0">
-													{{quantity}}
+													{{ quantity }}
 												</v-btn>
-												<v-btn
-													@click="quantity ++"
-													class="green-hover"
-													rounded="0"
-												>
+												<v-btn @click="quantity++" class="green-hover" rounded="0">
 													<v-icon icon="mdi mdi-plus"></v-icon>
 												</v-btn>
 											</v-btn-group>
@@ -186,7 +173,7 @@
 										</div>
 										<v-btn @click="addToCart()" block class="mb-2" size="large" flat color="green" rounded="xl"
 											><span style="color: #edf0ef; font-size: 14px; font-weight: 600">
-												{{isInCart() ? "Added to Cart" : "Add to cart"}}
+												{{ isInCart() ? "Added to Cart" : "Add to cart" }}
 											</span></v-btn
 										>
 										<v-btn
@@ -229,20 +216,23 @@
 
 						<p style="color: #333; font-size: 16px; font-weight: 600; line-height: 180%; /* 28.8px */ letter-spacing: -0.48px">Description:</p>
 						<p style="color: #333; font-size: 14px; font-weight: 400; line-height: 180%">
-							{{product.description}}
+							{{ product.description }}
 						</p>
 
 						<v-divider color="#EDEDED" class="my-6"></v-divider>
 
 						<p style="color: #333; font-size: 16px; font-weight: 600; line-height: 180%; /* 28.8px */ letter-spacing: -0.48px">Specification:</p>
-						<ul v-if="product.product_spec.includes(',')" style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
+						<ul
+							v-if="product.product_spec.includes(',')"
+							style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%"
+						>
 							<li v-for="(item, index) in product.product_spec.split(',')" :key="index">
-								<span>{{item}}</span>
+								<span>{{ item }}</span>
 							</li>
 						</ul>
 						<ul v-else style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
 							<li>
-								<span>{{product.product_spec}}</span>
+								<span>{{ product.product_spec }}</span>
 							</li>
 						</ul>
 
@@ -491,26 +481,19 @@
 							<div class="px-6 py-4">
 								<p style="font-size: 20px; font-weight: 500">Set Quantity</p>
 								<div class="d-flex justify-space-between align-center my-2">
-									<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Quantity: <span style="color: #000">{{ quantity }}</span></p>
+									<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">
+										Quantity: <span style="color: #000">{{ quantity }}</span>
+									</p>
 
 									<v-btn-group border rounded="xl" divided density="compact">
-										<v-btn
-											class="dark-hover"
-											rounded="0"
-											@click="quantity --"
-											:disabled = "quantity <= 1"
-										>
+										<v-btn class="dark-hover" rounded="0" @click="quantity--" :disabled="quantity <= 1">
 											<v-icon icon="mdi mdi-minus "></v-icon>
 										</v-btn>
 
 										<v-btn :ripple="false" rounded="0">
-											{{quantity}}
+											{{ quantity }}
 										</v-btn>
-										<v-btn
-											class="green-hover"
-											rounded="0"
-											@click="quantity ++"
-										>
+										<v-btn class="green-hover" rounded="0" @click="quantity++">
 											<v-icon icon="mdi mdi-plus"></v-icon>
 										</v-btn>
 									</v-btn-group>
@@ -518,11 +501,11 @@
 								<v-divider class="my-4"></v-divider>
 								<div class="d-flex justify-space-between align-center mb-4 my-2">
 									<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 140%">Total</p>
-									<p style="color: #1e1e1e; font-size: 24px; font-weight: 600; line-height: 140%">{{formattedPrice(quantity * product.price)}}</p>
+									<p style="color: #1e1e1e; font-size: 24px; font-weight: 600; line-height: 140%">{{ formattedPrice(quantity * product.price) }}</p>
 								</div>
 								<v-btn @click="addToCart()" block class="mb-2" size="large" flat color="green" rounded="xl"
 									><span style="color: #edf0ef; font-size: 14px; font-weight: 600">
-										{{isInCart() ? "Added to Cart" : "Add to cart"}}
+										{{ isInCart() ? "Added to Cart" : "Add to cart" }}
 									</span></v-btn
 								>
 								<v-btn
@@ -634,7 +617,7 @@
 }
 </style>
 <script>
-import {formattedPrice} from '~/utils/price'
+import { formattedPrice } from "~/utils/price";
 import { Editor, EditorContent } from "@tiptap/vue-3";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
@@ -642,15 +625,15 @@ import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
-import {ref} from "vue";
+import { ref } from "vue";
 
 export default {
-	setup(){
+	setup() {
 		const quantity = ref(1);
 
 		return {
-			quantity
-		}
+			quantity,
+		};
 	},
 	props: ["product"],
 	components: {
@@ -738,22 +721,22 @@ export default {
 	methods: {
 		isInCart() {
 			const cartStore = useCartStore();
-			const index = cartStore.items.findIndex(item => item.id == this.product.id)
+			const index = cartStore.items.findIndex((item) => item.id == this.product.id);
 			if (index !== -1) {
-				return true
-			}else {
-				return false
+				return true;
+			} else {
+				return false;
 			}
 		},
 		addToCart() {
 			const userStore = useUserStore();
-			
+
 			const cartStore = useCartStore();
 			if (userStore.getIsLoggedIn) {
-				const index = cartStore.items.findIndex(cart => cart.id == this.product.id)
+				const index = cartStore.items.findIndex((cart) => cart.id == this.product.id);
 				if (index !== -1) {
-					cartStore.clearItem(this.product.id)
-					return
+					cartStore.clearItem(this.product.id);
+					return;
 				}
 				cartStore.addItem(this.product, this.quantity);
 			} else {
