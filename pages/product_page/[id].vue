@@ -6,7 +6,7 @@
 
 <script setup>
     import {useProductStore} from '~/stores/productStore';
-    import { useRoute, useRouter } from '#vue-router';
+    import { useRoute } from '#vue-router';
     import {onMounted, ref } from 'vue';
 
     const route = useRoute();
