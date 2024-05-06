@@ -28,6 +28,9 @@ export const useVendorProductStore = defineStore('vendor-product', {
         currentPage: null,
         from: null,
         toPage: null,
+        successArchive: false,
+        successRestore: false,
+        successDelete: false,
        
     }),
     getters: {
@@ -131,6 +134,39 @@ export const useVendorProductStore = defineStore('vendor-product', {
            } finally {
             this.loading = false
            }
+        },
+        async archiveProduct(product){
+          const response = await api({
+            url: `vendor/products/${product.id}`,
+            method: "post",
+            data: {
+              _method: 'DELETE',
+              name: ""
+            }
+          });
+          return response 
+        },
+        async deleteProductPerm(product){
+          const response = await api({
+            url: `vendor/products/${product.id}/delete_perm`,
+            method: "post",
+            data: {
+              _method: 'DELETE',
+              name: ""
+            }
+          });
+          return response 
+        },
+        async restoreArchived(product){
+          const response = await api({
+            url: `vendor/products/${product.id}/restore`,
+            method: "post",
+            data: {
+              _method: 'PUT',
+              name: ""
+            }
+          });
+          return response 
         },
         saveGeneralInfo(info) {
             this.generalInfo = info
