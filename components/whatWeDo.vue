@@ -1,161 +1,167 @@
 <template>
-	<v-container style="position: relative" class="pt-0 padzero" fluid>
-		<v-card
-			flat
-			class="topcard height1 rounded-xl d-flex justify-center align-center"
-			height="100vh"
-			min-height="900px"
-			image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png"
-		>
-			<div v-if="$vuetify.display.smAndUp" style="position: absolute; top: 0; height: 100%; width: 100%">
-				<v-btn style="height: auto; top: 15%; left: 10%" flat rounded="xl" class="rw px-2 py-2" height="auto">
-					<v-avatar size="30.88" class="mr-1"
-						><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
-					></v-avatar>
-					<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
-				</v-btn>
-				<v-btn style="height: auto; position: absolute; right: 25%; top: 8%" flat rounded="xl" class="gh px-2 py-2" height="auto">
-					<v-avatar size="30.88" class="mr-1"
-						><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
-					></v-avatar>
-					<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
-				</v-btn>
-				<v-btn style="position: absolute; top: 50%" flat rounded="xl" class="ng px-2 py-2" height="auto">
-					<v-avatar size="30.88" class="mr-1"
-						><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
-					></v-avatar>
-					<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
-				</v-btn>
-				<v-btn style="position: absolute; top: 40%; right: 5%" flat rounded="xl" class="sa px-2 py-2" height="auto">
-					<v-avatar size="30.88" class="mr-1"
-						><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
-					></v-avatar>
-					<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> SOUTH AFRICA </span>
-				</v-btn>
-				<v-btn style="position: absolute; bottom: 25%; right: 20%" flat rounded="xl" class="ke px-2 py-2" height="auto">
-					<v-avatar size="30.88" class="mr-1"
-						><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
-					></v-avatar>
-					<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
-				</v-btn>
-			</div>
-			<v-container class="">
-				<div class="text-center bottom0 mx-auto mt-0" style="position: relative; bottom: 100px; max-width: 834px">
-					<p
-						class="tinytext1"
-						style="
-							color: #f38218;
-							font-size: 14px;
-							font-weight: 500;
-							line-height: 120%; /* 16.8px */
-							letter-spacing: 0.9px;
-							text-transform: uppercase;
-						"
-					>
-						Growing the African Market Space
-					</p>
-					<p style="color: #1e1e1e; font-size: 64px; font-weight: 600; line-height: 120%; letter-spacing: -1.92px" class="bigTitle mt-4">
-						<span style="color: #2c6e63"> Explore </span> a new digital African marketplace from any part of the world!
-					</p>
-					<p style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 400" class="mt-4">
-						The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.
-					</p>
+	<div>
+		<v-container style="position: relative" class="pt-0 padzero" fluid>
+			<v-card
+				flat
+				class="topcard height1 rounded-xl d-flex justify-center align-center"
+				height="100vh"
+				min-height="900px"
+				image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png"
+			>
+				<div v-if="$vuetify.display.smAndUp" style="position: absolute; top: 0; height: 100%; width: 100%">
+					<v-btn style="height: auto; top: 15%; left: 10%" flat rounded="xl" class="rw px-2 py-2" height="auto">
+						<v-avatar size="30.88" class="mr-1"
+							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+						></v-avatar>
+						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
+					</v-btn>
+					<v-btn style="height: auto; position: absolute; right: 25%; top: 8%" flat rounded="xl" class="gh px-2 py-2" height="auto">
+						<v-avatar size="30.88" class="mr-1"
+							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
+						></v-avatar>
+						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
+					</v-btn>
+					<v-btn style="position: absolute; top: 50%" flat rounded="xl" class="ng px-2 py-2" height="auto">
+						<v-avatar size="30.88" class="mr-1"
+							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
+						></v-avatar>
+						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
+					</v-btn>
+					<v-btn style="position: absolute; top: 40%; right: 5%" flat rounded="xl" class="sa px-2 py-2" height="auto">
+						<v-avatar size="30.88" class="mr-1"
+							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
+						></v-avatar>
+						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> SOUTH AFRICA </span>
+					</v-btn>
+					<v-btn style="position: absolute; bottom: 25%; right: 20%" flat rounded="xl" class="ke px-2 py-2" height="auto">
+						<v-avatar size="30.88" class="mr-1"
+							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
+						></v-avatar>
+						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
+					</v-btn>
+				</div>
+				<v-container class="">
+					<div class="text-center bottom0 mx-auto mt-0" style="position: relative; bottom: 100px; max-width: 834px">
+						<p
+							class="tinytext1"
+							style="
+								color: #f38218;
+								font-size: 14px;
+								font-weight: 500;
+								line-height: 120%; /* 16.8px */
+								letter-spacing: 0.9px;
+								text-transform: uppercase;
+							"
+						>
+							Growing the African Market Space
+						</p>
+						<p style="color: #1e1e1e; font-size: 64px; font-weight: 600; line-height: 120%; letter-spacing: -1.92px" class="bigTitle mt-4">
+							<span style="color: #2c6e63"> Explore </span> a new digital African marketplace from any part of the world!
+						</p>
+						<p style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 400" class="mt-4">
+							The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.
+						</p>
 
-					<div class="py-8">
-						<v-btn @click="opendialog()" color="green" flat class="mx-auto" size="x-large" rounded="xl">Join the Waitlist</v-btn>
+						<div class="py-8">
+							<v-btn @click="opendialog()" color="green" flat class="mx-auto" size="x-large" rounded="xl">Join the Waitlist</v-btn>
+						</div>
+					</div>
+				</v-container>
+				<div v-if="!$vuetify.display.smAndUp" class="scroll">
+					<div class="m-scroll">
+						<span class="upspan">
+							<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500">
+									SOUTH AFRICA
+								</span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500">
+									SOUTH AFRICA
+								</span>
+							</v-btn>
+						</span>
+						<span class="upspan">
+							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
+								<v-avatar size="30.88" class="mr-1"
+									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
+								></v-avatar>
+								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
+							</v-btn>
+						</span>
 					</div>
 				</div>
-			</v-container>
-			<div v-if="!$vuetify.display.smAndUp" class="scroll">
-				<div class="m-scroll">
-					<span class="upspan">
-						<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> SOUTH AFRICA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> SOUTH AFRICA </span>
-						</v-btn>
-					</span>
-					<span class="upspan">
-						<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
-							<v-avatar size="30.88" class="mr-1"
-								><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
-							></v-avatar>
-							<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
-						</v-btn>
-					</span>
-				</div>
-			</div>
-		</v-card>
-	</v-container>
-	<v-container style="position: relative; max-width: 1417px" class="pt-0" fluid>
-		<webdiscover />
-		<webexplore />
-	</v-container>
+			</v-card>
+		</v-container>
+		<v-container style="position: relative; max-width: 1417px" class="pt-0" fluid>
+			<webdiscover />
+			<webexplore />
+		</v-container>
+	</div>
 </template>
 <style>
 .scroll {
