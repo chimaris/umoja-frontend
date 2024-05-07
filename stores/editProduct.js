@@ -9,10 +9,18 @@ export const useEditVendorStore = defineStore('edit-product',{
         currentEditProduct: getLocalStorageItem("current-edit"),
         loading: false,
         allVariations: [],
+        deleteVariant: [],
+        currentVariant: []
     }),
     actions: {
         saveVariantsInfo(info) {
             this.allVariations = info
+          },
+          saveDeleteVariant(info){
+            this.deleteVariant = info
+          },
+          saveCurrentVariant(info){
+            this.currentVariant = info
           },
         setCurrentProduct(product) {
             this.currentEditProduct = product;
@@ -104,7 +112,7 @@ export const useEditVendorStore = defineStore('edit-product',{
                             data: {
                               name: variant.name,
                               sku: variant.sku,
-                              no_available: variant.quantity,
+                              no_available: variant.no_available,
                               price: variant.price,
                             }
                           });
@@ -115,7 +123,110 @@ export const useEditVendorStore = defineStore('edit-product',{
                     }
                 }}
                      
-            }
+            },
+
+            async updateVariants(datas) {
+                await this.editProduct(datas);
+            
+                // Get delete variants
+                const deleteVariants = this.deleteVariant;
+            
+                // Delete existing variants
+                await this.deleteVariants(deleteVariants);
+            
+                // Get existing variants
+                const existingVariants = this.allVariations;
+            
+                // Update current variants using IDs from existing variants or add new variants
+                const updatePromises = [];
+                for (const variant of this.currentVariant) {
+                    const existingVariant = existingVariants.find(v => v.name === variant.name);
+                    if (existingVariant) {
+                        // Variant exists in the database, update using its ID
+                        variant.id = existingVariant.id;
+                        variant.sku = existingVariant.sku;
+                        variant.price = existingVariant.price;
+                        variant.no_available = existingVariant.no_available
+                        const updatePromise = this.updateVariant(variant);
+                        updatePromises.push(updatePromise);
+                    } else {
+                        // Variant doesn't exist in the database, add it
+                        const addPromise = this.addVariant(variant);
+                        updatePromises.push(addPromise);
+                    }
+                }
+            
+                // Wait for all updates to finish
+                await Promise.all(updatePromises);
+            
+                // After all updates and additions are done, you can perform any necessary actions
+            },
+            
+              async updateVariant(variant) {
+                try {
+                  // Call the update endpoint for the variant
+                  const response = await api({
+                    url: `vendor/products/${this.currentEditProduct.id}/variations/${variant.id}`,
+                    method: 'post',
+                    data: {
+                        _method: 'PUT',
+                        name: variant.name,
+                        sku: variant.sku,
+                        no_available: variant.no_available,
+                        price: variant.price,
+
+                    }
+                  });
+                } catch (error) {
+                  // Handle error
+                  console.error('Error updating variant:', error);
+                }
+              },
+              
+              async addVariants(variants) {
+                try {
+                  // Call the add variation endpoint for each variant
+                  const addPromises = variants.map(async (variant) => {
+                    const response = await api({
+                        url: `vendor/products/${this.currentEditProduct.id}/variations`,
+                            method: 'post',
+                            data: {
+                                name: variant.name,
+                                sku: variant.sku,
+                                no_available: variant.no_available,
+                                price: variant.price
+                            ,}
+                    });
+                  });
+                  await Promise.all(addPromises);
+                } catch (error) {
+                  // Handle error
+                  console.error('Error adding variants:', error);
+                }
+              },
+              async deleteVariants(variants) {
+                try {
+                  // Call the add variation endpoint for each variant
+                  const addPromises = variants.map(async (variant) => {
+                    const response = await api({
+                        url: `vendor/products/${this.currentEditProduct.id}/variations/${variant.id}`,
+                            method: 'post',
+                            data: {
+                                _method: 'DELETE',
+                                name: variant.name,
+                                sku: variant.sku,
+                                no_available: variant.no_available,
+                                price: variant.price
+                            ,}
+                    });
+                  });
+                  await Promise.all(addPromises);
+                } catch (error) {
+                  // Handle error
+                  console.error('Error adding variants:', error);
+                }
+              },
+              
         
     }
 })

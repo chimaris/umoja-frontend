@@ -256,7 +256,7 @@
 										<span style="background-color: #f8f8f8; padding: 10px 14px; display: block; border-radius: 6px">{{formattedPrice(variant.price)}}</span>
 									</td>
 									<td class="tableThick px-1">
-										<span style="background-color: #f8f8f8; outline: none; padding: 10px 14px; display: block; border-radius: 6px">{{variant.quantity}}</span>
+										<span style="background-color: #f8f8f8; outline: none; padding: 10px 14px; display: block; border-radius: 6px">{{variant.no_available}}</span>
 									</td>
 									<td class="tableThick px-1">
 										<span style="background-color: #f8f8f8; outline: none; min-height: 40px; padding: 10px 14px; display: block; border-radius: 6px">{{variant.sku}}</span>
@@ -318,7 +318,7 @@
 											<tr v-for="variant in allVariants" :key=variant>
 												<td>{{variant.name}}</td>
 												<td>
-													<v-text-field class="py-5" v-model="variant.quantity" placeholder="€ 0.00" density="comfortable"></v-text-field>
+													<v-text-field class="py-5" v-model="variant.no_available" placeholder="€ 0.00" density="comfortable"></v-text-field>
 												</td>
 												<td>
 													<v-text-field class="py-5" v-model="variant.sku" density="comfortable"></v-text-field>
@@ -364,7 +364,7 @@
 											<tr>
 												<td>{{selectedVariant.name}}</td>
 												<td>
-													<v-text-field class="pa-5" v-model="selectedVariant.quantity" placeholder="€ 0.00" density="comfortable"></v-text-field>
+													<v-text-field class="pa-5" v-model="selectedVariant.no_available" placeholder="€ 0.00" density="comfortable"></v-text-field>
 												</td>
 												<td>
 													<v-text-field v-model="selectedVariant.sku" density="comfortable"></v-text-field>
@@ -421,6 +421,7 @@ export default {
     setup() {
         const vendorProducts = useVendorProductStore()
         const route = useRoute()
+		
 
         return {
             vendorProducts,
@@ -459,8 +460,9 @@ export default {
         editStore(){
             return useEditVendorStore()
         },
-		allVariants() {
-		const variants = [];
+		currentVariants() {
+			const variants = []
+		
 
 		// Check if any of the option arrays are non-empty
 		const hasOptions = this.product.colors.length > 0 || this.product.sizes.length > 0 || this.product.styles.length > 0 || this.product.materials.length > 0;
@@ -474,7 +476,7 @@ export default {
 
 		function generateVariants(index, currentVariantName) {
 			if (index >= optionArrays.length) {
-			variants.push({ name: currentVariantName, price: 0, quantity: 0, sku: "", selected: false });
+			variants.push({ name: currentVariantName, price: 0, no_available: 0, sku: "", selected: false });
 			} else {
 			const currentOptions = optionArrays[index];
 			if (currentOptions.length > 0) {
@@ -491,10 +493,56 @@ export default {
 		generateVariants(0, "");
 
 		return variants;
-		}
+		},
+		deleteVariant() {
+			const currentVariants = this.currentVariants;
+			const existingVariants = this.product.variations || [];
 
+			// Compare existing variants with current variants and find variants to delete
+			const deleteVariants = existingVariants.filter(existingVariant => {
+				return !currentVariants.some(currentVariant => currentVariant.name === existingVariant.name);
+			});
 
+			return deleteVariants;
+		},
+		allVariants() {
+			const variants = [];
+			const existingVariants = this.product.variations || [];
 
+			// Check if any of the option arrays are non-empty
+			const hasOptions = this.product.colors.length > 0 || this.product.sizes.length > 0 || this.product.styles.length > 0 || this.product.materials.length > 0;
+
+			if (!hasOptions) {
+				return existingVariants; // Return existing variants if no options are available
+			}
+
+			// Otherwise, proceed to generate variants based on available options
+			const optionArrays = [this.product.colors, this.product.sizes, this.product.styles, this.product.materials];
+
+			function generateVariants(index, currentVariantName) {
+				if (index >= optionArrays.length) {
+					// Check if the variant name already exists in existing variants and not in deleteVariants
+					if (!existingVariants.some(variant => variant.name === currentVariantName) && !this.deleteVariant.some(variant => variant.name === currentVariantName)) {
+						variants.push({ name: currentVariantName, price: 0, no_available: 0, sku: "", selected: false });
+					}
+				} else {
+					const currentOptions = optionArrays[index];
+					if (currentOptions.length > 0) {
+						currentOptions.forEach(option => {
+							const variantName = currentVariantName ? `${currentVariantName}/${option}` : `${option}`;
+							generateVariants(index + 1, variantName);
+						});
+					} else {
+						generateVariants(index + 1, currentVariantName);
+					}
+				}
+			}
+
+			generateVariants(0, "");
+
+			// Merge existing variants with generated variants
+			return variants.concat(existingVariants);
+	}
 },
 
 	methods: {
@@ -502,6 +550,8 @@ export default {
         try {
             this.editStore.loading = true;
             this.editStore.saveVariantsInfo(this.allVariants);
+			this.editStore.saveDeleteVariant(this.deleteVariant);
+			this.editStore.saveCurrentVariant(this.currentVariants)
 
             const data = {
                 colors: this.product.colors,
@@ -511,10 +561,8 @@ export default {
             };
 
 
-            await this.editStore.handleEditVariant(data);
-
-            // If the update is successful, update the local storage item
-            setLocalStorageItem("current-edit", this.product);
+            await this.editStore.updateVariants(data);
+			this.$router.push('/vendor/dashboard/Products')
         } catch (error) {
             // Handle errors
             if (error.response) {
@@ -534,7 +582,7 @@ export default {
 			const index = this.allVariants.findIndex(variant => variant.name == selectedVariant.name)
 			if (index !== -1) {
 				this.allVariants[index].price = selectedVariant.price
-				this.allVariants[index].quantity = selectedVariant.quantity
+				this.allVariants[index].no_available = selectedVariant.no_available
 				this.allVariants[index].sku = selectedVariant.sku
 				this.showEditSinglePrice = false;
 			}
@@ -705,7 +753,7 @@ export default {
 	applyVariantQuantity() {
             if (this.allVariantQuantity) {
             this.allVariants.forEach(variant => {
-			variant.quantity = this.allVariantQuantity;
+			variant.no_available = this.allVariantQuantity;
         });
 		this.allVariantQuantity = ""
         }
