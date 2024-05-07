@@ -798,11 +798,17 @@ export default {
 		});
 
 		onMounted(() => {
-            if (product === {}) {
+            if (!product) {
                 router.push('/vendor/dashboard/Products')
             }
 			fetchCategories()
             fetchSubCategories(product.category_name)
+			if (!product.colors || !product.sizes || !product.materials || !product.styles) {
+			product.colors = [];
+			product.sizes = [];
+			product.materials = [];
+			product.styles = [];
+		}
             
 		});
    
@@ -1195,6 +1201,7 @@ export default {
 				try {
                     this.editStore.loading = true;
                     await this.editStore.editProduct(data)
+					this.nextTab()
                     setLocalStorageItem("current-edit", this.product)
                 }catch(error){
                     console.error("error", error)
@@ -1228,6 +1235,7 @@ export default {
                     this.descError = ""
                     this.editStore.loading = true;
                     await this.editStore.editProduct(data)
+					this.nextTab()
                     setLocalStorageItem("current-edit", this.product)
                 }catch(error){
                     if (error.response) {
@@ -1268,6 +1276,7 @@ export default {
                     this.checkError= ""
                     this.editStore.loading = true;
                     await this.editStore.editProduct(data)
+					this.nextTab()
                     setLocalStorageItem("current-edit", this.product)
                 }catch(error){
                     if (error.response) {
@@ -1289,6 +1298,7 @@ export default {
                     this.pictureError = "";
                     this.editStore.loading = true;
                     await this.editStore.handleEditphotoUpload(this.imagePreviews);
+					this.nextTab()
                     setLocalStorageItem("current-edit", this.product);
                 } catch (error) {
                     if (error.response) {
@@ -1319,6 +1329,7 @@ export default {
                     this.inventoryError = ""
                     this.editStore.loading = true;
                     await this.editStore.editProduct(data)
+					this.nextTab()
                     setLocalStorageItem("current-edit", this.product)
                 }catch(error){
                     if (error.response) {
@@ -1359,6 +1370,7 @@ export default {
                     this.shippingError = ""
                     this.editStore.loading = true;
                     await this.editStore.editProduct(data)
+					this.nextTab()
                     setLocalStorageItem("current-edit", this.product)
                 }catch(error){
                         if (error.response) {
