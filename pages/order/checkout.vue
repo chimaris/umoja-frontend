@@ -260,6 +260,7 @@ import {emailRules, inputRules, phoneRules} from '~/utils/formrules'
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 import {watchEffect, ref, onMounted} from 'vue';
 import {formattedPrice} from '~/utils/price';
+import { useRouter } from 'vue-router';
 
 
 export default {
@@ -273,6 +274,7 @@ setup() {
     const shippingCity = ref("")
     const shippingCountry = ref("")
     const shippingTypes = ref();
+    const router = useRouter()
 
     watchEffect(() => {
 	    fetchStates(shippingCountry.value)
@@ -302,7 +304,8 @@ setup() {
         shippingCountry,
         shippingCity,
         shippingState,
-        shippingTypes
+        shippingTypes,
+        router
     }
 },
   data() {
