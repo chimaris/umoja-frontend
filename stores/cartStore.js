@@ -134,9 +134,13 @@ export const useCartStore = defineStore('cart', {
     try {
       const response = await api ({
         url: 'admin/shippingMethods',
-        method: 'get'
+        method: 'get',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('token')}`
+        }
       });
       return response
+      
     }catch(error) {
       console.error(error);
     }
