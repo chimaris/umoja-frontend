@@ -33,10 +33,7 @@ export const useUserStore = defineStore({
         this.loginError = '';
         const {access_token} = response.data;
         localStorage.setItem('token', access_token)
-        if (rememberMe) {
-          const { refreshToken } = response.data;
-          localStorage.setItem("refreshToken", refreshToken);
-        }
+        this.isLoggedIn = true;
         return true;
       } catch(error) {
           if (error.response) {
