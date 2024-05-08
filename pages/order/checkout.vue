@@ -233,7 +233,7 @@ letter-spacing: -0.14px;
     <v-card flat :color="n.cost == '0.00'? '#EDF3F0': ''"   class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" v-for="n in shippingTypes" :key="n">
    <div  class=" align-center d-flex">
 
-       <input type="radio" :id="'shipping_' + index" :value="n.id" v-model="selectedShippingValue" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">
+       <input type="radio" :id="'shipping_' + index" :value="n" v-model="selectedShippingValue" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">
        <div class="text-capitalize px-4">
            <p style="" class=" addressName mb-2">{{n.type}}</p>
            <p class="adddressPhone mb-1">{{n.duration}}</p>
@@ -246,7 +246,7 @@ letter-spacing: -0.14px;
     </v-card>
 
 </v-col>
-<Cartsummary :route="'/order/payment'" :text="'Continue to Payment'" @handleSubmit="handlePayment()"/>
+<Cartsummary :route="'/order/payment'" :cartError="cartError" :text="'Continue to Payment'" @handleSubmit="handlePayment()"/>
 </v-row> 
 
     </v-container>  
@@ -259,7 +259,8 @@ import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, 
 import {emailRules, inputRules, phoneRules} from '~/utils/formrules'
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 import {watchEffect, ref, onMounted} from 'vue';
-import {formattedPrice} from '~/utils/price'
+import {formattedPrice} from '~/utils/price';
+
 
 export default {
 setup() {
@@ -307,6 +308,7 @@ setup() {
   data() {
     return {
         addressError: "",
+        cartError: "",
         selectedAddress: null,
         selectedShippingValue: "",
         editAddressIndex: null,
@@ -412,16 +414,23 @@ buttons(){
   
   methods: {
     handlePayment() {
-        if (!this.selectedShippingValue && !this.selectedAddress) {
+        this.cartError = ""
+        if (!this.selectedAddress) {
+            this.cartError = "Please select shipping address, if you don't have click on add new address to create new shipping address."
+            return
+        }
+        if (!this.selectedShippingValue) {
+            this.cartError = "Please select shipping method"
             return
         }
 
         const data = {
             discountCode : "",
-            shippingOptionId: this.selectedShippingValue,
+            shippingOption: this.selectedShippingValue,
             shippingAddressId: this.selectedAddress
         }
         this.cartStore.saveShippingDetails(data)
+        console.log(this.cartStore.shippingDetails)
         this.$router.push('/order/payment')
     },
     async updateShippingAddress(address) {
