@@ -100,31 +100,51 @@ export const useEditVendorStore = defineStore('edit-product',{
                 return null;
             }
         },
-        async handleEditVariant(datas) {
-            this.editProduct(datas);
+            //     await this.editProduct(datas);
+            
+            //     // Get delete variants
+            //     const deleteVariants = this.deleteVariant;
+            
+            //     // Delete existing variants
+            //     await this.deleteVariants(deleteVariants);
+            
+            //     // Get existing variants
+            //     const existingVariants = this.allVariations;
 
-            if (this.allVariations && this.allVariations.length > 0) {
-                for (const variant of this.allVariations) {
-                    try{
-                        const variantResponse = await api({
-                            url: `vendor/products/${this.currentEditProduct.id}/variations`,
-                            method: 'post',
-                            data: {
-                              name: variant.name,
-                              sku: variant.sku,
-                              no_available: variant.no_available,
-                              price: variant.price,
-                            }
-                          });
-                    }catch (error) {
-                        console.error('Error uploading image:', error);
-                        // Handle error (e.g., show error message to user)
-                    
-                    }
-                }}
-                     
-            },
-
+            //     if (this.deleteVariant.length >= 1) {
+            //         existingVariants = this.allVariations.filter(variant => 
+            //             !this.deleteVariant.some(deleteVariant => deleteVariant.name === variant.name));
+            //             console.log(existingVariants)
+            //     }
+               
+            //     // Update current variants using IDs from existing variants or add new variants
+            //     const updatePromises = [];
+            //     for (const variant of this.currentVariant) {
+            //         const existingVariant = existingVariants.find(v => v.name === variant.name);
+            //         if (existingVariant && existingVariant.id) {
+            //             // Variant exists in the database, update using its ID
+            //             variant.id = existingVariant.id;
+            //             variant.sku = existingVariant.sku;
+            //             variant.price = existingVariant.price;
+            //             variant.no_available = existingVariant.no_available
+            //             const updatePromise = this.updateVariant(variant);
+            //             updatePromises.push(updatePromise);
+            //         } else if (existingVariant && !existingVariant.id) {
+            //             // Variant doesn't exist in the database, add it
+            //             variant.sku = existingVariant.sku;
+            //             variant.price = existingVariant.price;
+            //             variant.no_available = existingVariant.no_available
+            //             const addPromise = this.addVariant(variant);
+            //             updatePromises.push(addPromise);
+            //         }
+            //     }
+            
+            //     // Wait for all updates to finish
+            //     await Promise.all(updatePromises);
+            
+            //     // After all updates and additions are done, you can perform any necessary actions
+            // },
+            
             async updateVariants(datas) {
                 await this.editProduct(datas);
             
@@ -135,22 +155,31 @@ export const useEditVendorStore = defineStore('edit-product',{
                 await this.deleteVariants(deleteVariants);
             
                 // Get existing variants
-                const existingVariants = this.allVariations;
+                let existingVariants = this.allVariations;
             
-                // Update current variants using IDs from existing variants or add new variants
+                // Filter out variants marked for deletion
+                if (deleteVariants.length >= 1) {
+                    existingVariants = existingVariants.filter(variant => 
+                        !deleteVariants.some(deleteVariant => deleteVariant.name === variant.name)
+                    );
+                }
+            
+                // Update or add current variants
                 const updatePromises = [];
                 for (const variant of this.currentVariant) {
                     const existingVariant = existingVariants.find(v => v.name === variant.name);
-                    if (existingVariant) {
-                        // Variant exists in the database, update using its ID
+                    if (existingVariant && existingVariant.id) {
                         variant.id = existingVariant.id;
                         variant.sku = existingVariant.sku;
                         variant.price = existingVariant.price;
-                        variant.no_available = existingVariant.no_available
+                        variant.no_available = existingVariant.no_available;
                         const updatePromise = this.updateVariant(variant);
                         updatePromises.push(updatePromise);
-                    } else {
+                    } else if (existingVariant && !existingVariant.id) {
                         // Variant doesn't exist in the database, add it
+                        variant.sku = existingVariant.sku;
+                        variant.price = existingVariant.price;
+                        variant.no_available = existingVariant.no_available;
                         const addPromise = this.addVariant(variant);
                         updatePromises.push(addPromise);
                     }
@@ -159,7 +188,6 @@ export const useEditVendorStore = defineStore('edit-product',{
                 // Wait for all updates to finish
                 await Promise.all(updatePromises);
             
-                // After all updates and additions are done, you can perform any necessary actions
             },
             
               async updateVariant(variant) {
@@ -183,10 +211,8 @@ export const useEditVendorStore = defineStore('edit-product',{
                 }
               },
               
-              async addVariants(variants) {
+              async addVariant(variant) {
                 try {
-                  // Call the add variation endpoint for each variant
-                  const addPromises = variants.map(async (variant) => {
                     const response = await api({
                         url: `vendor/products/${this.currentEditProduct.id}/variations`,
                             method: 'post',
@@ -195,18 +221,14 @@ export const useEditVendorStore = defineStore('edit-product',{
                                 sku: variant.sku,
                                 no_available: variant.no_available,
                                 price: variant.price
-                            ,}
+                            }
                     });
-                  });
-                  await Promise.all(addPromises);
                 } catch (error) {
-                  // Handle error
                   console.error('Error adding variants:', error);
                 }
               },
               async deleteVariants(variants) {
                 try {
-                  // Call the add variation endpoint for each variant
                   const addPromises = variants.map(async (variant) => {
                     const response = await api({
                         url: `vendor/products/${this.currentEditProduct.id}/variations/${variant.id}`,
@@ -223,7 +245,7 @@ export const useEditVendorStore = defineStore('edit-product',{
                   await Promise.all(addPromises);
                 } catch (error) {
                   // Handle error
-                  console.error('Error adding variants:', error);
+                  console.error('Error deleting variants:', error);
                 }
               },
               

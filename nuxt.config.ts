@@ -20,6 +20,11 @@ export default defineNuxtConfig({
 		"@pinia/nuxt",
 		'maz-ui/nuxt',
 	],
+	runtimeConfig: {
+		public: {
+			stripePK: process.env.NUXT_ENV_STRIPE_PUBLIC_KEY
+		}
+	},
 	mazUi: {
 		injectComponents: true,
 		injectCss: true,

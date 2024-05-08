@@ -44,46 +44,7 @@
 						Express delivery (1-3 business days)
 					</p>
 					<a style="color: var(--deep-sky-blue-4, #1273eb); font-size: 12px; font-weight: 600" href="">TRACK ORDER</a>
-				</div>
-				<hr class="dashed-2 my-4" />
-				<v-row dense>
-					<v-col cols="9" class="d-flex">
-						<v-avatar color="grey-lighten-2" style="border-radius: 15px" class="ml-0" size="100">
-							<v-img cover src="https://res.cloudinary.com/payhospi/image/upload/v1691574327/s-2-gs-x-1-po-l_ckeqxo.png"></v-img>
-						</v-avatar>
-					</v-col>
-					<v-col cols="3">
-						<v-icon color="#00966D" class="my-4" size="55" icon="mdi mdi-check-circle-outline"></v-icon>
-						<p class="mb-4" style="font-size: 20px; font-weight: 600; line-height: 20px">Thanks for your order</p>
-						<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 20px">
-							The order confirmation has been sent to {{ cartStore.shippingDetails.email }}
-						</p>
-					</v-col>
-				</v-row>
-				<hr class="dashed-2 my-4" />
-				<div>
-					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Transaction Date</p>
-					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px">
-						{{ getCurrentTransactionDate() }}
-					</p>
-				</div>
-				<hr class="dashed-2 my-4" />
-				<div>
-					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Payment Method</p>
-					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px">Mastercard ending with 2546</p>
-				</div>
-				<hr class="dashed-2 my-4" />
-				<div>
-					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Shipping Method</p>
-					<p
-						v-if="cartStore.shippingDetails.shippingOption"
-						style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px"
-						class="mb-2"
-					>
-						{{ cartStore.shippingDetails.shippingOption.title }} ({{ cartStore.shippingDetails.shippingOption.duration }})
-					</p>
-					<a style="color: var(--deep-sky-blue-4, #1273eb); font-size: 12px; font-weight: 600" href="">TRACK ORDER</a>
-				</div>
+				</div>	
 				<hr class="dashed-2 my-4" />
 				<v-row dense v-if="!viewAll">
 					<v-col cols="3">
@@ -97,7 +58,7 @@
 								{{ cartStore.checkoutItems[0].name }}
 							</p>
 							<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate">
-								Category: Stone, Art, Sculpting, Carving.
+								{{cartStore.checkoutItems[0].category_name}}
 							</p>
 							<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="mt-4 text-truncate">
 								X{{ cartStore.checkoutItems[0].quantity }}
@@ -123,7 +84,7 @@
 									{{ item.name }}
 								</p>
 								<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate">
-									Category: Stone, Art, Sculpting, Carving.
+									{{item.category_name}}
 								</p>
 								<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="mt-4 text-truncate">X{{ item.quantity }}</p>
 							</div>
@@ -148,10 +109,10 @@
 					</div>
 					<a @click="viewAll = !viewAll" style="color: #1273eb; font-size: 14px; cursor: pointer; font-weight: 600">View Less</a>
 				</div>
-
+				<hr class="dashed-2 my-4" />
 				<div style="font-size: 14px; font-weight: 600" class="d-flex justify-space-between align-center">
 					<span>Subtotal</span>
-					<span>€ {{ cartStore.checkoutTotalCost }}</span>
+					<span>{{ formattedPrice(cartStore.checkoutTotalCost)  }}</span>
 				</div>
 
 				<hr class="dashed-2 my-6" />
@@ -174,7 +135,7 @@
 					<hr class="dashed-2 my-6" />
 					<div class="d-flex pb-3 align-center justify-space-between">
 						<p style="font-weight: 500; font-size: 14px; color: #969696">Grand Total</p>
-						<p style="color: var(--carbon-4, #333); font-size: 24px; font-weight: 600" class="">€ {{ cartStore.checkoutTotalCost }}</p>
+						<p style="color: var(--carbon-4, #333); font-size: 24px; font-weight: 600" class="">{{ formattedPrice(cartStore.checkoutTotalCost) }}</p>
 					</div>
 				</div>
 				<v-btn to="/market_place" flat block size="x-large" class="mt-8" rounded="xl" color="green">

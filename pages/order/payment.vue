@@ -29,154 +29,177 @@
 				</template>
 			</v-breadcrumbs>
 			<v-divider class="mb-4"></v-divider>
+	
 			<v-row class="pt-2">
 				<v-col cols="12" lg="8">
-					<v-card flat class="cardStyle bg-white rounded-lg py-6 pa-4">
-						<p class="chkt mb-8">Select Payment Method</p>
-
-						<v-card flat class="mb-4 cardStyle">
-							<div class="align-center justify-space-between d-flex">
-								<div class="d-flex align-center">
-									<v-icon color="green" icon="mdi mdi-circle-slice-8" size="30"></v-icon>
+						
+						<div class="mb-4 p cardStyle">
+							<p class="chkt mb-8">Select Payment Method</p>
+							<template v-if="paymentMethods.length >= 1">
+								<v-card  flat class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" v-for="(n, i) in paymentMethods" :key="i">
+								<input type="radio" :id="'payment_' + i" :value="n.id" v-model="paymentMethodId" class="mr-2" style="accent-color: #2C6E63; transform: scale(1.5);">
+								<div class="align-center d-flex">
+									<div class="ml-4" style="border-radius: 4.536px; border: 0.588px solid var(--carbon-1, #ededed)">
+										<v-img v-if="n.last_card_brand == 'visa'" width="54" src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo_shmb54.png"></v-img>
+										<v-img v-if="n.last_card_brand == 'mastercard'" width="54" src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo2_jpei5o.png"></v-img>
+										<v-img v-if="n.last_card_brand == 'verve'" width="54" src="https://res.cloudinary.com/payhospi/image/upload/v1714813559/umoja/234-2342510_aerocontractors-the-reliable-way-to-fly-verve-card_i7s2un.jpg"></v-img>
+									</div>
 									<div class="text-capitalize px-4">
-										<p style="font-weight: 500; font-size: 14px; line-height: 24px; color: #333333" class="">Credit Card</p>
+										<p style="color: #1e1e1e; font-size: 16px; font-weight: 600" class="  ">**** **** ****{{ n.last_card_digits }}</p>
+										<p style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 500">Expiry {{ n.expiry_month }}/{{ n.expiry_year }}</p>
 									</div>
 								</div>
-								<div class="d-flex align-center justify-end">
-									<v-img v-if="visa" contain src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo_shmb54.png" width="53" height="auto"></v-img>
-									<v-img v-if="master" contain src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo2_jpei5o.png" width="53" height="auto"></v-img>
-									<v-img v-if="verve" contain src="https://res.cloudinary.com/payhospi/image/upload/v1714813559/umoja/234-2342510_aerocontractors-the-reliable-way-to-fly-verve-card_i7s2un.jpg" width="53" height="auto"></v-img>
-								</div>
-							</div>
-
-							<v-divider class="my-4"></v-divider>
-
-							<v-text-field  v-model="cardNumber" @input="detectCardType" placeholder="Card number" density="comfortable"> </v-text-field>
-							<p v-if="cardError" style="color: red; font-size: 14px; margin-top: -20px; margin-bottom: 10px;">{{cardError}}</p>
-							<v-text-field v-model="cardName" placeholder="Name on card" density="comfortable"> </v-text-field>
-							<p v-if="nameError" style="color: red; font-size: 14px; margin-top: -15px; margin-bottom: 10px;">{{ nameError }}</p>
-							<v-row class="mb-1">
-								<v-col class="pb-0" cols="12" md="6">
-									<v-text-field v-model="expiryDate" placeholder="Expiration date (MM/YY)" density="comfortable"> </v-text-field
-								>
-								<p v-if="expiryError" style="color: red; font-size: 14px; margin-top: -15px;margin-bottom: 10px;">{{ expiryError }}</p>
-							</v-col>
-								<v-col class="pb-0" cols="12" md="6">
-									 <v-text-field v-model="cvv" placeholder="CVV" density="comfortable"> </v-text-field>
-									 <p style="color: red; font-size: 14px; margin-top: -15px;margin-bottom: 10px;">{{ cvvError }}</p>
-								</v-col>
-							</v-row>
-							<v-btn @click="handleSaveCard" class="textClass px-8" rounded="xl" color="green" flat>Add Payment Method</v-btn>
-						</v-card>
-						<v-card
-							flat
-							:color="n.cost == '0.00' ? '#EDF3F0' : ''"
-							class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex"
-							v-for="n in paymenthods"
-							:key="n"
-						>
-							<div class="align-center d-flex">
-								<v-icon
-									size="20"
-									:color="n.cost == '0.00' ? '#2C6E63' : ''"
-									:icon="n.cost == '0.00' ? 'mdi mdi-radiobox-marked' : 'mdi mdi-circle-outline'"
-								></v-icon>
-								<div class="text-capitalize px-4">
-									<p style="font-weight: 500; font-size: 14px; line-height: 24px; color: #333333" class="">{{ n.name }}</p>
-								</div>
-							</div>
-							<v-spacer></v-spacer>
-							<v-avatar style="width: 100px; max-height: 20px" rounded="0" size="40">
-								<v-img :src="n.image"></v-img>
-							</v-avatar>
-						</v-card>
-					</v-card>
-
-					 <v-card flat class="cardStyle bg-white rounded-lg my-4 pa-4">
-						<p class="chkt mb-">Billing Address</p>
-						<v-checkbox v-model="useShippingAddress" @click="useShippingAddress = !useShippingAddress" hide-details="" class="my-4" color="green">
-							<template v-slot:label>
-								<div style="font-size: 14px" class="font-weight-medium">Same as my shipping address</div>
+								<v-spacer></v-spacer>
+								<v-btn size="small" class="smallText" variant="text" @click="showDeleteModal(n.id)">Delete</v-btn>
+								<v-dialog v-model="showDeleteConfirmation" max-width="700" persistent>
+									<v-card>
+										<v-card-title>Are you sure you want to delete this payment method?</v-card-title>
+										<v-card-actions style="display: flex; justify-content: flex-end;">
+											<v-btn color="red" @click="deleteMethod()">Delete</v-btn>
+											<v-btn @click="showDeleteConfirmation = false">Cancel</v-btn>
+										</v-card-actions>
+									</v-card>
+								</v-dialog>
+							</v-card>
 							</template>
-						</v-checkbox>
-						<p class="inputLabel">Phone Number*</p>
-
-						<v-text-field :rules="phoneRules" v-model="phoneNo" placeholder="Enter your phone number" density="comfortable"> </v-text-field>
-						<p class="inputLabel">Street Name and House Number*</p>
-
-						<v-text-field v-model="streetName" :rules="inputRules" placeholder="Enter your street address" density="comfortable"> </v-text-field>
-						<v-row class="">
-							<v-col cols="12" md="6">
-								<p class="inputLabel">Country</p>
-								<v-select 
-									:items="allCountries"
-									:rules="inputRules"
-									 append-inner-icon="mdi mdi-chevron-down"
-									  placeholder="Select country"
-									  v-model="billingCountry"
-									   density="comfortable"> 
-									</v-select>
-							</v-col>
-							<v-col cols="12" md="6">
-								<p class="inputLabel">State</p>
-								<v-select 
-									@input="fetchStates(billingCountry.value)"
-									:loading="loadingStates"
-									color="green"
-									:items="states"
-									:rules="inputRules"
-									hint="**Make sure you select your country first**" 
-									append-inner-icon="mdi mdi-chevron-down" 
-									placeholder="Enter your state" 
-									v-model="billingState"
-									density="comfortable"> 
-								</v-select>
-							</v-col>
-						</v-row>
-						<v-row class="">
-							<v-col cols="12" md="6">
-								<p class="inputLabel">City</p>
-								<v-select 
-									@input="fetchCities(billingCountry.value, billingState.value)"
-									append-inner-icon="mdi mdi-chevron-down" 
-									placeholder="Select City" 
-									v-model="billingCity"
-									:items="cities"
-									:loading="loadingCities"
-									hint="**Make sure you select your state first**"
-									:rules="inputRules"
-									density="comfortable"> 
-								</v-select>
-							</v-col>
-							<v-col cols="12" md="6">
-								<p class="inputLabel">Zipcode</p>
-								<v-text-field :rules="numRules" v-model="zipcode" placeholder="Enter your zipcode" density="comfortable"> </v-text-field>
-							</v-col>
-						</v-row>
-						<p style="color: red; font-size: 16px; margin-bottom: 6px;">{{cartStore.billingError}}</p>
-						<v-btn v-if="added" class="textClass px-8" rounded="xl" :disabled="useShippingAddress" @click="updateAddress()" color="green" flat>Edit Billing Address</v-btn>
-						<v-btn v-else class="textClass px-8" rounded="xl" :disabled="useShippingAddress" @click="addBillingAddress()" color="green" flat>Add Billing Address</v-btn>
-					</v-card>
-					<v-card flat class="cardStyle bg-white rounded-lg pa-4">
-						<p class="chkt mb-">Remember my information</p>
-						<v-checkbox hide-details="" color="green">
-							<template v-slot:label>
-								<div style="font-size: 14px" class="font-weight-medium">Save my information for future checkout</div>
-							</template>
-						</v-checkbox>
-					</v-card>
+							
+							<v-btn @click="addPayment" size="large" width="" flat style="border: 1px solid var(--carbon-2, #cecece)" class="px-7" rounded="xl">
+								<span style="color: #333; font-size: 14px; font-weight: 600" class="d-flex align-center">
+									<v-icon class="mr-1" icon="mdi mdi-plus"></v-icon>
+									Add Payment Method
+								</span>
+							</v-btn>
+						</div>	
+						<v-dialog v-model="dialog" max-width="1000px" persistent>
+							<v-card flat class="mb-4 cardStyle">
+								<div class="align-center justify-space-between d-flex">
+									<div class="d-flex align-center">
+										<v-icon color="green" icon="mdi mdi-circle-slice-8" size="30"></v-icon>
+										<div class="text-capitalize px-4">
+											<p style="font-weight: 500; font-size: 14px; line-height: 24px; color: #333333" class="">Credit Card</p>
+										</div>
+									</div>
+								</div>
+								<v-divider class="my-4 mb-8"></v-divider>
+								<div class="mb-6">
+									<p class="inputLabel">Credit Card Information</p>
+									<div style=" padding: 18px; border-radius: 10px; background-color: #f6f6f6;" id='payment-element'></div>
+								</div>
+								<div>
+									<p class="inputLabel">Full Name</p>
+									<v-text-field v-model="fullName" :disabled="paymentProcessing" placeholder="Enter the name on your card" density="comfortable"> </v-text-field>
+								</div>		
+								<v-row>
+									<v-col cols="12" md="6">
+										<p class="inputLabel">Email Address</p>
+										<v-text-field v-model="email" :rules="emailRules" :disabled="paymentProcessing" placeholder="Enter your email address" density="comfortable"> </v-text-field>
+									</v-col>
+									<v-col cols="12" md="6">
+										<p class="inputLabel">Phone Number*</p>
+										<v-text-field :rules="phoneRules" :disabled="paymentProcessing" v-model="phoneNo" placeholder="Enter your phone number" density="comfortable"> </v-text-field>
+									</v-col>
+								</v-row>
+								<v-row class="mt-0">
+									<v-col cols="12" md="6">
+										<p class="inputLabel">Country</p>
+										<v-select 
+											:items="allCountries"
+											:rules="inputRules"
+											append-inner-icon="mdi mdi-chevron-down"
+											placeholder="Select country"
+											v-model="billingCountry"
+											:disabled="paymentProcessing"
+											density="comfortable"> 
+											</v-select>
+									</v-col>
+									<v-col cols="12" md="6">
+										<p class="inputLabel">State</p>
+										<v-select 
+											@input="fetchStates(billingCountry)"
+											:loading="loadingStates"
+											color="green"
+											:items="states"
+											:rules="inputRules"
+											:disabled="paymentProcessing"
+											append-inner-icon="mdi mdi-chevron-down" 
+											placeholder="Enter your state" 
+											v-model="billingState"
+											density="comfortable"> 
+										</v-select>
+									</v-col>
+								</v-row>
+								<v-row class="mt-0">
+									<v-col cols="12" md="6">
+										<p class="inputLabel">City</p>
+										<v-select 
+											@input="fetchCities(billingCountry, billingState)"
+											:disabled="paymentProcessing"
+											append-inner-icon="mdi mdi-chevron-down" 
+											placeholder="Select City" 
+											v-model="billingCity"
+											:items="cities"
+											:loading="loadingCities"
+											:rules="inputRules"
+											density="comfortable"> 
+										</v-select>
+									</v-col>
+									<v-col cols="12" md="6">
+										<p class="inputLabel">Zip Code</p>
+										<v-text-field :rules="numRules" :disabled="paymentProcessing" v-model="zipcode" placeholder="Enter your zipcode" density="comfortable"> </v-text-field>
+									</v-col>
+								</v-row>
+								<div>
+									<p class="inputLabel">Street Name and House Number*</p>
+									<v-text-field v-model="streetName" :disabled="paymentProcessing" :rules="inputRules" placeholder="Enter your street address" density="comfortable"> </v-text-field>
+								</div>
+								<p v-if="paymentError" style="color: red; font-size: 16px; margin-top: 10px; margin-bottom: 10px;">{{paymentError}}</p>
+								<div style="display: flex; align-items: center; gap: 20px">
+									<v-btn class="textClass px-8" size="large" @click="addPaymentMethod" :disabled="paymentProcessing" style=" margin-top: 20px; flex: 1" rounded="xl" color="green" flat>
+										{{paymentProcessing ? 'Adding' : 'Add Payment Method'}}
+									</v-btn>
+									<v-btn class="textClass px-8" size="large" @click="dialog= false" :disabled="paymentProcessing" style=" margin-top: 20px; border: 1px solid #2c6e63; flex: 1" rounded="xl"   flat>
+											Cancel
+									</v-btn>
+								</div>
+						
+								<v-card
+								flat
+								:color="n.cost == '0.00' ? '#EDF3F0' : ''"
+								class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex"
+								v-for="n in paymenthods"
+								:key="n"
+							>
+								<div class="align-center d-flex">
+									<v-icon
+										size="20"
+										:color="n.cost == '0.00' ? '#2C6E63' : ''"
+										:icon="n.cost == '0.00' ? 'mdi mdi-radiobox-marked' : 'mdi mdi-circle-outline'"
+									></v-icon>
+									<div class="text-capitalize px-4">
+										<p style="font-weight: 500; font-size: 14px; line-height: 24px; color: #333333" class="">{{ n.name }}</p>
+									</div>
+								</div>
+								<v-spacer></v-spacer>
+								<v-avatar style="width: 100px; max-height: 20px" rounded="0" size="40">
+									<v-img :src="n.image"></v-img>
+								</v-avatar>
+							</v-card>
+							</v-card>	
+						</v-dialog>
 				</v-col>
-				<Cartsummary :route="'/order/summary'" :text="'Proceed'" @handleSubmit="handlePayment()"/>
+				<Cartsummary :route="'/order/summary'" :disabled="paymentProcessing" :checkoutError="checkoutError" :paymentLoading="paymentLoading" :text="'Proceed'" @handleSubmit="handlePayment()"/>
 			</v-row>
 		</v-container>
 	</div>
 	<Mainfooter />
 </template>
 <script>
-import { numRules, phoneRules, inputRules } from '~/utils/formrules';
+import { numRules, emailRules, phoneRules, inputRules } from '~/utils/formrules';
 import {watchEffect, ref} from 'vue';
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi';
 import { useCartStore } from '~/stores/cartStore';
+import { loadStripe } from '@stripe/stripe-js';
+import { useApi } from '~/composables/useApi';
 export default {
 	setup(){
 		definePageMeta({
@@ -187,14 +210,15 @@ export default {
 		const billingState = ref("");
 		const billingCity = ref("");
 		const cartStore = useCartStore()
+		
 
 		watchEffect(() => {
 	    fetchStates(billingCountry.value)
     	});
+		watch(() => billingState.value, () => {
+			fetchCities(billingCountry.value, billingState.value);
+		});
 
-		watchEffect(() => {
-	    fetchCities(billingCountry.value, billingState.value);
-    });
 
 	return{
 		billingCountry,
@@ -205,23 +229,26 @@ export default {
 	},
 	data() {
 		return {
+			paymentLoading: false,
+			checkoutError: "",
+			showDeleteConfirmation: false,
+			deleteID: "",
+			paymentMethods: [],
+			fullName: "",
+			dialog: false,
+			paymentId: "",
+			paymentError: "",
+			paymentMethodId: "",
+			amount: "",
+			email: "",
+			paymentProcessing: false,
+			stripe: {},
+			paymentElement: {},
 			added: false,
 			billingId: "",
 			phoneNo: "",
 			streetName: "",
 			zipcode: "",
-			useShippingAddress: false,
-			cvv: "",
-			expiryDate: "",
-			visa: null,
-			master: null,
-			verve: null,
-			cardNumber: "",
-			cardName: "",
-			cardError: "",
-			nameError: "",
-			expiryError: "",
-			cvvError: "",
 			placescards: false,
 			mods: 1,
 			tab: null,
@@ -272,6 +299,10 @@ export default {
 			],
 		};
 	},
+	async mounted(){
+		this.paymentMethods = await this.cartStore.getPaymentMethods();
+	},
+
 	computed: {
 		orderSummary() {
 			return [
@@ -321,6 +352,92 @@ export default {
 		},
 	},
 	methods: {
+		showDeleteModal(id) {
+			this.deleteID = id,
+			this.showDeleteConfirmation = true
+		},
+		async deleteMethod(){
+			const response = await this.cartStore.deletePaymentMethod(this.deleteID);
+			if (response){
+				this.paymentMethods = await this.cartStore.getPaymentMethods();
+				this.showDeleteConfirmation = false;
+				this.deleteID = "";
+			}
+		},
+		async addPayment() {
+			this.dialog = true;
+			const config = useRuntimeConfig();
+
+			this.stripe = await loadStripe(config.public.stripePK);
+			const elements = this.stripe.elements();
+
+			
+			this.paymentElement = elements.create('card', {})
+			this.paymentElement.mount('#payment-element')
+		},
+		async addPaymentMethod(){
+			this.paymentProcessing = true;
+			const {paymentMethod, error} = await this.stripe.createPaymentMethod(
+				'card', this.paymentElement, {
+					billing_details: {
+						name: this.fullName,
+						email: this.email,
+						address: {
+							line1: this.streetName,
+							city: this.billingCity,
+							state: this.billingState,
+							postal_code: this.zipcode
+						}
+					}
+				}
+			);
+			this.paymentError = "";
+			if (error) {
+				this.paymentProcessing = false;
+				console.log(error)
+				this.paymentError = error.message;
+			}else if (paymentMethod) {
+				const api = useApi()
+				this.paymentError = "";
+				this.dialog = false;
+				const data = {
+					last_card_brand: paymentMethod.card.brand,
+					last_card_digits: paymentMethod.card.last4,
+					expiry_month: paymentMethod.card.exp_month,
+					expiry_year: paymentMethod.card.exp_year,
+					payment_method: paymentMethod.id,
+				}
+				try{
+					this.paymentError = "";
+					const response = await api ({
+						url: 'customer/paymentMethods',
+						method: 'POST',
+						data: data
+					});
+					this.paymentMethods = await this.cartStore.getPaymentMethods();
+				}catch(error) {
+					if (error.response) {
+						this.paymentError = error.response.data.message || 'An error occurred while adding payment method.';
+					} else if (error.request) {
+						this.paymentError = 'No response received from server. Please try again later.';
+					} else {
+						this.paymentError = 'An error occurred. Please try again later.';
+					}
+					return false
+				}finally{
+					this.paymentProcessing = false;
+					this.billingCountry = ""
+					this.fullName = ""
+					this.email = ""
+					this.zipcode = ""
+					this.phoneNo = ""
+					this.streetName = ""
+					this.billingState = ""
+					this.billingCity = ""
+				}
+				
+			}
+		},
 		async updateAddress(){
 			if (
 				this.billingCountry && 
@@ -356,115 +473,44 @@ export default {
 				}
 			}
 		},
-		isCvv(){
-			this.cvvError="";
-			const cvvRegex = /^[0-9]{3,4}$/;
-			if (!this.cvv) {
-				this.cvvError = "Field is required"
-				return false
+		async handlePayment() {
+			this.checkoutError = "";
+			if (!this.paymentMethodId) {
+				this.checkoutError = "Please select a payment method"
+				return
 			}
-			if (!cvvRegex.test(this.cvv)) {
-				this.cvvError = "Enter a valid cvv number"
-				return false
+			const data = {
+				shipping_address_id: this.cartStore.shippingDetails.shippingAddressId,
+				shipping_method_id: this.cartStore.shippingDetails.shippingOption.id,
+				payment_method_id: this.paymentMethodId,
+				delivery_charge: this.cartStore.shippingDetails.shippingOption.amount,
+				products: this.cartStore.checkoutItems
 			}
-			return this.cvv && cvvRegex.test(this.cvv)
-		},
-		isExpiryDate(){
-			const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/;
-			this.expiryError = ""
-			if (!this.expiryDate) {
-				this.expiryError = 'Expiration date is required';
-				return false
+			const api = useApi()
+			try{
+				this.paymentLoading = true;
+				this.checkoutError = "";
+				const response = await api({
+				url: 'customer/checkout',
+				method: 'POST',
+				data: data
+				});
+				console.log(response)
+				console.log(data)
+			}catch(error){
+				if (error.response) {
+					this.checkoutError = error.response.data.message || 'An error occurred while checking out.';
+				} else if (error.request) {
+					this.checkoutError = 'No response received from server. Please try again later.';
+				} else {
+					this.checkoutError = 'An error occurred. Please try again later.';
+				}
+			}finally{
+				this.paymentLoading = false
+				console.log(data)
 			}
-			if (!expiryRegex.test(this.expiryDate)) {
-				this.expiryError = 'Expiration date must be in MM/YY format';
-				return false
-			}
-			return this.expiryDate && expiryRegex.test(this.expiryDate)
-		},
-		isCardName() {
-			const nameRegex = /^((?:[A-Za-z]+ ?){1,5})$/;
-			this.nameError = "";
-			if (!this.cardName) {
-				this.nameError = "Card Name is Required!!";
-				return false
-			}
-			if (!nameRegex.test(this.cardName)) {
-				this.nameError = "Enter a valid card name";
-				return false
-			}
-			return this.cardName && nameRegex.test(this.cardName)
-		},
-		isCardNumberValid(cardNumber) {
-			const cardNumberWithoutSpaces = cardNumber.replace(/\s/g, '');
-
-			// Check if the card number is valid using the Luhn algorithm
-			if (/[^0-9-\s]/.test(cardNumberWithoutSpaces)) return false;
-
-			let nCheck = 0,
-				bEven = false;
-			const nDigits = cardNumberWithoutSpaces.length;
-
-			for (let n = nDigits - 1; n >= 0; n--) {
-				const cDigit = cardNumberWithoutSpaces.charAt(n);
-				let nDigit = parseInt(cDigit, 10);
-
-				if (bEven && (nDigit *= 2) > 9) nDigit -= 9;
-
-				nCheck += nDigit;
-				bEven = !bEven;
-			}
-
-			return nCheck % 10 === 0;
-		},
-		isCardNumber() {
-			this.cardError = ""
-			if (!this.cardNumber) {
-				this.cardError = "Card number is required!!"
-				return false
-			}
-			const isValid = this.isCardNumberValid(this.cardNumber);
-			if (!isValid) {
-				this.cardError = "Enter a valid card number"
-			}
-			return isValid;
-		},
-		isFormValid() {
-			const isValid = this.isCardNumber() && this.isCardName() && this.isExpiryDate() && this.isCvv();
-			if (isValid) {
-				// Clear all error messages
-				this.cardError = this.cvvError = this.expiryError = this.nameError = "";
-			}
-			return isValid;
-		},
-		handleSaveCard(){
-			if (this.isFormValid()) {
-				console.log("a")
-			}
-		},
-		detectCardType() {
-			let value = this.cardNumber.replace(/\s+/g, '').replace(/(\d{4})/g, '$1 ').trim();
- 
-      		this.cardNumber = value;
-			const cardNumberWithoutSpaces = this.cardNumber.replace(/\s/g, '');
-
-			const visaRegex = /^4[0-9]{12}(?:[0-9]{3,4})?$/;
-			const mastercardRegex = /^(?:5[1-5][0-9]{2}|222[1-9]|22[3-9][0-9]|2[3-6][0-9]{2}|27[01][0-9]|2720)[0-9]{12}$/;
-			const verveRegex = /^(?:50[067][180]|6500)(?:[0-9]{15})$/; // Verve cards start with 506
-			const mastercard_local = /^(?:5[13]99|55[35][19]|514[36])(?:11|4[10]|23|83|88)(?:[0-9]{10})$/;
-			const visa_local = /^4[19658][7684][0785][04278][128579](?:[0-9]{10})$/
-
-			this.visa = visaRegex.test(cardNumberWithoutSpaces) || visa_local.test(cardNumberWithoutSpaces);
-			this.master = mastercardRegex.test(cardNumberWithoutSpaces) || mastercard_local.test(cardNumberWithoutSpaces);
-			this.verve = verveRegex.test(cardNumberWithoutSpaces);
-
-			// Reset card types if the number is too short to determine
-			if (cardNumberWithoutSpaces.length < 4) {
-				this.visa = this.master = this.verve = false;
-			}
-	},
-		handlePayment() {
-			this.$router.push("/order/summary");
+			
+			// this.$router.push("/order/summary");
 		},
 		filt(text) {
 			var newText = text.length > 50 ? text.slice(0, 50) + "..." : text;

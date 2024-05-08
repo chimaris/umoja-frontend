@@ -506,43 +506,45 @@ export default {
 			return deleteVariants;
 		},
 		allVariants() {
-			const variants = [];
-			const existingVariants = this.product.variations || [];
+    const variants = [];
+    const existingVariants = this.product.variations || [];
 
-			// Check if any of the option arrays are non-empty
-			const hasOptions = this.product.colors.length > 0 || this.product.sizes.length > 0 || this.product.styles.length > 0 || this.product.materials.length > 0;
+    // Check if any of the option arrays are non-empty
+    const hasOptions = this.product.colors.length > 0 || this.product.sizes.length > 0 || this.product.styles.length > 0 || this.product.materials.length > 0;
 
-			if (!hasOptions) {
-				return existingVariants; // Return existing variants if no options are available
-			}
+    if (!hasOptions) {
+        return existingVariants; // Return existing variants if no options are available
+    }
 
-			// Otherwise, proceed to generate variants based on available options
-			const optionArrays = [this.product.colors, this.product.sizes, this.product.styles, this.product.materials];
+    // Otherwise, proceed to generate variants based on available options
+    const optionArrays = [this.product.colors, this.product.sizes, this.product.styles, this.product.materials];
 
-			function generateVariants(index, currentVariantName) {
-				if (index >= optionArrays.length) {
-					// Check if the variant name already exists in existing variants and not in deleteVariants
-					if (!existingVariants.some(variant => variant.name === currentVariantName) && !this.deleteVariant.some(variant => variant.name === currentVariantName)) {
-						variants.push({ name: currentVariantName, price: 0, no_available: 0, sku: "", selected: false });
-					}
-				} else {
-					const currentOptions = optionArrays[index];
-					if (currentOptions.length > 0) {
-						currentOptions.forEach(option => {
-							const variantName = currentVariantName ? `${currentVariantName}/${option}` : `${option}`;
-							generateVariants(index + 1, variantName);
-						});
-					} else {
-						generateVariants(index + 1, currentVariantName);
-					}
-				}
-			}
+    function generateVariants(index, currentVariantName) {
+        if (index >= optionArrays.length) {
+            // Check if the variant name already exists in existing variants and not in deleteVariants
+            if (!existingVariants.some(variant => variant.name === currentVariantName)) {
+                variants.push({ name: currentVariantName, price: 0, no_available: 0, sku: "", selected: false });
+            }
+        } else {
+            const currentOptions = optionArrays[index];
+            if (currentOptions.length > 0) {
+                currentOptions.forEach(option => {
+                    const variantName = currentVariantName ? `${currentVariantName}/${option}` : `${option}`;
+                    generateVariants(index + 1, variantName);
+                });
+            } else {
+                generateVariants(index + 1, currentVariantName);
+            }
+        }
+    }
 
-			generateVariants(0, "");
+    generateVariants(0, "");
 
-			// Merge existing variants with generated variants
-			return variants.concat(existingVariants);
-	}
+    // Merge existing variants with generated variants
+    return variants.concat(existingVariants);
+}
+
+
 },
 
 	methods: {
@@ -552,7 +554,6 @@ export default {
             this.editStore.saveVariantsInfo(this.allVariants);
 			this.editStore.saveDeleteVariant(this.deleteVariant);
 			this.editStore.saveCurrentVariant(this.currentVariants)
-
             const data = {
                 colors: this.product.colors,
                 sizes: this.product.sizes,
@@ -563,6 +564,8 @@ export default {
 
             await this.editStore.updateVariants(data);
 			this.$router.push('/vendor/dashboard/Products')
+            // If the update is successful, update the local storage item
+            setLocalStorageItem("current-edit", this.product);
         } catch (error) {
             // Handle errors
             if (error.response) {

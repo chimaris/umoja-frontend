@@ -7,8 +7,10 @@ const api = useApi()
 export const useCartStore = defineStore('cart', {
   state: () => ({
     items: getLocalStorageItem('cartItem', []),
-    checkoutItems: getLocalStorageItem('allcheckoutItem', []),
+    checkoutItems: getLocalStorageItem('allcheckout', []),
     shippingDetails: getLocalStorageItem("shipping-details", []),
+    cardDetails: getLocalStorageItem("card-details", []),
+    paymentLoading: false,
     addressError: "",
     billingError: "",
     loading: false,
@@ -25,7 +27,7 @@ export const useCartStore = defineStore('cart', {
     },
     checkoutTotalCost() {
       const totalCost = this.checkoutItems.reduce((total, item) => total + item.price * item.quantity, 0);
-      return totalCost.toLocaleString('en-US');
+      return totalCost;
     },
 
     totalItems() {
@@ -40,6 +42,10 @@ export const useCartStore = defineStore('cart', {
   },
 
   actions: {
+    saveCardDetails(card) {
+      this.cardDetails = card;
+      setLocalStorageItem("card-details", this.cardDetails)
+    },
     addItem(item, quantity) {
       const existingItem = this.items.find((i) => i.id === item.id);
 
@@ -97,6 +103,31 @@ export const useCartStore = defineStore('cart', {
         return false;
       }finally {
         this.load = false
+      }
+    },
+    async getPaymentMethods(){
+      try{
+        const response = await api({
+        url: 'customer/paymentMethods',
+        method: "GET"
+      });
+      return response.data.data
+      }catch(error){
+        console.error(error)
+      }
+    },
+    async deletePaymentMethod(id){
+      try{
+        const response = await api ({
+          url: `customer/paymentMethods/${id}`, 
+          method: 'POST',
+          data: {
+            _method: 'DELETE'
+          }
+        });
+        return response 
+      }catch(error) {
+        console.error(error)
       }
     },
    async shippingMethods() {
@@ -225,7 +256,7 @@ export const useCartStore = defineStore('cart', {
         // this.checkoutItems = [...this.checkoutItems, ...this.items.filter(item => item.selected)]
         const selectedItems = this.items.filter(item => item.selected);
         this.checkoutItems.push(...selectedItems)
-        setLocalStorageItem('allcheckoutItem', this.checkoutItems)
+        setLocalStorageItem('allcheckout', this.checkoutItems)
         this.items = this.items.filter(item => !item.selected);
         setLocalStorageItem('cartItem', this.items)
       },

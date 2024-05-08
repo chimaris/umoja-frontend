@@ -111,7 +111,7 @@ font-size: 14px;
 color: #969696;">Subtotal</p>
     <p style="color: var(--carbon-4, #333);
 font-size: 16px;
-font-weight: 600;" class="">€ {{ cartStore.checkoutTotalCost }}</p>
+font-weight: 600;" class="">{{ formattedPrice(cartStore.checkoutTotalCost) }}</p>
 </div>
 <div class="d-flex  pb-3 align-center justify-space-between">
 <p style="font-weight: 500;
@@ -136,13 +136,16 @@ font-size: 14px;
 color: #969696;">Grand Total</p>
     <p style="color: var(--carbon-4, #333);
 font-size: 24px;
-font-weight: 600;" class="">€ {{ cartStore.checkoutTotalCost }} </p>
+font-weight: 600;" class="">{{ formattedPrice(cartStore.checkoutTotalCost) }} </p>
 </div>
 
 </div>
-<v-btn @click="emit('handleSubmit')" flat block size="x-large" class="mt-8" rounded="xl" color="green"> <span style="font-size: 14px;
-font-style: normal;
-font-weight: 600;">{{text}}</span> </v-btn>
+<p style="color: red; font-size: 16px;">{{cartError}}</p>
+<p style="color: red; font-size: 16px;">{{checkoutError}}</p>
+<v-btn @click="emit('handleSubmit')" flat block size="x-large" class="mt-8" rounded="xl" color="green">
+    <span style="font-size: 14px; font-style: normal; font-weight: 600; margin-right: 10px;">{{text}}</span> 
+    <v-progress-circular v-if="paymentLoading"  indeterminate :width="2" :size="20"></v-progress-circular>
+</v-btn>
 </v-card>
 
 </v-col>
@@ -164,6 +167,15 @@ const props = defineProps({
     text: {
         type: String,
         required: true
+    },
+    paymentLoading: {
+        type: Boolean
+    },
+    checkoutError: {
+        type: String
+    },
+    cartError: {
+        type: String
     },
     route: {
         type: String,
