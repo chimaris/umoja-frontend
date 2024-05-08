@@ -184,16 +184,13 @@ const submit = () => {
 
 
 
-
-
-watchEffect(() => {
+watch(() => selectedBusinessCountry.value, () => {
 	fetchStates(selectedBusinessCountry.value)
-});
+		});
 
-watchEffect(() => {
+watch(() => selectedState.value, () => {
 	fetchCities(selectedBusinessCountry.value, selectedState.value);
-});
-
+		});
 function isFormValid() {
 	if (businessImages.value.length < 5) {
 		errorMessage.value = 'You must upload a minimum of 5 images!!'

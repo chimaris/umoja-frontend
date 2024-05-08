@@ -175,21 +175,21 @@ const isSessionExpired = ref(false)
 
 const currentPage = ref(route.params.name ? route.params.name : "Homepage");
 
-const handleSessionExpired = () => {
-  isSessionExpired.value = true;
+// const handleSessionExpired = () => {
+//   isSessionExpired.value = true;
  
   
-};
-function reLogin () {
-	localStorage.removeItem('vendorToken');
- 	 vendorStore.vendorIsLoggedIn = false;
-	router.push('/vendor/login');
-	isSessionExpired.value = false
-}
-window.addEventListener('sessionExpired', handleSessionExpired);
-onUnmounted(() => {
-      window.removeEventListener('sessionExpired', handleSessionExpired);
-    });
+// };
+// function reLogin () {
+// 	localStorage.removeItem('vendorToken');
+//  	 vendorStore.vendorIsLoggedIn = false;
+// 	router.push('/vendor/login');
+// 	isSessionExpired.value = false
+// }
+// window.addEventListener('sessionExpired', handleSessionExpired);
+// onUnmounted(() => {
+//       window.removeEventListener('sessionExpired', handleSessionExpired);
+//     });
 
 const handleClick = () => {
       if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product') {

@@ -276,13 +276,14 @@ setup() {
     const shippingTypes = ref();
     const router = useRouter()
 
-    watchEffect(() => {
-	    fetchStates(shippingCountry.value)
-    });
+   
+    watch(() => shippingCountry.value, () => {
+        fetchStates(shippingCountry.value)
+	});
 
-    watchEffect(() => {
-	    fetchCities(shippingCountry.value, shippingState.value);
-    });
+    watch(() => shippingState.value, () => {
+			fetchCities(shippingCountry.value, shippingState.value);
+	});
     onMounted(async () => {
         const response = await cartStore.shippingMethods();
         shippingTypes.value = response.data.data;

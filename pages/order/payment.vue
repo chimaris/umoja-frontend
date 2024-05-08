@@ -33,8 +33,8 @@
 			<v-row class="pt-2">
 				<v-col cols="12" lg="8">
 						
-						<div class="mb-4 p cardStyle">
-							<p class="chkt mb-8">Select Payment Method</p>
+						<div class="mb-4 p cardStyle" >
+							<p class="chkt mb-8" v-if="paymentMethods.length >= 1">Select Payment Method</p>
 							<template v-if="paymentMethods.length >= 1">
 								<v-card  flat class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" v-for="(n, i) in paymentMethods" :key="i">
 								<input type="radio" :id="'payment_' + i" :value="n.id" v-model="paymentMethodId" class="mr-2" style="accent-color: #2C6E63; transform: scale(1.5);">
@@ -45,7 +45,7 @@
 										<v-img v-if="n.last_card_brand == 'verve'" width="54" src="https://res.cloudinary.com/payhospi/image/upload/v1714813559/umoja/234-2342510_aerocontractors-the-reliable-way-to-fly-verve-card_i7s2un.jpg"></v-img>
 									</div>
 									<div class="text-capitalize px-4">
-										<p style="color: #1e1e1e; font-size: 16px; font-weight: 600" class="  ">**** **** ****{{ n.last_card_digits }}</p>
+										<p style="color: #1e1e1e; font-size: 16px; font-weight: 600" class="  ">**** **** **** {{ n.last_card_digits }}</p>
 										<p style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 500">Expiry {{ n.expiry_month }}/{{ n.expiry_year }}</p>
 									</div>
 								</div>
@@ -212,9 +212,9 @@ export default {
 		const cartStore = useCartStore()
 		
 
-		watchEffect(() => {
-	    fetchStates(billingCountry.value)
-    	});
+		watch(() => billingCountry.value, () => {
+			fetchStates(billingCountry.value)
+		});
 		watch(() => billingState.value, () => {
 			fetchCities(billingCountry.value, billingState.value);
 		});
@@ -376,7 +376,13 @@ export default {
 			this.paymentElement.mount('#payment-element')
 		},
 		async addPaymentMethod(){
+			this.paymentError = "";
 			this.paymentProcessing = true;
+			if (!this.fullName || !this.email || !this.phoneNo || !this.billingCountry || !this.billingState || !this.billingCity || !this.zipcode || !this.streetName){
+				this.paymentError = "Please provide all required informations!!";
+				this.paymentProcessing = false;
+				return
+			}
 			const {paymentMethod, error} = await this.stripe.createPaymentMethod(
 				'card', this.paymentElement, {
 					billing_details: {
@@ -391,7 +397,7 @@ export default {
 					}
 				}
 			);
-			this.paymentError = "";
+
 			if (error) {
 				this.paymentProcessing = false;
 				console.log(error)
@@ -406,6 +412,7 @@ export default {
 					expiry_month: paymentMethod.card.exp_month,
 					expiry_year: paymentMethod.card.exp_year,
 					payment_method: paymentMethod.id,
+					email: this.email
 				}
 				try{
 					this.paymentError = "";
