@@ -61,7 +61,7 @@
 						<dialogsearch />
 					</v-menu>
 
-					<v-btn rounded="xl" v-if="!isLoggedIn" to="/user/login" class="" icon flat color="transparent">
+					<v-btn rounded="xl" v-if="!isLoggedIn" to="/signin-category" class="" icon flat color="transparent">
 						<v-avatar size="24"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img> </v-avatar
 					></v-btn>
 					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" class="" icon flat color="transparent">
@@ -196,7 +196,7 @@ export default {
 				{ title: "Discovery", route: "/discovery_page", disabled: false },
 				{ title: "Market Place", route: "/market_place", disabled: false },
 				{ title: "About Us", route: "/about/*", disabled: false },
-				{ title: "Create Account", route: "/vendor/dashboard/Homepage", disabled: false },
+				{ title: "Create Account", route: "/signup-category", disabled: false },
 				// { title: "ERP Solution", route: "/vendor/dashboard/Homepage", disabled: false },
 			];
 		},
