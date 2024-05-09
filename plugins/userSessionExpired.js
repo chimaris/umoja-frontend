@@ -1,12 +1,14 @@
-import { removeLocalStorageItem } from '~/utils/storage';
+
 import { useUserStore } from "~/stores/userStore"; 
 
 export default defineNuxtPlugin(nuxtApp => {
+    const userStore = useUserStore();
+
+    userStore.initializeStore();
+
     function handleSessionExpired() {
-        removeLocalStorageItem('token'); 
-        const userStore = useUserStore();
+        localStorage.removeItem('token');
         userStore.isLoggedIn = false;
-        alert("Your login session has expired");
         nuxtApp.$router.push('/user/login'); 
     }
   

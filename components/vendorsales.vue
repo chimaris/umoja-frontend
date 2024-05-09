@@ -90,12 +90,13 @@
 						<p v-for="n in items" class="mr-2 lightText3"><v-icon size="9.6" :color="n.color" icon="mdi mdi-circle"></v-icon> {{ n.name }}</p>
 					</div>
 					<!-- <revenuegraph /> -->
-					<v-img
+					<apexchart type="bar" color="green" :options="chartOptions" :series="series"></apexchart>
+					<!-- <v-img
 						class="mt-12 mb-5"
 						src="https://res.cloudinary.com/payhospi/image/upload/v1686915235/Untitled_kwgtyz.png"
 						width="100%"
 						height="auto"
-					></v-img>
+					></v-img> -->
 				</v-card>
 			</v-col>
 			<v-col cols="12" lg="6">
@@ -122,12 +123,13 @@
 						<p v-for="n in items2" class="mr-2 lightText3"><v-icon size="9.6" :color="n.color" icon="mdi mdi-circle"></v-icon> {{ n.name }}</p>
 					</div>
 					<!-- <revenuegraph /> -->
-					<v-img
+					<apexchart type="line" color="green" :options="chartOptions2" :series="series2"></apexchart>
+					<!-- <v-img
 						class="mt-12 mb-5"
 						src="https://res.cloudinary.com/payhospi/image/upload/v1686903729/Group_1175_pm9ipd.png"
 						width="100%"
 						height="auto"
-					></v-img>
+					></v-img> -->
 				</v-card>
 			</v-col>
 
@@ -167,12 +169,13 @@
 						</v-chip-group>
 					</div>
 					<!-- <revenuegraph /> -->
-					<v-img
+					<apexchart type="line" color="green" :options="chartOptions3" :series="series3"></apexchart>
+					<!-- <v-img
 						class="mt-8"
 						src="https://res.cloudinary.com/payhospi/image/upload/v1686915796/Frame_548_s0rovu.png"
 						width="100%"
 						height="auto"
-					></v-img>
+					></v-img> -->
 				</v-card>
 			</v-col>
 		</v-row>
@@ -752,7 +755,125 @@ export default {
 				"https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1896_x07ole.png",
 				"https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1897_ca06qx.png",
 			],
-
+			series: [
+				{
+				"name": "Product A",
+				"data": [500, 1000, 1500, 2000, 2500, 3000, 3500]
+				},
+				{
+				"name": "Product B",
+				"data": [1000, 1500, 2000, 2500, 3000, 3500, 4000]
+				},
+				{
+				"name": "Product C",
+				"data": [1500, 2000, 2500, 3000, 3500, 4000, 4500]
+				}
+			],
+			chartOptions: {
+				chart: {
+				type: 'bar'
+				},
+				colors:['#CBDED6', '#00966D', '#005A41'],
+				xaxis: {
+				categories: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+				labels: {
+					style: {
+					fontSize: '16px',
+					fontWeight: 'bold',
+					}
+				}
+				},
+				yaxis: {
+					labels: {
+						formatter: function (value) {
+						return '£' + value + 'k';
+						},
+						style: {
+						fontSize: '16px',
+						fontWeight: 'bold',
+						}
+					}
+					}
+			},
+			series2: [
+				{
+				"name": "Clothing",
+				"data": [5000, 1000, 15000, 2000, 25000, 30000]
+				},
+				{
+				"name": "Shoes",
+				"data": [1000, 2000, 21000, 2000, 35000, 42000]
+				},
+				{
+				"name": "Accessories",
+				"data": [9000, 18000, 27000, 36000, 45000, 5000]
+				}
+			],
+			chartOptions2: {
+				chart: {
+				type: 'line'
+				},
+				colors:['#F38218', '#914E0E', '#FADACC'],
+				stroke: {
+				curve: 'smooth',
+				width: 3,
+				},
+				xaxis: {
+				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+				labels: {
+					style: {
+					fontSize: '16px',
+					fontWeight: 'bold',
+					}
+				}
+				},
+				yaxis: {
+					labels: {
+						formatter: function (value) {
+						return '£' + value + 'k';
+						},
+						style: {
+						fontSize: '16px',
+						fontWeight: 'bold',
+						}
+					}
+					}
+			},
+			series3: [
+					{
+						name: 'Revenue Growth',
+         	 			data: [300, 400, 350, 500, 490, 600, 700, 900, 500, 200, 900, 1000]
+					}
+			],
+			chartOptions3: {
+				chart: {
+				type: 'line'
+				},
+				xaxis: {
+				categories: ['Jan', 'Feb', 'March', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+				labels: {
+					style: {
+					fontSize: '16px',
+					fontWeight: 'bold',
+					}
+				}
+				},
+				stroke: {
+					curve: 'smooth',
+					colors: ['#2C6E63'] // Define the color for the line
+				},
+				yaxis: {
+				labels: {
+					formatter: function (value) {
+					return '£' + value + 'k';
+					},
+					style: {
+					fontSize: '16px',
+					fontWeight: 'bold',
+					}
+				}
+        }
+			},
 			items1: [
 				{
 					sn: "#23942",

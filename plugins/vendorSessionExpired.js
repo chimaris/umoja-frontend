@@ -1,12 +1,12 @@
-import { removeLocalStorageItem } from '~/utils/storage';
+
 import { useVendorStore } from '~/stores/vendorStore';
 
 export default defineNuxtPlugin(nuxtApp => {
     function handleSessionExpired() {
-        removeLocalStorageItem('vendorToken'); 
+
+        localStorage.removeItem('vendorToken')
         const vendorStore = useVendorStore();
         vendorStore.vendorIsLoggedIn = false;
-        alert("Your login session has expired");
         nuxtApp.$router.push('/vendor/login'); 
     }
   

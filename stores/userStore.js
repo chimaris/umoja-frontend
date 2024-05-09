@@ -13,14 +13,19 @@ export const useUserStore = defineStore({
     error: '',
     loginError: '',
     signUpError: '',
-    isLoggedIn: !!localStorage.getItem("token"),
-    token: localStorage.getItem("token"),
-    users: JSON.parse(localStorage.getItem('users')) || [] ,
+    isLoggedIn: false,
+    token: null,
   }),
   getters: {
     getIsLoggedIn: (state) => state.isLoggedIn
   },
   actions: {   
+    initializeStore() {
+      if (process.client) {
+        this.token = localStorage.getItem("token") || null;
+        this.isLoggedIn = !!this.token;
+      }
+    },
     async login({email, password, rememberMe}) {
       this.loading = true;
       try {
@@ -119,10 +124,10 @@ export const useUserStore = defineStore({
         console.error(error)
       }
     },
-    logout() {
-      localStorage.removeItem('isLoggedIn');
-      this.user = removeLocalStorageItem("user");
-      this.isLoggedIn = false;
-    }
+    // logout() {
+    //   localStorage.removeItem('isLoggedIn');
+    //   this.user = removeLocalStorageItem("user");
+    //   this.isLoggedIn = false;
+    // }
   }
 });
