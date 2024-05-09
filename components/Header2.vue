@@ -146,7 +146,7 @@ import { useCartStore } from "~/stores/cartStore";
 import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
 import { useProductStore } from "~/stores/productStore";
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
+import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from "~/utils/storage";
 
 export default {
 	data() {
@@ -195,15 +195,16 @@ export default {
 				{ title: "Sell", route: "/vendor/login", disabled: false },
 				{ title: "Discovery", route: "/discovery_page", disabled: false },
 				{ title: "Market Place", route: "/market_place", disabled: false },
-				{ title: "ERP Solution", route: "/vendor/dashboard/Homepage", disabled: false },
 				{ title: "About Us", route: "/about/*", disabled: false },
+				{ title: "Create Account", route: "/vendor/dashboard/Homepage", disabled: false },
+				// { title: "ERP Solution", route: "/vendor/dashboard/Homepage", disabled: false },
 			];
 		},
 		cartStore() {
 			return useCartStore();
 		},
-		productStore(){
-			return useProductStore()
+		productStore() {
+			return useProductStore();
 		},
 		router() {
 			return useRouter();
