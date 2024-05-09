@@ -19,7 +19,7 @@
 			</div>
 		</div>
 		<v-carousel style="overflow: visible" height="170" class="promo promoshort" :show-arrows="false" hide-delimiter-background="" cycle>
-			<v-carousel-item v-for="n in 6">
+			<v-carousel-item v-for="n in 6" :key="n">
 				<v-img
 					cover
 					height="auto"
@@ -135,8 +135,8 @@
 			</v-carousel-item>
 		</v-carousel>
 		<v-row style="background-color: #fff" class="mt-8">
-			<v-col v-for="(n, i) in items" :key="i" lg="4" xs="6" sm="4" md="6">
-				<product-component :index="i" :item="n"/>
+			<v-col v-for="(n, i) in items" :key="i" cols="6" lg="4" md="6">
+				<product-component :index="i" :item="n" />
 			</v-col>
 		</v-row>
 	</div>
@@ -150,14 +150,14 @@ import { useProductStore } from "~/stores/productStore.js";
 
 export default {
 	setup() {
-		const items = ref([])
+		const items = ref([]);
 		onMounted(() => {
-			items.value = useProductStore().getProductsArray("vendorProducts")
-		})
+			items.value = useProductStore().getProductsArray("vendorProducts");
+		});
 
 		return {
-			items
-		}
+			items,
+		};
 	},
 	components: {
 		VueCountdown,
@@ -169,7 +169,7 @@ export default {
 		},
 	},
 	computed: {
-		productStore(){
+		productStore() {
 			return useProductStore();
 		},
 		timediff() {

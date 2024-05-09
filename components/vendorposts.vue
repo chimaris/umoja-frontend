@@ -10,9 +10,16 @@
 		</div>
 
 		<v-row style="background-color: #fff">
-			<v-col cols="12" v-for="(n, i) in items" :key="i" lg="4" md="6">
+			<v-col cols="4" v-for="(n, i) in items" :key="i" lg="4" md="6">
 				<v-card flat style="border-radius: 15px" class="bg-white rounded-lg">
-					<v-img @click="dialog = true" class="rounded-lg bg-grey-lighten-2" cover width="100%" height="216" :src="n.image">
+					<v-img
+						@click="dialog = true"
+						class="rounded-lg bg-grey-lighten-2"
+						cover
+						width="100%"
+						:height="$vuetify.display.mobile ? 119 : 216"
+						:src="n.image"
+					>
 						<p
 							v-if="n.oos"
 							class="text-white py-1 px-3"
