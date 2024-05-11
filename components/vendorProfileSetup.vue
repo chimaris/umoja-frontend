@@ -25,6 +25,9 @@
 		<v-col cols="12" class="pb-0 dash" md="7">
 		  <v-card min-height="100vh" height="auto" class="pa-4" flat min style="background-color: #f8f8f8">
 			<v-window v-model="stage">
+			  <v-window-item value="About Business">
+				<tellus @submit="navigateNext" />
+			  </v-window-item>
 			  <v-window-item value="Business Info">
 				<business @submit="navigateNext" />
 			  </v-window-item>
@@ -42,7 +45,7 @@
 		</v-col>
 		<v-col cols="12" class="pt-8" md="2">
 		  <v-progress-linear :model-value="progress" color="light-green-darken-4"></v-progress-linear>
-		  <span class="mt-2 float-right" style="font-weight: 600; font-size: 14px; text-align: right">{{ formSect }}/4 Complete</span>
+		  <span class="mt-2 float-right" style="font-weight: 600; font-size: 14px; text-align: right">{{ formSect }}/5 Complete</span>
 		</v-col>
 	  </v-row>
 	</div>
@@ -52,12 +55,13 @@
   import { ref } from 'vue';
   
   const formSect = ref(1);
-  const stage = ref("Business Info");
+  const stage = ref("About Business");
   const items = [
-	{ id: 1, name: "Business Info" },
-	{ id: 2, name: "Contact" },
-	{ id: 3, name: "Account" },
-	{ id: 4, name: "Subscription" },
+  	{ id: 1, name: "About Business" },
+	{ id: 2, name: "Business Info" },
+	{ id: 3, name: "Contact" },
+	{ id: 4, name: "Account" },
+	{ id: 5, name: "Subscription" },
   ];
   
   function getDotColor(itemId) {

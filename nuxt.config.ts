@@ -19,12 +19,16 @@ export default defineNuxtConfig({
 		// ...
 		"@pinia/nuxt",
 		'maz-ui/nuxt',
+		'nuxt-mapbox'
 	],
 	runtimeConfig: {
 		public: {
 			stripePK: process.env.NUXT_ENV_STRIPE_PUBLIC_KEY
 		}
 	},
+	mapbox: {
+		accessToken: process.env.MAP_BOX_TOKEN
+	  },
 	mazUi: {
 		injectComponents: true,
 		injectCss: true,

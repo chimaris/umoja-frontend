@@ -11,7 +11,7 @@
 							<div style="max-width: 385px" class="pt-12 mx-auto">
 								<h1 style="font-weight: 800; font-size: 48px; line-height: 60px; color: #333333">Welcome Back</h1>
 								<p class="font-weight-regular mb-6 mt-1" style="font-size: 20px">Welcome back, please enter your details</p>
-								<v-form ref="form" @submit.prevent="handleLogin">
+								<v-form v-model="valid" @submit.prevent="handleLogin">
 									<p class="inputLabel">Email Address</p>
 
 									<v-text-field
@@ -49,7 +49,7 @@
 										</v-col>
 									</v-row>
 									<p v-if="userStore.loginError" style="color: red">{{ userStore.loginError }}</p>
-									<v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mt-3">
+									<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-3">
 										<span class="mr-4"> Sign in</span>
 										<v-progress-circular v-if="userStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
 									</v-btn>
@@ -131,17 +131,20 @@ export default {
 			email: "",
 			password: "",
 			rememberMe: false,
+			valid: false,
 			visible: false,
 		};
 	},
 	methods: {
 		async handleLogin() {
-			if (this.email && this.password) {
+			if (this.valid) {
 				try {
-					const isLoggedIn = await this.userStore.login({ email: this.email, password: this.password, rememberMe: this.rememberMe });
+					const isLoggedIn = await this.userStore.login({ email: this.email, password: this.password });
 					if (isLoggedIn) {
 						this.$router.push("/home2");
 						this.userStore.loginError = "";
+						email.value = "";
+						password.value = "";
 					} else {
 						// Show error message
 						console.error("Login failed");

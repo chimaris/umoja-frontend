@@ -26,7 +26,7 @@ export const useUserStore = defineStore({
         this.isLoggedIn = !!this.token;
       }
     },
-    async login({email, password, rememberMe}) {
+    async login({email, password}) {
       this.loading = true;
       try {
           const response = await api({
@@ -124,10 +124,20 @@ export const useUserStore = defineStore({
         console.error(error)
       }
     },
-    // logout() {
-    //   localStorage.removeItem('isLoggedIn');
-    //   this.user = removeLocalStorageItem("user");
-    //   this.isLoggedIn = false;
-    // }
+    async logout() {
+      try{
+        await api({
+          url: 'auth/logout',
+          method: 'POST'
+        });
+        this.isLoggedIn = false,
+        localStorage.removeItem('token')
+        return true
+      }catch(error){
+        console.error(error)
+        return false
+      }
+      
+    }
   }
 });

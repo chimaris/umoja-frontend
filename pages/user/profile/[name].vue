@@ -59,7 +59,7 @@
 							></v-btn>
 						</template>
 						<v-btn
-							@click="logout"
+							@click="logoutUser()"
 							width="250"
 							size="x-large"
 							color="red"
@@ -261,9 +261,12 @@ export default {
 			this.selected = n;
 			this.$router.push(`/user/profile/${n}`);
 		},
-		logout() {
-			this.userStore.logout();
-			this.$router.push("/home2");
+		async logoutUser() {
+			const response = await this.userStore.logout();
+			if (response){
+				this.$router.push("/user/login");
+			}
+			
 		},
 		filt(text) {
 			var newText = text.length > 50 ? text.slice(0, 50) + "..." : text;

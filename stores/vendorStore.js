@@ -7,15 +7,17 @@ const api = vendorUseApi()
 export const useVendorStore = defineStore('vendor', {
   state: () => ({
     vendor: getLocalStorageItem("vendor", []),
+    vendorCleared: false,
+    showRegistrationModal: false,
     loading: false,
     loginError: "",
     signupError: "",
     error: "",
-    vendorIsLoggedIn: !!localStorage.getItem('vendorToken'),
+    vendorIsLoggedIn: false,
+    vendorToken: null,
     companyInfo: {},
     ownerInfo: {},
     businessDocumentation: {},
-    vendors: getLocalStorageItem("vendors", []),
     isCompanyInfoComplete: false,
     isOwnerInfoComplete: false,
     isBusinessDocumentationComplete: false,
@@ -25,6 +27,12 @@ export const useVendorStore = defineStore('vendor', {
     getVendorIsLoggedIn: (state) => state.vendorIsLoggedIn
   },
   actions: {
+    initializeStore() {
+      if (process.client) {
+        this.vendorToken = localStorage.getItem("vendorToken") || null;
+        this.vendorIsLoggedIn = !!this.vendorToken;
+      }
+    },
     markSectionComplete(section) {
       this[section] = true;
     },
@@ -162,11 +170,18 @@ export const useVendorStore = defineStore('vendor', {
       } 
     },
     async logout() {
-       await api({
+      try{
+        await api({
         url: 'auth/logout',
         method: 'post'
-       });
-       return true
+        });
+        localStorage.removeItem('vendorToken')
+        this.vendorIsLoggedIn = false
+        return true
+      }catch(error){
+        console.error(error)
+      }
+       
     }
   }
 });

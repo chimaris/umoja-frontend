@@ -2,10 +2,12 @@
 import { useVendorStore } from '~/stores/vendorStore';
 
 export default defineNuxtPlugin(nuxtApp => {
-    function handleSessionExpired() {
+    const vendorStore = useVendorStore();
+    vendorStore.initializeStore();
 
+
+    function handleSessionExpired() {
         localStorage.removeItem('vendorToken')
-        const vendorStore = useVendorStore();
         vendorStore.vendorIsLoggedIn = false;
         nuxtApp.$router.push('/vendor/login'); 
     }

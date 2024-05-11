@@ -113,7 +113,7 @@ import {useVendorProfileStore} from "~/stores/vendorProfile"
 			profilePicture: profilePicture.value.name,
 			businessBio: businessBio.value
 		}
-      vendorProfile.addBusinessInfo(data)
+      console.log(data)
       emit("submit");
     };
 

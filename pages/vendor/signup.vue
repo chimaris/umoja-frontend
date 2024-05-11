@@ -51,7 +51,7 @@
 					Sign Up as a Vendor
 				</h1>
 				<p class="font-weight-medium mb-6 mt-1">
-					Already have an account? <span style="color: #0076ff; cursor: pointer" @click="$router.push('/user/login')">Sign In</span>
+					Already have an account? <span style="color: #0076ff; cursor: pointer" @click="$router.push('/vendor/login')">Sign In</span>
 				</p>
 				<v-row>
 					<v-col cols="6">
@@ -74,7 +74,7 @@
 					<p class="px-2 w-100 text-center" :style="{ fontSize: $vuetify.display.mobile ? '14px' : '16px' }">or sign up with</p>
 					<v-divider></v-divider>
 				</div>
-				<v-form ref="form" @submit.prevent="handleSubmit">
+				<v-form v-model="valid" @submit.prevent="handleSubmit">
 					<v-row>
 						<v-col>
 							<p class="inputLabel">First Name</p>
@@ -119,7 +119,7 @@
 						</template>
 					</v-checkbox>
 					<p v-if="userStore.signUpError" style="color: red">{{ userStore.signUpError }}</p>
-					<v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mt-6">
+					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-6">
 						<span class="mr-4" style="text-transform: none">Create an account</span>
 						<v-progress-circular v-if="userStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
 					</v-btn>
@@ -145,6 +145,7 @@ const first_name = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const agree = ref(false);
+const valid = ref(false)
 
 const agreeRule = [(v) => !!v || "You must agree to the terms and conditions"];
 
@@ -160,25 +161,32 @@ async function socialMediaLogin(provider) {
 }
 
 async function handleSubmit() {
-	if (first_name.value && last_name.value && email.value && password.value && agree.value && confirmPassword.value) {
-		try {
-			const isSignedUp = await userStore.signup({
-				first_name: first_name.value,
-				last_name: last_name.value,
-				email: email.value,
-				password: password.value,
-				password_confirmation: confirmPassword.value,
-				terms_accepted: 1,
-			});
-			if (isSignedUp) {
-				router.push("/home2");
-				userStore.signUpError = "";
-			}
-		} catch (error) {
-			// Handle any unexpected errors
-			console.error("An error occurred during signup:", error);
-			userStore.signUpError = error.message;
-		}
+	if (valid.value) {
+		console.log('hi')
+		// try {
+		// 	const isSignedUp = await userStore.signup({
+		// 		first_name: first_name.value,
+		// 		last_name: last_name.value,
+		// 		email: email.value,
+		// 		password: password.value,
+		// 		password_confirmation: confirmPassword.value,
+		// 		terms_accepted: 1,
+		// 	});
+		// 	if (isSignedUp) {
+		// 		router.push("/home2");
+		// 		userStore.signUpError = "";
+				// first_name.value = "";
+				// last_name.value = "";
+				// email.value = "";
+				// password.value = "";
+				// password_confirmation.value = "";
+				// agree.value = false;
+		// 	}
+		// } catch (error) {
+		// 	// Handle any unexpected errors
+		// 	console.error("An error occurred during signup:", error);
+		// 	userStore.signUpError = error.message;
+		// }
 	}
 }
 </script>
