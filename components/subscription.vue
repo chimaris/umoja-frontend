@@ -5,7 +5,7 @@
 			<v-avatar color="#EDF0FC" size="x-large">
 				<v-icon icon="mdi mdi-account-plus" color="#1273EB"></v-icon>
 			</v-avatar>
-			<h1 style="font-weight: 600; font-size: 32px; color: ##333333">Select Subscription Package</h1>
+			<h1 style="font-weight: 600; font-size: 32px; color: #333333">Select Subscription Package</h1>
 			<p style="font-weight: 500; font-size: 16px; line-height: 24px; color: #969696">Complete these simple steps to get your store up and running</p>
 
 			<div class="mt-10 mb-5">
@@ -64,10 +64,10 @@
 	<!-- View Subscription Section -->
 	<v-sheet v-if="subscriptionInfo" class="px-6 pt-8" max-width="550" width="100%" style="padding: 40px; margin: auto; border-radius: 15px">
 		<div>
-			<h1 style="font-weight: 600; font-size: 32px; color: ##333333">My Plan</h1>
+			<h1 style="font-weight: 600; font-size: 32px; color: #333333">My Plan</h1>
 			<p style="font-weight: 500; font-size: 16px; line-height: 24px; color: #969696">Change your plan based on your needs</p>
 			<v-sheet>
-				<div style="padding: 32px 24px; border: 1px solid #cecece; border-radius: 10px">
+				<div style="padding: 32px 24px; margin-bottom: 20px; border: 1px solid #cecece; border-radius: 10px">
 					<span>Basic Plan</span>
 					<v-chip class="ma-2" color="cyan" label> Billed Monthly </v-chip>
 					<p>€ 0.00 EUR (Next billing date: 9th March, 2024)</p>
@@ -76,7 +76,7 @@
 			</v-sheet>
 		</div>
 		<div class="my-10">
-			<h1 style="font-weight: 600; font-size: 32px; color: ##333333">Payment Method</h1>
+			<h1 style="font-weight: 600; font-size: 32px; color: #333333">Payment Method</h1>
 			<p style="font-weight: 500; font-size: 16px; line-height: 24px; color: #969696">Change how you pay your plan</p>
 			<v-sheet class="pt-8">
 				<div style="padding: 32px 24px; border: 1px solid #cecece; border-radius: 10px">
@@ -102,7 +102,7 @@
 		</div>
 
 		<div class="py-4 d-flex justify-space-between">
-			<v-btn size="x-large" style="border: 1px solid #969696" flat @click="cancelSubscription">
+			<v-btn size="x-large" style="border: 1px solid #969696" flat @click="cancelSubscription()">
 				<span style="color: #c20052; font-size: 16px; font-weight: 600; line-height: 24px"> Cancel Subscription</span></v-btn
 			>
 
@@ -132,26 +132,22 @@
 	</v-dialog> -->
 </template>
 
-<script>
-export default {
-	name: "subcription",
-	data() {
-		return {
-			value: "",
-			dialog: false,
-			subscriptionInfo: true,
-			editSubscriptionInfo: false,
-		};
-	},
-	methods: {
-		submit() {
-			this.$emit("submit");
-		},
+<script setup>
+	import {ref, defineEmits} from 'vue'
 
-		cancelSubscription() {
-			this.subscriptionInfo = false;
-			this.editSubscriptionInfo = true;
-		},
-	},
-};
+	const value = ref("")
+	const dialog = ref(false)
+	const subscriptionInfo = ref(false)
+	const editSubscriptionInfo = ref(true)
+	const emit = defineEmits(['submit']);
+
+	function cancelSubscription() {
+		this.subscriptionInfo = false;
+		this.editSubscriptionInfo = true;
+	}
+
+	function submit(){
+		emit('submit')
+	}
 </script>
+

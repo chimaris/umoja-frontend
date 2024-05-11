@@ -64,7 +64,7 @@
                             append-inner-icon="mdi mdi-chevron-down"
                             placeholder="Select Country"
                             density="comfortable"
-							@change="fetchStates(selectedBusinessCountry)"
+							@input="fetchStates(selectedBusinessCountry)"
                     >
                     </v-select>
                 </div>
@@ -72,7 +72,7 @@
                     <p class="inputLabel">State</p>
                     <v-select 
 						:items= "states"
-						@change="fetchCities(selectedBusinessCountry, selectedState)"
+						@input="fetchCities(selectedBusinessCountry, selectedState)"
 						v-model="selectedState" 
 						append-inner-icon="mdi mdi-chevron-down" 
 						placeholder="Select State" density="comfortable"> 
@@ -104,7 +104,7 @@
     </v-sheet>
 
     <!-- View Contact Section -->
-    <v-sheet max-width="550" width="100%" style="padding: 40px; margin: 0 auto; border-radius: 15px">
+    <v-sheet max-width="550" width="100%" style="padding: 40px; margin: 25px auto 0; border-radius: 15px">
         <v-sheet>
             <div class="mb-5">
                 <p class="mb-1 contact-label">Business Email</p>
@@ -183,12 +183,11 @@ import {useVendorProfileStore} from "~/stores/vendorProfile"
             }
         };
 
-watchEffect(() => {
-	fetchStates(selectedBusinessCountry.value)
-});
-
-watchEffect(() => {
+watch(() => selectedState.value, () => {
 	fetchCities(selectedBusinessCountry.value, selectedState.value);
+});
+watch(() => selectedBusinessCountry.value, () => {
+	fetchStates(selectedBusinessCountry.value)
 });
 
 const submit = () => {
@@ -205,7 +204,7 @@ const submit = () => {
 		Address: businessAddress.value,
 		complexBuilding: buildingName.value
 	}
-	vendorProfile.addContactInfo(data)
+	console.log(data)
 	emit("submit");
 }
 </script>

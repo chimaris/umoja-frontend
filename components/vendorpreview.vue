@@ -132,18 +132,32 @@
 					</v-col>
 				</v-row>
 			</v-container>
+			<v-dialog v-model="vendorStore.showRegistrationModal" max-width="600">
+				<v-card>
+					<v-card-title class="text-h5">Welcome! 🌟</v-card-title>
+					<v-card-text>
+						It’s great to have you here. Before you dive into adding and selling products, let’s complete your vendor profile. Head over to your profile settings to provide essential details. Once that’s done, you’ll be all set to showcase your amazing products to the world!
+					</v-card-text>
+					<v-card-actions>
+						<v-spacer></v-spacer>
+						<v-btn @click="completeReg()" class="bg-green" color="white" rounded-lg text>Complete Registration</v-btn>
+					</v-card-actions>
+				</v-card>
+			</v-dialog>
 		</v-card>
 	</div>
 </template>
 <script>
 import { useVendorStore } from '~/stores/vendorStore';
 import { countryCodes } from '~/utils/countryapi';
+import {onMounted} from 'vue'
+import {useRouter} from 'vue-router'
 
 export default {
 	setup(props, ctx) {
 		const vendorStore = useVendorStore()
 		const vendor = vendorStore.getVendor
-
+		const router = useRouter()
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		};
@@ -151,11 +165,25 @@ export default {
 		const openSocialMedia = (icon, handle) => {
       	window.open(`https://${icon}.com/${handle}`, '_blank');
     	};
+
+		function completeReg(){
+			vendorStore.showRegistrationModal = false;
+			router.push('/vendor/dashboard/Profile Setup')
+		}
+		onMounted(() => {
+			if (!vendorStore.vendorCleared){
+				setTimeout(() => {
+					vendorStore.showRegistrationModal = true
+			}, 2000)
+			}
+		
+		})
 		return {
 			vendorStore,
 			vendor,
 			choose,
-			openSocialMedia
+			openSocialMedia,
+			completeReg
 		}
 	},
 	data() {

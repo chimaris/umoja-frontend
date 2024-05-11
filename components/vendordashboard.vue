@@ -115,6 +115,15 @@ color: #969696;">vs last 7 days</p>
         </div>
         <v-row class="mt-8">
             <v-col cols="7">
+              <!-- <MapboxMap
+                map-id="{ID}"
+                style="position: absolute; top: 0; bottom: 0; left: 250px; width: 500px;"
+                :options="{
+                  style: 'mapbox://styles/mapbox/light-v11', // style URL
+                  center: [-68.137343, 45.137451], // starting position
+                  zoom: 5 // starting zoom
+                }"
+              /> -->
                 <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685704413/Maps_ic2b3z.png">
                     <v-card style="position: absolute;top:20px;left: 50%;transform: translate(-50%, 0);"  width="" class="pa-3 px-6 rounded-lg bg-green">
         <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>United States</p>

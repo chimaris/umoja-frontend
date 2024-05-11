@@ -107,7 +107,7 @@
 					
 			</v-select>
 			<p style="color: red; font-size: 16px;" class="mb-4">{{ formError }}</p>
-			<v-btn @click="submit()" style="border: 1px solid #e5e5e5" size="large" variant="outlined">Save and continue</v-btn>
+			<v-btn class="my-5" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="large">Save and continue</v-btn>
 		</div>
 	</div>
 </template>
@@ -142,12 +142,7 @@ const upLoadedFiles = ref([])
 const showProgress = ref(false)
 
 
-// const states = ref([]);
-// const cities = ref([]);
-
 const emit = defineEmits(['submit']);
-
-
 
 
 
@@ -168,16 +163,17 @@ const submit = () => {
 		selectedState: selectedState.value,
 		selectedCity: selectedCity.value
 	}
-	if (!isFormValid()) {
-		formError.value = "Please fill in all required fields."
-		return;
-	} 
-	formError.value = ""
-	if (!vendorStore.isCompanyInfoComplete) {
-		vendorStore.setCompanyInfo(companyInfo)
-		vendorStore.markSectionComplete('isCompanyInfoComplete')
-		console.log(vendorStore.companyInfo)
-	}
+	console.log(companyInfo)
+	// if (!isFormValid()) {
+	// 	formError.value = "Please fill in all required fields."
+	// 	return;
+	// } 
+	// formError.value = ""
+	// if (!vendorStore.isCompanyInfoComplete) {
+	// 	vendorStore.setCompanyInfo(companyInfo)
+	// 	vendorStore.markSectionComplete('isCompanyInfoComplete')
+	// 	console.log(vendorStore.companyInfo)
+	// }
 	emit('submit')
 			
 };

@@ -16,7 +16,9 @@
 		"@mdi/font": "^7.2.96",
 		"@stripe/stripe-js": "^3.4.0",
 		"@types/node": "^18",
+		"mapbox-gl": "^3.3.0",
 		"nuxt": "^3.4.3",
+		"nuxt-mapbox": "^1.5.9",
 		"vite-plugin-vuetify": "^1.0.2"
 	},
 	"dependencies": {
