@@ -13,7 +13,7 @@
       
             Please check your email and paste the code below.
           </div>
-      
+          <p style="color: #2C6E63; font-size: 14px; margin-top: 10px;">The code will expire in {{countdown}} seconds</p>
           <v-sheet color="surface">
             <v-otp-input
               v-model="otp"
@@ -44,7 +44,7 @@
     </v-app>
   </template>
 <script setup>
-import {ref} from 'vue';
+import {ref, onMounted, onUnmounted} from 'vue';
 import { VOtpInput } from "vuetify/lib/components";
 import {useVendorStore} from '~/stores/vendorStore';
 import { useRouter } from "vue-router";
@@ -61,12 +61,15 @@ definePageMeta({
 const otp = ref('')
 const vendorStore = useVendorStore();
 const router = useRouter();
+const countdown = ref(30 * 60)
+const intervalId = ref(null)
 
 async function resendCode(){
     otp.value = ''
    const response = await vendorStore.resendOtp();
    if (response) {
     vendorStore.resendError = ""
+    startCountdown()
    }
 }
 
@@ -80,4 +83,21 @@ async function verify(){
     }
 
 }
+function startCountdown() {
+  if (intervalId.value) clearInterval(intervalId.value);
+  countdown.value = 30 * 60; // Reset countdown to 30 minutes
+  intervalId.value = setInterval(() => {
+    if (countdown.value > 0) {
+      countdown.value--;
+    } else {
+      clearInterval(intervalId.value);
+    }
+  }, 1000);
+}
+onMounted(() => {
+  startCountdown()
+})
+onUnmounted(() => {
+  if (intervalId.value) clearInterval(intervalId.value);
+});
 </script>
