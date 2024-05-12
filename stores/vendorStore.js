@@ -1,6 +1,7 @@
 // stores/vendorStore.js
 import { defineStore } from 'pinia';
 import {vendorUseApi} from '~/composables/vendorApi'
+import axios from 'axios';
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
 const api = vendorUseApi()
