@@ -118,10 +118,10 @@
 							</div>
 						</template>
 					</v-checkbox>
-					<p v-if="userStore.signUpError" style="color: red">{{ userStore.signUpError }}</p>
+					<p v-if="vendorStore.signUpError" style="color: red">{{ vendorStore.signUpError }}</p>
 					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-6">
 						<span class="mr-4" style="text-transform: none">Create an account</span>
-						<v-progress-circular v-if="userStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
+						<v-progress-circular v-if="vendorStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
 					</v-btn>
 				</v-form>
 			</v-card>
@@ -130,11 +130,11 @@
 </template>
 <script setup>
 import { ref, reactive } from "vue";
-import { useUserStore } from "~/stores/userStore";
+import {useVendorStore} from '~/stores/vendorStore'
 import { useRouter } from "vue-router";
 import { emailRules, passwordRules, firstNameRules, lastNameRules } from "~/utils/formrules";
 
-const userStore = useUserStore();
+const vendorStore = useVendorStore();
 const router = useRouter();
 const visible = ref(false);
 const visible1 = ref(false);
@@ -153,7 +153,7 @@ const confirmpasswordRules = [(v) => !!v || "Confirm Password is required", (v) 
 
 async function socialMediaLogin(provider) {
 	try {
-		const response = await userStore.socialLogin(provider);
+		const response = await vendorStore.socialLogin(provider);
 		window.location.href = response.data.url;
 	} catch (error) {
 		console.log(error);
@@ -162,31 +162,29 @@ async function socialMediaLogin(provider) {
 
 async function handleSubmit() {
 	if (valid.value) {
-		console.log('hi')
-		// try {
-		// 	const isSignedUp = await userStore.signup({
-		// 		first_name: first_name.value,
-		// 		last_name: last_name.value,
-		// 		email: email.value,
-		// 		password: password.value,
-		// 		password_confirmation: confirmPassword.value,
-		// 		terms_accepted: 1,
-		// 	});
-		// 	if (isSignedUp) {
-		// 		router.push("/home2");
-		// 		userStore.signUpError = "";
-				// first_name.value = "";
-				// last_name.value = "";
-				// email.value = "";
-				// password.value = "";
-				// password_confirmation.value = "";
-				// agree.value = false;
-		// 	}
-		// } catch (error) {
-		// 	// Handle any unexpected errors
-		// 	console.error("An error occurred during signup:", error);
-		// 	userStore.signUpError = error.message;
-		// }
+		try {
+			const isSignedUp = await vendorStore.signupVendor({
+				first_name: first_name.value,
+				last_name: last_name.value,
+				email: email.value,
+				password: password.value,
+				password_confirmation: confirmPassword.value,
+				terms_accepted: 1,
+			});
+			if (isSignedUp) {
+				router.push("/vendor/verification");
+				vendorStore.signupError = "";
+				first_name.value = "";
+				last_name.value = "";
+				email.value = "";
+				password.value = "";
+				password_confirmation.value = "";
+				agree.value = false;
+			}
+		} catch (error) {
+			// Handle any unexpected errors
+			vendorStore.signupError = error.message;
+		}
 	}
 }
 </script>
