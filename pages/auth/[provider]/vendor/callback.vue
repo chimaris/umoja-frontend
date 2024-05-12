@@ -10,20 +10,20 @@
     </div>
  </template>
  <script setup>
-   import { useUserStore } from '~/stores/userStore';
+   import {useVendorStore} from '~/stores/vendorStore';
    import {onMounted} from 'vue'
    import { useRoute, useRouter } from '#vue-router';
 
-	const userStore = useUserStore();
+	const vendorStore = useVendorStore();
 	const route = useRoute();
     const router = useRouter();
 
     async function loginUser() {
         const provider  = route.params.provider;
         try {
-            const response = await userStore.socialLoginCallBack(provider);
+            const response = await vendorStore.socialLoginCallBack(provider);
             if (response) {
-                router.push('/home2')
+                router.push('/vendor/dashboard/homepage')
             } 
         }catch(error) {
             console.error("Error during Login", error)

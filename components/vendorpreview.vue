@@ -49,7 +49,7 @@
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
-										<span style="font-size: 1.5rem;" :class="getCountryIconClass"></span>
+										<!-- <span style="font-size: 1.5rem;" :class="getCountryIconClass"></span> -->
 									</div>
 								</div>
 								<v-divider></v-divider>
