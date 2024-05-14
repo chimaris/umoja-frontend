@@ -18,7 +18,7 @@
 </p>
  
  
-     <v-form ref="form" @submit.prevent="handleSetPassword">
+     <v-form v-model="valid" @submit.prevent="handleSetPassword">
         <p class="inputLabel">New Password</p>             
         <v-text-field
             :append-inner-icon="visible ? 'mdi mdi-eye' : 'mdi mdi-eye-off'"
@@ -67,7 +67,7 @@
 			You can now use your new password to login to your account 🙌🏽.
 		</p>
 		<v-card-actions class="d-flex justify-center align-center pt-10 w-100">
-			<v-btn width="250" to="/vendor/login" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px" size="x-large">Login</v-btn>
+			<v-btn width="250" @click="toLogin" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px" size="x-large">Login</v-btn>
 		</v-card-actions>
       </v-card>
       <v-icon @click="showModal = false" style="width: 30px; background-color: #B3B3B3; height: 30px; border-radius: 50%; font-weight: 900; cursor: pointer; font-size: 1.5rem;" icon="mdi mdi-window-close"></v-icon>
@@ -93,6 +93,7 @@ import axios from 'axios'
     const vendorStore = useVendorStore()
     const loading = ref(false)
     const error = ref("")
+    const valid = ref(false)
 
     const password = ref('');
     const c_password = ref('');
@@ -104,7 +105,10 @@ import axios from 'axios'
     v => !!v || 'Confirm Password is required',
     v => v === password.value || 'Passwords do not match'
   ]
-    
+  function toLogin(){
+    showModal.value = false 
+    router.push('/vendor/login')
+  }
 
   async function setPassWord({password, password_confirmation, token}) {
       loading.value = true;
@@ -130,7 +134,7 @@ import axios from 'axios'
     } 
     async function handleSetPassword() {
       const token = route.params.token
-        if (password.value && c_password.value) {
+        if (valid.value) {
             try{
                 const setPass = await setPassWord({password: password.value, password_confirmation: c_password.value, token: token}) 
                 if (setPass) {
