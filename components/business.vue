@@ -42,14 +42,20 @@
 					<fileUploading :file="file" />
 					</li>
      			 </ul>
+				  <ul>
+				<li v-for="(file, index) in upLoadedFiles" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between; ">
+					<fileUploaded :file="file" />
+				</li>
+				</ul>
 				<div class="textarea-wrapper">
 					<p class="mb-4">Business Bio</p>
-					<v-textarea :disabled="disableTextarea" v-model="businessBio" :rules="rules" rows="6" placeholder="Write a short bio about your business here..."></v-textarea>
+					<v-textarea :disabled="disableTextarea" v-model="vendor.business_bio" :rules="rules" rows="6" placeholder="Write a short bio about your business here..."></v-textarea>
 					<div class="char-count">{{ charCount }}/{{ maxCount }}</div>
 				</div>
 			</div>
 		</div>
-		<v-btn class="my-5" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="large">Save and continue</v-btn>
+		<p style="color: red; font-size: 16px;" class="mb-2">{{ bioError }}</p>
+		<v-btn class="mb-5" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="large">Save and continue</v-btn>
 	</v-sheet>
 
 	<!-- View Business Section -->
@@ -59,10 +65,10 @@
 		</v-avatar>
 
 		<v-sheet class="pt-8">
-			<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{vendor.vendor_details.business_type}})</span></h3>
+			<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{vendor.business_type}})</span></h3>
 
-			<p contenteditable="true" @input="businessBio = $event.target.innerText" class="editable text-left mt-2 mb-8" style="font-weight: 400; font-size: 14px; line-height: 19.6px; color: #333333" v-if="isEditing">{{ businessBio }}</p>
-			<p :disabled="disableTextarea" @click="isEditing = true" v-else>{{ businessBio }}</p>
+			<p contenteditable="true" @input="vendor.business_bio = $event.target.innerText" class="editable text-left mt-2 mb-8" style="font-weight: 400; font-size: 14px; line-height: 19.6px; color: #333333" v-if="isEditing">{{ vendor.business_bio }}</p>
+			<p :disabled="disableTextarea" @click="isEditing = true" v-else>{{ vendor.business_bio }}</p>
 		</v-sheet>
 		<div class="py-4 d-flex justify-space-between">
 			<v-btn @click="isEditing=!isEditing" size="x-large" style="border: 1px solid #969696" flat>
@@ -77,44 +83,72 @@
 </template>
 
 <script setup>
-import { ref, computed, defineEmits } from 'vue';
+import { ref, computed, defineEmits, onMounted } from 'vue';
 import profileVue from '~/pages/vendor/profile.vue';
 import { useVendorStore } from '~/stores/vendorStore';
-import {useVendorProfileStore} from "~/stores/vendorProfile"
+import axios from 'axios'
   	
 
     const value = ref('');
-    const rules = ref([(v) => v.length <= 250 || "Max 250 characters"]);
+    const rules = ref([(v) => v?.length <= 250 || "Max 250 characters"]);
 	const isEditing = ref(false)
 
 	const vendorStore = useVendorStore();
-	const vendorProfile = useVendorProfileStore()
 
 	const profilePicture = ref([])
+	const upLoadedFiles = ref([])
 	const errorMessage = ref("")
 	const showProgress = ref(false)
-	const businessBio = ref("")
+	const profile_photo = ref("")
+	const bioError = ref("")
 
-	const vendor = vendorStore.getVendor
+	const vendor = ref([])
+
+	onMounted(() => {
+		if (!vendorStore.vendor.vendor_details){
+			vendor.value = []
+		}else {
+			vendor.value = vendorStore.vendor.vendor_details
+		}
+	})
 
 	const emit = defineEmits(['submit']);
 	
 
     const charCount = computed(() => {
-      return businessBio.value.length;
+      return vendor.value.business_bio?.length;
     });
 
     const maxCount = computed(() => {
       return 250; // You can change this value to match your maximum count
     });
 
-    const submit = () => {
+    const submit = async () => {
+		bioError.value = ""
 		const data = {
-			profilePicture: profilePicture.value.name,
-			businessBio: businessBio.value
+			profile_photo: profile_photo.value,
+			business_bio: vendor.value.business_bio
 		}
-      console.log(data)
-      emit("submit");
+		if (profile_photo.value && vendor.value.business_bio){
+			try{
+				const response = await vendorStore.registerVendor(data)
+				console.log(response)
+				emit("submit");
+				return
+			}catch(error){
+			if (error.response) {
+				bioError.value = error.response.data.message || 'An error occurred during.';
+			} else if (error.request) {
+				bioError.value = 'No response received from server. Please try again later.';
+			} else {
+				bioError.value = 'An error occurred. Please try again later.';
+			}
+			return 
+		}
+			
+		}
+		
+    
     };
 
 	const disableTextarea = computed(() => {
@@ -122,13 +156,17 @@ import {useVendorProfileStore} from "~/stores/vendorProfile"
 	});
 
 function upLoadFile() {
+	if (upLoadedFiles.value.length == 1){
+		errorMessage.value = 'Maximum number of images allowed is 1'
+		return
+	}
 		const file = document.querySelector(".profile-picture").files[0]
 		if(!file) return;
 		
-    const allowedFiles = [".pdf", ".png", ".jpeg", ".jpg"]
+    const allowedFiles = [".png", ".jpeg", ".jpg"]
     const maxAllowedWidth = 800;
     const maxAllowedHeight = 400;
-    const maxFileSize = 2 * 1024 * 1024;
+    const maxFileSize = 3 * 1024 * 1024;
     const fileExtension = file.name.split(".").pop().toLowerCase();
     
     if (!allowedFiles.includes("." + fileExtension)) {
@@ -139,7 +177,7 @@ function upLoadFile() {
       errorMessage.value = ""
 
     if (file.size > maxFileSize) {
-      errorMessage.value = "File size exceeds the maximum allowed size of 2MB";
+      errorMessage.value = "File size exceeds the maximum allowed size of 3MB";
       return;
     }
     errorMessage.value = ""
@@ -148,44 +186,64 @@ function upLoadFile() {
     const img = new Image();
     img.src = URL.createObjectURL(file);
     img.onload = function () {
-      if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
-        errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
-        return;
-      }
+    //   if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
+    //     errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+    //     return;
+    //   }
       errorMessage.value = "";
       const filename = file.name
       const formData = new FormData();
-      formData.append("file", file);
-      const form = {name: filename, loading: 30}
+      formData.append("profile_photo", file);
+      const form = {name: filename, loading: 0}
       profilePicture.value = [form]
       showProgress.value = true;
-    };
+
+	  axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
+			headers: {
+					Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+					},
+			onUploadProgress: ({loaded, total}) => {
+				profilePicture.value[profilePicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles.value.push({name: filename, size: fileSize});
+					profilePicture.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				const profileImg = response.data.profile_photo
+				profile_photo.value = profileImg
+			})
+			.catch(error => {
+				if (error.response) {
+				errorMessage.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+				errorMessage.value = 'No response received from server. Please try again later.';
+				} else {
+				errorMessage.value = 'An error occurred. Please try again later.';
+				}
+			});
+			};
 
     img.onerror = function () {
       errorMessage.value = "Failed to load the image"
     };
 
-
-		// axios.post("", formData, {
-		// 	onUploadProgress: ({loaded, total}) => {
-		// 		bnDocument.value[bnDocument.value.length - 1].loading = Math.floor((loaded / total) * 100);
-		// 		if (loaded == total) {
-		// 			const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-		// 			upLoadedFiles.value.push({name: filename, size: fileSize});
-		// 			bnDocument.value = [];
-		// 			showProgress.value = false
-		// 		}
-		// 	}
-		// }).catch(console.error) 
 }
 function drop(e) {
+	if (upLoadedFiles.value.length == 1){
+		errorMessage.value = 'Maximum number of images allowed is 1'
+		return
+	}
 	const file= e.dataTransfer.files[0]
 	if(!file) return;
 
-	const allowedFiles = [".pdf", ".png", ".jpeg", ".jpg"]
+	const allowedFiles = [".png", ".jpeg", ".jpg"]
 	const maxAllowedWidth = 800;
   const maxAllowedHeight = 400;
-  const maxFileSize = 2 * 1024 * 1024;
+  const maxFileSize = 5 * 1024 * 1024;
 	const fileExtension = file.name.split(".").pop().toLowerCase();
 	
 	if (!allowedFiles.includes("." + fileExtension)) {
@@ -204,18 +262,46 @@ function drop(e) {
 	const img = new Image();
 	img.src = URL.createObjectURL(file);
 	img.onload = function () {
-		if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
-			errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
-			return;
-		}
+		// if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
+		// 	errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+		// 	return;
+		// }
 		errorMessage.value = "";
 		const filename = file.name
 		const formData = new FormData();
-		formData.append("file", file);
+		formData.append("profile_photo", file);
 		const form = {name: filename, loading: 0}
 		profilePicture.value = [form]
 		showProgress.value = true;
-	};
+
+		axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
+			headers: {
+					Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+					},
+			onUploadProgress: ({loaded, total}) => {
+				profilePicture.value[profilePicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles.value.push({name: filename, size: fileSize});
+					profilePicture.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				const profileImg = response.data.profile_photo
+				profile_photo.value = profileImg
+			})
+			.catch(error => {
+				if (error.response) {
+					errorMessage.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+					errorMessage.value = 'No response received from server. Please try again later.';
+				} else {
+					errorMessage.value = 'An error occurred. Please try again later.';
+				}
+			});
+			};
 
 	img.onerror = function () {
 		errorMessage.value = "Failed to load the image"

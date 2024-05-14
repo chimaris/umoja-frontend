@@ -24,6 +24,7 @@
             const response = await userStore.socialLoginCallBack(provider);
             if (response) {
                 router.push('/home2')
+                console.log(response)
             } 
         }catch(error) {
             console.error("Error during Login", error)

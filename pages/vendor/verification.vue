@@ -49,14 +49,14 @@ import { VOtpInput } from "vuetify/lib/components";
 import {useVendorStore} from '~/stores/vendorStore';
 import { useRouter } from "vue-router";
 
-definePageMeta({
-	middleware: defineNuxtRouteMiddleware((to, from) => {
-    const vendorStore = useVendorStore()
-    if (vendorStore.verified) {
-    return navigateTo('/vendor/dashboard/homepage')
-  }
-  })
-});
+// definePageMeta({
+// 	middleware: defineNuxtRouteMiddleware((to, from) => {
+//     const vendorStore = useVendorStore()
+//     if (vendorStore.verified) {
+//     return navigateTo('/vendor/dashboard/homepage')
+//   }
+//   })
+// });
 
 const otp = ref('')
 const vendorStore = useVendorStore();

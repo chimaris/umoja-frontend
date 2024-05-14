@@ -108,7 +108,7 @@ const confirmpasswordRules = [(v) => !!v || "Confirm Password is required", (v) 
 async function socialMediaLogin(provider) {
 			try {
 				const response = await userStore.socialLogin(provider);
-				window.location.href = response.data.url;;
+				window.location.href = response.data.url;
 			} catch (error) {
 				console.log(error);
 			}

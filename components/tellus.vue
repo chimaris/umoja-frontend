@@ -5,7 +5,7 @@
 		<div class="pt-8 pb-12" style="max-width: 502px">
 			<p class="inputLabel">What African country are you representing?</p>
 			<v-select
-				v-model="selectedCountry"
+				v-model="vendor.rep_country"
 				:items="countries"
 				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select African Country"
@@ -17,7 +17,7 @@
 			<p class="inputLabel" >What type of company is (Business name)</p>
 
 			<v-select
-				v-model="selectedCompanyCategory"
+				v-model="vendor.business_type"
 				append-inner-icon="mdi mdi-chevron-down"
 				:items="companyCategories"
 				placeholder="Select"
@@ -27,11 +27,11 @@
 			</v-select>
 			<p class="inputLabel">Business name</p>
 
-			<v-text-field :rules="inputRules" v-model="businessName" placeholder="Type your official business name" density="comfortable"> </v-text-field>
+			<v-text-field :rules="inputRules" v-model="vendor.business_name" placeholder="Type your official business name" density="comfortable"> </v-text-field>
 
 			<p class="inputLabel">Business Website <span><i class="mdi mdi-information" style="color: #1C274C"></i></span></p>
 
-			<v-text-field :rules="inputRules" v-model="businessWebsite" placeholder="http://www." density="comfortable"> </v-text-field>
+			<v-text-field :rules="inputRules" v-model="vendor.business_website" placeholder="http://www." density="comfortable"> </v-text-field>
 			<p class="inputLabel">Add business images <span style="color: #969696;">(at least 5-10 pictures)</span></p>
 			<div 
 			@dragenter.prevent
@@ -67,37 +67,37 @@
 			
 
 			<p class="inputLabel">Address</p>
-			<v-text-field :rules="inputRules" v-model="businessAddress" placeholder="Enter address" density="comfortable"> </v-text-field>
+			<v-text-field :rules="inputRules" v-model="vendor.address" placeholder="Enter address" density="comfortable"> </v-text-field>
 
 			
 			<p class="inputLabel">Country</p>
 
 			<v-select
-				v-model="selectedBusinessCountry"
+				v-model="vendor.country_name"
 				:items="countries"
 				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select Country"
 				density="comfortable"
 				:rules="inputRules"
-				@change="fetchStates(selectedBusinessCountry)"
+				@change="fetchStates(vendor?.country_name)"
 			>
 			</v-select>
 			<p class="inputLabel">State</p>
 			<v-select 
-			v-model="selectedState" 
+			v-model="vendor.state" 
 			color="green"
 			:loading="loadingStates"
 			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select State" 
 			density="comfortable" 
 			:items="states"
-			@change="fetchCities(selectedBusinessCountry, selectedState)"
+			@change="fetchCities(vendor?.country_name, vendor?.state)"
 			:rules="inputRules"> 
 			</v-select>
 
 				<p class="inputLabel">City</p>
 			<v-select 
-			v-model="selectedCity" 
+			v-model="vendor.city" 
 			:loading="loadingCities"
 			color="green"
 			append-inner-icon="mdi mdi-chevron-down" 
@@ -113,7 +113,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, reactive, watchEffect} from 'vue';
+import { ref, defineEmits, onMounted} from 'vue';
 import { useVendorStore } from '~/stores/vendorStore';
 import axios from 'axios'
 import { on } from 'events';
@@ -121,16 +121,16 @@ import {inputRules} from '~/utils/formrules'
 import { countries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
 
 const vendorStore = useVendorStore()
+const vendor = ref([])
 
+onMounted(()=> {
+	if (!vendorStore.vendor.vendor_details) {
+		vendor.value = []
+	}else {
+		vendor.value = vendorStore.vendor.vendor_details
+	}
+})
 
-const selectedCountry = ref("");
-const selectedCompanyCategory = ref("");
-const businessName = ref("");
-const businessWebsite = ref("")
-const businessAddress = ref("");
-const selectedBusinessCountry = ref("");
-const selectedState = ref("");
-const selectedCity = ref("");
 const businessImages = ref([])
 
 const errorMessage = ref("")
@@ -151,56 +151,63 @@ const companyCategories = [
   "Transportation", "Hospitality", "Real Estate", "Energy", "Media", "Construction", "Other"
 ];
 
-const submit = () => {
+const submit = async () => {
+	formError.value = ""
 	const companyInfo = {
-		selectedCountry : selectedCountry.value,
-		selectedCompanyCategory: selectedCompanyCategory.value,
-		businessName: businessName.value,
-		businessWebsite: businessWebsite.value,
+		rep_country: vendor.value.rep_country,
+		business_type: vendor.value.business_type,
+		business_name: vendor.value.business_name,
+		business_website: vendor.value.business_website,
 		business_image: businessImages.value.join(', '),
-		businessAddress: businessAddress.value,
-		selectedBusinessCountry: selectedBusinessCountry.value,
-		selectedState: selectedState.value,
-		selectedCity: selectedCity.value
+		address: vendor.value.address,
+		state: vendor.value.state,
+		city: vendor.value.city,
+		country_name: vendor.value.country_name
 	}
-	console.log(companyInfo)
-	// if (!isFormValid()) {
-	// 	formError.value = "Please fill in all required fields."
-	// 	return;
-	// } 
-	// formError.value = ""
-	// if (!vendorStore.isCompanyInfoComplete) {
-	// 	vendorStore.setCompanyInfo(companyInfo)
-	// 	vendorStore.markSectionComplete('isCompanyInfoComplete')
-	// 	console.log(vendorStore.companyInfo)
-	// }
-	emit('submit')
+	if (!isFormValid()) {
+		formError.value = "Please fill in all required fields."
+		return;
+	} 	
+	try{
+		await vendorStore.registerVendor(companyInfo)
+		emit('submit')
+		return
+	}catch(error){
+		if (error.response) {
+			formError.value = error.response.data.message || 'An error occurred.';
+        } else if (error.request) {
+			formError.value = 'No response received from server. Please try again later.';
+        } else {
+			formError.value = 'An error occurred. Please try again later.';
+        }
+        return 
+	}
+	
 			
 };
 
 
 
-watch(() => selectedBusinessCountry.value, () => {
-	fetchStates(selectedBusinessCountry.value)
+watch(() => vendor.value.country_name, () => {
+	fetchStates(vendor.value.country_name)
 		});
 
-watch(() => selectedState.value, () => {
-	fetchCities(selectedBusinessCountry.value, selectedState.value);
+watch(() => vendor.value.state, () => {
+	fetchCities(vendor.value.country_name, vendor.value.state);
 		});
 function isFormValid() {
 	if (businessImages.value.length < 5) {
 		errorMessage.value = 'You must upload a minimum of 5 images!!'
 	}
 	if (
-		selectedCountry.value &&
-		selectedCompanyCategory.value &&
-		businessName.value &&
-		businessWebsite.value &&
-		businessAddress.value && 
-		selectedBusinessCountry.value &&
-		selectedCity.value &&
-		selectedState.value &&
-		businessImages.value.length >= 5
+		vendor.value.rep_country &&
+		vendor.value.business_type &&
+		vendor.value.business_name&&
+		vendor.value.business_website &&
+		vendor.value.address && 
+		vendor.value.city &&
+		vendor.value.state &&
+		vendor.value.country_name
 	) {
 		errorMessage.value = ''
 		return true
@@ -210,7 +217,7 @@ function isFormValid() {
 }
 function upLoadFile() {
 	    if (upLoadedFiles.value.length == 10) {
-			errorMessage.value = "Maximum number of files images allowed is 10"
+			errorMessage.value = "Maximum number of file allowed is 10"
 			return;
 		}
 		const file = document.querySelector(".droppedFile").files[0]
@@ -241,7 +248,10 @@ function upLoadFile() {
 			files.value.push({name: filename, loading: 0})
 			showProgress.value = true;
 
-			axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
+			headers: {
+					Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+					},
 			onUploadProgress: ({loaded, total}) => {
 				files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
 				if (loaded == total) {
@@ -308,7 +318,10 @@ function drop(e) {
 			files.value.push({name: filename, loading: 0})
 			showProgress.value = true;
 
-			axios.post("https://umoja-production-9636.up.railway.app/api/auth/upload", formData, {
+			axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
+				headers: {
+					Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+					},
 			onUploadProgress: ({loaded, total}) => {
 				files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
 				if (loaded == total) {

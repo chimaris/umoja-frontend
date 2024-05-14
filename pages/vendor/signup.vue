@@ -118,7 +118,7 @@
 							</div>
 						</template>
 					</v-checkbox>
-					<p v-if="vendorStore.signUpError" style="color: red">{{ vendorStore.signUpError }}</p>
+					<p v-if="vendorStore.signupError" style="color: red">{{ vendorStore.signUpError }}</p>
 					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-6">
 						<span class="mr-4" style="text-transform: none">Create an account</span>
 						<v-progress-circular v-if="vendorStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>

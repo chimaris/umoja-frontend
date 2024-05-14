@@ -1,7 +1,8 @@
 import { useProductStore } from '~/stores/productStore';
-import { useCartStore } from '~/stores/cartStore';
 
-export default async ({ app }) => {
+
+
+export default defineNuxtPlugin(async (nuxtApp) => {
   const productStore = useProductStore();
   await productStore.fetchProducts();
-};
+});
