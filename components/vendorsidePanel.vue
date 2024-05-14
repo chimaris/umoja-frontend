@@ -10,7 +10,7 @@ padding-top: 32px;">
 
     <v-slide-x-transition>
 
-    <v-menu v-if="sidebar" :close-on-content-click="false">
+    <v-menu v-if="sidebar">
       
 <template v-slot:activator="{ props }">
 <div class="px-8">

@@ -192,7 +192,6 @@
 
 		<v-card-actions>
 			<v-spacer></v-spacer>
-
 			<v-btn text="Disagree" variant="text" @click="closeDialog"></v-btn>
 			<v-btn color="surface-variant" text="Agree" variant="flat" @click="closeDialog"></v-btn>
 		</v-card-actions>

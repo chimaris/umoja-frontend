@@ -20,10 +20,10 @@
 				</h1>
 				<p class="font-weight-medium mb-6 mt-1">
 					Don't have an account?
-					<span @click="$router.push('/vendor/registeration/form/Companys Information')" style="cursor: pointer; color: #0076ff">Sign Up</span>
+					<span @click="$router.push('/vendor/signup')" style="cursor: pointer; color: #0076ff">Sign Up</span>
 				</p>
 
-				<v-form ref="form" @submit.prevent="handleLogin">
+				<v-form v-model="valid" @submit.prevent="handleLogin">
 					<p class="inputLabel">Email Address</p>
 
 					<v-text-field v-model="email" :rules="emailRules" placeholder="Enter email address" density="comfortable"> </v-text-field>
@@ -40,7 +40,7 @@
 					></v-text-field>
 					<v-btn to="/vendor/forgot" style="color: #0076ff; text-decoration: none" variant="text" class="px-0 mb-4"> Forgot Password? </v-btn>
 					<p style="color: red; font-size: 16px">{{ vendorStore.loginError }}</p>
-					<v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mt-6">
+					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-6">
 						<span class="mr-4" style="text-transform: none">Login</span>
 						<v-progress-circular v-if="vendorStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
 					</v-btn>
@@ -61,17 +61,22 @@ definePageMeta({
 const email = ref("");
 const password = ref("");
 const visible = ref(false);
-
+const valid = ref(false);
 const vendorStore = useVendorStore();
 const router = useRouter();
 
 async function handleLogin() {
-	if (email.value && password.value) {
+	if (valid.value) {
 		try {
 			const isLoggedIn = await vendorStore.login({ email: email.value, password: password.value });
 			if (isLoggedIn) {
+				email.value = "";
+				password.value = "";
 				router.push(`/vendor/dashboard/Homepage`);
 				vendorStore.loginError = "";
+				setTimeout(() => {
+					vendorStore.showRegistrationModal = true
+				}, 3000)
 			}
 		} catch (error) {
 			console.error("An error occurred during login:", error);

@@ -31,7 +31,7 @@
 	</v-sheet>
 
 	<!-- View Contact Section -->
-	<v-sheet max-width="550" width="100%" style="padding-top: 10px; margin: auto; padding: 40px; border-radius: 15px">
+	<v-sheet max-width="550" width="100%" style="padding-top: 10px; margin: 25px auto 0; padding: 40px; border-radius: 15px">
 		<v-sheet class="pt-8">
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Bank Name</p>

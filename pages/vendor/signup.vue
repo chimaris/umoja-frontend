@@ -51,7 +51,7 @@
 					Sign Up as a Vendor
 				</h1>
 				<p class="font-weight-medium mb-6 mt-1">
-					Already have an account? <span style="color: #0076ff; cursor: pointer" @click="$router.push('/user/login')">Sign In</span>
+					Already have an account? <span style="color: #0076ff; cursor: pointer" @click="$router.push('/vendor/login')">Sign In</span>
 				</p>
 				<v-row>
 					<v-col cols="6">
@@ -74,7 +74,7 @@
 					<p class="px-2 w-100 text-center" :style="{ fontSize: $vuetify.display.mobile ? '14px' : '16px' }">or sign up with</p>
 					<v-divider></v-divider>
 				</div>
-				<v-form ref="form" @submit.prevent="handleSubmit">
+				<v-form v-model="valid" @submit.prevent="handleSubmit">
 					<v-row>
 						<v-col>
 							<p class="inputLabel">First Name</p>
@@ -118,10 +118,10 @@
 							</div>
 						</template>
 					</v-checkbox>
-					<p v-if="userStore.signUpError" style="color: red">{{ userStore.signUpError }}</p>
-					<v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mt-6">
+					<p v-if="vendorStore.signUpError" style="color: red">{{ vendorStore.signUpError }}</p>
+					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-6">
 						<span class="mr-4" style="text-transform: none">Create an account</span>
-						<v-progress-circular v-if="userStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
+						<v-progress-circular v-if="vendorStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
 					</v-btn>
 				</v-form>
 			</v-card>
@@ -137,11 +137,11 @@
 </template>
 <script setup>
 import { ref, reactive } from "vue";
-import { useUserStore } from "~/stores/userStore";
+import {useVendorStore} from '~/stores/vendorStore'
 import { useRouter } from "vue-router";
 import { emailRules, passwordRules, firstNameRules, lastNameRules } from "~/utils/formrules";
 
-const userStore = useUserStore();
+const vendorStore = useVendorStore();
 const router = useRouter();
 const visible = ref(false);
 const visible1 = ref(false);
@@ -154,6 +154,7 @@ const first_name = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const agree = ref(false);
+const valid = ref(false)
 
 const agreeRule = [(v) => !!v || "You must agree to the terms and conditions"];
 
@@ -161,7 +162,7 @@ const confirmpasswordRules = [(v) => !!v || "Confirm Password is required", (v) 
 
 async function socialMediaLogin(provider) {
 	try {
-		const response = await userStore.socialLogin(provider);
+		const response = await vendorStore.socialLogin(provider);
 		window.location.href = response.data.url;
 	} catch (error) {
 		console.log(error);
@@ -169,9 +170,9 @@ async function socialMediaLogin(provider) {
 }
 
 async function handleSubmit() {
-	if (first_name.value && last_name.value && email.value && password.value && agree.value && confirmPassword.value) {
+	if (valid.value) {
 		try {
-			const isSignedUp = await userStore.signup({
+			const isSignedUp = await vendorStore.signupVendor({
 				first_name: first_name.value,
 				last_name: last_name.value,
 				email: email.value,
@@ -180,13 +181,18 @@ async function handleSubmit() {
 				terms_accepted: 1,
 			});
 			if (isSignedUp) {
-				router.push("/home2");
-				userStore.signUpError = "";
+				router.push("/vendor/verification");
+				vendorStore.signupError = "";
+				first_name.value = "";
+				last_name.value = "";
+				email.value = "";
+				password.value = "";
+				password_confirmation.value = "";
+				agree.value = false;
 			}
 		} catch (error) {
 			// Handle any unexpected errors
-			console.error("An error occurred during signup:", error);
-			userStore.signUpError = error.message;
+			vendorStore.signupError = error.message;
 		}
 	}
 }

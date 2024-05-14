@@ -1,21 +1,28 @@
 // stores/vendorStore.js
 import { defineStore } from 'pinia';
 import {vendorUseApi} from '~/composables/vendorApi'
+import axios from 'axios';
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
 const api = vendorUseApi()
 export const useVendorStore = defineStore('vendor', {
   state: () => ({
     vendor: getLocalStorageItem("vendor", []),
+    vendorCleared: false,
+    showRegistrationModal: false,
     loading: false,
     loginError: "",
     signupError: "",
+    resendError: "",
+    verifyError: "",
+    verified:  localStorage.getItem("verified") == "true",
     error: "",
-    vendorIsLoggedIn: !!localStorage.getItem('vendorToken'),
+    vendorIsLoggedIn: false,
+    vendorEmail: localStorage.getItem("vendor-email", ""),
+    vendorToken: null,
     companyInfo: {},
     ownerInfo: {},
     businessDocumentation: {},
-    vendors: getLocalStorageItem("vendors", []),
     isCompanyInfoComplete: false,
     isOwnerInfoComplete: false,
     isBusinessDocumentationComplete: false,
@@ -25,6 +32,13 @@ export const useVendorStore = defineStore('vendor', {
     getVendorIsLoggedIn: (state) => state.vendorIsLoggedIn
   },
   actions: {
+    initializeStore() {
+      if (process.client) {
+        this.vendorToken = localStorage.getItem("vendorToken") || null;
+        this.vendorIsLoggedIn = !!this.vendorToken;
+       
+      }
+    },
     markSectionComplete(section) {
       this[section] = true;
     },
@@ -40,66 +54,94 @@ export const useVendorStore = defineStore('vendor', {
     setBusinessDocumentation(data) {
       this.businessDocumentation = data;
     },
-  //   saveVendorProfileInfo(vendor) {
-  //     const vendorIndex = this.vendors.findIndex(v => v.vendorId === vendor.vendorId);
-  //     if (vendorIndex !== -1) {
-  //         this.vendors[vendorIndex] = vendor;
-  //         setLocalStorageItem("vendor", this.vendor)
-  //         setLocalStorageItem('vendors', this.vendors);
-  //     }
-  // },
-  async registerVendor() {
-    this.loading = true;
-    this.signupError = ""
-    try {
-      const response = await api({
-        url: 'auth/register_vendor',
-        method: 'post',
-        data: {
-          first_name: this.ownerInfo.firstName,
-          last_name: this.ownerInfo.lastName,
-          email: this.ownerInfo.email,
-          language: "",
-          rep_country: this.companyInfo.selectedCountry,
-          gender: this.ownerInfo.Gender,
-          date_birth: this.ownerInfo.dateofBirth,
-          country_name:this.companyInfo.selectedBusinessCountry,
-          vendor_id_form_type: this.ownerInfo.formofId,
-          vendor_id_number: this.ownerInfo.idNumber,
-          phone_number: this.ownerInfo.phoneNumber,
-          company: "",
-          address: this.companyInfo.businessAddress,
-          apartment_suite: "",
-          state: this.companyInfo.selectedState,
-          city: this.companyInfo.selectedCity,
-          business_name: this.companyInfo.businessName,
-          business_type: this.companyInfo.selectedCompanyCategory,
-          business_website: this.companyInfo.businessWebsite,
-          business_number: this.businessDocumentation.BN_Number,
-          tax_id_number: this.businessDocumentation.Tax_ID,
-          utility_bill_type: this.businessDocumentation.Utility_Bill,
-          business_image: this.companyInfo.business_image,
-          profile_photo: "",
-          picture_vendor_id_number: this.ownerInfo.picture_vendor_id_number,
-          utility_photo: this.businessDocumentation.utility_photo,
-          business_number_photo: this.businessDocumentation.business_number_photo,
-        }
-      });
-      this.signupError = "";
-      return true
-    } catch (error) {
+    async signupVendor({first_name, last_name, email, password, password_confirmation, terms_accepted}){
+      this.loading = true;
+      try{
+        const response = await api ({
+          url: 'auth/register_vendor',
+          method: 'POST',
+          data: {first_name, last_name, email, password, password_confirmation, terms_accepted}
+        });
+        this.signupError = '';
+        this.vendorEmail = email;
+        localStorage.setItem('vendor-email', this.vendorEmail)
+        const {access_token} = response.data;
+        localStorage.setItem('vendorToken', access_token);
+        return true
+      }catch (error) {
         if (error.response) {
-          this.signupError = error.response.data.message || 'An error occurred during registration.';
+          this.signUpError = error.response.data.message || 'An error occurred during signup.';
         } else if (error.request) {
-          this.signupError = 'No response received from server. Please try again later.';
+          this.signUpError = 'No response received from server. Please try again later.';
         } else {
-          this.signupError  = 'An error occurred. Please try again later.';
+          this.signUpError = 'An error occurred. Please try again later.';
         }
         return false;
-    } finally {
-      this.loading = false;
-    }
-  },
+      }finally{
+        this.loading = false
+      }
+    },
+    async verifyVendor(otp){
+      this.loading = true
+      this.verifyError = ""
+      try{
+        const response = await api({
+          url: 'auth/verify',
+          method: 'POST',
+          data: {
+            email: this.vendorEmail,
+            verification_code: otp
+          }
+        });
+        localStorage.setItem("verified", "true");
+        this.verified = true;
+        this.vendorIsLoggedIn = true;
+        this.verifyError = ""
+        const id = response.data.user_id
+        const profileResponse = await api ({
+          url: `users/${id}`,
+          method: 'get',
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+          }
+        });
+        this.vendor = profileResponse.data.data;
+        setLocalStorageItem('vendor', this.vendor)
+        return true
+      }catch(error){
+        if (error.response) {
+          this.verifyError = error.response.data.message || 'An error occurred';
+        } else if (error.request) {
+          this.verifyError = 'No response received from server. Please try again later.';
+        } else {
+          this.verifyError = 'An error occurred. Please try again later.';
+        }
+        return false
+      }finally{
+        this.loading = false 
+      }
+    },
+    async resendOtp(){
+      this.resendError = ""
+      try{
+        await api({
+          url: 'auth/resend_code',
+          method: 'POST',
+          data: {email: this.vendorEmail}
+        });
+        this.resendError = ""
+        return true
+      }catch(error){
+        if (error.response) {
+          this.resendError = error.response.data.message || 'An error occurred';
+        } else if (error.request) {
+          this.resendError = 'No response received from server. Please try again later.';
+        } else {
+          this.resendError = 'An error occurred. Please try again later.';
+        }
+        return false
+      }
+    },
     async login({email, password}) {
       this.loading = true;
       try {
@@ -110,7 +152,9 @@ export const useVendorStore = defineStore('vendor', {
         });
         const {access_token} = response.data;
         localStorage.setItem('vendorToken', access_token);
-        
+        localStorage.setItem("verified", "true");
+        this.verified = true;
+        this.vendorIsLoggedIn = true;
         const id = response.data.user_id
           const profileResponse = await api ({
             url: `users/${id}`,
@@ -138,6 +182,33 @@ export const useVendorStore = defineStore('vendor', {
         this.loading = false;
       }
     },
+    async socialLogin(provider){
+      try{
+        const response = await api ({
+          url: `auth/${provider}/vendor/redirect`,
+          method: 'GET'
+        });
+        console.log(response)
+        return response 
+      }catch(error) {
+        console.error(error)
+      }
+    },
+    async socialLoginCallBack(provider) {
+      try {
+        const response = await axios.get(`https://umoja-store.netlify.app/auth/${provider}/vendor/callback`) 
+        const {access_token} = response.data;
+        localStorage.setItem('vendorToken', access_token);
+        this.vendorIsLoggedIn = true
+        this.verified = true;
+        localStorage.setItem('verified', "true")
+        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
+        console.log(response)
+        return true;
+      }catch(error) {
+        console.error(error)
+      }
+    },
     async forgotPassword(email) {
       this.loading = true;
       try {
@@ -162,11 +233,20 @@ export const useVendorStore = defineStore('vendor', {
       } 
     },
     async logout() {
-       await api({
+      try{
+        await api({
         url: 'auth/logout',
         method: 'post'
-       });
-       return true
+        });
+        localStorage.removeItem('vendorToken')
+        this.vendorIsLoggedIn = false
+        localStorage.removeItem('verified')
+        this.verified = false
+        return true
+      }catch(error){
+        console.error(error)
+      }
+       
     }
   }
 });
