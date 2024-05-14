@@ -17,7 +17,7 @@ color: #333333;">Set new password</h1>
 <p class="font-weight-medium mb-8 mt-1">Enter the email address associated with your account and we’ll send you a link to reset your password</p>
 
 
-     <v-form ref="form" @submit.prevent="handleResetPassword()">
+     <v-form v-model="valid" @submit.prevent="handleResetPassword()">
       <p class="inputLabel">Email Address</p>    
       <v-text-field
           placeholder="Enter your email address" 
@@ -47,7 +47,7 @@ color: #333333;">Set new password</h1>
           v-model="c_password"
       ></v-text-field>
       <p color="red">{{error}}</p>
-      <v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mr-1 mt-6"> 
+      <v-btn type="submit" :disabled="!valid"  block color="green" flat size="x-large" class="rounded-lg mr-1 mt-6"> 
             <span class="mr-4" style="text-transform: none;">Reset password</span>
             <v-progress-circular v-if="loading"
                 indeterminate
@@ -73,7 +73,7 @@ color: #333333;">Set new password</h1>
        You can now use your new password to login to your account 🙌🏽.
      </p>
      <v-card-actions class="d-flex justify-center align-center pt-10 w-100">
-       <v-btn width="250" to="/vendor/login" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px" size="x-large">Login</v-btn>
+       <v-btn width="250" @click="toLogin" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px" size="x-large">Login</v-btn>
      </v-card-actions>
        </v-card>
        <v-icon @click="showModal = false" style="width: 30px; background-color: #B3B3B3; height: 30px; border-radius: 50%; font-weight: 900; cursor: pointer; font-size: 1.5rem;" icon="mdi mdi-window-close"></v-icon>
@@ -85,7 +85,7 @@ color: #333333;">Set new password</h1>
 import { passwordRules, emailRules} from '~/utils/formrules'
 import {vendorUseApi} from '~/composables/vendorApi'
 import {ref} from '@vue/composition-api'
-import { useRoute } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import axios from 'axios'
 
 const confirmpasswordRules = [
@@ -95,9 +95,11 @@ const confirmpasswordRules = [
 
   const api = vendorUseApi();
   const route = useRoute();
+  const router = useRouter();
   const loading = ref(false)
   const error = ref("")
     const showModal = ref(false)
+    const valid = ref(false)
 
  const visible = ref(false)
  const visible1 = ref(false)
@@ -105,10 +107,14 @@ const confirmpasswordRules = [
  const c_password = ref("")
  const email = ref("")
 
+ function toLogin(){
+  showModal.value = false
+  router.push('/vendor/login')
+ }
 
   async function handleResetPassword() {
       const token = route.params.token
-      if(email.value && password.value && c_password.value) {
+      if(valid.value) {
         try {
           const resetPass = await resetPassWord({token: token, email: email.value, password: password.value, password_confirmation: c_password.value })
           if (resetPass) {
