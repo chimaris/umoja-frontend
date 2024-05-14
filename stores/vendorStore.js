@@ -213,7 +213,10 @@ export const useVendorStore = defineStore('vendor', {
         const response = await api ({
           url: `vendor/setup/${this.vendor.id}`,
           method: 'POST',
-          data: data
+          data: data,
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+          }
         });
         
         return response
