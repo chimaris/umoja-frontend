@@ -164,7 +164,7 @@ import {useRouter} from 'vue-router'
 export default {
 	setup(props, ctx) {
 		const vendorStore = useVendorStore()
-		const vendor = vendorStore.getVendor
+		const vendor = ref([])
 		const router = useRouter()
 		const choose = (x) => {
 			ctx.emit("changePage", x);
@@ -185,6 +185,7 @@ export default {
 			}, 2000)
 			}
 			await vendorStore.getUser(vendorStore.vendor.id)
+			vendor.value = vendorStore.vendor
 		})
 		return {
 			vendorStore,
