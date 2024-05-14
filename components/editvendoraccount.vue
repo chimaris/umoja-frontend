@@ -11,15 +11,15 @@
 			<div class="pt-8">
 				<div class="mb-4">
 					<v-label class="inputLabel">Bank Name </v-label>
-					<v-text-field :rules="inputRules" v-model="bankName" density="comfortable" placeholder="Enter your bank name"></v-text-field>
+					<v-text-field :rules="inputRules" v-model="vendor.bank_name" density="comfortable" placeholder="Enter your bank name"></v-text-field>
 				</div>
 				<div class="mb-4">
 					<v-label class="inputLabel">Account Number </v-label>
-					<v-text-field :rules="numRules" v-model="accountNumber" placeholder="Enter your account number" density="comfortable"> </v-text-field>
+					<v-text-field :rules="numRules" v-model="vendor.bank_account_number" placeholder="Enter your account number" density="comfortable"> </v-text-field>
 				</div>
 				<div class="mb-4">
 					<v-label class="inputLabel">Name on Account </v-label>
-					<v-text-field :rules="inputRules" v-model="accountName" density="comfortable"> </v-text-field>
+					<v-text-field :rules="inputRules" v-model="vendor.name_on_account" density="comfortable"> </v-text-field>
 				</div>
 
 				<p style="font-weight: 500; font-size: 16px; color: #969696">
@@ -27,6 +27,7 @@
 				</p>
 			</div>
 		</div>
+		<p style="color: red; font-size: 16px;" class="mb-2">{{ formError }}</p>
 		<v-btn :disabled="!isFormValid()" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
 	</v-sheet>
 
@@ -35,15 +36,15 @@
 		<v-sheet class="pt-8">
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Bank Name</p>
-				<p :contenteditable="isEditing" class="contact-value">{{bankName}}</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor.bank_name}}</p>
 			</div>
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Account Number</p>
-				<p :contenteditable="isEditing" class="contact-value">{{accountNumber}}</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor.bank_account_number}}</p>
 			</div>
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Account Name</p>
-				<p :contenteditable="isEditing" class="contact-value">{{accountName}}</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor.name_on_account}}</p>
 			</div>
 		</v-sheet>
 		<div class="py-4 d-flex justify-space-between">
@@ -58,31 +59,50 @@
 	</v-sheet>
 </template>
 <script setup>
-import {ref, defineEmits} from 'vue'
-import {useVendorProfileStore} from '~/stores/vendorProfile'
+import {ref, defineEmits, onMounted} from 'vue'
+import { useVendorStore } from '~/stores/vendorStore';
 import {numRules, inputRules} from '~/utils/formrules'
 
 const isEditing = ref(false)
-const accountName = ref("")
-const accountNumber = ref("")
-const bankName = ref("")
+const vendorStore = useVendorStore()
+const vendor = ref([])
+const formError = ref("")
 
+onMounted(() => {
+	if (!vendorStore.vendor.vendor_details){
+		vendor.value = []
+	}else {
+		vendor.value = vendorStore.vendor.vendor_details
+	}
+})
 
 const emit = defineEmits(['submit'])
-const vendorProfile = useVendorProfileStore()
 
 function isFormValid () {
-	return accountName.value && accountNumber.value && bankName.value
+	return vendor.value.name_on_account && vendor.value.bank_account_number && vendor.value.bank_name
 }
-const submit = () => {
+const submit = async () => {
 	if (isFormValid()) {
 		const data = {
-		bankName: bankName.value,
-		accountNumber: accountNumber.value,
-		accountName: accountName.value
+		bank_name: vendor.value.bank_name,
+		bank_account_number: vendor.value.bank_account_number,
+		name_on_account: vendor.value.name_on_account
 	}
-		vendorProfile.addBankInfo(data)
-		emit("submit");
+
+	try{
+		await vendorStore.registerVendor(data)
+		emit('submit')
+		return
+	}catch(error){
+		if (error.response) {
+			formError.value = error.response.data.message || 'An error occurred.';
+        } else if (error.request) {
+			formError.value = 'No response received from server. Please try again later.';
+        } else {
+			formError.value = 'An error occurred. Please try again later.';
+        }
+        return 
+	}
 	}
 };
 </script>

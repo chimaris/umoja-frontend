@@ -1,6 +1,14 @@
 <template>
 	<div id="homepage" style="min-height: 100vh; width: 100%">
-		<v-img
+		<v-img v-if="vendor.vendor_details?.profile_photo"
+			style="height: 185px; position: relative"
+			width="100%"
+			cover
+			class="d-flex bg-grey justify-end align-end"
+			:src="vendor.vendor_details?.profile_photo"
+		>
+		</v-img>
+		<v-img v-else
 			style="height: 185px; position: relative"
 			width="auto"
 			cover
@@ -49,7 +57,7 @@
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
-										<!-- <span style="font-size: 1.5rem;" :class="getCountryIconClass"></span> -->
+										<span style="font-size: 1.5rem;" :class="getCountryIconClass"></span>
 									</div>
 								</div>
 								<v-divider></v-divider>
@@ -57,14 +65,14 @@
 									<v-avatar rounded="0" size="19"
 										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 									></v-avatar>
-									<p class="textClass px-4"><span v-if="vendor.contactInfo?.complexBuilding">{{ vendor?.contactInfo?.complexBuilding }},</span> {{ vendor?.contactInfo?.Address }}, {{ vendor.contactInfo?.city }}, {{ vendor.contactInfo?.state }} {{ vendor.contactInfo?.Country }}</p>
+									<p class="textClass px-4"><span v-if="vendor.vendor_details?.complex_building_address">{{ vendor.vendor_details?.complex_building_address }},</span> {{ vendor.vendor_details?.address }}, {{ vendor.vendor_details?.office_city }}, {{ vendor.vendor_details?.office_state }} {{ vendor.vendor_details?.office_country }}</p>
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="px-6 pt-8">
 									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor.vendor_details?.business_type }})</span></h3>
 
 									<p class="textClass text-left mt-4 mb-8">
-										{{ vendor?.businessInfo?.businessBio }}
+										{{ vendor.vendor_details?.business_bio }}
 									</p>
 
 									<p style="font-weight: 700; font-size: 12px; line-height: 20px; color: #969696">ON THE WEB</p>
@@ -170,13 +178,13 @@ export default {
 			vendorStore.showRegistrationModal = false;
 			router.push('/vendor/dashboard/Profile Setup')
 		}
-		onMounted(() => {
+		onMounted(async () => {
 			if (!vendorStore.vendorCleared){
 				setTimeout(() => {
 					vendorStore.showRegistrationModal = true
 			}, 2000)
 			}
-		
+			await vendorStore.getUser(vendorStore.vendor.id)
 		})
 		return {
 			vendorStore,
@@ -275,19 +283,19 @@ export default {
 			return [
 				{
 					icon: "youtube",
-					handle: this.vendor.contactInfo?.youtubeHandle
+					handle: this.vendor.vendor_details?.youtube_handle
 				},
 				{
 					icon: "twitter",
-					handle: this.vendor.contactInfo?.twitterHandle
+					handle: this.vendor.vendor_details?.twitter_handle
 				},
 				{
 					icon: "facebook",
-					handle: this.vendor.contactInfo?.facebookHandle
+					handle: this.vendor.vendor_details?.facebook_handle
 				},
 				{
 					icon: "instagram",
-					handle: this.vendor.contactInfo?.instagramHandle
+					handle: this.vendor.vendor_details?.instagram_handle
 				},
 			];
 		},
@@ -305,7 +313,7 @@ export default {
 	methods: {
 		getCountryCode() {
 			
-      		const country = this.vendor.vendor_details.rep_country;
+      		const country = this.vendor.vendor_details?.rep_country;
       		return countryCodes[country];
     	},
 		getdateRegistered() {

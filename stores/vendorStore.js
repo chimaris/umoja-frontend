@@ -20,12 +20,6 @@ export const useVendorStore = defineStore('vendor', {
     vendorIsLoggedIn: false,
     vendorEmail: localStorage.getItem("vendor-email", ""),
     vendorToken: null,
-    companyInfo: {},
-    ownerInfo: {},
-    businessDocumentation: {},
-    isCompanyInfoComplete: false,
-    isOwnerInfoComplete: false,
-    isBusinessDocumentationComplete: false,
   }),
   getters: {
     getVendor: (state) => state.vendor,
@@ -39,21 +33,7 @@ export const useVendorStore = defineStore('vendor', {
        
       }
     },
-    markSectionComplete(section) {
-      this[section] = true;
-    },
-    areAllFormsSubmitted() {
-      return this.isCompanyInfoComplete && this.isOwnerInfoComplete && this.isBusinessDocumentationComplete;
-    },
-    setCompanyInfo(data) {
-      this.companyInfo = data;
-    },
-    setOwnerInfo(data) {
-      this.ownerInfo = data;
-    },
-    setBusinessDocumentation(data) {
-      this.businessDocumentation = data;
-    },
+ 
     async signupVendor({first_name, last_name, email, password, password_confirmation, terms_accepted}){
       this.loading = true;
       try{
@@ -98,15 +78,9 @@ export const useVendorStore = defineStore('vendor', {
         this.vendorIsLoggedIn = true;
         this.verifyError = ""
         const id = response.data.user_id
-        const profileResponse = await api ({
-          url: `users/${id}`,
-          method: 'get',
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
-          }
-        });
-        this.vendor = profileResponse.data.data;
+        await this.getUser(id)
         setLocalStorageItem('vendor', this.vendor)
+        console.log(response)
         return true
       }catch(error){
         if (error.response) {
@@ -156,16 +130,7 @@ export const useVendorStore = defineStore('vendor', {
         this.verified = true;
         this.vendorIsLoggedIn = true;
         const id = response.data.user_id
-          const profileResponse = await api ({
-            url: `users/${id}`,
-            method: 'get',
-            headers: {
-              Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
-            }
-          });
-          this.vendor = profileResponse.data.data;
-          setLocalStorageItem('vendor', this.vendor)
-        
+        await this.getUser(id)
 
         this.vendorIsLoggedIn = true;
         return true;
@@ -181,6 +146,18 @@ export const useVendorStore = defineStore('vendor', {
       } finally {
         this.loading = false;
       }
+    },
+    async getUser(id){
+      const profileResponse = await api ({
+        url: `users/${id}`,
+        method: 'get',
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+        }
+      });
+      this.vendor = profileResponse.data.data;
+      setLocalStorageItem('vendor', this.vendor)
+      return
     },
     async socialLogin(provider){
       try{
@@ -231,6 +208,15 @@ export const useVendorStore = defineStore('vendor', {
       }finally {
         this.loading = false;
       } 
+    },
+    async registerVendor(data){
+        const response = await api ({
+          url: `vendor/setup/${this.vendor.id}`,
+          method: 'POST',
+          data: data
+        });
+        
+        return response
     },
     async logout() {
       try{

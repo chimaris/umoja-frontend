@@ -115,13 +115,13 @@ const agreeRule = [(v) => !!v || "You must agree to the terms and conditions"];
 const confirmpasswordRules = [(v) => !!v || "Confirm Password is required", (v) => v === password.value || "Passwords do not match"];
 
 async function socialMediaLogin(provider) {
-	try {
-		const response = await userStore.socialLogin(provider);
-		window.location.href = response.data.url;
-	} catch (error) {
-		console.log(error);
-	}
-}
+			try {
+				const response = await userStore.socialLogin(provider);
+				window.location.href = response.data.url;
+			} catch (error) {
+				console.log(error);
+			}
+		}
 
 async function handleSubmit() {
 	if (valid.value) {

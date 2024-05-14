@@ -11,12 +11,12 @@
             <div class="pt-8" style="max-width: 502px">
                 <div class="mb-4">
                     <v-label class="inputLabel">Email Address </v-label>
-                    <v-text-field :rules="emailRules" v-model="email" placeholder="Enter email address" density="comfortable"> </v-text-field>
+                    <v-text-field :rules="emailRules" v-model="vendor.busniess_email" placeholder="Enter email address" density="comfortable"> </v-text-field>
                 </div>
                 <div class="mb-4">
                     <p class="inputLabel">Phone Number</p>
                     <MazPhoneNumberInput style="width: 100%;"
-                                         v-model="results.phoneNumber "
+                                         v-model="vendor.busniess_phone_number"
                                          show-code-on-list
                                          :success="results?.isValid"
                                          @update="results = $event"
@@ -59,12 +59,12 @@
                 <div class="mb-4">
                     <p class="inputLabel">Country</p>
                     <v-select
-                            v-model="selectedBusinessCountry"
+                            v-model="vendor.office_country"
                             :items="countries"
                             append-inner-icon="mdi mdi-chevron-down"
                             placeholder="Select Country"
                             density="comfortable"
-							@input="fetchStates(selectedBusinessCountry)"
+							@input="fetchStates(vendor.office_country)"
                     >
                     </v-select>
                 </div>
@@ -72,8 +72,8 @@
                     <p class="inputLabel">State</p>
                     <v-select 
 						:items= "states"
-						@input="fetchCities(selectedBusinessCountry, selectedState)"
-						v-model="selectedState" 
+						@input="fetchCities(vendor.office_country, vendor.office_state)"
+						v-model="vendor.office_state" 
 						append-inner-icon="mdi mdi-chevron-down" 
 						placeholder="Select State" density="comfortable"> 
 					</v-select>
@@ -81,7 +81,7 @@
                 <div class="mb-4">
                     <p class="inputLabel">City</p>
                     <v-select 
-						v-model="selectedCity"
+						v-model="vendor.office_city"
 						:items="cities"
 						append-inner-icon="mdi mdi-chevron-down" 
 						placeholder="Select" density="comfortable">
@@ -92,14 +92,15 @@
 
                 <div class="mb-4">
                     <p class="inputLabel">Street Address</p>
-                    <v-text-field :rules="inputRules" v-model="businessAddress" placeholder="Enter address" density="comfortable"> </v-text-field>
+                    <v-text-field :rules="inputRules" v-model="vendor.office_address" placeholder="Enter address" density="comfortable"> </v-text-field>
                 </div>
                 <div class="mb-4">
                     <p class="inputLabel">Complex Building (Optional)</p>
-                    <v-text-field v-model="buildingName" placeholder="Building name, unit number or floor" density="comfortable"> </v-text-field>
+                    <v-text-field v-model="vendor.complex_building_address" placeholder="Building name, unit number or floor" density="comfortable"> </v-text-field>
                 </div>
             </div>
         </div>
+        <p style="color: red; font-size: 16px;" class="mb-4">{{ formError }}</p>
         <v-btn @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
     </v-sheet>
 
@@ -108,18 +109,18 @@
         <v-sheet>
             <div class="mb-5">
                 <p class="mb-1 contact-label">Business Email</p>
-                <p :contenteditable="isEditing" class="mb-5 contact-value">{{ email }}</p>
+                <p :contenteditable="isEditing" class="mb-5 contact-value">{{ vendor.busniess_email }}</p>
             </div>
             <div class="mb-5">
                 <p class="mb-1 contact-label">Phone Number</p>
-                <p :contenteditable="isEditing" class="mb-5 contact-value">{{ results.phoneNumber }}</p>
+                <p :contenteditable="isEditing" class="mb-5 contact-value">{{ vendor.busniess_phone_number }}</p>
             </div>
             <div class="mb-5">
                 <p class="mb-1 contact-label">Office Address</p>
                 <p :contenteditable="isEditing" class="d-flex flex-column contact-value">
-                    <span>{{ businessAddress }}</span>
-                    <span>{{ selectedCity }}, {{ selectedState }}</span>
-                    <span>{{ selectedBusinessCountry }}</span>
+                    <span>{{ vendor.office_address }}</span>
+                    <span>{{ vendor.office_city }}, {{ vendor.office_state }}</span>
+                    <span>{{ vendor.office_country }}</span>
                 </p>
             </div>
             <div>
@@ -143,27 +144,38 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from 'vue';
+import { ref, defineEmits, onMounted } from 'vue';
 import { countries, fetchStates, fetchCities, states, cities } from '~/utils/countryapi'
 import {emailRules, inputRules} from '~/utils/formrules'
-import {useVendorProfileStore} from "~/stores/vendorProfile"
+import { useVendorStore } from '~/stores/vendorStore';
 
 		const results = ref("")
-        const email = ref('');
-        const twitter = ref('');
         const socialMedia = ["Twitter", "Instagram", "Facebook", "Youtube"];
         const accordionOpen = ref(-1);
-        const socialMediaHandles = ref(Array(socialMedia.length).fill(''));
-        const selectedBusinessCountry = ref('');
-        const selectedCity = ref('');
-        const selectedState = ref('');
-        const businessAddress = ref('');
-		const buildingName = ref('')
 		const isEditing = ref(false)
+        const vendorStore = useVendorStore()
+        const vendor = ref([])
+     
+        const formError = ref("")
 
-        const vendorProfile = useVendorProfileStore();
+        onMounted(() => {
+            if (!vendorStore.vendor.vendor_details){
+                vendor.value = []
+            }else {
+                vendor.value = vendorStore.vendor.vendor_details
+            }
+            console.log(socialMediaHandles, vendor.value.twitter_handle)
+        })
+
 		const emit = defineEmits(['submit']);
+        const socialMediaHandles = computed(() => [
+            vendor.value.twitter_handle,
+            vendor.value.instagram_handle,
+            vendor.value.facebook_handle,
+            vendor.value.youtube_handle
+        ]);
 
+    
         const toggleAccordion = (index) => {
             accordionOpen.value = accordionOpen.value === index ? -1 : index;
         };
@@ -183,29 +195,44 @@ import {useVendorProfileStore} from "~/stores/vendorProfile"
             }
         };
 
-watch(() => selectedState.value, () => {
-	fetchCities(selectedBusinessCountry.value, selectedState.value);
+watch(() => vendor.value.office_state, () => {
+	fetchCities(vendor.value.office_country, vendor.value.office_state);
 });
-watch(() => selectedBusinessCountry.value, () => {
-	fetchStates(selectedBusinessCountry.value)
+watch(() => vendor.value.office_country, () => {
+	fetchStates(vendor.value.office_country)
 });
 
-const submit = () => {
+const submit = async () => {
+    formError.value = ""
 	const data = { 
-		email: email.value,
-		phoneNumber: results.value.phoneNumber,
-		twitterHandle: socialMediaHandles.value[0],
-		instagramHandle: socialMediaHandles.value[1],
-		facebookHandle: socialMediaHandles.value[2],
-		youtubeHandle: socialMediaHandles.value[3],
-		Country: selectedBusinessCountry.value,
-		state: selectedState.value,
-		city: selectedCity.value,
-		Address: businessAddress.value,
-		complexBuilding: buildingName.value
+		busniess_email: vendor.value.busniess_email,
+		busniess_phone_number: results.value.phoneNumber,
+		twitter_handle: socialMediaHandles.value[0],
+		instagram_handle: socialMediaHandles.value[1],
+		facebook_handle: socialMediaHandles.value[2],
+		youtube_handle: socialMediaHandles.value[3],
+		office_country: vendor.value.office_country,
+		office_state: vendor.value.office_state,
+		office_city: vendor.value.office_city,
+		office_address: vendor.value.office_address,
+		complex_building_address: vendor.value.complex_building_address
 	}
-	console.log(data)
-	emit("submit");
+    try{
+        formError.value = ""
+       await vendorStore.registerVendor(data)
+	    emit("submit");
+        return
+    }catch(error){
+		if (error.response) {
+            formError.value = error.response.data.message || 'An error occurred.';
+        } else if (error.request) {
+            formError.value = 'No response received from server. Please try again later.';
+        } else {
+            formError.value = 'An error occurred. Please try again later.';
+        }
+        return 
+	}
+
 }
 </script>
 

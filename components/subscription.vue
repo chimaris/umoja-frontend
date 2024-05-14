@@ -58,7 +58,13 @@
 				</v-sheet>
 			</div>
 		</div>
-		<v-btn flat style="background-color: #2c6e63; color: #fff" size="x-large">Join basic plan (Free)</v-btn>
+		<stripe-checkout
+		ref="checkoutRef"
+		mode = "subscription"
+		:pk="publishableKey"
+		:lineItems = "lineItems"
+    />
+		<v-btn @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Join basic plan (Free)</v-btn>
 	</v-sheet>
 
 	<!-- View Subscription Section -->
@@ -134,20 +140,31 @@
 
 <script setup>
 	import {ref, defineEmits} from 'vue'
+	import { StripeCheckout } from '@vue-stripe/vue-stripe';
 
 	const value = ref("")
+	const checkoutRef = ref(null)
 	const dialog = ref(false)
+	const config = useRuntimeConfig();
+	const publishableKey = config.public.stripePK
 	const subscriptionInfo = ref(false)
 	const editSubscriptionInfo = ref(true)
 	const emit = defineEmits(['submit']);
 
+	const lineItems = [
+		{
+			price: 'price_1PFHkMP7XylLhhgiIodwtUZX',
+			quantity: 1
+		}
+	]
 	function cancelSubscription() {
 		this.subscriptionInfo = false;
 		this.editSubscriptionInfo = true;
 	}
 
-	function submit(){
-		emit('submit')
+	async function submit(){
+		checkoutRef.value.redirectToCheckout()
+		// emit('submit')
 	}
 </script>
 
