@@ -13,7 +13,7 @@
 				</p>
 				<v-card
 					flat
-					@click="$router.push('/user/signin')"
+					@click="$router.push('/user/login')"
 					:style="{ width: $vuetify.display.mobile ? '100%' : '859px', height: $vuetify.display.mobile ? 'auto' : '169px' }"
 					class="mb-8 py-4 rounded-lg pa-6 d-flex align-center"
 				>
@@ -37,7 +37,7 @@
 				<v-card
 					:style="{ width: $vuetify.display.mobile ? '100%' : '859px', height: $vuetify.display.mobile ? 'auto' : '169px' }"
 					flat
-					@click="$router.push('/vendor/signin')"
+					@click="$router.push('/vendor/login')"
 					class="mb-4 rounded-lg pa-6 d-flex align-center"
 				>
 					<div class="d-flex align-center" style="margin-right: 100px">
