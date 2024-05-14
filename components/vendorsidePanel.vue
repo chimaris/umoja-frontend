@@ -143,7 +143,7 @@ line-height: 24px }
 <script>
 import { useAppStore } from '@/stores/appStore';
 import { useVendorStore } from '~/stores/vendorStore';
-
+import {ref, onMounted} from 'vue'
 
 
 export default {
@@ -151,11 +151,17 @@ export default {
 setup() {
 const appStore = useAppStore();
 const vendorStore = useVendorStore();
+const vendor = ref([])
+
+onMounted(async () => {
+  // await vendorStore.getUser(vendorStore.vendor.id)
+			vendor.value = vendorStore.vendor
+})
 
 return {
 integratedApps: appStore.integratedApps,
 vendorStore,
-vendor: vendorStore.getVendor
+vendor
 };
 },
 mounted(){

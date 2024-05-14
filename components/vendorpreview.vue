@@ -179,12 +179,7 @@ export default {
 			router.push('/vendor/dashboard/Profile Setup')
 		}
 		onMounted(async () => {
-			if (!vendorStore.vendorCleared){
-				setTimeout(() => {
-					vendorStore.showRegistrationModal = true
-			}, 2000)
-			}
-			await vendorStore.getUser(vendorStore.vendor.id)
+			// await vendorStore.getUser(vendorStore.vendor.id)
 			vendor.value = vendorStore.vendor
 		})
 		return {

@@ -74,9 +74,6 @@ async function handleLogin() {
 				password.value = "";
 				router.push(`/vendor/dashboard/Homepage`);
 				vendorStore.loginError = "";
-				setTimeout(() => {
-					vendorStore.showRegistrationModal = true
-				}, 3000)
 			}
 		} catch (error) {
 			console.error("An error occurred during login:", error);
