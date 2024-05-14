@@ -113,8 +113,8 @@
 						<template v-slot:label>
 							<div class="font-weight-medium" :style="{ fontSize: $vuetify.display.mobile ? '14px' : '16px' }">
 								I agree to Umoja
-								<a href="#" style="color: #0076ff; text-decoration: none" @click="openPrivacyPolicy">Privacy Policy</a> and
-								<a href="#" style="color: #0076ff; text-decoration: none" @click="openTermsOfUse">Terms of Use</a>
+								<a href="#" style="color: #0076ff; text-decoration: none" @click="privacyVisible = true">Privacy Policy</a> and
+								<a href="#" style="color: #0076ff; text-decoration: none" @click="termsVisible = true">Terms of Use</a>
 							</div>
 						</template>
 					</v-checkbox>
@@ -127,6 +127,13 @@
 			</v-card>
 		</div>
 	</div>
+	<v-dialog max-width="800" v-model="privacyVisible" persistent>
+		<privacyPolicy @closePrivacyVisible="closePrivacyVisible" />
+	</v-dialog>
+
+	<v-dialog max-width="800" v-model="termsVisible" persistent>
+		<TermsOfUse @closeTermsVisible="closeTermsVisible" />
+	</v-dialog>
 </template>
 <script setup>
 import { ref, reactive } from "vue";
@@ -138,6 +145,8 @@ const vendorStore = useVendorStore();
 const router = useRouter();
 const visible = ref(false);
 const visible1 = ref(false);
+const privacyVisible = ref(false);
+const termsVisible = ref(false);
 
 const email = ref("");
 const last_name = ref("");
@@ -187,4 +196,10 @@ async function handleSubmit() {
 		}
 	}
 }
+const closePrivacyVisible = () => {
+	privacyVisible.value = false;
+};
+const closeTermsVisible = () => {
+	termsVisible.value = false;
+};
 </script>
