@@ -14,7 +14,7 @@
 				<v-card
 					flat
 					@click="$router.push('/user/signup')"
-					:style="{ width: $vuetify.display.mobile ? '100%' : '859px', height: $vuetify.display.mobile ? 'auto' : '169px' }"
+					:style="{ width: $vuetify.display.mobile ? '100%' : '859px', height: $vuetify.display.mobile ? '100px' : '169px' }"
 					class="mb-8 py-4 rounded-lg pa-2 pa-md-6 d-flex align-center"
 				>
 					<div class="d-flex align-center" style="margin-right: 100px">
@@ -22,7 +22,7 @@
 							<v-icon :size="$vuetify.display.mobile ? 20 : 40" class="" icon="mdi mdi-account"></v-icon>
 						</v-avatar>
 
-						<div class="mr-2 mr-md-0">
+						<div class="mr-3 mr-md-0">
 							<p :style="{ fontSize: $vuetify.display.mobile ? '16px' : '24px' }" style="font-weight: 700; line-height: 30px; color: #333333">
 								Sign Up as a Customer
 							</p>
@@ -35,7 +35,7 @@
 					<v-img class="signupimg" src="https://res.cloudinary.com/payhospi/image/upload/v1686202938/Frame_yg0jej.png"></v-img>
 				</v-card>
 				<v-card
-					:style="{ width: $vuetify.display.mobile ? '100%' : '859px', height: $vuetify.display.mobile ? 'auto' : '169px' }"
+					:style="{ width: $vuetify.display.mobile ? '100%' : '859px', height: $vuetify.display.mobile ? '100px' : '169px' }"
 					flat
 					@click="$router.push('/vendor/signup')"
 					class="mb-4 rounded-lg pa-2 pa-md-6 d-flex align-center"
@@ -44,7 +44,7 @@
 						<v-avatar :size="$vuetify.display.mobile ? 40 : 80" class="mr-2 mr-md-6" variant="tonal" color="green">
 							<v-icon :size="$vuetify.display.mobile ? 20 : 40" class="" icon="mdi mdi-store"></v-icon>
 						</v-avatar>
-						<div class="mr-2 mr-md-0">
+						<div class="mr-3 mr-md-0">
 							<p :style="{ fontSize: $vuetify.display.mobile ? '16px' : '24px' }" style="font-weight: 700; line-height: 30px; color: #333333">
 								Sign Up as a Vendor
 							</p>

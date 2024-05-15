@@ -46,12 +46,7 @@
 										@input="productStore.search()"
 									>
 										<template v-slot:append-inner>
-											<v-progress-circular v-if="productStore.searching"
-											color="grey"
-											:size="24"
-											:width="3"
-											indeterminate
-											></v-progress-circular>
+											<v-progress-circular v-if="productStore.searching" color="grey" :size="24" :width="3" indeterminate></v-progress-circular>
 											<v-icon v-else color="grey" @click="searchmenu = false" icon="mdi mdi-close-circle" />
 										</template>
 									</v-text-field>
@@ -97,7 +92,7 @@
 
 	<!-- Responsive navbar -->
 	<v-layout v-if="$vuetify.display.mobile">
-		<v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'left' : undefined" temporary style="width: 100%; top: 50px">
+		<v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'left' : undefined" temporary style="width: 100%; height: 100vh">
 			<div class="d-flex align-center justify-space-between px-4">
 				<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
 					<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
@@ -219,7 +214,7 @@ export default {
 	methods: {
 		searchProduct() {
 			if (this.searchQuery) {
-				this.productStore.searchTerm = this.searchQuery
+				this.productStore.searchTerm = this.searchQuery;
 			}
 		},
 		toCart() {

@@ -41,7 +41,7 @@
 									</v-btn>
 								</div>
 							</v-col>
-							<v-col class="d-flex justify-end" cols="6" sm="6">
+							<!-- <v-col class="d-flex justify-end" cols="6" sm="6">
 								<v-card
 									width="auto"
 									style="
@@ -128,7 +128,7 @@
 										</div>
 									</vue-countdown>
 								</v-card>
-							</v-col>
+							</v-col> -->
 						</v-row>
 					</div>
 				</v-img>
