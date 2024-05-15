@@ -6,7 +6,7 @@
 			<p class="inputLabel">What African country are you representing?</p>
 			<v-select
 				v-model="vendor.rep_country"
-				:items="countries"
+				:items="allCountries"
 				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select African Country"
 				density="comfortable"
@@ -74,7 +74,7 @@
 
 			<v-select
 				v-model="vendor.country_name"
-				:items="countries"
+				:items="allCountries"
 				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select Country"
 				density="comfortable"
@@ -118,7 +118,7 @@ import { useVendorStore } from '~/stores/vendorStore';
 import axios from 'axios'
 import { on } from 'events';
 import {inputRules} from '~/utils/formrules'
-import { countries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
+import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
 
 const vendorStore = useVendorStore()
 const vendor = ref([])
@@ -148,8 +148,7 @@ const emit = defineEmits(['submit']);
 
 
 const companyCategories = [
-  "Technology", "Finance", "Fashion", "Healthcare", "Retail", "Manufacturing", "Education",
-  "Transportation", "Hospitality", "Real Estate", "Energy", "Media", "Construction", "Other"
+  "Fashion", "Cosmetic", "Art", "Home decoration", "Furniture", "Accessories","Other"
 ];
 
 const submit = async () => {
