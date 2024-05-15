@@ -101,8 +101,9 @@
 								</v-sheet>
 							</v-sheet>
 						</v-card>
-						<v-card style="margin-top: -95px; z-index: 99" flat class="pb-12 d-block d-md-none bg-transparent" width="100%">
-							<v-sheet max-width="455" class="mx-auto" width="100%" style="padding-top: 20px">
+						<!-- mobile View -->
+						<v-card style="margin-top: -85px; z-index: 99" flat class="pb-4 d-block d-md-none bg-transparent" width="100%">
+							<div max-width="455" class="mx-auto" width="100%" style="padding-top: 20px">
 								<div class="pa-1">
 									<v-avatar class="mx-auto" style="border: 2.93049px solid #fce7ce" size="100">
 										<v-img
@@ -118,7 +119,7 @@
 									</div>
 								</div>
 								<div class="d-flex">
-									<div class="align-center justify-space-between d-flex">
+									<div class="align-center justify-space-between d-flex mr-10">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
 												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684592715/umoja/profile-2user_2_jcekww.png"></v-img
@@ -174,11 +175,11 @@
 
 									<p class="textClass text-grey-darken-1 mt-10">MEMBER SINCE: MARCH 24, 2020</p>
 								</v-sheet>
-							</v-sheet>
+							</div>
 						</v-card>
 					</v-col>
 					<v-col md="8" xs="12">
-						<v-sheet style="overflow: hidden" color="transparent" class="mt-2">
+						<v-sheet style="overflow: hidden" color="transparent" class="mt-0 mt-md-2">
 							<v-tabs v-model="tab" color="green" grow>
 								<v-tab v-for="item in ['products', 'posts', 'articles', 'promo%']" :key="item" :value="item" class="d-flex align-center">
 									{{ item }}
