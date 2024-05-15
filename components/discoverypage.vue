@@ -162,7 +162,7 @@
 								</v-menu>
 							</div>
 
-							<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px;">
+							<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px">
 								<p>{{ productStore.searchError }}</p>
 							</div>
 							<v-row style="" class="">
@@ -186,10 +186,10 @@
 				</v-row>
 			</v-container>
 		</v-card>
-		<v-container class="px-0 mx-auto" style="padding-top: 0px; max-width: 1400px">
-			<div style="padding: 50px 0">
-				<v-row>
-					<v-col class="px-0" cols="6" md="6" lg="6">
+		<div style="padding: 50px 0">
+			<v-container class="px-0 mx-auto">
+				<v-row class="pl-0 pr-0 mr-0 ml-0">
+					<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
 						<v-img
 							eager
 							cover
@@ -200,7 +200,7 @@
 						></v-img>
 					</v-col>
 
-					<v-col class="px-0" cols="6" md="6" lg="6">
+					<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
 						<v-card
 							rounded="0"
 							width="100%"
@@ -234,15 +234,17 @@
 						</v-card>
 					</v-col>
 				</v-row>
-			</div>
-		</v-container>
+			</v-container>
+		</div>
+
 		<v-container class="px-3" style="padding-top: 0px; max-width: 1400px">
 			<PostsRow :maxwidth="'1400px'" :showVendor="true" :title="postRow.title" :items="postRow.items" />
 		</v-container>
-		<v-container class="px-0 mx-auto" style="padding-top: 0px; max-width: 1400px">
-			<div style="padding: 100px 0">
-				<v-row>
-					<v-col class="px-0" cols="6" md="6" lg="6">
+
+		<div style="padding: 100px 0">
+			<v-container class="px-0 mx-auto">
+				<v-row class="pl-0 pr-0 mr-0 ml-0">
+					<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
 						<v-card
 							rounded="0"
 							width="100%"
@@ -276,7 +278,7 @@
 							</v-container>
 						</v-card>
 					</v-col>
-					<v-col class="px-0" cols="6" md="6" lg="6">
+					<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
 						<v-img
 							:min-height="$vuetify.display.mobile ? 195 : 429"
 							eager
@@ -287,8 +289,9 @@
 						></v-img>
 					</v-col>
 				</v-row>
-			</div>
-		</v-container>
+			</v-container>
+		</div>
+
 		<v-container style="max-width: 1400px">
 			<v-row>
 				<v-col class="pt-0" cols="12" xs="12">
@@ -300,11 +303,6 @@
 									font-weight: 600;
 									font-size: 32px;
 									line-height: 1;
-									/* identical to box height */
-
-									text-transform: ;
-
-									/* Carbon/4 */
 
 									color: #333333;
 								"
