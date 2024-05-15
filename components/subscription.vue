@@ -119,7 +119,7 @@
 	</v-sheet>
 
 	<!-- Modal on successful registration -->
-	<!-- <v-dialog v-model="dialog" max-width="600px">
+	<v-dialog v-model="dialog" max-width="600px">
 		<v-card class="d-flex flex-column text-center pa-10" style="width: 550px; justify-content: center; align-items: center; border-radius: 15px">
 			<v-avatar color="#FEF6ED" size="x-large" class="mb-5"> 🎉</v-avatar>
 			<h3 style="font-size: 32px; font-weight: 600; line-height: 40px; color: #2a2a2a">Your profile setup has been successfully completed</h3>
@@ -127,20 +127,23 @@
 				You can now use your new password to login to your account 🙌🏽.
 			</p>
 			<v-card-actions class="d-flex justify-space-between pt-10 w-100">
-				<v-btn size="large" style="border: 1px solid #969696" flat @click="dialog = true">
+				<v-btn @click="toDashboard" size="large" style="border: 1px solid #969696" flat>
 					<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 20px; padding: 10px"> Go back to dashboard</span></v-btn
 				>
-				<v-btn flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px" size="large"
+				<v-btn @click="dialog = false" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px" size="large"
 					>View profile in settings</v-btn
 				>
 			</v-card-actions>
 		</v-card>
-	</v-dialog> -->
+	</v-dialog>
 </template>
 
 <script setup>
 	import {ref, defineEmits} from 'vue'
 	import { StripeCheckout } from '@vue-stripe/vue-stripe';
+	import {vendorUseApi} from '~/composables/vendorApi'
+	import {useRouter} from 'vue-router'
+	import { useVendorStore } from '~/stores/vendorStore';
 
 	const value = ref("")
 	const checkoutRef = ref(null)
@@ -150,6 +153,8 @@
 	const subscriptionInfo = ref(false)
 	const editSubscriptionInfo = ref(true)
 	const emit = defineEmits(['submit']);
+	const router = useRouter()
+	const vendorStore = useVendorStore()
 
 	const lineItems = [
 		{
@@ -161,9 +166,23 @@
 		this.subscriptionInfo = false;
 		this.editSubscriptionInfo = true;
 	}
-
+    function toDashboard(){
+		router.push('/vendor/dashboard/Homepage')
+		dialog.value = false
+	}
 	async function submit(){
-		checkoutRef.value.redirectToCheckout()
+		const api = vendorUseApi()
+		try{
+			const response =  await api({
+				url: 'vendor/subscribe/',
+				method: 'POST'
+			});
+			await vendorStore.getUser(vendorStore.vendor.id)
+			vendorStore.vendor.complete_setup = 1
+			dialog.value = true
+		}catch(error){
+			console.error(error)
+		}
 		// emit('submit')
 	}
 </script>

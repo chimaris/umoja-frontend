@@ -1,17 +1,21 @@
 import {defineStore} from "pinia"
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
-const api = vendorUseApi()
+
+
 export const useEditVendorStore = defineStore('edit-product',{
     state: () => ({
-        currentEditProduct: getLocalStorageItem("current-edit"),
+        currentEditProduct: [],
         loading: false,
         allVariations: [],
         deleteVariant: [],
         currentVariant: []
     }),
+    persist: {
+        enabled: true,
+        storage: persistedState.localStorage,
+      },
     actions: {
         saveVariantsInfo(info) {
             this.allVariations = info
@@ -24,9 +28,9 @@ export const useEditVendorStore = defineStore('edit-product',{
           },
         setCurrentProduct(product) {
             this.currentEditProduct = product;
-            setLocalStorageItem("current-edit", this.currentEditProduct)
         },
         async editProduct(datas) {
+            const api = vendorUseApi()
                 const response = await api({
                     url: `vendor/products/${this.currentEditProduct.id}`,
                     method: 'post',
@@ -38,6 +42,7 @@ export const useEditVendorStore = defineStore('edit-product',{
                 return response
         },
         async handleEditphotoUpload(imagePreviews) {
+            const api = vendorUseApi()
             this.loading = true;
             const tempCloudinaryLinks = [];
         
@@ -100,52 +105,8 @@ export const useEditVendorStore = defineStore('edit-product',{
                 return null;
             }
         },
-            //     await this.editProduct(datas);
-            
-            //     // Get delete variants
-            //     const deleteVariants = this.deleteVariant;
-            
-            //     // Delete existing variants
-            //     await this.deleteVariants(deleteVariants);
-            
-            //     // Get existing variants
-            //     const existingVariants = this.allVariations;
-
-            //     if (this.deleteVariant.length >= 1) {
-            //         existingVariants = this.allVariations.filter(variant => 
-            //             !this.deleteVariant.some(deleteVariant => deleteVariant.name === variant.name));
-            //             console.log(existingVariants)
-            //     }
-               
-            //     // Update current variants using IDs from existing variants or add new variants
-            //     const updatePromises = [];
-            //     for (const variant of this.currentVariant) {
-            //         const existingVariant = existingVariants.find(v => v.name === variant.name);
-            //         if (existingVariant && existingVariant.id) {
-            //             // Variant exists in the database, update using its ID
-            //             variant.id = existingVariant.id;
-            //             variant.sku = existingVariant.sku;
-            //             variant.price = existingVariant.price;
-            //             variant.no_available = existingVariant.no_available
-            //             const updatePromise = this.updateVariant(variant);
-            //             updatePromises.push(updatePromise);
-            //         } else if (existingVariant && !existingVariant.id) {
-            //             // Variant doesn't exist in the database, add it
-            //             variant.sku = existingVariant.sku;
-            //             variant.price = existingVariant.price;
-            //             variant.no_available = existingVariant.no_available
-            //             const addPromise = this.addVariant(variant);
-            //             updatePromises.push(addPromise);
-            //         }
-            //     }
-            
-            //     // Wait for all updates to finish
-            //     await Promise.all(updatePromises);
-            
-            //     // After all updates and additions are done, you can perform any necessary actions
-            // },
-            
             async updateVariants(datas) {
+                const api = vendorUseApi()
                 await this.editProduct(datas);
             
                 // Get delete variants
@@ -191,6 +152,7 @@ export const useEditVendorStore = defineStore('edit-product',{
             },
             
               async updateVariant(variant) {
+                const api = vendorUseApi()
                 try {
                   // Call the update endpoint for the variant
                   const response = await api({
@@ -212,6 +174,7 @@ export const useEditVendorStore = defineStore('edit-product',{
               },
               
               async addVariant(variant) {
+                const api = vendorUseApi()
                 try {
                     const response = await api({
                         url: `vendor/products/${this.currentEditProduct.id}/variations`,
@@ -228,6 +191,7 @@ export const useEditVendorStore = defineStore('edit-product',{
                 }
               },
               async deleteVariants(variants) {
+                const api = vendorUseApi()
                 try {
                   const addPromises = variants.map(async (variant) => {
                     const response = await api({

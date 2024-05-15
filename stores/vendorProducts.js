@@ -3,21 +3,21 @@ import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
-const api = vendorUseApi()
+
 export const useVendorProductStore = defineStore('vendor-product', {
     state: () => ({
         Products: [],
-        generalInfo: getLocalStorageItem("general", []),
-        textInfo:  getLocalStorageItem("text", []),
-        priceInfo:  getLocalStorageItem("price", []),
-        pictureInfo:  getLocalStorageItem("picture", []),
-        inventoryInfo:  getLocalStorageItem("inventory", []),
-        shippingInfo: getLocalStorageItem("shipping", []),
-        variantsInfo: getLocalStorageItem("variant", []),
-        colorInfo: getLocalStorageItem("color", []),
-        sizeInfo: getLocalStorageItem("size", []),
-        styleInfo: getLocalStorageItem("style", []),
-        materialInfo: getLocalStorageItem("material", []),
+        generalInfo: [],
+        textInfo: [],
+        priceInfo: [],
+        pictureInfo: [],
+        inventoryInfo: [],
+        shippingInfo: [],
+        variantsInfo: [],
+        colorInfo: [],
+        sizeInfo: [],
+        styleInfo: [],
+        materialInfo: [],
         newProductAdded: false,
         newProductName: "",
         newProductsku: "",
@@ -33,11 +33,16 @@ export const useVendorProductStore = defineStore('vendor-product', {
         successDelete: false,
        
     }),
+     persist: {
+    enabled: true,
+    storage: persistedState.localStorage,
+   },
     getters: {
         getProducts: (state) => state.Products
     },
     actions: {
       async getAllProduct(page) {
+        const api = vendorUseApi()
         try {
           const response = await api({
             url: `vendor/products/?page=${page}`,
@@ -48,6 +53,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
           this.from = response.data.meta.from;
           this.toPage = response.data.meta.to;
           this.currentPage = response.data.meta.current_page;
+          return this.Products
         }catch(error) {
           console.error(error)
         }
@@ -55,6 +61,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
       async addVendorProduct(){
           this.loading = true;
           this.productError = ""
+          const api = vendorUseApi()
            try {
               const response = await api({
                 url: 'vendor/products',
@@ -136,6 +143,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
            }
         },
         async archiveProduct(product){
+          const api = vendorUseApi()
           const response = await api({
             url: `vendor/products/${product.id}`,
             method: "post",
@@ -147,6 +155,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
           return response 
         },
         async deleteProductPerm(product){
+          const api = vendorUseApi()
           const response = await api({
             url: `vendor/products/${product.id}/delete_perm`,
             method: "post",
@@ -158,6 +167,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
           return response 
         },
         async restoreArchived(product){
+          const api = vendorUseApi()
           const response = await api({
             url: `vendor/products/${product.id}/restore`,
             method: "post",
@@ -170,9 +180,9 @@ export const useVendorProductStore = defineStore('vendor-product', {
         },
         saveGeneralInfo(info) {
             this.generalInfo = info
-            setLocalStorageItem('general', this.generalInfo)
           },
           async handlephotoUpload(imagePreviews) {
+            const api = vendorUseApi()
             this.loading = true;
             try {
               const tempCloudinaryLinks = [];
@@ -231,43 +241,33 @@ export const useVendorProductStore = defineStore('vendor-product', {
           },                   
         saveTextInfo(info) {
             this.textInfo = info
-            setLocalStorageItem('text', this.textInfo)
           },
           savePriceInfo(info) {
             this.priceInfo = info
-            setLocalStorageItem('picture', this.pictureInfo)
           },
           savePictureInfo(info) {
             this.priceInfo= info
-            setLocalStorageItem('price', this.priceInfo)
           },
           saveInventoryInfo(info) {
             this.inventoryInfo= info
-            setLocalStorageItem('inventory', this.inventoryInfo)
           },
           saveShippingInfo(info) {
             this.shippingInfo = info
-            setLocalStorageItem('shipping', this.shippingInfo)
           },
           saveVariantsInfo(info) {
             this.variantsInfo = info
-            setLocalStorageItem('variant', this.variantsInfo)
           },
           saveColorOptions(info) {
             this.colorInfo = info
-            setLocalStorageItem('color', this.colorInfo)
           },
           saveSizeOptions(info) {
             this.sizeInfo = info;
-            setLocalStorageItem('size', this.sizeInfo)
           },
           saveStyleOptions(info) {
             this.styleInfo = info;
-            setLocalStorageItem('style', this.styleInfo)
           },
           saveMaterialOptions(info) {
             this.materialInfo = info;
-            setLocalStorageItem('material', this.materialInfo)
           }
 
     }

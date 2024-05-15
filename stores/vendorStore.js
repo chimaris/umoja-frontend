@@ -2,12 +2,11 @@
 import { defineStore } from 'pinia';
 import {vendorUseApi} from '~/composables/vendorApi'
 import axios from 'axios';
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
-const api = vendorUseApi()
+
 export const useVendorStore = defineStore('vendor', {
   state: () => ({
-    vendor: getLocalStorageItem("vendor", []),
+    vendor: [],
     vendorCleared: false,
     showRegistrationModal: false,
     loading: false,
@@ -15,27 +14,25 @@ export const useVendorStore = defineStore('vendor', {
     signupError: "",
     resendError: "",
     verifyError: "",
-    verified:  localStorage.getItem("verified") == "true",
+    verified:  "",
     error: "",
     vendorIsLoggedIn: false,
-    vendorEmail: localStorage.getItem("vendor-email", ""),
+    vendorEmail: "",
     vendorToken: null,
   }),
+  persist: {
+    enabled: true,
+    storage: persistedState.localStorage,
+  },
   getters: {
     getVendor: (state) => state.vendor,
     getVendorIsLoggedIn: (state) => state.vendorIsLoggedIn
   },
   actions: {
-    initializeStore() {
-      if (process.client) {
-        this.vendorToken = localStorage.getItem("vendorToken") || null;
-        this.vendorIsLoggedIn = !!this.vendorToken;
-       
-      }
-    },
  
     async signupVendor({first_name, last_name, email, password, password_confirmation, terms_accepted}){
       this.loading = true;
+      const api = vendorUseApi()
       try{
         const response = await api ({
           url: 'auth/register_vendor',
@@ -44,9 +41,8 @@ export const useVendorStore = defineStore('vendor', {
         });
         this.signupError = '';
         this.vendorEmail = email;
-        localStorage.setItem('vendor-email', this.vendorEmail)
         const {access_token} = response.data;
-        localStorage.setItem('vendorToken', access_token);
+        this.vendorToken = access_token
         return true
       }catch (error) {
         if (error.response) {
@@ -64,6 +60,7 @@ export const useVendorStore = defineStore('vendor', {
     async verifyVendor(otp){
       this.loading = true
       this.verifyError = ""
+      const api = vendorUseApi()
       try{
         const response = await api({
           url: 'auth/verify',
@@ -73,14 +70,11 @@ export const useVendorStore = defineStore('vendor', {
             verification_code: otp
           }
         });
-        localStorage.setItem("verified", "true");
         this.verified = true;
         this.vendorIsLoggedIn = true;
         this.verifyError = ""
         const id = response.data.user_id
         await this.getUser(id)
-        setLocalStorageItem('vendor', this.vendor)
-        console.log(response)
         return true
       }catch(error){
         if (error.response) {
@@ -97,6 +91,7 @@ export const useVendorStore = defineStore('vendor', {
     },
     async resendOtp(){
       this.resendError = ""
+      const api = vendorUseApi()
       try{
         await api({
           url: 'auth/resend_code',
@@ -118,6 +113,7 @@ export const useVendorStore = defineStore('vendor', {
     },
     async login({email, password}) {
       this.loading = true;
+      const api = vendorUseApi()
       try {
           const response = await api({
           url: 'auth/vendor_login', 
@@ -125,13 +121,10 @@ export const useVendorStore = defineStore('vendor', {
           data: { email, password}
         });
         const {access_token} = response.data;
-        localStorage.setItem('vendorToken', access_token);
-        localStorage.setItem("verified", "true");
-        this.verified = true;
-        this.vendorIsLoggedIn = true;
+        this.vendorToken = access_token
         const id = response.data.user_id
         await this.getUser(id)
-
+        this.verified = true;
         this.vendorIsLoggedIn = true;
         return true;
       } catch(error) {
@@ -147,19 +140,21 @@ export const useVendorStore = defineStore('vendor', {
         this.loading = false;
       }
     },
+
     async getUser(id){
+      const api = vendorUseApi()
       const profileResponse = await api ({
         url: `users/${id}`,
         method: 'get',
         headers: {
-          Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+          Authorization: `Bearer ${this.vendorToken}`
         }
       });
       this.vendor = profileResponse.data.data;
-      setLocalStorageItem('vendor', this.vendor)
-      return
+      return 
     },
     async socialLogin(provider){
+      const api = vendorUseApi()
       try{
         const response = await api ({
           url: `auth/${provider}/vendor/redirect`,
@@ -172,13 +167,13 @@ export const useVendorStore = defineStore('vendor', {
       }
     },
     async socialLoginCallBack(provider) {
+      const api = vendorUseApi()
       try {
         const response = await axios.get(`https://umoja-store.netlify.app/auth/${provider}/vendor/callback`) 
         const {access_token} = response.data;
-        localStorage.setItem('vendorToken', access_token);
+        this.vendorToken = access_token
         this.vendorIsLoggedIn = true
         this.verified = true;
-        localStorage.setItem('verified', "true")
         axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
         console.log(response)
         return true;
@@ -188,6 +183,7 @@ export const useVendorStore = defineStore('vendor', {
     },
     async forgotPassword(email) {
       this.loading = true;
+      const api = vendorUseApi()
       try {
         const response = await api({
           url: 'auth/forget_vendor_password', 
@@ -210,32 +206,25 @@ export const useVendorStore = defineStore('vendor', {
       } 
     },
     async registerVendor(data){
+      const api = vendorUseApi()
         const response = await api ({
           url: `vendor/setup/${this.vendor.id}`,
           method: 'POST',
           data: data,
           headers: {
-            Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
+            Authorization: `Bearer ${this.vendorToken}`
           }
         });
         
         return response
     },
-    async logout() {
-      try{
-        await api({
-        url: 'auth/logout',
-        method: 'post'
-        });
-        localStorage.removeItem('vendorToken')
+    logout() {
+        this.vendor = []
         this.vendorIsLoggedIn = false
-        localStorage.removeItem('verified')
-        this.verified = false
+        this.vendorEmail = ""
+        this.vendorToken = null
         return true
-      }catch(error){
-        console.error(error)
       }
-       
-    }
+
   }
 });

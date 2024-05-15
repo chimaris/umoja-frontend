@@ -1,14 +1,6 @@
 <template>
 	<div id="homepage" style="min-height: 100vh; width: 100%">
-		<v-img v-if="vendor.vendor_details?.profile_photo"
-			style="height: 185px; position: relative"
-			width="100%"
-			cover
-			class="d-flex bg-grey justify-end align-end"
-			:src="vendor.vendor_details?.profile_photo"
-		>
-		</v-img>
-		<v-img v-else
+		<v-img
 			style="height: 185px; position: relative"
 			width="auto"
 			cover
@@ -30,7 +22,12 @@
 							<v-sheet max-width="455" class="mx-auto" width="100%" style="padding-top: 20px">
 								<div class="text-center pa-4">
 									<v-avatar class="mx-auto"  size="100">
-										<v-img
+										<v-img v-if="vendor.vendor_details?.profile_photo"
+											class="bg-grey-lighten-3 rounded-xl"
+											:src="vendor.vendor_details?.profile_photo"
+										>
+										</v-img>
+										<v-img v-else
 											class="bg-grey-lighten-3 rounded-xl"
 											src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"
 										></v-img>
@@ -65,7 +62,7 @@
 									<v-avatar rounded="0" size="19"
 										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 									></v-avatar>
-									<p class="textClass px-4"><span v-if="vendor.vendor_details?.complex_building_address">{{ vendor.vendor_details?.complex_building_address }},</span> {{ vendor.vendor_details?.address }}, {{ vendor.vendor_details?.office_city }}, {{ vendor.vendor_details?.office_state }} {{ vendor.vendor_details?.office_country }}</p>
+									<p class="textClass px-4"> {{ vendor.vendor_details?.address }}, {{ vendor.vendor_details?.city }}, {{ vendor.vendor_details?.state }} {{ vendor.vendor_details?.country_name }}</p>
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="px-6 pt-8">
@@ -179,8 +176,10 @@ export default {
 			router.push('/vendor/dashboard/Profile Setup')
 		}
 		onMounted(async () => {
+
 			// await vendorStore.getUser(vendorStore.vendor.id)
-			vendor.value = vendorStore.vendor
+			vendor.value = vendorStore.getVendor
+			
 		})
 		return {
 			vendorStore,
