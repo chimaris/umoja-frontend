@@ -1,5 +1,5 @@
 <template>
 	<Header2 />
 	<Discoverypage />
-	<!-- <Mainfooter :showBaloon="true" /> -->
+	<Mainfooter :showBaloon="true" />
 </template>
