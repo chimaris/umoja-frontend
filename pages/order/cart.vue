@@ -30,7 +30,10 @@
 								<v-table class="mt-4" style="height: 80%; overflow: scroll">
 									<thead>
 										<tr style="border-radius: 6px" class="rounded-lg">
-											<th :style="{ width: $vuetify.display.mobile ? '130px' : '50px' }" class="font-weight-medium px-1 text-left d-flex align-bottom">
+											<th
+												:style="{ width: $vuetify.display.mobile ? '130px' : '50px' }"
+												class="font-weight-medium px-1 text-left d-flex align-bottom"
+											>
 												<v-checkbox color="green" @click="selectAllItems" v-model="selectAll" hide-details></v-checkbox>
 												<span class="mt-5">Select all</span>
 											</th>
