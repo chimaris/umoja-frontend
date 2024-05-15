@@ -5,7 +5,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
   if (!vendorStore.vendorIsLoggedIn || !vendorStore.verified) {
    return navigateTo('/vendor/login')
   }
-  if (!vendorStore.vendor.complete_setup){
+  if (vendorStore.vendor.complete_setup !== 1){
       if (to.path !== '/vendor/dashboard/Profile Setup'){
         return navigateTo('/vendor/dashboard/Profile Setup')
       }
