@@ -333,7 +333,7 @@
 
 		<div style="padding: 150px 0px" class="d-none d-md-block">
 			<v-carousel style="overflow: visible" height="429" class="promo" :show-arrows="false" hide-delimiter-background="" cycle>
-				<v-carousel-item v-for="n in 6">
+				<v-carousel-item v-for="n in 6" :key="n">
 					<v-row>
 						<v-col class="px-0" cols="12" md="6" lg="6">
 							<v-img

@@ -1,6 +1,6 @@
 <template>
 	<v-card>
-		<v-card-title class="headline">Umoja Marketplace Vendor Agreement</v-card-title>
+		<v-card-title class="headline text-wrap">Umoja Marketplace Vendor Agreement</v-card-title>
 
 		<v-card-text>
 			<p>

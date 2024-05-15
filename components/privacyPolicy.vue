@@ -1,6 +1,6 @@
 <template>
 	<v-card>
-		<v-card-title class="headline">Privacy Policy</v-card-title>
+		<v-card-title class="headline text-wrap">Privacy Policy</v-card-title>
 		<v-card-subtitle class="mb-3">Effective Date: 01.05.2024</v-card-subtitle>
 
 		<v-card-text>
