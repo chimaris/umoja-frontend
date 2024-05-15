@@ -27,7 +27,7 @@
 		"@date-io/dayjs": "^3.0.0",
 		"@nuxtjs/axios": "^5.13.6",
 		"@nuxtjs/toast": "^3.3.1",
-		"@pinia/nuxt": "^0.4.11",
+		"@pinia/nuxt": "^0.5.1",
 		"@popperjs/core": "^2.11.8",
 		"@tiptap/extension-link": "^2.0.3",
 		"@tiptap/extension-text-align": "^2.0.3",
