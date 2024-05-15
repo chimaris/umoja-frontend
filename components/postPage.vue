@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-row class="p-0">
+		<v-row class="pl-0 pr-0 ml-0 mr-0">
 			<v-col cols="12" md="6" class="py-0 px-0 mx-0" order="12" order-md="1">
 				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl1 + ')', height: $vuetify.display.mobile ? '203px' : '' }">
 					<div class="mx-auto text-center" :style="{ width: $vuetify.display.mobile ? '300px' : '418px' }">
