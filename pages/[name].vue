@@ -27,7 +27,7 @@
 	<product-row
 		:vendorlist="databank.vendor.items"
 		:category="select"
-		style="margin: 100px auto"
+		style="margin: 50px auto"
 		:vendor="true"
 		:maxwidth="'1200px'"
 		:showVendor="true"
