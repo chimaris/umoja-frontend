@@ -1,9 +1,9 @@
 <template>
 	<div style="position: relative">
 		<!-- {{ databank  }} -->
-		<div style="width: 100%; position: absolute; top: 40px" class="d-flex">
+		<div style="width: 100%; position: absolute; top: 40px" class="d-flex d-none d-md-block">
 			<img
-				class="rotimg"
+				class="rotimg d-none d-md-block"
 				style="z-index: -1; opacity: 0.1; left: 0; top: 90px"
 				height=""
 				width="366"
@@ -11,8 +11,27 @@
 				src="https://res.cloudinary.com/payhospi/image/upload/v1695370409/Frame_5_jyfv_two6l9.png"
 			/>
 			<img
-				class="rotimg"
+				class="rotimg d-none d-md-block"
 				style="z-index: -1; opacity: 0.1; position: absolute; right: 9%; top: 90px"
+				height=""
+				width="286"
+				contain
+				src="https://res.cloudinary.com/payhospi/image/upload/v1693848059/vector_xfq7us.png"
+			/>
+		</div>
+		<div style="width: 100%; position: absolute; top: 40px" class="d-flex d-block d-md-none">
+			<img
+				class="rotimg"
+				style="z-index: -1; opacity: 0.1; position: absolute; left: -55%; top: 90px"
+				height=""
+				width="366"
+				contain
+				src="https://res.cloudinary.com/payhospi/image/upload/v1695370409/Frame_5_jyfv_two6l9.png"
+			/>
+
+			<img
+				class="rotimg"
+				style="z-index: -1; opacity: 0.1; position: absolute; right: -40%; top: 390px"
 				height=""
 				width="286"
 				contain
@@ -87,6 +106,8 @@
 				</v-col>
 			</v-row>
 		</v-container>
+
+		<!-- Mobile view -->
 		<v-container style="max-width: 1200px; width: 100%" class="d-block d-md-none">
 			<v-row style="min-height: 756px; position: relative" class="py-12">
 				<v-col cols="12" md="4">
