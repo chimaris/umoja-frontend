@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-row class="p-0">
+		<v-row class="pl-0 pr-0 ml-0 mr-0">
 			<v-col cols="12" class="pl-0 pr-0 mx-0">
 				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl1 + ')' }"></div>
 			</v-col>
