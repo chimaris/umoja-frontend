@@ -18,14 +18,60 @@
 				</v-btn>
 			</div>
 		</div>
-		<div class="mb-6" v-for="n in 2" :key="n">
-			<v-sheet flat color="#FDF1ED" class="px-6 rounded-lg d-flex justify-space-between align-center mb-6 py-3">
+
+		<v-carousel
+			style="overflow: visible"
+			height="170"
+			class="promo promoshort d-block d-md-none"
+			:show-arrows="false"
+			hide-delimiter-background=""
+			cycle
+		>
+			<v-carousel-item v-for="n in 6" :key="n">
+				<v-img
+					cover
+					height="auto"
+					min-height="160px"
+					class="bg-black d-flex py-3 align-center rounded-lg"
+					src="https://res.cloudinary.com/payhospi/image/upload/v1715767704/umoja/vendo-slide-banner.png"
+				>
+					<div>
+						<v-row class="d-flex pa-4 px-4 justify-space-between align-center">
+							<v-col cols="9" sm="9">
+								<h1 style="line-height: 30px; font-size: 24px" class="mb-0 text-white font-weight-black">The Waden Cloth</h1>
+								<p style="line-height: 15px; font-size: 12px" class="textClass mb-4 text-white">known to be used by the Nawi people</p>
+								<div>
+									<v-btn flat to="/product_page" color="orange"><span class="smallBtn"> See product </span> </v-btn>
+									<v-btn flat variant="text" class="ml-2 text-white howit"
+										><span style="text-decoration: underline">
+											<span class="smallBtn"> Not now </span>
+										</span>
+									</v-btn>
+								</div>
+							</v-col>
+							<v-col class="d-flex justify-end" cols="3" sm="3"> </v-col>
+						</v-row>
+					</div>
+				</v-img>
+			</v-carousel-item>
+		</v-carousel>
+
+		<div class="mb-6 mt-14" v-for="n in 2" :key="n">
+			<v-sheet flat color="#FDF1ED" class="px-2 px-md-6 rounded-lg d-flex justify-space-between align-center mb-6 py-3">
 				<div class="d-flex align-center">
 					<v-icon icon="mdi mdi-sale" color="orange"></v-icon>
-					<p class="ml-2" style="font-weight: 600; font-size: 14px; line-height: 18px; color: #f38218">PROMO WITH 30% OFF</p>
+					<p
+						class="ml-2"
+						:style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px' }"
+						style="font-weight: 600; line-height: 18px; color: #f38218"
+					>
+						PROMO WITH 30% OFF
+					</p>
 				</div>
 				<div class="d-flex align-center">
-					<p style="font-weight: 400; font-size: 16px; line-height: 20px; color: #333333">Time Left</p>
+					<p :style="{ fontSize: $vuetify.display.mobile ? '14px' : '16px' }" style="font-weight: 400; line-height: 20px; color: #333333">
+						Time Left
+					</p>
 					<div class="d-flex align-center justify-space-between">
 						<vue-countdown
 							style="font-weight: 700; font-size: 40px"
@@ -33,7 +79,13 @@
 							:time="timediff"
 							v-slot="{ days, hours, minutes, seconds }"
 						>
-							<p style="font-weight: 600; font-size: 16px; line-height: 20px; color: #333333" class="ml-2">{{ hours }}:{{ minutes }}:{{ seconds }}</p>
+							<p
+								:style="{ fontSize: $vuetify.display.mobile ? '14px' : '16px' }"
+								style="font-weight: 600; line-height: 20px; color: #333333"
+								class="ml-2"
+							>
+								{{ hours }}:{{ minutes }}:{{ seconds }}
+							</p>
 						</vue-countdown>
 					</div>
 				</div>
