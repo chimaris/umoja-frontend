@@ -2,7 +2,12 @@
 	<v-sheet
 		:min-height="$vuetify.display.mobile ? 'auto' : '100vh'"
 		class="d-flex justify-center align-center"
-		style="overflow: hidden"
+		style="
+			overflow: hidden;
+			background-image: url('https://res.cloudinary.com/payhospi/image/upload/v1715747311/umoja/Isolation_Mode_kuks8l.png');
+			background-size: cover;
+			background-position: center;
+		"
 		color="#CDD6D4"
 	>
 		<div

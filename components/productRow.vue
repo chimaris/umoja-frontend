@@ -30,28 +30,12 @@
 		>
 			<div class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in items" :key="i">
 				<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
-				<product-component
-					:cover="coverbol"
-					:category="category"
-					v-else
-					:index="i"
-					:showVendor="showVendor"
-					:showdisco="showdisco"
-					:item="n"
-				/>
+				<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 			</div>
 
 			<div class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in items" :key="i">
 				<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
-				<product-component
-					:cover="coverbol"
-					:category="category"
-					v-else
-					:index="i"
-					:showVendor="showVendor"
-					:showdisco="showdisco"
-					:item="n"
-				/>
+				<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 			</div>
 		</div>
 		<!-- For mobile View -->
@@ -59,15 +43,7 @@
 			<v-row dense>
 				<v-col v-for="(n, i) in items" :key="i" cols="6" :md="6" :lg="3">
 					<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
-					<product-component
-						:cover="coverbol"
-						:category="category"
-						v-else
-						:index="i"
-						:showVendor="showVendor"
-						:showdisco="showdisco"
-						:item="n"
-					/>
+					<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 				</v-col>
 			</v-row>
 
