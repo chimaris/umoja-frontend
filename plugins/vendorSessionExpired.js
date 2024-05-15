@@ -3,8 +3,7 @@ import { useVendorStore } from '~/stores/vendorStore';
 
 export default defineNuxtPlugin(nuxtApp => {
     const vendorStore = useVendorStore();
-    vendorStore.initializeStore();
-
+    
 
     function handleSessionExpired() {
         localStorage.removeItem('vendorToken')

@@ -42,7 +42,7 @@
 									<v-carousel-item v-else :value="n" v-for="n in 4" :key="n" cover height="349px" :src="product.photo"> </v-carousel-item>
 								</v-carousel>
 								<v-row dense v-if="product.photo.includes(',')">
-									<v-col v-for="n in product.photo.split(',')" cols="3">
+									<v-col v-for="n in product.photo.split(',')"  cols="3">
 										<v-img
 											v-ripple="{ class: 'text-grey' }"
 											class="bg-grey-lighten-4 caroimg"
@@ -226,10 +226,13 @@
 							v-if="product.product_spec.includes(',')"
 							style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%"
 						>
-							<li v-for="(item, index) in product.product_spec.split(',')" :key="index">
+							<li v-for="(item, index) in displayedSpecs" :key="index" v-show="index < maxVisibleSpecs || showAllSpecs">
 								<span>{{ item }}</span>
 							</li>
 						</ul>
+						<button style="color: #2C6E63; font-size: 14px;" @click="toggleSpecs" v-if="product.product_spec.split(',').length > maxVisibleSpecs">
+						{{ showAllSpecs ? 'See Less' : 'See More' }}
+						</button>
 						<ul v-else style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
 							<li>
 								<span>{{ product.product_spec }}</span>
@@ -669,6 +672,8 @@ export default {
 				},
 			],
 			editor: null,
+			showAllSpecs: false,
+			maxVisibleSpecs: 6,
 			carousel: 0,
 			color: 0,
 			size: "",
@@ -717,8 +722,14 @@ export default {
 		cartStore() {
 			return useCartStore();
 		},
+		displayedSpecs() {
+		return this.product.product_spec.split(',');
+		},
 	},
 	methods: {
+		toggleSpecs() {
+		this.showAllSpecs = !this.showAllSpecs;
+		},
 		isInCart() {
 			const cartStore = useCartStore();
 			const index = cartStore.items.findIndex((item) => item.id == this.product.id);

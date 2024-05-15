@@ -2,10 +2,9 @@
 
 import { defineStore } from 'pinia';
 import axios from 'axios';
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 import { useApi } from '~/composables/useApi';
 
-const api = useApi()
+
 export const useUserStore = defineStore({
   id: 'user',
   state: () => ({
@@ -14,19 +13,18 @@ export const useUserStore = defineStore({
     loginError: '',
     signUpError: '',
     isLoggedIn: false,
-    token: null,
+    userToken: null,
   }),
+  persist: {
+    enabled: true,
+    storage: persistedState.localStorage,
+  },
   getters: {
     getIsLoggedIn: (state) => state.isLoggedIn
   },
   actions: {   
-    initializeStore() {
-      if (process.client) {
-        this.token = localStorage.getItem("token") || null;
-        this.isLoggedIn = !!this.token;
-      }
-    },
     async login({email, password}) {
+      const api = useApi()
       this.loading = true;
       try {
           const response = await api({
@@ -37,7 +35,7 @@ export const useUserStore = defineStore({
        
         this.loginError = '';
         const {access_token} = response.data;
-        localStorage.setItem('token', access_token)
+        this.userToken = access_token
         this.isLoggedIn = true;
         return true;
       } catch(error) {
@@ -55,6 +53,8 @@ export const useUserStore = defineStore({
     },
     async signup({first_name, last_name, email, password, password_confirmation, terms_accepted}) {
       this.loading = true;
+      this.signUpError = '';
+      const api = useApi()
       try {
         const response = await api({
           url: 'auth/register_customer', 
@@ -63,7 +63,8 @@ export const useUserStore = defineStore({
         });
         this.signUpError = '';
         const {access_token} = response.data;
-        localStorage.setItem('token', access_token);
+        this.userToken = access_token
+        this.isLoggedIn = true
         return true
       } catch (error) {
         if (error.response) {
@@ -80,6 +81,7 @@ export const useUserStore = defineStore({
     },
     async forgotPassword(email) {
       this.loading = true;
+      const api = useApi()
       try {
         const response = await api({
           url: 'auth/forget_customer_password', 
@@ -101,6 +103,7 @@ export const useUserStore = defineStore({
       } 
     },
     async socialLogin(provider) {
+      const api = useApi()
       try {
         const response = await api({
           url: `auth/${provider}/redirect`,
@@ -115,7 +118,7 @@ export const useUserStore = defineStore({
       try {
         const response = await axios.get(`https://umoja-store.netlify.app/auth/${provider}/callback`) 
         const {access_token} = response.data;
-        localStorage.setItem('token', access_token);
+        this.userToken = access_token
         this.isLoggedIn = true
         
         axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
@@ -131,7 +134,7 @@ export const useUserStore = defineStore({
           method: 'POST'
         });
         this.isLoggedIn = false,
-        localStorage.removeItem('token')
+        this.userToken = null
         return true
       }catch(error){
         console.error(error)

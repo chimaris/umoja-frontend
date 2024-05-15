@@ -339,7 +339,7 @@ import { debounce } from 'lodash';
 export default {
 	setup(props, ctx) {
 		const selectedPage = ref(1)
-
+		
 		const tabs = [
 				{ name: "All Products", prop: null, filterBy: null },
 				{ name: "Active", prop: "status", filterBy: 'active' },

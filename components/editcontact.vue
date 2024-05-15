@@ -1,7 +1,7 @@
 <template>
     <!-- Edit Contact Section -->
-    <v-sheet class="pt-8" max-width="550" width="100%" style="padding: 40px; margin: 0 auto; border-radius: 15px; margin-bottom: 20px">
-        <div style="background-color: #fff">
+    <v-sheet class="pt-8" max-width="550" width="100%" style=" margin: 0 auto; background-color: #f8f8f8;  margin-bottom: 20px">
+        <div style="background-color: #fff; padding: 40px; border-radius: 15px;">
             <v-avatar color="#EDF0FC" size="x-large">
                 <v-icon icon="mdi mdi-account-plus" color="#1273EB"></v-icon>
             </v-avatar>
@@ -45,8 +45,10 @@
                 </div>
             </div>
         </div>
+        <p style="color: red; font-size: 16px;" class="mb-4">{{ formError }}</p>
+        <v-btn @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
     </v-sheet>
-    <v-sheet max-width="550" width="100%" style="margin: auto; background-color: #f8f8f8">
+    <!-- <v-sheet max-width="550" width="100%" style="margin: auto; background-color: #f8f8f8">
         <div style="background-color: #fff; padding: 40px; border-radius: 15px; margin-bottom: 20px">
             <div class="d-flex align-center">
                 <v-avatar size="x-large" color="#EDF0FC" class="mr-4">
@@ -100,9 +102,8 @@
                 </div>
             </div>
         </div>
-        <p style="color: red; font-size: 16px;" class="mb-4">{{ formError }}</p>
-        <v-btn @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
-    </v-sheet>
+        
+    </v-sheet> -->
 
     <!-- View Contact Section -->
     <v-sheet max-width="550" width="100%" style="padding: 40px; margin: 25px auto 0; border-radius: 15px">
@@ -115,14 +116,14 @@
                 <p class="mb-1 contact-label">Phone Number</p>
                 <p :contenteditable="isEditing" class="mb-5 contact-value">{{ vendor.busniess_phone_number }}</p>
             </div>
-            <div class="mb-5">
+            <!-- <div class="mb-5">
                 <p class="mb-1 contact-label">Office Address</p>
                 <p :contenteditable="isEditing" class="d-flex flex-column contact-value">
                     <span>{{ vendor.office_address }}</span>
                     <span>{{ vendor.office_city }}, {{ vendor.office_state }}</span>
                     <span>{{ vendor.office_country }}</span>
                 </p>
-            </div>
+            </div> -->
             <div>
                 <div class="mb-4" v-for="(socialMedia, index) in socialMedia" :key="index">
                     <p  class="mb-2">
@@ -164,7 +165,6 @@ import { useVendorStore } from '~/stores/vendorStore';
             }else {
                 vendor.value = vendorStore.vendor.vendor_details
             }
-            console.log(socialMediaHandles, vendor.value.twitter_handle)
         })
 
 		const emit = defineEmits(['submit']);
@@ -211,11 +211,11 @@ const submit = async () => {
 		instagram_handle: socialMediaHandles.value[1],
 		facebook_handle: socialMediaHandles.value[2],
 		youtube_handle: socialMediaHandles.value[3],
-		office_country: vendor.value.office_country,
-		office_state: vendor.value.office_state,
-		office_city: vendor.value.office_city,
-		office_address: vendor.value.office_address,
-		complex_building_address: vendor.value.complex_building_address
+		// office_country: vendor.value.office_country,
+		// office_state: vendor.value.office_state,
+		// office_city: vendor.value.office_city,
+		// office_address: vendor.value.office_address,
+		// complex_building_address: vendor.value.complex_building_address
 	}
     try{
         formError.value = ""

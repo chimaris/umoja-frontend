@@ -1,10 +1,11 @@
 import axios from 'axios';
 import { useRouter } from 'vue-router';
+import { useVendorStore } from '~/stores/vendorStore';
 
-const router = useRouter()
 
 export const vendorUseApi = () => {
-    const token = localStorage.getItem('vendorToken') || null;
+    
+    const token = useVendorStore().vendorToken;
     const baseURL = 'https://umoja-production-9636.up.railway.app/api/';
 
     const instance = axios.create({

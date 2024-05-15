@@ -52,8 +52,10 @@
   </template>
   
   <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
+  import { useVendorStore } from '~/stores/vendorStore';
   
+  const vendorStore = useVendorStore()
   const formSect = ref(1);
   const stage = ref("About Business");
   const items = [
@@ -63,6 +65,7 @@
 	{ id: 4, name: "Account" },
 	{ id: 5, name: "Subscription" },
   ];
+
   
   function getDotColor(itemId) {
 	return itemId <= formSect.value ? '#00966D' : 'grey-lighten-2';

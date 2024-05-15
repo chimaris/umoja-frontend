@@ -153,9 +153,10 @@ const appStore = useAppStore();
 const vendorStore = useVendorStore();
 const vendor = ref([])
 
+
+
 onMounted(async () => {
-  // await vendorStore.getUser(vendorStore.vendor.id)
-			vendor.value = vendorStore.vendor
+			vendor.value = vendorStore.getVendor
 })
 
 return {

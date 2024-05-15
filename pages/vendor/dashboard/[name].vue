@@ -169,48 +169,32 @@ const edit = ref(true);
 const router = useRouter();
 const route = useRoute()
 const vendorStore  = useVendorStore();
-const vendor = vendorStore.getVendor;
 const vendorProducts = useVendorProductStore()
 const isSessionExpired = ref(false)
 
 const currentPage = ref(route.params.name ? route.params.name : "Homepage");
 
-// const handleSessionExpired = () => {
-//   isSessionExpired.value = true;
- 
-  
-// };
-// function reLogin () {
-// 	localStorage.removeItem('vendorToken');
-//  	 vendorStore.vendorIsLoggedIn = false;
-// 	router.push('/vendor/login');
-// 	isSessionExpired.value = false
-// }
-// window.addEventListener('sessionExpired', handleSessionExpired);
-// onUnmounted(() => {
-//       window.removeEventListener('sessionExpired', handleSessionExpired);
-//     });
+watch(() => route.params.name, (name) => {
+  currentPage.value = name;
+});
 
 const handleClick = () => {
       if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product') {
         // Update the currentPage value to 'Products' if it meets the condition, otherwise set it to 'Orders'
-        currentPage.value = 'Products';
 		router.push('/vendor/dashboard/Products')
+      
+		
       } else {
 		router.push('/vendor/dashboard/Orders')
-        currentPage.value = 'Orders';
       }
     };
 
 function changePage(n) {
-  router.push(`/vendor/dashboard/${n}`);
+  	router.push(`/vendor/dashboard/${n}`);
 }
 
 function sideFn() {
   sidebar.value = false;
 }
 
-// onMounted(() => {
-//   route.params.name = vendor.first_name
-//   })
 </script>
