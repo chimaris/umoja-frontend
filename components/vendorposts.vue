@@ -82,8 +82,9 @@
 		<v-dialog v-model="dialog" transition="dialog-bottom-transition" width="auto">
 			<v-card style="height: 70vh; overflow: hidden" max-width="700px" :min-width="$vuetify.display.mobile ? '90vw' : '60vw'" class="rounded-lg">
 				<v-row style="height: 70vh">
-					<v-col cols="12" class="px-0 py-0 d-none d-md-block" md="6">
+					<v-col cols="12" class="px-0 py-0 pb-0" md="6">
 						<v-img
+							class="pb-0"
 							cover
 							width="100%"
 							height="100%"
@@ -302,6 +303,9 @@
 .pts .v-rating__item .v-btn {
 	scale: 0.8;
 	margin-left: -16px;
+}
+.v-responsive__sizer {
+	padding-bottom: 0 !important;
 }
 </style>
 <script>
