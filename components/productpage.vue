@@ -233,7 +233,7 @@
 						<button style="color: #2C6E63; font-size: 14px;" @click="toggleSpecs" v-if="product.product_spec.split(',').length > maxVisibleSpecs">
 						{{ showAllSpecs ? 'See Less' : 'See More' }}
 						</button>
-						<ul v-else style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
+						<ul v-if="!product.product_spec.includes(',')" style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
 							<li>
 								<span>{{ product.product_spec }}</span>
 							</li>
