@@ -711,6 +711,7 @@ export default {
     ) {
 		const response =  await this.vendorProducts.addVendorProduct();
 		if (response) {
+			
 			this.vendorProducts.newProductAdded = true;
 			this.$router.push('/vendor/dashboard/Products');
 		}

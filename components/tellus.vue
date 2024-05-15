@@ -14,7 +14,7 @@
 			>
 			</v-select>
 		
-			<p class="inputLabel" >What type of company is (Business name)</p>
+			<p class="inputLabel" >What type of company is your Business Category</p>
 
 			<v-select
 				v-model="vendor.business_type"
@@ -128,6 +128,7 @@ onMounted(()=> {
 		vendor.value = []
 	}else {
 		vendor.value = vendorStore.vendor.vendor_details
+		console.log(vendorStore.getVendor)
 	}
 })
 

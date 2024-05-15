@@ -1,13 +1,12 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useApi } from '~/composables/useApi';
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 import { debounce } from 'lodash';
 
-const api = useApi()
+
 export const useProductStore = defineStore('productStore', {
   state: () => ({
-    recentSearches: getLocalStorageItem("recentSearches", []),
+    recentSearches: [],
     productFrom: "",
     allProducts: [],
     productTo: "",
@@ -27,6 +26,10 @@ export const useProductStore = defineStore('productStore', {
        // You can add more arrays based on your needs
     },
   }),
+  persist: {
+    enabled: true,
+    storage: persistedState.localStorage,
+  },
   actions: {
     filteredProducts() {
       let result = this.products.main
@@ -37,6 +40,7 @@ export const useProductStore = defineStore('productStore', {
       return result
     },
     search: debounce(async function() {
+      const api = useApi()
       
       if (this.searchTerm.trim()) {
         try{
@@ -77,11 +81,9 @@ export const useProductStore = defineStore('productStore', {
 				
 			}
 
-			setLocalStorageItem("recentSearches", this.recentSearches)
     	},
       clearSearchHistory() {
         this.recentSearches = [];
-        setLocalStorageItem("recentSearches", this.recentSearches)
       },
     async fetchProducts() {
       const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');

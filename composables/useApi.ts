@@ -1,8 +1,9 @@
 import axios from 'axios'
+import { useUserStore } from '~/stores/userStore';
 
 
 export const useApi = () => {
-    const token = localStorage.getItem('token') || null;
+    const token = useUserStore().userToken;
     const baseURL = 'https://umoja-production-9636.up.railway.app/api/';
 
     const instance = axios.create({

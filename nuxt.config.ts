@@ -19,8 +19,12 @@ export default defineNuxtConfig({
 		// ...
 		"@pinia/nuxt",
 		'maz-ui/nuxt',
-		'nuxt-mapbox'
+		'nuxt-mapbox',
+		'@pinia-plugin-persistedstate/nuxt',
 	],
+	piniaPersistedstate: {
+		storage: 'localStorage'
+	  },
 	runtimeConfig: {
 		public: {
 			stripePK: process.env.NUXT_ENV_STRIPE_PUBLIC_KEY

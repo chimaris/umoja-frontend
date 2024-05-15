@@ -4,7 +4,6 @@ import { useUserStore } from "~/stores/userStore";
 export default defineNuxtPlugin(nuxtApp => {
     const userStore = useUserStore();
 
-    userStore.initializeStore();
 
     function handleSessionExpired() {
         localStorage.removeItem('token');
