@@ -5,7 +5,7 @@
 			<v-avatar color="#EDF0FC" size="x-large">
 				<v-icon icon="mdi mdi-account-plus" color="#1273EB"></v-icon>
 			</v-avatar>
-			<h1 style="font-weight: 600; font-size: 32px; color: ##333333">Your business profile</h1>
+			<h1 style="font-weight: 600; font-size: 32px; color: #333333">Your business profile</h1>
 			<p style="font-weight: 500; font-size: 16px; line-height: 24px; color: #969696">Complete these simple steps to get your store up and running</p>
 
 			<div class="mt-10 mb-5">
