@@ -18,16 +18,16 @@
 	</div>
 
 	<fashionhero v-if="select == 'fashion'" :style="{ marginBottom: $vuetify.display.mobile ? '0' : '100px' }" />
-	<art v-else-if="select == 'art'" style="margin-bottom: 100px" />
-	<Decoration v-else-if="select == 'home decoration'" style="margin-bottom: 100px" />
-	<Cosmetics v-else-if="select == 'cosmetics'" style="margin-bottom: 100px" />
+	<art v-else-if="select == 'art'" :style="{ marginBottom: $vuetify.display.mobile ? '0' : '100px' }" />
+	<Decoration v-else-if="select == 'home decoration'" :style="{ marginBottom: $vuetify.display.mobile ? '0' : '100px' }" />
+	<Cosmetics v-else-if="select == 'cosmetics'" :style="{ marginBottom: $vuetify.display.mobile ? '0' : '100px' }" />
 
 	<shopmenu :showImg="showImg" :databank="databank" />
 
 	<product-row
 		:vendorlist="databank.vendor.items"
 		:category="select"
-		style="margin: 50px auto"
+		:style="{ margin: $vuetify.display.mobile ? '50px auto' : '100px auto' }"
 		:vendor="true"
 		:maxwidth="'1200px'"
 		:showVendor="true"
