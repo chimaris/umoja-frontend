@@ -73,7 +73,7 @@
 						Lorem ipsum dolor sit amet consectetur. Id et ornare tristique tempus egestas neque tincidunt lobortis. Integer arcu sit massa orci
 						phasellus ipsum tincidunt et amet.
 					</p>
-					<v-btn size="small" color="#1273EB" class="px-0" variant="text" @click="$router.push('/articleDetail')">
+					<v-btn size="small" color="#1273EB" class="px-0" variant="text" @click="$router.push('/article_detail')">
 						<span style="color: var(--deep-sky-blue-4, #1273eb); font-size: 14px; font-weight: 600"> Read more </span>
 						<v-icon size="small" class="ml-4" icon="mdi mdi-arrow-right"></v-icon
 					></v-btn>
