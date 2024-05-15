@@ -12,16 +12,16 @@
 				<v-sheet style="background-color: #edf0ef; border: 1px solid #2c6e63; padding: 24px; border-radius: 15px">
 					<div class="d-flex mb-2 justify-space-between">
 						<v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large" color="green">
-							<span style="font-size: 16.879px !important; font-weight: 500">Basic Plan</span></v-chip
+							<span style="font-size: 16.879px !important; font-weight: 500">Freemium Package</span></v-chip
 						>
 						<v-icon size="30" color="#2C6E63" icon="mdi mdi-check-circle"></v-icon>
 					</div>
 					<p style="color: #333; font-size: 40px; font-weight: 600">€ Free/Month</p>
 					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Our free plan has...</p>
 
-					<div v-for="n in 4" :key="n" class="mb-4 d-flex align-center">
+					<div v-for="n in freeFeatures" :key="n" class="mb-4 d-flex align-center">
 						<v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
-						<p style="color: #333; font-size: 14px; font-weight: 400">Lorem ipsum dolor sit amet consectetur.</p>
+						<p style="color: #333; font-size: 14px; font-weight: 400">{{n}}</p>
 					</div>
 				</v-sheet>
 
@@ -155,6 +155,14 @@
 	const emit = defineEmits(['submit']);
 	const router = useRouter()
 	const vendorStore = useVendorStore()
+	const freeFeatures = [
+		"Basic storefront on the Umoja platform to showcase products.",
+		"Access to essential inventory management & Order processing tools.",
+		"Advanced analytics and reporting for deeper insights into sales performance.",
+		"Standard customer support via email.",
+		"Sales Commission: 10% of each sale made through the platform.",
+		"Ideal for: Businesses and start-ups looking to test the platform and get started with minimal upfront costs."
+	]
 
 	const lineItems = [
 		{
