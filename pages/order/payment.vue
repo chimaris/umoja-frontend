@@ -217,7 +217,7 @@
 									{{ paymentProcessing ? "Adding" : "Add Payment Method" }}
 								</v-btn>
 								<v-btn
-									class="textClass px-8"
+									class="textClass px-1"
 									size="large"
 									@click="dialog = false"
 									:disabled="paymentProcessing"
@@ -269,7 +269,7 @@
 </template>
 <script>
 import { numRules, emailRules, phoneRules, inputRules } from "~/utils/formrules";
-import {ref } from "vue";
+import { ref } from "vue";
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from "~/utils/countryapi";
 import { useCartStore } from "~/stores/cartStore";
 import { loadStripe } from "@stripe/stripe-js";
