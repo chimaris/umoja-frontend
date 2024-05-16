@@ -112,7 +112,7 @@
 									</tbody>
 								</v-table>
 
-								<!-- Cart Card -->
+								<!-- Cart Card for Mobile view -->
 								<div class="d-block d-md-none">
 									<div class="d-flex align-center justify-start">
 										<div class="mr-4">
@@ -122,10 +122,10 @@
 									</div>
 									<div v-for="item in cartStore.items" :key="item.id" class="mt-3" style="border-bottom: 1px solid #ededed">
 										<div class="d-flex justify-space-between">
-											<div>
+											<div class="mr-2">
 												<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
 											</div>
-											<div>
+											<div class="mr-2">
 												<v-avatar color="grey-lighten-4" style="border-radius: 15px" class="" size="100">
 													<v-img
 														v-if="item.photo == null"
@@ -156,7 +156,7 @@
 										</div>
 
 										<div class="w-100 py-8 d-flex justify-space-between">
-											<v-btn @click="showConfirmModal(item.id)" color="#333" variant="text" class="red-hover"
+											<v-btn @click="showConfirmModal(item.id)" color="#333" variant="text" class="red-hover pl-0"
 												><span class="smallBtn"></span> <v-icon size="15" class="" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn
 											>
 											<div class="d-flex w-100 justify-end align-center">
