@@ -120,8 +120,6 @@ export const useUserStore = defineStore({
         const {access_token} = response.data;
         this.userToken = access_token
         this.isLoggedIn = true
-        
-        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
         return true;
       }catch(error) {
         console.error(error)
