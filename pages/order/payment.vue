@@ -269,11 +269,12 @@
 </template>
 <script>
 import { numRules, emailRules, phoneRules, inputRules } from "~/utils/formrules";
-import { watchEffect, ref } from "vue";
+import {ref } from "vue";
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from "~/utils/countryapi";
 import { useCartStore } from "~/stores/cartStore";
 import { loadStripe } from "@stripe/stripe-js";
 import { useApi } from "~/composables/useApi";
+import { usePaymentMethods, deletPaymentMethod } from "~/composables/usePayment";
 export default {
 	setup() {
 		definePageMeta({
@@ -378,7 +379,7 @@ export default {
 		};
 	},
 	async mounted() {
-		this.paymentMethods = await this.cartStore.getPaymentMethods();
+		this.paymentMethods = await usePaymentMethods();
 	},
 
 	computed: {
@@ -434,9 +435,9 @@ export default {
 			(this.deleteID = id), (this.showDeleteConfirmation = true);
 		},
 		async deleteMethod() {
-			const response = await this.cartStore.deletePaymentMethod(this.deleteID);
+			const response = await deletPaymentMethod(this.deleteID);
 			if (response) {
-				this.paymentMethods = await this.cartStore.getPaymentMethods();
+				this.paymentMethods = await usePaymentMethods();
 				this.showDeleteConfirmation = false;
 				this.deleteID = "";
 			}

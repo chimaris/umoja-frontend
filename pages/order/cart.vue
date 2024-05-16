@@ -271,7 +271,6 @@ function selectItem(id) {
 
 function handleCheckout() {
 	cartStore.checkoutProducts();
-	console.log(localStorage.getItem("token"));
 	if (cartStore.totalCheckoutItems !== 0) {
 		router.push("/order/checkout");
 	}

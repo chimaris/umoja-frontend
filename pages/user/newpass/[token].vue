@@ -22,7 +22,7 @@
 					Enter the email address associated with your account and we’ll send you a link to reset your password
 				</p>
 
-				<v-form ref="form" @submit.prevent="handleResetPassword()">
+				<v-form v-model="valid" @submit.prevent="handleResetPassword()">
 					<p class="inputLabel">Email Address</p>
 					<v-text-field placeholder="Enter your email address" density="comfortable" :rules="emailRules" v-model="email"></v-text-field>
 					<p class="inputLabel">New Password</p>
@@ -46,8 +46,8 @@
 						:rules="confirmpasswordRules"
 						v-model="c_password"
 					></v-text-field>
-					<p color="red">{{ error }}</p>
-					<v-btn type="submit" block color="green" flat size="x-large" class="rounded-lg mr-1 mt-6">
+					<p style="color: red;">{{ error }}</p>
+					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mr-1 mt-6">
 						<span class="mr-4" style="text-transform: none">Reset password</span>
 						<v-progress-circular v-if="loading" indeterminate :width="2" :size="25"></v-progress-circular>
 					</v-btn>
@@ -68,7 +68,7 @@
 					<v-card-actions class="d-flex justify-center align-center pt-10 w-100">
 						<v-btn
 							width="250"
-							to="/user/login"
+							@click="toLogin"
 							flat
 							style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px"
 							size="x-large"
@@ -87,7 +87,7 @@
 </template>
 <script setup>
 import { passwordRules, emailRules } from "~/utils/formrules";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { ref } from "@vue/composition-api";
 import { useApi } from "~/composables/useApi";
 import axios from "axios";
@@ -95,8 +95,10 @@ import axios from "axios";
 const confirmpasswordRules = [(v) => !!v || "Confirm Password is required", (v) => v === password.value || "Passwords do not match"];
 const api = useApi();
 const route = useRoute();
+const router = useRouter();
 const loading = ref(false);
 const error = ref("");
+const valid = ref(false)
 
 const showModal = ref(false);
 const visible = ref(false);
@@ -105,42 +107,44 @@ const password = ref("");
 const c_password = ref("");
 const email = ref("");
 
-async function handleResetPassword() {
-	const token = route.params.token;
-	if (email.value && password.value && c_password.value) {
-		try {
-			const resetPass = await resetPassWord({ token: token, email: email.value, password: password.value, password_confirmation: c_password.value });
-			if (resetPass) {
-				showModal.value = true;
-			}
-		} catch (error) {
-			console.error(error);
-		}
-	}
+function toLogin(){
+	showModal.value = false 
+	router.push('/user/login')
 }
 
-async function resetPassWord({ token, email, password, password_confirmation }) {
-	loading.value = true;
-	try {
-		const response = await axios.post("https://umoja-production-9636.up.railway.app/api/auth/reset_customer_password", {
-			token,
-			email,
-			password,
-			password_confirmation,
-		});
+
+async function handleResetPassword() {
+	const token = route.params.token;
+	if (valid){
+		loading.value = true;
 		error.value = "";
-		return true;
-	} catch (error) {
-		if (error.response) {
-			error.value = error.response.data.message || "An error occurred during set password request.";
-		} else if (error.request) {
-			error.value = "No response received from server. Please try again later.";
-		} else {
-			error.value = "An error occurred. Please try again later.";
-		}
-		return false;
-	} finally {
-		loading.value = false;
-	}
-}
+		try{
+			const response = await api ({
+			url: "auth/reset_customer_password",
+			method: "POST",
+			data: {
+				token: token,
+				email: email.value,
+				password: password.value,
+				password_confirmation: c_password.value
+			}});
+			showModal.value = true;
+			error.value = "";
+			return true;
+			}catch (error) {
+				if (error.response) {
+					error.value = error.response.data.error || "An error occurred during set password request.";
+				} else if (error.request) {
+					error.value = "No response received from server. Please try again later.";
+				} else {
+					error.value = "An error occurred. Please try again later.";
+				}
+				return false;
+			} finally {
+				loading.value = false;
+			}
+	
+	}}
+
+ 
 </script>

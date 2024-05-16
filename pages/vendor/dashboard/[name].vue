@@ -135,15 +135,14 @@
 		</v-row>
 	</div>
 	<tutorial />
-	<v-dialog v-model="isSessionExpired" max-width="400" persistent>
-	<v-card>
-		<v-card-title class="text-h5">Session Expired</v-card-title>
-		<v-card-text>Your login session has expired. Please login again.</v-card-text>
-		<v-card-actions>
-		<v-spacer></v-spacer>
-		<v-btn @click="reLogin" class="bg-green" color="white rounded-lg" text >Login</v-btn>
-		</v-card-actions>
-	</v-card>
+	<v-dialog v-model="showModal" persistent max-width="600">
+		<v-card>
+			<v-card-text>Please use a desktop computer to access the vendor dashboard for the best experience.</v-card-text>
+			<v-card-actions>
+				<v-spacer></v-spacer>
+				<v-btn @click="showModal = false">OK</v-btn>
+			</v-card-actions>
+		</v-card>
 	</v-dialog>
 </template>
 <style>
@@ -158,7 +157,7 @@ middleware: "vendor-auth"
 })
 
 
-import { ref, computed, onMounted,  onBeforeMount } from 'vue';
+import { ref, onBeforeUnmount, onMounted,  } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
@@ -171,13 +170,29 @@ const route = useRoute()
 const vendorStore  = useVendorStore();
 const vendorProducts = useVendorProductStore()
 const isSessionExpired = ref(false)
+const showModal = ref(true)
 
 const currentPage = ref(route.params.name ? route.params.name : "Homepage");
 
 watch(() => route.params.name, (name) => {
   currentPage.value = name;
 });
+watch(() => window.innerWidth, () => {
+ checkScreenSize()
+});
+onMounted(() => {
+	checkScreenSize()
+	window.addEventListener('resize', checkScreenSize);
+});
 
+onBeforeUnmount(() => {
+	window.removeEventListener('resize', checkScreenSize)
+})
+
+
+function checkScreenSize(){
+	showModal.value = window.innerWidth < 1024;
+}
 const handleClick = () => {
       if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product') {
         // Update the currentPage value to 'Products' if it meets the condition, otherwise set it to 'Orders'

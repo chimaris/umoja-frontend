@@ -1,6 +1,6 @@
+import { defineNuxtPlugin } from '#app'
+import { compressImage } from 'image-conversion'
 
-
-import Vue from 'vue';
-import { compressImage } from 'image-conversion';
-
-Vue.prototype.$compressImage = compressImage;
+export default defineNuxtPlugin(nuxtApp => {
+  nuxtApp.vueApp.config.globalProperties.$compressImage = compressImage
+})
