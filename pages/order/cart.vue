@@ -27,13 +27,13 @@
 								</v-card>
 							</v-dialog>
 							<v-sheet>
-								<v-table class="mt-4" style="height: 80%; overflow: scroll">
+								<v-table class="mt-4 d-none d-md-block" style="height: 80%; overflow: scroll">
 									<thead>
 										<tr style="border-radius: 6px" class="rounded-lg">
 											<th style="width: 50px" class="font-weight-medium px-1 text-left">
 												<v-checkbox color="green" @click="selectAllItems" v-model="selectAll" hide-details></v-checkbox>
 											</th>
-											<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left pl-10 pl-md-0">Select all</th>
+											<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left pl-md-0">Select all</th>
 											<th style="font-size: 14px" class="text-center px-1 font-weight-medium">Quantity</th>
 
 											<th style="font-size: 14px" class="text-right px-1 font-weight-medium">Price</th>
@@ -111,6 +111,77 @@
 										</template>
 									</tbody>
 								</v-table>
+
+								<!-- Cart Card -->
+								<div class="d-block d-md-none">
+									<div class="d-flex align-center justify-start">
+										<div class="mr-4">
+											<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
+										</div>
+										<span style="font-size: 14px; width: 100px" class="font-weight-medium">Select all</span>
+									</div>
+									<div v-for="item in cartStore.items" :key="item.id" class="mt-3" style="border-bottom: 1px solid #ededed">
+										<div class="d-flex justify-space-between">
+											<div>
+												<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
+											</div>
+											<div>
+												<v-avatar color="grey-lighten-4" style="border-radius: 15px" class="" size="100">
+													<v-img
+														v-if="item.photo == null"
+														cover
+														src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"
+													></v-img>
+													<v-img v-else-if="item.photo.includes(',')" cover :src="item.photo.split(',')[0]"></v-img>
+													<v-img v-else cover :src="item.photo"></v-img>
+												</v-avatar>
+											</div>
+
+											<div>
+												<p class="mb-1" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">
+													{{ item.name }}
+												</p>
+												<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate mb-1">
+													Category:{{ item.category_name }}
+												</p>
+												<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate mb-1">
+													Location: {{ item.vendor_state }}, {{ item.vendor_country }}
+												</p>
+												<v-chip size="x-small" color="green" style="font-weight: 500" class="mt-1" rounded="lg">IN STOCK</v-chip>
+
+												<p class="mt-4" style="color: #333; font-size: 16px; font-style: normal; font-weight: 600">
+													{{ formattedPrice(item.price * item.quantity) }}
+												</p>
+											</div>
+										</div>
+
+										<div class="w-100 py-8 d-flex justify-space-between">
+											<v-btn @click="showConfirmModal(item.id)" color="#333" variant="text" class="red-hover"
+												><span class="smallBtn"></span> <v-icon size="15" class="" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn
+											>
+											<div class="d-flex w-100 justify-end align-center">
+												<v-btn-group border width="122" rounded="lg" divided density="compact">
+													<v-btn
+														class="dark-hover"
+														rounded="0"
+														:disabled="cartStore.getItemQuantity(item.id) <= 1"
+														@click="cartStore.reduceItem(item.id)"
+													>
+														<v-icon icon="mdi mdi-minus "></v-icon>
+													</v-btn>
+
+													<v-btn :ripple="false" rounded="0">
+														{{ cartStore.getItemQuantity(item.id) }}
+													</v-btn>
+													<v-btn class="green-hover" rounded="0" @click="cartStore.addItem(item)">
+														<v-icon icon="mdi mdi-plus"></v-icon>
+													</v-btn>
+												</v-btn-group>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<v-dialog v-model="isModalVisible" persistent max-width="400">
 									<v-card>
 										<v-card-title style="font-size: 14px; font-weight: 600">Are you sure you want to remove item ?</v-card-title>
