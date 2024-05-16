@@ -38,7 +38,7 @@ letter-spacing: -0.14px;
     placeholder="Select country" 
     :items="allCountries" 
     :rules="inputRules"
-    @change="fetchStates(shippingCountry)"
+    @input="fetchStates(shippingCountry)"
     density="compact" class="mt-4" 
     variant="outlined"  >
 </v-select>
@@ -46,7 +46,7 @@ letter-spacing: -0.14px;
 <v-divider class="my-8"></v-divider>
 <h1 class="chkt">Shipping Address</h1>
 <template v-if="cartStore.shippingAdress.length > 0">
-    <template v-for="(item, index) in cartStore.shippingAdress" :key="index">
+    <template v-for="(item, index) in shippingAddress " :key="index">
         <v-card flat class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" >
        <div  class=" align-center d-flex">
         <input type="radio" :id="'address_' + index" :value="item.id" v-model="selectedAddress" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">
@@ -129,7 +129,7 @@ letter-spacing: -0.14px;
                 </v-select>
             </v-col>
         </v-row>   
-        <p style="color: red; font-size: 16px;">{{cartStore.addressError}}</p>   
+        <p style="color: red; font-size: 16px;">{{addressError}}</p>   
         <p class="inputLabel">Postal code<span class="mb-2">*</span></p>             
         <v-text-field v-model="item.shipping_postal_code" placeholder="Enter your zipcode" density="comfortable"  >
         </v-text-field>             
@@ -218,7 +218,7 @@ letter-spacing: -0.14px;
     <p class="inputLabel">Postal code<span class="mb-2">*</span></p>             
     <v-text-field v-model="postalCode" placeholder="Enter your zipcode" density="comfortable"  >
     </v-text-field>  
-    <p style="color: red; font-size: 16px;">{{cartStore.addressError}}</p>           
+    <p style="color: red; font-size: 16px;">{{addressError}}</p>           
     <v-btn type="submit" class="textClass px-8" rounded="xl" color="green"  flat>
         
         <span class="mr-4"> Use this address</span>
@@ -257,10 +257,10 @@ letter-spacing: -0.14px;
 import { useCartStore } from '~/stores/cartStore';
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi';
 import {emailRules, inputRules, phoneRules} from '~/utils/formrules'
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
-import {watchEffect, ref, onMounted} from 'vue';
+import {ref, onMounted} from 'vue';
 import {formattedPrice} from '~/utils/price';
 import { useRouter } from 'vue-router';
+import {fetchShippingAdress, updateShippingAddress, createShippingAddress,addressError, shippingMethods } from '~/composables/useShippingAddress'
 
 
 export default {
@@ -274,7 +274,8 @@ setup() {
     const shippingCity = ref("")
     const shippingCountry = ref("")
     const shippingTypes = ref();
-    const router = useRouter()
+    const router = useRouter();
+    const shippingAddress = ref([]);
 
    
     watch(() => shippingCountry.value, () => {
@@ -285,9 +286,8 @@ setup() {
 			fetchCities(shippingCountry.value, shippingState.value);
 	});
     onMounted(async () => {
-        const response = await cartStore.shippingMethods();
-        shippingTypes.value = response.data.data;
-        await cartStore.fetchShippingAdress();
+        shippingTypes.value = await shippingMethods();
+        shippingAddress.value = await fetchShippingAdress();
         
     });
 
@@ -306,12 +306,12 @@ setup() {
         shippingCity,
         shippingState,
         shippingTypes,
-        router
+        router,
+        shippingAddress 
     }
 },
   data() {
     return {
-        addressError: "",
         cartError: "",
         selectedAddress: null,
         selectedShippingValue: "",
@@ -322,7 +322,6 @@ setup() {
         streetName: "",
         postalCode: "",
         confirmationEmail: "",
-        shippingAddress: getLocalStorageItem('shippingAddresses', []),
         addAddress: false,
         placescards:false,
         mods:1,
@@ -448,10 +447,10 @@ buttons(){
         ) {
             return
         }
-        const response = await this.cartStore.updateShippingAddress(address);
+        const response = await updateShippingAddress(address);
         if (response){
             this.editAddressIndex = null;
-            await this.cartStore.fetchShippingAdress();
+            this.shippingAddress =  await fetchShippingAdress();
 
         }
     },
@@ -478,9 +477,9 @@ buttons(){
                     shipping_country: this.shippingCountry,
                     shipping_postal_code: this.postalCode
                 }
-            const response = await this.cartStore.createShippingAddress(data);
+            const response = await createShippingAddress(data);
             if (response) {
-                await this.cartStore.fetchShippingAdress();
+                this.shippingAddress = await fetchShippingAdress();
                 this.addAddress = false;
             }
 

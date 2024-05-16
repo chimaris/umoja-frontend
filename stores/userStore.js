@@ -127,20 +127,10 @@ export const useUserStore = defineStore({
         console.error(error)
       }
     },
-    async logout() {
-      try{
-        await api({
-          url: 'auth/logout',
-          method: 'POST'
-        });
+    logout() {
         this.isLoggedIn = false,
         this.userToken = null
-        return true
-      }catch(error){
-        console.error(error)
-        return false
-      }
-      
+        return true 
     }
   }
 });

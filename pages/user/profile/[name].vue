@@ -129,6 +129,11 @@
 import { useUserStore } from "~/stores/userStore";
 
 export default {
+	setup(){
+		definePageMeta({
+			middleware: ["auth"],
+		});
+	},
 	data() {
 		return {
 			selected: "Account Settings",
@@ -261,8 +266,8 @@ export default {
 			this.selected = n;
 			this.$router.push(`/user/profile/${n}`);
 		},
-		async logoutUser() {
-			const response = await this.userStore.logout();
+	 	logoutUser() {
+			const response = this.userStore.logout();
 			if (response){
 				this.$router.push("/user/login");
 			}

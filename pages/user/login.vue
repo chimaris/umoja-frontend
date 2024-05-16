@@ -138,20 +138,16 @@ export default {
 	methods: {
 		async handleLogin() {
 			if (this.valid) {
-				try {
 					const isLoggedIn = await this.userStore.login({ email: this.email, password: this.password });
 					if (isLoggedIn) {
 						this.$router.push("/home2");
 						this.userStore.loginError = "";
-						email.value = "";
-						password.value = "";
+						this.email = "";
+						this.password = "";
 					} else {
 						// Show error message
 						console.error("Login failed");
 					}
-				} catch (error) {
-					console.error("An error occurred during login:", error);
-				}
 			}
 		},
 
