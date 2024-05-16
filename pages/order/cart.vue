@@ -30,17 +30,13 @@
 								<v-table class="mt-4" style="height: 80%; overflow: scroll">
 									<thead>
 										<tr style="border-radius: 6px" class="rounded-lg">
-											<th
-												:style="{ width: $vuetify.display.mobile ? '130px' : '50px' }"
-												class="font-weight-medium px-1 text-left d-flex align-bottom"
-											>
-												<v-checkbox color="green" @click="selectAllItems" v-model="selectAll" hide-details></v-checkbox>
-												<span class="mt-5">Select all</span>
+											<th style="width: 50px" class="font-weight-medium px-1 text-left">
+												<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
 											</th>
-											<!-- <th style="font-size: 14px; width: 100px" class="font-weight-medium text-left">Select all</th> -->
-											<th style="font-size: 14px" class="text-center px-1 font-weight-medium d-none d-md-block">Quantity</th>
+											<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left pl-10 pl-md-0">Select all</th>
+											<th style="font-size: 14px" class="text-center px-1 font-weight-medium">Quantity</th>
 
-											<th style="font-size: 14px" class="text-right px-1 font-weight-medium d-none d-md-block">Price</th>
+											<th style="font-size: 14px" class="text-right px-1 font-weight-medium">Price</th>
 										</tr>
 									</thead>
 
@@ -51,7 +47,7 @@
 												<td class="text-grey-lighten-1 pl-1">
 													<v-checkbox color="green" v-model="item.selected" @click="selectItem(item.id)" hide-details></v-checkbox>
 												</td>
-												<td style="position: relative; font-size: 14px; height: 100px">
+												<td style="position: relative; font-size: 14px; height: 100px" class="pl-5 pl-md-0">
 													<div style="position: ; top: 24px; width: ">
 														<div v-bind="props" class="d-flex align-start pr-4 pl-1">
 															<v-avatar color="grey-lighten-4" style="border-radius: 15px" class="mr-3 ml-0" size="100">
@@ -107,7 +103,7 @@
 												</td>
 
 												<td class="tableLight text-right px-1">
-													<p style="color: #333; font-size: 16px; font-style: normal; font-weight: 600">
+													<p class="mb-10" style="color: #333; font-size: 16px; font-style: normal; font-weight: 600">
 														{{ formattedPrice(item.price * item.quantity) }}
 													</p>
 												</td>
