@@ -45,8 +45,8 @@ letter-spacing: -0.14px;
         
 <v-divider class="my-8"></v-divider>
 <h1 class="chkt">Shipping Address</h1>
-<template v-if="cartStore.shippingAdress.length > 0">
-    <template v-for="(item, index) in shippingAddress " :key="index">
+<template v-if="shippingAddress.length > 0">
+    <template v-for="(item, index) in shippingAddress" :key="index">
         <v-card flat class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex" >
        <div  class=" align-center d-flex">
         <input type="radio" :id="'address_' + index" :value="item.id" v-model="selectedAddress" class="mr-2" style="accent-color: #2C6E63; transform: scale(2);">

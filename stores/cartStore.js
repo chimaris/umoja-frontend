@@ -13,7 +13,6 @@ export const useCartStore = defineStore('cart', {
     addressError: "",
     billingError: "",
     loading: false,
-    shippingAdress: [],
     discountError: "",
     updateLoading: false,
     load: false,
