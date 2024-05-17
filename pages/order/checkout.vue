@@ -487,17 +487,18 @@ export default {
 				if (response) {
 					this.shippingAddress = await fetchShippingAdress();
 					this.addAddress = false;
+					
+					this.fullName = "";
+					this.email = "";
+					this.confirmationEmail = "";
+					this.phoneNumber = "";
+					this.streetName = "";
+					this.shippingState = "";
+					this.shippingCity = "";
+					this.postalCode = "";
+					this.shippingCountry = "";
 				}
 
-				this.fullName = "";
-				this.email = "";
-				this.confirmationEmail = "";
-				this.phoneNumber = "";
-				this.streetName = "";
-				this.shippingState = "";
-				this.shippingCity = "";
-				this.postalCode = "";
-				this.shippingCountry = "";
 			}
 		},
 		filt(text) {

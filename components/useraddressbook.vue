@@ -129,7 +129,8 @@ font-weight: 600;">Add New Address</p>
                 <v-text-field v-model="zipcode" placeholder="Enter your zipcode" density="comfortable"  >
                 </v-text-field> 
             </v-col>
-         </v-row>               
+         </v-row>   
+         <p style="color: red; font-size: 16px">{{ addressError }}</p>            
          <v-btn class="textClass px-8" rounded="xl" type="submit" :disabled="!valid" color="green"  flat>Use this address</v-btn>          
          <v-btn @click="dialog=false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>   
     </v-form>       
@@ -294,15 +295,17 @@ watch(() => shippingCountry.value, () => {
         if (response) {
             shippingAddress.value = await fetchShippingAdress()
             dialog.value = false
-        }
-        fullName.value = ""
-        email.value = ""
-        phoneNumber.value = ""
-        streetName.value = ""
-        shippingState.value = ""
-        shippingCity.value = ""
-        shippingCountry.value = ""
-        zipcode.value = ""
+
+            fullName.value = ""
+            email.value = ""
+            phoneNumber.value = ""
+            streetName.value = ""
+            shippingState.value = ""
+            shippingCity.value = ""
+            shippingCountry.value = ""
+            zipcode.value = ""
+            }
+   
     }
   }
   async function updateAddress() {
