@@ -140,7 +140,7 @@
 					>
 				</div>
 				<v-divider></v-divider>
-				<div style="padding: 50px 90px 90px">
+				<div :style="{ padding: $vuetify.display.mobile ? '20px 20px' : '50px 90px 90px' }">
 					<v-card class="" flat>
 						<div style="" class="pb-8">
 							<div class="d-flex mb-4 align-center">
@@ -149,7 +149,9 @@
 									<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>April 17, 2023
 								</p>
 							</div>
-							<h1 style="font-weight: 700; font-size: 40px; color: #333333">Ankara Beauty Essentials: Elevate Your Style with Confidence</h1>
+							<h1 :style="{ fontSize: $vuetify.display.mobile ? '28px' : '40px' }" style="font-weight: 700; color: #333333">
+								Ankara Beauty Essentials: Elevate Your Style with Confidence
+							</h1>
 
 							<div>
 								<div>
@@ -171,7 +173,7 @@
 						></v-img>
 
 						<div>
-							<h1 class="my-8">What does this mean for fintechs?</h1>
+							<h1 :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" class="my-8">What does this mean for fintechs?</h1>
 							<p>
 								NIP commoditises digital money movement and levels the playing field for all operators. MTN’s MoMo PSB will have to rely on more than
 								just person-to-person transfers to differentiate itself in the market, especially for already banked users.
@@ -181,7 +183,9 @@
 								2020 agent banking survey, First Bank’s First Monie was the leading agency banking provider with 37% of all active agents in the
 								country. Other bank players like Access Bank, Zenith Bank, and GTB were not far behind.
 							</p>
-							<h2 class="my-8">Competition and collaboration in the financial industry</h2>
+							<h2 :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" class="my-8">
+								Competition and collaboration in the financial industry
+							</h2>
 							<p>
 								The banks have also invested considerably in expanding their digital reach through mobile banking apps and USSD (usually in a delicate
 								partnership with telcos). Today, millions of Nigerian customers and businesses are able to make payments, obtain cards, and apply for
@@ -194,7 +198,7 @@
 								growth. This aggressive growth expands to offline services as well: in 2021, OPay had the second most registered agents, and non-banks
 								made up 50% of the top 10 agency banking providers, according to the EfInA agent banking survey.
 							</p>
-							<h2 class="my-8">Services and competition in the fintech landscape</h2>
+							<h2 :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" class="my-8">Services and competition in the fintech landscape</h2>
 							<p>
 								The services provided by these disrupting fintechs vary widely, including some services that payment service banks are not allowed to
 								offer: payments, savings, lending, insurance, remittance, investments, micro-pensions, and more. Beyond the breadth of services, users
@@ -206,7 +210,7 @@
 								MTN should also expect competition from other telcos as well. Airtel, which launched SmartCash PSB on the same day as MTN’s MoMo’s
 								PSB, also has a sizable base of customers and experience with mobile money in its other African and Asian markets.
 							</p>
-							<h2 class="my-8">Opportunities and net positive impact</h2>
+							<h2 :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" class="my-8">Opportunities and net positive impact</h2>
 							<p>Despite very strong advantages, MTN should expect a very different financial landscape compared to its other African markets.</p>
 							<p>
 								In the weeks before MTN commenced operations of MoMo PSB, there were mixed reactions across the financial ecosystem. Some fintech

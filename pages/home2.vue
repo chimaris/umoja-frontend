@@ -330,7 +330,6 @@
 	</div>
 	<div>
 		<product-row :cover="false" :maxwidth="'1200px'" :items="productStore.products.hotDeals" :showVendor="true" title=" 🔥 Hot Deals " />
-
 		<div style="padding: 150px 0px" class="d-none d-md-block">
 			<v-carousel style="overflow: visible" height="429" class="promo" :show-arrows="false" hide-delimiter-background="" cycle>
 				<v-carousel-item v-for="n in 6" :key="n">

@@ -78,7 +78,7 @@
 		</v-img>
 		<div
 			@click="$router.push('/vendor_page')"
-			class="mt-2"
+			class="mt-2 d-block d-md-none"
 			:style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px', fontWeight: $vuetify.display.mobile ? 500 : 600 }"
 			style="cursor: pointer; color: #1e1e1e; letter-spacing: -0.14px"
 		>
@@ -90,12 +90,12 @@
 		</div>
 		<p
 			@click="$router.push(`/product_page/${item.id}`)"
-			style="font-weight: 600; font-size: 14px; min-height: 36px; line-height: 18px; cursor: pointer; color: #000000"
+			style="font-weight: 600; font-size: 14px; line-height: 18px; cursor: pointer; color: #000000"
 			class="mt-1 text-wrap"
 		>
 			{{ filt(item.name) }}
 		</p>
-		<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">
+		<p class="mt-1" style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000">
 			{{ item.category_name }}
 		</p>
 		<p style="font-weight: 600; font-size: 10px; line-height: 10px; color: #000000" class="d-flex mb-1 pb-0 pt-1 align-center">
@@ -111,16 +111,18 @@
 			style="font-size: 10px; font-weight: 500; border-radius: 6px; letter-spacing: 0.5px"
 			>FREE DELIVERY</v-chip
 		>
-		<!-- <div v-if="vendorShow" class="d-none d-md-block">
+		<div v-if="vendorShow" class="d-none d-md-block">
 			<div class="d-flex mt-2">
 				<v-avatar size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img></v-avatar>
 				<div style="cursor: pointer" @click="$router.push('/vendor_page')" class="ml-2">
-					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">Genevieve Obukeme</p>
+					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
+						{{ item.vendor_firstname }} {{ item.vendor_lastname }}
+					</p>
 					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">Accra, Ghana🇬🇭</p>
 				</div>
 			</div>
-			<v-divider color="#a4a4a4" class="my-4"></v-divider>
-		</div> -->
+			<v-divider color="#a4a4a4" class="mt-4"></v-divider>
+		</div>
 		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
 			<div :class="showdisco ? 'mt-0' : 'mt-3'">
 				<h1 :style="{ fontSize: $vuetify.display.mobile ? '14px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">
