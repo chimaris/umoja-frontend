@@ -505,7 +505,7 @@ export default {
 						method: "POST",
 						data: data,
 					});
-					this.paymentMethods = await this.cartStore.getPaymentMethods();
+					this.paymentMethods = await usePaymentMethods();
 				} catch (error) {
 					if (error.response) {
 						this.paymentError = error.response.data.message || "An error occurred while adding payment method.";

@@ -20,16 +20,16 @@
 
     async function loginUser() {
         const provider  = route.params.provider;
+         const code = route.query.code;
         try {
-            const response = await userStore.socialLoginCallBack(provider);
+            const response = await userStore.socialLoginCallBack(provider, code);
             if (response) {
                 router.push('/home2')
-                console.log(response)
             } 
         }catch(error) {
             console.error("Error during Login", error)
         }
-        const code = route.query.code;
+       
     }
 
     onMounted(async () => {
