@@ -7,7 +7,6 @@
 			<v-select
 				v-model="vendor.rep_country"
 				:items="allCountries"
-				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select African Country"
 				density="comfortable"
 				:rules="inputRules"
@@ -18,7 +17,6 @@
 
 			<v-select
 				v-model="vendor.business_type"
-				append-inner-icon="mdi mdi-chevron-down"
 				:items="companyCategories"
 				placeholder="Select"
 				density="comfortable"
