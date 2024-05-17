@@ -200,7 +200,6 @@ function isFormValid() {
 		vendor.value.rep_country &&
 		vendor.value.business_type &&
 		vendor.value.business_name&&
-		vendor.value.business_website &&
 		vendor.value.address && 
 		vendor.value.city &&
 		vendor.value.state &&
