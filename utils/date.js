@@ -8,6 +8,24 @@ export function formatDate() {
     return `${month} ${day}, ${year}`;
   }
 
+export const getdateRegistered = (dateCreated) =>  {
+  const dateString = dateCreated;
+  const date = new Date(dateString)
+
+  const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  const month = months[date.getMonth()];
+  const day = date.getDate();
+  const year = date.getFullYear();
+
+    return `${month} ${day}, ${year}`;
+}
+export const calculateAge = (birthDate) => {
+  const currentDate = new Date();
+  const birthDateObj = new Date(birthDate);
+  const ageInMilliseconds = currentDate - birthDateObj;
+  const ageInYears = ageInMilliseconds / (365 * 24 * 60 * 60 * 1000);
+  return Math.floor(ageInYears);
+}
 export function getCurrentTransactionDate() {
       const currentDate = new Date();
       

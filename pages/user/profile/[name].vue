@@ -39,7 +39,7 @@
 							></v-btn>
 						</v-avatar>
 						<div class="pt-4">
-							<p style="font-size: 24px; font-weight: 600">Nweke Franklin O.</p>
+							<p style="font-size: 24px; font-weight: 600">{{ userStore.user.last_name }} {{ userStore.user.first_name }}</p>
 							<div class="d-flex mt-1">
 								<div class="d-flex align-center" v-for="n in userDetails" :key="n.data">
 									<v-icon class="" size="18" :icon="n.icon"></v-icon>
@@ -127,12 +127,13 @@
 </template>
 <script>
 import { useUserStore } from "~/stores/userStore";
-
+import {getdateRegistered} from '~/utils/date';
 export default {
 	setup(){
 		definePageMeta({
 			middleware: ["auth"],
 		});
+
 	},
 	data() {
 		return {
@@ -144,19 +145,19 @@ export default {
 			userDetails: [
 				{
 					icon: "mdi mdi-email",
-					data: "@sylvesterfranklin007@gmail.com",
+					data: useUserStore().user.email,
 				},
 				{
 					icon: "mdi mdi-account",
-					data: "24 Years",
+					data: "",
 				},
 				{
 					icon: "mdi mdi-map-marker",
-					data: "🇺🇸 United States, New York City",
+					data: "",
 				},
 				{
 					icon: "mdi mdi-history",
-					data: "Joined June 2023",
+					data: getdateRegistered(useUserStore().user.created),
 				},
 			],
 			items: [
