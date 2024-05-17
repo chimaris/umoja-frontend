@@ -26,15 +26,15 @@
 				<v-row class="mb-2">
 					<v-col cols="12" lg="6">
 						<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-2">Name</p>
-						<p style="color: #333; font-size: 14px; font-weight: 500">{{ userStore.user.first_name }}</p>
+						<p style="color: #333; font-size: 14px; font-weight: 500">{{ userStore.user.first_name || "" }}</p>
 					</v-col>
 					<v-col cols="12" lg="6">
 						<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-2">Last Name</p>
-						<p style="color: #333; font-size: 14px; font-weight: 500">{{ userStore.user.last_name }}</p>
+						<p style="color: #333; font-size: 14px; font-weight: 500">{{ userStore.user.last_name || "" }}</p>
 					</v-col>
 					<v-col cols="12" lg="6">
 						<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-2">Email Address</p>
-						<p style="color: #333; font-size: 14px; font-weight: 500">{{userStore.user.email}}</p>
+						<p style="color: #333; font-size: 14px; font-weight: 500">{{userStore.user.email || ""}}</p>
 					</v-col>
 					<v-col cols="12" lg="6">
 						<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-2">Phone</p>
