@@ -124,7 +124,6 @@ export const useUserStore = defineStore({
         const {access_token} = response.data;
         this.userToken = access_token
         this.isLoggedIn = true
-        console.log(access_token, response)
         return true;
       }catch(error) {
         console.error(error)
