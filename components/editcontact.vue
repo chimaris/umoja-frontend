@@ -63,7 +63,6 @@
                     <v-select
                             v-model="vendor.office_country"
                             :items="countries"
-                            append-inner-icon="mdi mdi-chevron-down"
                             placeholder="Select Country"
                             density="comfortable"
 							@input="fetchStates(vendor.office_country)"
@@ -84,8 +83,7 @@
                     <p class="inputLabel">City</p>
                     <v-select 
 						v-model="vendor.office_city"
-						:items="cities"
-						append-inner-icon="mdi mdi-chevron-down" 
+						:items="cities" 
 						placeholder="Select" density="comfortable">
 					</v-select>
                 </div>

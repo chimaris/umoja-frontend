@@ -75,7 +75,6 @@
 			<v-select
 				v-model="vendor.country_name"
 				:items="allCountries"
-				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select Country"
 				density="comfortable"
 				:rules="inputRules"
@@ -87,7 +86,6 @@
 			v-model="vendor.state" 
 			color="green"
 			:loading="loadingStates"
-			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select State" 
 			density="comfortable" 
 			:items="states"
@@ -100,7 +98,6 @@
 			v-model="vendor.city" 
 			:loading="loadingCities"
 			color="green"
-			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select" density="comfortable" 
 			:items="cities"
 			:rules="inputRules"> 
