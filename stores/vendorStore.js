@@ -169,12 +169,14 @@ export const useVendorStore = defineStore('vendor', {
     async socialLoginCallBack(provider) {
       const api = vendorUseApi()
       try {
-        const response = await axios.get(`https://umoja-store.netlify.app/auth/${provider}/vendor/callback`) 
+        const response = await api({
+          url :`auth/${provider}/vendor/callback?code=${code}`,
+          method: 'GET'
+        });
         const {access_token} = response.data;
         this.vendorToken = access_token
         this.vendorIsLoggedIn = true
         this.verified = true;
-        axios.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
         console.log(response)
         return true;
       }catch(error) {
