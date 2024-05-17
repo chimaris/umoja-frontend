@@ -7,8 +7,17 @@
 			</v-avatar>
 			<h1 style="font-weight: 600; font-size: 32px; color: #333">Personal Bank Account</h1>
 			<p style="font-weight: 500; font-size: 16px; line-height: 24px; color: #9ea5ad">Just few mmore steps to go and you are done⚡️</p>
-
 			<div class="pt-8">
+				<div class="mb-4">
+					<v-label class="inputLabel">How would you like to receive payments </v-label>
+					<v-select
+						placeholder="Select preferred mode of payment"
+						v-model="paymentMode"
+						:items="paymentModes">
+					</v-select>
+				</div>
+			</div>
+			<div v-if="paymentMode == 'Bank Account'">
 				<div class="mb-4">
 					<v-label class="inputLabel">Bank Name </v-label>
 					<v-text-field :rules="inputRules" v-model="vendor.bank_name" density="comfortable" placeholder="Enter your bank name"></v-text-field>
@@ -26,9 +35,22 @@
 					To help us verify your account, the name on your bank account should match the name you provided as the owner of your business Verifying.
 				</p>
 			</div>
+			<div v-if="paymentMode == 'PayPal'" class="pt-2">
+				<div class="mb-4">
+					<v-label class="inputLabel">PayPal Email Address </v-label>
+					<v-text-field :rules="inputRules"  density="comfortable" placeholder="Enter your paypal email address"></v-text-field>
+				</div>
+				<div class="mb-4">
+					<v-label class="inputLabel">PayPal Account Holder Name </v-label>
+					<v-text-field :rules="numRules"  placeholder="Enter your account name" density="comfortable"> </v-text-field>
+				</div>
+				<p style="font-weight: 500; font-size: 16px; color: #969696">
+					To help us verify your account, the name on your paypal account should match the name you provided as the owner of your business Verifying.
+				</p>
+			</div>
 		</div>
 		<p style="color: red; font-size: 16px;" class="mb-2">{{ formError }}</p>
-		<v-btn :disabled="!isFormValid()" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
+		<v-btn :disabled="!isFormValid() || paymentMode == 'PayPal'" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
 	</v-sheet>
 
 	<!-- View Contact Section -->
@@ -67,6 +89,8 @@ const isEditing = ref(false)
 const vendorStore = useVendorStore()
 const vendor = ref([])
 const formError = ref("")
+const paymentMode = ref("Bank Account")
+const paymentModes = ["Bank Account", "PayPal"]
 
 onMounted(() => {
 	if (!vendorStore.vendor.vendor_details){

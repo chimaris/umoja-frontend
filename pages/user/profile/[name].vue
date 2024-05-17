@@ -131,7 +131,19 @@ import {getdateRegistered} from '~/utils/date';
 export default {
 	setup(){
 		definePageMeta({
-			middleware: ["auth"],
+			middleware: defineNuxtRouteMiddleware((to, from) => {
+				const userStore = useUserStore();
+				if (!userStore.isLoggedIn) {
+					return navigateTo("/user/login");
+				}
+				if (!userStore.user) {
+					const response = userStore.logout();
+					if (response){
+						return navigateTo("/user/login");
+					}
+					
+				}
+			}),
 		});
 
 	},
@@ -145,7 +157,7 @@ export default {
 			userDetails: [
 				{
 					icon: "mdi mdi-email",
-					data: useUserStore().user.email || "",
+					data: useUserStore().user?.email,
 				},
 				{
 					icon: "mdi mdi-account",
@@ -157,7 +169,7 @@ export default {
 				},
 				{
 					icon: "mdi mdi-history",
-					data: getdateRegistered(useUserStore().user.created) || "",
+					data: getdateRegistered(useUserStore().user?.created),
 				},
 			],
 			items: [
