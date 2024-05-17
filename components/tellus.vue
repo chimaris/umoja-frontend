@@ -128,7 +128,6 @@ onMounted(()=> {
 		vendor.value = []
 	}else {
 		vendor.value = vendorStore.vendor.vendor_details
-		console.log(vendorStore.getVendor)
 	}
 })
 
