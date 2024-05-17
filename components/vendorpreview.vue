@@ -102,7 +102,7 @@
 											<v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon> Edit Profile
 										</v-btn>
 									</div>
-									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ getdateRegistered() }}</p>
+									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ getdateRegistered(vendor.created) }}</p>
 								</v-sheet>
 							</v-sheet>
 						</v-card>
@@ -155,6 +155,7 @@
 <script>
 import { useVendorStore } from '~/stores/vendorStore';
 import { countryCodes } from '~/utils/countryapi';
+import {getdateRegistered} from '~/utils/date';
 import {onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 
@@ -311,17 +312,6 @@ export default {
       		const country = this.vendor.vendor_details?.rep_country;
       		return countryCodes[country];
     	},
-		getdateRegistered() {
-			const dateString = this.vendor.created;
-			const date = new Date(dateString)
-
-			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-			const month = months[date.getMonth()];
-			const day = date.getDate();
-			const year = date.getFullYear();
-  
-    		return `${month} ${day}, ${year}`;
-		}
 		},
 		filt(text) {
 			var newText = text.length > 40 ? text.slice(0, 40) + "..." : text;

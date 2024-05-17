@@ -3,6 +3,7 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useApi } from '~/composables/useApi';
+import {getUser} from '~/composables/useUser';
 
 
 export const useUserStore = defineStore({
@@ -14,6 +15,7 @@ export const useUserStore = defineStore({
     signUpError: '',
     isLoggedIn: false,
     userToken: null,
+    user: null
   }),
   persist: {
     enabled: true,
@@ -37,6 +39,7 @@ export const useUserStore = defineStore({
         const {access_token} = response.data;
         this.userToken = access_token
         this.isLoggedIn = true;
+        this.user = await getUser(response.data.user_id)
         return true;
       } catch(error) {
           if (error.response) {
@@ -63,6 +66,7 @@ export const useUserStore = defineStore({
         });
         this.signUpError = '';
         const {access_token} = response.data;
+        this.user = await getUser(response.data.user_id)
         this.userToken = access_token
         this.isLoggedIn = true
         return true
@@ -124,6 +128,7 @@ export const useUserStore = defineStore({
         const {access_token} = response.data;
         this.userToken = access_token
         this.isLoggedIn = true
+        this.user = await getUser(response.data.user.user_id)
         return true;
       }catch(error) {
         console.error(error)

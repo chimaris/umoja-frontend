@@ -86,7 +86,6 @@ font-weight: 600;">Add New Address</p>
             <v-col cols="12" md="6"> 
                 <p class="inputLabel">Country<span class="mb-2">*</span></p>             
                 <v-select 
-                    append-inner-icon="mdi mdi-chevron-down" 
                     v-model="shippingCountry" 
                     placeholder="Select Country" 
                     :items="allCountries" 
@@ -98,11 +97,10 @@ font-weight: 600;">Add New Address</p>
             <v-col cols="12" md="6">
                 <p class="inputLabel">Region<span class="mb-2">*</span></p>                    
                 <v-select 
-                    append-inner-icon="mdi mdi-chevron-down" 
                     v-model="shippingState"
                     color="green"
                     :items="states" 
-                    @change="fetchCities(shippingCountry, shippingState)"
+                    @input="fetchCities(shippingCountry, shippingState)"
                     :rules="inputRules"
                     hint="**Make sure you select your country first**"
                     :loading="loadingStates"
@@ -115,7 +113,6 @@ font-weight: 600;">Add New Address</p>
             <v-col cols="12" md="6"> 
                 <p class="inputLabel">City<span class="mb-2">*</span></p>             
                 <v-select 
-                    append-inner-icon="mdi mdi-chevron-down" 
                     v-model="shippingCity" 
                     :items="cities"
                     color="green"
@@ -167,7 +164,6 @@ font-weight: 600;">Add New Address</p>
             <v-col cols="12" md="6"> 
                 <p class="inputLabel">Country<span class="mb-2">*</span></p>             
                 <v-select 
-                    append-inner-icon="mdi mdi-chevron-down" 
                     v-model="selectedEdit.shipping_country" 
                     placeholder="Select Country" 
                     :items="allCountries" 
@@ -179,7 +175,6 @@ font-weight: 600;">Add New Address</p>
             <v-col cols="12" md="6">
                 <p class="inputLabel">Region<span class="mb-2">*</span></p>                    
                 <v-select 
-                    append-inner-icon="mdi mdi-chevron-down" 
                     v-model="selectedEdit.shipping_region"
                     color="green"
                     :items="states" 
@@ -196,7 +191,6 @@ font-weight: 600;">Add New Address</p>
             <v-col cols="12" md="6"> 
                 <p class="inputLabel">City<span class="mb-2">*</span></p>             
                 <v-select 
-                    append-inner-icon="mdi mdi-chevron-down" 
                     v-model="selectedEdit.shipping_city" 
                     :items="cities"
                     color="green"
