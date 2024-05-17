@@ -39,11 +39,11 @@
 							></v-btn>
 						</v-avatar>
 						<div class="pt-4">
-							<p style="font-size: 24px; font-weight: 600">{{ userStore.user.last_name }} {{ userStore.user.first_name }}</p>
+							<p v-if="userStore.user" style="font-size: 24px; font-weight: 600">{{ userStore.user.last_name }} {{ userStore.user.first_name }}</p>
 							<div class="d-flex mt-1">
 								<div class="d-flex align-center" v-for="n in userDetails" :key="n.data">
 									<v-icon class="" size="18" :icon="n.icon"></v-icon>
-									<p class="ml-2 mr-4" style="color: #333; font-size: 14px; font-weight: 500">{{ n.data }}</p>
+									<p v-if="n.data" class="ml-2 mr-4" style="color: #333; font-size: 14px; font-weight: 500">{{ n.data }}</p>
 								</div>
 							</div>
 						</div>
@@ -145,7 +145,7 @@ export default {
 			userDetails: [
 				{
 					icon: "mdi mdi-email",
-					data: useUserStore().user.email,
+					data: useUserStore().user.email || "",
 				},
 				{
 					icon: "mdi mdi-account",
@@ -157,7 +157,7 @@ export default {
 				},
 				{
 					icon: "mdi mdi-history",
-					data: getdateRegistered(useUserStore().user.created),
+					data: getdateRegistered(useUserStore().user.created) || "",
 				},
 			],
 			items: [
