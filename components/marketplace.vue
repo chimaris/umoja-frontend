@@ -1,6 +1,6 @@
 <template>
 	<v-divider></v-divider>
-	<v-container class="pt-0">
+	<v-container class="pt-0" style="max-width: 1400px">
 		<div style="height: 122px" class="align-center justify-space-between d-flex">
 			<div>
 				<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" style="font-weight: 600; letter-spacing: -0.72px">Happy shopping Frank</p>
@@ -84,7 +84,8 @@
 						</div>
 
 						<p class="mt-4" :style="{ fontSize: $vuetify.display.mobile ? '14px' : '15.281px' }" style="font-weight: 500; letter-spacing: -0.153px">
-							Showing {{productStore.productFrom}} - {{ productStore.productTo }} items out of a total of {{ productStore.totalProducts }} for “fashion”
+							Showing {{ productStore.productFrom }} - {{ productStore.productTo }} items out of a total of {{ productStore.totalProducts }} for
+							“fashion”
 						</p>
 					</div>
 
@@ -160,13 +161,19 @@
 							</v-chip>
 						</v-chip-group>
 					</div>
-					<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px;">
+					<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px">
 						<p>{{ productStore.searchError }}</p>
 					</div>
 					<div>
-						<v-row id="homepage" style="background-color: #fff" class="mt-2">
+						<!-- <v-row id="homepage" style="background-color: #fff" class="mt-2">
 							<v-col v-for="(n, i) in productStore.filteredProducts()" :key="i" lg="3" cols="6" sm="6" md="4">
 								<product-component :index="i" :item="n" />
+							</v-col>
+						</v-row> -->
+
+						<v-row dense class="mt-2">
+							<v-col v-for="(n, i) in productStore.filteredProducts()" :key="i" cols="6" :md="3" :lg="3">
+								<product-component :item="n" :index="i" />
 							</v-col>
 						</v-row>
 					</div>

@@ -28,8 +28,8 @@
 							</p>
 							<p
 								class="pr-3 mr-md-0"
-								:style="{ fontSize: $vuetify.display.mobile ? '10px' : '16px' }"
-								style="font-weight: 400; max-width: 317px; color: #333333"
+								:style="{ fontSize: $vuetify.display.mobile ? '10px' : '16px', maxWidth: $vuetify.display.mobile ? '317px' : '' }"
+								style="font-weight: 400; color: #333333"
 							>
 								Lorem ipsum dolor sit amet consectetur. Sit urna neque pellentesque at cras.
 							</p>
@@ -54,8 +54,8 @@
 							</p>
 							<p
 								class="pr-3 mr-md-0"
-								:style="{ fontSize: $vuetify.display.mobile ? '10px' : '16px' }"
-								style="font-weight: 400; color: #333333; max-width: 317px"
+								:style="{ fontSize: $vuetify.display.mobile ? '10px' : '16px', maxWidth: $vuetify.display.mobile ? '317px' : '' }"
+								style="font-weight: 400; color: #333333"
 							>
 								Lorem ipsum dolor sit amet consectetur. Sit urna neque pellentesque at cras.
 							</p>

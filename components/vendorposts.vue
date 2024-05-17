@@ -80,8 +80,16 @@
 			</v-col>
 		</v-row>
 		<v-dialog v-model="dialog" transition="dialog-bottom-transition" width="auto">
-			<v-card style="height: 70vh; overflow: hidden" max-width="700px" :min-width="$vuetify.display.mobile ? '90vw' : '60vw'" class="rounded-lg">
-				<v-row style="height: 70vh">
+			<v-card
+				style="height: 100vh; overflow: hidden; position: relative"
+				max-width="700px"
+				:min-width="$vuetify.display.mobile ? '90vw' : '60vw'"
+				class="rounded-lg"
+			>
+				<v-btn class="ms-auto my-2" @click="dialog = false">
+					<v-icon class="" size="24" icon="mdi mdi-close"></v-icon>
+				</v-btn>
+				<v-row style="height: 100vh">
 					<v-col cols="12" class="px-0 py-0 pb-0" md="6">
 						<v-img
 							class="pb-0"
@@ -133,7 +141,7 @@
 								<h1 style="font-weight: 700; font-size: 24px; line-height: 27px; color: #000000" class="pa-6">Comments</h1>
 							</div>
 							<v-divider></v-divider>
-							<v-row style="background-color: #fff" class="mt-2 px-5">
+							<v-row style="background-color: #fff" class="mt-2 px-5 ml-0 mr-0">
 								<v-col v-for="(n, i) in items" :key="i" cols="12">
 									<v-card flat class="bg-white">
 										<div class="d-flex pb-4">

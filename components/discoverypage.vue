@@ -165,11 +165,12 @@
 							<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px">
 								<p>{{ productStore.searchError }}</p>
 							</div>
-							<v-row style="" class="">
-								<v-col cols="6" v-for="(n, i) in items" sm="4" :key="i" lg="24" md="3">
+							<v-row dense>
+								<v-col v-for="(n, i) in items" :key="i" cols="6" :md="3" :lg="24">
 									<product-component :item="n" :index="i" />
 								</v-col>
 							</v-row>
+
 							<v-btn
 								block
 								class="d-flex d-md-none mt-8"

@@ -65,7 +65,6 @@
 					<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 				</v-col>
 			</v-row>
-
 			<v-btn
 				block
 				class="d-flex d-md-none mt-8"
