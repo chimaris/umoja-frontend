@@ -116,7 +116,7 @@ export const useUserStore = defineStore({
     },
     async socialLoginCallBack(provider, code) {
       try {
-        const response = await axios.get(`https://umoja-store.netlify.app/auth/${provider}/callback/?code=${code}`) 
+        const response = await axios.get(`https://umoja-store.netlify.app/auth/${provider}/callback?code=${code}`) 
         const {access_token} = response.data;
         this.userToken = access_token
         this.isLoggedIn = true
