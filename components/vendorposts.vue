@@ -129,7 +129,7 @@
 							</div>
 
 							<v-divider></v-divider>
-							<div>
+							<!-- <div>
 								<h1 style="font-weight: 700; font-size: 24px; line-height: 27px; color: #000000" class="pa-6">Comments</h1>
 							</div>
 							<v-divider></v-divider>
@@ -175,7 +175,7 @@
 										</div>
 									</v-card>
 								</v-col>
-							</v-row>
+							</v-row> -->
 						</v-sheet>
 					</v-col>
 				</v-row>

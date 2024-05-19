@@ -39,7 +39,7 @@
 								<input
 									type="radio"
 									:id="'payment_' + i"
-									:value="n.id"
+									:value="n"
 									v-model="paymentMethodId"
 									class="mr-2"
 									style="accent-color: #2c6e63; transform: scale(1.5)"
@@ -317,7 +317,7 @@ export default {
 			dialog: false,
 			paymentId: "",
 			paymentError: "",
-			paymentMethodId: "",
+			paymentMethodId: null,
 			amount: "",
 			email: "",
 			paymentProcessing: false,
@@ -484,7 +484,6 @@ export default {
 
 			if (error) {
 				this.paymentProcessing = false;
-				console.log(error);
 				this.paymentError = error.message;
 			} else if (paymentMethod) {
 				const api = useApi();
@@ -564,13 +563,15 @@ export default {
 				this.checkoutError = "Please select a payment method";
 				return;
 			}
+
 			const data = {
 				shipping_address_id: this.cartStore.shippingDetails.shippingAddressId,
 				shipping_method_id: this.cartStore.shippingDetails.shippingOption.id,
-				payment_method_id: this.paymentMethodId,
+				payment_method_id: this.paymentMethodId.id,
 				delivery_charge: this.cartStore.shippingDetails.shippingOption.amount,
 				products: this.cartStore.checkoutItems,
 			};
+			this.cartStore.paymentMethod = this.paymentMethodId
 			const api = useApi();
 			try {
 				this.paymentLoading = true;
@@ -580,8 +581,11 @@ export default {
 					method: "POST",
 					data: data,
 				});
-				console.log(response);
-				console.log(data);
+				this.cartStore.checkoutItems = []
+				this.cartStore.orderTotal = response.data.order.total_amount
+				this.cartStore.orderSubTotal =  response.data.order.sub_total
+				this.cartStore.orders = response.data.order.products
+				this.$router.push("/order/summary");
 			} catch (error) {
 				if (error.response) {
 					this.checkoutError = error.response.data.message || "An error occurred while checking out.";
@@ -592,10 +596,9 @@ export default {
 				}
 			} finally {
 				this.paymentLoading = false;
-				console.log(data);
 			}
 
-			// this.$router.push("/order/summary");
+			
 		},
 		filt(text) {
 			var newText = text.length > 50 ? text.slice(0, 50) + "..." : text;

@@ -13,10 +13,6 @@
 					<v-icon class="mr-2" icon="mdi mdi-tray-arrow-up"></v-icon>
 					Export
 				</v-btn>
-				<v-btn @click="choose2()" flat color="green" size="large" class="ml-4 text-grey-darken-3">
-					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
-					Create Order
-				</v-btn>
 			</div>
 		</div>
 		<div class="d-flex w-100 align-center mt-6 justify-space-between">
@@ -48,9 +44,9 @@
 				</v-tab>
 			</v-tabs>
 			<v-divider></v-divider>
-			<v-table
+			<v-table v-if="filteredOrderData.length > 0"
 				style="    height: 80%; !important;
-    overflow: scroll;"
+ overflow: scroll;"
 			>
 				<thead>
 					<tr style="background: #f8f8f8; border-radius: 6px" class="rounded-lg">
@@ -70,7 +66,7 @@
 				</thead>
 				<tbody>
 					<!-- @click="chosen = item.sn" -->
-					<tr @click="choose(item.sn)" :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="item in items" :key="item.sn">
+					<tr @click="orderDets(item)" :style="chosen == item.order_id ? 'background:#DFDFDF' : ''" v-for="item in filteredOrderData" :key="item.order_id">
 						<td class="text-grey-lighten-1 pl-4 px-1">
 							<v-checkbox hide-details></v-checkbox>
 						</td>
@@ -78,17 +74,17 @@
 							<v-menu location="end">
 								<template v-slot:activator="{ props }">
 									<span v-bind="props">
-										{{ item.sn }}
+										#{{ item.order_id }}
 									</span>
 								</template>
 								<v-card class="pa-4 rounded-lg bg-green">
-									<p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: {{ item.sn }}</p>
+									<p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: #{{ item.order_id }}</p>
 									<div class="pt-2 align-center d-flex">
 										<v-avatar size="44" class="mr-2"
-											><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685693849/Rectangle_1898_gyahsj.png"></v-img
+											><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img
 										></v-avatar>
 										<div>
-											<p style="font-weight: 500; font-size: 14px" class="text-capitalize">{{ item.customer }}</p>
+											<p style="font-weight: 500; font-size: 14px" class="text-capitalize">{{ item.customer_fullname }}</p>
 											<p
 												style="
 													font-weight: 500;
@@ -100,32 +96,32 @@
 												"
 												class="text-capitalize"
 											>
-												<v-icon size="12" class="mr-1" icon="mdi mdi-map-marker"></v-icon>United States
+												<v-icon size="12" class="mr-1" icon="mdi mdi-map-marker"></v-icon>{{item.customer_country}}
 											</p>
 										</div>
 									</div>
 								</v-card>
 							</v-menu>
 						</td>
-						<td class="tabledate px-1">{{ item.date }}</td>
-						<td class="tableThick px-1">{{ item.customer }}</td>
+						<td class="tabledate px-1">{{ getdateRegistered(item.created_at) }}</td>
+						<td class="tableThick px-1">{{ item.customer_fullname }}</td>
 						<td class="tableLight px-1">
-							<span v-if="item.delivery != 0">
-								{{ item.delivery }}
+							<span v-if="item.delivery_price !== 0">
+								{{ item.delivery_price }}
 							</span>
 							<span v-else class="d-flex align-center text-green">Free <v-icon class="ml-1" size="small" icon="mdi mdi-star"></v-icon></span>
 						</td>
-						<td class="tableThick px-1">{{ item.total }}</td>
+						<td class="tableThick px-1">{{ formattedPrice(item.total) }}</td>
 						<td class="text-grey-lighten-1 text-center px-1">
-							<v-chip rounded="lg" class="tablechip" :color="item.payment_status == 1 ? 'blue' : 'orange'" variant="tonal">
-								<v-icon class="mr-2" size="small" v-if="item.payment_status == 1" icon="mdi mdi-check-circle"></v-icon>
-								{{ item.payment_status == 1 ? "Paid" : "Pending" }}
+							<v-chip rounded="lg" class="tablechip" :color="item.payment_status == 'paid' ? 'blue' : 'orange'" variant="tonal">
+								<v-icon class="mr-2" size="small" icon="mdi mdi-check-circle"></v-icon>
+								{{ item.payment_status }}
 							</v-chip>
 						</td>
-						<td class="tableLight px-1">{{ item.items_no + " Item" + (item.items_no > 1 ? "s" : "") }}</td>
+						<td class="tableLight px-1">{{ item.items.length + " Item" + (item.items.length > 1 ? "s" : "") }}</td>
 						<td class="text-grey-lighten-1 text-center px-1">
-							<v-chip rounded="lg" class="tablechip" :color="item.status == 2 ? 'green' : item.status == 0 ? 'red' : 'orange'" variant="tonal">
-								{{ item.status == 2 ? "Fulfilled" : item.status == 0 ? "Unfulfiled" : "Pending" }}
+							<v-chip rounded="lg" class="tablechip" :color="item.fulfillment_status == 'fulfilled' ? 'green' : item.fulfillment_status == 'unfulfilled' ? 'red' : 'orange'" variant="tonal">
+								{{ item.fulfillment_status }}
 							</v-chip>
 						</td>
 						<td class="um px-1">{{ item.delivery_method }}</td>
@@ -139,27 +135,12 @@
 					</tr>
 				</tbody>
 			</v-table>
-			<!-- <div
-				class="w-100 mt-4 d-flex justify-space-between align-center"
-				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px"
-			>
-				<div>
-					<span style="font-size: 14px; font-weight: 400">1 - 9 of 725 Pages</span>
-				</div>
-				<div class="d-flex align-center">
-					<span style="font-size: 12px; font-weight: 400">The Page you’re on</span>
-					<v-select append-inner-icon="mdi mdi-chevron-down" variant="outlined" placeholder="1" style="background-color: white"> </v-select>
-					|
-					<v-btn flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
-					<v-btn flat><v-icon icon="mdi mdi-redo"></v-icon></v-btn>
-				</div>
-			</div> -->
-			<div
+			<div  v-if="filteredOrderData.length > 0"
 				class="w-100 mt-4 d-flex justify-space-between align-center"
 				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
 			>
 				<div style="display: flex; align-items: center">
-					<span style="font-size: 14px; font-weight: 400">1 - 9 of 725 Pages</span>
+					<span style="font-size: 14px; font-weight: 400">{{ from }} - {{ toPage }} of {{pagesNo}} Pages</span>
 				</div>
 				<div class="d-flex align-center" style="margin-left: auto">
 					<span style="font-size: 12px; font-weight: 400; margin-right: 10px">The Page you’re on</span>
@@ -168,6 +149,8 @@
 						variant="outlined"
 						placeholder="1"
 						style="background-color: white; min-width: 40px"
+						:items = "pageOptions"
+						v-model="selectedPage"
 					></v-select>
 					<v-img
 						:width="10"
@@ -176,14 +159,14 @@
 						class="mx-2"
 					></v-img>
 
-					<v-btn class="mr-1" flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
-					<v-btn flat><v-icon icon="mdi mdi-redo"></v-icon></v-btn>
+					<v-btn :disabled="currentPage == 1" @click="selectedPage --;"  class="mr-1" flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
+					<v-btn  @click="selectedPage ++;" :disabled="currentPage == pagesNo" flat><v-icon icon="mdi mdi-redo"></v-icon></v-btn>
 				</div>
 			</div>
 		</div>
 
 		<!-- If there is no orders show this -->
-		<div v-if="items1.length === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
+		<div v-if="filteredOrderData.length === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
 			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
 				<v-img
 					:width="300"
@@ -199,208 +182,85 @@
 		</div>
 	</v-container>
 </template>
-<script>
-export default {
-	data() {
-		return {
-			tab: "",
-			tabs: [
+<script setup>
+import {ref, onMounted, defineEmits, computed} from 'vue';
+import {vendorUseApi} from '~/composables/vendorApi';
+import { getdateRegistered } from '~/utils/date';
+import { formattedPrice } from '~/utils/price';
+import {useOrderStore} from '~/stores/order'
+
+const emits = defineEmits(["changePage"])
+const items1 = ref([])
+const item1 = ref([])
+const selectedPage = ref(1)
+const filteredOrderData = ref([])
+const pagesNo = ref(null)
+const currentPage = ref(null)
+const from = ref(null)
+const toPage = ref(null)
+const orderStore = useOrderStore()
+
+const pageOptions = computed(() => {
+	return Array.from({ length: pagesNo.value }, (_, index) => index + 1);
+})
+const tabs = [
 				{ name: "All Orders", prop: null, value: null },
-				{ name: "Unfulfilled", prop: "status", value: 0 },
-				{ name: "Unpaid", prop: "payment_status", value: 0 },
-				{ name: "Open", prop: "status", value: 1 },
-				{ name: "closed", prop: "status", value: 2 },
-			],
-			items1: [
-				{
-					sn: "#23942",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#876567",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: 0,
-					payment_status: 0,
-					status: 2,
-					items_no: 1,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#3456456",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 4,
-					delivery_method: "DHL Delivery",
-				},
-				{
-					sn: "#65459",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#098765",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: 0,
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#65456",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: "€ 24.08",
-					payment_status: 0,
-					status: 2,
-					items_no: 1,
-					delivery_method: "DHL Delivery",
-				},
-				{
-					sn: "#239042",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 4,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#9867763",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "DHL Delivery",
-				},
-				{
-					sn: "#98755765",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: "€ 24.08",
-					payment_status: 0,
-					status: 1,
-					items_no: 1,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#7646439",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 4,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#9876765",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#9876765",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: "€ 24.08",
-					payment_status: 0,
-					status: 0,
-					items_no: 1,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#12t65345",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 4,
-					delivery_method: "Umoja Delivery",
-				},
-			],
-			items: [],
-		};
-	},
-	mounted() {
-		this.items = this.items1;
-	},
-	methods: {
-		choose(x) {
-			this.$emit("changePage", "Order details");
-		},
-		choose2(x) {
-			this.$emit("changePage", "createorder");
-		},
-		sort(x, y) {
-			var itm = this.items1;
-			this.items = itm.filter((item) => {
+				{ name: "Unfulfilled", prop: "unfulfilled", value: 0 },
+				{ name: "Unpaid", prop: "unpaid", value: 0 },
+				{ name: "Open", prop: "open", value: 1 },
+				{ name: "closed", prop: "closed", value: 2 },
+			]
+const tab = ref("")
+function choose(x) {emits("changePage", x);}
+function choose2(x) {emits("changePage", "createorder");}
+
+function orderDets(order){
+	orderStore.orderDetail = order
+	choose("Order details")
+	console.log(orderStore.orderDetail)
+}
+function sort(x, y) {
+			var itm = items1.value;
+			items1.value = itm.filter((item) => {
 				return item[x] == y;
 			});
-		},
-	},
-};
+		}
+
+async function filterOrderBy(){
+	try{
+		const api = vendorUseApi();
+		let url = `vendor/orders/?${tab.value.prop}=true&page=${selectedPage.value}`
+		if (tab.value.name === "All Orders"){
+			url = `vendor/orders/?page=${selectedPage.value}`
+		}
+
+		const response = await api({
+			url : url,
+			method: 'GET'
+		});
+		pagesNo.value = response.data.meta.last_page
+		from.value = response.data.meta.from
+		toPage.value = response.data.meta.to
+		currentPage.value = response.data.meta.current_page
+		return response.data.data
+	}catch(error){
+		console.error(error);
+	}
+}
+async function fetchFilteredOrders(){
+	try{
+		filteredOrderData.value = await filterOrderBy();
+	}catch(error){
+		console.error(error);
+	}
+}
+onMounted(async () => {
+	await fetchFilteredOrders();
+});
+watch(() => tab.value, () => {
+	fetchFilteredOrders();
+});
+watch(() => selectedPage.value, () => {
+	fetchFilteredOrders();
+});
 </script>

@@ -143,15 +143,12 @@ import axios from 'axios'
 	const bioError = ref("")
 	const cover_photo = ref("")
 
-	const vendor = ref([])
-
-	onMounted(() => {
-		if (!vendorStore.vendor.vendor_details){
-			vendor.value = []
-		}else {
-			vendor.value = vendorStore.vendor.vendor_details
-		}
-	})
+	const vendor = computed(() => {
+	if (!vendorStore.vendor.vendor_details) {
+		return []
+	}
+	return vendorStore.vendor.vendor_details
+});
 
 	const emit = defineEmits(['submit']);
 	

@@ -1,7 +1,6 @@
 import {defineStore} from "pinia";
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
 
 export const useVendorProductStore = defineStore('vendor-product', {

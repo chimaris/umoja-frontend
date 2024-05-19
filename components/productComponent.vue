@@ -131,7 +131,7 @@
 					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg"> 20% OFF </v-chip>
 				</div>
 			</div>
-			<v-btn
+			<v-btn v-if="!role"
 				@click="addToCart(item)"
 				rounded="xl"
 				style="border: 0.66px solid #ced2d6; border-radius: 6px"
@@ -158,7 +158,7 @@ import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
 
 export default {
-	props: ["item", "short", "category", "cover", "index", "showVendor", "showdisco"],
+	props: ["item", "short", "category", "cover", "index", "showVendor", "showdisco", "role"],
 	computed: {
 		likedStore() {
 			return useLikedStore();

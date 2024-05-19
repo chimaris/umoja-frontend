@@ -7,9 +7,13 @@ export const useCartStore = defineStore('cart', {
   state: () => ({
     items: [],
     checkoutItems: [],
+    orders: [],
+    orderTotal: null,
+    orderSubTotal: null,
     shippingDetails: [],
     cardDetails: [],
     paymentLoading: false,
+    paymentMethod: [],
     addressError: "",
     billingError: "",
     loading: false,
@@ -36,6 +40,9 @@ export const useCartStore = defineStore('cart', {
     },
     totalCartItems() {
       return this.items.length;
+    },
+    totalOrders(){
+      return this.orders.length;
     },
     totalCheckoutItems() {
       return this.checkoutItems.length

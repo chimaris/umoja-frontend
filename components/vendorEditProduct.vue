@@ -44,7 +44,7 @@
 							<v-select v-model="product.condition" :items="conditions" append-inner-icon="mdi mdi-chevron-down" placeholder="Select product condition" density="comfortable"> </v-select>
 						</div>
 					</v-sheet>
-					<v-sheet class="cardStyle my-4" width="800">
+					<!-- <v-sheet class="cardStyle my-4" width="800">
 						<div class="d-flex align-center">
 							<p style="color: #333; font-size: 20px; font-weight: 600">Selling Type</p>
 						</div>
@@ -56,7 +56,7 @@
 								</div>
 							</template>
 						</v-checkbox>
-						<!-- <v-checkbox hide-details density="compact" color="#00966D">
+						 <v-checkbox hide-details density="compact" color="#00966D">
 						<template v-slot:label>
 							<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">Online selling only</div>
 						</template>
@@ -68,7 +68,7 @@
 							</div>
 						</template>
 					</v-checkbox> -->
-					</v-sheet>
+					<!-- </v-sheet> --> 
                     <v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						<span class="mr-4">Save</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
@@ -790,11 +790,11 @@ export default {
 		const Categories = ref([])
 		const isFetching =  ref(false)
         const editStore = useEditVendorStore()
-        const product = editStore.currentEditProduct == null ? {} : editStore.currentEditProduct;
+        const product = computed(() => editStore.currentEditProduct);
         const router = useRouter()
 
 		watchEffect(() => {
-    	fetchSubCategories(product.category_name);
+    	fetchSubCategories(product.value.category_name);
 		});
 
 		onMounted(() => {
@@ -802,12 +802,12 @@ export default {
                 router.push('/vendor/dashboard/Products')
             }
 			fetchCategories()
-            fetchSubCategories(product.category_name)
-			if (!product.colors || !product.sizes || !product.materials || !product.styles) {
-			product.colors = [];
-			product.sizes = [];
-			product.materials = [];
-			product.styles = [];
+            fetchSubCategories(product.value.category_name)
+			if (!product.value.colors || !product.value.sizes || !product.value.materials || !product.value.styles) {
+			product.value.colors = [];
+			product.value.sizes = [];
+			product.value.materials = [];
+			product.value.styles = [];
 		}
             
 		});
@@ -842,8 +842,8 @@ export default {
 		async function fetchSubCategories() {
 			const api = vendorUseApi()
 			isFetching.value = true;
-			const category_id = getCategoryId(product.category_name)
-			const category_name = getCategoryName(product.category_name)
+			const category_id = getCategoryId(product.value.category_name)
+			const category_name = getCategoryName(product.value.category_name)
 			try {
 				const response = await api({
 					url: `admin/sub_categories/category/${category_id}`,
@@ -884,15 +884,15 @@ export default {
 		const addTag = (newTag) => {
 			const trimmedNewTag = newTag.trim().toLowerCase();
 
-				if (trimmedNewTag !== '' && product.tags.some(tag => tag.toLowerCase() === trimmedNewTag)) {
+				if (trimmedNewTag !== '' && product.value.tags.some(tag => tag.toLowerCase() === trimmedNewTag)) {
 					return; 
 				}
-				product.tags.push(newTag.trim());
+				product.value.tags.push(newTag.trim());
 		};
 		const removeTag = (tag) => {
-			const index = product.tags.indexOf(tag);
+			const index = product.value.tags.indexOf(tag);
 			if (index !== -1) {
-				product.tags.splice(index, 1);
+				product.value.tags.splice(index, 1);
 			}
 		};
 		const handleTagInput = () => {
@@ -1195,7 +1195,6 @@ export default {
 				unit_per_item: this.product.unit_per_item,
 				material: this.product.material,
 				condition: this.product.condition,
-				sell_online: this.product.sell_online,
 			}
 			if (this.product.sku && this.product.unit_per_item && this.product.unit_per_item> 0) {
 				try {
