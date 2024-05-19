@@ -1,7 +1,7 @@
 <template>
 	<div id="homepage" style="min-height: 100vh; width: 100%">
 		<v-img
-			style="height: 185px; position: relative"
+			style="height: 185px; position: relative;"
 			width="auto"
 			cover
 			class="d-flex bg-grey justify-end align-end"
@@ -21,21 +21,23 @@
 						>
 							<v-sheet max-width="455" class="mx-auto" width="100%" style="padding-top: 20px">
 								<div class="text-center pa-4">
-									<v-avatar class="mx-auto"  size="100">
+									<v-avatar class="mx-auto"  size="100" :style="`border: 3px solid ${profileBorderColor};`">
 										<v-img v-if="vendor.vendor_details?.profile_photo"
-											class="bg-grey-lighten-3 rounded-xl"
+											class="bg-grey-lighten-3"
+											cover
 											:src="vendor.vendor_details?.profile_photo"
 										>
 										</v-img>
 										<v-img v-else
+											cover
 											class="bg-grey-lighten-3 rounded-xl"
 											src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"
 										></v-img>
 									</v-avatar>
-									<h3 class="py-4" style="font-size: 24px; font-weight: 800; line-height: 30px">
+									<h3 class="py-4 pb-6" style="font-size: 24px; font-weight: 800; line-height: 30px">
 										{{ vendor.vendor_details?.business_name }} <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
 									</h3>
-									<v-btn color="orange" width="80%" flat> Follow</v-btn>
+									<v-divider></v-divider>
 								</div>
 								<div class="pa-2">
 									<div class="pa-4 align-center justify-space-between d-flex">
@@ -88,7 +90,7 @@
 											<v-avatar rounded="0" size="23"><v-icon color="green" :icon="'mdi mdi-' + n.icon"></v-icon></v-avatar>
 										</v-btn>
 									</div>
-									<div class="pt-12 mt-12 justify-start align-center d-flex">
+									<!-- <div class="pt-12 mt-12 justify-start align-center d-flex">
 										<v-btn
 											@click="choose('Profile Setup')"
 											style="border: 0.357149px solid #2c6e63"
@@ -101,8 +103,9 @@
 										>
 											<v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon> Edit Profile
 										</v-btn>
-									</div>
-									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ getdateRegistered(vendor.created) }}</p>
+									</div> -->
+								
+									<p class="text-center textClass text-grey-darken-1 pt-12">MEMBER SINCE: {{ getdateRegistered(vendor.created) }}</p>
 								</v-sheet>
 							</v-sheet>
 						</v-card>
@@ -158,6 +161,7 @@ import { countryCodes } from '~/utils/countryapi';
 import {getdateRegistered} from '~/utils/date';
 import {onMounted} from 'vue'
 import {useRouter} from 'vue-router'
+import ColorThief from 'colorthief';
 
 export default {
 	setup(props, ctx) {
@@ -197,6 +201,7 @@ export default {
 			window: "products",
 			rating: 4,
 			tab: null,
+			profileBorderColor: '#F38218',
 			items: [
 				{
 					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
@@ -306,6 +311,19 @@ export default {
 				: [6, 12, 12, 12, 12, 12, 12, 12, 12];
 		},
 	},
+	mounted() {
+    const img = new Image();
+	img.crossOrigin = 'Anonymous'; 
+    img.src = this.vendor.vendor_details?.profile_photo;
+    img.onload = () => {
+      const colorThief = new ColorThief();
+      const dominantColor = colorThief.getColor(img);
+      this.profileBorderColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+    };
+	img.onerror = () => {
+    console.error('Cannot load image');
+  };
+  },
 	methods: {
 		getCountryCode() {
 			

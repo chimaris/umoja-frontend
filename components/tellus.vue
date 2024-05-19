@@ -116,15 +116,13 @@ import {inputRules} from '~/utils/formrules'
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
 
 const vendorStore = useVendorStore()
-const vendor = ref([])
-
-onMounted(()=> {
+const vendor = computed(() => {
 	if (!vendorStore.vendor.vendor_details) {
-		vendor.value = []
-	}else {
-		vendor.value = vendorStore.vendor.vendor_details
+		return []
 	}
+	return vendorStore.vendor.vendor_details
 })
+
 
 const businessImages = ref([])
 

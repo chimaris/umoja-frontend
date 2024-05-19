@@ -22,7 +22,7 @@
 					<v-icon color="#00966D" class="my-4" size="55" icon="mdi mdi-check-circle-outline"></v-icon>
 					<p class="mb-4" style="font-size: 20px; font-weight: 600; line-height: 20px">Thanks for your order</p>
 					<p style="color: #969696; font-size: 14px; font-weight: 500; line-height: 20px">
-						The order confirmation has been sent to thatdesignpro@gmail.com
+						The order confirmation has been sent to {{ useUserStore().user?.email }}
 					</p>
 				</div>
 				<hr class="dashed-2 my-4" />
@@ -35,13 +35,13 @@
 				<hr class="dashed-2 my-4" />
 				<div>
 					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Payment Method</p>
-					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px">Mastercard ending with 2546</p>
+					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px">{{cartStore.paymentMethod.last_card_brand}} ending with {{ cartStore.paymentMethod.last_card_digits }}</p>
 				</div>
 				<hr class="dashed-2 my-4" />
 				<div>
 					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Shipping Method</p>
 					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px" class="mb-2">
-						Express delivery (1-3 business days)
+						{{ cartStore.shippingDetails.shippingOption.type }} ({{ cartStore.shippingDetails.shippingOption.duration }})
 					</p>
 					<a style="color: var(--deep-sky-blue-4, #1273eb); font-size: 12px; font-weight: 600" href="">TRACK ORDER</a>
 				</div>	
@@ -49,33 +49,33 @@
 				<v-row dense v-if="!viewAll">
 					<v-col cols="3">
 						<v-avatar color="grey-lighten-2" style="border-radius: 15px" class="mr-3 ml-0" size="100">
-							<v-img cover :src="cartStore.checkoutItems[0].image"></v-img>
+							<v-img cover :src="cartStore.orders[0].photo.split(',')[0]"></v-img>
 						</v-avatar>
 					</v-col>
 					<v-col cols="6">
 						<div class="px-2" style="max-width: 200px; overflow: hidden; text-overflow: ellipsis">
 							<p class="mb-1 text-truncate" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">
-								{{ cartStore.checkoutItems[0].name }}
+								{{ cartStore.orders[0].name }}
 							</p>
 							<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate">
-								{{cartStore.checkoutItems[0].category_name}}
+								{{cartStore.orders[0].category_name}}
 							</p>
 							<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="mt-4 text-truncate">
-								X{{ cartStore.checkoutItems[0].quantity }}
+								X{{ cartStore.orders[0].pivot.qty }}
 							</p>
 						</div>
 					</v-col>
 					<v-col cols="3">
 						<p class="mb-1 text-right" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">
-							{{ formattedPrice(cartStore.checkoutItems[0].quantity * cartStore.checkoutItems[0].price) }}
+							{{ formattedPrice(cartStore.orders[0].pivot.qty * cartStore.orders[0].price) }}
 						</p>
 					</v-col>
 				</v-row>
 				<template v-if="viewAll">
-					<v-row dense v-for="item in cartStore.checkoutItems" :key="item.id">
+					<v-row dense v-for="item in cartStore.orders" :key="item.id">
 						<v-col cols="3">
 							<v-avatar color="grey-lighten-2" style="border-radius: 15px" class="mr-3 ml-0" size="100">
-								<v-img cover :src="item.image"></v-img>
+								<v-img cover :src="item.photo.split(',')[0]"></v-img>
 							</v-avatar>
 						</v-col>
 						<v-col cols="6">
@@ -86,12 +86,12 @@
 								<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate">
 									{{item.category_name}}
 								</p>
-								<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="mt-4 text-truncate">X{{ item.quantity }}</p>
+								<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="mt-4 text-truncate">X{{ item.pivot.qty }}</p>
 							</div>
 						</v-col>
 						<v-col cols="3">
 							<p class="mb-1 text-right" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">
-								{{ formattedPrice(item.price * item.quantity) }}
+								{{ formattedPrice(item.price * item.pivot.qty) }}
 							</p>
 						</v-col>
 					</v-row>
@@ -99,20 +99,20 @@
 
 				<div v-if="!viewAll" class="pt-4 d-flex align-center justify-space-between">
 					<div class="d-flex align-center" style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 600">
-						<v-icon size="18" class="mr-2" icon="mdi mdi-shopping"></v-icon> +{{ cartStore.totalCheckoutItems - 1 }} items
+						<v-icon size="18" class="mr-2" icon="mdi mdi-shopping"></v-icon> +{{ cartStore.totalOrders - 1 }} items
 					</div>
 					<a @click="viewAll = !viewAll" style="color: #1273eb; font-size: 14px; cursor: pointer; font-weight: 600">View all items</a>
 				</div>
 				<div v-if="viewAll" class="pt-4 d-flex align-center justify-space-between">
 					<div class="d-flex align-center" style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 600">
-						<v-icon size="18" class="mr-2" icon="mdi mdi-shopping"></v-icon> {{ cartStore.totalCheckoutItems }} items
+						<v-icon size="18" class="mr-2" icon="mdi mdi-shopping"></v-icon> {{ cartStore.totalOrders }} items
 					</div>
 					<a @click="viewAll = !viewAll" style="color: #1273eb; font-size: 14px; cursor: pointer; font-weight: 600">View Less</a>
 				</div>
 				<hr class="dashed-2 my-4" />
 				<div style="font-size: 14px; font-weight: 600" class="d-flex justify-space-between align-center">
 					<span>Subtotal</span>
-					<span>{{ formattedPrice(cartStore.checkoutTotalCost)  }}</span>
+					<span>{{ formattedPrice(cartStore.orderSubTotal)  }}</span>
 				</div>
 
 				<hr class="dashed-2 my-6" />
@@ -130,12 +130,12 @@
 					</div>
 					<div class="d-flex pb-3 align-center justify-space-between">
 						<p style="font-weight: 500; font-size: 14px; color: #969696">Shipment cost</p>
-						<p style="color: var(--carbon-4, #333); font-size: 16px; font-weight: 600" class="">€ 0.00</p>
+						<p style="color: var(--carbon-4, #333); font-size: 16px; font-weight: 600" class="">{{formattedPrice(cartStore.shippingDetails.shippingOption.amount)}}</p>
 					</div>
 					<hr class="dashed-2 my-6" />
 					<div class="d-flex pb-3 align-center justify-space-between">
 						<p style="font-weight: 500; font-size: 14px; color: #969696">Grand Total</p>
-						<p style="color: var(--carbon-4, #333); font-size: 24px; font-weight: 600" class="">{{ formattedPrice(cartStore.checkoutTotalCost) }}</p>
+						<p style="color: var(--carbon-4, #333); font-size: 24px; font-weight: 600" class="">{{ formattedPrice(cartStore.orderTotal) }}</p>
 					</div>
 				</div>
 				<v-btn to="/market_place" flat block size="x-large" class="mt-8" rounded="xl" color="green">
@@ -148,6 +148,7 @@
 </template>
 <script>
 import { useCartStore } from "~/stores/cartStore";
+import { useUserStore } from "~/stores/userStore";
 import { getCurrentTransactionDate } from "~/utils/date";
 import { formattedPrice } from "~/utils/price";
 

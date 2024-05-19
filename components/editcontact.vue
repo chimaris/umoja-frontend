@@ -153,17 +153,14 @@ import { useVendorStore } from '~/stores/vendorStore';
         const accordionOpen = ref(-1);
 		const isEditing = ref(false)
         const vendorStore = useVendorStore()
-        const vendor = ref([])
-     
-        const formError = ref("")
-
-        onMounted(() => {
-            if (!vendorStore.vendor.vendor_details){
-                vendor.value = []
-            }else {
-                vendor.value = vendorStore.vendor.vendor_details
+        const vendor = computed(() => {
+            if (!vendorStore.vendor.vendor_details) {
+                return []
             }
-        })
+            return vendorStore.vendor.vendor_details
+        });
+            
+        const formError = ref("")
 
 		const emit = defineEmits(['submit']);
         const socialMediaHandles = computed(() => [

@@ -7,6 +7,7 @@ import axios from 'axios';
 export const useVendorStore = defineStore('vendor', {
   state: () => ({
     vendor: [],
+    sideBtn: true,
     vendorCleared: false,
     showRegistrationModal: false,
     loading: false,

@@ -309,15 +309,15 @@ export default {
 			shippingAddress.value = await fetchShippingAdress();
 		});
 
-		watch(
-			() => cartStore.totalCheckoutItems,
-			(newVal) => {
-				if (newVal === 0) {
-					router.push("/order/cart");
-				}
-			},
-			{ immediate: true }
-		);
+		// watch(
+		// 	() => cartStore.totalCheckoutItems,
+		// 	(newVal) => {
+		// 		if (newVal === 0) {
+		// 			router.push("/order/cart");
+		// 		}
+		// 	},
+		// 	{ immediate: true }
+		// );
 		return {
 			cartStore,
 			shippingCountry,
@@ -448,7 +448,6 @@ export default {
 				shippingAddressId: this.selectedAddress,
 			};
 			this.cartStore.saveShippingDetails(data);
-			console.log(this.cartStore.shippingDetails);
 			this.$router.push("/order/payment");
 		},
 		async updateShippingAddress(address) {

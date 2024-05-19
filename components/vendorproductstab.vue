@@ -180,7 +180,7 @@
 		</v-carousel>
 		<v-row style="background-color: #fff" class="mt-8">
 			<v-col v-for="(n, i) in items" :key="i" cols="6" lg="4" md="6">
-				<product-component :index="i" :item="n" />
+				<product-component :index="i" :item="n" :role="role" />
 			</v-col>
 		</v-row>
 	</div>
@@ -195,12 +195,14 @@ import { useProductStore } from "~/stores/productStore.js";
 export default {
 	setup() {
 		const items = ref([]);
+		const role = ref("vendor");
 		onMounted(() => {
 			items.value = useProductStore().getProductsArray("vendorProducts");
 		});
 
 		return {
 			items,
+			role
 		};
 	},
 	components: {

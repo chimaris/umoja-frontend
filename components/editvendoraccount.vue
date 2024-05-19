@@ -87,18 +87,15 @@ import {numRules, inputRules} from '~/utils/formrules'
 
 const isEditing = ref(false)
 const vendorStore = useVendorStore()
-const vendor = ref([])
+const vendor = computed(() => {
+	if (!vendorStore.vendor.vendor_details) {
+		return []
+	}
+	return vendorStore.vendor.vendor_details
+})
 const formError = ref("")
 const paymentMode = ref("Bank Account")
 const paymentModes = ["Bank Account", "PayPal"]
-
-onMounted(() => {
-	if (!vendorStore.vendor.vendor_details){
-		vendor.value = []
-	}else {
-		vendor.value = vendorStore.vendor.vendor_details
-	}
-})
 
 const emit = defineEmits(['submit'])
 
