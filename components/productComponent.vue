@@ -78,7 +78,7 @@
 		</v-img>
 		<div
 			@click="$router.push('/vendor_page')"
-			class="mt-2 d-block d-md-none"
+			class="mt-3 d-block d-md-none"
 			:style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px', fontWeight: $vuetify.display.mobile ? 500 : 600 }"
 			style="cursor: pointer; color: #1e1e1e; letter-spacing: -0.14px"
 		>
@@ -91,7 +91,7 @@
 		<p
 			@click="$router.push(`/product_page/${item.id}`)"
 			style="font-weight: 600; font-size: 14px; line-height: 18px; cursor: pointer; color: #000000"
-			class="mt-1 text-wrap"
+			class="mt-1 mt-md-3 text-wrap"
 		>
 			{{ filt(item.name) }}
 		</p>

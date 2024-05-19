@@ -1,5 +1,5 @@
 <template>
-    <Header2 />
-    <Vendorpage />
-    <Mainfooter />
+	<Header2 />
+	<Vendorpage />
+	<Mainfooter />
 </template>

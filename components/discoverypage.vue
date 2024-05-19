@@ -187,110 +187,110 @@
 				</v-row>
 			</v-container>
 		</v-card>
-		<div style="padding: 50px 0">
-			<v-container class="px-0 mx-auto">
-				<v-row class="pl-0 pr-0 mr-0 ml-0">
-					<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
-						<v-img
-							eager
-							cover
-							width="100%"
-							:min-height="$vuetify.display.mobile ? 195 : 429"
-							height="auto"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1690560694/rectangle-69_u12j2b.png"
-						></v-img>
-					</v-col>
+		<div style="padding: 50px 0; width: 100%">
+			<!-- <v-container class="px-0 mx-auto"> -->
+			<v-row class="pl-0 pr-0 mr-0 ml-0">
+				<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
+					<v-img
+						eager
+						cover
+						width="100%"
+						:min-height="$vuetify.display.mobile ? 195 : 429"
+						height="auto"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1690560694/rectangle-69_u12j2b.png"
+					></v-img>
+				</v-col>
 
-					<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
-						<v-card
-							rounded="0"
-							width="100%"
-							height="100%"
-							:min-height="$vuetify.display.mobile ? 195 : 429"
-							color="#F8B735"
-							flat
-							class="d-flex align-center"
-						>
-							<v-container style="max-width: 1400px" class="px-4 px-md-12">
-								<p
-									:style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }"
-									style="color: var(--magnetic-green-2, #333); font-weight: 500; letter-spacing: 3.66px; text-transform: uppercase"
-								>
-									limited offer
-								</p>
-								<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '48px' }" style="color: #333; font-weight: 500; letter-spacing: -1.44px">
-									Art in its essense
-								</p>
-								<p
-									:style="{ fontSize: $vuetify.display.mobile ? '12px' : '20px' }"
-									style="color: #333; font-weight: 500; letter-spacing: -0.2px"
-									class="mb-8"
-								>
-									GET 20% OFF for your first order
-								</p>
-								<v-btn color="#333" size="large" variant="outlined" rounded="xl" style="font-size: 14px">
-									Discover now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
-								</v-btn>
-							</v-container>
-						</v-card>
-					</v-col>
-				</v-row>
-			</v-container>
+				<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
+					<v-card
+						rounded="0"
+						width="100%"
+						height="100%"
+						:min-height="$vuetify.display.mobile ? 195 : 429"
+						color="#F8B735"
+						flat
+						class="d-flex align-center"
+					>
+						<v-container style="max-width: 1400px" class="px-4 px-md-12">
+							<p
+								:style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }"
+								style="color: var(--magnetic-green-2, #333); font-weight: 500; letter-spacing: 3.66px; text-transform: uppercase"
+							>
+								limited offer
+							</p>
+							<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '48px' }" style="color: #333; font-weight: 500; letter-spacing: -1.44px">
+								Art in its essense
+							</p>
+							<p
+								:style="{ fontSize: $vuetify.display.mobile ? '12px' : '20px' }"
+								style="color: #333; font-weight: 500; letter-spacing: -0.2px"
+								class="mb-8"
+							>
+								GET 20% OFF for your first order
+							</p>
+							<v-btn color="#333" size="large" variant="outlined" rounded="xl" style="font-size: 14px">
+								Discover now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
+							</v-btn>
+						</v-container>
+					</v-card>
+				</v-col>
+			</v-row>
+			<!-- </v-container> -->
 		</div>
 
 		<v-container class="px-3" style="padding-top: 0px; max-width: 1400px">
 			<PostsRow :maxwidth="'1400px'" :showVendor="true" :title="postRow.title" :items="postRow.items" />
 		</v-container>
 
-		<div style="padding: 100px 0">
-			<v-container class="px-0 mx-auto">
-				<v-row class="pl-0 pr-0 mr-0 ml-0">
-					<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
-						<v-card
-							rounded="0"
-							width="100%"
-							style="border: none !important"
-							height="100%"
-							:min-height="$vuetify.display.mobile ? 195 : 429"
-							color="green"
-							flat
-							class="cardStyle py-0 d-flex align-center"
-						>
-							<v-container style="max-width: 1400px" class="px-2 px-md-12">
-								<p
-									:style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }"
-									style="color: var(--magnetic-green-2, #fff); font-weight: 500; letter-spacing: 3%; text-transform: uppercase"
-								>
-									limited offer
-								</p>
-								<p :style="{ fontSize: $vuetify.display.mobile ? '16px' : '48px' }" style="color: #fff; font-weight: 500; letter-spacing: -1.44px">
-									Uncensored Beauty
-								</p>
-								<p
-									:style="{ fontSize: $vuetify.display.mobile ? '12px' : '20px' }"
-									style="color: #fff; font-weight: 500; letter-spacing: -0.2px"
-									class="mb-8"
-								>
-									GET 20% OFF for your first order
-								</p>
-								<v-btn color="#fff" size="large" variant="outlined" rounded="xl" style="font-size: 14px">
-									Discover now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
-								</v-btn>
-							</v-container>
-						</v-card>
-					</v-col>
-					<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
-						<v-img
-							:min-height="$vuetify.display.mobile ? 195 : 429"
-							eager
-							cover
-							width="100%"
-							height="auto"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1690560991/rectangle-69_vgfhlc.png"
-						></v-img>
-					</v-col>
-				</v-row>
-			</v-container>
+		<div style="padding: 100px 0, width: 100%">
+			<!-- <v-container class="px-0 mx-auto"> -->
+			<v-row class="pl-0 pr-0 mr-0 ml-0">
+				<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
+					<v-card
+						rounded="0"
+						width="100%"
+						style="border: none !important"
+						height="100%"
+						:min-height="$vuetify.display.mobile ? 195 : 429"
+						color="green"
+						flat
+						class="cardStyle py-0 d-flex align-center"
+					>
+						<v-container style="max-width: 1400px" class="px-2 px-md-12">
+							<p
+								:style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }"
+								style="color: var(--magnetic-green-2, #fff); font-weight: 500; letter-spacing: 3%; text-transform: uppercase"
+							>
+								limited offer
+							</p>
+							<p :style="{ fontSize: $vuetify.display.mobile ? '16px' : '48px' }" style="color: #fff; font-weight: 500; letter-spacing: -1.44px">
+								Uncensored Beauty
+							</p>
+							<p
+								:style="{ fontSize: $vuetify.display.mobile ? '12px' : '20px' }"
+								style="color: #fff; font-weight: 500; letter-spacing: -0.2px"
+								class="mb-8"
+							>
+								GET 20% OFF for your first order
+							</p>
+							<v-btn color="#fff" size="large" variant="outlined" rounded="xl" style="font-size: 14px">
+								Discover now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
+							</v-btn>
+						</v-container>
+					</v-card>
+				</v-col>
+				<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
+					<v-img
+						:min-height="$vuetify.display.mobile ? 195 : 429"
+						eager
+						cover
+						width="100%"
+						height="auto"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1690560991/rectangle-69_vgfhlc.png"
+					></v-img>
+				</v-col>
+			</v-row>
+			<!-- </v-container> -->
 		</div>
 
 		<v-container style="max-width: 1400px">
