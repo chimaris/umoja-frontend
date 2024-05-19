@@ -18,7 +18,7 @@
 				</v-btn>
 			</v-container>
 		</v-img>
-		<v-card class="overflow-visible pr-2" flat tile color="#Fff" min-height="100vh" width="100%">
+		<v-card class="overflow-visible" flat tile color="#Fff" min-height="100vh" width="100%">
 			<v-container style="max-width: 1400px">
 				<v-row>
 					<v-col md="4" cols="12" xs="12">
