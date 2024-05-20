@@ -29,7 +29,7 @@
 						</div>
 						<div>
 							<p class="inputLabel">Unit</p>
-							<v-select v-model="unit" :rules="inputRules" :items="units" append-inner-icon="mdi mdi-chevron-down" placeholder="Select unit" density="comfortable"> </v-select>
+							<v-select v-model="unit" :rules="inputRules" :items="units"  placeholder="Select unit" density="comfortable"> </v-select>
 						</div>
 						<div>
 							<p class="inputLabel">Unit Per Item</p>
@@ -41,7 +41,7 @@
 						</div>
 						<div>
 							<p class="inputLabel">Condition</p>
-							<v-select v-model="condition" :items="conditions" append-inner-icon="mdi mdi-chevron-down" placeholder="Select product condition" density="comfortable"> </v-select>
+							<v-select v-model="condition" :items="conditions"  placeholder="Select product condition" density="comfortable"> </v-select>
 						</div>
 					</v-sheet>
 					<!-- <v-sheet class="cardStyle my-4" width="800">
@@ -177,7 +177,7 @@
 								<div class="d-flex align-center">
 									<p style="color: #333; font-size: 20px; font-weight: 600">Product status</p>
 								</div>
-								<v-select class="mt-4" :items="['Active', 'Draft']" v-model = "productStat" append-inner-icon="mdi mdi-chevron-down" placeholder="Active" density="comfortable"> </v-select>
+								<v-select class="mt-4" :items="['Active', 'Draft']" v-model = "productStat"  placeholder="Active" density="comfortable"> </v-select>
 							</v-sheet>
 							<v-sheet class="cardStyle mt-4">
 								<div class="d-flex align-center mb-6">
@@ -185,15 +185,15 @@
 								</div>
 								<div>
 									<p class="inputLabel">Category</p>
-									<v-select  @change="fetchSubCategories()" :items="Categories.map(category => category.name)" v-model="selectedCategory" :rules="inputRules" append-inner-icon="mdi mdi-chevron-down" placeholder="Fashion and style" density="comfortable"> </v-select>
+									<v-select  @change="fetchSubCategories()" :items="Categories.map(category => category.name)" v-model="selectedCategory" :rules="inputRules"  placeholder="Fashion and style" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Sub Category</p>
-									<v-select :loading="isFetching" color="green" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="selectedSubCategory" :rules="inputRules" append-inner-icon="mdi mdi-chevron-down" placeholder="Sneakers" density="comfortable"> </v-select>
+									<v-select :loading="isFetching" color="green" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="selectedSubCategory" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Gender</p>
-									<v-select v-model="selectedGender" :items="['Men', 'Women', 'Unisex']" append-inner-icon="mdi mdi-chevron-down" placeholder="Unisex" density="comfortable"> </v-select>
+									<v-select v-model="selectedGender" :items="['Men', 'Women', 'Unisex']"  placeholder="Unisex" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Tags</p>
@@ -231,7 +231,7 @@
 							</div>
 							<div class="mt-6">
 								<p class="inputLabel">Ust Index (Optional)</p>
-								<v-select append-inner-icon="mdi mdi-chevron-down" v-model="ustIndex" :items="['0%', '5%', '19%', '20%']" placeholder="Eg. 19%" density="comfortable"> </v-select>
+								<v-select  v-model="ustIndex" :items="['0%', '5%', '19%', '20%']" placeholder="Eg. 19%" density="comfortable"> </v-select>
 							</div>
 							<v-row>
 								<v-col>
@@ -777,6 +777,7 @@ import { ref, computed, onMounted, watchEffect } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
+import {fetchCategories, getCategoryId, getCategoryName} from '~/composables/useCategories';
 
 export default {
 
@@ -786,30 +787,14 @@ export default {
 		const Categories = ref([])
 		const isFetching =  ref(false)
 
-		watchEffect(() => {
-    	fetchSubCategories(selectedCategory.value);
+		watch(() => selectedCategory.value, () => {
+			fetchSubCategories(selectedCategory.value);
 		});
 
-		onMounted(() => {
-			fetchCategories()
+		onMounted(async () => {
+			Categories.value = await fetchCategories()
 		})
 
-		function getCategoryId(selectedCat) {
-			const category = Categories.value.findIndex(category => category.name === selectedCat);
-			if (category === -1) {
-				return
-			}
-			const category_id = Categories.value[category].id
-			return category_id
-		}
-		function getCategoryName(selectedCat) {
-			const category = Categories.value.findIndex(category => category.name === selectedCat);
-			if (category === -1) {
-				return
-			}
-			const category_name = Categories.value[category].name
-			return category_name
-		}
 		function getSubCategoryId(subCategory) {
 			const subCat = subCategories.value.findIndex(subCat => subCat.subcategory_name === subCategory);
 			if (subCat === -1) {
@@ -822,8 +807,8 @@ export default {
 		async function fetchSubCategories() {
 			const api = vendorUseApi()
 			isFetching.value = true;
-			const category_id = getCategoryId(selectedCategory.value)
-			const category_name = getCategoryName(selectedCategory.value)
+			const category_id = getCategoryId(selectedCategory.value, Categories.value)
+			const category_name = getCategoryName(selectedCategory.value, Categories.value)
 			try {
 				const response = await api({
 					url: `admin/sub_categories/category/${category_id}`,
@@ -893,21 +878,7 @@ export default {
 	
 		}
 	
-		async function fetchCategories() {
-			const api = vendorUseApi()
-			try {
-				const response = await api({
-					url: 'admin/categories',
-					method: 'get'
-				});
-				const categoryNames = response.data.data;
-				Categories.value = categoryNames;
-	
-			}catch(error) {
-				console.error(error)
-			}
-			
-		}
+
 
 		return {
 			nonNegValue,
@@ -926,11 +897,8 @@ export default {
 			selectedCategory,
 			subCategories,
 			Categories,
-			getCategoryName,
-			getCategoryId,
 			getSubCategoryId,
 			fetchSubCategories,
-			fetchCategories,
 			
 		}
 	},
@@ -1174,7 +1142,7 @@ export default {
 				productName: this.productName,
 				productStatus: this.productStat,
 				productSpec: this.productSpec,
-				Category: this.getCategoryId(this.selectedCategory).toString(),
+				Category: getCategoryId(this.selectedCategory, this.Categories).toString(),
 				SubCategory: this.getSubCategoryId(this.selectedSubCategory).toString(),
 				Gender: this.selectedGender,
 				Description: this.editorContent,
@@ -1216,7 +1184,6 @@ export default {
 				}
 				if (Number(this.price) < Number(this.itemCost)) {
 				this.checkError = "Cost per item cannot be more than the price"
-				console.log(this.price, this.itemCost)
 				return
 			}
 				this.checkError = ""

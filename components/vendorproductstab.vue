@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
-			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">72 products found</p>
+			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{items.length}} products found</p>
 			<div>
 				<v-btn flat rounded="xl" size="x-small" color="transparent" style="font-size: 15px; color: #333333" icon="mdi mdi-view-grid"></v-btn>
 				<v-btn
@@ -191,13 +191,15 @@ import VueCountdown from "@chenfengyuan/vue-countdown";
 import { useVendorStore } from "~/stores/vendorStore";
 import { useCartStore } from "~/stores/cartStore";
 import { useProductStore } from "~/stores/productStore.js";
+import {useVendorProductStore} from '~/stores/vendorProducts'
+import {ref, computed} from 'vue'
 
 export default {
 	setup() {
-		const items = ref([]);
+		const items = computed(() => useVendorProductStore().allProducts);
 		const role = ref("vendor");
 		onMounted(() => {
-			items.value = useProductStore().getProductsArray("vendorProducts");
+			useVendorProductStore().getAllProduct()
 		});
 
 		return {

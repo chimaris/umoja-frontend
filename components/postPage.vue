@@ -65,7 +65,7 @@
 			<v-col cols="12" md="3" class="d-none d-md-block"> </v-col>
 			<v-col cols="12" md="4">
 				<v-row dense>
-					<v-col v-for="(n, i) in items" :key="i" cols="12">
+					<v-col v-for="(n, i) in availablePosts" :key="i" cols="12">
 						<postComponent :index="i" :item="n" />
 					</v-col>
 				</v-row>
@@ -125,14 +125,18 @@
 	</v-container>
 </template>
 
-<script>
-export default {
-	data() {
-		return {
-			imageUrl1: "https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg",
-			imageUrl2: "https://res.cloudinary.com/payhospi/image/upload/v1714742949/umoja/post-hero2.png",
-			country: "All of African",
-			africanCountries: [
+<script setup>
+import {ref, onMounted, computed} from 'vue'
+import { fetchAllPosts } from '~/composables/usePost';
+import { useUserStore } from "~/stores/userStore";
+
+
+const userStore = useUserStore()
+const availablePosts = computed(() => userStore.allPosts)
+const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg")
+const imageUrl2 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742949/umoja/post-hero2.png")
+const country = ref("All of African")
+const africanCountries = [
 				"Algeria",
 				"Angola",
 				"Benin",
@@ -187,9 +191,9 @@ export default {
 				"Uganda",
 				"Zambia",
 				"Zimbabwe",
-			],
+			]
 
-			items: [
+const items = [
 				{
 					vendorName: "Nana Akufo-Addo",
 					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
@@ -242,10 +246,12 @@ export default {
 					likes: "66",
 					oos: true,
 				},
-			],
-		};
-	},
-};
+			]
+
+onMounted(() => {
+	fetchAllPosts()
+	console.log(availablePosts.value)
+})
 </script>
 
 <style>
