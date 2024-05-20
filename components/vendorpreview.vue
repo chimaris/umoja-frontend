@@ -115,7 +115,9 @@
 							<v-tabs v-model="tab" color="green" grow>
 								<v-tab v-for="item in ['products', 'posts', 'articles', 'promo%']" :key="item" :value="item" class="d-flex align-center">
 									{{ item }}
-									<v-badge v-if="item !== 'promo%'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" content="2" size="12"></v-badge>
+									<v-badge v-if="item == 'posts'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="postStore.posts.length" size="12"></v-badge>
+									<v-badge v-if="item == 'products'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendorProducts.allProducts.length" size="12"></v-badge>
+									<v-badge v-if="item == 'articles'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="postStore.articles.length" size="12"></v-badge>
 								</v-tab>
 							</v-tabs>
 							<v-divider></v-divider>
@@ -159,15 +161,19 @@
 import { useVendorStore } from '~/stores/vendorStore';
 import { countryCodes } from '~/utils/countryapi';
 import {getdateRegistered} from '~/utils/date';
-import {onMounted} from 'vue'
 import {useRouter} from 'vue-router'
 import ColorThief from 'colorthief';
+import {ref, onMounted, computed} from 'vue'
+import {useCreateStore} from '~/stores/createPostStore'
+import {useVendorProductStore} from '~/stores/vendorProducts'
 
 export default {
 	setup(props, ctx) {
 		const vendorStore = useVendorStore()
-		const vendor = ref([])
+		const vendor = computed(() => vendorStore.getVendor)
+		const vendorProducts = useVendorProductStore()
 		const router = useRouter()
+		const postStore = useCreateStore()
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		};
@@ -181,17 +187,18 @@ export default {
 			router.push('/vendor/dashboard/Profile Setup')
 		}
 		onMounted(async () => {
-
-			// await vendorStore.getUser(vendorStore.vendor.id)
-			vendor.value = vendorStore.getVendor
-			
+			await postStore.getPost()
+			await vendorProducts.getAllProduct()
+			await postStore.getArticle()
 		})
 		return {
 			vendorStore,
+			postStore,
 			vendor,
 			choose,
 			openSocialMedia,
-			completeReg
+			completeReg,
+			vendorProducts
 		}
 	},
 	data() {

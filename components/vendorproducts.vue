@@ -11,6 +11,7 @@
 						hide-details
 						prepend-inner-icon="mdi mdi-magnify"
 						placeholder="Search "
+						
 					>
 					<template v-slot:append-inner>
 						<v-progress-circular v-if="loading"

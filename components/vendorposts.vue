@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
-			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">2 posts found</p>
+			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{allPosts.length}} posts found</p>
 			<div>
 				<v-btn style="border: 1px solid #e5e5e5" variant="outlined" class="ml-4 textClass text-grey-darken-3">
 					<v-icon class="mr-2" size="20" icon="mdi mdi-tune-vertical"></v-icon>Filter
@@ -47,18 +47,17 @@
 		</v-carousel>
 
 		<v-row style="background-color: #fff" class="mt-8">
-			<v-col cols="4" v-for="(n, i) in items" :key="i" lg="4" md="6">
+			<v-col cols="4" v-for="(n, i) in allPosts" :key="i" lg="4" md="6">
 				<v-card flat style="border-radius: 15px" class="bg-white rounded-lg">
-					<v-img
-						@click="dialog = true"
+					<v-img v-if="n.featured_img.includes(',')"
+						@click="openPost(n)"
 						class="rounded-lg bg-grey-lighten-2"
 						cover
 						width="100%"
 						:height="$vuetify.display.mobile ? 119 : 216"
-						:src="n.image"
+						:src="n.featured_img.split(',')[0]"
 					>
 						<p
-							v-if="n.oos"
 							class="text-white py-1 px-3"
 							rounded="lg"
 							style="
@@ -73,8 +72,17 @@
 							flat
 							size="x-small"
 						>
-							1/2
+							1/{{n.featured_img.split(',').length}}
 						</p>
+					</v-img>
+					<v-img v-if="!n.featured_img.includes(',')"
+						@click="openPost(n)"
+						class="rounded-lg bg-grey-lighten-2"
+						cover
+						width="100%"
+						:height="$vuetify.display.mobile ? 119 : 216"
+						:src="n.featured_img"
+					>
 					</v-img>
 				</v-card>
 			</v-col>
@@ -91,133 +99,39 @@
 				</v-btn>
 				<v-row style="height: 100vh">
 					<v-col cols="12" class="px-0 py-0 pb-0" md="6">
-						<v-img
+						<v-img v-if="allPosts[selectedPost].featured_img.includes(',')"
 							class="pb-0"
 							cover
 							width="100%"
 							height="100%"
-							src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_600/v1685878571/Rectangle_1903_2x_ssbqbl.png"
+							:src="allPosts[selectedPost].featured_img.split(',')[1]"
 						></v-img>
-					</v-col>
-					<v-col cols="12" style="position: relative" class="px-0 py-0" md="6">
-						<v-sheet style="height: 100%; overflow: scroll; position: absolute; width: 100%" class="py-2">
-							<div class="d-flex px-6 pt-6 pb-4">
-								<v-avatar size="48" class="mr-5">
-									<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685880308/Frame_221_gj6tpk.png"></v-img>
-								</v-avatar>
-								<div class="w-100 d-flex justify-space-between">
-									<div>
-										<div class="d-flex">
-											<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">Bonsu Thompson</p>
-											<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
-												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>23 Nov, 2022
-											</p>
-										</div>
-										<div class="d-flex">
-											<v-chip size="x-small" class="px-3" color="#936900" rounded="0">Stylist</v-chip>
-											<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
-												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>042, Coal city state, Ghana
-											</p>
-										</div>
-									</div>
-									<div class="pr-2">
-										<v-icon icon="mdi mdi-dots-horizontal"></v-icon>
-									</div>
-								</div>
-							</div>
-							<div class="px-6">
-								<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
-									Lorem ipsum dolor sit amet consectetur. Nulla vitae mauris odio urna integer molestie laoreet. Enim viverra cursus imperdiet
-									aliquam. Sed ut commodo diam est aenean at.
-								</p>
-								<div class="d-flex align-center py-2">
-									<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-heart-outline"></v-icon> 1.2k likes </v-btn>
-									<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
-								</div>
-							</div>
-
-							<v-divider></v-divider>
-							<!-- <div>
-								<h1 style="font-weight: 700; font-size: 24px; line-height: 27px; color: #000000" class="pa-6">Comments</h1>
-							</div>
-							<v-divider></v-divider>
-							<v-row style="background-color: #fff" class="mt-2 px-5 ml-0 mr-0">
-								<v-col v-for="(n, i) in items" :key="i" cols="12">
-									<v-card flat class="bg-white">
-										<div class="d-flex pb-4">
-											<v-avatar size="48" class="mr-5">
-												<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685880308/Frame_221_gj6tpk.png"></v-img>
-											</v-avatar>
-											<div class="w-100 d-flex justify-space-between">
-												<div>
-													<div class="d-flex">
-														<p style="font-weight: 700; font-size: 16px; line-height: 22px; color: #1e1e1e">Bonsu Thompson</p>
-														<p class="" style="font-weight: 400; font-size: 14px; line-height: 22px; color: #969696">
-															<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>23 Nov, 2022
-														</p>
-													</div>
-													<div class="d-flex">
-														<v-chip size="x-small" class="px-3" color="#936900" rounded="0">Stylist</v-chip>
-														<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
-															<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>042, Coal city state, Ghana
-														</p>
-													</div>
-												</div>
-												<div class="pr-2">
-													<v-icon icon="mdi mdi-dots-horizontal"></v-icon>
-												</div>
-											</div>
-										</div>
-										<div class="">
-											<p style="font-weight: 400; font-size: 14px; line-height: 19px; letter-spacing: 0.03em">
-												Lorem ipsum dolor sit amet consectetur. Nulla vitae mauris odio urna integer molestie laoreet. Enim viverra cursus imperdiet
-												aliquam. Sed ut commodo diam est aenean at.
-											</p>
-											<div class="d-flex justify-space-between align-center" style="color: #1e1e1e; font-size: 12px">
-												<div class="d-flex align-center py-2">
-													<span class="mr-6"> <v-icon class="mr-1" icon="mdi mdi-heart-outline"></v-icon>4 </span>
-													<span> <v-icon class="mr-1" icon="mdi mdi-message-text-outline"></v-icon>11 </span>
-												</div>
-												<span> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> </span>
-											</div>
-										</div>
-									</v-card>
-								</v-col>
-							</v-row> -->
-						</v-sheet>
-					</v-col>
-				</v-row>
-			</v-card>
-		</v-dialog>
-		<v-dialog v-model="dialog1" transition="dialog-bottom-transition" width="auto">
-			<v-card style="height: 70vh; overflow: hidden" max-width="700px" min-width="60vw" class="rounded-lg">
-				<v-row style="height: 70vh">
-					<v-col cols="12" class="px-0 py-0" md="6">
-						<v-img
+						<v-img v-if="!allPosts[selectedPost].featured_img.includes(',')"
+							class="pb-0"
 							cover
 							width="100%"
 							height="100%"
-							src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_600/v1685878571/Rectangle_1903_2x_ssbqbl.png"
+							:src="allPosts[selectedPost].featured_img"
 						></v-img>
 					</v-col>
 					<v-col cols="12" style="position: relative" class="px-0 py-0" md="6">
 						<v-sheet style="height: 100%; overflow: scroll; position: absolute; width: 100%" class="py-2">
 							<div class="d-flex px-6 pt-6 pb-4">
 								<v-avatar size="48" class="mr-5">
-									<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685880308/Frame_221_gj6tpk.png"></v-img>
+									<v-img :src="allPosts[selectedPost].vendor_profile_photo"></v-img>
 								</v-avatar>
 								<div class="w-100 d-flex justify-space-between">
 									<div>
 										<div class="d-flex">
-											<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">Bonsu Thompson</p>
+											<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">{{allPosts[selectedPost].vendor_lastname}} {{allPosts[selectedPost].vendor_firstname}}</p>
 											<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
-												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>23 Nov, 2022
+												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{getdateRegistered(allPosts[selectedPost].created_at)}}
 											</p>
 										</div>
 										<div class="d-flex">
-											<v-chip size="x-small" class="px-3" color="#936900" rounded="0">Stylist</v-chip>
+											<v-chip size="x-small" class="px-3" color="#936900" rounded="0">{{allPosts[selectedPost].category_name}}</v-chip>
 											<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
-												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>042, Coal city state, Ghana
+												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{allPosts[selectedPost].location}}
 											</p>
 										</div>
 									</div>
@@ -228,74 +142,64 @@
 							</div>
 							<div class="px-6">
 								<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
-									Lorem ipsum dolor sit amet consectetur. Nulla vitae mauris odio urna integer molestie laoreet. Enim viverra cursus imperdiet
-									aliquam. Sed ut commodo diam est aenean at.
+									{{allPosts[selectedPost].description}}
 								</p>
 								<div class="d-flex align-center py-2">
-									<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-heart-outline"></v-icon> 1.2k likes </v-btn>
+									<v-btn @click="postStore.handleLike(allPosts[selectedPost].id, selectedPost)" v-if="allPosts[selectedPost].Islike == 0" flat> <v-icon class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{allPosts[selectedPost].likes}} {{allPosts[selectedPost].likes <= 1 ? 'Like' : 'Likes'}} </v-btn>
+									<v-btn @click="postStore.handleLike(allPosts[selectedPost].id, selectedPost)" v-if="allPosts[selectedPost].Islike == 1" flat> <v-icon class="mr-1" icon="mdi mdi-heart"></v-icon> {{allPosts[selectedPost].likes}} {{allPosts[selectedPost].likes <= 1 ? 'Like' : 'Likes'}} </v-btn>
 									<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
 								</div>
 							</div>
 
 							<v-divider></v-divider>
-							<div>
-								<h1 style="font-weight: 700; font-size: 24px; line-height: 27px; color: #000000" class="pa-6">
-									Related Products ({{ items.length }})
-								</h1>
+							<div style="display: flex; flex-direction: column; justify-content: center; width: 100%; align-items: center">
+							<p class="my-5" style="color: #333; font-size: 20px; text-align:center; font-weight: 600; line-height: 20px">Related products</p>
+
+							<div v-if="allPosts[selectedPost].products.length > 0" v-for="item in allPosts[selectedPost].products" :key="item" class="cardStyle mb-4 w-75">
+								<v-card flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg"> 
+									<v-btn rounded="xl" flat size="x-small" style="position: absolute; top: 15px; right: 15px" icon="mdi mdi-heart-outline"></v-btn>
+									<v-img
+										cover
+										height="100%"
+										width="100%"
+										:src="item.photo.split(',')[0]"
+									></v-img>
+								</v-card>
+								<p
+									style="
+										font-weight: 600;
+										font-size: 14px;
+										line-height: 18px;
+
+										color: #000000;
+									"
+									class="mt-2"
+								>
+									{{item.name}}
+								</p>
+								<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">{{item.category_name}}</p>
+								<p style="font-weight: 600; font-size: 12px; line-height: 13px; color: #000000" class="d-flex my-1 align-center">
+									<v-rating v-model="rating" color="grey-lighten-2 " active-color="#E7CE5D" class="" density="compact" size="small"></v-rating
+									><span style="margin-left: 9px">(0)</span>
+								</p>
+								<div class="d-flex align-center justify-space-between">
+									<div class="d-flex align-center">
+										<h1 style="font-size: 16px; line-height: 20px; color: #1a1d1f" class="priceClass">{{formattedPrice(item.price)}}</h1>
+									</div>
+									<v-btn style="border: 1px solid #e5e5e5" size="small" variant="outlined"
+										><span
+											style="
+												color: var(--grey-1000, #1a1d1f);
+
+												font-size: 12px;
+												font-weight: 600;
+											"
+											>Pre-Order</span
+										></v-btn
+									>
+								</div>
 							</div>
-							<v-divider></v-divider>
-							<v-row style="background-color: #fff" class="mt-2 px-5">
-								<v-col v-for="(n, i) in items" :key="i" cols="12">
-									<v-card flat style="border-radius: 15px; border: 1px solid #f6f6f6" class="bg-white rounded-lg pa-4">
-										<v-row>
-											<v-col cols="5">
-												<v-img class="rounded-lg bg-grey-lighten-2" cover width="100%" height="160" :src="n.image">
-													<v-btn rounded="xl" icon style="position: absolute; right: 12px; top: 12px" flat size="x-small">
-														<v-icon size="x-small" color="#1C274C" icon="mdi mdi-heart-outline"></v-icon
-													></v-btn> </v-img
-											></v-col>
-											<v-col cols="7" class="pb-4">
-												<div class="h-100" style="position: relative">
-													<p
-														style="
-															font-weight: 600;
-															font-size: 14px;
-															line-height: 18px;
-
-															color: #000000;
-														"
-														class="mt-2"
-													>
-														{{ filt(n.name) }}
-													</p>
-													<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">Organic cotton certified</p>
-													<p style="font-weight: 600; font-size: 10px; line-height: 13px; color: #000000" class="d-flex mb-1 align-center">
-														<v-rating v-model="rating" color="grey-lighten-2" active-color="#E7CE5D" class="pts ml-4" size="x-small"></v-rating
-														><span style="margin-left: -9px">(65)</span>
-													</p>
-
-													<div style="position: absolute; bottom: 0" class="d-flex align-center w-100 justify-space-between">
-														<div class="d-flex align-center">
-															<h1 style="font-size: 16px; line-height: 20px; color: #1a1d1f" class="priceClass">N{{ n.price }}</h1>
-														</div>
-														<v-btn
-															size="small"
-															style="border: 1px solid #ced2d6; border-radius: 6px"
-															:color="n.oos ? 'green' : ''"
-															:variant="!n.oos ? 'outlined' : 'elevated'"
-															flat
-															:class="n.oos ? 'text-grey' : ''"
-															class="ml-2"
-														>
-															<span class="smallBtn">Pre-Order</span>
-														</v-btn>
-													</div>
-												</div></v-col
-											>
-										</v-row>
-									</v-card>
-								</v-col>
-							</v-row>
+							</div>
 						</v-sheet>
 					</v-col>
 				</v-row>
@@ -317,7 +221,39 @@
 }
 </style>
 <script>
+import {useCreateStore} from '~/stores/createPostStore'
+import {ref, onMounted, computed} from 'vue'
+import {getdateRegistered} from '~/utils/date'
+import {formattedPrice} from '~/utils/price'
 export default {
+	setup(){
+		const postStore = useCreateStore()
+		const allPosts = computed(() => postStore.posts)
+		const selectedPost = ref(null)
+		const dialog = ref(false)
+		
+
+		const openPost = (post) => {
+			const selectedPostIndex = allPosts.value.findIndex((item) => {
+				return post.id == item.id
+			});
+			if (selectedPostIndex !== -1){
+				selectedPost.value = selectedPostIndex
+			}
+			dialog.value = true
+		}
+		onMounted(async() => {
+			await postStore.getPost()
+		})
+
+		return{
+			postStore,
+			allPosts,
+			selectedPost,
+			openPost,
+			dialog
+		}
+	},
 	methods: {
 		filt(text) {
 			var newText = text.length > 40 ? text.slice(0, 40) + "..." : text;
@@ -326,7 +262,7 @@ export default {
 	},
 	data() {
 		return {
-			dialog: false,
+	
 			placescards: false,
 			mods: 1,
 			window: "products",
