@@ -38,12 +38,12 @@
 		<!-- For mobile View -->
 		<div class="d-block d-md-none">
 			<v-row dense>
-				<v-col v-for="(n, i) in items" :key="i" cols="12">
+				<v-col v-for="(n, i) in items" :key="i" cols="12" class="mb-4">
 					<postComponent :index="i" :item="n" />
 				</v-col>
 			</v-row>
 			<v-row dense>
-				<v-col v-for="(n, i) in items" :key="i" cols="12">
+				<v-col v-for="(n, i) in items" :key="i" cols="12" class="mb-4">
 					<postComponent :index="i" :item="n" />
 				</v-col>
 			</v-row>

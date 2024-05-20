@@ -8,14 +8,15 @@
 				<span
 					class="d-inline-block text-truncate"
 					v-if="item.disabled"
-					style="color: #2c6e63; font-size: 14px; font-weight: 600; line-height: 20px; /* 142.857% */ letter-spacing: -0.14px"
+					style="color: #2c6e63; font-size: 14px; font-weight: 600; line-height: 20px; letter-spacing: -0.14px"
+					:style="{ width: $vuetify.display.mobile ? '120px' : '100%' }"
 				>
 					{{ product.name }}
 				</span>
 				<span
 					class="d-inline-block text-truncate"
 					v-else
-					style="color: #969696; font-size: 14px; font-weight: 500; opacity: 1 !important; line-height: 20px; /* 142.857% */ letter-spacing: -0.14px"
+					style="color: #969696; font-size: 14px; font-weight: 500; opacity: 1 !important; line-height: 20px; letter-spacing: -0.14px"
 				>
 					{{ item.title }}
 				</span>
@@ -42,7 +43,7 @@
 									<v-carousel-item v-else :value="n" v-for="n in 4" :key="n" cover height="349px" :src="product.photo"> </v-carousel-item>
 								</v-carousel>
 								<v-row dense v-if="product.photo.includes(',')">
-									<v-col v-for="n in product.photo.split(',')"  cols="3">
+									<v-col v-for="n in product.photo.split(',')" cols="3">
 										<v-img
 											v-ripple="{ class: 'text-grey' }"
 											class="bg-grey-lighten-4 caroimg"
@@ -230,10 +231,13 @@
 								<span>{{ item }}</span>
 							</li>
 						</ul>
-						<button style="color: #2C6E63; font-size: 14px;" @click="toggleSpecs" v-if="product.product_spec.split(',').length > maxVisibleSpecs">
-						{{ showAllSpecs ? 'See Less' : 'See More' }}
+						<button style="color: #2c6e63; font-size: 14px" @click="toggleSpecs" v-if="product.product_spec.split(',').length > maxVisibleSpecs">
+							{{ showAllSpecs ? "See Less" : "See More" }}
 						</button>
-						<ul v-if="!product.product_spec.includes(',')" style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%">
+						<ul
+							v-if="!product.product_spec.includes(',')"
+							style="color: #333; font-size: 14px; font-weight: 400; list-style-type: none; line-height: 180%"
+						>
 							<li>
 								<span>{{ product.product_spec }}</span>
 							</li>
@@ -723,12 +727,12 @@ export default {
 			return useCartStore();
 		},
 		displayedSpecs() {
-		return this.product.product_spec.split(',');
+			return this.product.product_spec.split(",");
 		},
 	},
 	methods: {
 		toggleSpecs() {
-		this.showAllSpecs = !this.showAllSpecs;
+			this.showAllSpecs = !this.showAllSpecs;
 		},
 		isInCart() {
 			const cartStore = useCartStore();

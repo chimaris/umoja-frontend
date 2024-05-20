@@ -52,8 +52,10 @@
 			></v-avatar>
 		</v-card>
 		<p style="color: #1e1e1e; font-size: 14px; font-weight: 400" class="text-wrap mt-4">
-			Lorem ipsum dolor sit amet consectetur. Duis pulvinar semper ornare quis. Est faucibus.. <strong>See More</strong>
+			Lorem ipsum dolor sit amet consectetur. Duis pulvinar semper ornare quis. Est faucibus..
+			<strong style="cursor: pointer" @click="$router.push('/post_detail')">See More</strong>
 		</p>
+
 		<div class="d-flex mt-4 align-center justify-space-between">
 			<div class="d-flex align-center">
 				<v-icon size="19" icon="mdi mdi-heart-outline"></v-icon>

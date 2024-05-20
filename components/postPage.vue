@@ -7,12 +7,10 @@
 						<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" style="color: #fff; font-weight: 500" class="mb-4">
 							Whats stopping you from posting about your business?
 						</p>
-						<!-- <div class="btn" style="height: 65px"> -->
 						<v-btn rounded="xl" color="#FFFFFF" height="44" style="width: 225px; padding: 10px 20px">
 							Make a post now
 							<v-img width="24" height="24" src="https://res.cloudinary.com/payhospi/image/upload/v1714745945/umoja/star_outlined.svg"></v-img>
 						</v-btn>
-						<!-- </div> -->
 					</div>
 				</div>
 			</v-col>
@@ -65,7 +63,7 @@
 			<v-col cols="12" md="3" class="d-none d-md-block"> </v-col>
 			<v-col cols="12" md="4">
 				<v-row dense>
-					<v-col v-for="(n, i) in items" :key="i" cols="12">
+					<v-col v-for="(n, i) in items" :key="i" cols="12" class="mb-4">
 						<postComponent :index="i" :item="n" />
 					</v-col>
 				</v-row>
