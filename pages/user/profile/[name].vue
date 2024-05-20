@@ -25,7 +25,7 @@
 		<div>
 			<v-container style="margin-top: -66px; max-width: 1400px">
 				<div class="d-flex align-center justify-space-between">
-					<div class="d-flex align-center">
+					<div class="d-flex flex-column flex-md-row align-md-center">
 						<v-avatar color="grey-lighten-3" style="overflow: visible" class="mr-2" size="166">
 							<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691587215/ellipse-103_o9gvrw.png"></v-img>
 							<v-btn
@@ -40,7 +40,7 @@
 						</v-avatar>
 						<div class="pt-4">
 							<p style="font-size: 24px; font-weight: 600">Nweke Franklin O.</p>
-							<div class="d-flex mt-1">
+							<div class="d-flex flex-column flex-md-row mt-1">
 								<div class="d-flex align-center" v-for="n in userDetails" :key="n.data">
 									<v-icon class="" size="18" :icon="n.icon"></v-icon>
 									<p class="ml-2 mr-4" style="color: #333; font-size: 14px; font-weight: 500">{{ n.data }}</p>
@@ -76,7 +76,7 @@
 			</v-container>
 			<v-container class="pt-2" style="max-width: 1400px">
 				<v-card flat class="cardStyle px-0 mt-4 mb-12 py-0">
-					<div class="d-flex px-4 pt-6 justify-space-around">
+					<!-- <div class="d-flex px-4 pt-6 justify-space-around">
 						<div
 							:key="n"
 							v-for="n in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']"
@@ -90,7 +90,7 @@
 								</span>
 							</v-btn>
 						</div>
-					</div>
+					</div> -->
 					<v-divider class="mt-6"></v-divider>
 
 					<div>
@@ -129,7 +129,7 @@
 import { useUserStore } from "~/stores/userStore";
 
 export default {
-	setup(){
+	setup() {
 		definePageMeta({
 			middleware: ["auth"],
 		});
@@ -266,12 +266,11 @@ export default {
 			this.selected = n;
 			this.$router.push(`/user/profile/${n}`);
 		},
-	 	logoutUser() {
+		logoutUser() {
 			const response = this.userStore.logout();
-			if (response){
+			if (response) {
 				this.$router.push("/user/login");
 			}
-			
 		},
 		filt(text) {
 			var newText = text.length > 50 ? text.slice(0, 50) + "..." : text;

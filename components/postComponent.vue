@@ -61,19 +61,18 @@
 				<v-icon size="19" icon="mdi mdi-heart-outline"></v-icon>
 				<p
 					style="color: #1e1e1e; font-size: 11.822px; font-weight: 400; line-height: 26.486px; /* 224.044% */ letter-spacing: 0.355px"
-					class="pa-1 ml-2"
+					class="pa-1 ml-1"
 				>
 					1.2k
 				</p>
-				<v-icon size="19" class="ml-3" icon="mdi mdi-comment-text-outline"></v-icon>
-				<p
-					style="color: #1e1e1e; font-size: 11.822px; font-weight: 400; line-height: 26.486px; /* 224.044% */ letter-spacing: 0.355px"
-					class="pa-1 ml-2"
-				>
+				<v-img width="19" height="19" class="ml-4" src="https://res.cloudinary.com/payhospi/image/upload/v1716239838/umoja/message-text_wsdpjw.svg" />
+				<p style="color: #1e1e1e; font-size: 11.822px; font-weight: 400; line-height: 26.486px; /* 224.044% */ letter-spacing: 0.355px" class="pa-1">
 					1156
 				</p>
 			</div>
-			<v-icon size="19" icon="mdi mdi-tray-arrow-up"></v-icon>
+			<div>
+				<v-img width="19" height="19" src="https://res.cloudinary.com/payhospi/image/upload/v1716240124/umoja/export_n0gjxv.svg" />
+			</div>
 		</div>
 	</v-card>
 </template>

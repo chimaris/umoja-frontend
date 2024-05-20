@@ -109,7 +109,8 @@
 				<v-col v-for="n in points" :key="n.icon" cols="12" lg="3" md="6">
 					<div class="d-flex mb-5 mb-md-0">
 						<v-avatar class="mr-3" size="60" style="border: 1px solid var(--magnetic-green-4, #2c6e63)">
-							<v-icon color="#2C6E63" :icon="'mdi mdi-' + n.icon"></v-icon>
+							<v-img width="20" height="20" :src="n.icon"> </v-img>
+							<!-- <v-icon color="#2C6E63" :icon="'mdi mdi-' + n.icon"></v-icon> -->
 						</v-avatar>
 						<div :style="{ width: $vuetify.display.mobile ? '210px' : '' }">
 							<p style="color: #333; font-size: 16px; font-weight: 600; line-height: 120%; /* 19.2px */ letter-spacing: -0.16px" class="mb-2">
@@ -828,22 +829,29 @@ export default {
 
 			points: [
 				{
-					icon: "cart",
+					// icon: "cart",
+					icon: "https://res.cloudinary.com/payhospi/image/upload/v1716231082/umoja/cartIcon.svg",
 					title: "Umoja Delivery",
 					body: "Get free delivery for every order above $20",
 				},
 				{
-					icon: "history",
+					// icon: "history",
+					icon: "https://res.cloudinary.com/payhospi/image/upload/v1716230312/umoja/calender.svg",
+
 					title: "90 Days Return",
 					body: "Return within 90 days of receiving your order.",
 				},
 				{
-					icon: "credit-card",
+					//icon: "credit-card",
+					icon: "https://res.cloudinary.com/payhospi/image/upload/v1716231343/umoja/credit-card.svg",
+
 					title: "Secure Payment",
 					body: "100% secure payment. Get easy support anytime",
 				},
 				{
-					icon: "face-agent",
+					//icon: "face-agent",
+					icon: "https://res.cloudinary.com/payhospi/image/upload/v1716231241/umoja/support-icon.svg",
+
 					title: "24/7 Online Support",
 					body: "100% secure payment. Get easy support anytime",
 				},

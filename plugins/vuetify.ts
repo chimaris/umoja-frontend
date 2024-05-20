@@ -1,6 +1,7 @@
 import * as components from "vuetify/components";
 import * as directives from "vuetify/directives";
 import { createVuetify, ThemeDefinition } from "vuetify";
+
 import { aliases, fa } from "vuetify/iconsets/fa";
 import "vuetify/styles";
 
@@ -39,8 +40,8 @@ export default defineNuxtPlugin((nuxt) => {
 			defaultSet: "fa",
 			aliases,
 			sets: {
-				mdi,
 				fa,
+				mdi,
 			},
 		},
 	});

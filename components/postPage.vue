@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-row class="pl-0 pr-0 ml-0 mr-0">
-			<v-col cols="12" md="6" class="py-0 px-0 mx-0" order="12" order-md="1">
+			<v-col cols="12" md="6" class="pt-0 pt-md-3 px-0 mx-0" order="12" order-md="1">
 				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl1 + ')', height: $vuetify.display.mobile ? '203px' : '' }">
 					<div class="mx-auto text-center" :style="{ width: $vuetify.display.mobile ? '300px' : '418px' }">
 						<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" style="color: #fff; font-weight: 500" class="mb-4">
@@ -14,8 +14,8 @@
 					</div>
 				</div>
 			</v-col>
-			<v-col cols="12" md="6" class="py-0 px-0 mx-0" order="1" order-md="12">
-				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl2 + ')' }"></div>
+			<v-col cols="12" md="6" class="pb-0 px-0 mx-0" order="1" order-md="12">
+				<div class="image-container" style="background-size: center" :style="{ backgroundImage: 'url(' + imageUrl2 + ')' }"></div>
 			</v-col>
 		</v-row>
 	</div>
@@ -129,6 +129,7 @@ export default {
 		return {
 			imageUrl1: "https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg",
 			imageUrl2: "https://res.cloudinary.com/payhospi/image/upload/v1714742949/umoja/post-hero2.png",
+			imageUrl3: "https://res.cloudinary.com/payhospi/image/upload/v1716241035/umoja/Rectangle_22478_rwkigc.png",
 			country: "All of African",
 			africanCountries: [
 				"Algeria",
