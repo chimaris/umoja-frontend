@@ -39,13 +39,8 @@
 							></v-btn>
 						</v-avatar>
 						<div class="pt-4">
-<<<<<<< HEAD
-							<p style="font-size: 24px; font-weight: 600">Nweke Franklin O.</p>
-							<div class="d-flex flex-column flex-md-row mt-1">
-=======
 							<p v-if="userStore.user" style="font-size: 24px; font-weight: 600">{{ userStore.user.last_name }} {{ userStore.user.first_name }}</p>
 							<div class="d-flex mt-1">
->>>>>>> ffd00c1c33218e19faa8610b40c470417686084e
 								<div class="d-flex align-center" v-for="n in userDetails" :key="n.data">
 									<v-icon class="" size="18" :icon="n.icon"></v-icon>
 									<p v-if="n.data" class="ml-2 mr-4" style="color: #333; font-size: 14px; font-weight: 500">{{ n.data }}</p>
@@ -81,7 +76,7 @@
 			</v-container>
 			<v-container class="pt-2" style="max-width: 1400px">
 				<v-card flat class="cardStyle px-0 mt-4 mb-12 py-0">
-					<!-- <div class="d-flex px-4 pt-6 justify-space-around">
+					<div class="d-flex px-4 pt-6 justify-space-around">
 						<div
 							:key="n"
 							v-for="n in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']"
@@ -95,7 +90,7 @@
 								</span>
 							</v-btn>
 						</div>
-					</div> -->
+					</div>
 					<v-divider class="mt-6"></v-divider>
 
 					<div>
@@ -132,7 +127,7 @@
 </template>
 <script>
 import { useUserStore } from "~/stores/userStore";
-import {getdateRegistered} from '~/utils/date';
+import { getdateRegistered } from "~/utils/date";
 export default {
 	setup() {
 		definePageMeta({
@@ -143,14 +138,12 @@ export default {
 				}
 				if (!userStore.user) {
 					const response = userStore.logout();
-					if (response){
+					if (response) {
 						return navigateTo("/user/login");
 					}
-					
 				}
 			}),
 		});
-
 	},
 	data() {
 		return {

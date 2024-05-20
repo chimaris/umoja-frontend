@@ -110,7 +110,6 @@
 					<div class="d-flex mb-5 mb-md-0">
 						<v-avatar class="mr-3" size="60" style="border: 1px solid var(--magnetic-green-4, #2c6e63)">
 							<v-img width="20" height="20" :src="n.icon"> </v-img>
-							<!-- <v-icon color="#2C6E63" :icon="'mdi mdi-' + n.icon"></v-icon> -->
 						</v-avatar>
 						<div :style="{ width: $vuetify.display.mobile ? '210px' : '' }">
 							<p style="color: #333; font-size: 16px; font-weight: 600; line-height: 120%; /* 19.2px */ letter-spacing: -0.16px" class="mb-2">
@@ -331,7 +330,7 @@
 	</div>
 	<div>
 		<product-row :cover="false" :maxwidth="'1200px'" :items="productStore.products.hotDeals" :showVendor="true" title=" 🔥 Hot Deals " />
-		<div style="padding: 150px 0px" class="d-none d-md-block">
+		<div style="padding: 50px 0px 100px" class="d-none d-md-block">
 			<v-carousel style="overflow: visible" height="429" class="promo" :show-arrows="false" hide-delimiter-background="" cycle>
 				<v-carousel-item v-for="n in 6" :key="n">
 					<v-row>
