@@ -188,7 +188,6 @@
 			</v-container>
 		</v-card>
 		<div style="padding: 50px 0; width: 100%">
-			<!-- <v-container class="px-0 mx-auto"> -->
 			<v-row class="pl-0 pr-0 mr-0 ml-0">
 				<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
 					<v-img
@@ -235,7 +234,6 @@
 					</v-card>
 				</v-col>
 			</v-row>
-			<!-- </v-container> -->
 		</div>
 
 		<v-container class="px-3" style="padding-top: 0px; max-width: 1400px">

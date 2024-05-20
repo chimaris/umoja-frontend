@@ -61,6 +61,7 @@
 		<p style="color: #1e1e1e; font-size: 14px; font-weight: 400" class="text-wrap mt-0">
 			<strong>See More</strong>
 		</p>
+
 		<div class="d-flex mt-4 align-center justify-space-between">
 			<div class="d-flex align-center">
 				<v-icon size="19" icon="mdi mdi-heart-outline"></v-icon>
