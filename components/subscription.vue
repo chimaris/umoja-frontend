@@ -33,11 +33,11 @@
 						<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
 					</div>
 					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ 30/Month</p>
-					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything in our free plan plus...</p>
+					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything  our medium plan has...</p>
 
-					<div v-for="n in 7" :key="n" class="mb-4 d-flex align-center">
+					<div v-for="n in freeFeatures" :key="n" class="mb-4 d-flex align-center">
 						<v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
-						<p style="color: #333; font-size: 14px; font-weight: 400">Lorem ipsum dolor sit amet consectetur.</p>
+						<p style="color: #333; font-size: 14px; font-weight: 400">{{n}}</p>
 					</div>
 				</v-sheet>
 
@@ -49,11 +49,11 @@
 						<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
 					</div>
 					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ 39/Month</p>
-					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything in our free plan plus...</p>
+					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything our premium plan has...</p>
 
-					<div v-for="n in 9" :key="n" class="mb-4 d-flex align-center">
+					<div v-for="n in freeFeatures" :key="n" class="mb-4 d-flex align-center">
 						<v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
-						<p style="color: #333; font-size: 14px; font-weight: 400">Lorem ipsum dolor sit amet consectetur.</p>
+						<p style="color: #333; font-size: 14px; font-weight: 400">{{ n }}</p>
 					</div>
 				</v-sheet>
 			</div>

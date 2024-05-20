@@ -3,17 +3,20 @@
 import { defineStore } from 'pinia';
 import axios from 'axios';
 import { useApi } from '~/composables/useApi';
+import {getUser} from '~/composables/useUser';
 
 
 export const useUserStore = defineStore({
   id: 'user',
   state: () => ({
     loading: false,
+    allPosts: [],
     error: '',
     loginError: '',
     signUpError: '',
     isLoggedIn: false,
     userToken: null,
+    user: null
   }),
   persist: {
     enabled: true,
@@ -37,6 +40,7 @@ export const useUserStore = defineStore({
         const {access_token} = response.data;
         this.userToken = access_token
         this.isLoggedIn = true;
+        this.user = await getUser(response.data.user_id)
         return true;
       } catch(error) {
           if (error.response) {
@@ -63,6 +67,7 @@ export const useUserStore = defineStore({
         });
         this.signUpError = '';
         const {access_token} = response.data;
+        this.user = await getUser(response.data.user_id)
         this.userToken = access_token
         this.isLoggedIn = true
         return true
@@ -114,13 +119,17 @@ export const useUserStore = defineStore({
         console.error(error)
       }
     },
-    async socialLoginCallBack(provider) {
+    async socialLoginCallBack(provider, code) {
+      const api = useApi()
       try {
-        const response = await axios.get(`https://umoja-store.netlify.app/auth/${provider}/callback`) 
+        const response = await api({
+          url :`auth/${provider}/callback?code=${code}`,
+          method: 'GET'
+        });
         const {access_token} = response.data;
         this.userToken = access_token
         this.isLoggedIn = true
-        console.log(access_token, response)
+        this.user = await getUser(response.data.user.user_id)
         return true;
       }catch(error) {
         console.error(error)

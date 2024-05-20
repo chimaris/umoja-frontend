@@ -39,11 +39,16 @@
 							></v-btn>
 						</v-avatar>
 						<div class="pt-4">
+<<<<<<< HEAD
 							<p style="font-size: 24px; font-weight: 600">Nweke Franklin O.</p>
 							<div class="d-flex flex-column flex-md-row mt-1">
+=======
+							<p v-if="userStore.user" style="font-size: 24px; font-weight: 600">{{ userStore.user.last_name }} {{ userStore.user.first_name }}</p>
+							<div class="d-flex mt-1">
+>>>>>>> ffd00c1c33218e19faa8610b40c470417686084e
 								<div class="d-flex align-center" v-for="n in userDetails" :key="n.data">
 									<v-icon class="" size="18" :icon="n.icon"></v-icon>
-									<p class="ml-2 mr-4" style="color: #333; font-size: 14px; font-weight: 500">{{ n.data }}</p>
+									<p v-if="n.data" class="ml-2 mr-4" style="color: #333; font-size: 14px; font-weight: 500">{{ n.data }}</p>
 								</div>
 							</div>
 						</div>
@@ -127,12 +132,25 @@
 </template>
 <script>
 import { useUserStore } from "~/stores/userStore";
-
+import {getdateRegistered} from '~/utils/date';
 export default {
 	setup() {
 		definePageMeta({
-			middleware: ["auth"],
+			middleware: defineNuxtRouteMiddleware((to, from) => {
+				const userStore = useUserStore();
+				if (!userStore.isLoggedIn) {
+					return navigateTo("/user/login");
+				}
+				if (!userStore.user) {
+					const response = userStore.logout();
+					if (response){
+						return navigateTo("/user/login");
+					}
+					
+				}
+			}),
 		});
+
 	},
 	data() {
 		return {
@@ -144,19 +162,19 @@ export default {
 			userDetails: [
 				{
 					icon: "mdi mdi-email",
-					data: "@sylvesterfranklin007@gmail.com",
+					data: useUserStore().user?.email,
 				},
 				{
 					icon: "mdi mdi-account",
-					data: "24 Years",
+					data: "",
 				},
 				{
 					icon: "mdi mdi-map-marker",
-					data: "🇺🇸 United States, New York City",
+					data: "",
 				},
 				{
 					icon: "mdi mdi-history",
-					data: "Joined June 2023",
+					data: getdateRegistered(useUserStore().user?.created),
 				},
 			],
 			items: [

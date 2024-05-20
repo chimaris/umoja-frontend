@@ -1,12 +1,12 @@
 import {defineStore} from "pinia";
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from '~/utils/storage';
 
 
 export const useVendorProductStore = defineStore('vendor-product', {
     state: () => ({
         Products: [],
+        allProducts: [],
         generalInfo: [],
         textInfo: [],
         priceInfo: [],
@@ -41,19 +41,15 @@ export const useVendorProductStore = defineStore('vendor-product', {
         getProducts: (state) => state.Products
     },
     actions: {
-      async getAllProduct(page) {
+      async getAllProduct() {
         const api = vendorUseApi()
         try {
           const response = await api({
-            url: `vendor/products/?page=${page}`,
+            url: 'vendor/products',
             method: 'get'
           });
-          this.Products = response.data.data;
-          this.pagesNo = response.data.meta.last_page;
-          this.from = response.data.meta.from;
-          this.toPage = response.data.meta.to;
-          this.currentPage = response.data.meta.current_page;
-          return this.Products
+          this.allProducts = response.data.data;
+          return 
         }catch(error) {
           console.error(error)
         }

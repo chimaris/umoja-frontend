@@ -1,7 +1,7 @@
 <template>
 	<div id="homepage" style="min-height: 100vh; width: 100%">
 		<v-img
-			style="height: 185px; position: relative"
+			style="height: 185px; position: relative;"
 			width="auto"
 			cover
 			class="d-flex bg-grey justify-end align-end"
@@ -21,21 +21,23 @@
 						>
 							<v-sheet max-width="455" class="mx-auto" width="100%" style="padding-top: 20px">
 								<div class="text-center pa-4">
-									<v-avatar class="mx-auto"  size="100">
+									<v-avatar class="mx-auto"  size="100" :style="`border: 3px solid ${profileBorderColor};`">
 										<v-img v-if="vendor.vendor_details?.profile_photo"
-											class="bg-grey-lighten-3 rounded-xl"
+											class="bg-grey-lighten-3"
+											cover
 											:src="vendor.vendor_details?.profile_photo"
 										>
 										</v-img>
 										<v-img v-else
+											cover
 											class="bg-grey-lighten-3 rounded-xl"
 											src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"
 										></v-img>
 									</v-avatar>
-									<h3 class="py-4" style="font-size: 24px; font-weight: 800; line-height: 30px">
+									<h3 class="py-4 pb-6" style="font-size: 24px; font-weight: 800; line-height: 30px">
 										{{ vendor.vendor_details?.business_name }} <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
 									</h3>
-									<v-btn color="orange" width="80%" flat> Follow</v-btn>
+									<v-divider></v-divider>
 								</div>
 								<div class="pa-2">
 									<div class="pa-4 align-center justify-space-between d-flex">
@@ -88,7 +90,7 @@
 											<v-avatar rounded="0" size="23"><v-icon color="green" :icon="'mdi mdi-' + n.icon"></v-icon></v-avatar>
 										</v-btn>
 									</div>
-									<div class="pt-12 mt-12 justify-start align-center d-flex">
+									<!-- <div class="pt-12 mt-12 justify-start align-center d-flex">
 										<v-btn
 											@click="choose('Profile Setup')"
 											style="border: 0.357149px solid #2c6e63"
@@ -101,8 +103,9 @@
 										>
 											<v-icon class="mr-2" icon="mdi mdi-pencil"></v-icon> Edit Profile
 										</v-btn>
-									</div>
-									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ getdateRegistered() }}</p>
+									</div> -->
+								
+									<p class="text-center textClass text-grey-darken-1 pt-12">MEMBER SINCE: {{ getdateRegistered(vendor.created) }}</p>
 								</v-sheet>
 							</v-sheet>
 						</v-card>
@@ -112,7 +115,9 @@
 							<v-tabs v-model="tab" color="green" grow>
 								<v-tab v-for="item in ['products', 'posts', 'articles', 'promo%']" :key="item" :value="item" class="d-flex align-center">
 									{{ item }}
-									<v-badge v-if="item !== 'promo%'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" content="2" size="12"></v-badge>
+									<v-badge v-if="item == 'posts'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="postStore.posts.length" size="12"></v-badge>
+									<v-badge v-if="item == 'products'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendorProducts.allProducts.length" size="12"></v-badge>
+									<v-badge v-if="item == 'articles'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="postStore.articles.length" size="12"></v-badge>
 								</v-tab>
 							</v-tabs>
 							<v-divider></v-divider>
@@ -155,14 +160,20 @@
 <script>
 import { useVendorStore } from '~/stores/vendorStore';
 import { countryCodes } from '~/utils/countryapi';
-import {onMounted} from 'vue'
+import {getdateRegistered} from '~/utils/date';
 import {useRouter} from 'vue-router'
+import ColorThief from 'colorthief';
+import {ref, onMounted, computed} from 'vue'
+import {useCreateStore} from '~/stores/createPostStore'
+import {useVendorProductStore} from '~/stores/vendorProducts'
 
 export default {
 	setup(props, ctx) {
 		const vendorStore = useVendorStore()
-		const vendor = ref([])
+		const vendor = computed(() => vendorStore.getVendor)
+		const vendorProducts = useVendorProductStore()
 		const router = useRouter()
+		const postStore = useCreateStore()
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		};
@@ -176,17 +187,18 @@ export default {
 			router.push('/vendor/dashboard/Profile Setup')
 		}
 		onMounted(async () => {
-
-			// await vendorStore.getUser(vendorStore.vendor.id)
-			vendor.value = vendorStore.getVendor
-			
+			await postStore.getPost()
+			await vendorProducts.getAllProduct()
+			await postStore.getArticle()
 		})
 		return {
 			vendorStore,
+			postStore,
 			vendor,
 			choose,
 			openSocialMedia,
-			completeReg
+			completeReg,
+			vendorProducts
 		}
 	},
 	data() {
@@ -196,6 +208,7 @@ export default {
 			window: "products",
 			rating: 4,
 			tab: null,
+			profileBorderColor: '#F38218',
 			items: [
 				{
 					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
@@ -305,23 +318,25 @@ export default {
 				: [6, 12, 12, 12, 12, 12, 12, 12, 12];
 		},
 	},
+	mounted() {
+    const img = new Image();
+	img.crossOrigin = 'Anonymous'; 
+    img.src = this.vendor.vendor_details?.profile_photo;
+    img.onload = () => {
+      const colorThief = new ColorThief();
+      const dominantColor = colorThief.getColor(img);
+      this.profileBorderColor = `rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`;
+    };
+	img.onerror = () => {
+    console.error('Cannot load image');
+  };
+  },
 	methods: {
 		getCountryCode() {
 			
       		const country = this.vendor.vendor_details?.rep_country;
       		return countryCodes[country];
     	},
-		getdateRegistered() {
-			const dateString = this.vendor.created;
-			const date = new Date(dateString)
-
-			const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-			const month = months[date.getMonth()];
-			const day = date.getDate();
-			const year = date.getFullYear();
-  
-    		return `${month} ${day}, ${year}`;
-		}
 		},
 		filt(text) {
 			var newText = text.length > 40 ? text.slice(0, 40) + "..." : text;

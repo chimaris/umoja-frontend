@@ -48,12 +48,12 @@
 								v-if="currentPage != 'Order details' && currentPage != 'Add Products' && currentPage != 'createorder' && currentPage !== 'Import Product' && currentPage !== 'Edit Product'"
 								class="h-100 d-flex align-center"
 							>
-								<v-btn class="mx-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
+								<v-btn class="mx-4" icon flat rounded="xl" @click="vendorStore.sideBtn = !vendorStore.sideBtn"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
 
 								<p style="font-weight: 600; font-size: 24px; line-height: 32px; color: #1a1d1f" class="text-capitalize">{{ currentPage }}</p>
 							</div>
 							<div v-else class="h-100 px-8 d-flex align-center">
-								<v-btn class="mr-4" icon flat rounded="xl" @click="sidebar = !sidebar"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
+								<v-btn class="mr-4" icon flat rounded="xl" @click="vendorStore.sideBtn = !vendorStore.sideBtn"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
 
 								<v-btn
 									@click="handleClick"
@@ -157,13 +157,13 @@ middleware: "vendor-auth"
 })
 
 
-import { ref, onBeforeUnmount, onMounted,  } from 'vue';
+import { ref, onBeforeUnmount, onMounted, computed  } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
 
 
-const sidebar = ref(true);
+const sidebar = computed(() => useVendorStore().sideBtn)
 const edit = ref(true);
 const router = useRouter();
 const route = useRoute()
@@ -195,7 +195,6 @@ function checkScreenSize(){
 }
 const handleClick = () => {
       if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product') {
-        // Update the currentPage value to 'Products' if it meets the condition, otherwise set it to 'Orders'
 		router.push('/vendor/dashboard/Products')
       
 		
@@ -209,7 +208,7 @@ function changePage(n) {
 }
 
 function sideFn() {
-  sidebar.value = false;
+  useVendorStore().sideBtn = false
 }
 
 </script>

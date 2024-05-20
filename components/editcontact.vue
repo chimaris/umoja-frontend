@@ -63,7 +63,6 @@
                     <v-select
                             v-model="vendor.office_country"
                             :items="countries"
-                            append-inner-icon="mdi mdi-chevron-down"
                             placeholder="Select Country"
                             density="comfortable"
 							@input="fetchStates(vendor.office_country)"
@@ -84,8 +83,7 @@
                     <p class="inputLabel">City</p>
                     <v-select 
 						v-model="vendor.office_city"
-						:items="cities"
-						append-inner-icon="mdi mdi-chevron-down" 
+						:items="cities" 
 						placeholder="Select" density="comfortable">
 					</v-select>
                 </div>
@@ -155,17 +153,14 @@ import { useVendorStore } from '~/stores/vendorStore';
         const accordionOpen = ref(-1);
 		const isEditing = ref(false)
         const vendorStore = useVendorStore()
-        const vendor = ref([])
-     
-        const formError = ref("")
-
-        onMounted(() => {
-            if (!vendorStore.vendor.vendor_details){
-                vendor.value = []
-            }else {
-                vendor.value = vendorStore.vendor.vendor_details
+        const vendor = computed(() => {
+            if (!vendorStore.vendor.vendor_details) {
+                return []
             }
-        })
+            return vendorStore.vendor.vendor_details
+        });
+            
+        const formError = ref("")
 
 		const emit = defineEmits(['submit']);
         const socialMediaHandles = computed(() => [

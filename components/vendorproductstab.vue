@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
-			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">72 products found</p>
+			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{items.length}} products found</p>
 			<div>
 				<v-btn flat color="transparent" style="font-size: 15px; color: #333333">
 					<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716236003/umoja/view-grid.svg" />
@@ -185,7 +185,7 @@
 		</v-carousel>
 		<v-row style="background-color: #fff" class="mt-8">
 			<v-col v-for="(n, i) in items" :key="i" cols="6" lg="4" md="6">
-				<product-component :index="i" :item="n" />
+				<product-component :index="i" :item="n" :role="role" />
 			</v-col>
 		</v-row>
 	</div>
@@ -196,16 +196,20 @@ import VueCountdown from "@chenfengyuan/vue-countdown";
 import { useVendorStore } from "~/stores/vendorStore";
 import { useCartStore } from "~/stores/cartStore";
 import { useProductStore } from "~/stores/productStore.js";
+import {useVendorProductStore} from '~/stores/vendorProducts'
+import {ref, computed} from 'vue'
 
 export default {
 	setup() {
-		const items = ref([]);
+		const items = computed(() => useVendorProductStore().allProducts);
+		const role = ref("vendor");
 		onMounted(() => {
-			items.value = useProductStore().getProductsArray("vendorProducts");
+			useVendorProductStore().getAllProduct()
 		});
 
 		return {
 			items,
+			role
 		};
 	},
 	components: {

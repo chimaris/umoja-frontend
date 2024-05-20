@@ -38,6 +38,7 @@
 		"@vue-stripe/vue-stripe": "^4.5.0",
 		"apexcharts": "^3.49.0",
 		"axios": "^1.4.0",
+		"colorthief": "^2.4.0",
 		"compressorjs": "^1.2.1",
 		"dayjs": "^1.11.10",
 		"flag-icon-css": "^4.1.7",

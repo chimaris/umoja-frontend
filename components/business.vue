@@ -15,7 +15,6 @@
 					</p>
 					<v-row 
 						style="align-items: center; display: flex" 
-						@change="upLoadFile"
 						@dragenter.prevent
 						@dragleave.prevent
 						@dragover.prevent
@@ -31,7 +30,7 @@
 								<v-label style="color: #1273eb; font-size: 12px; font-weight: 600" for='profile'>Click to Upload</v-label> or drag and drop <br />
 								SVG, PNF, JPG, or GIF (max 800X400px)
 							</p>
-							<input class="profile-picture" id="profile" type="file" style="display: none;" accept=".svg, .png, .jpeg, .jpg, .gif">
+							<input class="profile-picture" id="profile" @change="upLoadFile($event)" type="file" style="display: none;" accept=".svg, .png, .jpeg, .jpg, .gif">
 						</v-col>
 					</v-row>
 					<p style="color: red; font-size: 14px;">{{ errorMessage }}</p>
@@ -44,6 +43,43 @@
      			 </ul>
 				  <ul>
 				<li v-for="(file, index) in upLoadedFiles" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between; ">
+					<fileUploaded :file="file" />
+				</li>
+				</ul>
+				<div class="mb-8">
+					<p style="font-size: 16px; color: #969696" class="mb-2">
+						<span style="font-weight: 500; color: #333">Upload cover photo</span> (Optional)
+					</p>
+					<v-row 
+						style="align-items: center; display: flex" 
+						@dragenter.prevent
+						@dragleave.prevent
+						@dragover.prevent
+						@drop.prevent="drop1"
+						>
+						<v-col cols="2">
+							<v-avatar color="#EDF0EF" class="mr-4" size="x-large">
+								<v-label for='profile'><v-icon color="#9EA5AD" icon="mdi mdi-file-upload-outline"></v-icon></v-label>
+							</v-avatar>
+						</v-col>
+						<v-col cols="10">
+							<p style="font-weight: 500; font-size: 12px; color: #969696; border: 1px dotted #cecece; border-radius: 6px; padding: 15px; width: 100%">
+								<v-label style="color: #1273eb; font-size: 12px; font-weight: 600" for='profile1'>Click to Upload</v-label> or drag and drop <br />
+								SVG, PNF, JPG, or GIF (max 800X400px)
+							</p>
+							<input class="profile-picture1" id="profile1" @change="upLoadFile1($event)" type="file" style="display: none;" accept=".svg, .png, .jpeg, .jpg, .gif">
+						</v-col>
+					</v-row>
+					<p style="color: red; font-size: 14px;">{{ errorMessage1 }}</p>
+				</div>
+				
+				<ul class="my-7" v-if="showProgress1">
+					<li v-for="(file, index) in coverPicture" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between;">
+					<fileUploading :file="file" />
+					</li>
+     			 </ul>
+				  <ul>
+				<li v-for="(file, index) in upLoadedFiles1" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between; ">
 					<fileUploaded :file="file" />
 				</li>
 				</ul>
@@ -96,21 +132,23 @@ import axios from 'axios'
 	const vendorStore = useVendorStore();
 
 	const profilePicture = ref([])
+	const coverPicture = ref([])
 	const upLoadedFiles = ref([])
+	const upLoadedFiles1 = ref([])
 	const errorMessage = ref("")
+	const errorMessage1 = ref("")
 	const showProgress = ref(false)
+	const showProgress1 = ref(false)
 	const profile_photo = ref("")
 	const bioError = ref("")
+	const cover_photo = ref("")
 
-	const vendor = ref([])
-
-	onMounted(() => {
-		if (!vendorStore.vendor.vendor_details){
-			vendor.value = []
-		}else {
-			vendor.value = vendorStore.vendor.vendor_details
-		}
-	})
+	const vendor = computed(() => {
+	if (!vendorStore.vendor.vendor_details) {
+		return []
+	}
+	return vendorStore.vendor.vendor_details
+});
 
 	const emit = defineEmits(['submit']);
 	
@@ -127,12 +165,12 @@ import axios from 'axios'
 		bioError.value = ""
 		const data = {
 			profile_photo: profile_photo.value,
-			business_bio: vendor.value.business_bio
+			business_bio: vendor.value.business_bio,
+			cover_image: cover_photo.value
 		}
 		if (profile_photo.value && vendor.value.business_bio){
 			try{
 				const response = await vendorStore.registerVendor(data)
-				console.log(response)
 				emit("submit");
 				return
 			}catch(error){
@@ -155,12 +193,12 @@ import axios from 'axios'
 					return charCount.value >= maxCount.value;
 	});
 
-function upLoadFile() {
+function upLoadFile(event) {
 	if (upLoadedFiles.value.length == 1){
 		errorMessage.value = 'Maximum number of images allowed is 1'
 		return
 	}
-		const file = document.querySelector(".profile-picture").files[0]
+		const file = event.target.files[0]
 		if(!file) return;
 		
     const allowedFiles = [".png", ".jpeg", ".jpg"]
@@ -229,6 +267,160 @@ function upLoadFile() {
 
     img.onerror = function () {
       errorMessage.value = "Failed to load the image"
+    };
+
+}
+function upLoadFile1(event) {
+	if (upLoadedFiles1.value.length == 1){
+		errorMessage1.value = 'Maximum number of images allowed is 1'
+		return
+	}
+		const file = event.target.files[0]
+		if(!file) return;
+		
+    const allowedFiles = [".png", ".jpeg", ".jpg"]
+    const maxAllowedWidth = 800;
+    const maxAllowedHeight = 400;
+    const maxFileSize = 3 * 1024 * 1024;
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    
+    if (!allowedFiles.includes("." + fileExtension)) {
+          errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
+          return;
+      }
+
+      errorMessage1.value = ""
+
+    if (file.size > maxFileSize) {
+      errorMessage1.value = "File size exceeds the maximum allowed size of 3MB";
+      return;
+    }
+    errorMessage1.value = ""
+
+
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = function () {
+    //   if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
+    //     errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+    //     return;
+    //   }
+      errorMessage1.value = "";
+      const filename = file.name
+      const formData = new FormData();
+      formData.append("profile_photo", file);
+      const form = {name: filename, loading: 0}
+      coverPicture.value = [form]
+      showProgress1.value = true;
+
+	  axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
+			headers: {
+					Authorization: `Bearer ${vendorStore.vendorToken}`
+					},
+			onUploadProgress: ({loaded, total}) => {
+				coverPicture.value[coverPicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles1.value.push({name: filename, size: fileSize});
+					coverPicture.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				const coverImg = response.data.profile_photo
+				cover_photo.value = coverImg
+			})
+			.catch(error => {
+				if (error.response) {
+				errorMessage1.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+				errorMessage1.value = 'No response received from server. Please try again later.';
+				} else {
+				errorMessage1.value = 'An error occurred. Please try again later.';
+				}
+			});
+			};
+
+    img.onerror = function () {
+      errorMessage1.value = "Failed to load the image"
+    };
+
+}
+function drop1(e) {
+	if (upLoadedFiles1.value.length == 1){
+		errorMessage1.value = 'Maximum number of images allowed is 1'
+		return
+	}
+		const file= e.dataTransfer.files[0]
+		if(!file) return;
+		
+    const allowedFiles = [".png", ".jpeg", ".jpg"]
+    const maxAllowedWidth = 800;
+    const maxAllowedHeight = 400;
+    const maxFileSize = 3 * 1024 * 1024;
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+    
+    if (!allowedFiles.includes("." + fileExtension)) {
+          errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
+          return;
+      }
+
+      errorMessage1.value = ""
+
+    if (file.size > maxFileSize) {
+      errorMessage1.value = "File size exceeds the maximum allowed size of 3MB";
+      return;
+    }
+    errorMessage1.value = ""
+
+
+    const img = new Image();
+    img.src = URL.createObjectURL(file);
+    img.onload = function () {
+    //   if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
+    //     errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
+    //     return;
+    //   }
+      errorMessage1.value = "";
+      const filename = file.name
+      const formData = new FormData();
+      formData.append("profile_photo", file);
+      const form = {name: filename, loading: 0}
+      coverPicture.value = [form]
+      showProgress1.value = true;
+
+	  axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
+			headers: {
+					Authorization: `Bearer ${vendorStore.vendorToken}`
+					},
+			onUploadProgress: ({loaded, total}) => {
+				coverPicture.value[coverPicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
+				if (loaded == total) {
+					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
+					upLoadedFiles1.value.push({name: filename, size: fileSize});
+					coverPicture.value = [];
+				}
+			}
+			
+			})
+			.then(response => {
+				const coverImg = response.data.profile_photo
+				cover_photo.value = coverImg
+			})
+			.catch(error => {
+				if (error.response) {
+				errorMessage1.value = error.response.data.message || 'An error occurred during file upload.';
+				} else if (error.request) {
+				errorMessage1.value = 'No response received from server. Please try again later.';
+				} else {
+				errorMessage1.value = 'An error occurred. Please try again later.';
+				}
+			});
+			};
+
+    img.onerror = function () {
+      errorMessage1.value = "Failed to load the image"
     };
 
 }

@@ -151,13 +151,8 @@ export default {
 setup() {
 const appStore = useAppStore();
 const vendorStore = useVendorStore();
-const vendor = ref([])
+const vendor = computed(() => vendorStore.getVendor)
 
-
-
-onMounted(async () => {
-			vendor.value = vendorStore.getVendor
-})
 
 return {
 integratedApps: appStore.integratedApps,
@@ -209,16 +204,16 @@ list: [
 { text: 'Settings', icon: 'mdi mdi-cog' },
 ]
 },
-{
-name: 'Umoja Apps',
-list: [
-{ text: 'All Apps', icon: 'mdi mdi-message-badge',
-subapps: [
-{ text: 'Jira', icon: 'mdi mdi-square-rounded' },
-{ text: 'Quick Books', icon: 'mdi mdi-square-rounded' },
-]},
-]
-},
+// {
+// name: 'Umoja Apps',
+// list: [
+// { text: 'All Apps', icon: 'mdi mdi-message-badge',
+// subapps: [
+// { text: 'Jira', icon: 'mdi mdi-square-rounded' },
+// { text: 'Quick Books', icon: 'mdi mdi-square-rounded' },
+// ]},
+// ]
+// },
 ]
 }
 },

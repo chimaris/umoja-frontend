@@ -309,15 +309,15 @@ export default {
 			shippingAddress.value = await fetchShippingAdress();
 		});
 
-		watch(
-			() => cartStore.totalCheckoutItems,
-			(newVal) => {
-				if (newVal === 0) {
-					router.push("/order/cart");
-				}
-			},
-			{ immediate: true }
-		);
+		// watch(
+		// 	() => cartStore.totalCheckoutItems,
+		// 	(newVal) => {
+		// 		if (newVal === 0) {
+		// 			router.push("/order/cart");
+		// 		}
+		// 	},
+		// 	{ immediate: true }
+		// );
 		return {
 			cartStore,
 			shippingCountry,
@@ -448,7 +448,6 @@ export default {
 				shippingAddressId: this.selectedAddress,
 			};
 			this.cartStore.saveShippingDetails(data);
-			console.log(this.cartStore.shippingDetails);
 			this.$router.push("/order/payment");
 		},
 		async updateShippingAddress(address) {
@@ -487,17 +486,18 @@ export default {
 				if (response) {
 					this.shippingAddress = await fetchShippingAdress();
 					this.addAddress = false;
+					
+					this.fullName = "";
+					this.email = "";
+					this.confirmationEmail = "";
+					this.phoneNumber = "";
+					this.streetName = "";
+					this.shippingState = "";
+					this.shippingCity = "";
+					this.postalCode = "";
+					this.shippingCountry = "";
 				}
 
-				this.fullName = "";
-				this.email = "";
-				this.confirmationEmail = "";
-				this.phoneNumber = "";
-				this.streetName = "";
-				this.shippingState = "";
-				this.shippingCity = "";
-				this.postalCode = "";
-				this.shippingCountry = "";
 			}
 		},
 		filt(text) {

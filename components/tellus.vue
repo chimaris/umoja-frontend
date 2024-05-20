@@ -7,18 +7,16 @@
 			<v-select
 				v-model="vendor.rep_country"
 				:items="allCountries"
-				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select African Country"
 				density="comfortable"
 				:rules="inputRules"
 			>
 			</v-select>
 		
-			<p class="inputLabel" >What type of company is your Business Category</p>
+			<p class="inputLabel" >What category is your business?</p>
 
 			<v-select
 				v-model="vendor.business_type"
-				append-inner-icon="mdi mdi-chevron-down"
 				:items="companyCategories"
 				placeholder="Select"
 				density="comfortable"
@@ -29,10 +27,10 @@
 
 			<v-text-field :rules="inputRules" v-model="vendor.business_name" placeholder="Type your official business name" density="comfortable"> </v-text-field>
 
-			<p class="inputLabel">Business Website <span><i class="mdi mdi-information" style="color: #1C274C"></i></span></p>
+			<!-- <p class="inputLabel">Business Website <span><i class="mdi mdi-information" style="color: #1C274C"></i></span></p>
 
-			<v-text-field :rules="inputRules" v-model="vendor.business_website" placeholder="http://www." density="comfortable"> </v-text-field>
-			<p class="inputLabel">Add business images <span style="color: #969696;">(at least 5-10 pictures)</span></p>
+			<v-text-field :rules="inputRules" v-model="vendor.business_website" placeholder="http://www." density="comfortable"> </v-text-field> -->
+			<!-- <p class="inputLabel">Add business images <span style="color: #969696;">(at least 5-10 pictures)</span></p>
 			<div 
 			@dragenter.prevent
 			@dragleave.prevent
@@ -46,7 +44,7 @@
 				<label class="mb-1" style="color: #475467; font-weight: 400; font-size: 16px;" for="file-input"><span style="color: #2C6E63; font-weight: 600;">Click to upload</span> or drag and drop </label>
 				<span style="font-weight: 400; font-size: 16px; color: #475467;">SVG, PNG, JPG, or GIF (max, 800px x 400px)</span>
 				<input class="droppedFile" id="file-input" type="file" multiple style="display: none;" accept=".svg, .png, .jpeg, .jpg, .gif">
-      </div>
+      		</div>
 			<p style="color:red; font-size: 14px;">{{ errorMessage }} </p>
 		
 			<ul class="my-7" v-if="showProgress">
@@ -58,7 +56,7 @@
 				<li v-for="(file, index) in upLoadedFiles" :key="index" class="d-flex align-center py-2 rounded-lg px-4 mb-4" style="border: 1px solid #EAECF0; justify-content: space-between; ">
 					<fileUploaded :file="file" />
 				</li>
-			</ul>
+			</ul> -->
 			
 			<p class="mt-4" style="font-weight: 600; font-size: 20px; line-height: 30px; color: #1a1d1f">Verify your business location</p>
 			<p style="font-weight: 500; font-size: 16px; line-height: 24px; color: #9ea5ad" class="mb-8">
@@ -75,7 +73,6 @@
 			<v-select
 				v-model="vendor.country_name"
 				:items="allCountries"
-				append-inner-icon="mdi mdi-chevron-down"
 				placeholder="Select Country"
 				density="comfortable"
 				:rules="inputRules"
@@ -87,7 +84,6 @@
 			v-model="vendor.state" 
 			color="green"
 			:loading="loadingStates"
-			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select State" 
 			density="comfortable" 
 			:items="states"
@@ -100,7 +96,6 @@
 			v-model="vendor.city" 
 			:loading="loadingCities"
 			color="green"
-			append-inner-icon="mdi mdi-chevron-down" 
 			placeholder="Select" density="comfortable" 
 			:items="cities"
 			:rules="inputRules"> 
@@ -121,16 +116,13 @@ import {inputRules} from '~/utils/formrules'
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
 
 const vendorStore = useVendorStore()
-const vendor = ref([])
-
-onMounted(()=> {
+const vendor = computed(() => {
 	if (!vendorStore.vendor.vendor_details) {
-		vendor.value = []
-	}else {
-		vendor.value = vendorStore.vendor.vendor_details
-		console.log(vendorStore.getVendor)
+		return []
 	}
+	return vendorStore.vendor.vendor_details
 })
+
 
 const businessImages = ref([])
 
@@ -148,7 +140,7 @@ const emit = defineEmits(['submit']);
 
 
 const companyCategories = [
-  "Fashion", "Cosmetic", "Art", "Home decoration", "Furniture", "Accessories","Other"
+  "Fashion", "Cosmetic", "Art", "Home decoration", "Furniture", "Accessories"
 ];
 
 const submit = async () => {
@@ -157,8 +149,6 @@ const submit = async () => {
 		rep_country: vendor.value.rep_country,
 		business_type: vendor.value.business_type,
 		business_name: vendor.value.business_name,
-		business_website: vendor.value.business_website,
-		business_image: businessImages.value.join(', '),
 		address: vendor.value.address,
 		state: vendor.value.state,
 		city: vendor.value.city,
@@ -203,7 +193,6 @@ function isFormValid() {
 		vendor.value.rep_country &&
 		vendor.value.business_type &&
 		vendor.value.business_name&&
-		vendor.value.business_website &&
 		vendor.value.address && 
 		vendor.value.city &&
 		vendor.value.state &&
