@@ -67,7 +67,7 @@
 					<v-col cols="12" lg="7">
 						<v-row>
 							<v-col v-for="(n, i) in categoriesData" :key="i" cols="6" lg="3">
-								<p style="color: #000; font-size: 18px; font-weight: 600" class="pl-0 pl-md-4">{{ n.title }}</p>
+								<p style="color: #000; font-size: 18px; font-weight: 600" class="pl-0">{{ n.title }}</p>
 								<div class="mt-6">
 									<p
 										style="color: var(--carbon-2, #000); font-size: 14px; font-weight: 400; letter-spacing: -0.42px; text-align: left"
@@ -96,11 +96,10 @@
 				<v-sheet style="border-radius: 15px" class="pb-4 align-center d-flex">
 					<v-row>
 						<v-col cols="12" class="d-flex align-center" md="3">
-							<v-btn size="small" variant="text" class="pl-0 pl-md-2"
-								><v-icon icon="mdi mdi-store" color="green" size="18" class="mr-2"></v-icon>
-								<span
-									style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 500; line-height: 120%; /* 16.8px */ letter-spacing: -0.42px"
-								>
+							<v-btn size="small" variant="text" class="pl-0 pl-md-2">
+								<v-img class="mr-2" height="24" width="24" src="https://res.cloudinary.com/payhospi/image/upload/v1716231831/umoja/Shop_2_lwrjvz.svg">
+								</v-img>
+								<span style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 500; line-height: 120%; letter-spacing: -0.42px">
 									Become a Vendor</span
 								></v-btn
 							>
@@ -139,8 +138,9 @@
 							<div class="w-100">
 								<v-btn color="#F8F8F8" flat icon="mdi mdi-instagram" class="mx-0 mx-md-2 dark-hover" rounded="xl" style="color: #333"></v-btn>
 								<v-btn color="#F8F8F8" flat icon="mdi mdi-twitter" class="mx-2 dark-hover" rounded="xl" style="color: #333"></v-btn>
-								<v-btn color="#F8F8F8" flat icon="mdi mdi-facebook" class="mx-2 dark-hover" rounded="xl" style="color: #333"></v-btn>
-								<v-btn color="#F8F8F8" flat icon="mdi mdi-linkedin" class="dark-hover" rounded="xl" style="color: #333"></v-btn></div
+								<v-btn color="#F8F8F8" flat icon="fab fa-facebook-f" class="mx-2 dark-hover" rounded="xl" style="color: #333"></v-btn>
+
+								<v-btn color="#F8F8F8" flat icon="fab fa-linkedin-in" class="dark-hover" rounded="xl" style="color: #333"></v-btn></div
 						></v-col>
 					</v-row>
 				</v-sheet>

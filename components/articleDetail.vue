@@ -72,7 +72,9 @@
 					target both already banked users but also the 49.5% of Nigerians that are financially excluded or informally served.
 				</p>
 			</v-card>
-			<p class="mb-10 text-overline text-center" style="font-weight: 600; margin-top: 120px; font-size: 16px; color: #333333">READ NEXT</p>
+			<p class="mb-10 text-overline text-left text-md-center" style="font-weight: 600; margin-top: 120px; font-size: 16px; color: #333333">
+				READ NEXT
+			</p>
 
 			<div
 				v-for="n in [
@@ -145,11 +147,11 @@
 					<v-icon size="small" class="ml-4" icon="mdi mdi-arrow-right"></v-icon
 				></v-btn>
 			</div>
-			<div class="px-12 text-center mt-16 mb-0">
+			<!-- <div class="px-12 text-center mt-16 mb-0">
 				<v-btn class="mx-auto" size="x-large" @click="dialog = false" flat variant="outlined"
 					>Back up <v-icon size="16" class="ml-2" icon="mdi mdi-arrow-up-right"></v-icon
 				></v-btn>
-			</div>
+			</div> -->
 		</v-sheet>
 	</v-container>
 </template>

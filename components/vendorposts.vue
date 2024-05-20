@@ -3,8 +3,9 @@
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
 			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{allPosts.length}} posts found</p>
 			<div>
-				<v-btn style="border: 1px solid #e5e5e5" variant="outlined" class="ml-4 textClass text-grey-darken-3">
-					<v-icon class="mr-2" size="20" icon="mdi mdi-tune-vertical"></v-icon>Filter
+				<v-btn style="border: 1px solid #e5e5e5; border-radius: 100px !important" variant="outlined" class="textClass text-grey-darken-3">
+					<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
+					Filter
 				</v-btn>
 			</div>
 		</div>

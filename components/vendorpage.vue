@@ -93,7 +93,7 @@
 											flat
 											icon
 										>
-											<v-avatar rounded="0" size="23"><v-icon color="green" :icon="'mdi mdi-' + n.icon"></v-icon></v-avatar>
+											<v-avatar rounded="0" size="23"><v-icon color="green" :icon="n.icon"></v-icon></v-avatar>
 										</v-btn>
 									</div>
 									<div class="pt-12 mt-12 justify-start align-center d-flex"></div>
@@ -169,7 +169,7 @@
 											flat
 											icon
 										>
-											<v-avatar rounded="0" size="23"><v-icon color="green" :icon="'mdi mdi-' + n.icon"></v-icon></v-avatar>
+											<v-avatar rounded="0" size="23"><v-icon color="green" :icon="n.icon"></v-icon></v-avatar>
 										</v-btn>
 									</div>
 
@@ -289,16 +289,16 @@ export default {
 		buttons() {
 			return [
 				{
-					icon: "youtube",
+					icon: "mdi mdi-youtube",
 				},
 				{
-					icon: "twitter",
+					icon: "mdi mdi-twitter",
 				},
 				{
-					icon: "facebook",
+					icon: "fab fa-facebook-f",
 				},
 				{
-					icon: "linkedin",
+					icon: "fab fa-linkedin-in",
 				},
 			];
 		},

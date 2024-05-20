@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<v-row class="pl-0 pr-0 ml-0 mr-0">
-			<v-col cols="12" md="6" class="py-0 px-0 mx-0" order="12" order-md="1">
+			<v-col cols="12" md="6" class="pt-0 pt-md-3 px-0 mx-0" order="12" order-md="1">
 				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl1 + ')', height: $vuetify.display.mobile ? '203px' : '' }">
 					<div class="mx-auto text-center" :style="{ width: $vuetify.display.mobile ? '300px' : '418px' }">
 						<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" style="color: #fff; font-weight: 500" class="mb-4">
@@ -14,8 +14,8 @@
 					</div>
 				</div>
 			</v-col>
-			<v-col cols="12" md="6" class="py-0 px-0 mx-0" order="1" order-md="12">
-				<div class="image-container" :style="{ backgroundImage: 'url(' + imageUrl2 + ')' }"></div>
+			<v-col cols="12" md="6" class="pb-0 px-0 mx-0" order="1" order-md="12">
+				<div class="image-container" style="background-size: center" :style="{ backgroundImage: 'url(' + imageUrl2 + ')' }"></div>
 			</v-col>
 		</v-row>
 	</div>
@@ -124,132 +124,131 @@
 </template>
 
 <script setup>
-import {ref, onMounted, computed} from 'vue'
-import { fetchAllPosts } from '~/composables/usePost';
+import { ref, onMounted, computed } from "vue";
+import { fetchAllPosts } from "~/composables/usePost";
 import { useUserStore } from "~/stores/userStore";
 
-
-const userStore = useUserStore()
-const availablePosts = computed(() => userStore.allPosts)
-const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg")
-const imageUrl2 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742949/umoja/post-hero2.png")
-const country = ref("All of African")
+const userStore = useUserStore();
+const availablePosts = computed(() => userStore.allPosts);
+const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg");
+const imageUrl2 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742949/umoja/post-hero2.png");
+const country = ref("All of African");
 const africanCountries = [
-				"Algeria",
-				"Angola",
-				"Benin",
-				"Botswana",
-				"Burkina Faso",
-				"Burundi",
-				"Cabo Verde",
-				"Cameroon",
-				"Central African Republic",
-				"Chad",
-				"Comoros",
-				"Democratic Republic of the Congo",
-				"Republic of the Congo",
-				"Cote d'Ivoire",
-				"Djibouti",
-				"Egypt",
-				"Equatorial Guinea",
-				"Eritrea",
-				"Eswatini",
-				"Ethiopia",
-				"Gabon",
-				"Gambia",
-				"Ghana",
-				"Guinea",
-				"Guinea-Bissau",
-				"Kenya",
-				"Lesotho",
-				"Liberia",
-				"Libya",
-				"Madagascar",
-				"Malawi",
-				"Mali",
-				"Mauritania",
-				"Mauritius",
-				"Morocco",
-				"Mozambique",
-				"Namibia",
-				"Niger",
-				"Nigeria",
-				"Rwanda",
-				"Sao Tome and Principe",
-				"Senegal",
-				"Seychelles",
-				"Sierra Leone",
-				"Somalia",
-				"South Africa",
-				"South Sudan",
-				"Sudan",
-				"Tanzania",
-				"Togo",
-				"Tunisia",
-				"Uganda",
-				"Zambia",
-				"Zimbabwe",
-			]
+	"Algeria",
+	"Angola",
+	"Benin",
+	"Botswana",
+	"Burkina Faso",
+	"Burundi",
+	"Cabo Verde",
+	"Cameroon",
+	"Central African Republic",
+	"Chad",
+	"Comoros",
+	"Democratic Republic of the Congo",
+	"Republic of the Congo",
+	"Cote d'Ivoire",
+	"Djibouti",
+	"Egypt",
+	"Equatorial Guinea",
+	"Eritrea",
+	"Eswatini",
+	"Ethiopia",
+	"Gabon",
+	"Gambia",
+	"Ghana",
+	"Guinea",
+	"Guinea-Bissau",
+	"Kenya",
+	"Lesotho",
+	"Liberia",
+	"Libya",
+	"Madagascar",
+	"Malawi",
+	"Mali",
+	"Mauritania",
+	"Mauritius",
+	"Morocco",
+	"Mozambique",
+	"Namibia",
+	"Niger",
+	"Nigeria",
+	"Rwanda",
+	"Sao Tome and Principe",
+	"Senegal",
+	"Seychelles",
+	"Sierra Leone",
+	"Somalia",
+	"South Africa",
+	"South Sudan",
+	"Sudan",
+	"Tanzania",
+	"Togo",
+	"Tunisia",
+	"Uganda",
+	"Zambia",
+	"Zimbabwe",
+];
 
 const items = [
-				{
-					vendorName: "Nana Akufo-Addo",
-					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
-					vendorCategory: "Sculptor",
-					name: "Koko Rachel Deco Set",
+	{
+		vendorName: "Nana Akufo-Addo",
+		vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
+		vendorCategory: "Sculptor",
+		name: "Koko Rachel Deco Set",
 
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694074683/rectangle-53artpost_i1dui9.png",
-					price: "115.32",
+		image: "https://res.cloudinary.com/payhospi/image/upload/v1694074683/rectangle-53artpost_i1dui9.png",
+		price: "115.32",
 
-					location: "Accra, Ghana",
-					likes: "1.2k",
-					imgs: "2",
-				},
-				{
-					vendorName: "Bonsu Thompson",
-					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1694180194/frame-221hyjfutd_wjuuzh.png",
-					vendorCategory: "Artist",
+		location: "Accra, Ghana",
+		likes: "1.2k",
+		imgs: "2",
+	},
+	{
+		vendorName: "Bonsu Thompson",
+		vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1694180194/frame-221hyjfutd_wjuuzh.png",
+		vendorCategory: "Artist",
 
-					name: "The Nawi Scarfs",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694074680/rectangle-53artpt_qhdriv.png",
-					price: "79.00",
-					location: "Accra, Ghana",
-					likes: "66",
-					video: true,
-					imgs: "4",
-					oos: true,
-				},
-				{
-					vendorName: "Dede Ayew",
-					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
-					vendorCategory: "Painter",
+		name: "The Nawi Scarfs",
+		image: "https://res.cloudinary.com/payhospi/image/upload/v1694074680/rectangle-53artpt_qhdriv.png",
+		price: "79.00",
+		location: "Accra, Ghana",
+		likes: "66",
+		video: true,
+		imgs: "4",
+		oos: true,
+	},
+	{
+		vendorName: "Dede Ayew",
+		vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
+		vendorCategory: "Painter",
 
-					name: "Koko Rachel Deco Set",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694074679/rectangle-53artre4_acefqy.png",
-					price: "115.32",
-					location: "Accra, Ghana",
-					imgs: "5",
-					likes: "1.2k",
-				},
-				{
-					vendorName: "Bonsu Thompson",
-					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1694180194/frame-221hyjfutd_wjuuzh.png",
-					vendorCategory: "Artist",
-					name: "The Nawi Scarfs",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694179608/rectangle-53mkiut_ae1wpt.png",
-					price: "79.00",
-					video: true,
-					imgs: "4",
-					location: "Accra, Ghana",
-					likes: "66",
-					oos: true,
-				},
-			]
+		name: "Koko Rachel Deco Set",
+		image: "https://res.cloudinary.com/payhospi/image/upload/v1694074679/rectangle-53artre4_acefqy.png",
+		price: "115.32",
+		location: "Accra, Ghana",
+		imgs: "5",
+		likes: "1.2k",
+	},
+	{
+		vendorName: "Bonsu Thompson",
+		vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1694180194/frame-221hyjfutd_wjuuzh.png",
+		vendorCategory: "Artist",
+		name: "The Nawi Scarfs",
+		image: "https://res.cloudinary.com/payhospi/image/upload/v1694179608/rectangle-53mkiut_ae1wpt.png",
+		price: "79.00",
+		video: true,
+		imgs: "4",
+		location: "Accra, Ghana",
+		likes: "66",
+		oos: true,
+	},
+];
 
 onMounted(() => {
-	fetchAllPosts()
-	console.log(availablePosts.value)
-})
+	fetchAllPosts();
+	console.log(availablePosts.value);
+});
 </script>
 
 <style>
