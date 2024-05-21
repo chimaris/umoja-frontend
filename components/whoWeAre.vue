@@ -154,9 +154,9 @@
 		</v-container>
 
 		<div style="max-width: 1400px; width: 100%; margin: auto">
-			<v-row>
-				<v-col cols="12" md="6" lg="6" class="pl-0">
-					<v-card rounded="0" height="100%" min-height="429" flat class="d-flex align-center pr-md-14 pl-4">
+			<v-row class="pl-0 pr-0 mr-0 ml-0">
+				<v-col cols="12" md="6" lg="6" class="px-0">
+					<v-card rounded="0" height="100%" min-height="429" flat class="d-flex align-center pr-md-14">
 						<v-container style="max-width: 700px; width: 100%" class="">
 							<v-avatar color="#F4EBFF">
 								<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon1.svg" alt="Icon" />
@@ -186,7 +186,7 @@
 					></v-img>
 				</v-col>
 			</v-row>
-			<v-row class="reverse-columns px-0">
+			<v-row class="reverse-columns pl-0 pr-0 mr-0 ml-0">
 				<v-col cols="12" md="6" lg="6" class="px-0">
 					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-4 pl-md-14">
 						<v-container style="max-width: 700px; width: 100%">
@@ -220,9 +220,9 @@
 					></v-img>
 				</v-col>
 			</v-row>
-			<v-row>
-				<v-col cols="12" md="6" lg="6" class="pl-0">
-					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-md-14 pl-4">
+			<v-row class="pl-0 pr-0 mr-0 ml-0">
+				<v-col cols="12" md="6" lg="6" class="px-0">
+					<v-card rounded="0" width="100%" height="100%" min-height="429" flat class="d-flex align-center pr-md-14">
 						<v-container style="max-width: 700px; width: 100%">
 							<v-avatar color="#F4EBFF">
 								<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon3.svg" alt="Icon" />

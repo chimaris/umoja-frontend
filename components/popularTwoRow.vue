@@ -28,7 +28,7 @@
 		<!-- For mobile View -->
 		<div class="d-block d-md-none">
 			<v-row dense>
-				<v-col v-for="(n, i) in items" :key="i" cols="12" :md="6" :lg="3">
+				<v-col v-for="(n, i) in items" :key="i" cols="12" :md="6" :lg="3" class="mb-3">
 					<populartwoComponent :showBid="showBid" :index="i" :item="n" />
 				</v-col>
 			</v-row>
