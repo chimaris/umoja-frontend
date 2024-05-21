@@ -190,66 +190,6 @@ const africanCountries = [
 				"Zambia",
 				"Zimbabwe",
 			]
-
-const items = [
-				{
-					vendorName: "Nana Akufo-Addo",
-					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
-					vendorCategory: "Sculptor",
-					name: "Koko Rachel Deco Set",
-
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694074683/rectangle-53artpost_i1dui9.png",
-					price: "115.32",
-
-					location: "Accra, Ghana",
-					likes: "1.2k",
-					imgs: "2",
-				},
-				{
-					vendorName: "Bonsu Thompson",
-					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1694180194/frame-221hyjfutd_wjuuzh.png",
-					vendorCategory: "Artist",
-
-					name: "The Nawi Scarfs",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694074680/rectangle-53artpt_qhdriv.png",
-					price: "79.00",
-					location: "Accra, Ghana",
-					likes: "66",
-					video: true,
-					imgs: "4",
-					oos: true,
-				},
-				{
-					vendorName: "Dede Ayew",
-					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
-					vendorCategory: "Painter",
-
-					name: "Koko Rachel Deco Set",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694074679/rectangle-53artre4_acefqy.png",
-					price: "115.32",
-					location: "Accra, Ghana",
-					imgs: "5",
-					likes: "1.2k",
-				},
-				{
-					vendorName: "Bonsu Thompson",
-					vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1694180194/frame-221hyjfutd_wjuuzh.png",
-					vendorCategory: "Artist",
-					name: "The Nawi Scarfs",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1694179608/rectangle-53mkiut_ae1wpt.png",
-					price: "79.00",
-					video: true,
-					imgs: "4",
-					location: "Accra, Ghana",
-					likes: "66",
-					oos: true,
-				},
-			]
-
-onMounted(() => {
-	fetchAllPosts()
-	console.log(availablePosts.value)
-})
 </script>
 
 <style>

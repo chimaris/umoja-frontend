@@ -47,33 +47,34 @@
 	</v-container>
 	<v-container class="px-3" style="padding-top: 0px; max-width: 1400px">
 		<v-row>
-			<v-col cols="12" v-for="(n, i) in articles" :key="i" lg="4" md="4">
+			<v-col cols="12" v-for="(n, i) in availableArticle" :key="i" lg="4" md="4">
 				<div class="cardStyle">
 					<div class="mb-4 d-flex">
 						<v-avatar size="50">
-							<v-img :src="n.smallImage"></v-img>
+							<v-img :src="n.vendor_profile_photo"></v-img>
 						</v-avatar>
 						<div class="ml-3">
 							<div class="d-flex align-center">
-								<p style="color: #1e1e1e; font-size: 16px; font-weight: 600; line-height: 140%">Thatdesignpro</p>
+								<p style="color: #1e1e1e; font-size: 16px; font-weight: 600; line-height: 140%">{{n.vendor_firstname}} {{ n.vendor_lastname }}</p>
 								<v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
-								<p style="color: #969696; font-size: 14px; font-weight: 400; line-height: 140%">27th Nov, 2023</p>
+								<p style="color: #969696; font-size: 14px; font-weight: 400; line-height: 140%">{{getdateRegistered(n.created_at)}}</p>
 							</div>
 							<div class="d-flex align-center mt-1">
-								<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500">Fashion and Beauty</p>
+								<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500">{{n.category_name}}</p>
 							</div>
 						</div>
 					</div>
-					<v-card flat color="grey-lighten-4" :image="n.bigImage" width="100%" height="188px" class="d-flex align-center justify-center rounded-lg">
+					<v-card flat color="grey-lighten-4" :image="n.cover_image" width="100%" height="188px" class="d-flex align-center justify-center rounded-lg">
 					</v-card>
 					<p class="mt-4 mb-2" style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 700; line-height: 140%">
-						Ankara Beauty Essentials: Elevate Your Style with Confidence
+						{{n.title}}
 					</p>
-					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 400; line-height: 140%">
+					<div v-html="n.content" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis" class="article-content"></div>
+					<!-- <p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 400; line-height: 140%">
 						Lorem ipsum dolor sit amet consectetur. Id et ornare tristique tempus egestas neque tincidunt lobortis. Integer arcu sit massa orci
 						phasellus ipsum tincidunt et amet.
-					</p>
-					<v-btn size="small" color="#1273EB" class="px-0" variant="text" @click="$router.push('/article_detail')">
+					</p> -->
+					<v-btn size="small" color="#1273EB" class="px-0" variant="text" @click="$router.push(`/article_detail/${n.id}`)">
 						<span style="color: var(--deep-sky-blue-4, #1273eb); font-size: 14px; font-weight: 600"> Read more </span>
 						<v-icon size="small" class="ml-4" icon="mdi mdi-arrow-right"></v-icon
 					></v-btn>
@@ -96,13 +97,16 @@
 	</v-container>
 </template>
 
-<script>
-export default {
-	data() {
-		return {
-			imageUrl1: "https://res.cloudinary.com/payhospi/image/upload/v1714918700/umoja/artcle-hero-img.png",
-			country: "All of African",
-			africanCountries: [
+<script setup>
+import { useUserStore } from "~/stores/userStore";
+import {ref, onMounted, computed} from 'vue'
+import {getdateRegistered} from '~/utils/date'
+
+const userStore = useUserStore()
+const availableArticle = computed(() => userStore.allArticles)
+const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg")
+const country = ref("All of African")
+const africanCountries = [
 				"Algeria",
 				"Angola",
 				"Benin",
@@ -157,37 +161,10 @@ export default {
 				"Uganda",
 				"Zambia",
 				"Zimbabwe",
-			],
-
-			articles: [
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046634/rectangle-22429mhgdy878_iyunoo.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29jhv646_o8o1ps.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046633/rectangle-22429jhgcuytd767_v27dnn.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1688745018/rectangle-29_ofcoa9.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046633/rectangle-22429jgud77_eruoj1.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29mhgch767_f0kg3t.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046626/rectangle-22429mhgdjyud767476_hetdp0.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29jhfcj7575_d7vim4.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046641/rectangle-22429ngfxydyd6536_gdmnar.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29nsys66_hgyeof.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046640/rectangle-22429jgdcuc87_nngvuq.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-2ijhf8678_n7ksv8.png",
-				},
-			],
-		};
-	},
-};
+			]
+onMounted(() => {
+	console.log(userStore.allArticles)
+})
 </script>
 
 <style>

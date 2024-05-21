@@ -11,6 +11,7 @@ export const useUserStore = defineStore({
   state: () => ({
     loading: false,
     allPosts: [],
+    allArticles: [],
     error: '',
     loginError: '',
     signUpError: '',

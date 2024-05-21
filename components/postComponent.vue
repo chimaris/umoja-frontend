@@ -28,7 +28,7 @@
 				</div>
 			</div>
 		</div>
-		<v-card v-if="item.featured_img.includes(',')" :image="item.featured_img.split(',')[0]" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
+		<v-card  @click="$router.push(`/post_detail/${item.id}`)" v-if="item.featured_img.includes(',')" :image="item.featured_img.split(',')[0]" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
 			<p
 				class="text-white py-1 px-3"
 				rounded="lg"
@@ -50,7 +50,7 @@
 				><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693937411/vuesax-twotone-play-circle_oyfiqz.png"></v-img
 			></v-avatar>
 		</v-card>
-		<v-card v-if="!item.featured_img.includes(',')" :image="item.featured_img" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
+		<v-card  @click="$router.push(`/post_detail/${item.id}`)" v-if="!item.featured_img.includes(',')" :image="item.featured_img" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
 			<v-avatar v-if="item.video" size="39"
 				><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693937411/vuesax-twotone-play-circle_oyfiqz.png"></v-img
 			></v-avatar>
@@ -58,13 +58,13 @@
 		<p style="color: #1e1e1e; font-size: 14px; font-weight: 400; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis" class="text-wrap mt-4">
 			{{ item.description }}
 		</p>
-		<p style="color: #1e1e1e; font-size: 14px; font-weight: 400" class="text-wrap mt-0">
+		<p @click="$router.push(`/post_detail/${item.id}`)" style="color: #1e1e1e; cursor: pointer; font-size: 14px; font-weight: 400" class="text-wrap mt-0">
 			<strong>See More</strong>
 		</p>
 
 		<div class="d-flex mt-4 align-center justify-space-between">
 			<div class="d-flex align-center">
-				<v-icon size="19" icon="mdi mdi-heart-outline"></v-icon>
+				<v-icon @click="likePost(item.id)" size="19" icon="mdi mdi-heart-outline"></v-icon>
 				<p
 					style="color: #1e1e1e; font-size: 11.822px; font-weight: 400; line-height: 26.486px; /* 224.044% */ letter-spacing: 0.355px"
 					class="pa-1 ml-2"
@@ -85,6 +85,7 @@
 </template>
 <script>
 import {getdateRegistered} from '~/utils/date'
+import { likePost } from '~/composables/useLike';
 export default {
 	props: ["item", "short", "index", "showVendor", "showdisco"],
 };
