@@ -111,13 +111,6 @@ import { useUserStore } from "~/stores/userStore";
 export default {
 
 	props: ["article"],
-	data() {
-		return {
-			dialog: false,
-			smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046634/rectangle-22429mhgdy878_iyunoo.png",
-			bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29jhv646_o8o1ps.png",
-		};
-	},
 	computed: {
 		availableArticle(){
 			return useUserStore().allArticles

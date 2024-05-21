@@ -4,7 +4,7 @@
 	<Mainfooter :showBaloon="true" />
 </template>
 <script setup>
-    import { useRoute } from '#vue-router';
+    import { useRoute } from 'vue-router';
     import {onMounted, ref } from 'vue';
 	import { useUserStore } from "~/stores/userStore";
 
@@ -13,23 +13,8 @@
 	const article = ref(null);
 	const userStore = useUserStore();
 
-		const articleIndex = userStore.allPosts.findIndex(item => articleId == item.id);
-		if (articleIndex !== -1){
-			article.value = userStore.allArticles[articleIndex]
-		}
-		if (articleIndex == -1){
-			article.value = userStore.allArticles[0]
-		}
+	article.value = userStore.allArticles.find(art => art.id == articleId);
 
-		// watch(() => articleId, () => {
-		// 	const articleIndex = userStore.allPosts.findIndex(item => item.id == articleId);
-		// if (articleIndex !== -1){
-		// 	article.value = userStore.allArticles[articleIndex]
-		// }
-		// if (articleIndex == -1){
-		// 	article.value = userStore.allArticles[0]
-		// }
-		// });
 
 	
 </script>

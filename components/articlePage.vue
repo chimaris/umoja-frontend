@@ -162,9 +162,7 @@ const africanCountries = [
 				"Zambia",
 				"Zimbabwe",
 			]
-onMounted(() => {
-	console.log(userStore.allArticles)
-})
+
 </script>
 
 <style>
