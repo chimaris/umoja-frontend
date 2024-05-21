@@ -76,7 +76,8 @@
 
 		<div class="d-flex mt-4 align-center justify-space-between">
 			<div class="d-flex align-center">
-				<v-icon @click="handleLike(item?.id)" size="19" icon="mdi mdi-heart-outline"></v-icon>
+				<v-icon v-if="likedPost" @click="handleunLike(item)" size="19" icon="mdi mdi-heart"></v-icon>
+				<v-icon v-if="!likedPost" @click="handleLike(item)" size="19" icon="mdi mdi-heart-outline"></v-icon>
 				<p
 					style="color: #1e1e1e; font-size: 11.822px; font-weight: 400; line-height: 26.486px; /* 224.044% */ letter-spacing: 0.355px"
 					class="pa-1 ml-1"
@@ -104,25 +105,37 @@
 <script>
 import {getdateRegistered} from '~/utils/date'
 import { useUserStore } from "~/stores/userStore";
-import { likePost } from '~/composables/useLike';
+import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
 export default {
-	props: ["item", "short", "index", "showVendor", "showdisco"],
+	props: ["item", "short", "index", "showVendor", "showdisco", "likedPost"],
 	data(){
 		return{
-			loginDialog: false
+			loginDialog: false,
 		}
 	},
+
+
 	methods: {
-		handleLike(id){
+		async handleunLike(item){
+			this.$emit("unLikePost")
+			item.likes --;
+			await unlikePost(item.id)
+		},
+		async handleLike(item){
 			if (!useUserStore().isLoggedIn){
 				this.loginDialog = true
 				return
 			}
-			likePost(id)
+			this.$emit("likePost")
+			item.likes ++;
+			await likePost(item.id)
 		},
 		toLogin(){
 			this.loginDialog = false
 			this.$router.push('/user/login')
+		},
+		async userLiked(id){
+			return await hasLiked(id)
 		}
 	}
 };

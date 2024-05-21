@@ -25,21 +25,6 @@ export const useCreateStore = defineStore('post', {
     },
 
     actions: {
-      async handleLike(id, index){
-        if (this.posts[index].Islike == 1){
-          const res = await unlikePost(id)
-          if (res){
-            await this.getPost()
-            this.posts[index].Islike = 0
-          }
-        }else if(this.posts[index].Islike == 0){
-          const res = await likePost(id, index)
-          if (res){
-            await this.getPost()
-            this.posts[index].Islike = 1
-          }
-        }
-      },
         async getPost(){
             const api = vendorUseApi()
             try{

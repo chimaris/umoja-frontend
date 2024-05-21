@@ -53,8 +53,9 @@
 							<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
 								{{post.description}}
 							</p>
-							<div class="d-flex align-center py-2">
-								<v-btn flat> <v-icon @click="handleLike(post.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ post.likes }} {{ post.likes <= 0 ? 'Like' : "Likes" }} </v-btn>
+							<div class="d-flex align-center py-2" >
+								<v-btn flat v-if="userLiked"> <v-icon @click="handUnLike(post.id)" class="mr-1" icon="mdi mdi-heart"></v-icon> {{ post.likes }} {{ post.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
+								<v-btn flat v-if="!userLiked"> <v-icon @click="handleLike(post.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ post.likes }} {{ post.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
 								<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
 							</div>
 							<v-dialog v-model="loginDialog" persistent max-width="350">
@@ -174,19 +175,42 @@
 }
 </style>
 <script>
-import { likePost } from '~/composables/useLike';
+import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
 import {getdateRegistered} from '~/utils/date'
 import { useUserStore } from "~/stores/userStore";
 import {formattedPrice} from '~/utils/price'
 export default {
 	props: ["post"],
+	data() {
+		return {
+			dialog: false,
+			placescards: false,
+			loginDialog: false,
+			mods: 1,
+			window: "products",
+			userLiked: false,
+			rating: 4,
+		};
+	},
+	async mounted() {
+		if (useUserStore().isLoggedIn){
+			this.userLiked = await hasLiked(this.post.id)
+		}
+	},
 	methods: {
-		handleLike(id){
+		async handUnLike(id){
+			this.userLiked = false
+			this.post.likes --;
+			await unlikePost(id)
+		},
+		async handleLike(id){
 			if (!useUserStore().isLoggedIn){
 				this.loginDialog = true
 				return
 			}
-			likePost(id)
+			this.userLiked = true
+			this.post.likes ++;
+			await likePost(id)
 		},
 		toLogin(){
 			this.loginDialog = false
@@ -197,15 +221,6 @@ export default {
 			return newText;
 		},
 	},
-	data() {
-		return {
-			dialog: false,
-			placescards: false,
-			loginDialog: false,
-			mods: 1,
-			window: "products",
-			rating: 4,
-		};
-	},
+
 };
 </script>
