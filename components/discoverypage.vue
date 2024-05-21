@@ -69,7 +69,7 @@
 			></div>
 		</v-img>
 		<v-card class="overflow-visible" flat tile color="" min-height="100vh" width="100%">
-			<v-container style="padding-bottom: 100px; max-width: 1400px">
+			<v-container style="padding-bottom: 50px; max-width: 1400px">
 				<v-row>
 					<v-col class="pt-0" cols="12" xs="12">
 						<v-sheet class="pt-0">
@@ -116,9 +116,15 @@
 										</v-chip>
 									</v-chip-group>
 									<div>
-										<v-btn variant="tonal" color="#333333" class="textClass" flat>
-											<v-icon size="20" icon="mdi mdi-filter-outline"></v-icon>Filter</v-btn
-										>
+										<v-btn style="border: 1px solid #e5e5e5; border-radius: 100px !important" variant="outlined" class="textClass text-grey-darken-3">
+											<v-img
+												class="mr-2"
+												width="14"
+												height="14"
+												src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg"
+											/>
+											Filter
+										</v-btn>
 									</div>
 								</div>
 							</div>
@@ -236,12 +242,11 @@
 			</v-row>
 		</div>
 
-		<v-container class="px-3" style="padding-top: 0px; max-width: 1400px">
+		<v-container class="px-3 mb-16" style="padding-top: 0px; max-width: 1400px">
 			<PostsRow :maxwidth="'1400px'" :showVendor="true" :title="postRow.title" :items="postRow.items" />
 		</v-container>
 
-		<div style="padding: 100px 0, width: 100%">
-			<!-- <v-container class="px-0 mx-auto"> -->
+		<div style="padding: 50px 0, width: 100%">
 			<v-row class="pl-0 pr-0 mr-0 ml-0">
 				<v-col class="pl-0 pr-0 mr-0 ml-0" cols="6" md="6" lg="6">
 					<v-card
@@ -288,10 +293,9 @@
 					></v-img>
 				</v-col>
 			</v-row>
-			<!-- </v-container> -->
 		</div>
 
-		<v-container style="max-width: 1400px">
+		<v-container class="mt-16" style="max-width: 1400px">
 			<v-row>
 				<v-col class="pt-0" cols="12" xs="12">
 					<v-sheet class="pt-0">

@@ -25,7 +25,7 @@
 		<div>
 			<v-container style="margin-top: -66px; max-width: 1400px">
 				<div class="d-flex align-center justify-space-between">
-					<div class="d-flex align-center">
+					<div class="d-flex flex-column flex-md-row align-md-center">
 						<v-avatar color="grey-lighten-3" style="overflow: visible" class="mr-2" size="166">
 							<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691587215/ellipse-103_o9gvrw.png"></v-img>
 							<v-btn
@@ -127,9 +127,9 @@
 </template>
 <script>
 import { useUserStore } from "~/stores/userStore";
-import {getdateRegistered} from '~/utils/date';
+import { getdateRegistered } from "~/utils/date";
 export default {
-	setup(){
+	setup() {
 		definePageMeta({
 			middleware: defineNuxtRouteMiddleware((to, from) => {
 				const userStore = useUserStore();
@@ -138,14 +138,12 @@ export default {
 				}
 				if (!userStore.user) {
 					const response = userStore.logout();
-					if (response){
+					if (response) {
 						return navigateTo("/user/login");
 					}
-					
 				}
 			}),
 		});
-
 	},
 	data() {
 		return {
@@ -279,12 +277,11 @@ export default {
 			this.selected = n;
 			this.$router.push(`/user/profile/${n}`);
 		},
-	 	logoutUser() {
+		logoutUser() {
 			const response = this.userStore.logout();
-			if (response){
+			if (response) {
 				this.$router.push("/user/login");
 			}
-			
 		},
 		filt(text) {
 			var newText = text.length > 50 ? text.slice(0, 50) + "..." : text;

@@ -197,7 +197,13 @@
 											</v-btn>
 											<v-divider inset="" vertical=""></v-divider>
 											<v-btn width="48%" variant="text" class="">
-												<v-icon icon="mdi mdi-share-variant-outline" class="mr-2" size="17"></v-icon>
+												<v-img
+													class="mr-2"
+													width="13"
+													height="15"
+													src="https://res.cloudinary.com/payhospi/image/upload/v1716238487/umoja/share-icon.svg"
+												/>
+
 												<span style="font-size: 14px; font-weight: 600">Share</span>
 											</v-btn>
 										</div>

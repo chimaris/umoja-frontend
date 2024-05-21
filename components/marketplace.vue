@@ -52,8 +52,21 @@
 				<div>
 					<div v-if="$vuetify.display.mobile">
 						<div class="d-flex align-center justify-space-between">
-							<v-btn variant="tonal" color="#333333" class="textClass" flat @click="filterDrawer = true">
-								<v-icon class="mr-2" size="20" icon="mdi mdi-tune-vertical"></v-icon>Filter</v-btn
+							<v-btn
+								variant="tonal"
+								color="#2C6E63"
+								class="textClass"
+								flat
+								@click="filterDrawer = true"
+								style="border: 1px solid #94aaa5; border-radius: 100px !important"
+							>
+								<v-img
+									class="mr-2"
+									width="20"
+									height="20"
+									src="https://res.cloudinary.com/payhospi/image/upload/v1716242897/umoja/Filter_k0khdy.svg"
+								/>
+								Filter</v-btn
 							>
 
 							<div class="d-flex align-center">
@@ -186,7 +199,15 @@
 						<div style="height: auto">
 							<div class="d-flex align-center justify-space-between px-4 pt-4">
 								<p style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>
-								<v-icon class="d-block d-md-none" icon="mdi mdi-close" @click.stop="filterDrawer = false"></v-icon>
+								<div>
+									<v-img
+										class="d-block d-md-none"
+										width="21"
+										height="21"
+										@click.stop="filterDrawer = false"
+										src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+									/>
+								</div>
 							</div>
 
 							<filter-card />
