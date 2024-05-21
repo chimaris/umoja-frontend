@@ -18,7 +18,7 @@
 			src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"
 		>
 			<v-btn
-				@click="toggleLike(item, index)"
+				@click.self="toggleLike(item, index)"
 				:ref="item.name + index"
 				rounded="xl"
 				icon
@@ -50,8 +50,14 @@
 				flat
 				size="x-small"
 			>
-				<v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon
-			></v-btn>
+				<v-img
+					width="15"
+					height="15"
+					:color="!isLiked(index) ? '#1C274C' : 'red'"
+					src="https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg"
+				/>
+				<!-- <v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon> -->
+			</v-btn>
 		</v-img>
 		<v-img
 			class="rounded-lg bg-grey-lighten-5"
@@ -73,8 +79,14 @@
 				flat
 				size="x-small"
 			>
-				<v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon
-			></v-btn>
+				<v-img
+					width="15"
+					height="15"
+					:color="!isLiked(index) ? '#1C274C' : 'red'"
+					src="https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg"
+				/>
+				<!-- <v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon> -->
+			</v-btn>
 		</v-img>
 		<div
 			@click="$router.push(`/vendor_page/${item.vendor_id}`)"
@@ -133,7 +145,8 @@
 					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg"> 20% OFF </v-chip>
 				</div>
 			</div>
-			<v-btn v-if="!role"
+			<v-btn
+				v-if="!role"
 				@click="addToCart(item)"
 				rounded="xl"
 				style="border: 0.66px solid #ced2d6; border-radius: 6px"
