@@ -76,17 +76,24 @@
 
 		<div class="d-flex mt-4 align-center justify-space-between">
 			<div class="d-flex align-center">
-				<v-icon @click="likePost(item?.id)" size="19" icon="mdi mdi-heart-outline"></v-icon>
+				<v-icon @click="handleLike(item?.id)" size="19" icon="mdi mdi-heart-outline"></v-icon>
 				<p
 					style="color: #1e1e1e; font-size: 11.822px; font-weight: 400; line-height: 26.486px; /* 224.044% */ letter-spacing: 0.355px"
 					class="pa-1 ml-1"
 				>
 					{{ item?.likes }}
 				</p>
-				<!-- <v-img width="19" height="19" class="ml-4" src="https://res.cloudinary.com/payhospi/image/upload/v1716239838/umoja/message-text_wsdpjw.svg" />
-				<p style="color: #1e1e1e; font-size: 11.822px; font-weight: 400; line-height: 26.486px; /* 224.044% */ letter-spacing: 0.355px" class="pa-1">
-					1156
-				</p> -->
+				<v-dialog v-model="loginDialog" persistent max-width="350">
+					<v-card>
+						<v-card-title class="headline">Login Required</v-card-title>
+						<v-card-text>You need to be logged in to like a post.</v-card-text>
+						<v-card-actions>
+							<v-spacer></v-spacer>
+							<v-btn color="green darken-1" text @click="loginDialog = false">Close</v-btn>
+							<v-btn color="green darken-1" text @click="toLogin()">Login</v-btn>
+						</v-card-actions>
+					</v-card>
+				</v-dialog>
 			</div>
 			<div>
 				<v-img width="19" height="19" src="https://res.cloudinary.com/payhospi/image/upload/v1716240124/umoja/export_n0gjxv.svg" />
@@ -96,8 +103,27 @@
 </template>
 <script>
 import {getdateRegistered} from '~/utils/date'
+import { useUserStore } from "~/stores/userStore";
 import { likePost } from '~/composables/useLike';
 export default {
 	props: ["item", "short", "index", "showVendor", "showdisco"],
+	data(){
+		return{
+			loginDialog: false
+		}
+	},
+	methods: {
+		handleLike(id){
+			if (!useUserStore().isLoggedIn){
+				this.loginDialog = true
+				return
+			}
+			likePost(id)
+		},
+		toLogin(){
+			this.loginDialog = false
+			this.$router.push('/user/login')
+		}
+	}
 };
 </script>

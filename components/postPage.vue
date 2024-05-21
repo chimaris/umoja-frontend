@@ -70,13 +70,15 @@
 				<v-btn
 					class="mt-10"
 					block
+					@click="loadPost()"
 					color="#333"
 					size="large"
 					variant="outlined"
 					rounded="xl"
 					style="border: 1px solid #cecece; font-size: 14px; font-weight: 600"
 				>
-					Load More
+						<span class="mr-4"> Load More</span>
+						<v-progress-circular v-if="userStore.loadPost" indeterminate :width="2" :size="20"></v-progress-circular>
 				</v-btn>
 			</v-col>
 			<v-col cols="12" md="1" class="d-none d-md-block"> </v-col>
@@ -189,6 +191,19 @@ const africanCountries = [
 				"Zambia",
 				"Zimbabwe",
 			]
+
+async function loadPost(){
+	if (userStore.currentPage == userStore.lastPage && userStore.postPage > 1){
+		userStore.postPage = userStore.postPage - 1;
+		await fetchAllPosts(userStore.postPage)
+		return 
+	}
+	if (userStore.currentPage < userStore.lastPage){
+		userStore.postPage = userStore.postPage + 1;
+		await fetchAllPosts(userStore.postPage)
+		return
+	}
+}
 </script>
 
 <style>

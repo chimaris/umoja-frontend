@@ -44,12 +44,23 @@
 								{{ post.description }}
 							</p>
 							<div class="d-flex align-center py-2">
-								<v-btn flat class="pl-0">
-									<v-icon @click="likePost(post.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ post.likes }}
+								<v-btn flat>
+									<v-icon @click="handleLike(post.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ post.likes }}
 									{{ post.likes <= 0 ? "Like" : "Likes" }}
 								</v-btn>
 								<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
 							</div>
+							<v-dialog v-model="loginDialog" persistent max-width="350">
+								<v-card>
+									<v-card-title class="headline">Login Required</v-card-title>
+									<v-card-text>You need to be logged in to like a post.</v-card-text>
+									<v-card-actions>
+										<v-spacer></v-spacer>
+										<v-btn color="green darken-1" text @click="loginDialog = false">Close</v-btn>
+										<v-btn color="green darken-1" text @click="toLogin()">Login</v-btn>
+									</v-card-actions>
+								</v-card>
+							</v-dialog>
 						</div>
 
 						<!-- <v-row style="background-color: #fff" class="mt-2 px-5 ml-0 mr-0">
@@ -138,10 +149,22 @@
 <script>
 import { likePost } from "~/composables/useLike";
 import { getdateRegistered } from "~/utils/date";
+import { useUserStore } from "~/stores/userStore";
 import { formattedPrice } from "~/utils/price";
 export default {
 	props: ["post"],
 	methods: {
+		handleLike(id) {
+			if (!useUserStore().isLoggedIn) {
+				this.loginDialog = true;
+				return;
+			}
+			likePost(id);
+		},
+		toLogin() {
+			this.loginDialog = false;
+			this.$router.push("/user/login");
+		},
 		filt(text) {
 			var newText = text.length > 40 ? text.slice(0, 40) + "..." : text;
 			return newText;
@@ -151,75 +174,10 @@ export default {
 		return {
 			dialog: false,
 			placescards: false,
+			loginDialog: false,
 			mods: 1,
 			window: "products",
 			rating: 4,
-			items: [
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png",
-					price: "115.32",
-					likes: "1.2k",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png",
-					price: "57.00",
-					likes: "456",
-					oos: true,
-				},
-
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
-					price: "79.00",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png",
-					price: "179.00",
-					likes: "966",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
-					price: "79.00",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png",
-					price: "179.00",
-					likes: "966",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png",
-					price: "57.00",
-					likes: "456",
-				},
-			],
 		};
 	},
 };

@@ -84,13 +84,15 @@
 				<v-btn
 					class="mt-10 mx-auto"
 					block
+					@click="loadArticle()"
 					color="#333"
 					size="large"
 					variant="outlined"
 					rounded="xl"
 					style="border: 1px solid #cecece; font-size: 14px; font-weight: 600"
 				>
-					Load More
+					<span class="mr-4"> Load More</span>
+						<v-progress-circular v-if="userStore.loadArticle" indeterminate :width="2" :size="20"></v-progress-circular>
 				</v-btn>
 			</v-container>
 		</v-row>
@@ -101,6 +103,7 @@
 import { useUserStore } from "~/stores/userStore";
 import {ref, computed} from 'vue'
 import {getdateRegistered} from '~/utils/date'
+import { fetchAllArticle } from "~/composables/usePost";
 
 const userStore = useUserStore()
 const availableArticle = computed(() => userStore.allArticles)
@@ -162,6 +165,19 @@ const africanCountries = [
 				"Zambia",
 				"Zimbabwe",
 			]
+
+async function loadArticle(){
+	if (userStore.artCurrentPage == userStore.artLastPage && userStore.articlePage > 1){
+		userStore.articlePage = userStore.articlePage - 1;
+		await fetchAllArticle(userStore.articlePage)
+		return 
+	}
+	if (userStore.artCurrentPage < userStore.artLastPage){
+		userStore.articlePage = userStore.articlePage + 1;
+		await fetchAllArticle(userStore.articlePage)
+		return
+	}
+}
 
 </script>
 
