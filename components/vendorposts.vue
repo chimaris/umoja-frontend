@@ -229,7 +229,7 @@ import {formattedPrice} from '~/utils/price'
 export default {
 	setup(){
 		const postStore = useCreateStore()
-		const allPosts = computed(() => postStore.posts)
+		const allPosts = computed(() => postStore.posts.slice(0,12))
 		const selectedPost = ref(null)
 		const dialog = ref(false)
 		
