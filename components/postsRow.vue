@@ -29,10 +29,7 @@
 		>
 			<div class="d-inline-block mr-2" style="width: 275px" v-for="(n, i) in items" :key="i" cols="6" lg="3">
 				<postComponent :index="i" :item="n" />
-			</div>
-			<div class="d-inline-block mr-2" style="width: 275px" v-for="(n, i) in items" :key="i" cols="6" lg="3">
-				<postComponent :index="i" :item="n" />
-			</div>
+			</div>	
 		</div>
 
 		<!-- For mobile View -->

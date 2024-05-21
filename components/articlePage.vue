@@ -99,7 +99,7 @@
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
-import {ref, onMounted, computed} from 'vue'
+import {ref, computed} from 'vue'
 import {getdateRegistered} from '~/utils/date'
 
 const userStore = useUserStore()

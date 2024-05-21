@@ -243,7 +243,7 @@
 		</div>
 
 		<v-container class="px-3 mb-16" style="padding-top: 0px; max-width: 1400px">
-			<PostsRow :maxwidth="'1400px'" :showVendor="true" :title="postRow.title" :items="postRow.items" />
+			<PostsRow :maxwidth="'1400px'" :showVendor="true" title="Top Posts" :items="availablePosts" />
 		</v-container>
 
 		<div style="padding: 50px 0, width: 100%">
@@ -329,33 +329,34 @@
 				</v-col>
 			</v-row>
 			<v-row>
-				<v-col cols="12" v-for="(n, i) in articles" :key="i" lg="4" md="4">
+				<v-col cols="12" v-for="(n, i) in availableArticle.slice(0, 6)" :key="i" lg="4" md="4">
 					<div class="cardStyle">
 						<div class="mb-4 d-flex">
 							<v-avatar size="50">
-								<v-img :src="n.smallImage"></v-img>
+								<v-img :src="n.vendor_profile_photo"></v-img>
 							</v-avatar>
 							<div class="ml-3">
 								<div class="d-flex align-center">
-									<p style="color: #1e1e1e; font-size: 16px; font-weight: 600; line-height: 140%">Thatdesignpro</p>
+									<p style="color: #1e1e1e; font-size: 16px; font-weight: 600; line-height: 140%">{{n.vendor_firstname}} {{ n.vendor_lastname }}</p>
 									<v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
-									<p style="color: #969696; font-size: 14px; font-weight: 400; line-height: 140%">27th Nov, 2023</p>
+									<p style="color: #969696; font-size: 14px; font-weight: 400; line-height: 140%">{{getdateRegistered(n.created_at)}}</p>
 								</div>
 								<div class="d-flex align-center mt-1">
-									<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500">Fashion and Beauty</p>
+									<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500">{{n.category_name}}</p>
 								</div>
 							</div>
 						</div>
-						<v-card flat color="grey-lighten-4" :image="n.bigImage" width="100%" height="188px" class="d-flex align-center justify-center rounded-lg">
+						<v-card flat color="grey-lighten-4" :image="n.cover_image" width="100%" height="188px" class="d-flex align-center justify-center rounded-lg">
 						</v-card>
 						<p class="mt-4 mb-2" style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 700; line-height: 140%">
-							Ankara Beauty Essentials: Elevate Your Style with Confidence
+							{{n.title}}
 						</p>
-						<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 400; line-height: 140%">
+						<div v-html="n.content" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis" class="article-content"></div>
+						<!-- <p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 400; line-height: 140%">
 							Lorem ipsum dolor sit amet consectetur. Id et ornare tristique tempus egestas neque tincidunt lobortis. Integer arcu sit massa orci
 							phasellus ipsum tincidunt et amet.
-						</p>
-						<v-btn size="small" color="#1273EB" class="px-0" variant="text" @click="$router.push('/article_detail')">
+						</p> -->
+						<v-btn  @click="$router.push(`/article_detail/${n.id}`)" size="small" color="#1273EB" class="px-0" variant="text">
 							<span style="color: var(--deep-sky-blue-4, #1273eb); font-size: 14px; font-weight: 600"> Read more </span>
 							<v-icon size="small" class="ml-4" icon="mdi mdi-arrow-right"></v-icon
 						></v-btn>
@@ -382,100 +383,30 @@
 <style></style>
 <script>
 import { useProductStore } from "~/stores/productStore.js";
+import { useUserStore } from "~/stores/userStore";
+import {getdateRegistered} from '~/utils/date'
 
 export default {
+	setup(){
+		const userStore = useUserStore();
+		const availablePosts = computed(() => userStore.allPosts.slice(0, 10));
+		const availableArticle = computed(() => userStore.allArticles)
+
+		return{
+			userStore,
+			availablePosts,
+			availableArticle
+		}
+	},
 	data() {
 		return {
 			selectedTag: null,
 			tag: "POPULAR products",
-			articles: [
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046634/rectangle-22429mhgdy878_iyunoo.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29jhv646_o8o1ps.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046633/rectangle-22429jhgcuytd767_v27dnn.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1688745018/rectangle-29_ofcoa9.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046633/rectangle-22429jgud77_eruoj1.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29mhgch767_f0kg3t.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046626/rectangle-22429mhgdjyud767476_hetdp0.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29jhfcj7575_d7vim4.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046641/rectangle-22429ngfxydyd6536_gdmnar.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-29nsys66_hgyeof.png",
-				},
-				{
-					smallImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046640/rectangle-22429jgdcuc87_nngvuq.png",
-					bigImage: "https://res.cloudinary.com/payhospi/image/upload/v1695046484/rectangle-2ijhf8678_n7ksv8.png",
-				},
-			],
 			placescards: false,
 			mods: 1,
 			tab: null,
 			country: "All of Africa",
 			chip: "POPULAR products",
-			postRow: {
-				title: "Top Posts",
-				items: [
-					{
-						vendorName: "Nana Akufo-Addo",
-						vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
-						vendorCategory: "Sculptor",
-						name: "Koko Rachel Deco Set",
-
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694074683/rectangle-53artpost_i1dui9.png",
-						price: "115.32",
-
-						location: "Accra, Ghana",
-						likes: "1.2k",
-						imgs: "2",
-					},
-					{
-						vendorName: "Bonsu Thompson",
-						vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1694180194/frame-221hyjfutd_wjuuzh.png",
-						vendorCategory: "Artist",
-
-						name: "The Nawi Scarfs",
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694074680/rectangle-53artpt_qhdriv.png",
-						price: "79.00",
-						location: "Accra, Ghana",
-						likes: "66",
-						video: true,
-						imgs: "4",
-						oos: true,
-					},
-					{
-						vendorName: "Dede Ayew",
-						vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png",
-						vendorCategory: "Painter",
-
-						name: "Koko Rachel Deco Set",
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694074679/rectangle-53artre4_acefqy.png",
-						price: "115.32",
-						location: "Accra, Ghana",
-						imgs: "5",
-						likes: "1.2k",
-					},
-					{
-						vendorName: "Bonsu Thompson",
-						vendorImg: "https://res.cloudinary.com/payhospi/image/upload/v1694180194/frame-221hyjfutd_wjuuzh.png",
-						vendorCategory: "Artist",
-						name: "The Nawi Scarfs",
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694179608/rectangle-53mkiut_ae1wpt.png",
-						price: "79.00",
-						video: true,
-						imgs: "4",
-						location: "Accra, Ghana",
-						likes: "66",
-						oos: true,
-					},
-				],
-			},
 			tags: [
 				{
 					name: "POPULAR products",
