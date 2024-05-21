@@ -201,7 +201,7 @@ import {ref, computed} from 'vue'
 
 export default {
 	setup() {
-		const items = computed(() => useVendorProductStore().allProducts);
+		const items = computed(() => useVendorProductStore().allProducts.slice(0, 12));
 		const role = ref("vendor");
 		onMounted(() => {
 			useVendorProductStore().getAllProduct()
