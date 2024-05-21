@@ -15,3 +15,17 @@ export const fetchAllPosts = async () => {
         console.error(error)
     }
 }
+export const fetchAllArticle = async () => {
+    const api = useApi()
+    const userStore = useUserStore()
+    try{
+        const response = await api({
+            url: 'allarticles',
+            method: 'GET'
+        });
+        userStore.allArticles = response.data.data
+        return 
+    }catch(error){
+        console.error(error)
+    }
+}
