@@ -89,7 +89,7 @@
 			</v-btn>
 		</v-img>
 		<div
-			@click="$router.push('/vendor_page')"
+			@click="$router.push(`/vendor_page/${item.vendor_id}`)"
 			class="mt-3 d-block d-md-none"
 			:style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px', fontWeight: $vuetify.display.mobile ? 500 : 600 }"
 			style="cursor: pointer; color: #1e1e1e; letter-spacing: -0.14px"
@@ -125,12 +125,12 @@
 		>
 		<div v-if="vendorShow" class="d-none d-md-block">
 			<div class="d-flex mt-2">
-				<v-avatar size="40"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img></v-avatar>
-				<div style="cursor: pointer" @click="$router.push('/vendor_page')" class="ml-2">
+				<v-avatar @click="$router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img :src="item.vendor_profile_photo"></v-img></v-avatar>
+				<div style="cursor: pointer" @click="$router.push(`/vendor_page/${item.vendor_id}`)" class="ml-2">
 					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
 						{{ item.vendor_firstname }} {{ item.vendor_lastname }}
 					</p>
-					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">Accra, Ghana🇬🇭</p>
+					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">{{ item.vendor_country }} <span style="font-size: 1rem; margin-left: 5px" :class="getCountryIconClass(item.vendor_country)"></span></p>
 				</div>
 			</div>
 			<v-divider color="#a4a4a4" class="mt-4"></v-divider>

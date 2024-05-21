@@ -246,36 +246,6 @@ export default {
             categories.value = await fetchCategories()
             await postStore.getArticle()
         })
-        // async function handleArticle(){
-        //     artError.value = ""
-        //     if (articleContent.value.length < 200){
-        //         artError.value = "length of character is less than the minimum required length of 150 characters"
-        //         return
-        //     }   
-        //     // if (articleContent.value.length > 600){
-        //     //     artError.value = "length of character exceeds the maximum limit of 600 characters"
-        //     //     return
-        //     // }
-        //     if (selectedCat.value && articleContent.value && articleTitle.value && imagePreview.value){
-        //         const data = {
-        //             title: articleTitle.value,
-        //             content: articleContent.value,
-        //             category_id: getCategoryId(selectedCat.value, categories.value)
-        //         }
-        //         const res = await postStore.postArticle(imagePreview.value, data)
-        //         if (res){
-        //             articleContent.value  = ""
-        //             articleTitle.value = ""
-        //             selectedCat.value = ""
-        //             imagePreview.value = ""
-        //             postStore.errorArticle = ""
-        //             if (editor.value) {
-        //             editor.value.commands.setContent('<p>Start Typing...</p>');
-        //         }
-        //             // editor.value.commands.setContent('<p>Start Typing...</p>');
-        //         }
-        //     }
-        // }
     function handleFileInputChange(event) {
       const file = event.target.files[0]; // Get the first selected file
       if (!file) return; // Return if no file is selected
@@ -393,8 +363,6 @@ export default {
                     this.imagePreview = ""
                     this.postStore.errorArticle = ""
                     this.editor.commands.setContent('<p>Start Typing...</p>');
-                
-                    // editor.value.commands.setContent('<p>Start Typing...</p>');
                 }
             }
         }

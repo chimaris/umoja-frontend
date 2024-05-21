@@ -155,11 +155,11 @@
 								<div class="d-block mt-1">
 									<div class="d-flex align-center">
 										<v-chip style="justify-content: center; align-items: center; display: flex" color="#936900" size="small" rounded="lg">
-											{{vendor.vendor_details?.business_type}}</v-chip
+											{{selectedCat}}</v-chip
 										>
 										<v-icon class="mx-1" size="5" color="grey-lighten-1" icon="mdi mdi-circle"></v-icon>
 										<div class="text-truncate" style="color: #1e1e1e; font-size: 14px !important; font-weight: 400">
-											{{vendor.vendor_details?.address}} {{vendor.vendor_details?.city}}, {{vendor.vendor_details?.country_name}}
+											{{location}}
 										</div>
 									</div>
 								</div>
