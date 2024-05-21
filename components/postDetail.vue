@@ -43,11 +43,9 @@
 							<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
 								{{ post.description }}
 							</p>
-							<div class="d-flex align-center py-2">
-								<v-btn flat>
-									<v-icon @click="handleLike(post.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ post.likes }}
-									{{ post.likes <= 0 ? "Like" : "Likes" }}
-								</v-btn>
+							<div class="d-flex align-center py-2" >
+								<v-btn flat v-if="userLiked"> <v-icon @click="handUnLike(post.id)" class="mr-1" icon="mdi mdi-heart"></v-icon> {{ post.likes }} {{ post.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
+								<v-btn flat v-if="!userLiked"> <v-icon @click="handleLike(post.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ post.likes }} {{ post.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
 								<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
 							</div>
 							<v-dialog v-model="loginDialog" persistent max-width="350">
@@ -62,7 +60,54 @@
 								</v-card>
 							</v-dialog>
 						</div>
+						<v-divider></v-divider>
+						<div style="display: flex; flex-direction: column; justify-content: center; width: 100%; align-items: center">
+							<h1 style="font-weight: 700; font-size: 24px; line-height: 27px; color: #000000" class="pa-6">Related Products</h1>
+							<div v-if="post.products?.length > 0" v-for="item in post.products" :key="item" class="cardStyle mb-4 w-75">
+								<v-card flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg"> 
+									<v-btn rounded="xl" flat size="x-small" style="position: absolute; top: 15px; right: 15px" icon="mdi mdi-heart-outline"></v-btn>
+									<v-img
+										cover
+										height="100%"
+										width="100%"
+										:src="item.photo.split(',')[0]"
+									></v-img>
+								</v-card>
+								<p
+									style="
+										font-weight: 600;
+										font-size: 14px;
+										line-height: 18px;
 
+										color: #000000;
+									"
+									class="mt-2"
+								>
+									{{item.name}}
+								</p>
+								<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">{{item.category_name}}</p>
+								<p style="font-weight: 600; font-size: 12px; line-height: 13px; color: #000000" class="d-flex my-1 align-center">
+									<v-rating v-model="rating" color="grey-lighten-2 " active-color="#E7CE5D" class="" density="compact" size="small"></v-rating
+									><span style="margin-left: 9px">(0)</span>
+								</p>
+								<div class="d-flex align-center justify-space-between">
+									<div class="d-flex align-center">
+										<h1 style="font-size: 16px; line-height: 20px; color: #1a1d1f" class="priceClass">{{formattedPrice(item.price)}}</h1>
+									</div>
+									<v-btn style="border: 1px solid #e5e5e5" size="small" variant="outlined"
+										><span
+											style="
+												color: var(--grey-1000, #1a1d1f);
+
+												font-size: 12px;
+												font-weight: 600;
+											"
+											>Pre-Order</span
+										></v-btn
+									>
+								</div>
+						</div>
+						</div>
 						<!-- <v-row style="background-color: #fff" class="mt-2 px-5 ml-0 mr-0">
 							<v-col v-for="(n, i) in items" :key="i" cols="12">
 								<v-card flat class="bg-white">
@@ -147,19 +192,42 @@
 }
 </style>
 <script>
-import { likePost } from "~/composables/useLike";
-import { getdateRegistered } from "~/utils/date";
+import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
+import {getdateRegistered} from '~/utils/date'
 import { useUserStore } from "~/stores/userStore";
 import { formattedPrice } from "~/utils/price";
 export default {
 	props: ["post"],
+	data() {
+		return {
+			dialog: false,
+			placescards: false,
+			loginDialog: false,
+			mods: 1,
+			window: "products",
+			userLiked: false,
+			rating: 4,
+		};
+	},
+	async mounted() {
+		if (useUserStore().isLoggedIn){
+			this.userLiked = await hasLiked(this.post.id)
+		}
+	},
 	methods: {
-		handleLike(id) {
-			if (!useUserStore().isLoggedIn) {
-				this.loginDialog = true;
-				return;
+		async handUnLike(id){
+			this.userLiked = false
+			this.post.likes --;
+			await unlikePost(id)
+		},
+		async handleLike(id){
+			if (!useUserStore().isLoggedIn){
+				this.loginDialog = true
+				return
 			}
-			likePost(id);
+			this.userLiked = true
+			this.post.likes ++;
+			await likePost(id)
 		},
 		toLogin() {
 			this.loginDialog = false;
@@ -170,15 +238,6 @@ export default {
 			return newText;
 		},
 	},
-	data() {
-		return {
-			dialog: false,
-			placescards: false,
-			loginDialog: false,
-			mods: 1,
-			window: "products",
-			rating: 4,
-		};
-	},
+
 };
 </script>

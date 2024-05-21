@@ -64,7 +64,7 @@
 			<v-col cols="12" md="4">
 				<v-row dense>
 					<v-col v-for="(n, i) in availablePosts" :key="i" cols="12">
-						<postComponent :index="i" :item="n" />
+						<postComponent :index="i" :item="n" :likedPost="likedPosts[n.id]" @likePost="likedPosts[n.id] = true" @unLikePost="likedPosts[n.id] = false" />
 					</v-col>
 				</v-row>
 				<v-btn
@@ -130,6 +130,7 @@ import { ref, onMounted, computed } from "vue";
 import { fetchAllPosts } from "~/composables/usePost";
 import { useUserStore } from "~/stores/userStore";
 
+const likedPosts = ref([])
 const userStore = useUserStore();
 const availablePosts = computed(() => userStore.allPosts);
 const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg");
@@ -191,6 +192,14 @@ const africanCountries = [
 				"Zambia",
 				"Zimbabwe",
 			]
+
+onMounted(async () => {
+	if (userStore.isLoggedIn){
+		for (const post of availablePosts.value) {
+			likedPosts.value[post.id] = await hasLiked(post.id)
+		}
+	}
+});
 
 async function loadPost(){
 	if (userStore.currentPage == userStore.lastPage && userStore.postPage > 1){

@@ -100,39 +100,39 @@
 				</v-btn>
 				<v-row style="height: 100vh">
 					<v-col cols="12" class="px-0 py-0 pb-0" md="6">
-						<v-img v-if="allPosts[selectedPost].featured_img.includes(',')"
+						<v-img v-if="selectedPost.featured_img.includes(',')"
 							class="pb-0"
 							cover
 							width="100%"
 							height="100%"
-							:src="allPosts[selectedPost].featured_img.split(',')[1]"
+							:src="selectedPost.featured_img.split(',')[1]"
 						></v-img>
-						<v-img v-if="!allPosts[selectedPost].featured_img.includes(',')"
+						<v-img v-if="!selectedPost.featured_img.includes(',')"
 							class="pb-0"
 							cover
 							width="100%"
 							height="100%"
-							:src="allPosts[selectedPost].featured_img"
+							:src="selectedPost.featured_img"
 						></v-img>
 					</v-col>
 					<v-col cols="12" style="position: relative" class="px-0 py-0" md="6">
 						<v-sheet style="height: 100%; overflow: scroll; position: absolute; width: 100%" class="py-2">
 							<div class="d-flex px-6 pt-6 pb-4">
 								<v-avatar size="48" class="mr-5">
-									<v-img :src="allPosts[selectedPost].vendor_profile_photo"></v-img>
+									<v-img :src="selectedPost.vendor_profile_photo"></v-img>
 								</v-avatar>
 								<div class="w-100 d-flex justify-space-between">
 									<div>
 										<div class="d-flex">
-											<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">{{allPosts[selectedPost].vendor_lastname}} {{allPosts[selectedPost].vendor_firstname}}</p>
+											<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">{{selectedPost.vendor_lastname}} {{selectedPost.vendor_firstname}}</p>
 											<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
-												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{getdateRegistered(allPosts[selectedPost].created_at)}}
+												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{getdateRegistered(selectedPost.created_at)}}
 											</p>
 										</div>
 										<div class="d-flex">
-											<v-chip size="x-small" class="px-3" color="#936900" rounded="0">{{allPosts[selectedPost].category_name}}</v-chip>
+											<v-chip size="x-small" class="px-3" color="#936900" rounded="0">{{selectedPost.category_name}}</v-chip>
 											<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
-												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{allPosts[selectedPost].location}}
+												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{selectedPost.location}}
 											</p>
 										</div>
 									</div>
@@ -143,11 +143,11 @@
 							</div>
 							<div class="px-6">
 								<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
-									{{allPosts[selectedPost].description}}
+									{{selectedPost.description}}
 								</p>
 								<div class="d-flex align-center py-2">
-									<v-btn @click="postStore.handleLike(allPosts[selectedPost].id, selectedPost)" v-if="allPosts[selectedPost].Islike == 0" flat> <v-icon class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{allPosts[selectedPost].likes}} {{allPosts[selectedPost].likes <= 1 ? 'Like' : 'Likes'}} </v-btn>
-									<v-btn @click="postStore.handleLike(allPosts[selectedPost].id, selectedPost)" v-if="allPosts[selectedPost].Islike == 1" flat> <v-icon class="mr-1" icon="mdi mdi-heart"></v-icon> {{allPosts[selectedPost].likes}} {{allPosts[selectedPost].likes <= 1 ? 'Like' : 'Likes'}} </v-btn>
+									<v-btn flat v-if="userLiked"> <v-icon @click="handUnLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart"></v-icon> {{ selectedPost.likes }} {{ selectedPost.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
+								<v-btn flat v-if="!userLiked"> <v-icon @click="handleLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ selectedPost.likes }} {{ selectedPost.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
 									<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
 								</div>
 							</div>
@@ -156,7 +156,7 @@
 							<div style="display: flex; flex-direction: column; justify-content: center; width: 100%; align-items: center">
 							<p class="my-5" style="color: #333; font-size: 20px; text-align:center; font-weight: 600; line-height: 20px">Related products</p>
 
-							<div v-if="allPosts[selectedPost].products.length > 0" v-for="item in allPosts[selectedPost].products" :key="item" class="cardStyle mb-4 w-75">
+							<div v-if="selectedPost.products.length > 0" v-for="item in selectedPost.products" :key="item" class="cardStyle mb-4 w-75">
 								<v-card flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg"> 
 									<v-btn rounded="xl" flat size="x-small" style="position: absolute; top: 15px; right: 15px" icon="mdi mdi-heart-outline"></v-btn>
 									<v-img
@@ -226,21 +226,32 @@ import {useCreateStore} from '~/stores/createPostStore'
 import {ref, onMounted, computed} from 'vue'
 import {getdateRegistered} from '~/utils/date'
 import {formattedPrice} from '~/utils/price'
+import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
+
 export default {
 	setup(){
 		const postStore = useCreateStore()
 		const allPosts = computed(() => postStore.posts.slice(0,12))
 		const selectedPost = ref(null)
 		const dialog = ref(false)
+		const userLiked = ref(false)
 		
-
+		watch(() => selectedPost.value, async () => {
+			userLiked.value = await hasLiked(selectedPost.value.id, "vendor")
+		});
+		const handUnLike = async (id) => {
+			userLiked.value = false
+			selectedPost.value.likes --;
+			await unlikePost(id, "vendor")
+		}
+		const handleLike = async (id) => {
+			userLiked.value = true
+			selectedPost.value.likes ++;
+			await likePost(id, "vendor")
+		}
 		const openPost = (post) => {
-			const selectedPostIndex = allPosts.value.findIndex((item) => {
-				return post.id == item.id
-			});
-			if (selectedPostIndex !== -1){
-				selectedPost.value = selectedPostIndex
-			}
+				selectedPost.value = post
+			
 			dialog.value = true
 		}
 		onMounted(async() => {
@@ -252,7 +263,10 @@ export default {
 			allPosts,
 			selectedPost,
 			openPost,
-			dialog
+			dialog,
+			userLiked,
+			handUnLike,
+			handleLike
 		}
 	},
 	methods: {
@@ -268,72 +282,6 @@ export default {
 			mods: 1,
 			window: "products",
 			rating: 4,
-			items: [
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png",
-					price: "115.32",
-					likes: "1.2k",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png",
-					price: "57.00",
-					likes: "456",
-					oos: true,
-				},
-
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
-					price: "79.00",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png",
-					price: "179.00",
-					likes: "966",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
-					price: "79.00",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png",
-					price: "179.00",
-					likes: "966",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png",
-					price: "57.00",
-					likes: "456",
-				},
-			],
 		};
 	},
 };
