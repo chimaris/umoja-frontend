@@ -58,7 +58,7 @@ import {getdateRegistered} from '~/utils/date'
 const postStore = useCreateStore()
 const allArticle = computed(() => postStore.articles)
 const emits = defineEmits(['changePage'])
-const menuVisible = ref([])
+const menuVisible = ref({})
 const choose = (x) => {
 			emits("changePage", x);
 }

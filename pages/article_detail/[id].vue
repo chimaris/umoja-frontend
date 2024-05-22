@@ -1,6 +1,6 @@
 <template>
 	<Header2 />
-	<articleDetail :article = "article" />
+	<articleDetail :article = "article" :loading="loading" />
 	<Mainfooter :showBaloon="true" />
 </template>
 <script setup>
@@ -11,9 +11,13 @@
 	const route = useRoute();
 	const articleId = route.params.id;
 	const article = ref(null);
+	const loading = ref(true)
 
 	onBeforeMount(async () => {
 		article.value = await getArticleById(articleId)
+		if (article.value){
+			loading.value = false
+		}
 	})
 
 

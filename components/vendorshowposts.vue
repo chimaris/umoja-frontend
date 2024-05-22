@@ -130,15 +130,16 @@ const postStore = useCreateStore()
 const allPosts = computed(() => postStore.posts)
 const emits = defineEmits(['changePage'])
 const likedPosts = ref([])
-const menuVisible = ref([])
+const menuVisible = ref({})
 
 const choose = (x) => {
 			emits("changePage", x);
 }
 async function editPost(item){
 	postStore.postToEdit = item
-    choose('Edit Post')
 	menuVisible.value[item.id] = false
+    choose('Edit Post')
+
    
 	
 }

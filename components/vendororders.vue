@@ -166,7 +166,7 @@
 		</div>
 
 		<!-- If there is no orders show this -->
-		<div v-if="filteredOrderData.length === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
+		<div v-if="orderStore.allOrder.length === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
 			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
 				<v-img
 					:width="300"

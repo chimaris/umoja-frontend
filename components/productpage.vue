@@ -25,8 +25,9 @@
 		<v-divider color="#EDEDED"></v-divider>
 		<v-row>
 			<v-col cols="12" lg="8">
-				<div class="py-6">
-					<div>
+				<div class="py-6"> 
+					<productpageloader v-if="loading" />
+					<div v-else>
 						<v-row>
 							<v-col cols="12" lg="6">
 								<v-carousel v-model="carousel" class="caro mb-2" style="border-radius: 6px" hide-delimiters height="349px">
@@ -486,7 +487,8 @@
 			</v-col>
 			<v-col cols="12" lg="4">
 				<div class="py-6 d-none d-md-block">
-					<div>
+					<productsetloader v-if="loading" />
+					<div v-else>
 						<v-card flat class="pa-0 cardStyle">
 							<div style="background-color: #edf3f0; height: 40px" class="d-flex align-center justify-center w-100">
 								<p style="color: #00966d; font-size: 14px; font-weight: 600; line-height: 140%">Available</p>
@@ -653,6 +655,7 @@ export default {
 		EditorContent,
 	},
 	mounted() {
+		this.mockLoading()
 		this.editor = new Editor({
 			extensions: [
 				StarterKit,
@@ -670,6 +673,7 @@ export default {
 	},
 	data() {
 		return {
+			loading: true,
 			productDetails: [
 				{ label: "Payment", labelColor: "#969696", value: "Secure transaction", valueColor: "#1273EB" },
 				{ label: "Ships from", labelColor: "#969696", value: "Umoja", valueColor: "#000" },
@@ -737,6 +741,11 @@ export default {
 		},
 	},
 	methods: {
+		mockLoading(){
+			setTimeout(() => {
+                this.loading = false
+            }, 1000)
+		},
 		toggleSpecs() {
 			this.showAllSpecs = !this.showAllSpecs;
 		},
