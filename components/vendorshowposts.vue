@@ -23,13 +23,19 @@
 						<v-icon class="mr-1" size="3" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
 						<p style="color: #969696; font-size: 11px; font-weight: 400">{{ getdateRegistered(item?.created_at) }}</p>
 					</div>
-					<v-icon :id="'menu-activator' + item.id" @click="menuVisible[item.id] = true" icon="mdi mdi-dots-horizontal"></v-icon>
-                        <v-menu :activator="'#menu-activator' + item.id" flat  v-model="menuVisible[item.id]">
-                        <v-list>
-                            <v-list-item @click="editPost(item)">Edit Post</v-list-item>
-                            <v-list-item @click="deletePost(item.id)">Delete Post</v-list-item>
-                        </v-list>
-                    	</v-menu>
+						<v-menu >
+								<template v-slot:activator="{ props }">
+									<v-icon class="ml-10"  v-bind="props" icon="mdi mdi-dots-horizontal"></v-icon>
+								</template> 
+								<v-list>
+								<v-list-item style="cursor: pointer"  @click="editPost(item)">
+									Edit Post
+								</v-list-item>
+								<v-list-item style="cursor: pointer" @click="deletePost(item.id)">
+									Delete Post
+								</v-list-item>
+								</v-list>
+							</v-menu> 
 				</div>
 
 				<div class="d-block mt-1">
@@ -136,12 +142,9 @@ const choose = (x) => {
 			emits("changePage", x);
 }
 async function editPost(item){
-	postStore.postToEdit = item
-	menuVisible.value[item.id] = false
-    choose('Edit Post')
+	postStore.setPostToEdit(item)
+	choose('Edit Post')
 
-   
-	
 }
 
 onMounted(async() => {
@@ -153,7 +156,6 @@ onMounted(async() => {
 });
 async function deletePost(id){
     postStore.deletePost(id)
-    menuVisible.value[id] = false
 }
 async function handleunLike(item){
 	likedPosts.value[item.id] = false
