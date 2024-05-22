@@ -1,4 +1,5 @@
 import { useVendorStore } from "~/stores/vendorStore";
+import {useEditVendorStore} from '~/stores/editProduct';
 import {useCreateStore} from '~/stores/createPostStore'
 
 export default defineNuxtRouteMiddleware((to, from) => {
@@ -23,6 +24,26 @@ export default defineNuxtRouteMiddleware((to, from) => {
     const postStore = useCreateStore()
     if (postStore.articles.length == 0){
       return navigateTo('/vendor/dashboard/Create Article')
+    }
+ 
+  }
+  if (to.path == '/vendor/dashboard/Edit%20Product'){
+    if (!useEditVendorStore().currentEditProduct){
+      return navigateTo('/vendor/dashboard/Products')
+    }
+ 
+  }
+  if (to.path == '/vendor/dashboard/Edit%20Article'){
+    const postStore = useCreateStore()
+    if (!postStore.articleToEdit){
+      return navigateTo('/vendor/dashboard/Articles')
+    }
+ 
+  }
+  if (to.path == '/vendor/dashboard/Edit%20Post'){
+    const postStore = useCreateStore()
+    if (!postStore.postToEdit){
+      return navigateTo('/vendor/dashboard/Posts')
     }
  
   }
