@@ -135,9 +135,13 @@ const menuVisible = ref([])
 const choose = (x) => {
 			emits("changePage", x);
 }
-function editPost(item){
-    postStore.postToEdit = item
+async function editPost(item){
+	postStore.postToEdit = item
+	menuVisible.value[item.id] = false
     choose('Edit Post')
+	
+   
+	
 }
 
 onMounted(async() => {

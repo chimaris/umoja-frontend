@@ -68,7 +68,8 @@ async function deleteArticle(id){
     menuVisible.value[id] = false
 }
 function editArticle(item){
-    postStore.articleToEdit = item;
+    postStore.articleToEdit = item
+    menuVisible.value[item.id] = false
     choose('Edit Article')
 }
 </script>

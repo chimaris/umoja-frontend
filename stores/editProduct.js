@@ -6,7 +6,7 @@ import Compressor from 'compressorjs';
 
 export const useEditVendorStore = defineStore('edit-product',{
     state: () => ({
-        currentEditProduct: [],
+        currentEditProduct: null,
         loading: false,
         allVariations: [],
         deleteVariant: [],
