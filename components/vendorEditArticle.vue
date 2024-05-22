@@ -230,7 +230,7 @@ export default {
     setup(){
         const postStore = useCreateStore()
         const allArticles = computed(() => postStore.articles)
-        const editArticle = computed(() => postStore.articleToEdit)
+        const editArticle = ref(postStore.articleToEdit)
         const categories = ref([])
         const imagePreview = ref([editArticle.value.cover_image])
         const editor =  ref(null)
@@ -242,6 +242,11 @@ export default {
         onMounted(async () => {
             categories.value = await fetchCategories()
         })
+        watch(() => postStore.articleToEdit, (newpost, oldpost) => {
+			editArticle.value = newpost
+			imagePreview.value = [newpost.cover_image]
+			
+		});
     function handleFileInputChange(event) {
       const file = event.target.files[0]; // Get the first selected file
       if (!file) return; // Return if no file is selected

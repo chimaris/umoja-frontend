@@ -23,13 +23,19 @@
 									<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500">{{n.category_name}}</p>
 								</div>
 							</div>
-                            <v-icon class="ml-10" :id="'menu-activator' + n.id" @click="menuVisible[n.id] = true" icon="mdi mdi-dots-horizontal"></v-icon>
-                            <v-menu :activator="'#menu-activator' + n.id" flat  v-model="menuVisible[n.id]">
-                            <v-list>
-                                <v-list-item @click="editArticle(n)">Edit Article</v-list-item>
-                                <v-list-item @click="deleteArticle(n.id)">Delete Article</v-list-item>
-                            </v-list>
-                            </v-menu>
+							<v-menu >
+								<template v-slot:activator="{ props }">
+									<v-icon class="ml-10"  v-bind="props" icon="mdi mdi-dots-horizontal"></v-icon>
+								</template> 
+								<v-list>
+								<v-list-item style="cursor: pointer"  @click="editArticle(n)">
+									Edit Article
+								</v-list-item>
+								<v-list-item style="cursor: pointer" @click="deleteArticle(n.id)">
+									Delete Article
+								</v-list-item>
+								</v-list>
+							</v-menu> 
 						</div>
 						<v-card flat color="grey-lighten-4" :image="n.cover_image" width="100%" height="188px" class="d-flex align-center justify-center rounded-lg">
 						</v-card>
@@ -65,11 +71,9 @@ const choose = (x) => {
 
 async function deleteArticle(id){
     postStore.deleteArticle(id)
-    menuVisible.value[id] = false
 }
 function editArticle(item){
-    postStore.articleToEdit = item
-    menuVisible.value[item.id] = false
+    postStore.setArticleToEdit(item)
     choose('Edit Article')
 }
 </script>

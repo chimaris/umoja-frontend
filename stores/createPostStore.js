@@ -31,6 +31,12 @@ export const useCreateStore = defineStore('post', {
     },
 
     actions: {
+      setPostToEdit(post) {
+       this.postToEdit = post;
+      },
+      setArticleToEdit(article) {
+        this.articleToEdit = article;
+       },
         async getPost(){
             const api = vendorUseApi()
             try{

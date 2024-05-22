@@ -299,22 +299,27 @@ export default {
 		const postStore = useCreateStore()
 		const searchQuery = ref("")
 		const categories = ref([])
-        const editPost = computed(() => postStore.postToEdit)
+        const editPost = ref(postStore.postToEdit)
+		const imagePreviews = ref(editPost.value.featured_img.includes(',')? [...editPost.value.featured_img.split(',')] : [editPost.value.featured_img])
 
 		onMounted(async() => {
 			categories.value = await fetchCategories()
 		})
-
+		watch(() => postStore.postToEdit, (newpost, oldpost) => {
+			editPost.value = newpost
+			imagePreviews.value = newpost.featured_img.includes(',')? [...newpost.featured_img.split(',')] : [newpost.featured_img]
+			
+		});
 		return{
 			postStore,
 			searchQuery,
 			categories,
-            editPost
+            editPost,
+			imagePreviews
 		}
 	},
 	data() {
 		return {
-			imagePreviews: this.editPost.featured_img.includes(',')? [...this.editPost.featured_img.split(',')] : [this.editPost.featured_img],
 			pictureError: "",
 			postError: "",
 			tags: ["Fashion", "Sneakers", "Unisex shoes", "Men shoes", "Black", "Fashion and style", "Ghana Ankara Material"],
@@ -324,6 +329,7 @@ export default {
 			chip: "All",
 			chosen: "",
             loading: false,
+		
 		};
 	},
 
