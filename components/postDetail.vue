@@ -1,6 +1,7 @@
 <template>
 	<v-container>
-		<v-card
+		<post-detail-loader v-if="loading" />
+		<v-card v-else
 			style="height: auto; overflow: hidden; position: relative"
 			max-width="700px"
 			:min-width="$vuetify.display.mobile ? '90vw' : '60vw'"
@@ -197,7 +198,7 @@ import {getdateRegistered} from '~/utils/date'
 import { useUserStore } from "~/stores/userStore";
 import { formattedPrice } from "~/utils/price";
 export default {
-	props: ["post", "id"],
+	props: ["post", "id", "loading"],
 	data() {
 		return {
 			dialog: false,

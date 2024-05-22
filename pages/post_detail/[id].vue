@@ -1,6 +1,6 @@
 <template>
 	<Header2 />
-	<PostDetail :post="post" :id="postId"/>
+	<PostDetail :post="post" :id="postId" :loading="loading"/>
 	<Mainfooter :showBaloon="true" />
 </template>
 <script setup>
@@ -11,9 +11,13 @@
 	const route = useRoute();
 	const postId = route.params.id;
 	const post = ref(null)
+	const loading = ref(true)
 	
 		onBeforeMount(async () => {
 			post.value = await getPostById(postId)
+			if (post.value){
+			loading.value = false
+		}
 		})
 	
 </script>

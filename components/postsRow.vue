@@ -28,7 +28,7 @@
 			class="rower my-8 d-none d-md-block"
 		>
 			<div class="d-inline-block mr-2" style="width: 275px" v-for="(n, i) in items" :key="i" cols="6" lg="3">
-				<postComponent :index="i" :item="n" />
+				<postComponent :index="i" :item="n" :likedPost="likedPosts[n.id]" @likePost="likedPosts[n.id] = true" @unLikePost="likedPosts[n.id] = false" />
 			</div>	
 		</div>
 
@@ -73,9 +73,23 @@ border: none!important;
 </style>
 <script>
 import { useProductStore } from "~/stores/productStore.js";
+import { hasLiked } from "~/composables/useLike";
+import { useUserStore } from "~/stores/userStore";
 
 export default {
 	props: ["showVendor", "vendor", "items", "title", "maxwidth"],
+	data(){
+		return{
+			likedPosts: []
+		}
+	},
+	async mounted(){
+		if(useUserStore().isLoggedIn){
+			for (const post of this.items) {
+				this.likedPosts[post.id] = await hasLiked(post.id)
+			}
+		}
+	},
 	computed: {
 		maxw() {
 			return this.maxwidth ? this.maxwidth : "1400px";

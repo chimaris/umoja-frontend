@@ -1,7 +1,8 @@
 <template>
 	<v-container>
 		<v-sheet>
-			<v-card flat>
+			<article-loader v-if="loading" />
+			<v-card flat v-else>
 				<div class="d-flex align-center">
 					<p style="font-weight: 500; font-size: 14px; line-height: 50.2px; color: #333333">{{article?.category_name}}</p>
 					<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
@@ -110,7 +111,7 @@ import { useUserStore } from "~/stores/userStore";
 
 export default {
 
-	props: ["article"],
+	props: ["article", "loading"],
 	computed: {
 		availableArticle(){
 			return useUserStore().allArticles
@@ -127,3 +128,4 @@ export default {
 
 };
 </script>
+

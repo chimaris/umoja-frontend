@@ -7,6 +7,8 @@ import { useUserStore } from "./userStore";
 export const useCreateStore = defineStore('post', {
     state: () => ({
         relatedPosts: [],
+        menuVisible: [],
+        menuVisible2: [],
         loading: false,
         errorArticle: "",
         postToEdit: null,
