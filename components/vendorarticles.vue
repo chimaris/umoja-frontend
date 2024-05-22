@@ -188,9 +188,9 @@ import {useCreateStore} from '~/stores/createPostStore'
 import {getdateRegistered} from '~/utils/date'
 
 
-onMounted(async () => {
-	await postStore.getArticle()
-})
+// onMounted(async () => {
+// 	await postStore.getArticle()
+// })
 
 
 const postStore = useCreateStore()

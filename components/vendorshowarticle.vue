@@ -23,8 +23,8 @@
 									<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500">{{n.category_name}}</p>
 								</div>
 							</div>
-                            <v-icon class="ml-10" :id="'menu-activator' + n.id" icon="mdi mdi-dots-horizontal"></v-icon>
-                            <v-menu :activator="'#menu-activator' + n.id" flat close-on-content-click="false" v-model="menuVisible[n.id]">
+                            <v-icon class="ml-10" :id="'menu-activator' + n.id" @click="menuVisible[n.id] = true" icon="mdi mdi-dots-horizontal"></v-icon>
+                            <v-menu :activator="'#menu-activator' + n.id" flat  v-model="menuVisible[n.id]">
                             <v-list>
                                 <v-list-item @click="editArticle(n)">Edit Article</v-list-item>
                                 <v-list-item @click="deleteArticle(n.id)">Delete Article</v-list-item>
