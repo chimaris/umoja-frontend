@@ -727,12 +727,13 @@ export default {
 			}
 			const res = await this.postStore.createPost(this.imagePreviews, data)
 			if (res){
+				this.$router.push('/vendor/dashboard/Posts')
 				this.postStore.errorPost = ""
 				this.imagePreviews = []
 				this.postContent = []
 				this.location = ""
 				this.selectedCat = ""
-				this.$router.push('/vendor/dashboard/Homepage')
+				
 			}
 	
 		}
@@ -848,12 +849,13 @@ export default {
 			}
 			const res = await this.postStore.draftPost(this.imagePreviews, data)
 			if (res){
+				this.$router.push('/vendor/dashboard/Posts')
 				this.postStore.errorPost = ""
 				this.imagePreviews = []
 				this.postContent = []
 				this.location = ""
 				this.selectedCat = ""
-				this.$router.push('/vendor/dashboard/Homepage')
+			
 			}
 
 			}
@@ -870,6 +872,7 @@ export default {
 			}
 			const response = await this.postStore.schedulePost(this.imagePreviews, data)
 			if (response){
+				this.$router.push('/vendor/dashboard/Posts')
 				this.postStore.scheduleError = ""
 				this.dialog1 = false;
 				this.showAlert = true;

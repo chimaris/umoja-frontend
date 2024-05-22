@@ -39,3 +39,27 @@ export const fetchAllArticle = async (page) => {
         userStore.loadArticle = false
     }
 }
+export const getArticleById = async (id) => {
+    const api = useApi()
+    try{
+        const res = await api({
+            url: `vendor/articles/${id}`,
+            method: 'get'
+        });
+        console.log(res)
+    }catch(error){
+        console.error(error)
+    }
+}
+export const getPostById = async (id) => {
+    const api = useApi()
+    try{
+        const res = await api({
+            url: `vendor/posts/${id}`,
+            method: 'get'
+        });
+        console.log(res)
+    }catch(error){
+        console.error(error)
+    }
+}

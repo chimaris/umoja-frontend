@@ -130,6 +130,7 @@ import { ref, onMounted, computed } from "vue";
 import { fetchAllPosts } from "~/composables/usePost";
 import { useUserStore } from "~/stores/userStore";
 
+
 const likedPosts = ref([])
 const userStore = useUserStore();
 const availablePosts = computed(() => userStore.allPosts);

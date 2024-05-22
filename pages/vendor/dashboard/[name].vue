@@ -45,7 +45,7 @@
 							"
 						>
 							<div
-								v-if="currentPage != 'Order details' && currentPage != 'Add Products' && currentPage != 'createorder' && currentPage !== 'Import Product' && currentPage !== 'Edit Product'"
+								v-if="currentPage != 'Order details' && currentPage != 'Add Products' && currentPage != 'createorder' && currentPage !== 'Import Product' && currentPage !== 'Edit Product' && currentPage != 'Create Post' && currentPage !== 'Edit Post' && currentPage != 'Create Article' && currentPage != 'Edit Article'"
 								class="h-100 d-flex align-center"
 							>
 								<v-btn class="mx-4" icon flat rounded="xl" @click="vendorStore.sideBtn = !vendorStore.sideBtn"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
@@ -64,7 +64,7 @@
 									class="text-grey-darken-3"
 								>
 									<v-icon size="16" class="mr-2" icon="mdi mdi-arrow-left-top"></v-icon>
-									Back to {{ currentPage !== "Add Products" && currentPage !== "Edit Product" && currentPage !== "Import Product" ? "Orders" : "Products" }}
+									Back to {{ curPageValue }}
 								</v-btn>
 							</div>
 						</div>
@@ -102,11 +102,23 @@
 						<v-window-item :value="'createorder'">
 							<Vendorcreateorder />
 						</v-window-item>
-						<v-window-item :value="'Posts'">
+						<v-window-item :value="'Create Post'">
 							<Vendorcreatepost />
 						</v-window-item>
-						<v-window-item :value="'Articles'">
+						<v-window-item :value="'Posts'">
+							<Vendorshowposts @changePage="changePage" />
+						</v-window-item>
+						<v-window-item :value="'Edit Post'">
+							<VendorEditPost />
+						</v-window-item>
+						<v-window-item :value="'Create Article'">
 							<Vendorcreatearticle />
+						</v-window-item>
+						<v-window-item :value="'Edit Article'">
+							<VendorEditArticle />
+						</v-window-item>
+						<v-window-item :value="'Articles'">
+							<Vendorshowarticle @changePage="changePage" />
 						</v-window-item>
 						<v-window-item @changeTab="changePage" :value="'Customers'">
 							<Vendorcustomers />
@@ -161,6 +173,7 @@ import { ref, onBeforeUnmount, onMounted, computed  } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
+import {useCreateStore} from '~/stores/createPostStore'
 
 
 const sidebar = computed(() => useVendorStore().sideBtn)
@@ -169,9 +182,19 @@ const router = useRouter();
 const route = useRoute()
 const vendorStore  = useVendorStore();
 const vendorProducts = useVendorProductStore()
-const isSessionExpired = ref(false)
+const postStore = useCreateStore()
 const showModal = ref(true)
-
+const curPageValue = computed(() => {
+	if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product'){
+		return 'Products'
+	}else if (currentPage.value === 'Create Post' || currentPage.value === 'Edit Post'){
+		return 'Posts'
+	}else if (currentPage.value ==='Create Article' || currentPage.value === 'Edit Article'){
+		return 'Articles'
+	}else{
+		return 'Orders'
+	}
+})
 const currentPage = ref(route.params.name ? route.params.name : "Homepage");
 
 watch(() => route.params.name, (name) => {
@@ -180,8 +203,11 @@ watch(() => route.params.name, (name) => {
 watch(() => window.innerWidth, () => {
  checkScreenSize()
 });
-onMounted(() => {
+onMounted(async () => {
 	checkScreenSize()
+	await postStore.getArticle()
+	await postStore.getPost()
+	await vendorProducts.getAllProduct()
 	window.addEventListener('resize', checkScreenSize);
 });
 
@@ -196,9 +222,11 @@ function checkScreenSize(){
 const handleClick = () => {
       if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product') {
 		router.push('/vendor/dashboard/Products')
-      
-		
-      } else {
+      }else if (currentPage.value === 'Create Post' || currentPage.value === 'Edit Post'){
+		router.push('/vendor/dashboard/Posts')
+	  }else if (currentPage.value === 'Create Article' || currentPage.value === 'Edit Article'){
+		router.push('/vendor/dashboard/Articles')
+	  }else {
 		router.push('/vendor/dashboard/Orders')
       }
     };
