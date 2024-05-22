@@ -14,6 +14,9 @@
 	const userStore = useUserStore();
 
 	article.value = userStore.allArticles.find(art => art.id == articleId);
+	// onMounted(() => {
+	// 	getArticle(articleId)
+	// })
 
 
 	

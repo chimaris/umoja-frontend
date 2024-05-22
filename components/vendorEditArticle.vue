@@ -11,7 +11,7 @@
                         line-height: 30px;
                         letter-spacing: -0.02em;
                         ">
-                        Write Article
+                        Edit Article
                 </h1>
                 <p 
                 style="color: #969696;
@@ -27,11 +27,11 @@ Write compelling articles for you customers and audience            </p>
                     <div class="d-flex justify-space-between">
                         <p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px; letter-spacing: -0.2px;">Cover Title</p>
                     </div>
-                    <v-text-field class="mt-4 headerso" placeholder="Header" :rules="inputRules" v-model="articleTitle"></v-text-field>
+                    <v-text-field class="mt-4 headerso" placeholder="Header" :rules="inputRules" v-model="editArticle.title"></v-text-field>
                     <div class="d-flex justify-space-between">
                         <p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px; letter-spacing: -0.2px;">Category</p>
                     </div>
-                    <v-select placeholder="Select article category" :rules="inputRules" :items="categories.map(category => category.name)" v-model="selectedCat" density="comfortable"> </v-select
+                    <v-select placeholder="Select article category" :rules="inputRules" :items="categories.map(category => category.name)" v-model="editArticle.category_name" density="comfortable"> </v-select
 						>
                     <div class="d-flex justify-space-between">
                         
@@ -61,7 +61,7 @@ letter-spacing: -0.2px;">Cover Image</p>
                 We recommend uploading an image that is <span style="font-weight: 700;">1920x1080 pixels
                 </span> .
             </p>
-            <v-label for="coverImg" style="border: 1px solid #e5e5e5; padding: 8px;"  variant="outlined" class="mt-4"><span style="font-size: 14px;">Upload Cover</span> </v-label>
+            <v-label for="coverImg" style="border: 1px solid #e5e5e5; padding: 8px"  variant="outlined" class="mt-4"><span  style="font-size: 14px;">Upload Cover</span> </v-label>
             <input style="display: none" id="coverImg" type="file" @change="handleFileInputChange($event)"/>
         </div>
     </v-card>
@@ -208,7 +208,7 @@ font-weight: 600;">View all Articles</span></v-btn>
         <p class="d-flex justify-end"  style="color: #B00020; font-size: 14px; margin-bottom: 10px; margin-top: 10px">{{postStore.errorArticle}}</p>
 		<div class="d-flex justify-end">
 			<v-btn @click="handleArticle()" class="mx-2" style="border: 1px solid #e5e5e5" size="large" color="green" flat>
-				<span style="font-size: 14px; margin-right: 10px; font-weight: 600; line-height: 20px"> Post Article </span>
+				<span style="font-size: 14px; margin-right: 10px; font-weight: 600; line-height: 20px"> Save changes </span>
 				<v-progress-circular v-if="postStore.load4" indeterminate :width="2" :size="18"></v-progress-circular>
 			</v-btn>
         </div>
@@ -225,26 +225,22 @@ import {ref, onMounted, computed} from 'vue'
 import {getdateRegistered} from '~/utils/date'
 import { fetchCategories, getCategoryId } from "~/composables/useCategories";
 import {useCreateStore} from '~/stores/createPostStore'
-import {useVendorStore} from '~/stores/vendorStore'
 
 export default {
     setup(){
+        const postStore = useCreateStore()
+        const allArticles = computed(() => postStore.articles)
+        const editArticle = computed(() => postStore.articleToEdit)
         const categories = ref([])
-        const imagePreview = ref([])
+        const imagePreview = ref([editArticle.value.cover_image])
         const editor =  ref(null)
         const pictureError = ref("")
         const artError = ref("")
-        const postStore = useCreateStore()
-        const selectedCat = ref("")
-        const articleTitle = ref("")
         const articleContent = ref("")
-        const vendorStore = useVendorStore()
-        const vendor = computed(() => vendorStore.vendor)
-        const allArticles = computed(() => postStore.articles)
+
 
         onMounted(async () => {
             categories.value = await fetchCategories()
-
         })
     function handleFileInputChange(event) {
       const file = event.target.files[0]; // Get the first selected file
@@ -309,16 +305,14 @@ export default {
     }
 
         return{
+            editArticle,
             categories,
             handleFileInputChange,
             imagePreview,
             pictureError,
             drop,
             postStore,
-            selectedCat,
             articleContent,
-            articleTitle,
-            vendor,
             allArticles
         }
     },
@@ -331,9 +325,6 @@ export default {
             checkqty: true,
             window: 'basic',
             radioship:true,
-            dialog:false,
-          
-            tab: 'Customer Details',
             chip: 'All',
             chosen: '',
         }
@@ -349,21 +340,16 @@ export default {
             //     artError.value = "length of character exceeds the maximum limit of 600 characters"
             //     return
             // }
-            if (this.selectedCat && this.articleContent && this.articleTitle && this.imagePreview){
+            if (this.editArticle.category_name && this.articleContent && this.editArticle.title && this.imagePreview){
                 const data = {
-                    title: this.articleTitle,
+                    title: this.editArticle.title,
                     content: this.articleContent,
-                    category_id: getCategoryId(this.selectedCat, this.categories)
+                    category_id: getCategoryId(this.editArticle.category_name, this.categories)
                 }
-                const res = await this.postStore.postArticle(this.imagePreview, data)
+                const res = await this.postStore.editArticle(this.imagePreview, data)
                 if (res){
-                    this.$router.push('/vendor/dashboard/Articles')
-                    this.articleContent  = ""
-                    this.articleTitle = ""
-                    this.selectedCat = ""
-                    this.imagePreview = ""
                     this.postStore.errorArticle = ""
-                    this.editor.commands.setContent('<p>Start Typing...</p>');
+                    this.$router.push('/vendor/dashboard/Articles')
                 }
             }
         }
@@ -381,12 +367,13 @@ export default {
                     types: ['heading', 'paragraph'],
                 }),
             ],
-            content: '<p>Start Typing...</p>',
+            content: this.editArticle.content,
         })
 
         this.editor.on('update', ({ editor }) => {
       	this.articleContent = editor.getHTML() // or use getText() for plain text
     	});
+        this.editor.commands.setContent(this.editArticle.content);
     },
     beforeDestroy() {
     if (this.editor) {

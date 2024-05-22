@@ -186,11 +186,6 @@ export default {
 			vendorStore.showRegistrationModal = false;
 			router.push('/vendor/dashboard/Profile Setup')
 		}
-		onMounted(async () => {
-			await postStore.getPost()
-			await vendorProducts.getAllProduct()
-			await postStore.getArticle()
-		})
 		return {
 			vendorStore,
 			postStore,

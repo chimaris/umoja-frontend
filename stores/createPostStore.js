@@ -2,16 +2,20 @@ import {defineStore} from "pinia";
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
 import { likePost, unlikePost } from "~/composables/useLike";
+import { useUserStore } from "./userStore";
 
 export const useCreateStore = defineStore('post', {
     state: () => ({
         relatedPosts: [],
         loading: false,
         errorArticle: "",
+        postToEdit: null,
+        articleToEdit: null,
         load: false,
         load2: false,
         load3: false,
         load4: false,
+        loadEdit: false,
         pictureInfo: [],
         coverInfo: [],
         errorPost: "",
@@ -49,6 +53,21 @@ export const useCreateStore = defineStore('post', {
               return
           }catch(error){
               console.error("error fetching article", error)
+          }
+        },
+        async deleteArticle(id){
+          const api = vendorUseApi();
+          try{
+            const res = await api({
+              url: `vendor/articles/${id}`,
+              method: 'post',
+              data: {
+                _method: 'DELETE'
+              }
+            });
+            await this.getArticle()
+          }catch(error){
+            console.error(error, "an error occured")
           }
         },
         async getProduct(searchQuery) {
@@ -176,6 +195,21 @@ export const useCreateStore = defineStore('post', {
             this.coverInfo = tempCloudinaryLinks.join(', ');
             return tempCloudinaryLinks.length > 0; // Return true if at least one image was uploaded
           },
+          async deletePost(id){
+            const api = vendorUseApi();
+            try{
+              const res = await api({
+                url: `vendor/posts/${id}`,
+                method: 'post',
+                data: {
+                  _method: 'DELETE'
+                }
+              });
+              await this.getPost()
+            }catch(error){
+              console.error(error, "an error occured")
+            }
+          },
           async createPost(imagePreviews, data){
             this.load = true
             try{
@@ -194,6 +228,7 @@ export const useCreateStore = defineStore('post', {
                         }
                     });
                     this.relatedPosts = []
+                    await this.getPost()
                     return true
                 }
             }catch (error) {
@@ -208,6 +243,41 @@ export const useCreateStore = defineStore('post', {
                 return false;
               }finally{
                 this.load = false
+              }
+          },
+          async editPost(imagePreviews, data){
+            this.loadEdit = true
+            try{
+                const photoResponse = await this.handlephotoUpload(imagePreviews)
+                if (photoResponse){
+                    const api = vendorUseApi()
+                    const response = await api ({
+                        url: `vendor/posts/${this.postToEdit.id}`,
+                        method: 'POST',
+                        data: {
+                          _method: 'PUT',
+                            category_id: data.category_id,
+                            product_ids: data.product_ids,
+                            location: data.location,
+                            description: data.description,
+                            featured_img: this.pictureInfo
+                        }
+                    });
+                    await this.getPost()
+                    return true
+                }
+            }catch (error) {
+                console.error('Failed to upload file:', error);
+                if (error.response) {
+                  this.errorPost = error.response.data.message || 'An error occurred during post upload.';
+                } else if (error.request) {
+                  this.errorPost  = 'No response received from server. Please try again later.';
+                } else {
+                  this.errorPost   = 'An error occurred. Please try again later.';
+                }
+                return false;
+              }finally{
+                this.loadEdit = false
               }
           },
           async schedulePost(imagePreviews, data){
@@ -229,6 +299,7 @@ export const useCreateStore = defineStore('post', {
                         }
                     });
                     this.relatedPosts = []
+                    await this.getPost()
                     return true
                 }
             }catch (error) {
@@ -263,6 +334,7 @@ export const useCreateStore = defineStore('post', {
                         }
                     });
                     this.relatedPosts = []
+                    await this.getPost()
                     return true
                 }
             }catch (error) {
@@ -295,6 +367,41 @@ export const useCreateStore = defineStore('post', {
                           cover_image: this.coverInfo
                         }
                     });
+                    await this.getArticle()
+                    return true
+                }
+            }catch (error) {
+                console.error('Failed to upload file:', error);
+                if (error.response) {
+                  this.errorArticle = error.response.data.message || 'An error occurred during post upload.';
+                } else if (error.request) {
+                  this.errorArticle  = 'No response received from server. Please try again later.';
+                } else {
+                  this.errorArticle   = 'An error occurred. Please try again later.';
+                }
+                return false;
+              }finally{
+                this.load4 = false
+              }
+          },
+          async editArticle(imagePreview, data){
+            this.load4 = true
+            try{
+                const photoResponse = await this.handlephotoUpload2(imagePreview)
+                if (photoResponse){
+                    const api = vendorUseApi()
+                    const response = await api ({
+                        url: `vendor/articles/${this.articleToEdit.id}`,
+                        method: 'POST',
+                        data: {
+                          _method: 'PUT',
+                          title: data.title,
+                          content: data.content,
+                          category_id: data.category_id,
+                          cover_image: this.coverInfo
+                        }
+                    });
+                    this.getArticle()
                     return true
                 }
             }catch (error) {
