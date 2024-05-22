@@ -5,18 +5,16 @@
 </template>
 <script setup>
     import { useRoute } from 'vue-router';
-    import {onMounted, ref } from 'vue';
-	import { useUserStore } from "~/stores/userStore";
+    import {onBeforeMount, ref } from 'vue';
+	import { getArticleById} from '~/composables/usePost';
 
 	const route = useRoute();
 	const articleId = route.params.id;
 	const article = ref(null);
-	const userStore = useUserStore();
 
-	article.value = userStore.allArticles.find(art => art.id == articleId);
-	// onMounted(() => {
-	// 	getArticle(articleId)
-	// })
+	onBeforeMount(async () => {
+		article.value = await getArticleById(articleId)
+	})
 
 
 	

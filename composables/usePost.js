@@ -43,10 +43,10 @@ export const getArticleById = async (id) => {
     const api = useApi()
     try{
         const res = await api({
-            url: `vendor/articles/${id}`,
+            url: `vendor/articles/${id}/show_article`,
             method: 'get'
         });
-        console.log(res)
+        return res.data.data
     }catch(error){
         console.error(error)
     }
@@ -55,10 +55,10 @@ export const getPostById = async (id) => {
     const api = useApi()
     try{
         const res = await api({
-            url: `vendor/posts/${id}`,
+            url: `vendor/posts/${id}/show_post`,
             method: 'get'
         });
-        console.log(res)
+        return res.data.data
     }catch(error){
         console.error(error)
     }

@@ -1,6 +1,6 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div v-if="filteredProductsData.length > 0" class="d-flex align-center justify-space-between">
+		<div v-if="vendorProducts.Products.length > 0" class="d-flex align-center justify-space-between">
 			<div class="d-flex w-100 align-center">
 				<div class="d-flex align-center">
 					<v-text-field
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 
-		<div v-if="filteredProductsData.length > 0" class="mt-5">
+		<div v-if="vendorProducts.Products.length > 0" class="mt-5">
 			<v-tabs v-model="tab" class="orders" color="green">
 				<v-tab @click.stop="sort(item.prop, item.value)" v-for="item in tabs" :key="item" :value="item" class="d-flex text-capitalize align-center">
 					{{ item.name }}
@@ -240,7 +240,7 @@
 				</v-dialog>
 				
 			</v-table>
-			<div v-if="filteredProductsData.length > 0"
+			<div v-if="vendorProducts.Products.length > 0"
 				class="w-100 mt-4 d-flex justify-space-between align-center"
 				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
 			>
@@ -359,7 +359,7 @@ export default {
 		}
 		
 		
-		onMounted(async () => {
+		onBeforeMount(async () => {
 			await fetchFilteredProducts();
 		});
 		watch(() => tab.value, () => {

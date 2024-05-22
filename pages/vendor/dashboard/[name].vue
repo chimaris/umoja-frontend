@@ -169,7 +169,7 @@ middleware: "vendor-auth"
 })
 
 
-import { ref, onBeforeUnmount, onMounted, computed  } from 'vue';
+import { ref, onBeforeUnmount, computed  } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
@@ -203,7 +203,7 @@ watch(() => route.params.name, (name) => {
 watch(() => window.innerWidth, () => {
  checkScreenSize()
 });
-onMounted(async () => {
+onBeforeMount(async () => {
 	checkScreenSize()
 	await postStore.getArticle()
 	await postStore.getPost()

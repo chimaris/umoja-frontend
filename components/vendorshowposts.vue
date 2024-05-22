@@ -23,8 +23,8 @@
 						<v-icon class="mr-1" size="3" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
 						<p style="color: #969696; font-size: 11px; font-weight: 400">{{ getdateRegistered(item?.created_at) }}</p>
 					</div>
-					<v-icon :id="'menu-activator' + item.id" icon="mdi mdi-dots-horizontal"></v-icon>
-                        <v-menu :activator="'#menu-activator' + item.id" flat close-on-content-click="false" v-model="menuVisible[item.id]">
+					<v-icon :id="'menu-activator' + item.id" @click="menuVisible[item.id] = true" icon="mdi mdi-dots-horizontal"></v-icon>
+                        <v-menu :activator="'#menu-activator' + item.id" flat  v-model="menuVisible[item.id]">
                         <v-list>
                             <v-list-item @click="editPost(item)">Edit Post</v-list-item>
                             <v-list-item @click="deletePost(item.id)">Delete Post</v-list-item>
@@ -137,9 +137,8 @@ const choose = (x) => {
 }
 async function editPost(item){
 	postStore.postToEdit = item
-	menuVisible.value[item.id] = false
     choose('Edit Post')
-	
+	menuVisible.value[item.id] = false
    
 	
 }

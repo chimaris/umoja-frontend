@@ -1,21 +1,19 @@
 <template>
 	<Header2 />
-	<PostDetail :post="post"/>
+	<PostDetail :post="post" :id="postId"/>
 	<Mainfooter :showBaloon="true" />
 </template>
 <script setup>
     import { useRoute } from '#vue-router';
-    import {onMounted, ref } from 'vue';
-	import { useUserStore } from "~/stores/userStore";
+    import {ref, onBeforeMount } from 'vue';
+	import { getPostById } from '~/composables/usePost';
 
 	const route = useRoute();
 	const postId = route.params.id;
-	const post = ref(null);
-	const userStore = useUserStore();
-
-		const postIndex = userStore.allPosts.findIndex(item => item.id == postId);
-		if (postIndex !== -1){
-			post.value = userStore.allPosts[postIndex]
-		}
+	const post = ref(null)
+	
+		onBeforeMount(async () => {
+			post.value = await getPostById(postId)
+		})
 	
 </script>

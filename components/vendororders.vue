@@ -183,7 +183,7 @@
 	</v-container>
 </template>
 <script setup>
-import {ref, onMounted, defineEmits, computed} from 'vue';
+import {ref, onBeforeMount, defineEmits, computed} from 'vue';
 import {vendorUseApi} from '~/composables/vendorApi';
 import { getdateRegistered } from '~/utils/date';
 import { formattedPrice } from '~/utils/price';
@@ -217,7 +217,6 @@ function choose2(x) {emits("changePage", "createorder");}
 function orderDets(order){
 	orderStore.orderDetail = order
 	choose("Order details")
-	console.log(orderStore.orderDetail)
 }
 function sort(x, y) {
 			var itm = items1.value;
@@ -254,7 +253,7 @@ async function fetchFilteredOrders(){
 		console.error(error);
 	}
 }
-onMounted(async () => {
+onBeforeMount(async () => {
 	await fetchFilteredOrders();
 });
 watch(() => tab.value, () => {

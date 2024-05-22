@@ -8,29 +8,29 @@
 		>
 			<v-row style="height: 100vh">
 				<v-col cols="12" class="px-0 py-0 pb-0" md="6">
-					<v-img v-if="post.featured_img?.includes(',')" class="pb-0" cover width="100%" height="100%" :src="post.featured_img.split(',')[1]"></v-img>
-					<v-img v-if="!post.featured_img?.includes(',')" class="pb-0" cover width="100%" height="100%" :src="post.featured_img"></v-img>
+					<v-img v-if="post?.featured_img?.includes(',')" class="pb-0" cover width="100%" height="100%" :src="post?.featured_img.split(',')[1]"></v-img>
+					<v-img v-if="!post?.featured_img?.includes(',')" class="pb-0" cover width="100%" height="100%" :src="post?.featured_img"></v-img>
 				</v-col>
 				<v-col cols="12" style="position: relative" class="px-0 py-0" md="6">
 					<v-sheet style="height: 100%; overflow: scroll; position: absolute; width: 100%" class="py-2">
 						<div class="d-flex px-6 pt-6 pb-4">
 							<v-avatar size="48" class="mr-5">
-								<v-img :src="post.vendor_profile_photo"></v-img>
+								<v-img :src="post?.vendor_profile_photo"></v-img>
 							</v-avatar>
 							<div class="w-100 d-flex justify-space-between">
 								<div>
 									<div class="d-flex">
 										<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">
-											{{ post.vendor_firstname }} {{ post.vendor_lastname }}
+											{{ post?.vendor_firstname }} {{ post?.vendor_lastname }}
 										</p>
 										<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
-											<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{ getdateRegistered(post.created_at) }}
+											<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{ getdateRegistered(post?.created_at) }}
 										</p>
 									</div>
 									<div class="d-flex">
-										<v-chip size="x-small" class="px-3" color="#936900" rounded="0">{{ post.category_name }}</v-chip>
+										<v-chip size="x-small" class="px-3" color="#936900" rounded="0">{{ post?.category_name }}</v-chip>
 										<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
-											<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{ post.location }}
+											<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{ post?.location }}
 										</p>
 									</div>
 								</div>
@@ -41,17 +41,17 @@
 						</div>
 						<div class="px-6">
 							<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
-								{{ post.description }}
+								{{ post?.description }}
 							</p>
 							<div class="d-flex align-center py-2" >
-								<v-btn flat v-if="userLiked"> <v-icon @click="handUnLike(post.id)" class="mr-1" icon="mdi mdi-heart"></v-icon> {{ post.likes }} {{ post.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
-								<v-btn flat v-if="!userLiked"> <v-icon @click="handleLike(post.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ post.likes }} {{ post.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
+								<v-btn flat v-if="userLiked"> <v-icon @click="handUnLike(post?.id)" class="mr-1" icon="mdi mdi-heart"></v-icon> {{ post?.likes }} {{ post?.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
+								<v-btn flat v-if="!userLiked"> <v-icon @click="handleLike(post?.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ post?.likes }} {{ post?.likes <= 1 ? 'Like' : "Likes" }} </v-btn>
 								<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
 							</div>
 							<v-dialog v-model="loginDialog" persistent max-width="350">
 								<v-card>
 									<v-card-title class="headline">Login Required</v-card-title>
-									<v-card-text>You need to be logged in to like a post.</v-card-text>
+									<v-card-text>You need to be logged in to like a post?.</v-card-text>
 									<v-card-actions>
 										<v-spacer></v-spacer>
 										<v-btn color="green darken-1" text @click="loginDialog = false">Close</v-btn>
@@ -63,7 +63,7 @@
 						<v-divider></v-divider>
 						<div style="display: flex; flex-direction: column; justify-content: center; width: 100%; align-items: center">
 							<h1 style="font-weight: 700; font-size: 24px; line-height: 27px; color: #000000" class="pa-6">Related Products</h1>
-							<div v-if="post.products?.length > 0" v-for="item in post.products" :key="item" class="cardStyle mb-4 w-75">
+							<div v-if="post?.products?.length > 0" v-for="item in post?.products" :key="item" class="cardStyle mb-4 w-75">
 								<v-card flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg"> 
 									<v-btn rounded="xl" flat size="x-small" style="position: absolute; top: 15px; right: 15px" icon="mdi mdi-heart-outline"></v-btn>
 									<v-img
@@ -157,7 +157,7 @@
 		</v-card>
 		<!-- <v-divider></v-divider>
 		<v-row>
-			<v-col v-if="post.products?.length > 0" v-for="item in post.products" :key="item.id" cols="12" sm="6" md="4" lg="3" class="mb-4">
+			<v-col v-if="post?.products?.length > 0" v-for="item in post?.products" :key="item.id" cols="12" sm="6" md="4" lg="3" class="mb-4">
 				<v-card flat color="grey-lighten-4" class="d-flex align-center justify-center rounded-lg" height="313px">
 					<v-btn rounded="xl" flat size="x-small" style="position: absolute; top: 15px; right: 15px" icon="mdi mdi-heart-outline"></v-btn>
 					<v-img cover height="100%" width="100%" :src="item.photo.split(',')[0]"></v-img>
@@ -197,7 +197,7 @@ import {getdateRegistered} from '~/utils/date'
 import { useUserStore } from "~/stores/userStore";
 import { formattedPrice } from "~/utils/price";
 export default {
-	props: ["post"],
+	props: ["post", "id"],
 	data() {
 		return {
 			dialog: false,
@@ -211,7 +211,7 @@ export default {
 	},
 	async mounted() {
 		if (useUserStore().isLoggedIn){
-			this.userLiked = await hasLiked(this.post.id)
+			this.userLiked = await hasLiked(this.id)
 		}
 	},
 	methods: {
