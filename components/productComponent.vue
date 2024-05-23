@@ -137,6 +137,7 @@
 		</div>
 		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
 			<div :class="showdisco ? 'mt-0' : 'mt-3'">
+				<h4 v-if="item.compare_at_price" class="text-decoration-line-through priceClass" >{{formattedPrice(item.compare_at_price)}}</h4>
 				<h1 :style="{ fontSize: $vuetify.display.mobile ? '14px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">
 					{{ formattedPrice(item.price) }}
 				</h1>

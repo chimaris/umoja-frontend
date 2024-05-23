@@ -1,6 +1,7 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div class="d-flex align-center justify-space-between">
+		<div v-if="filteredOrderData.length > 0">
+			<div class="d-flex align-center justify-space-between">
 			<div>
 				<p style="font-weight: 600; font-size: 24px" class="mb-2 d-flex align-center text-left">Manage all your orders here</p>
 			</div>
@@ -44,6 +45,7 @@
 				</v-tab>
 			</v-tabs>
 			<v-divider></v-divider>
+		</div>
 			<v-table v-if="filteredOrderData.length > 0"
 				style="    height: 80%; !important;
  overflow: scroll;"

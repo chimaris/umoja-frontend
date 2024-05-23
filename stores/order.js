@@ -4,7 +4,8 @@ import {vendorUseApi} from '~/composables/vendorApi'
 export const useOrderStore = defineStore('order', {
     state: () => ({
         orderDetail: [],
-        allOrder: []
+        allOrder: [],
+        revenue: []
     }),
     persist: {
         enabled: true,
@@ -23,6 +24,19 @@ export const useOrderStore = defineStore('order', {
 	}catch(error){
 		console.error(error);
 	}
+},
+async getRevenues(){
+    const api = vendorUseApi()
+    const year = new Date().getFullYear()
+        try{
+            const res = await api({
+                url: `vendor/revenue_growth?filter=year&years=${year}`,
+                method: 'GET'
+            });
+            this.revenue = res.data
+        }catch(error){
+            console.error(error)
+        }
 }
     }
 })

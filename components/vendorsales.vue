@@ -6,23 +6,33 @@
 					<v-card color="green" height="260" min-width="300px" class="pt-4 px-4 mx-auto cardStyle" width="100%" style="" flat>
 						<div class="d-flex align-center">
 							<p style="font-weight: 400; font-size: 17px; line-height: 25px; letter-spacing: -0.01em; color: #edf0ef">
-								Total Revenue made this year (2023)
+								Total Revenue made this year ({{new Date().getFullYear()}})
 							</p>
 						</div>
 						<div class="d-flex align-center justify-space-between">
-							<h1 style="font-weight: 600; font-size: 40px; line-height: 60px; color: #edf0ef">€‎ 23,512.07</h1>
+							<h1 style="font-weight: 600; font-size: 40px; line-height: 60px; color: #edf0ef">{{!hasOrder? formattedPrice(0.00) : orderStore.revenue[0]?.total_amount? `€ ${(orderStore.revenue[0]?.total_amount/1000000)}M` : formattedPrice(0.00)}}</h1>
 							<div class="pa-4" style="position: absolute; bottom: 0; width: 100%; left: 0">
-								<v-progress-linear class="rounded-xl" model-value="80" :height="5"></v-progress-linear>
+								<v-progress-linear class="rounded-xl"  :model-value="!hasOrder? 0 : orderStore.revenue[0]?.total_amount? `${(orderStore.revenue[0]?.total_amount/1000000)}` : 0" :height="5"></v-progress-linear>
 								<div class="d-flex pt-3 justify-space-between">
-									<p class="tiny">84%</p>
-									<p class="tiny">€ 65M Last year</p>
+									<p class="tiny">{{!hasOrder? '0%' : orderStore.revenue[0]?.total_amount? `${(orderStore.revenue[0]?.total_amount/1000000)}` : 0}}</p>
+									<p class="tiny">{{!hasOrder? '' :'€ 65M Last year'}}</p>
 								</div>
 							</div>
 						</div>
 					</v-card>
 				</v-col>
 				<v-col cols="12" lg="4">
-					<v-card color="" height="260" min-width="300px" class="pt-4 px-4 mx-auto cardStyle" width="100%" style="" flat>
+					<v-card v-if="!hasOrder" color="" height="260" min-width="300px" class="pt-4 px-4 mx-auto cardStyle" width="100%" style="" flat>
+						<div class="d-flex justify-space-between">
+							<p style="font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.03em; color: #333333">Most Purchased Category</p>
+						</div>
+
+						<div style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
+							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
+							<span>No Product has been sold yet</span>
+						</div>
+					</v-card>
+					<v-card v-else color="" height="260" min-width="300px" class="pt-4 px-4 mx-auto cardStyle" width="100%" style="" flat>
 						<div class="d-flex justify-space-between">
 							<p style="font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.03em; color: #333333">Most Purchased Category</p>
 							<v-btn size="small" variant="text" color="#1361F4" class="" @click="dialog = true"> View All </v-btn>
@@ -43,21 +53,31 @@
 					</v-card>
 				</v-col>
 				<v-col cols="12" lg="4">
-					<v-card color="" height="260" min-width="300px" class="pt-4 px-4 mx-auto cardStyle" width="100%" style="" flat>
+					<v-card v-if="!hasOrder" color="" height="260" min-width="300px" class="pt-4 px-4 mx-auto cardStyle" width="100%" style="" flat>
+						<div class="d-flex justify-space-between">
+							<p style="font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.03em; color: #333333">Most Popular Product</p>
+						</div>
+
+						<div style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
+							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
+							<span>No Product has been sold yet</span>
+						</div>
+					</v-card>
+					<v-card v-else color="" height="260" min-width="300px" class="pt-4 px-4 mx-auto cardStyle" width="100%" style="" flat>
 						<div class="d-flex justify-space-between">
 							<p style="font-weight: 600; font-size: 24px; line-height: 30px; letter-spacing: -0.03em; color: #333333">Most Popular Product</p>
 							<v-btn size="small" variant="text" color="#1361F4" class="" @click="dialog1 = true"> View All </v-btn>
 						</div>
 
-						<div style="position: absolute; bottom: 16px; width: 100%; left: 0" class="">
-							<div v-for="n in items2" :key="n" class="px-4 py-1">
+						<div style="position: absolute; bottom: 30px; width: 100%; left: 0" class="">
+							<div v-for="(n,i) in soldProducts.slice(0,3)" :key="n" class="px-4 py-2">
 								<div class="d-flex pb-2 align-center justify-space-between">
 									<div class="d-flex align-center">
-										<p class="ml-2 tiny3">{{ n.name }}</p>
+										<p class="ml-2 tiny2">{{ n.product_name }}</p>
 									</div>
-									<p class="tiny2">€ 0.{{ n.sales }}M</p>
+									<p class="tiny2">€ {{(n.total_amount/1000000)}}M</p>
 								</div>
-								<v-progress-linear class="rounded-xl" :color="n.color" :model-value="n.sales" :height="5"></v-progress-linear>
+								<v-progress-linear class="rounded-xl" :color="colors[i]" :model-value="n.total_amount/1000000" :height="5"></v-progress-linear>
 							</div>
 						</div>
 					</v-card>
@@ -75,28 +95,21 @@
 
 						<v-menu width="auto">
 							<template v-slot:activator="{ props }">
-								<v-btn v-bind="props" style="border: 1px solid #e5e5e5" variant="outlined" class="text-grey-darken-3">
+								<v-btn :disabled="!hasOrder" v-bind="props" style="border: 1px solid #e5e5e5" variant="outlined" class="text-grey-darken-3">
 									Last 7 Days <v-icon icon="mdi mdi-chevron-down"></v-icon>
 								</v-btn>
 							</template>
 							<v-list>
-								<v-list-item v-for="(item, index) in ['Last 7 days', 'This Month', 'This Year', 'Custom']" :key="index" :value="index">
+								<v-list-item v-for="(item, index) in ['Last 7 days', 'This Month', 'This Year', 'Custom']" :key="index" @click="filterProduct = item">
 									<v-list-item-title>{{ item }}</v-list-item-title>
 								</v-list-item>
 							</v-list>
 						</v-menu>
-					</div>
-					<div class="d-flex align-center">
-						<p v-for="n in items" class="mr-2 lightText3"><v-icon size="9.6" :color="n.color" icon="mdi mdi-circle"></v-icon> {{ n.name }}</p>
-					</div>
-					<!-- <revenuegraph /> -->
-					<apexchart type="bar" color="green" :options="chartOptions" :series="series"></apexchart>
-					<!-- <v-img
-						class="mt-12 mb-5"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1686915235/Untitled_kwgtyz.png"
-						width="100%"
-						height="auto"
-					></v-img> -->
+						</div>
+					<!-- <div class="d-flex align-center" v-if="hasOrder">
+						<p v-for="n in soldProducts" class="mr-2 lightText3"><v-icon size="9.6" :color="n.color" icon="mdi mdi-circle"></v-icon> {{ n.product_name }}</p>
+					</div> -->
+					<soldproductgraph :soldProducts="soldProducts" />
 				</v-card>
 			</v-col>
 			<v-col cols="12" lg="6">
@@ -108,28 +121,21 @@
 
 						<v-menu width="auto">
 							<template v-slot:activator="{ props }">
-								<v-btn v-bind="props" style="border: 1px solid #e5e5e5" variant="outlined" class="text-grey-darken-3">
+								<v-btn :disabled="!hasOrder" v-bind="props" style="border: 1px solid #e5e5e5" variant="outlined" class="text-grey-darken-3">
 									This year <v-icon icon="mdi mdi-chevron-down"></v-icon>
 								</v-btn>
 							</template>
 							<v-list>
-								<v-list-item v-for="(item, index) in ['Last 7 days', 'This Month', 'This Year', 'Custom']" :key="index" :value="index">
+								<v-list-item v-for="(item, index) in ['Last 7 days', 'This Month', 'This Year', 'Custom']" :key="index" @click="filterCategory = item">
 									<v-list-item-title>{{ item }}</v-list-item-title>
 								</v-list-item>
 							</v-list>
 						</v-menu>
 					</div>
-					<div class="d-flex align-center">
+					<!-- <div class="d-flex align-center" v-if="hasOrder">
 						<p v-for="n in items2" class="mr-2 lightText3"><v-icon size="9.6" :color="n.color" icon="mdi mdi-circle"></v-icon> {{ n.name }}</p>
-					</div>
-					<!-- <revenuegraph /> -->
-					<apexchart type="line" color="green" :options="chartOptions2" :series="series2"></apexchart>
-					<!-- <v-img
-						class="mt-12 mb-5"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1686903729/Group_1175_pm9ipd.png"
-						width="100%"
-						height="auto"
-					></v-img> -->
+					</div> -->
+					<salescategorygraph :soldCategories="soldCategories" />
 				</v-card>
 			</v-col>
 
@@ -138,7 +144,7 @@
 					<div class="d-flex justify-space-between">
 						<div>
 							<h4 class="mb-2 timernum d-flex align-center text-left">Revenue Growth <span class="ml-2 lightText">(EUR)</span></h4>
-							<p style="font-weight: 600; font-size: 48px; line-height: 60px; color: #333333">€ 534,780.00</p>
+							<p style="font-weight: 600; font-size: 48px; line-height: 60px; color: #333333">{{!hasOrder? formattedPrice(0.00) : saleRevenue[0]?.total_amount? `€ ${(saleRevenue[0]?.total_amount/1000)}K` : formattedPrice(0.00)}}</p>
 						</div>
 
 						<v-chip-group
@@ -156,10 +162,12 @@
 							v-model="chip"
 							selected-class=" chipselected2"
 						>
-							<v-chip
+							<v-chip 
 								:class="chip == tag ? 'chipselected2' : ''"
 								style="border: 1px solid #ced2d6; font-size: 14px; font-weight: 600 !important"
 								size="x-large"
+								:disabled="!hasOrder"
+								@click="filterRevenue = tag"
 								class="pa-4"
 								v-for="tag in ['Last 24 hours', 'Last 7 days', 'This Month', 'This Year']"
 								:key="tag"
@@ -168,14 +176,7 @@
 							</v-chip>
 						</v-chip-group>
 					</div>
-					<!-- <revenuegraph /> -->
-					<apexchart type="line" color="green" :options="chartOptions3" :series="series3"></apexchart>
-					<!-- <v-img
-						class="mt-8"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1686915796/Frame_548_s0rovu.png"
-						width="100%"
-						height="auto"
-					></v-img> -->
+					<revenuegrowthgraph :saleRevenue ="saleRevenue"/>
 				</v-card>
 			</v-col>
 		</v-row>
@@ -541,7 +542,7 @@
 				</thead>
 				<tbody>
 					<!-- @click="chosen = item.sn" -->
-					<tr :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="item in items1" :key="item.sn">
+					<tr :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="item in soldProducts" :key="item.sn">
 						<td class="text-grey-lighten-1 pl-4 px-1">
 							<v-checkbox hide-details></v-checkbox>
 						</td>
@@ -552,15 +553,15 @@
 										<div v-bind="props" class="d-flex align-center pr-4 pl-2">
 											<v-avatar color="grey-lighten-4" class="rounded-lg pa-1 mr-3 ml-0" size="50"
 												><v-img
-													src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"
+													:src="item.product_photo.split(',')[0]"
 												></v-img
 											></v-avatar>
 											<div>
 												<p class="mb-1" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">
-													Ghana multi-colored kente...
+													{{item.product_name}}
 												</p>
 												<p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696" class="text-truncate">
-													The Ghana kente material comes with a...
+													{{item.product_name}}
 												</p>
 											</div>
 										</div></template
@@ -658,7 +659,130 @@
 }
 </style>
 <script>
+import { useOrderStore } from '~/stores/order';
+import { formattedPrice } from '~/utils/price';
+import {vendorUseApi} from '~/composables/vendorApi'
+import {ref, onBeforeMount} from 'vue'
+
 export default {
+	setup(){
+		const soldProducts =ref([])
+		const soldCategories = ref([])
+		const saleRevenue = ref([])
+		const filterProduct =ref("Last 7 days")
+		const filterCategory = ref("Last 7 days")
+		const filterRevenue = ref("Last 24 hours")
+		const orderStore = useOrderStore()
+
+		const hasOrder = computed(() => useOrderStore().allOrder.length > 0)
+
+		onBeforeMount(async () => {
+			if (hasOrder.value){
+				await getSales()
+				await getCategories()
+				await getRevenue()
+				await useOrderStore().getRevenues()
+			}
+		});
+
+		watch(() => filterProduct.value, async () => {
+			await getSales()
+		})
+		watch(() => filterCategory.value, async () => {
+			await getCategories()
+		})
+		watch(() => filterRevenue.value, async () => {
+			await getRevenue()
+		})
+
+		function getCurrentMonthIndex() {
+		const date = new Date();
+		return date.getMonth() + 1; 
+		}
+
+		async function getCategories(){
+			const api = vendorUseApi()
+			let url = 'vendor/top_categories?last_days=7'
+			if (filterCategory.value == 'This Year'){
+				const year = new Date().getFullYear()
+				url = `vendor/top_categories?year=${year}`
+			}
+			if (filterCategory.value == 'This Month'){
+				url = `vendor/top_categories?month=${getCurrentMonthIndex()}`
+			}
+			try{
+                const res = await api({
+                    url: url,
+                    method: 'GET'
+                });
+				soldCategories.value = res.data
+            }catch(error){
+                console.error(error)
+            }
+		}
+
+		async function getSales(){
+        const api = vendorUseApi()
+			let url = 'vendor/sold_products?last_days=7'
+			if (filterProduct.value == 'This Year'){
+				const year = new Date().getFullYear()
+				url = `vendor/sold_products?year=${year}`
+			}
+			if (filterProduct.value == 'This Month'){
+				url = `vendor/sold_products?month=${getCurrentMonthIndex()}`
+			}
+            try{
+                const res = await api({
+                    url: url,
+                    method: 'GET'
+                });
+				soldProducts.value = res.data
+            }catch(error){
+                console.error(error)
+            }
+    }
+	async function getRevenue(){
+        const api = vendorUseApi()
+			let url;
+			if (filterRevenue.value == 'Last 24 hours'){
+				url = `vendor/revenue_growth?filter=24hours`
+			}
+			if (filterRevenue.value == 'Last 7 days'){
+				url = `vendor/revenue_growth?filter=last7days`
+			}
+			if (filterRevenue.value == 'This Month'){
+				url = `vendor/revenue_growth?filter=month&months=${getCurrentMonthIndex()}`
+			}
+			if (filterRevenue.value == 'This Year'){
+				const year = new Date().getFullYear()
+				url = `vendor/revenue_growth?filter=year&years=${year}`
+			}
+            try{
+                const res = await api({
+                    url: url,
+                    method: 'GET'
+                });
+				saleRevenue.value = res.data
+            }catch(error){
+                console.error(error)
+            }
+    }
+
+		return {
+			soldProducts,
+			getSales,
+			filterProduct,
+			filterCategory,
+			getCurrentMonthIndex,
+			getCategories,
+			hasOrder,
+			soldCategories,
+			saleRevenue,
+			getRevenue,
+			filterRevenue,
+			orderStore
+		}
+	},
 	data() {
 		return {
 			menu: true,
@@ -710,6 +834,7 @@ export default {
 					img: "https://res.cloudinary.com/payhospi/image/upload/v1685693849/Flags_3_hqmdge.png",
 				},
 			],
+			colors: ["#CBDED6", "#00966D", "#005A41"],
 			items: [
 				{
 					name: "Buju Golden Bracelet",
@@ -755,125 +880,6 @@ export default {
 				"https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1896_x07ole.png",
 				"https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1897_ca06qx.png",
 			],
-			series: [
-				{
-				"name": "Product A",
-				"data": [500, 1000, 1500, 2000, 2500, 3000, 3500]
-				},
-				{
-				"name": "Product B",
-				"data": [1000, 1500, 2000, 2500, 3000, 3500, 4000]
-				},
-				{
-				"name": "Product C",
-				"data": [1500, 2000, 2500, 3000, 3500, 4000, 4500]
-				}
-			],
-			chartOptions: {
-				chart: {
-				type: 'bar'
-				},
-				colors:['#CBDED6', '#00966D', '#005A41'],
-				xaxis: {
-				categories: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
-				labels: {
-					style: {
-					fontSize: '16px',
-					fontWeight: 'bold',
-					}
-				}
-				},
-				yaxis: {
-					labels: {
-						formatter: function (value) {
-						return '£' + value + 'k';
-						},
-						style: {
-						fontSize: '16px',
-						fontWeight: 'bold',
-						}
-					}
-					}
-			},
-			series2: [
-				{
-				"name": "Clothing",
-				"data": [5000, 1000, 15000, 2000, 25000, 30000]
-				},
-				{
-				"name": "Shoes",
-				"data": [1000, 2000, 21000, 2000, 35000, 42000]
-				},
-				{
-				"name": "Accessories",
-				"data": [9000, 18000, 27000, 36000, 45000, 5000]
-				}
-			],
-			chartOptions2: {
-				chart: {
-				type: 'line'
-				},
-				colors:['#F38218', '#914E0E', '#FADACC'],
-				stroke: {
-				curve: 'smooth',
-				width: 3,
-				},
-				xaxis: {
-				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-				labels: {
-					style: {
-					fontSize: '16px',
-					fontWeight: 'bold',
-					}
-				}
-				},
-				yaxis: {
-					labels: {
-						formatter: function (value) {
-						return '£' + value + 'k';
-						},
-						style: {
-						fontSize: '16px',
-						fontWeight: 'bold',
-						}
-					}
-					}
-			},
-			series3: [
-					{
-						name: 'Revenue Growth',
-         	 			data: [300, 400, 350, 500, 490, 600, 700, 900, 500, 200, 900, 1000]
-					}
-			],
-			chartOptions3: {
-				chart: {
-				type: 'line'
-				},
-				xaxis: {
-				categories: ['Jan', 'Feb', 'March', 'Apr', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
-				labels: {
-					style: {
-					fontSize: '16px',
-					fontWeight: 'bold',
-					}
-				}
-				},
-				stroke: {
-					curve: 'smooth',
-					colors: ['#2C6E63'] // Define the color for the line
-				},
-				yaxis: {
-				labels: {
-					formatter: function (value) {
-					return '£' + value + 'k';
-					},
-					style: {
-					fontSize: '16px',
-					fontWeight: 'bold',
-					}
-				}
-        }
-			},
 			items1: [
 				{
 					sn: "#23942",
@@ -931,5 +937,8 @@ export default {
 			],
 		};
 	},
-};
+
+
+
+}
 </script>

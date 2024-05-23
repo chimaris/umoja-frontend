@@ -796,6 +796,7 @@ export default {
 		watchEffect(() => {
     	fetchSubCategories(product.value.category_name);
 		});
+		
 
 		onMounted(() => {
             if (!product) {
@@ -1065,16 +1066,18 @@ export default {
       		return this.Categories.map(category => category.name);
        },
 	   commission(){
-			return ((2/100) * this.product.price).toFixed(2)
+			return ((1/100) * this.product.price).toFixed(2)
 	   },
 	   profit(){
 			return (this.product.price - this.product.cost_per_item).toFixed(2)
 	   },
 	   margin(){
 		if ((!this.product.price) || (!this.product.cost_per_item)) {
-    		return "0.00%"; // or any default value you prefer
+    		return "0.00% (0.00)"; // or any default value you prefer
 		} else {
-   			 return (((this.product.price - this.product.cost_per_item) / this.product.price) * 100).toFixed(2);
+			const marginPercent = (((this.product.price - this.product.cost_per_item) / this.product.price) * 100).toFixed(2);
+			const marginPrice = this.profit - this.commission
+			return  `${marginPercent} (${(marginPrice)})`
 		}
 	   },
         orderDetails() {
@@ -1259,7 +1262,7 @@ export default {
 				tax_charge_on_product: this.product.tax_charge_on_product,
 				cost_per_item: this.product.cost_per_item,
 				profit: this.profit,
-				margin: this.margin
+				margin: this.profit - this.commission
 			}
 			
 			if (this.product.price && this.product.cost_per_item) {

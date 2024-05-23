@@ -58,15 +58,15 @@
 		<v-sheet class="pt-8">
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Bank Name</p>
-				<p :contenteditable="isEditing" class="contact-value">{{vendor.bank_name}}</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor?.bank_name}}</p>
 			</div>
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Account Number</p>
-				<p :contenteditable="isEditing" class="contact-value">{{vendor.bank_account_number}}</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor?.bank_account_number}}</p>
 			</div>
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Account Name</p>
-				<p :contenteditable="isEditing" class="contact-value">{{vendor.name_on_account}}</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor?.name_on_account}}</p>
 			</div>
 		</v-sheet>
 		<div class="py-4 d-flex justify-space-between">
@@ -81,18 +81,20 @@
 	</v-sheet>
 </template>
 <script setup>
-import {ref, defineEmits, onMounted} from 'vue'
+import {ref, defineEmits, onBeforeMount} from 'vue'
 import { useVendorStore } from '~/stores/vendorStore';
 import {numRules, inputRules} from '~/utils/formrules'
 
 const isEditing = ref(false)
 const vendorStore = useVendorStore()
-const vendor = computed(() => {
+const vendor = ref(vendorStore.vendor.vendor_details)
+
+onBeforeMount(() => {
 	if (!vendorStore.vendor.vendor_details) {
-		return []
+		vendor.value =  []
 	}
-	return vendorStore.vendor.vendor_details
 })
+
 const formError = ref("")
 const paymentMode = ref("Bank Account")
 const paymentModes = ["Bank Account", "PayPal"]
@@ -100,14 +102,14 @@ const paymentModes = ["Bank Account", "PayPal"]
 const emit = defineEmits(['submit'])
 
 function isFormValid () {
-	return vendor.value.name_on_account && vendor.value.bank_account_number && vendor.value.bank_name
+	return vendor.value?.name_on_account && vendor.value?.bank_account_number && vendor.value?.bank_name
 }
 const submit = async () => {
 	if (isFormValid()) {
 		const data = {
-		bank_name: vendor.value.bank_name,
-		bank_account_number: vendor.value.bank_account_number,
-		name_on_account: vendor.value.name_on_account
+		bank_name: vendor.value?.bank_name,
+		bank_account_number: vendor.value?.bank_account_number,
+		name_on_account: vendor.value?.name_on_account
 	}
 
 	try{

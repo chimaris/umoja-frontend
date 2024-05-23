@@ -18,7 +18,10 @@ padding-top: 32px;">
 <v-card color="#EDEDED" flat="" v-bind="props" class="rounded-xl  " width="100%" height="">
 <div class="d-flex pa-4 align-center justify-space-between ">
 
-<v-avatar size="48" color="white"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img></v-avatar>
+<v-avatar size="48" color="white">
+  <v-img v-if="vendor.vendor_details?.profile_photo" :src="vendor.vendor_details?.profile_photo"></v-img>
+  <v-img v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
+</v-avatar>
 <div class="text-left px-4">
 <p style="color: #1A1D1F;
 font-weight: 600;
@@ -151,7 +154,11 @@ export default {
 setup() {
 const appStore = useAppStore();
 const vendorStore = useVendorStore();
-const vendor = computed(() => vendorStore.getVendor)
+const vendor = ref(vendorStore.vendor)
+
+watch(() => vendorStore.vendor, (newpost, oldpost) => {
+			vendor.value = newpost
+		});
 
 
 return {

@@ -175,6 +175,7 @@ import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
 import {useCreateStore} from '~/stores/createPostStore'
 import { useOrderStore } from '~/stores/order';
+import {useSaleStore} from '~/stores/sales'
 
 
 const sidebar = computed(() => useVendorStore().sideBtn)
@@ -206,10 +207,14 @@ watch(() => window.innerWidth, () => {
 });
 onBeforeMount(async () => {
 	checkScreenSize()
-	await vendorProducts.getAllProduct()
-	await postStore.getArticle()
-	await postStore.getPost()
-	await useOrderStore().getOrder()
+	if (vendorStore.vendor.complete_setup == 1){
+		await vendorProducts.getAllProduct()
+		await postStore.getArticle()
+		await postStore.getPost()
+		await useOrderStore().getOrder()
+		// await useSaleStore().getSales()
+	}
+	
 	window.addEventListener('resize', checkScreenSize);
 });
 
