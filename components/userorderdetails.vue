@@ -1,5 +1,5 @@
 <template>
-	<div class="mx-6 pa-0 my-6 cardStyle">
+	<div class="mx-6 pa-0 my-6 cardStyle d-none d-md-block">
 		<v-table>
 			<thead>
 				<tr class="bg-grey-lighten-3">
@@ -43,6 +43,7 @@
 						<v-chip v-if="dataselect.status == 3" size="small" rounded="lg" color="green">
 							<span style="font-size: 12px !important; font-weight: 600; line-height: 20px"> Delivered </span>
 						</v-chip>
+
 						<v-chip v-if="dataselect.status == 1" size="small" rounded="lg" color="#906A20">
 							<span style="font-size: 12px !important; font-weight: 600; line-height: 20px"> Awaiting Shipment </span>
 						</v-chip>
@@ -57,7 +58,7 @@
 			</tbody>
 		</v-table>
 	</div>
-	<div class="mx-6 pa-6 pb-2 mb-6 cardStyle">
+	<div class="mx-6 pa-6 pb-2 mb-6 cardStyle d-none d-md-block">
 		<div style="width: 100%" class=" ">
 			<v-expand-transition>
 				<v-card rounded="0" color="" class="pb-4" flat v-if="true" style="width: 100%">
@@ -120,7 +121,7 @@
 			</v-expand-transition>
 		</div>
 	</div>
-	<div class="mx-6 pa-0 mb-6 cardStyle">
+	<div class="mx-6 pa-0 mb-6 cardStyle d-none d-md-block">
 		<v-table>
 			<thead>
 				<tr class="bg-grey-lighten-3">
@@ -169,7 +170,7 @@
 			</tbody>
 		</v-table>
 	</div>
-	<div class="mx-6 pa-0 mb-6 cardStyle">
+	<div class="mx-6 pa-0 mb-6 cardStyle d-none d-md-block">
 		<v-row>
 			<v-col cols="6">
 				<div class="pa-4 w-100" style="max-width: 334px">
@@ -189,7 +190,194 @@
 			</v-col>
 		</v-row>
 	</div>
+
+	<!-- For mobile View -->
+	<div class="mb-6 d-block d-md-none">
+		<v-sheet style="border: 1px solid #ededed; border-radius: 10px">
+			<div class="d-flex justify-space-between align-center" style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<div class="d-flex">
+					<v-avatar color="#EDF0FC" size="50" class="mr-2">
+						<!-- <v-icon color="#1273EB" size="20" icon="fas fa-box"></v-icon> -->
+						<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+					</v-avatar>
+					<div>
+						<span class="d-flex align-center">
+							<span style="font-size: 20px; font-weight: 600">001799/10</span>
+							<v-img width="24" height="24" class="ml-2" src="https://res.cloudinary.com/payhospi/image/upload/v1716456639/umoja/copy-icon.svg" />
+						</span>
+
+						<span style="font-size: 12px; letter-spacing: 3%; color: #969696">ORDER DETAILS</span>
+					</div>
+				</div>
+				<v-btn size="40" rounded="xl" flat style="border: 1px solid #cecece" @click="$emit('takeback')" class="ml-" icon="mdi mdi-chevron-down">
+				</v-btn>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<v-row>
+					<v-col>
+						<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">CREATED AT</h4>
+						<span style="font-size: 14px; letter-spacing: -3%; font-weight: 600; color: #333">14th May, 2023</span>
+					</v-col>
+					<v-col>
+						<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">STATUS</h4>
+						<v-chip color="primary" size="small" rounded="sm"> Shipped </v-chip>
+					</v-col>
+				</v-row>
+				<v-row>
+					<v-col>
+						<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">ITEMS PURCHASED</h4>
+						<span style="font-size: 14px; letter-spacing: -3%; font-weight: 600; color: #333">Three (3)</span>
+					</v-col>
+					<v-col>
+						<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">TOTAL AMOUNT</h4>
+						<span style="font-size: 14px; letter-spacing: -3%; font-weight: 600; color: #333"> € 5,829.00 </span>
+					</v-col>
+				</v-row>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">SHIPPING ADDRESS</h4>
+				<p class="mb-2" style="font-size: 14px; letter-spacing: -4%; font-weight: 500; color: #333">
+					Mrs Smith 71 Cherry Court Southampton SO53 5PD, USA
+				</p>
+				<span style="font-size: 14px; letter-spacing: -4%; font-weight: 500; color: #333"> (212) 445-7622</span>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">BILLING ADDRESS</h4>
+				<span style="font-size: 14px; letter-spacing: -3%; font-weight: 500; color: #333"> Same as shipping address</span>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">SHIPPING METHOD</h4>
+				<span class="d-flex justify-space-between align-center">
+					<span style="font-size: 14px; letter-spacing: -4%; font-weight: 500; color: #333">Express delivery (DHL Express)</span>
+					<div>
+						<v-img width="40" height="40" src="https://res.cloudinary.com/payhospi/image/upload/v1716473804/umoja/DHL_Logo_apivwt.svg" />
+					</div>
+				</span>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">PAYMENT METHOD</h4>
+				<span class="d-flex justify-space-between align-center">
+					<span style="font-size: 14px; letter-spacing: -4%; font-weight: 500; color: #333">VISA xxxx 5642</span>
+					<div>
+						<v-img width="53" height="29" src="https://res.cloudinary.com/payhospi/image/upload/v1716474298/umoja/visa-logo.svg" />
+					</div>
+				</span>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">TRACKING NUMBER</h4>
+				<span style="font-size: 14px; letter-spacing: -3%; font-weight: 500; color: #333; text-decoration: underline">ID25725728RS</span>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">PRODUCT PURCHASE</h4>
+				<span style="font-size: 14px; letter-spacing: -3%; font-weight: 500; color: #333">Online-store purchase</span>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<h4 class="mb-4" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">TIMELINE</h4>
+
+				<v-timeline density="compact" side="end" truncate-line="start">
+					<v-timeline-item class="mb-4" dot-color="#00966D" icon="mdi mdi-check" icon-color="#fff" size="small" fill-dot>
+						<div class="d-flex justify-space-between flex-grow-1">
+							<div>
+								<p class="timeline-title">Processed</p>
+								<p class="timeline-date">May 14th, 2023</p>
+							</div>
+							<div class="flex-shrink-0 timeline-time">1:00 AM</div>
+						</div>
+					</v-timeline-item>
+
+					<v-timeline-item class="mb-4" dot-color="#00966D" icon="mdi mdi-check" icon-color="#fff" size="small" fill-dot>
+						<div class="d-flex justify-space-between flex-grow-1">
+							<div>
+								<p class="timeline-title">Shipped</p>
+								<p class="timeline-date">May 16th, 2023</p>
+							</div>
+							<div class="flex-shrink-0 timeline-time">14:35 PM</div>
+						</div>
+					</v-timeline-item>
+
+					<v-timeline-item class="mb-4" dot-color="grey" size="small">
+						<div class="d-flex justify-space-between flex-grow-1">
+							<div>
+								<p class="timeline-title">In transit</p>
+								<p class="timeline-date">Pending...</p>
+							</div>
+							<div class="flex-shrink-0 timeline-time">...</div>
+						</div>
+					</v-timeline-item>
+
+					<v-timeline-item class="mb-4" dot-color="grey" size="small">
+						<div class="d-flex justify-space-between flex-grow-1">
+							<div>
+								<p class="timeline-title">Delivered</p>
+								<p class="timeline-date">Pending...</p>
+							</div>
+							<div class="flex-shrink-0 timeline-time">...</div>
+						</div>
+					</v-timeline-item>
+				</v-timeline>
+			</div>
+			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+				<h4 class="mb-4" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">ITEMS</h4>
+				<div class="d-flex align-center justify-space-between">
+					<div class="d-flex align-center" style="width: 271px">
+						<v-avatar rounded="lg" color="grey-lighten-2" class="pa-1 mr-2" size="68"
+							><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img
+						></v-avatar>
+						<div>
+							<p
+								class=""
+								style="color: #1273eb; font-size: 13px; font-weight: 600; line-height: 20px; /* 142.857% */ text-decoration-line: underline"
+							>
+								Multicolored Ankara Material from Ghana
+							</p>
+							<p style="font-size: 12px; font-weight: 500; color: #969696">
+								<span class="mr-2">x2</span>
+								<span class="mr-2">Size: Small</span>
+								<span>SKU: 5000</span>
+							</p>
+						</div>
+					</div>
+					<div style="color: #1e1e1e; font-size: 14px; font-weight: 600; line-height: 20px">
+						<span> € 5,829.00 </span>
+					</div>
+				</div>
+			</div>
+
+			<v-row dense style="padding: 30px 20px">
+				<v-col cols="6">
+					<v-btn rounded="xl" block style="border: 1px solid #969696" variant="outlined" size="large" class="menubar text-grey-darken-3">
+						Cancel Order
+					</v-btn>
+				</v-col>
+				<v-col cols="6">
+					<v-btn rounded="xl" block color="green" flat size="large" class="menubar text-grey-darken-3"> Track Order </v-btn>
+				</v-col>
+			</v-row>
+		</v-sheet>
+	</div>
 </template>
+<style>
+.v-timeline--vertical.v-timeline.v-timeline--side-end .v-timeline-item .v-timeline-item__body {
+	justify-self: auto;
+}
+.timeline-title {
+	color: #333;
+	font-size: 14;
+	font-weight: 500;
+}
+.timeline-date {
+	color: #969696;
+	font-size: 14;
+	font-weight: 500;
+}
+.timeline-time {
+	font-size: 14px;
+	color: #333;
+	font-weight: 500;
+	letter-spacing: -3%;
+}
+</style>
+
 <script>
 export default {
 	name: "UserOrderDetails",
