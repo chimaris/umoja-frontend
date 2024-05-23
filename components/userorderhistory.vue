@@ -19,7 +19,7 @@
 	</div>
 	<v-window direction="vertical" v-model="viewswitch">
 		<v-window-item value="1">
-			<div class="mx-6 pa-0 mb-6 cardStyle">
+			<div class="mx-6 pa-0 mb-6 cardStyle d-none d-md-block">
 				<v-table>
 					<thead>
 						<tr class="bg-grey-lighten-3">
@@ -100,6 +100,69 @@
 						<v-divider v-if="i + 1 < items1.length" style="position: absolute" inset=""></v-divider>
 					</tbody>
 				</v-table>
+			</div>
+			<div class="mb-6 d-block d-md-none" v-for="(item, i) in items1" :key="i">
+				<v-sheet rounded>
+					<div class="d-flex justify-space-between align-center" style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+						<div class="d-flex">
+							<v-avatar color="#EDF0FC" size="50" class="mr-2">
+								<!-- <v-icon color="#1273EB" size="20" icon="fas fa-box"></v-icon> -->
+								<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+							</v-avatar>
+							<div>
+								<span class="d-flex align-center">
+									<span style="font-size: 20px; font-weight: 600">001799/10</span>
+									<v-img width="24" height="24" class="ml-2" src="https://res.cloudinary.com/payhospi/image/upload/v1716456639/umoja/copy-icon.svg" />
+								</span>
+
+								<span style="font-size: 12px; letter-spacing: 3%; color: #969696">ORDER DETAILS</span>
+							</div>
+						</div>
+						<v-btn
+							size="40"
+							rounded="xl"
+							flat
+							style="border: 1px solid #cecece"
+							@click="select(item.sn + '' + i, item)"
+							class="ml-"
+							icon="mdi mdi-chevron-down"
+						>
+						</v-btn>
+					</div>
+					<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
+						<v-row>
+							<v-col>
+								<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">CREATED AT</h4>
+								<span style="font-size: 14px; letter-spacing: -3%; font-weight: 600; color: #333">14th May, 2023</span>
+							</v-col>
+							<v-col>
+								<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">STATUS</h4>
+								<v-chip color="primary" size="small" rounded="sm"> Shipped </v-chip>
+							</v-col>
+						</v-row>
+						<v-row>
+							<v-col>
+								<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">ITEMS PURCHASED</h4>
+								<span style="font-size: 14px; letter-spacing: -3%; font-weight: 600; color: #333">Three (3)</span>
+							</v-col>
+							<v-col>
+								<h4 class="mb-2" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">TOTAL AMOUNT</h4>
+								<span style="font-size: 14px; letter-spacing: -3%; font-weight: 600; color: #333"> € 5,829.00 </span>
+							</v-col>
+						</v-row>
+					</div>
+					<v-row dense style="padding: 30px 20px">
+						<v-col cols="6">
+							<v-btn rounded="xl" block style="border: 1px solid #969696" variant="outlined" size="large" class="menubar text-grey-darken-3">
+								Cancel Order
+							</v-btn>
+						</v-col>
+						<v-col cols="6">
+							<v-btn rounded="xl" block color="green" flat size="large" class="menubar text-grey-darken-3"> Track Order </v-btn>
+						</v-col>
+					</v-row>
+				</v-sheet>
+				<v-divider v-if="i + 1 < items1.length" style="position: absolute" inset=""></v-divider>
 			</div>
 		</v-window-item>
 		<v-window-item value="2">
