@@ -143,7 +143,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, onMounted } from 'vue';
+import { ref, defineEmits, onBeforeMount} from 'vue';
 import { countries, fetchStates, fetchCities, states, cities } from '~/utils/countryapi'
 import {emailRules, inputRules} from '~/utils/formrules'
 import { useVendorStore } from '~/stores/vendorStore';
@@ -153,21 +153,22 @@ import { useVendorStore } from '~/stores/vendorStore';
         const accordionOpen = ref(-1);
 		const isEditing = ref(false)
         const vendorStore = useVendorStore()
-        const vendor = computed(() => {
+        const vendor = ref(vendorStore.vendor.vendor_details)
+
+        onBeforeMount(() => {
             if (!vendorStore.vendor.vendor_details) {
-                return []
+                vendor.value =  []
             }
-            return vendorStore.vendor.vendor_details
-        });
+        })
             
         const formError = ref("")
 
 		const emit = defineEmits(['submit']);
         const socialMediaHandles = computed(() => [
-            vendor.value.twitter_handle,
-            vendor.value.instagram_handle,
-            vendor.value.facebook_handle,
-            vendor.value.youtube_handle
+            vendor.value?.twitter_handle,
+            vendor.value?.instagram_handle,
+            vendor.value?.facebook_handle,
+            vendor.value?.youtube_handle
         ]);
 
     
@@ -190,11 +191,11 @@ import { useVendorStore } from '~/stores/vendorStore';
             }
         };
 
-watch(() => vendor.value.office_state, () => {
-	fetchCities(vendor.value.office_country, vendor.value.office_state);
+watch(() => vendor.value?.office_state, () => {
+	fetchCities(vendor.value?.office_country, vendor.value.office_state);
 });
-watch(() => vendor.value.office_country, () => {
-	fetchStates(vendor.value.office_country)
+watch(() => vendor.value?.office_country, () => {
+	fetchStates(vendor.value?.office_country)
 });
 
 const submit = async () => {

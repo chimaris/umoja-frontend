@@ -123,6 +123,17 @@ export const useVendorProductStore = defineStore('vendor-product', {
               this.newProductName = this.textInfo.productName;
               this.newProductsku = this.generalInfo.productNumber;
               this.productError = "";
+              this.variantsInfo = []
+              this.generalInfo = []
+              this.textInfo = []
+              this.priceInfo = []
+              this.pictureInfo = []
+              this.inventoryInfo = []
+              this.shippingInfo = []
+              this.colorInfo = []
+              this.sizeInfo = []
+              this.styleInfo = []
+              this.materialInfo = []
               return true
             
            }catch(error) {

@@ -2,11 +2,29 @@
 	<div id="homepage" style="min-height: 100vh; width: 100%">
 		<v-img
 			style="height: 185px; position: relative;"
-			width="auto"
+			width="100%"
 			cover
 			class="d-flex bg-grey justify-end align-end"
-			src="https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png"
+			:src="vendor.vendor_details?.cover_image ? vendor.vendor_details?.cover_image :'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"
 		>
+		<v-container style="max-width: 1400px; height: 100%; width: 100%" class="d-flex flex-column pt-6 justify-end align-end">
+				<v-progress-circular v-if="coverLoading" class="align-self-center"
+				color="black"
+				indeterminate
+				></v-progress-circular>
+				<p v-show="errorMessage" class="align-self-center" style="color: red; font-size: 16px">{{errorMessage}}</p>
+				<v-label
+					size="large"
+					rounded="xl"
+					flat
+					for="profile"
+					class="d-flex align-center text-white"
+					style="text-transform: none !important; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 20px"
+					><v-icon icon="mdi mdi-pencil-outline" class="mx-2" size="21"></v-icon>
+					<span  style="font-size: 12px; font-weight: 400"> Edit Cover Photo </span>
+					<input @change="upLoadFile1($event)" id="profile"  type="file" style="display: none;" accept=".svg, .png, .jpeg, .jpg, .gif">
+				</v-label>
+			</v-container>
 		</v-img>
 		<v-card class="overflow-visible pr-2" flat tile color="#Fff" min-height="100vh" width="100%">
 			<v-container style="max-width: 1300px">
@@ -90,7 +108,7 @@
 											<v-avatar rounded="0" size="23"><v-icon color="green" :icon="'mdi mdi-' + n.icon"></v-icon></v-avatar>
 										</v-btn>
 									</div>
-									<!-- <div class="pt-12 mt-12 justify-start align-center d-flex">
+									 <!-- <div class="pt-12 mt-12 justify-start align-center d-flex">
 										<v-btn
 											@click="choose('Profile Setup')"
 											style="border: 0.357149px solid #2c6e63"
@@ -106,7 +124,7 @@
 									</div> -->
 								
 									<p class="text-center textClass text-grey-darken-1 pt-12">MEMBER SINCE: {{ getdateRegistered(vendor.created) }}</p>
-								</v-sheet>
+								</v-sheet>   
 							</v-sheet>
 						</v-card>
 					</v-col>
@@ -166,17 +184,85 @@ import ColorThief from 'colorthief';
 import {ref, onMounted, computed} from 'vue'
 import {useCreateStore} from '~/stores/createPostStore'
 import {useVendorProductStore} from '~/stores/vendorProducts'
+import Compressor from 'compressorjs';
+import axios from 'axios'
 
 export default {
 	setup(props, ctx) {
 		const vendorStore = useVendorStore()
-		const vendor = computed(() => vendorStore.getVendor)
+		const vendor = ref(vendorStore.vendor)
 		const vendorProducts = useVendorProductStore()
 		const router = useRouter()
 		const postStore = useCreateStore()
+		const coverLoading = ref(false)
+		const errorMessage = ref("")
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		};
+
+async function upLoadFile1(event) {
+	coverLoading.value = true
+    const file = event.target.files[0];
+    if (!file) {
+		coverLoading.value = false;
+		return
+	}
+
+    const allowedFiles = [".png", ".jpeg", ".jpg"];
+    const fileExtension = file.name.split(".").pop().toLowerCase();
+
+    if (!allowedFiles.includes("." + fileExtension)) {
+        errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
+		coverLoading.value = false;
+        return;
+    }
+
+    errorMessage.value = "";
+
+    new Compressor(file, {
+        quality: 0.7, // Adjust the quality as needed
+        maxWidth: 1000, // Max width
+        maxHeight: 1000, // Max height
+        success: async (compressedFile) => { // Make the success callback async
+            const formData = new FormData();
+            formData.append("cover_image", compressedFile);
+
+            try {
+                const res = await axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload/cover_image", formData, {
+                    headers: {
+                        Authorization: `Bearer ${vendorStore.vendorToken}`
+                    }
+                });
+				const data = {
+					cover_image: res.data.cover_image
+				}
+				if ( res.data.cover_image){
+					const response = await vendorStore.registerVendor(data)
+				}
+				
+            } catch (error) {
+				console.error(error)
+                if (error.response) {
+                    errorMessage.value = error.response.data.message || 'An error occurred during file upload.';
+                } else if (error.request) {
+                    errorMessage.value = 'No response received from server. Please try again later.';
+                } else {
+                    errorMessage.value = 'An error occurred. Please try again later.';
+                }
+            }finally{
+					coverLoading.value = false
+				}
+        },
+        error(err) {
+            errorMessage.value = err.message || "Failed to compress the image";
+			coverLoading.value = false;
+        }
+    });
+}
+	
+		watch(() => vendorStore.vendor, (newpost, oldpost) => {
+			vendor.value = newpost
+		});
 
 		const openSocialMedia = (icon, handle) => {
       	window.open(`https://${icon}.com/${handle}`, '_blank');
@@ -193,7 +279,10 @@ export default {
 			choose,
 			openSocialMedia,
 			completeReg,
-			vendorProducts
+			vendorProducts,
+			upLoadFile1,
+			errorMessage,
+			coverLoading
 		}
 	},
 	data() {
@@ -204,72 +293,6 @@ export default {
 			rating: 4,
 			tab: null,
 			profileBorderColor: '#F38218',
-			items: [
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png",
-					price: "115.32",
-					likes: "1.2k",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png",
-					price: "57.00",
-					likes: "456",
-					oos: true,
-				},
-
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
-					price: "79.00",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png",
-					price: "179.00",
-					likes: "966",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
-					price: "79.00",
-					likes: "66",
-					oos: true,
-				},
-				{
-					name: "Bento Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_5_y4qlrw.png",
-					price: "179.00",
-					likes: "966",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602016/Rectangle_459_3_eoyq3v.png",
-					price: "57.00",
-					likes: "456",
-				},
-			],
 		};
 	},
 

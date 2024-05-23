@@ -218,7 +218,7 @@ export const useVendorStore = defineStore('vendor', {
             Authorization: `Bearer ${this.vendorToken}`
           }
         });
-        
+        await this.getUser(this.vendor.id)
         return response
     },
     logout() {

@@ -549,6 +549,9 @@ export default {
 
 	methods: {
         async saveVariant() {
+			if (this.allVariants.length == 0){
+				return
+			}
         try {
             this.editStore.loading = true;
             this.editStore.saveVariantsInfo(this.allVariants);

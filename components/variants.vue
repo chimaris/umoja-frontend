@@ -687,31 +687,21 @@ export default {
 	},
 	async addProduct() {
 		this.error = "";
-    if (this.allVariants.length < 1) {
-        this.error = "You have not provided any information on variants";
-		await this.vendorProducts.getAllProduct()
-
-        return;
-    } else {
-        this.vendorProducts.saveVariantsInfo(this.allVariants);
+		this.vendorProducts.saveVariantsInfo(this.allVariants);
 		this.vendorProducts.saveColorOptions(this.colorOptions);
 		this.vendorProducts.saveSizeOptions(this.sizeOptions);
 		this.vendorProducts.saveStyleOptions(this.styleOptions);
 		this.vendorProducts.saveMaterialOptions(this.materialOptions);
-    }
-
     if (
         this.vendorProducts.generalInfo &&
         this.vendorProducts.textInfo &&
         this.vendorProducts.priceInfo &&
         this.vendorProducts.pictureInfo &&
         this.vendorProducts.inventoryInfo &&
-        this.vendorProducts.shippingInfo &&
-        this.vendorProducts.variantsInfo
+        this.vendorProducts.shippingInfo
     ) {
 		const response =  await this.vendorProducts.addVendorProduct();
-		if (response) {
-			
+		if (response) {	
 			this.vendorProducts.newProductAdded = true;
 			this.$router.push('/vendor/dashboard/Products');
 		}

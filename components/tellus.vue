@@ -108,7 +108,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits, onMounted} from 'vue';
+import { ref, defineEmits, onMounted, onBeforeMount} from 'vue';
 import { useVendorStore } from '~/stores/vendorStore';
 import axios from 'axios'
 import { on } from 'events';
@@ -116,11 +116,12 @@ import {inputRules} from '~/utils/formrules'
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
 
 const vendorStore = useVendorStore()
-const vendor = computed(() => {
+const vendor = ref(vendorStore.vendor.vendor_details)
+
+onBeforeMount(() => {
 	if (!vendorStore.vendor.vendor_details) {
-		return []
+		vendor.value =  []
 	}
-	return vendorStore.vendor.vendor_details
 })
 
 
@@ -178,11 +179,11 @@ const submit = async () => {
 
 
 
-watch(() => vendor.value.country_name, () => {
+watch(() => vendor.value?.country_name, () => {
 	fetchStates(vendor.value.country_name)
 		});
 
-watch(() => vendor.value.state, () => {
+watch(() => vendor.value?.state, () => {
 	fetchCities(vendor.value.country_name, vendor.value.state);
 		});
 function isFormValid() {

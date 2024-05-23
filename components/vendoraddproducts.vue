@@ -768,6 +768,7 @@
 </template>
 <script>
 import { Editor, EditorContent } from '@tiptap/vue-3'
+import {formattedPrice} from '~/utils/price'
 import StarterKit from '@tiptap/starter-kit'
 import TextAlign from '@tiptap/extension-text-align'
 import Underline from '@tiptap/extension-underline'
@@ -1020,16 +1021,18 @@ export default {
       		return this.Categories.map(category => category.name);
        },
 	   commission(){
-			return ((2/100) * this.price).toFixed(2)
+			return ((1/100) * this.price).toFixed(2)
 	   },
 	   profit(){
 			return (this.price - this.itemCost).toFixed(2)
 	   },
 	   margin(){
 		if ((!this.price) || (!this.itemCost)) {
-    		return "0.00%"; // or any default value you prefer
+    		return `0.00% (0.00)`; // or any default value you prefer
 		} else {
-   			 return (((this.price - this.itemCost) / this.price) * 100).toFixed(2);
+			const marginPercent = (((this.price - this.itemCost) / this.price) * 100).toFixed(2)
+			const marginPrice = this.profit - this.commission
+   			return  `${marginPercent}% (${(marginPrice)})`
 		}
 	   },
         orderDetails() {
@@ -1173,7 +1176,7 @@ export default {
 				chargeTax: this.chargeTax ? 1 : 0,
 				costPerItem: this.itemCost,
 				profit: this.profit,
-				margin: this.margin
+				margin: this.profit - this.commission
 			}
 		
 			
