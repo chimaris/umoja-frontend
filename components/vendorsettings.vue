@@ -16,7 +16,7 @@
 					</div>
 					<div class="px-4" style="min-height: 50px; position: absolute; bottom: 30px; left: -4px; width: 100%">
 						<v-btn
-							@click="logout"
+							@click="logOut()"
 							block
 							size="x-large"
 							color="red"
@@ -32,7 +32,7 @@
 				<v-col cols="12" class="px-0 dash" md="9">
 					<v-window v-model="selected">
 						<v-window-item value="My Profile">
-							<Vendorsettingsprofile />
+							<Vendorsettingsprofile :vendor="vendor" />
 						</v-window-item>
 						<v-window-item value="Billing">
 							<Vendorsettingsbilling />
@@ -55,8 +55,34 @@
 
 <script>
 import { useUserStore } from "~/stores/userStore";
+import { useVendorStore } from '~/stores/vendorStore';
+import { ref, onMounted } from 'vue';
+import {useRouter} from 'vue-router'
 
 export default {
+	setup(){
+		const vendorStore = useVendorStore();
+		const vendor = ref(vendorStore.vendor);
+		const router = useRouter()
+
+		watch(() => vendorStore.vendor, (newpost, oldpost) => {
+			vendor.value = newpost
+		});
+
+		async function logOut(){
+			const response = await vendorStore.logout();
+			if (response) {
+			router.push('/vendor/login')
+			}
+		}
+
+		return{
+			vendorStore,
+			vendor,
+			logOut,
+			router
+		}
+	},
 	data() {
 		return {
 			tab: "",
