@@ -76,6 +76,7 @@ async function resendCode(){
 async function verify(){
     const verifyUser = await vendorStore.verifyVendor(otp.value)
     if (verifyUser){
+       vendorStore.selectedItem = 'Homepage';
         router.push('/vendor/dashboard/Homepage')
         vendorStore.verifyError = ""
         localStorage.removeItem('vendor-email')

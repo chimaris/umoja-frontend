@@ -13,9 +13,11 @@ const series3 = ref([
        { name: 'Revenue Growth',
         data: Array(12).fill(0),}
 ])  ;
+
 watch(() => props.saleRevenue, () => {
     updateSeries()
 })
+
 
 function updateSeries() {
     props.saleRevenue.forEach(dataPoint => {

@@ -9,24 +9,19 @@ const props = defineProps({
         required: true
     }
 })
-const series = ref([])
+const series = ref([
+	{
+		name: 'Product A',
+		data: Array(7).fill(0)
+	},
+	{
+		name: 'Product B',
+		data: Array(7).fill(0)
+	}
+])
 series.value = updateSeries();
-// const series = ref(
-//              [
-// 				{
-// 				name: "Product A",
-// 				data: []
-// 				},
-// 				{
-// 				name: "Product B",
-// 				data: []
-// 				},
-// 				{
-// 				name: "Product C",
-// 				data: []
-// 				}
-// 			]
-// ) 
+const vendorStore  = useVendorStore();
+
 const chartOptions =ref(
     {
 				chart: {
@@ -75,6 +70,7 @@ function updateSeries(){
 watch(() => props.soldProducts, () => {
         series.value = updateSeries();
 });
+
 
 
             
