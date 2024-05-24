@@ -60,7 +60,8 @@
 								size="x-small"
 								variant="elevated"
 								flat
-								style="position: absolute; top: 8px; right: 11px; height: 32px; width: 32px; border-radius: 50%"
+								style="position: absolute; height: 32px; width: 32px; border-radius: 50%"
+								:style="{ right: $vuetify.display.mobile ? '2px' : '11px', top: $vuetify.display.mobile ? '2px' : '8px' }"
 							>
 								<v-img height="24" width="24" src="https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg" />
 							</v-btn>
