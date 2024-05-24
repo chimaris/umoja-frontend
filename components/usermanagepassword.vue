@@ -1,14 +1,14 @@
 <template>
-	<div class="px-md-6 py-10">
+	<div class="px-4 px-md-6 py-5 my-4 my-md-0 py-md-10 bg-white">
 		<p style="color: #000; font-size: 24px; font-weight: 600">Manage Password</p>
 		<p style="color: var(--carbon-3, #969696); font-family: Faktum; font-size: 14px; font-style: normal; font-weight: 500">
 			Lorem ipsum dolor sit amet, consectetur adipiscing elit. Commodo pellentesque massa tellus ac augue. Lectus arcu at in in rhoncus malesuada
 			ipsum turpis.
 		</p>
 	</div>
-	<div class="mx-md-6 mb-6" :class="$vuetify.display.mobile ? '' : 'cardStyle'">
-		<v-row>
-			<v-col cols="12" lg="5" :order="$vuetify.display.mobile ? 'last' : 'first'">
+	<div class="mx-4 mx-md-6 mb-6" :class="$vuetify.display.mobile ? '' : 'cardStyle'">
+		<v-row :dense="$vuetify.display.mobile">
+			<v-col cols="12" lg="5" :order="$vuetify.display.mobile ? 'last' : 'first'" class="bg-white pa-4 mt-4 mt-md-0">
 				<p class="inputLabel2">Current Password</p>
 				<v-text-field append-inner-icon="mdi mdi-eye-outline" placeholder="Enter current password" density="comfortable"> </v-text-field>
 				<p class="inputLabel2">New Password</p>

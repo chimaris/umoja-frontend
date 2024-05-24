@@ -1,16 +1,16 @@
 <template>
-	<div class="px-6 py-10">
+	<div class="px-4 px-md-6 py-5 my-4 my-md-0 py-md-10 bg-white">
 		<p style="color: #000; font-size: 24px; font-weight: 600">Address Book</p>
 		<p style="color: var(--carbon-3, #969696); font-family: Faktum; font-size: 14px; font-style: normal; font-weight: 500">
 			Here you can manage all your delivery address.
 		</p>
 	</div>
-	<div class="d-flex px-md-6 pb-6 w-100 align-center">
+	<div class="d-flex px-4 px-md-6 pb-4 pb-md-6 w-100 align-center">
 		<v-text-field hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Search for Order ID or Product" density="compact"> </v-text-field>
 		<v-btn
 			rounded="xl"
 			:width="$vuetify.display.mobile ? '116' : '154'"
-			style="border: 1px solid #e5e5e5; color: #333; font-size: 14px; font-weight: 600"
+			style="border: 1px solid #969696; color: #333; font-size: 14px; font-weight: 600"
 			variant="outlined"
 			class="textClass text-grey-darken-3 ml-3"
 		>
@@ -18,17 +18,20 @@
 			Filter
 		</v-btn>
 	</div>
-	<div class="mx-md-6 mb-6" :class="$vuetify.display.mobile ? '' : 'cardStyle'">
+	<div class="mx-4 mx-md-6 mb-6" :class="$vuetify.display.mobile ? 'bg-white' : 'cardStyle'">
 		<template v-if="shippingAddress.length >= 1">
 			<div v-for="address in shippingAddress" :key="address.id">
-				<div class="pa-4 mb-4 d-flex flex-column flex-md-row align-start justify-space-between" :class="$vuetify.display.mobile ? '' : 'cardStyle'">
+				<div
+					class="pa-4 mb-md-4 d-flex flex-column flex-md-row align-start justify-space-between"
+					:class="$vuetify.display.mobile ? '' : 'cardStyle'"
+				>
 					<div class="d-flex">
 						<div>
-							<p style="font-size: 16px; font-weight: 600" class="mb-2 my-0">{{ address.full_name }}</p>
-							<p style="color: #1e1e1e; font-size: 14px; font-weight: 500" class="mb-0">{{ address.shipping_address }}</p>
-							<p style="color: #1e1e1e; font-size: 14px; font-weight: 500" class="mb-0">{{ address.shipping_city }}, {{ address.shipping_region }}</p>
-							<p style="color: #1e1e1e; font-size: 14px; font-weight: 500" class="mb-0">{{ address.shipping_country }}</p>
-							<p style="color: #1e1e1e; font-size: 14px; font-weight: 500" class="mb-3">{{ address.phone_number }}</p>
+							<p style="font-size: 16px; font-weight: 600; color: #333" class="mb-2 my-0">{{ address.full_name }}</p>
+							<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-0">{{ address.shipping_address }}</p>
+							<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-0">{{ address.shipping_city }}, {{ address.shipping_region }}</p>
+							<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-0">{{ address.shipping_country }}</p>
+							<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-3">{{ address.phone_number }}</p>
 							<p v-if="n == 1" style="color: #00966d; font-size: 14px; font-weight: 500" class="my-0">
 								<v-icon size="18" icon="mdi mdi-information"></v-icon> Default Address
 							</p>
@@ -37,7 +40,13 @@
 					<div class="d-none d-md-block">
 						<v-btn @click="editAddress(address)" flat style="border: 1px solid var(--carbon-2, #cecece)" class="ml-2" rounded="xl">
 							<span style="color: #333; font-size: 14px; font-weight: 600" class="d-flex align-center">
-								<v-icon icon="mdi mdi-pencil-outline"></v-icon> Edit
+								<v-img
+									class="mx-2"
+									height="24"
+									width="24"
+									src="https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg"
+								/>
+								Edit
 							</span>
 						</v-btn>
 						<v-btn
@@ -50,39 +59,76 @@
 							rounded="xl"
 						>
 							<span style="font-size: 14px; font-weight: 600" class="d-flex align-center">
-								<v-icon icon="mdi mdi-trash-can-outline"></v-icon> Delete
+								<v-icon class="mr-2" icon="mdi mdi-trash-can-outline"></v-icon> Delete
 							</span>
 						</v-btn>
 					</div>
-					<div class="d-flex justify-space-between d-block d-md-none">
-						<v-btn @click="editAddress(address)" flat style="border: 1px solid var(--carbon-2, #cecece); width: 90%" rounded="xl">
-							<span style="color: #333; font-size: 14px; font-weight: 600" class="d-flex align-center">
-								<v-icon icon="mdi mdi-pencil-outline"></v-icon> Edit
-							</span>
-						</v-btn>
-						<v-btn
-							@click="deleteAdd(address.id)"
-							variant="outlined"
-							color="red"
-							flat
-							style="border: 1px solid var(--carbon-2, #cecece); width: 90%"
-							rounded="xl"
-						>
-							<span style="font-size: 14px; font-weight: 600" class="d-flex align-center">
-								<v-icon icon="mdi mdi-trash-can-outline"></v-icon> Delete
-							</span>
-						</v-btn>
-					</div>
+
+					<v-row dense class="d-flex d-md-none py-4" style="border-top: 1px solid #ededed; width: 100%">
+						<v-col cols="6">
+							<v-btn
+								@click="editAddress(address)"
+								rounded="xl"
+								block
+								style="border: 1px solid #969696"
+								variant="outlined"
+								size="large"
+								class="menubar text-grey-darken-3"
+							>
+								<span style="color: #333; font-size: 14px; font-weight: 600" class="d-flex align-center">
+									<!-- <v-icon icon="mdi mdi-pencil-outline"></v-icon>  -->
+									<v-img
+										class="mx-2"
+										height="24"
+										width="24"
+										src="https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg"
+									/>
+
+									Edit
+								</span>
+							</v-btn>
+						</v-col>
+						<v-col cols="6">
+							<v-btn
+								@click="deleteAdd(address.id)"
+								color="red"
+								rounded="xl"
+								style="border: 1px solid #969696"
+								block
+								variant="outlined"
+								flat
+								size="large"
+								class="menubar text-grey-darken-3"
+							>
+								<span style="font-size: 14px; font-weight: 600" class="d-flex align-center">
+									<v-icon class="mr-2" icon="mdi mdi-trash-can-outline"></v-icon> Delete
+								</span>
+							</v-btn>
+						</v-col>
+					</v-row>
 				</div>
 			</div>
 		</template>
-
+		<v-btn @click="dialog = true" class="textClass px-8 d-none d-md-block" rounded="xl" color="green" flat>Create New Address</v-btn>
+	</div>
+	<div class="d-flex justify-center justify-md-start py-5 py-md-0 bg-white d-md-none">
 		<v-btn @click="dialog = true" class="textClass px-8" rounded="xl" color="green" flat>Create New Address</v-btn>
 	</div>
 	<v-dialog max-width="750" v-model="dialog">
-		<v-sheet max-width="949" class="cardStyle pa-6">
-			<p style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 600">Add New Address</p>
-			<v-card flat class="cardStyle mt-4 bg-white rounded-lg pa-4 py-4">
+		<v-sheet max-width="949" class="pa-md-6">
+			<div class="d-flex align-center justify-space-between pa-4">
+				<p style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 600">Add New Address</p>
+				<div>
+					<v-img
+						width="21"
+						height="21"
+						@click="dialog = false"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+					/>
+				</div>
+			</div>
+			<v-divider></v-divider>
+			<v-card flat class="mt-4 bg-white rounded-lg pa-4 py-4">
 				<v-form v-model="valid" @submit.prevent="addAddress">
 					<v-row>
 						<v-col class="pb-0" cols="12">
@@ -151,8 +197,10 @@
 						</v-col>
 					</v-row>
 					<p style="color: red; font-size: 16px">{{ addressError }}</p>
-					<v-btn class="textClass px-8" rounded="xl" type="submit" :disabled="!valid" color="green" flat>Use this address</v-btn>
-					<v-btn @click="dialog = false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>
+					<div class="d-flex justify-center justify-md-start w-100">
+						<v-btn class="textClass px-8" rounded="xl" type="submit" :disabled="!valid" color="green" flat>Create New Address</v-btn>
+						<!-- <v-btn @click="dialog = false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn> -->
+					</div>
 				</v-form>
 			</v-card>
 		</v-sheet>

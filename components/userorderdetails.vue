@@ -192,7 +192,7 @@
 	</div>
 
 	<!-- For mobile View -->
-	<div class="mb-6 d-block d-md-none">
+	<div class="mx-4 mb-6 d-block d-md-none">
 		<v-sheet style="border: 1px solid #ededed; border-radius: 10px">
 			<div class="d-flex justify-space-between align-center" style="padding: 30px 20px; border-bottom: 1px solid #ededed">
 				<div class="d-flex">
@@ -319,15 +319,12 @@
 			<div style="padding: 30px 20px; border-bottom: 1px solid #ededed">
 				<h4 class="mb-4" style="font-size: 10px; letter-spacing: 3%; font-weight: 400; color: #969696">ITEMS</h4>
 				<div class="d-flex align-center justify-space-between">
-					<div class="d-flex align-center" style="width: 271px">
-						<v-avatar rounded="lg" color="grey-lighten-2" class="pa-1 mr-2" size="68"
+					<div class="d-flex align-center">
+						<v-avatar rounded="lg" color="grey-lighten-2" class="pa-1 mr-2" size="64"
 							><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img
 						></v-avatar>
-						<div>
-							<p
-								class=""
-								style="color: #1273eb; font-size: 13px; font-weight: 600; line-height: 20px; /* 142.857% */ text-decoration-line: underline"
-							>
+						<div style="width: 173px">
+							<p style="color: #1273eb; font-size: 13px; font-weight: 600; line-height: 20px; /* 142.857% */ text-decoration-line: underline">
 								Multicolored Ankara Material from Ghana
 							</p>
 							<p style="font-size: 12px; font-weight: 500; color: #969696">

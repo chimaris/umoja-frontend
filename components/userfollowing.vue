@@ -1,16 +1,16 @@
 <template>
-	<div class="px-md-6 py-10">
+	<div class="px-4 px-md-6 py-5 my-4 my-md-0 py-md-10 bg-white">
 		<p style="color: #000; font-size: 24px; font-weight: 600">Following (1920)</p>
 		<p style="color: var(--carbon-3, #969696); font-family: Faktum; font-size: 14px; font-style: normal; font-weight: 500">
 			List of all the business accounts your are following
 		</p>
 	</div>
-	<div class="d-flex px-md-6 pb-6 w-100 align-center">
+	<div class="d-flex px-4 px-md-6 pb-4 pb-md-6 w-100 align-center">
 		<v-text-field hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Search for Order ID or Product" density="compact"> </v-text-field>
 		<v-btn
 			rounded="xl"
 			:width="$vuetify.display.mobile ? '116' : '154'"
-			style="border: 1px solid #e5e5e5; color: #333; font-size: 14px; font-weight: 600"
+			style="border: 1px solid #969696; color: #333; font-size: 14px; font-weight: 600"
 			variant="outlined"
 			class="textClass text-grey-darken-3 ml-3"
 		>
@@ -18,7 +18,7 @@
 			Filter
 		</v-btn>
 	</div>
-	<div class="mx-md-6 mb-6 cardStyle">
+	<div class="mx-4 mx-md-6 mb-6 cardStyle bg-white">
 		<div v-for="n in 8" :key="n">
 			<div class="pa-md-6 d-flex align-center justify-space-between">
 				<div class="d-flex">

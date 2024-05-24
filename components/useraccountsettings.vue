@@ -1,11 +1,11 @@
 <template>
-	<div class="px-md-6 py-10">
+	<div class="px-4 px-md-6 py-5 my-4 my-md-0 py-md-10 bg-white">
 		<p style="color: #000; font-size: 24px; font-weight: 600">Account Settings</p>
 		<p style="color: var(--carbon-3, #969696); font-family: Faktum; font-size: 14px; font-style: normal; font-weight: 500">
 			Here you can manage your profile settongs.
 		</p>
 	</div>
-	<div class="cardStyle mx-md-6 mb-6">
+	<div class="cardStyle mx-4 mx-md-6 mb-6 bg-white">
 		<div class="pa-md-5 py-md-8">
 			<div class="mb-4 d-flex align-center justify-space-between">
 				<p style="font-size: 20px; font-weight: 600">Personal Information</p>

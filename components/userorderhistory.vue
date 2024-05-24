@@ -1,19 +1,23 @@
 <template>
 	<div>
-		<div class="px-6 py-10">
+		<div class="px-4 px-md-6 py-5 my-4 my-md-0 py-md-10 bg-white">
 			<p style="color: #000; font-size: 24px; font-weight: 600">Order History</p>
 			<p style="color: var(--carbon-3, #969696); font-family: Faktum; font-size: 14px; font-style: normal; font-weight: 500">
 				Here you can manage your order
 			</p>
 		</div>
-		<div id="orderdet" class="d-flex px-6 pb-6 w-100 align-center">
+		<div id="orderdet" class="d-flex px-4 px-md-6 pb-4 pb-md-6 w-100 align-center">
 			<v-text-field hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Search for Order ID or Product" density="compact">
 			</v-text-field>
-			<v-btn width="154" flat style="border: 1px solid var(--carbon-2, #cecece)" class="ml-3" rounded="xl">
-				<span style="color: #333; font-size: 14px; font-weight: 600">
-					<v-icon class="mr-1" icon="mdi mdi-tune-vertical"></v-icon>
-					Filters
-				</span>
+			<v-btn
+				rounded="xl"
+				:width="$vuetify.display.mobile ? '116' : '154'"
+				style="border: 1px solid #969696; color: #333; font-size: 14px; font-weight: 600"
+				variant="outlined"
+				class="textClass text-grey-darken-3 ml-3"
+			>
+				<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
+				Filter
 			</v-btn>
 		</div>
 	</div>
@@ -101,8 +105,10 @@
 					</tbody>
 				</v-table>
 			</div>
+
+			<!-- For mobile View -->
 			<div class="mb-6 d-block d-md-none" v-for="(item, i) in items1" :key="i">
-				<v-sheet rounded>
+				<v-sheet rounded class="mx-4">
 					<div class="d-flex justify-space-between align-center" style="padding: 30px 20px; border-bottom: 1px solid #ededed">
 						<div class="d-flex">
 							<v-avatar color="#EDF0FC" size="50" class="mr-2">
@@ -166,12 +172,6 @@
 			</div>
 		</v-window-item>
 		<v-window-item value="2">
-			<!-- <div  class="px-6 pb-6 pt-4">
-
-          <v-btn size="40" rounded="xl" flat style="border: 1px solid #CECECE;" 
-          class="ml-" ><v-icon size="16" icon="mdi mdi-arrow-left-top"></v-icon>
-        </v-btn>
-      </div> -->
 			<userorderdetails :dataselect="dataselect" @takeback="viewswitch = '1'" />
 		</v-window-item>
 	</v-window>
