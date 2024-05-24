@@ -1,5 +1,5 @@
 <template>
-	<v-card style="backdrop-filter: blur(7px); background: rgb(255 255 255 / 89%); max-height: 80vh; border: none" class="rounded-lg">
+	<v-card style="backdrop-filter: blur(7px); background: rgb(255 255 255 / 89%); max-height: 80vh; border: none" class="rounded-lg mx-0">
 		<div style="position: sticky; top: 0" class="topbar w-100">
 			<div class="d-flex pa-6 justify-space-bewteen">
 				<p style="color: #1e1e1e; font-size: 20px; font-weight: 600">Notifications</p>
@@ -15,7 +15,7 @@
 					<v-col cols="1">
 						<v-icon size="7" color="#1273EB" icon="mdi mdi-circle"></v-icon>
 					</v-col>
-					<v-col class="pr-8" cols="11">
+					<v-col class="pl-8 pl-md-0 pr-md-8" cols="11">
 						<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 500" class="">
 							Your Order
 							<strong> #ID25725728RS</strong>
@@ -63,7 +63,7 @@
 					<v-col style="position: relative" cols="1">
 						<!-- <v-icon v-if="i == 0" style="position: absolute;top: 5px;left: 5px;" size="7" color="#1273EB" icon="mdi mdi-circle"></v-icon> -->
 					</v-col>
-					<v-col class="pr-8" cols="8">
+					<v-col class="pl-8 pl-md-0 pr-md-8" cols="8">
 						<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 500" class="">
 							Item
 							<strong> #ID25725728RS</strong>
