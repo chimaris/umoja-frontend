@@ -1,12 +1,12 @@
 <template>
-	<div class="px-6 py-10">
+	<div class="px-4 px-md-6 py-5 my-4 my-md-0 py-md-10 bg-white">
 		<p style="color: #000; font-size: 24px; font-weight: 600">Notifications</p>
 		<p style="color: var(--carbon-3, #969696); font-family: Faktum; font-size: 14px; font-style: normal; font-weight: 500">
 			Here you can manage all your notifications
 		</p>
 	</div>
-	<v-sheet class="mx-md-6 mb-6" :class="$vuetify.display.mobile ? '' : 'cardStyle'">
-		<div class="pa-5 pt-8">
+	<div class="mx-4 mx-md-6 mb-6" :class="$vuetify.display.mobile ? '' : 'cardStyle'">
+		<v-sheet class="pa-5 pt-8 mb-4 mb-md-0">
 			<v-row>
 				<v-col cols="12" lg="3">
 					<p style="color: #333; font-size: 20px; font-weight: 600">Email Notification</p>
@@ -50,9 +50,9 @@
 					</div>
 				</v-col>
 			</v-row>
-		</div>
+		</v-sheet>
 		<v-divider></v-divider>
-		<div class="pa-5 pt-8">
+		<v-sheet class="pa-5 pt-8">
 			<v-row>
 				<v-col cols="12" lg="3">
 					<p style="color: #333; font-size: 20px; font-weight: 600">More Activity</p>
@@ -96,6 +96,6 @@
 					</div>
 				</v-col>
 			</v-row>
-		</div>
-	</v-sheet>
+		</v-sheet>
+	</div>
 </template>

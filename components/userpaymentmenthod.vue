@@ -1,12 +1,13 @@
 <template>
-	<div class="px-6 py-10 pb-6">
+	<!-- <div class="px-6 py-10 pb-6"> -->
+	<div class="px-4 px-md-6 py-5 my-4 my-md-0 py-md-10 bg-white">
 		<p style="color: #000; font-size: 24px; font-weight: 600">Payment Method</p>
 		<p style="color: var(--carbon-3, #969696); font-family: Faktum; font-size: 14px; font-style: normal; font-weight: 500">
 			Here you can manage your payment methods
 		</p>
 	</div>
 
-	<div class="mx-6 mb-6 p cardStyle">
+	<div class="mx-4 mx-md-6 mb-6 cardStyle bg-white">
 		<template v-if="paymentMethods.length >= 1">
 			<v-card flat class="pa-4 cardStyle rounded-lg justify-space-between align-center mb-4 d-flex" v-for="(n, i) in paymentMethods" :key="i">
 				<input
@@ -53,12 +54,14 @@
 				</v-dialog>
 			</v-card>
 		</template>
-		<v-btn @click="addPayment" size="large" width="" flat style="border: 1px solid var(--carbon-2, #cecece)" class="px-7" rounded="xl">
-			<span style="color: #333; font-size: 14px; font-weight: 600" class="d-flex align-center">
-				<v-icon class="mr-1" icon="mdi mdi-plus"></v-icon>
-				New Payment Method
-			</span>
-		</v-btn>
+		<div class="d-flex justify-center justify-md-start">
+			<v-btn @click="addPayment" size="large" width="" flat style="border: 1px solid var(--carbon-2, #cecece)" class="px-7" rounded="xl">
+				<span style="color: #333; font-size: 14px; font-weight: 600" class="d-flex align-center">
+					<v-icon class="mr-1" icon="mdi mdi-plus"></v-icon>
+					New Payment Method
+				</span>
+			</v-btn>
+		</div>
 	</div>
 	<v-dialog v-model="dialog" max-width="1000px" persistent>
 		<v-card flat class="mb-4 cardStyle">

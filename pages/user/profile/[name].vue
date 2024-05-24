@@ -18,7 +18,8 @@
 					class="d-flex align-center text-white"
 					style="text-transform: none !important"
 					color="rgba(0, 0, 0, 0.5)"
-					><v-icon icon="mdi mdi-pencil-outline" class="mx-2" size="21"></v-icon>
+				>
+					<v-img class="mx-2" height="24" width="24" src="https://res.cloudinary.com/payhospi/image/upload/v1716540767/umoja/edit-icon.svg" />
 					<span style="font-size: 12px; font-weight: 400"> Edit Cover Photo </span>
 				</v-btn>
 				<v-menu open-on-hover="" class="d-block d-md-none">
@@ -59,15 +60,16 @@
 								size="x-small"
 								variant="elevated"
 								flat
-								style="position: absolute; top: 8px; right: 11px"
-								icon="mdi mdi-pencil-outline"
-							></v-btn>
+								style="position: absolute; top: 8px; right: 11px; height: 32px; width: 32px; border-radius: 50%"
+							>
+								<v-img height="24" width="24" src="https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg" />
+							</v-btn>
 						</v-avatar>
 						<div class="pt-4 d-none d-md-block">
 							<p v-if="userStore.user" style="font-size: 24px; font-weight: 600">{{ userStore.user.last_name }} {{ userStore.user.first_name }}</p>
 							<div class="d-flex mt-1">
 								<div class="d-flex align-center" v-for="n in userDetails" :key="n.data">
-									<v-icon class="" size="18" :icon="n.icon"></v-icon>
+									<v-icon class="" size="15" :icon="n.icon"></v-icon>
 									<p v-if="n.data" class="ml-2 mr-4" style="color: #333; font-size: 14px; font-weight: 500">{{ n.data }}</p>
 								</div>
 							</div>
@@ -107,15 +109,24 @@
 						</v-btn>
 					</v-menu>
 				</div>
-				<v-divider class="mt-4"></v-divider>
+				<v-divider class="mt-4 d-none d-md-block"></v-divider>
 			</v-container>
-			<v-container class="pt-2" style="max-width: 1400px">
-				<v-card flat :class="$vuetify.display.mobile ? '' : 'cardStyle'" class="px-0 mt-4 mb-12 py-0">
-					<div class="d-flex flex-column flex-md-row px-4 pt-6 justify-space-around" :class="$vuetify.display.mobile ? 'cardStyle' : ''">
+			<v-container class="pt-2 px-0 px-md-4" style="max-width: 1400px" :style="{ backgroundColor: $vuetify.display.mobile ? '#f8f8f8' : '' }">
+				<v-card
+					flat
+					:class="$vuetify.display.mobile ? '' : 'cardStyle'"
+					class="px-0 mt-4 mb-12 py-0"
+					:style="{ backgroundColor: $vuetify.display.mobile ? '#f8f8f8' : '' }"
+				>
+					<div
+						class="d-flex flex-column flex-md-row px-4 pt-0 pb-0 pt-md-6 justify-space-around bg-white"
+						:class="$vuetify.display.mobile ? 'cardStyle mx-4' : ''"
+					>
 						<div
-							class="d-flex justify-space-between mb-4 mb-md-0"
+							class="d-flex justify-space-between align-center py-4 py-md-0"
+							:style="{ borderTop: index !== 0 ? ($vuetify.display.mobile ? '1px solid #EDEDED' : '') : '' }"
 							:key="n"
-							v-for="n in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']"
+							v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']"
 						>
 							<v-btn size="large" variant="tonal" @click="changeTab(n)" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
 								<v-scale-transition leave-absolute="">
@@ -130,7 +141,7 @@
 							</div>
 						</div>
 					</div>
-					<v-divider class="mt-6"></v-divider>
+					<v-divider class="mt-6 d-none d-md-block"></v-divider>
 
 					<div>
 						<v-window v-model="selected">
@@ -197,11 +208,11 @@ export default {
 					data: useUserStore().user?.email,
 				},
 				{
-					icon: "mdi mdi-account",
+					icon: "fas fa-user",
 					data: "24 Years",
 				},
 				{
-					icon: "mdi mdi-map-marker",
+					icon: "fas fa-location-dot",
 					data: "Joined June 2023",
 				},
 				{
