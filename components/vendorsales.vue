@@ -663,10 +663,12 @@ import { useOrderStore } from '~/stores/order';
 import { formattedPrice } from '~/utils/price';
 import {vendorUseApi} from '~/composables/vendorApi'
 import {ref, onBeforeMount} from 'vue'
+import { useVendorStore } from '~/stores/vendorStore';
 
 export default {
 	setup(){
 		const soldProducts =ref([])
+		const vendorStore  = useVendorStore();
 		const soldCategories = ref([])
 		const saleRevenue = ref([])
 		const filterProduct =ref("Last 7 days")
@@ -684,7 +686,14 @@ export default {
 				await useOrderStore().getRevenues()
 			}
 		});
-
+		watch(() => vendorStore.vendor, async () => {
+			if (hasOrder.value){
+				await getSales()
+				await getCategories()
+				await getRevenue()
+				await useOrderStore().getRevenues()
+			}
+		});
 		watch(() => filterProduct.value, async () => {
 			await getSales()
 		})
@@ -780,7 +789,8 @@ export default {
 			saleRevenue,
 			getRevenue,
 			filterRevenue,
-			orderStore
+			orderStore,
+			vendorStore
 		}
 	},
 	data() {

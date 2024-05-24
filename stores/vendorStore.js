@@ -8,6 +8,7 @@ export const useVendorStore = defineStore('vendor', {
   state: () => ({
     vendor: [],
     sideBtn: true,
+    selectedItem: 'Homepage',
     vendorCleared: false,
     showRegistrationModal: false,
     loading: false,
