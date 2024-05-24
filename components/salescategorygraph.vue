@@ -3,7 +3,17 @@
 </template>
 <script setup>
 import {ref} from 'vue'
-const series2 =ref([])
+
+const series2 =ref([
+{
+		name: 'category A',
+		data:  Array(12).fill(0)
+	},
+	{
+		name: 'category B',
+		data:  Array(12).fill(0)
+	}
+])
 const props = defineProps({
     soldCategories: {
         type: Array,
@@ -14,6 +24,7 @@ const props = defineProps({
 watch(() => props.soldCategories, () => {
         series2.value = updateSeries();
 });
+
 function updateSeries(){
     const formatData = props.soldCategories.map((category) => {
         const monthlyAmount = Array(12).fill(0);

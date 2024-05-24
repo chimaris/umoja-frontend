@@ -360,8 +360,11 @@ export default {
 			ctx.emit("changePage", x);
 		}
 
-		watch(() => vendorStore.vendor, async () => {
-			await fetchFilteredProducts();
+		watch(() => vendorStore.vendorToken, async () => {
+			if (vendorStore.vendorToken){
+				await fetchFilteredProducts();
+			}
+
 		});
 		
 		

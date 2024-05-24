@@ -260,8 +260,11 @@ async function fetchFilteredOrders(){
 onBeforeMount(async () => {
 	await fetchFilteredOrders();
 });
-watch(() => vendorStore.vendor, async () => {
-	await fetchFilteredOrders();
+watch(() => vendorStore.vendorToken, async () => {
+	if (vendorStore.vendorToken){
+		await fetchFilteredOrders();
+	}
+
 	});
 watch(() => tab.value, () => {
 	fetchFilteredOrders();

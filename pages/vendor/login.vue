@@ -72,6 +72,7 @@ async function handleLogin() {
 			if (isLoggedIn) {
 				email.value = "";
 				password.value = "";
+				vendorStore.selectedItem = 'Homepage';
 				router.push(`/vendor/dashboard/Homepage`);
 				vendorStore.loginError = "";
 			}

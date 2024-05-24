@@ -167,7 +167,7 @@ vendorStore,
 vendor
 };
 },
-mounted(){
+beforeMount(){
 this.vendorStore.selectedItem = this.currentPage
 },
 props: ['currentPage', 'sidebar'],

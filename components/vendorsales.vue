@@ -96,7 +96,7 @@
 						<v-menu width="auto">
 							<template v-slot:activator="{ props }">
 								<v-btn :disabled="!hasOrder" v-bind="props" style="border: 1px solid #e5e5e5" variant="outlined" class="text-grey-darken-3">
-									Last 7 Days <v-icon icon="mdi mdi-chevron-down"></v-icon>
+									{{filterProduct}} <v-icon icon="mdi mdi-chevron-down"></v-icon>
 								</v-btn>
 							</template>
 							<v-list>
@@ -122,7 +122,7 @@
 						<v-menu width="auto">
 							<template v-slot:activator="{ props }">
 								<v-btn :disabled="!hasOrder" v-bind="props" style="border: 1px solid #e5e5e5" variant="outlined" class="text-grey-darken-3">
-									This year <v-icon icon="mdi mdi-chevron-down"></v-icon>
+									{{filterCategory}} <v-icon icon="mdi mdi-chevron-down"></v-icon>
 								</v-btn>
 							</template>
 							<v-list>
@@ -687,7 +687,7 @@ export default {
 			}
 		});
 		watch(() => vendorStore.vendor, async () => {
-			if (hasOrder.value){
+			if (hasOrder.value && vendorStore.vendorToken){
 				await getSales()
 				await getCategories()
 				await getRevenue()
