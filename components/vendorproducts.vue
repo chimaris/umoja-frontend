@@ -336,6 +336,7 @@ import { onBeforeMount, onMounted, ref, watchEffect } from 'vue';
 import {useEditVendorStore} from '~/stores/editProduct';
 import {vendorUseApi} from '~/composables/vendorApi';
 import { debounce } from 'lodash';
+import { useVendorStore } from '~/stores/vendorStore';
 
 export default {
 	setup(props, ctx) {
@@ -353,10 +354,15 @@ export default {
 		const tab = ref("")
 		const searchQuery = ref("")
 		const loading = ref(false)
+		const vendorStore = useVendorStore()
 	
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		}
+
+		watch(() => vendorStore.vendor, async () => {
+			await fetchFilteredProducts();
+		});
 		
 		
 		onBeforeMount(async () => {
@@ -433,7 +439,8 @@ export default {
 			fetchFilteredProducts,
 			filterproductBy,
 			searchQuery,
-			loading
+			loading,
+			vendorStore
 		};
 	},
 	data() {

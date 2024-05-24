@@ -205,6 +205,14 @@ watch(() => route.params.name, (name) => {
 watch(() => window.innerWidth, () => {
  checkScreenSize()
 });
+watch(() => vendorStore.vendor, async () => {
+	if (vendorStore.vendor.complete_setup == 1){
+		await vendorProducts.getAllProduct()
+		await postStore.getArticle()
+		await postStore.getPost()
+		await useOrderStore().getOrder()
+	}
+});
 onBeforeMount(async () => {
 	checkScreenSize()
 	if (vendorStore.vendor.complete_setup == 1){

@@ -189,9 +189,11 @@ import {ref, onBeforeMount, defineEmits, computed} from 'vue';
 import {vendorUseApi} from '~/composables/vendorApi';
 import { getdateRegistered } from '~/utils/date';
 import { formattedPrice } from '~/utils/price';
+import { useVendorStore } from '~/stores/vendorStore';
 import {useOrderStore} from '~/stores/order'
 
 const emits = defineEmits(["changePage"])
+const vendorStore = useVendorStore()
 const items1 = ref([])
 const item1 = ref([])
 const selectedPage = ref(1)
@@ -258,6 +260,9 @@ async function fetchFilteredOrders(){
 onBeforeMount(async () => {
 	await fetchFilteredOrders();
 });
+watch(() => vendorStore.vendor, async () => {
+	await fetchFilteredOrders();
+	});
 watch(() => tab.value, () => {
 	fetchFilteredOrders();
 });
