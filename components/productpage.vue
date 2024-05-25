@@ -477,9 +477,24 @@
 										</div>
 									</div>
 									<div style="min-height: 162px" class="bg-grey-lighten-4 pa-4">
-										<editor-content :editor="editor" />
+										<editor-content :editor="editor" v-model="editorContent" />
 									</div>
+									<v-rating 
+										v-model="rating"
+										active-color="#F0B136"
+										density="comfortable"
+										color="grey-lighten-1"
+										size="x-large"
+									></v-rating>
 								</v-card>
+							
+								<p v-if="errorMessage" style="color: red">{{errorMessage}}</p>
+								<div style=" width: 100%; display: flex; justify-content: end">
+									<v-btn @click="postReview()"  class="mt-4" size="large" :disabled="!editorContent" flat color="green" rounded="xl">
+										post review
+									</v-btn>
+								</div>
+							
 							</div>
 						</div>
 					</div>
@@ -640,40 +655,28 @@ import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
+import {makeReview, getReview} from '~/composables/useReview'
 
 export default {
 	setup() {
 		const quantity = ref(1);
 
+	
 		return {
 			quantity,
 		};
 	},
-	props: ["product"],
+	props: ["product", ""],
 	components: {
 		EditorContent,
-	},
-	mounted() {
-		this.mockLoading()
-		this.editor = new Editor({
-			extensions: [
-				StarterKit,
-				Link,
-				Underline,
-				TextAlign.configure({
-					types: ["heading", "paragraph"],
-				}),
-			],
-			content: "<p>This sneakers is made from one of the best  ankara material in Ghana</p>",
-		});
-	},
-	beforeUnmount() {
-		this.editor.destroy();
 	},
 	data() {
 		return {
 			loading: true,
+			editorContent: "",
+			rating: 0,
+			errorMessage: "",
 			productDetails: [
 				{ label: "Payment", labelColor: "#969696", value: "Secure transaction", valueColor: "#1273EB" },
 				{ label: "Ships from", labelColor: "#969696", value: "Umoja", valueColor: "#000" },
@@ -732,6 +735,26 @@ export default {
 			],
 		};
 	},
+	mounted() {
+		this.mockLoading()
+		this.editor = new Editor({
+			extensions: [
+				StarterKit,
+				Link,
+				Underline,
+				TextAlign.configure({
+					types: ["heading", "paragraph"],
+				}),
+			],
+		});
+		this.editor.on('update', ({editor}) => {
+			this.editorContent = editor.getText()
+		});
+	},
+	beforeUnmount() {
+		this.editor.destroy();
+	},
+
 	computed: {
 		cartStore() {
 			return useCartStore();
@@ -741,6 +764,30 @@ export default {
 		},
 	},
 	methods: {
+		async postReview(){
+			const data = {
+				product_id: this.product.id,
+				vendor_id: this.product.vendor_id,
+				rating: this.rating,
+				review_comment: this.editorContent
+			}
+			try{
+				const res = await makeReview(data)
+				this.editor.commands.setContent('');
+				this.editorContent = ""
+				this.rating = 0
+				console.log(res)
+			}catch(error){
+				if (error.response) {
+					this.errorMessage  = error.response.data.message || 'An error occurred while posting review.';
+				} else if (error.request) {
+					this.errorMessage  = 'No response received from server. Please try again later.';
+				} else {
+					this.errorMessage  = 'An error occurred. Please try again later.';
+				}
+				return false;
+				}
+		},
 		mockLoading(){
 			setTimeout(() => {
                 this.loading = false

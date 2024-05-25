@@ -35,10 +35,10 @@
 							</div>
 						</div>
 						<div class="d-flex align-center mt-4">
-							<h1 class="bigpriceClass2">10.0k</h1>
+							<h1 class="bigpriceClass2">{{hasReview ? '10.1k' : 0}}</h1>
 							<div class="text-left">
 								<v-chip style="font-weight: 600; font-size: 14px; line-height: 18px; color: #00966d" class="ml-3 text-green-lighten-2"
-									><v-icon icon="mdi mdi-trending-up"></v-icon> 8%</v-chip
+									><v-icon icon="mdi mdi-trending-up"></v-icon> {{hasReview ? '10%' : '0%'}}</v-chip
 								>
 							</div>
 						</div>
@@ -60,9 +60,9 @@
 							</div>
 						</div>
 						<div class="d-flex align-center mt-4">
-							<h1 class="bigpriceClass2">4.0</h1>
+							<h1 class="bigpriceClass2">{{hasReview ? 4.0 : 0.0}}</h1>
 							<div class="text-left reviews">
-								<v-rating v-model="rating" color="grey-lighten-2" active-color="#F0B136" class="ml-4" size="x-small"></v-rating>
+								<v-rating :v-model="hasReview ? 4 : 0" color="grey-lighten-2" active-color="#F0B136" class="ml-4" size="x-small"></v-rating>
 							</div>
 						</div>
 						<p style="font-weight: 500; font-size: 14px; line-height: 18px; letter-spacing: -0.01em; color: #969696">
@@ -77,52 +77,52 @@
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px !important ; font-weight: 600"> 5</span>
 							</div>
-							<v-progress-linear v-model="skill" style="width: 40%; left: 70px" color="#C20052" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? 10 : 0" style=" left: 70px" color="#C20052" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">1.0k</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
 						</div>
 						<div class="d-flex align-center">
 							<div class="d-flex align-center">
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px; font-weight: 600"> 4</span>
 							</div>
-							<v-progress-linear v-model="skill" style="width: 90%; left: 8px; transform: none" color="#00966D" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? 10 : 0" style=" left: 8px; transform: none" color="#00966D" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">2.0k</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
 						</div>
 						<div class="d-flex align-center">
 							<div class="d-flex align-center">
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px; font-weight: 600"> 3</span>
 							</div>
-							<v-progress-linear v-model="skill" style="width: 20%; left: 70px" color="#F38218" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? 10 : 0" style="left: 70px" color="#F38218" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">500</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
 						</div>
 						<div class="d-flex align-center">
 							<div class="d-flex align-center">
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px; font-weight: 600"> 2</span>
 							</div>
-							<v-progress-linear v-model="skill" style="width: 11%; left: 70px" color="#1273EB" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? 10 : 0" style=" left: 70px" color="#1273EB" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">200</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
 						</div>
 						<div class="d-flex align-center">
 							<div class="d-flex align-center">
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px; font-weight: 600"> 1</span>
 							</div>
-							<v-progress-linear v-model="skill" style="width: 5%; left: 70px" color="#F8B735" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? 10 : 0" style=" left: 70px" color="#F8B735" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">50</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
 						</div>
 					</v-card>
 				</v-col>
 			</v-row>
 		</div>
 
-		<div class="mt-5">
+		<div v-if="hasReview" class="mt-5">
 			<v-card height="100%" class="mx-auto coolTable pb-4 mb-12" width="100%" style="overflow: hidden" flat>
 				<div class="">
 					<v-table>
@@ -140,7 +140,7 @@
 								@click="chosen = item.sn"
 								style="height: 100px; width: 100%"
 								:style="chosen == item.sn ? 'background:#ececec' : ''"
-								v-for="(item, i) in items"
+								v-for="(item, i) in allReviews"
 								:key="item.sn"
 							>
 								<td style="position: relative; font-size: 14px; height: 100px; width: 270px">
@@ -150,12 +150,12 @@
 												<div v-bind="props" class="px-1 d-flex pl-2">
 													<v-avatar color="grey-lighten-4" class="rounded-lg pa-1 mr-3 ml-1" size="50"
 														><v-img
-															src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"
+															:src="item.product.photo.split(',')[0]"
 														></v-img
 													></v-avatar>
 													<div>
-														<p class="" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">{{ item.name }}</p>
-														<p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696">Fashion and Style</p>
+														<p class="" style="font-weight: 600; font-size: 16px !important; line-height: 20px; color: #333333">{{ item.product.name }}</p>
+														<p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696">{{item.product.category_name}}</p>
 													</div>
 												</div></template
 											>
@@ -163,16 +163,16 @@
 												<v-row class="d-flex align-start">
 													<v-avatar color="grey-lighten-4" class="pa-1" size="70" rounded="lg">
 														<v-img
-															src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"
+															:src="item.product.photo.split(',')[1]"
 														></v-img>
 													</v-avatar>
 													<v-col class="py-0">
 														<p style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px">
-															Multicolored Ankara Material made in the Suberbs of Africa
+															{{item.product.name}}
 														</p>
-														<p style="color: #cdd6d4; font-size: 12px; font-weight: 500; line-height: 20px">Fashion and Style</p>
+														<p style="color: #cdd6d4; font-size: 12px; font-weight: 500; line-height: 20px">{{item.product.category_name}}</p>
 
-														<p style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px" class="mt-1">€ 235.00 per yard</p>
+														<p style="color: #edf0ef; font-size: 16px; font-weight: 600; line-height: 20px" class="mt-1">{{formattedPrice(item.product.price)}} per {{item.product.unit_per_item == 1? '': item.product.unit_per_item}} {{item.product.unit}}</p>
 													</v-col>
 												</v-row>
 											</v-card>
@@ -186,7 +186,7 @@
 												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687517181/Rectangle_1923_oguuzi.png"></v-img
 											></v-avatar>
 											<div>
-												<p class="" style="font-weight: 500; font-size: 16px !important; line-height: 20px; color: #333333">Sarah Johnson</p>
+												<p class="" style="font-weight: 500; font-size: 16px !important; line-height: 20px; color: #333333">{{item.user.first_name}} {{item.user.last_name}}</p>
 												<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696">🇺🇸 USA, New York City</p>
 											</div>
 										</div>
@@ -201,7 +201,7 @@
 										<p style="font-weight: 600; font-size: 16px; line-height: 10px; color: #000000" class="d-flex mb-1 pb-0 pt-1 align-center">
 											<v-rating
 												readonly
-												model-value="4"
+												:model-value="item.rating"
 												color="grey-lighten-1"
 												active-color="#F0B136"
 												class="rts"
@@ -212,11 +212,10 @@
 										</p>
 										<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: 0.6px">13/6/2017, 8:23 PM</p>
 									</div>
-									<p style="color: #333; font-size: 16px; font-weight: 600" class="mb-3">The product really giving if you ask me</p>
 									<p style="color: #333; font-size: 16px; line-height: 140%" class="px-">
-										Lorem ipsum dolor sit amet consectetur. Lobortis sagittis porta tincidunt nibh eget lacus. Tristique tellus tempus dolor semper
-										aliquam amet ipsum at. Ultricies porttitor sceler... <span style="color: #1273eb; font-weight: 600"> Read More </span>
+										{{item.review_comment}} 
 									</p>
+									<!-- <span style="color: #1273eb; font-weight: 600"> Read More </span> -->
 
 									<v-btn
 										v-if="i !== 1"
@@ -254,7 +253,7 @@
 											color="#C5912C"
 											variant="tonal"
 										>
-											Pending
+											{{item.review_status}}
 										</v-chip>
 									</div>
 								</td>
@@ -286,7 +285,7 @@
 		</v-dialog>
 
 		<!-- If there is no reviews show this -->
-		<div v-if="items1.length === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
+		<div v-if="!hasReview" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
 			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
 				<v-img
 					:width="300"
@@ -308,12 +307,30 @@
 }
 </style>
 <script>
+import {getAllReview} from '~/composables/useVendorReview';
+import { formattedPrice } from '~/utils/price';
+import { useVendorStore } from '~/stores/vendorStore';
 export default {
+	setup(){
+		const vendorStore = useVendorStore()
+		const vendor = ref(vendorStore.vendor)
+		const hasReview = computed(() => vendor.value.vendor_details.review_count > 0)
+
+		watch(() => vendorStore.vendor, async (newval, oldval) => {
+			vendor.value = newval
+		});
+		return{
+			vendor,
+			vendorStore,
+			hasReview
+		}
+	},
 	data() {
 		return {
 			rating: 4,
 			skill: 100,
 			chosen: "",
+			allReviews: [],
 			tab: "",
 			dialog: false,
 			tabs: [
@@ -445,6 +462,13 @@ export default {
 	},
 	mounted() {
 		this.items = this.items1;
+	},
+	async beforeMount(){
+		if (this.vendor.vendor_details.review_count > 0){
+			this.allReviews = await getAllReview()
+			console.log(this.allReviews)
+		}
+		
 	},
 	methods: {
 		sort(x, y) {

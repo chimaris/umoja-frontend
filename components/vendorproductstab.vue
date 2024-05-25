@@ -1,5 +1,12 @@
 <template>
-	<div>
+	<div v-if="items.length == 0" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+		<p>You have no products yet. Click the button below to add your first product.</p>
+			<v-btn @click="$router.push('/vendor/dashboard/Add Products')" flat color="green" size="default" class="ml-4 justify-end menubar text-grey-darken-3">
+					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
+					Add Product
+				</v-btn>
+	</div>
+	<div v-if="items.length > 0">
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
 			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{items.length}} products found</p>
 			<div>
@@ -45,7 +52,7 @@
 								<h1 style="line-height: 1.2" class="mb-0 text-white font-weight-black">The Waden Cloth</h1>
 								<p class="textClass mb-4 text-white">known to be used by the Nawi people</p>
 								<div>
-									<v-btn flat to="/product_page" color="orange"><span class="smallBtn"> See product </span> </v-btn>
+									<v-btn flat color="orange"><span class="smallBtn"> See product </span> </v-btn>
 									<v-btn flat variant="text" class="ml-2 text-white howit"
 										><span style="text-decoration: underline">
 											<span class="smallBtn"> Not now </span>
@@ -201,10 +208,11 @@ import {ref, computed} from 'vue'
 
 export default {
 	setup() {
-		const items = computed(() => useVendorProductStore().allProducts.slice(0, 12));
+		const items = ref(useVendorProductStore().allProducts.slice(0, 12));
 		const role = ref("vendor");
-		onMounted(() => {
-			useVendorProductStore().getAllProduct()
+
+		watch(() => useVendorProductStore().allProducts, (newval, oldval) => {
+			items.value = newval
 		});
 
 		return {

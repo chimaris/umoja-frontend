@@ -1,6 +1,6 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div v-if="vendorProducts.allProducts.length > 0" class="d-flex align-center justify-space-between">
+		<div v-if="vendor.vendor_details?.product_count > 0" class="d-flex align-center justify-space-between">
 			<div class="d-flex w-100 align-center">
 				<div class="d-flex align-center">
 					<v-text-field
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 
-		<div v-if="vendorProducts.allProducts.length > 0" class="mt-5">
+		<div v-if="vendor.vendor_details?.product_count > 0" class="mt-5">
 			<v-tabs v-model="tab" class="orders" color="green">
 				<v-tab @click.stop="sort(item.prop, item.value)" v-for="item in tabs" :key="item" :value="item" class="d-flex text-capitalize align-center">
 					{{ item.name }}
@@ -275,7 +275,7 @@
 
 		<!-- If there is no Product show this -->
 		<div
-			v-if="vendorProducts.allProducts.length === 0"
+			v-if="vendor.vendor_details?.product_count == 0"
 			class="d-flex flex-column justify-center align-center"
 			style="max-height: 100%; height: 90vh; border: 1px solid #cecece; border-radius: 15px"
 		>
@@ -355,21 +355,24 @@ export default {
 		const searchQuery = ref("")
 		const loading = ref(false)
 		const vendorStore = useVendorStore()
+		const vendor = ref(vendorStore.vendor)
 	
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		}
 
-		watch(() => vendorStore.vendorToken, async () => {
-			if (vendorStore.vendorToken){
+		watch(() => vendorStore.vendor, async (newval, oldval) => {
+			vendor.value = newval
+			if (vendor.value.vendor_details.product_count > 0){
 				await fetchFilteredProducts();
 			}
-
 		});
 		
 		
 		onBeforeMount(async () => {
-			await fetchFilteredProducts();
+			if (vendor.value.vendor_details.product_count > 0){
+				await fetchFilteredProducts();
+			}	
 		});
 		watch(() => tab.value, () => {
 			fetchFilteredProducts();
@@ -434,6 +437,7 @@ export default {
 		return {
 			choose,
 			vendorProducts,
+			vendor,
 			selectedPage,
 			editProduct,
 			tabs,

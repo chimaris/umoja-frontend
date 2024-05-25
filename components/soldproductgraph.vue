@@ -9,22 +9,13 @@ const props = defineProps({
         required: true
     }
 })
-const series = ref([
-	{
-		name: 'Product A',
-		data: Array(7).fill(0)
-	},
-	{
-		name: 'Product B',
-		data: Array(7).fill(0)
-	}
-])
-series.value = updateSeries();
-const vendorStore  = useVendorStore();
+const series = ref(updateSeries())
+
 
 const chartOptions =ref(
     {
 				chart: {
+				height: '100%',
 				type: 'bar'
 				},
 				colors:['#CBDED6', '#00966D', '#005A41'],

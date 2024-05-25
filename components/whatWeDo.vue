@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<v-container style="position: relative" class="pt-0 padzero" fluid>
+		<v-container style="position: relative" class="pt-5 padzero" fluid>
 			<v-card
 				flat
 				class="topcard height1 rounded-xl d-flex justify-center align-center"
@@ -62,9 +62,9 @@
 							The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.
 						</p>
 
-						<div class="py-8">
+						<!-- <div class="py-8">
 							<v-btn @click="opendialog()" color="green" flat class="mx-auto" size="x-large" rounded="xl">Join the Waitlist</v-btn>
-						</div>
+						</div> -->
 					</div>
 				</v-container>
 				<div v-if="!$vuetify.display.smAndUp" class="scroll">

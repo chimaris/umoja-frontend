@@ -31,6 +31,10 @@ export const useCreateStore = defineStore('post', {
     },
 
     actions: {
+      clearUser(){
+        this.posts = []
+        this.articles = []
+      },
       setPostToEdit(post) {
        this.postToEdit = post;
       },

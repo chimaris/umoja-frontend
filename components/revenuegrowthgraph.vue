@@ -30,6 +30,7 @@ function updateSeries() {
 const chartOptions3 =ref(
     {
 				chart: {
+				height: '100%',
 				type: 'line'
 				},
 				xaxis: {
