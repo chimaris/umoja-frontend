@@ -7,23 +7,23 @@
 			class="d-flex bg-grey justify-end align-end"
 			:src="vendor.vendor_details?.cover_image ? vendor.vendor_details?.cover_image :'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"
 		>
-		<v-container style="max-width: 1400px; height: 100%; width: 100%" class="d-flex flex-column pt-6 justify-end align-end">
-				<v-progress-circular v-if="coverLoading" class="align-self-center"
-				color="black"
-				indeterminate
-				></v-progress-circular>
-				<p v-show="errorMessage" class="align-self-center" style="color: red; font-size: 16px">{{errorMessage}}</p>
-				<v-label
+		<v-container style="max-width: 1400px; height: 100%; width: 100%" class="d-flex flex-column pt-6 justify-between align-start">
+				<v-label 
 					size="large"
 					rounded="xl"
 					flat
 					for="profile"
 					class="d-flex align-center text-white"
-					style="text-transform: none !important; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 20px"
+					style="text-transform: none !important; background-color: rgba(0, 0, 0, 0.5); padding: 10px; border-radius: 20px; position: absolute; top: 20px"
 					><v-icon icon="mdi mdi-pencil-outline" class="mx-2" size="21"></v-icon>
 					<span  style="font-size: 12px; font-weight: 400"> Edit Cover Photo </span>
 					<input @change="upLoadFile1($event)" id="profile"  type="file" style="display: none;" accept=".svg, .png, .jpeg, .jpg, .gif">
 				</v-label>
+				<v-progress-circular v-if="coverLoading" style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%)"
+				color="black"
+				indeterminate
+				></v-progress-circular>
+				<p v-show="errorMessage" class="align-self-center" style="color: red; font-size: 16px">{{errorMessage}}</p>
 			</v-container>
 		</v-img>
 		<v-card class="overflow-visible pr-2" flat tile color="#Fff" min-height="100vh" width="100%">
@@ -133,9 +133,10 @@
 							<v-tabs v-model="tab" color="green" grow>
 								<v-tab v-for="item in ['products', 'posts', 'articles', 'promo%']" :key="item" :value="item" class="d-flex align-center">
 									{{ item }}
-									<v-badge v-if="item == 'posts'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="postStore.posts.length" size="12"></v-badge>
-									<v-badge v-if="item == 'products'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendorProducts.allProducts.length" size="12"></v-badge>
-									<v-badge v-if="item == 'articles'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="postStore.articles.length" size="12"></v-badge>
+									<v-badge v-if="item == 'posts'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendor.vendor_details?.post_count" size="12"></v-badge>
+									<v-badge v-if="item == 'products'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendor.vendor_details?.product_count" size="12"></v-badge>
+									<v-badge v-if="item == 'articles'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendor.vendor_details?.article_count" size="12"></v-badge>
+									<v-badge v-if="item == 'promo%'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendor.vendor_details?.promo_count" size="12"></v-badge>
 								</v-tab>
 							</v-tabs>
 							<v-divider></v-divider>

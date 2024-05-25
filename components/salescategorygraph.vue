@@ -4,16 +4,7 @@
 <script setup>
 import {ref} from 'vue'
 
-const series2 =ref([
-{
-		name: 'category A',
-		data:  Array(12).fill(0)
-	},
-	{
-		name: 'category B',
-		data:  Array(12).fill(0)
-	}
-])
+const series2 =ref(updateSeries())
 const props = defineProps({
     soldCategories: {
         type: Array,
@@ -43,6 +34,7 @@ function updateSeries(){
 const chartOptions2 = ref(
     {
 				chart: {
+				height: '100%',
 				type: 'line'
 				},
 				colors:['#F38218', '#914E0E', '#FADACC'],

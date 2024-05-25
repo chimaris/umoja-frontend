@@ -1,6 +1,14 @@
 <template>
+	<div v-if="allPosts.length == 0" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+			<p>You have no posts yet. Click the button below to create your post.</p>
+			<v-btn @click="$router.push('/vendor/dashboard/Create Post')" flat color="green" size="default" class="ml-4 justify-end menubar text-grey-darken-3">
+					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
+					Create Post
+				</v-btn>
+		</div>
 	<div>
-		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
+	<div v-if="allPosts.length > 0">
+		<div  style="background-color: " class="d-flex py-6 align-center justify-space-between">
 			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{allPosts.length}} posts found</p>
 			<div>
 				<v-btn style="border: 1px solid #e5e5e5; border-radius: 100px !important" variant="outlined" class="textClass text-grey-darken-3">
@@ -46,7 +54,7 @@
 				</v-img>
 			</v-carousel-item>
 		</v-carousel>
-
+		
 		<v-row style="background-color: #fff" class="mt-8">
 			<v-col cols="4" v-for="(n, i) in allPosts" :key="i" lg="4" md="6">
 				<v-card flat style="border-radius: 15px" class="bg-white rounded-lg">
@@ -207,6 +215,7 @@
 			</v-card>
 		</v-dialog>
 	</div>
+	</div>
 </template>
 <style>
 .pts .v-rating__item .v-btn .v-icon {
@@ -231,13 +240,16 @@ import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
 export default {
 	setup(){
 		const postStore = useCreateStore()
-		const allPosts = computed(() => postStore.posts.slice(0,12))
+		const allPosts = ref(postStore.posts.slice(0,12))
 		const selectedPost = ref(null)
 		const dialog = ref(false)
 		const userLiked = ref(false)
 		
 		watch(() => selectedPost.value, async () => {
 			userLiked.value = await hasLiked(selectedPost.value.id, "vendor")
+		});
+		watch(() => postStore.posts, async (newval, oldval) => {
+			allPosts.value = newval
 		});
 		const handUnLike = async (id) => {
 			userLiked.value = false

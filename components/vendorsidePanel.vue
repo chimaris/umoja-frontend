@@ -224,6 +224,14 @@ list: [
 ]
 }
 },
+// watch: {
+//     currentPage(newValue) {
+//       console.log(this.currentPage)
+//       // if (this.vendorStore.selectedItem !== this.currentPage){
+//       //   this.vendorStore.selectedItem == this.currentPage
+//       // }
+//     },
+//   },
 methods:{
   async logOut(){
     const response = await this.vendorStore.logout();

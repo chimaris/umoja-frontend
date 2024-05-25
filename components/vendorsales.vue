@@ -675,8 +675,9 @@ export default {
 		const filterCategory = ref("Last 7 days")
 		const filterRevenue = ref("Last 24 hours")
 		const orderStore = useOrderStore()
+		const vendor = ref(vendorStore.vendor)
 
-		const hasOrder = computed(() => useOrderStore().allOrder.length > 0)
+		const hasOrder = computed(() => vendor.value.vendor_details.order_count > 0)
 
 		onBeforeMount(async () => {
 			if (hasOrder.value){
@@ -686,7 +687,8 @@ export default {
 				await useOrderStore().getRevenues()
 			}
 		});
-		watch(() => vendorStore.vendor, async () => {
+		watch(() => vendorStore.vendor, async (newval, oldval) => {
+			vendor.value = newval
 			if (hasOrder.value && vendorStore.vendorToken){
 				await getSales()
 				await getCategories()
@@ -790,7 +792,8 @@ export default {
 			getRevenue,
 			filterRevenue,
 			orderStore,
-			vendorStore
+			vendorStore,
+			vendor
 		}
 	},
 	data() {

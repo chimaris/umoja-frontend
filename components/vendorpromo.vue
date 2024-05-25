@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
-			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">3 live promos%</p>
+			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{items.length}} live promos%</p>
 			<div>
 				<v-btn flat color="transparent" style="font-size: 15px; color: #333333">
 					<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716236003/umoja/view-grid.svg" />
@@ -61,8 +61,8 @@
 			</v-carousel-item>
 		</v-carousel>
 
-		<div class="mb-6 mt-14" v-for="n in 2" :key="n">
-			<v-sheet flat color="#FDF1ED" class="px-2 px-md-6 rounded-lg d-flex justify-space-between align-center mb-6 py-3">
+		<div class="mb-6 mt-14" >
+			<!-- <v-sheet flat color="#FDF1ED" class="px-2 px-md-6 rounded-lg d-flex justify-space-between align-center mb-6 py-3">
 				<div class="d-flex align-center">
 					<v-icon icon="mdi mdi-sale" color="orange"></v-icon>
 					<p
@@ -94,10 +94,10 @@
 						</vue-countdown>
 					</div>
 				</div>
-			</v-sheet>
+			</v-sheet> -->
 			<v-row style="background-color: #fff" class="">
 				<v-col cols="6" v-for="(n, i) in items" :key="i" lg="4" md="6">
-					<product-component :index="i" :item="n" />
+					<product-component :index="i" :item="n" role="vendor"/>
 				</v-col>
 			</v-row>
 		</div>
@@ -105,6 +105,7 @@
 </template>
 <script>
 import VueCountdown from "@chenfengyuan/vue-countdown";
+import {useVendorProductStore} from '~/stores/vendorProducts'
 
 export default {
 	components: {
@@ -124,6 +125,9 @@ export default {
 			var seconds = endDate.getTime() - startDate.getTime();
 			return seconds;
 		},
+		items(){
+			return useVendorProductStore().promoProducts.slice(0, 12);
+		}
 	},
 	data() {
 		return {
@@ -131,36 +135,7 @@ export default {
 			mods: 1,
 			window: "products",
 			rating: 4,
-			items: [
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png",
-					price: "115.32",
-					likes: "1.2k",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png",
-					price: "57.00",
-					likes: "456",
-					oos: true,
-				},
-
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-			],
 		};
 	},
-};
+}
 </script>

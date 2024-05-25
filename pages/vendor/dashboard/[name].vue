@@ -169,7 +169,7 @@ middleware: "vendor-auth"
 })
 
 
-import { ref, onBeforeUnmount, computed  } from 'vue';
+import { ref, onBeforeUnmount, computed, onMounted  } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
@@ -207,25 +207,46 @@ watch(() => window.innerWidth, () => {
 });
 watch(() => vendorStore.vendor, async () => {
 	if (vendorStore.vendor.complete_setup == 1){
-		await vendorProducts.getAllProduct()
-		await postStore.getArticle()
-		await postStore.getPost()
-		await useOrderStore().getOrder()
+		if (vendorStore.vendor.vendor_details?.product_count > 0){
+			await vendorProducts.getAllProduct()
+		}
+		if (vendorStore.vendor.vendor_details?.article_count > 0){
+			await postStore.getArticle()
+		}
+		if (vendorStore.vendor.vendor_details?.post_count > 0){
+			await postStore.getPost()
+		}
+		if (vendorStore.vendor.vendor_details?.promo_count > 0){
+			await vendorProducts.getPromoProduct()
+		}
+		
+		// await useOrderStore().getOrder()
 	}
 });
 onBeforeMount(async () => {
-	checkScreenSize()
 	if (vendorStore.vendor.complete_setup == 1){
-		await vendorProducts.getAllProduct()
-		await postStore.getArticle()
-		await postStore.getPost()
-		await useOrderStore().getOrder()
-		// await useSaleStore().getSales()
+		if (vendorStore.vendor.vendor_details.product_count > 0){
+			await vendorProducts.getAllProduct()
+		}
+		if (vendorStore.vendor.vendor_details?.article_count > 0){
+			await postStore.getArticle()
+		}
+		if (vendorStore.vendor.vendor_details?.post_count > 0){
+			await postStore.getPost()
+		}
+		if (vendorStore.vendor.vendor_details?.promo_count > 0){
+			await vendorProducts.getPromoProduct()
+		}
+
+		// await useOrderStore().getOrder()
 	}
 	
-	window.addEventListener('resize', checkScreenSize);
-});
 
+});
+onMounted(() => {
+	checkScreenSize()
+	window.addEventListener('resize', checkScreenSize);
+})
 onBeforeUnmount(() => {
 	window.removeEventListener('resize', checkScreenSize)
 })

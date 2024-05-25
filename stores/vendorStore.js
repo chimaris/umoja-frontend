@@ -1,6 +1,8 @@
 // stores/vendorStore.js
 import { defineStore } from 'pinia';
 import {vendorUseApi} from '~/composables/vendorApi'
+import { useVendorProductStore } from './vendorProducts';
+import { useCreateStore } from './createPostStore';
 import axios from 'axios';
 
 
@@ -227,6 +229,8 @@ export const useVendorStore = defineStore('vendor', {
         this.vendorIsLoggedIn = false
         this.vendorEmail = ""
         this.vendorToken = null
+        useVendorProductStore().clearProducts()
+        useCreateStore().clearUser()
         return true
       }
 

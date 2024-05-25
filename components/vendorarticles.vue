@@ -1,5 +1,12 @@
 <template>
-	<div>
+	<div v-if="allArticles.length == 0" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+			<p>You have no articles yet. Click the button below to create your first article.</p>
+			<v-btn @click="$router.push('/vendor/dashboard/Create Article')" flat color="green" size="default" class="ml-4 justify-end menubar text-grey-darken-3">
+					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
+					Create Articles
+				</v-btn>
+		</div>
+	<div v-if="allArticles.length > 0">
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
 			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">5/{{allArticles.length}} articles found</p>
 			<div>
@@ -60,8 +67,8 @@
 				</v-img>
 			</v-carousel-item>
 		</v-carousel>
-
-		<v-sheet class="mt-8">
+		
+		<v-sheet class="mt-8" >
 			<v-card flat v-for="item in allArticles.slice(0,5)" :key="item">
 				<v-img
 					@click="openArticle(item)"
@@ -196,7 +203,7 @@ import {getdateRegistered} from '~/utils/date'
 const postStore = useCreateStore()
 const modalContainer = ref(null)
 const dialog = ref(false)
-const allArticles = computed(() => postStore.articles)
+const allArticles = ref(postStore.articles)
 const selectedArticle = ref(null)
 const nextArticle = computed(() => {
 	if (selectedArticle.value){
@@ -208,6 +215,9 @@ const nextArticle = computed(() => {
 		return allArticles.value[newIndex];
 	}
 
+})
+watch(() => postStore.articles, (newval, oldval) => {
+	allArticles.value = newval
 })
 function scrollToTop() {
 	modalContainer.value.scrollTop = 0;

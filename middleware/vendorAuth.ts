@@ -14,15 +14,13 @@ export default defineNuxtRouteMiddleware((to, from) => {
     
   }
   if (to.path == '/vendor/dashboard/Posts'){
-    const postStore = useCreateStore()
-    if (postStore.posts.length == 0){
+    if (vendorStore.vendor.vendor_details?.post_count == 0){
       return navigateTo('/vendor/dashboard/Create Post')
     }
  
   }
   if (to.path == '/vendor/dashboard/Articles'){
-    const postStore = useCreateStore()
-    if (postStore.articles.length == 0){
+    if (vendorStore.vendor.vendor_details?.article_count == 0){
       return navigateTo('/vendor/dashboard/Create Article')
     }
  

@@ -82,14 +82,14 @@ export default {
             {
                 color: '#FDF1ED',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-search-minimalistic-magnifer_k1wit4.png',
-                title: 'Explore a commercial/cultural Learning experience',
-                content: `In Umoja, you're able to not only buy but discover and learn about the different african cultures and feel a personal connection to each vendor and product.`
+                title: 'Exclusive African marketplace',
+                content: `Connect with African businesses worldwide and Buy authentic products from any part of the world and discover a unique African cultural experience.`
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-shopping-ecommerce-cart-2_fpmwr0.png',
                 color: '#FEF6ED',
-                title: 'Buy authentic African products',
-                content: `We've partnered with original and authentic African Vendors, from whom you are able to buy a wide range of products directly from.`
+                title: 'Explore a commercial/cultural Learning experience',
+                content: `In Umoja, you're able to not only buy but discover and learn about the different african cultures and feel a personal connection to each vendor and  product.`
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-essentional-ui-delivery_nifd95.png',
@@ -103,25 +103,25 @@ export default {
                 color: '#F7EDEE',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-shopping-ecommerce-shop-2_zay7a9.png',
                 title: 'African Marketplace',
-                content: 'Our marketplace is dedicated to vendors with connections to Africa. Experience a closer cooperation between seller and buyers. Get direct channels to customers from all parts of the world and share your potential with a global audience.'
+                content: 'Umoja marketplace is dedicated to empowering African related businesses from each corner of the world. It’s a marketplace where vendors creativity and potential are celebrated & highlighted and where a unique African culture is experienced.'
             },
             {
                 color: '#FEF6ED',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-security-key-minimalistic-2_avxmje.png',
-                title: 'CRM Solution',
-                content: `The platform offers more than just a marketplace. We offer a CRM tool that comes with different apps and features which aims to cover all areas of your businesses.`
+                title: 'Engage with global customers',
+                content: `Experience a closer cooperation between seller and buyers. Get direct channels to customers from all parts of the world and share your potential with a global audience.`
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-business-statistic-graph-new_ogoig8.png',
                 color: '#FDF1ED',
-                title: 'Umoja Business Partner',
-                content: `Umoja is your partner. We want to support you and help you manage your business with ease, so you're able to focus on your creativity, realise your potential and grow.`
+                title: 'ERP Business solution',
+                content: `The platform offers more than just a marketplace. We offer a ERP solution with tool that provides vendors with the resources and knowledge needed to grow & scale business globally.`
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1692435142/bold-transport-parts-service-bus_q2khvi.png',
                 color: '#EDF0EF',
-                title: 'Umoja Logistics',
-                content: `With the Umoja logistics (TMS) solution, we aim to support our vendors through our global transport activities. Umoja logistics strives to ensure our Partners are able to fulfil the customers expectation.`
+                title: 'Umoja Partnership',
+                content: `Umoja aim is to build a partnership with the businesses, through dedicated and intentional customer support so they can fully focus on their creativity, realize their potential and grow.`
             },
         ],
      
