@@ -32,7 +32,7 @@
 										></v-btn>
 									</v-slide-x-reverse-transition>
 								</div>
-								<v-slide-x-reverse-transition leave-absolute origin="center center">
+								<v-slide-x-reverse-transition leave-absolute origin="center center" class="d-none d-md-block">
 									<v-text-field
 										v-if="isActive"
 										variant="outline"
