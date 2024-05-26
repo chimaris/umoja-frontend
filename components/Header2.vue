@@ -53,7 +53,7 @@
 								</v-slide-x-reverse-transition>
 							</div>
 						</template>
-						<dialogsearch />
+						<dialogsearch :close="handleSearchClose" />
 					</v-menu>
 
 					<v-btn rounded="xl" v-if="!isLoggedIn" to="/signin-category" class="" icon flat color="transparent">
@@ -228,6 +228,10 @@ export default {
 		},
 		openNav() {
 			this.drawer = true;
+		},
+
+		handleSearchClose() {
+			this.searchmenu = false;
 		},
 	},
 };

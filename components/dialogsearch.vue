@@ -48,19 +48,12 @@
 		</div>
 	</v-card>
 
-	<v-card
-		class="d-block d-md-none rounded-lg"
-		style="backdrop-filter: blur(7px); background: rgb(255 255 255 / 89%); max-width: 620px; max-height: 80vh; border: none"
-	>
+	<!-- Mobile View -->
+	<v-card class="d-block d-md-none rounded-lg" style="max-width: 620px; max-height: 80vh; border: none">
 		<div class="d-flex align-center justify-space-between pa-4">
 			<p style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 600">Search for products</p>
 			<div>
-				<v-img
-					width="21"
-					height="21"
-					@click="dialog = false"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
-				/>
+				<v-img width="21" height="21" @click="handleClose" src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg" />
 			</div>
 		</div>
 		<v-divider></v-divider>
@@ -117,6 +110,12 @@
 import { useProductStore } from "~/stores/productStore";
 export default {
 	// props:['route', 'text'],
+	props: {
+		close: {
+			type: Function,
+			required: true,
+		},
+	},
 	data() {
 		return {
 			searches: [
@@ -139,6 +138,11 @@ export default {
 	computed: {
 		productStore() {
 			return useProductStore();
+		},
+	},
+	methods: {
+		handleClose() {
+			this.close();
 		},
 	},
 };
