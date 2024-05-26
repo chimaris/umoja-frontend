@@ -206,9 +206,20 @@
 		</v-sheet>
 	</v-dialog>
 	<v-dialog max-width="750" v-model="dialog2">
-		<v-sheet max-width="949" class="cardStyle pa-6">
-			<p style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 600">Add New Address</p>
-			<v-card flat class="cardStyle mt-4 bg-white rounded-lg pa-4 py-4">
+		<v-sheet max-width="949" class="pa-md-6">
+			<div class="d-flex align-center justify-space-between pa-4">
+				<p style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 600">Add New Address</p>
+				<div>
+					<v-img
+						width="21"
+						height="21"
+						@click="dialog2 = false"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+					/>
+				</div>
+			</div>
+			<v-divider></v-divider>
+			<v-card flat class="mt-4 bg-white rounded-lg pa-4 py-4">
 				<v-form v-model="valid2" @submit.prevent="updateAddress">
 					<v-row>
 						<v-col class="pb-0" cols="12">
@@ -288,8 +299,10 @@
 							<v-text-field v-model="selectedEdit.shipping_postal_code" placeholder="Enter your zipcode" density="comfortable"> </v-text-field>
 						</v-col>
 					</v-row>
-					<v-btn class="textClass px-8" rounded="xl" type="submit" :disabled="!valid2" color="green" flat>Save Changes</v-btn>
-					<v-btn @click="dialog2 = false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>
+					<div class="d-flex justify-center justify-md-start w-100">
+						<v-btn class="textClass px-8" rounded="xl" type="submit" :disabled="!valid2" color="green" flat>Save Changes</v-btn>
+						<!-- <v-btn @click="dialog2 = false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn> -->
+					</div>
 				</v-form>
 			</v-card>
 		</v-sheet>
