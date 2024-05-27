@@ -18,6 +18,10 @@ watch(() => props.saleRevenue, () => {
     updateSeries()
 })
 
+onBeforeUnmount(() => {
+	series3.value = []
+})
+
 
 function updateSeries() {
     props.saleRevenue.forEach(dataPoint => {

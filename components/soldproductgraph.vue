@@ -61,7 +61,9 @@ function updateSeries(){
 watch(() => props.soldProducts, () => {
         series.value = updateSeries();
 });
-
+onBeforeUnmount(() => {
+	series.value = []
+})
 
 
             

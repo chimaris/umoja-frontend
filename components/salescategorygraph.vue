@@ -2,7 +2,7 @@
     <apexchart type="line" color="green" :options="chartOptions2" :series="series2"></apexchart>
 </template>
 <script setup>
-import {ref} from 'vue'
+import {ref, onBeforeUnmount} from 'vue'
 
 const series2 =ref(updateSeries())
 const props = defineProps({
@@ -15,7 +15,9 @@ const props = defineProps({
 watch(() => props.soldCategories, () => {
         series2.value = updateSeries();
 });
-
+onBeforeUnmount(() => {
+	series2.value = []
+})
 function updateSeries(){
     const formatData = props.soldCategories.map((category) => {
         const monthlyAmount = Array(12).fill(0);

@@ -19,8 +19,7 @@ export const getReview = async (id) => {
             url: `customer/allreviews?product_id=${id}`,
             method:'GET'
         });
-        console.log(res)
-        return res.data
+        return res.data.data
     }catch(error){
         console.error(error)
     }

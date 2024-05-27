@@ -35,7 +35,7 @@
 							</div>
 						</div>
 						<div class="d-flex align-center mt-4">
-							<h1 class="bigpriceClass2">{{hasReview ? '10.1k' : 0}}</h1>
+							<h1 class="bigpriceClass2">{{hasReview ? `${(allReviews.length) / 1000}K` : 0}}</h1>
 							<div class="text-left">
 								<v-chip style="font-weight: 600; font-size: 14px; line-height: 18px; color: #00966d" class="ml-3 text-green-lighten-2"
 									><v-icon icon="mdi mdi-trending-up"></v-icon> {{hasReview ? '10%' : '0%'}}</v-chip
@@ -210,7 +210,7 @@
 											></v-rating
 											><span style="margin-left: 3px; margin-top: 3px"></span>
 										</p>
-										<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: 0.6px">13/6/2017, 8:23 PM</p>
+										<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: 0.6px">{{getDateTime(item.created_at)}}</p>
 									</div>
 									<p style="color: #333; font-size: 16px; line-height: 140%" class="px-">
 										{{item.review_comment}} 
@@ -218,7 +218,7 @@
 									<!-- <span style="color: #1273eb; font-weight: 600"> Read More </span> -->
 
 									<v-btn
-										v-if="i !== 1"
+										v-if="!item.review_reply"
 										variant="text"
 										style="
 											color: #333;
@@ -227,7 +227,7 @@
 											line-height: 140% !important;
 											letter-spacing: 0.6px !important;
 										"
-										@click="dialog = true"
+										@click="leaveComment(item)"
 										class="text-overline mt-2 text-uppercase"
 										>LEAVE A COMMENT</v-btn
 									>
@@ -236,11 +236,11 @@
 											Your Response
 										</p>
 										<p style="color: #333; font-size: 16px; line-height: 140%" class="px-">
-											Lorem ipsum dolor sit amet consectetur. Lobortis sagittis porta tincidunt nibh eget lacus.
+											{{item.review_reply}}
 										</p>
 										<div class="mt-2">
-											<v-btn variant="text" class=""><span style="color: #333; font-size: 16px; font-weight: 600">Edit</span> </v-btn>
-											<v-btn variant="text" color="red" class="ml-2"><span style="font-size: 16px; font-weight: 600">Delete</span> </v-btn>
+											<v-btn @click="editComment(item)" variant="text" class=""><span style="color: #333; font-size: 16px; font-weight: 600">Edit</span> </v-btn>
+											<v-btn @click="deleteReply(item.id)" variant="text" color="red" class="ml-2"><span style="font-size: 16px; font-weight: 600">Delete</span> </v-btn>
 										</div>
 									</div>
 								</td>
@@ -272,18 +272,32 @@
 			<v-card class="cardStyle py-2">
 				<div class="d-flex mb-2 align-center justify-space-between">
 					<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 500">
-						Replying to <span style="color: #1273eb">@sarahjohnson</span>
+						Replying to <span style="color: #1273eb">{{reviewToReply.user.email}}</span>
 					</p>
 					<v-btn @click="dialog = false" icon="mdi mdi-close" flat></v-btn>
 				</div>
-				<v-textarea persistent-counter :counter="200" class="reviewtextarea" variant="outlined" placeholder="Add a comment"> </v-textarea>
+				<v-textarea persistent-counter v-model="reviewReply" :counter="200" class="reviewtextarea" variant="outlined" placeholder="Add a comment"> </v-textarea>
 				<div class="d-flex my-2 align-center justify-space-between">
 					<p style="font-size: 32px">🙂</p>
-					<v-btn color="green" flat width="97" size="large">Send</v-btn>
+					<v-btn @click="commentReview()" :disabled = "!reviewReply || reviewReply.length > 200 || sending" color="green" flat width="97" size="large">{{sending? 'Sending': 'Send'}}</v-btn>
 				</div>
 			</v-card>
 		</v-dialog>
-
+		<v-dialog absolute v-model="dialog2" width="395">
+			<v-card class="cardStyle py-2">
+				<div class="d-flex mb-2 align-center justify-space-between">
+					<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 500">
+						Replying to <span style="color: #1273eb">{{reviewToEdit?.user.email}}</span>
+					</p>
+					<v-btn @click="dialog2 = false" icon="mdi mdi-close" flat></v-btn>
+				</div>
+				<v-textarea persistent-counter v-model="reviewToEdit.review_reply" :counter="200" class="reviewtextarea" variant="outlined" placeholder="Add a comment"> </v-textarea>
+				<div class="d-flex my-2 align-center justify-space-between">
+					<p style="font-size: 32px">🙂</p>
+					<v-btn @click="editVendorReview()" :disabled = "!reviewToEdit.review_reply || reviewToEdit.review_reply.length > 200" color="green" flat width="97" size="large">Send</v-btn>
+				</div>
+			</v-card>
+		</v-dialog>
 		<!-- If there is no reviews show this -->
 		<div v-if="!hasReview" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
 			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
@@ -307,22 +321,85 @@
 }
 </style>
 <script>
-import {getAllReview} from '~/composables/useVendorReview';
+import {getAllReview, replyReview, deleteReview, editReview} from '~/composables/useVendorReview';
 import { formattedPrice } from '~/utils/price';
 import { useVendorStore } from '~/stores/vendorStore';
+import {getDateTime} from '~/utils/date'
 export default {
 	setup(){
 		const vendorStore = useVendorStore()
 		const vendor = ref(vendorStore.vendor)
-		const hasReview = computed(() => vendor.value.vendor_details.review_count > 0)
+		const hasReview = computed(() => vendor.value.vendor_details?.review_count > 0)
+		const allReviews = ref([])
+		const reviewToReply = ref(null)
+		const reviewToEdit = ref(null)
+		const dialog2 = ref(false)
+		const dialog = ref(false)
+		const reviewReply = ref("")
+		const sending = ref(false)
 
+		const leaveComment = (review) => {
+			reviewToReply.value = review
+			dialog.value = true
+		}
+		const editComment = (review) => {
+			reviewToEdit.value = review
+			dialog2.value = true
+		}
+		const deleteReply = async (id) => {
+			const res = await deleteReview(id)
+			if (res){
+				allReviews.value = await getAllReview()
+			}
+		}
+		async function commentReview(){
+			sending.value = true
+			const data = {
+				review_reply: reviewReply.value,
+				review_status: 'approved'
+			}
+			try{
+				await replyReview(reviewToReply.value.id, data)
+				allReviews.value = await getAllReview()
+				dialog.value = false
+				reviewReply.value = ""
+			}catch(error){
+				console.error(error)
+			}finally{
+				sending.value = false
+			}
+		}
+		async function editVendorReview(){
+			try{
+				await editReview(reviewToEdit.value.id, reviewToEdit.value.review_reply)
+				allReviews.value = await getAllReview()
+				dialog2.value = false
+			}catch(error){
+				console.error(error)
+			}
+		}
 		watch(() => vendorStore.vendor, async (newval, oldval) => {
 			vendor.value = newval
+			if (newval && vendor.value.vendor_details?.review_count > 0){
+			allReviews.value = await getAllReview()
+		}
 		});
 		return{
 			vendor,
+			reviewToReply,
+			reviewToEdit,
+			deleteReply,
+			leaveComment,
 			vendorStore,
-			hasReview
+			hasReview,
+			allReviews,
+			dialog,
+			dialog2,
+			sending,
+			commentReview,
+			reviewReply,
+			editComment,
+			editVendorReview
 		}
 	},
 	data() {
@@ -330,9 +407,7 @@ export default {
 			rating: 4,
 			skill: 100,
 			chosen: "",
-			allReviews: [],
 			tab: "",
-			dialog: false,
 			tabs: [
 				{ name: "All Orders", prop: null, value: null },
 				{ name: "Unfulfilled", prop: "status", value: 0 },
@@ -466,7 +541,6 @@ export default {
 	async beforeMount(){
 		if (this.vendor.vendor_details.review_count > 0){
 			this.allReviews = await getAllReview()
-			console.log(this.allReviews)
 		}
 		
 	},

@@ -301,7 +301,6 @@ async function upLoadFile1(event) {
 		getCountryIconClass() {
 			const countryCode = this.getCountryCode();
       		if (!countryCode) {
-			console.error("Invalid or missing country code");
 			return ''; // Or provide a default class
 			}
 			return `fi fi-${countryCode.toLowerCase()}`;

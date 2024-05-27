@@ -363,14 +363,14 @@ export default {
 
 		watch(() => vendorStore.vendor, async (newval, oldval) => {
 			vendor.value = newval
-			if (vendor.value.vendor_details.product_count > 0){
+			if (newval && vendor.value.vendor_details?.product_count > 0){
 				await fetchFilteredProducts();
 			}
 		});
 		
 		
 		onBeforeMount(async () => {
-			if (vendor.value.vendor_details.product_count > 0){
+			if (vendor.value.vendor_details?.product_count > 0){
 				await fetchFilteredProducts();
 			}	
 		});
