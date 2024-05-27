@@ -363,7 +363,7 @@
 							</div>
 						</div>
 						<div >
-							<template v-if="review.length > 0">
+							<template v-if="review?.length > 0">
 								<div v-for="(n, i) in review" :key="n" class="d-flex mt-8">
 								<v-avatar color="grey-lighten-4" class="pa-1 mr-3" size="50"
 									><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687517181/Rectangle_1923_oguuzi.png"></v-img
