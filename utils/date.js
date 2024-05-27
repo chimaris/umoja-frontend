@@ -19,6 +19,18 @@ export const getdateRegistered = (dateCreated) =>  {
 
     return `${month} ${day}, ${year}`;
 }
+
+export const getDateTime = (dateString) => {
+  const date = new Date(dateString);
+  return date.toLocaleString('en-GB', {
+    day: 'numeric',
+    month: 'numeric',
+    year: 'numeric',
+    hour: 'numeric',
+    minute: 'numeric',
+    hour12: true,
+  });
+}
 export const calculateAge = (birthDate) => {
   const currentDate = new Date();
   const birthDateObj = new Date(birthDate);

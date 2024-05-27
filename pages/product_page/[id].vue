@@ -1,13 +1,13 @@
 <template>
     <Header2 />
-    <Productpage :product= "product"/>
+    <Productpage :product= "product" :review="review"/>
     <Mainfooter />
 </template>
 
 <script setup>
     import {useProductStore} from '~/stores/productStore';
     import { useRoute } from '#vue-router';
-    import {onBeforeMount, ref } from 'vue';
+    import {onMounted, ref } from 'vue';
     import {getReview} from '~/composables/useReview'
 
     const route = useRoute();
@@ -17,11 +17,14 @@
     const review = ref([])
 
   
+    onMounted(async () => {
+        const itemIndex = productStore.allProducts.findIndex(product => product.id == productId);
+        if (itemIndex !== -1) {
+            product.value = productStore.allProducts[itemIndex]
+            review.value = await getReview(product.value.id)
 
-    const itemIndex = productStore.allProducts.findIndex(product => product.id == productId);
-    if (itemIndex !== -1) {
-        product.value = productStore.allProducts[itemIndex]
-        review.value = await getReview(product.value.id)
-    }
+        }
+    })
+  
 
 </script>

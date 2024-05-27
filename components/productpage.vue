@@ -362,8 +362,9 @@
 								</v-chip-group>
 							</div>
 						</div>
-						<div>
-							<div v-for="(n, i) in 3" :key="n" class="d-flex mt-8">
+						<div >
+							<template v-if="review.length > 0">
+								<div v-for="(n, i) in review" :key="n" class="d-flex mt-8">
 								<v-avatar color="grey-lighten-4" class="pa-1 mr-3" size="50"
 									><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687517181/Rectangle_1923_oguuzi.png"></v-img
 								></v-avatar>
@@ -371,29 +372,27 @@
 									<div class="d-flex justify-space-between">
 										<div class="px-1 d-flex align-center pl-0">
 											<div>
-												<p class="" style="font-weight: 500; font-size: 16px !important; line-height: 20px; color: #333333">Sarah Johnson</p>
+												<p class="" style="font-weight: 500; font-size: 16px !important; line-height: 20px; color: #333333">{{n.user.first_name}} {{ n.user.last_name }}</p>
 												<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696">🇺🇸 USA, New York City</p>
 											</div>
 										</div>
 										<div class="d-none d-md-flex reviews2 pr-1 align-center">
 											<v-rating
-												:model-value="4"
+												:model-value="n.rating"
 												color="grey-lighten-2"
 												active-color="#E7CE5D"
 												class="rts mr-4"
 												density="comfortable"
 												size=""
 											></v-rating>
-											<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: 0.6px">13/6/2017, 8:23 PM</p>
+											<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: 0.6px">{{getDateTime(n.created_at)}}</p>
 										</div>
 									</div>
 									<div>
-										<p style="color: #333; font-size: 16px; font-weight: 600" class="mt-4 mb-2">The product really giving if you ask me</p>
-										<p style="color: #333; font-size: 14px; line-height: 140%" class="px-">
-											Lorem ipsum dolor sit amet consectetur. Lobortis sagittis porta tincidunt nibh eget lacus. Tristique tellus tempus dolor semper
-											aliquam amet ipsum at. Ultricies porttitor sceler... <span style="color: #1273eb; font-weight: 600"> Read More </span>
+										<p style="color: #333; font-size: 14px; line-height: 140%" class="pt-2">
+											{{n.review_comment}}
 										</p>
-
+										<!-- <span style="color: #1273eb; font-weight: 600"> Read More </span> -->
 										<div class="mt-2">
 											<v-btn variant="text" class="pl-0">
 												<v-icon icon="mdi mdi-heart-outline" class="mr-2" size="17"></v-icon
@@ -408,6 +407,7 @@
 									<v-divider color="#EDEDED" class="mt-4"></v-divider>
 								</div>
 							</div>
+							</template>
 							<div class="my-8">
 								<p :style="{ fontSize: $vuetify.display.mobile ? '18px' : '20px' }" style="font-weight: 600" class="inputLabel d-flex align-center">
 									Review this product <v-icon size="18" class="ml-2" icon="mdi mdi-information"></v-icon>
@@ -657,6 +657,7 @@ import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
 import { ref, onMounted } from "vue";
 import {makeReview, getReview} from '~/composables/useReview'
+import {getDateTime} from '~/utils/date'
 
 export default {
 	setup() {
@@ -667,7 +668,7 @@ export default {
 			quantity,
 		};
 	},
-	props: ["product", ""],
+	props: ["product", "review"],
 	components: {
 		EditorContent,
 	},

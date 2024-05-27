@@ -2,7 +2,7 @@
     <apexchart type="line" color="green" :options="chartOptions2" :series="series2"></apexchart>
 </template>
 <script setup>
-import {ref} from 'vue'
+import {ref, onBeforeUnmount} from 'vue'
 
 const series2 =ref(updateSeries())
 const props = defineProps({

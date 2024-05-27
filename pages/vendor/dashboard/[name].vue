@@ -185,7 +185,7 @@ const route = useRoute()
 const vendorStore  = useVendorStore();
 const vendorProducts = useVendorProductStore()
 const postStore = useCreateStore()
-const showModal = ref(true)
+const showModal = ref(false)
 const curPageValue = computed(() => {
 	if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product'){
 		return 'Products'
@@ -207,43 +207,29 @@ watch(() => window.innerWidth, () => {
 });
 watch(() => vendorStore.vendor, async () => {
 	if (vendorStore.vendor.complete_setup == 1){
-		if (vendorStore.vendor.vendor_details?.product_count > 0){
-			await vendorProducts.getAllProduct()
-		}
-		if (vendorStore.vendor.vendor_details?.article_count > 0){
-			await postStore.getArticle()
-		}
-		if (vendorStore.vendor.vendor_details?.post_count > 0){
-			await postStore.getPost()
-		}
-		if (vendorStore.vendor.vendor_details?.promo_count > 0){
-			await vendorProducts.getPromoProduct()
-		}
-		
-		// await useOrderStore().getOrder()
+		await loadVendorData();
 	}
 });
-onBeforeMount(async () => {
+async function loadVendorData(){
+	const vendorDetails = vendorStore.vendor.vendor_details;
+		if (vendorDetails?.product_count > 0){
+			await vendorProducts.getAllProduct()
+		}
+		if (vendorDetails?.article_count > 0){
+			await postStore.getArticle()
+		}
+		if (vendorDetails?.post_count > 0){
+			await postStore.getPost()
+		}
+		if (vendorDetails?.promo_count > 0){
+			await vendorProducts.getPromoProduct()
+		}
+}
+
+onMounted(async () => {
 	if (vendorStore.vendor.complete_setup == 1){
-		if (vendorStore.vendor.vendor_details.product_count > 0){
-			await vendorProducts.getAllProduct()
-		}
-		if (vendorStore.vendor.vendor_details?.article_count > 0){
-			await postStore.getArticle()
-		}
-		if (vendorStore.vendor.vendor_details?.post_count > 0){
-			await postStore.getPost()
-		}
-		if (vendorStore.vendor.vendor_details?.promo_count > 0){
-			await vendorProducts.getPromoProduct()
-		}
-
-		// await useOrderStore().getOrder()
+		await loadVendorData();
 	}
-	
-
-});
-onMounted(() => {
 	checkScreenSize()
 	window.addEventListener('resize', checkScreenSize);
 })

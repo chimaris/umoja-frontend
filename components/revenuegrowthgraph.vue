@@ -19,6 +19,7 @@ watch(() => props.saleRevenue, () => {
 })
 
 
+
 function updateSeries() {
     props.saleRevenue.forEach(dataPoint => {
             const monthIndex = dataPoint.month - 1; // Convert month to zero-based index

@@ -677,7 +677,7 @@ export default {
 		const orderStore = useOrderStore()
 		const vendor = ref(vendorStore.vendor)
 
-		const hasOrder = computed(() => vendor.value.vendor_details.order_count > 0)
+		const hasOrder = computed(() => vendor.value.vendor_details?.order_count > 0)
 
 		onBeforeMount(async () => {
 			if (hasOrder.value){

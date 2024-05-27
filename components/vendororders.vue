@@ -168,7 +168,7 @@
 		</div>
 
 		<!-- If there is no orders show this -->
-		<div v-if="vendor.vendor_details.order_count === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
+		<div v-if="vendor.vendor_details?.order_count === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
 			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
 				<v-img
 					:width="300"
@@ -207,7 +207,7 @@ const vendor = ref(vendorStore.vendor)
 
 watch(() => vendorStore.vendor, async (newval, oldval) => {
 			vendor.value = newval
-			if (vendor.value.vendor_details.order_count > 0){
+			if (newval && vendor.value.vendor_details?.order_count > 0){
 				await fetchFilteredOrders();
 			}
 		});

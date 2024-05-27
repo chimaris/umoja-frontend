@@ -224,25 +224,19 @@ list: [
 ]
 }
 },
-// watch: {
-//     currentPage(newValue) {
-//       console.log(this.currentPage)
-//       // if (this.vendorStore.selectedItem !== this.currentPage){
-//       //   this.vendorStore.selectedItem == this.currentPage
-//       // }
-//     },
-//   },
+
 methods:{
   async logOut(){
     const response = await this.vendorStore.logout();
     if (response) {
-      this.$router.push('/vendor/login')
+      // this.$router.push('/vendor/login')
+      window.location.reload()
     }
   },
 selectItem(n){
-if (n == 'All Apps') {
-this.openapps = !this.openapps
-}
+// if (n == 'All Apps') {
+// this.openapps = !this.openapps
+// }
 this.selectedSubItem = ''
 this.vendorStore.selectedItem = n
 
