@@ -234,9 +234,9 @@ methods:{
     }
   },
 selectItem(n){
-if (n == 'All Apps') {
-this.openapps = !this.openapps
-}
+// if (n == 'All Apps') {
+// this.openapps = !this.openapps
+// }
 this.selectedSubItem = ''
 this.vendorStore.selectedItem = n
 

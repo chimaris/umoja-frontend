@@ -15,9 +15,7 @@ const props = defineProps({
 watch(() => props.soldCategories, () => {
         series2.value = updateSeries();
 });
-onBeforeUnmount(() => {
-	series2.value = []
-})
+
 function updateSeries(){
     const formatData = props.soldCategories.map((category) => {
         const monthlyAmount = Array(12).fill(0);

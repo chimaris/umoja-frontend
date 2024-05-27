@@ -185,7 +185,7 @@ const route = useRoute()
 const vendorStore  = useVendorStore();
 const vendorProducts = useVendorProductStore()
 const postStore = useCreateStore()
-const showModal = ref(true)
+const showModal = ref(false)
 const curPageValue = computed(() => {
 	if (currentPage.value === 'Add Products' || currentPage.value === 'Import Product'|| currentPage.value === 'Edit Product'){
 		return 'Products'
