@@ -74,7 +74,8 @@
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
-										<span style="font-size: 1.5rem;" :class="getCountryIconClass"></span>
+										<span style="font-size: 1.5rem;">{{getFlag()}}</span>
+										<!-- <span style="font-size: 1.5rem;" :class="getCountryIconClass"></span> -->
 									</div>
 								</div>
 								<v-divider></v-divider>
@@ -187,6 +188,7 @@ import {useCreateStore} from '~/stores/createPostStore'
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import Compressor from 'compressorjs';
 import axios from 'axios'
+import emojiFlags from 'emoji-flags';
 
 export default {
 	setup(props, ctx) {
@@ -350,8 +352,11 @@ async function upLoadFile1(event) {
   };
   },
 	methods: {
+		getFlag() {
+			const countryCode = this.getCountryCode()
+			return emojiFlags.countryCode(countryCode).emoji;
+			},
 		getCountryCode() {
-			
       		const country = this.vendor.vendor_details?.rep_country;
       		return countryCodes[country];
     	},

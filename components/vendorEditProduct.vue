@@ -69,7 +69,7 @@
 						</template>
 					</v-checkbox> -->
 					<!-- </v-sheet> --> 
-                    <v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+                    <v-btn type="submit" class="my-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						<span class="mr-4">Save</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
 					</v-btn>
@@ -218,7 +218,7 @@
 							</v-sheet>
 						</v-col>
 					</v-row>
-					<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+					<v-btn type="submit" class="my-2" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						<span class="mr-4">Save</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
 					</v-btn>

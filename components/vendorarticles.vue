@@ -1,5 +1,5 @@
 <template>
-	<div v-if="allArticles.length == 0" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+	<div v-if="allArticles.length == 0" style="height: 100%; min-height: 500px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
 			<p>You have no articles yet. Click the button below to create your first article.</p>
 			<v-btn @click="$router.push('/vendor/dashboard/Create Article')" flat color="green" size="default" class="ml-4 justify-end menubar text-grey-darken-3">
 					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
@@ -69,7 +69,7 @@
 		</v-carousel>
 		
 		<v-sheet class="mt-8" >
-			<v-card flat v-for="item in allArticles.slice(0,5)" :key="item">
+			<v-card flat v-for="item in allArticles.slice(0,1)" :key="item">
 				<v-img
 					@click="openArticle(item)"
 					height="180"
@@ -94,7 +94,7 @@
 							</div>
 							<div class="d-flex align-center">
 								<p class="mr-2" style="font-weight: 400; font-size: 14px; color: #969696">by</p>
-								<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{item.vendor_firstname}} {{item.vendor_lastname}}</p>
+								<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{item.vendor_firstname}} {{item.vendor_lastname}}</p> -->
 								<!-- <v-icon class="ml-1" icon="mdi mdi-twitter" size="16" color="#55ACEE"></v-icon> -->
 							</div>
 						</div>
@@ -102,7 +102,45 @@
 					<div></div>
 				</div>
 			</v-card>
+			<v-divider class="my-5"></v-divider>
+			<div v-for="n in allArticles.slice(1,5)" :key="n">
+				<v-sheet class="d-flex align-center justify-space-between py-5 my-5 ga-5"  flat>
+					<div style="max-width: 450px">
+						<div class="d-flex mb-4 align-center">
+							<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{n.category_name}}</p>
+							<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
+								<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{getdateRegistered(n.created_at)}}
+							</p>
+						</div>
+						<h1 style="font-weight: 700; font-size: 24px; color: #333333">{{n.title}}</h1>
+						<div v-html="n.content" style="display: -webkit-box; -webkit-line-clamp: 6; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis" class="article-content"></div>
 
+						<div>
+							<div>
+								<div class="d-flex pt-4 justify-space-between align-center">
+									<div class="d-flex align-center">
+										<p class="mr-2" style="font-weight: 400; font-size: 14px; color: #969696">by</p>
+										<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{ n.vendor_firstname }} {{ n.vendor_lastname }}</p>
+										<!-- <v-icon class="ml-1" icon="mdi mdi-twitter" size="16" color="#55ACEE"></v-icon> -->
+									</div>
+								</div>
+							</div>
+							<div></div>
+						</div>
+					</div>
+					<div style="width: 349px; height: 227px;">
+						<v-img
+							@click="openArticle(n)"
+							height="100%"
+							cover
+							class="my-4"
+							style="border-radius: 15px"
+							:src="n.cover_image"
+					></v-img>
+					</div>
+				</v-sheet>
+				<v-divider class="my-5"></v-divider>
+			</div>
 		
 		</v-sheet>
 		<v-dialog ref="modalContainer" v-model="dialog" transition="dialog-bottom-transition" width="auto">

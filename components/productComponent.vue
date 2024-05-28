@@ -96,7 +96,7 @@
 		>
 			<span class="mr-2">
 				{{ item.vendor_firstname }} {{ item.vendor_lastname }}
-				<span style="font-size: 1rem; margin-left: 5px" :class="getCountryIconClass(item.vendor_country)"></span>
+				<span style="font-size: 1rem; margin-left: 5px">{{getCountryIconClass(item.vendor_country)}}</span>
 			</span>
 			<v-icon icon="mdi mdi-information-outline" color="#969696" />
 		</div>
@@ -130,20 +130,19 @@
 					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
 						{{ item.vendor_firstname }} {{ item.vendor_lastname }}
 					</p>
-					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">{{ item.vendor_country }} <span style="font-size: 1rem; margin-left: 5px" :class="getCountryIconClass(item.vendor_country)"></span></p>
+					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">{{ item.vendor_country }}: <span style="font-size: 1rem; margin-left: 5px">{{getCountryIconClass(item.vendor_country)}}</span></p>
 				</div>
 			</div>
 			<v-divider color="#a4a4a4" class="mt-4"></v-divider>
 		</div>
 		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
 			<div :class="showdisco ? 'mt-0' : 'mt-3'">
-				<h4 v-if="item.compare_at_price" class="text-decoration-line-through priceClass" >{{formattedPrice(item.compare_at_price)}}</h4>
 				<h1 :style="{ fontSize: $vuetify.display.mobile ? '14px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">
 					{{ formattedPrice(item.price) }}
 				</h1>
-				<div v-if="showdisco" class="d-flex align-center">
-					<p style="color: var(--carbon-3, #969696); font-weight: 600; line-height: 17.673px; text-decoration: line-through">€15,000.00</p>
-					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg"> 20% OFF </v-chip>
+				<div  class="d-flex align-center">
+					<p v-if="item.compare_at_price" style="color: var(--carbon-3, #969696); font-weight: 600; line-height: 17.673px; text-decoration: line-through">{{formattedPrice(item.compare_at_price)}}</p>
+					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg"> {{Math.floor((item.compare_at_price - item.price) / item.compare_at_price * 100)}}% OFF </v-chip>
 				</div>
 			</div>
 			<v-btn
@@ -172,6 +171,7 @@ import { formattedPrice } from "~/utils/price";
 import { countryCodes } from "~/utils/countryapi";
 import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
+import emojiFlags from 'emoji-flags';
 
 export default {
 	props: ["item", "short", "category", "cover", "index", "showVendor", "showdisco", "role"],
@@ -229,7 +229,7 @@ export default {
 				console.error("Invalid or missing country code");
 				return ""; // Or provide a default class
 			}
-			return `fi fi-${countryCode.toLowerCase()}`;
+			return emojiFlags.countryCode(countryCode).emoji;
 		},
 		async addToCart(item) {
 			const userStore = useUserStore();
