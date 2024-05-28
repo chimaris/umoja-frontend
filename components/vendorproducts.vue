@@ -28,12 +28,12 @@
 						Sort by
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
 					</v-btn>
-						<v-menu activator="#activate" open-on-hover  transition="slide-x-transition"   :close-on-content-click="false">
+						<!-- <v-menu activator="#activate" open-on-hover  transition="slide-x-transition"   :close-on-content-click="false">
 							<v-list >
 								<v-list-item class="sort-options" style="cursor: pointer; font-weight: 500">Availability</v-list-item>
 								<v-list-item class="sort-options" style="cursor: pointer; font-weight: 500" >Sold</v-list-item>
 							</v-list>
-						</v-menu>
+						</v-menu> -->
 					<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">
 						Collection type
 						<v-icon class="ml-2" icon="mdi mdi-tune-vertical"></v-icon>
@@ -73,11 +73,17 @@
 				</v-tab>
 			</v-tabs>
 			<v-divider></v-divider>
-			<v-table
+			<div v-if="productLoading" class="d-flex align-center justify-center" style="position: relative; height: 100%; min-height: 500px;">
+				<v-progress-circular
+					color="green"
+				indeterminate
+				></v-progress-circular>
+			</div>
+			<v-table v-if="filteredProductsData.length > 0 && !productLoading"
 				style="    height: 80%; !important;
    overflow: scroll;"
 			>
-				<thead>
+				<thead >
 					<tr style="background: #f8f8f8; border-radius: 6px" class="rounded-lg">
 						<th style="width: 50px" class="font-weight-medium text-left">
 							<v-checkbox hide-details></v-checkbox>
@@ -93,7 +99,7 @@
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium"></th>
 					</tr>
 				</thead>
-				<tbody>
+				<tbody >
 					<!-- @click="chosen = item.sn" -->
 					<tr :style="chosen == item.id ? 'background:#DFDFDF' : ''" v-for="item in filteredProductsData" :key="item.id">
 						<td class="text-grey-lighten-1 pl-4 px-1">
@@ -107,6 +113,7 @@
 											<v-avatar color="grey-lighten-4" class="rounded-lg pa-1 mr-3 ml-0" size="50"
 												><v-img
 													:src="item.photo.split(',')[0]"
+													cover
 												></v-img
 											></v-avatar>
 											<div>
@@ -124,6 +131,7 @@
 											<v-avatar color="grey-lighten-4" class="pa-1" size="70" rounded="lg">
 												<v-img
 													:src="item.photo.split(',')[1]"
+													cover
 												></v-img>
 											</v-avatar>
 											<v-col class="py-0">
@@ -240,7 +248,7 @@
 				</v-dialog>
 				
 			</v-table>
-			<div v-if="filteredProductsData.length > 0"
+			<div v-if="filteredProductsData.length > 0 && !productLoading"
 				class="w-100 mt-4 d-flex justify-space-between align-center"
 				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
 			>
@@ -249,8 +257,7 @@
 				</div>
 				<div class="d-flex align-center" style="margin-left: auto">
 					<span style="font-size: 12px; font-weight: 400; margin-right: 10px">The Page you’re on</span>
-					<v-select
-						append-inner-icon="mdi mdi-chevron-down"
+					<v-select class="mt-5"
 						variant="outlined"
 						placeholder="1"
 						style="background-color: white; min-width: 40px"
@@ -350,6 +357,7 @@ export default {
 			]
 
 		const vendorProducts = useVendorProductStore()
+		const productLoading = ref(false)
 		const filteredProductsData = ref([])
 		const tab = ref("")
 		const searchQuery = ref("")
@@ -399,6 +407,7 @@ export default {
 			try {
 			const api = vendorUseApi();
 			let url = `vendor/products/?${tab.value.prop}=${tab.value.filterBy}&page=${selectedPage.value}`;
+			productLoading.value = true
 			
 			// Check if the tab name is "Archived" and set the parameter accordingly
 			if (tab.value.name === "All Products") {
@@ -426,6 +435,7 @@ export default {
 			console.error(error);
 			}finally {
 				loading.value = false
+				productLoading.value = false
 			}
 
 			return vendorProducts.Products;
@@ -447,7 +457,8 @@ export default {
 			filterproductBy,
 			searchQuery,
 			loading,
-			vendorStore
+			vendorStore,
+			productLoading
 		};
 	},
 	data() {

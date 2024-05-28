@@ -39,7 +39,7 @@ const chartOptions2 = ref(
 				},
 				colors:['#F38218', '#914E0E', '#FADACC'],
                 xaxis: {
-                categories: ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+					categories: ['Jan', 'Feb', 'March', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
 				labels: {
 					style: {
 					fontSize: '16px',

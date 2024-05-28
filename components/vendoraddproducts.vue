@@ -217,7 +217,7 @@
 							</v-sheet>
 						</v-col>
 					</v-row>
-					<v-btn type = "submit" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
+					<v-btn type = "submit" flat style="background-color: #2c6e63; margin-top: 20px; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large"
 						>Save and continue</v-btn
 					>
 					</v-form>
@@ -411,7 +411,7 @@
 					</v-sheet>
 					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureError}}</p>
 					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{vendorProducts.pictureError}}</p>
-					<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+					<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; margin-top: 20px; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						<span class="mr-4">Save and continue</span>
 						<v-progress-circular v-if="vendorProducts.loading" indeterminate :width="2" :size="25"></v-progress-circular>
 					</v-btn>
@@ -519,7 +519,7 @@
 								</v-text-field>
 							</div>
 						</v-sheet>
-						<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						<v-btn type="submit" flat style="background-color: #2c6e63; margin-top: 20px; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						Save and continue
 					</v-btn>
 					</v-form>
@@ -753,8 +753,8 @@
 								</div>
 							</div>
 						</v-sheet>
-						<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{shippingError}}</p>
-						<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						<p v-show="shippingError" style="color: #B00020; font-size: 14px; margin-top: 20px">{{shippingError}}</p>
+						<v-btn type="submit"  flat style="background-color: #2c6e63; color: #fff; font-size: 16px; margin-top: 20px; font-weight: 600; padding: 16px 34px" size="x-large">
 							Save and continue
 						</v-btn>
 					</v-form>
