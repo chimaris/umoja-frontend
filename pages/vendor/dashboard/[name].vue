@@ -55,7 +55,7 @@
 							<div v-else class="h-100 px-8 d-flex align-center">
 								<v-btn class="mr-4" icon flat rounded="xl" @click="vendorStore.sideBtn = !vendorStore.sideBtn"><v-icon icon="mdi mdi-menu"></v-icon></v-btn>
 
-								<v-btn
+								<v-btn v-if="!(currentPage == 'Create Post' && vendorStore.vendor.vendor_details?.post_count == 0 || currentPage == 'Create Article' && vendorStore.vendor.vendor_details?.article_count == 0)"
 									@click="handleClick"
 									size="large"
 									v-bind="props"

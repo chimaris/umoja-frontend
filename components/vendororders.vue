@@ -139,18 +139,17 @@
 			</v-table>
 			<div  v-if="filteredOrderData.length > 0"
 				class="w-100 mt-4 d-flex justify-space-between align-center"
-				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
+				style="background-color: #f8f8f8; overflow: hidden; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
 			>
 				<div style="display: flex; align-items: center">
 					<span style="font-size: 14px; font-weight: 400">{{ from }} - {{ toPage }} of {{pagesNo}} Pages</span>
 				</div>
 				<div class="d-flex align-center" style="margin-left: auto">
 					<span style="font-size: 12px; font-weight: 400; margin-right: 10px">The Page you’re on</span>
-					<v-select
-						append-inner-icon="mdi mdi-chevron-down"
+					<v-select class="mt-5" 
 						variant="outlined"
 						placeholder="1"
-						style="background-color: white; min-width: 40px"
+						style="background-color: #f8f8f8; min-width: 40px"
 						:items = "pageOptions"
 						v-model="selectedPage"
 					></v-select>
