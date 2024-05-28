@@ -1,5 +1,6 @@
 import {defineStore} from "pinia";
 import {vendorUseApi} from '~/composables/vendorApi'
+import { useVendorStore } from './vendorStore';
 import Compressor from 'compressorjs';
 
 
@@ -73,6 +74,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
         }
       },
       async addVendorProduct(){
+        const vendorStore = useVendorStore()
           this.loading = true;
           this.productError = ""
           const api = vendorUseApi()
@@ -141,17 +143,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
               this.newProductName = this.textInfo.productName;
               this.newProductsku = this.generalInfo.productNumber;
               this.productError = "";
-              this.variantsInfo = []
-              this.generalInfo = []
-              this.textInfo = []
-              this.priceInfo = []
-              this.pictureInfo = []
-              this.inventoryInfo = []
-              this.shippingInfo = []
-              this.colorInfo = []
-              this.sizeInfo = []
-              this.styleInfo = []
-              this.materialInfo = []
+              await vendorStore.getUser(vendorStore.vendor.id)
               return true
             
            }catch(error) {

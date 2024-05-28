@@ -1,6 +1,7 @@
 import {defineStore} from "pinia";
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
+import { useVendorStore } from "./vendorStore";
 import { likePost, unlikePost } from "~/composables/useLike";
 import { useUserStore } from "./userStore";
 
@@ -223,6 +224,7 @@ export const useCreateStore = defineStore('post', {
             }
           },
           async createPost(imagePreviews, data){
+            const vendorStore = useVendorStore()
             this.load = true
             try{
                 const photoResponse = await this.handlephotoUpload(imagePreviews)
@@ -240,6 +242,7 @@ export const useCreateStore = defineStore('post', {
                         }
                     });
                     this.relatedPosts = []
+                    await vendorStore.getUser(vendorStore.vendor.id)
                     await this.getPost()
                     return true
                 }
@@ -294,6 +297,7 @@ export const useCreateStore = defineStore('post', {
           },
           async schedulePost(imagePreviews, data){
             this.load2 = true
+            const vendorStore = useVendorStore()
             try{
                 const photoResponse = await this.handlephotoUpload(imagePreviews)
                 if (photoResponse){
@@ -311,6 +315,7 @@ export const useCreateStore = defineStore('post', {
                         }
                     });
                     this.relatedPosts = []
+                    await vendorStore.getUser(vendorStore.vendor.id)
                     await this.getPost()
                     return true
                 }
@@ -330,6 +335,7 @@ export const useCreateStore = defineStore('post', {
           },
           async draftPost(imagePreviews, data){
             this.load3 = true
+            const vendorStore = useVendorStore()
             try{
                 const photoResponse = await this.handlephotoUpload(imagePreviews)
                 if (photoResponse){
@@ -346,6 +352,7 @@ export const useCreateStore = defineStore('post', {
                         }
                     });
                     this.relatedPosts = []
+                    await vendorStore.getUser(vendorStore.vendor.id)
                     await this.getPost()
                     return true
                 }
@@ -364,6 +371,7 @@ export const useCreateStore = defineStore('post', {
               }
           },
           async postArticle(imagePreview, data){
+            const vendorStore = useVendorStore()
             this.load4 = true
             try{
                 const photoResponse = await this.handlephotoUpload2(imagePreview)
@@ -379,6 +387,7 @@ export const useCreateStore = defineStore('post', {
                           cover_image: this.coverInfo
                         }
                     });
+                    await vendorStore.getUser(vendorStore.vendor.id)
                     await this.getArticle()
                     return true
                 }
