@@ -95,7 +95,7 @@
 			style="cursor: pointer; color: #1e1e1e; letter-spacing: -0.14px"
 		>
 			<span class="mr-2">
-				{{ item.vendor_firstname.toUpperCase() }} {{ item.vendor_lastname.toUpperCase() }}
+				<span style="text-transform: capitalize;">{{ item.vendor_firstname }} {{ item.vendor_lastname }}</span>
 				<span style="font-size: 1rem; margin-left: 5px; margin-top: 3px">{{getCountryIconClass(item.vendor_country)}}</span>
 			</span>
 			<v-icon icon="mdi mdi-information-outline" color="#969696" />
@@ -127,8 +127,8 @@
 			<div class="d-flex mt-2">
 				<v-avatar @click="$router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img cover :src="item.vendor_profile_photo"></v-img></v-avatar>
 				<div style="cursor: pointer" @click="$router.push(`/vendor_page/${item.vendor_id}`)" class="ml-2">
-					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
-						{{ item.vendor_firstname.toUpperCase() }} {{ item.vendor_lastname.toUpperCase() }}
+					<p style="color: #1e1e1e; text-transform: capitalize; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
+						{{ item.vendor_firstname }} {{ item.vendor_lastname }}
 					</p>
 						<p  style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">{{ item.vendor_country }}: <span style="font-size: 1rem; margin-top: 3px; margin-left: 5px">{{getCountryIconClass(item.vendor_country)}}</span></p>
 				</div>

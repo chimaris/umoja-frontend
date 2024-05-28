@@ -55,7 +55,7 @@
 						</v-avatar>
 						<div class="ml-3">
 							<div class="d-flex align-center">
-								<p style="color: #1e1e1e; font-size: 16px; font-weight: 600; line-height: 140%">{{n.vendor_firstname}} {{ n.vendor_lastname }}</p>
+								<p style="color: #1e1e1e; font-size: 16px; text-transform: capitalize; font-weight: 600; line-height: 140%">{{n.vendor_firstname}} {{ n.vendor_lastname }}</p>
 								<v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
 								<p style="color: #969696; font-size: 14px; font-weight: 400; line-height: 140%">{{getdateRegistered(n.created_at)}}</p>
 							</div>
