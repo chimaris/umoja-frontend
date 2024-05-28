@@ -59,24 +59,19 @@
 					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Sub Category</p>
 					<v-icon>{{ subCategoryExpand ? "mdi mdi-chevron-up" : "mdi mdi-chevron-down" }}</v-icon>
 				</div>
-				<!-- <v-expand-transition leave-absolute>
-					<v-list v-if="subCategoryExpand">
-						<v-list-group>
-							<template v-slot:activator="{ props }">
-								<v-list-item style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px" v-bind="props" title="Clothing Male"></v-list-item>
-							</template>
-							<v-list-item v-for="(title, i) in admins" :key="i" :title="title" style="cursor: pointer"></v-list-item>
-						</v-list-group>
-					</v-list>
-				</v-expand-transition> -->
+
 				<v-expand-transition leave-absolute>
 					<v-list v-if="subCategoryExpand">
-						<v-list-group v-for="(category, index) in categories" :key="index">
+						<v-list-group v-for="(subCategory, index) in subCategories" :key="index">
 							<template v-slot:activator="{ props }">
-								<v-list-item style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px" v-bind="props" :title="category.title"></v-list-item>
+								<v-list-item
+									style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px"
+									v-bind="props"
+									:title="subCategory.title"
+								></v-list-item>
 							</template>
 							<v-list-item
-								v-for="(sub, subIndex) in category.subcategories"
+								v-for="(sub, subIndex) in subCategory.subcategories"
 								:key="subIndex"
 								:title="sub"
 								style="cursor: pointer; font-size: 10px"
@@ -302,7 +297,7 @@ export default {
 			category: "Fashion",
 			categories: ["Fashion", "Cosmetics", "Art", "Home Decoration"],
 			discounts: ["10%", "20%", "30%", "45%", "50%", "60%", "75%"],
-			categories: [
+			subCategories: [
 				{
 					title: "Clothing Male",
 					subcategories: [
