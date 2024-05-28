@@ -286,9 +286,9 @@ export default {
 	},
 	data() {
 		return {
-			categoryExpand: false,
-			subCategoryExpand: true,
-			genderExpand: false,
+			categoryExpand: true,
+			subCategoryExpand: false,
+			genderExpand: true,
 			country: "All of Africa",
 			sellingExpand: false,
 			priceExpand: false,
