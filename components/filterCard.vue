@@ -50,7 +50,7 @@
 					</v-chip-group>
 				</div>
 			</v-expand-transition>
-			<div>
+			<!-- <div>
 				<v-divider class="my-4"></v-divider>
 				<div @click="sellingExpand = !sellingExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
 					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Selling Type</p>
@@ -74,7 +74,7 @@
 						</v-checkbox>
 					</div>
 				</v-expand-transition>
-			</div>
+			</div> -->
 
 			<div>
 				<v-divider class="my-4"></v-divider>

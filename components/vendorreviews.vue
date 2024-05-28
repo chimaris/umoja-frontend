@@ -26,7 +26,7 @@
 					<v-card min-width="300px" class="mx-auto cardStyle" width="100%" style="" flat>
 						<div class="d-flex align-center">
 							<v-avatar class="mr-2" size="34"
-								><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687445473/Frame_427320547_10_zxkguh.png"></v-img
+								><v-img cover src="https://res.cloudinary.com/payhospi/image/upload/v1687445473/Frame_427320547_10_zxkguh.png"></v-img
 							></v-avatar>
 							<p style="font-weight: 500; font-size: 20px; line-height: 25px; color: #333333">Total Reviews</p>
 							<div class="ml-2">
@@ -240,7 +240,7 @@
 										</p>
 										<div class="mt-2">
 											<v-btn @click="editComment(item)" variant="text" class=""><span style="color: #333; font-size: 16px; font-weight: 600">Edit</span> </v-btn>
-											<v-btn @click="deleteReply(item.id)" variant="text" color="red" class="ml-2"><span style="font-size: 16px; font-weight: 600">Delete</span> </v-btn>
+											<v-btn @click="confirmDelete(item.id)" variant="text" color="red" class="ml-2"><span style="font-size: 16px; font-weight: 600">Delete</span> </v-btn>
 										</div>
 									</div>
 								</td>
@@ -283,6 +283,18 @@
 				</div>
 			</v-card>
 		</v-dialog>
+		<v-dialog persistent v-model="deleteWarning" max-width="400">
+								<v-card>
+									<v-card-title>Delete Reply</v-card-title>
+									<v-card-text>
+										Are you sure you want to delete this reply?
+									</v-card-text>
+									<v-card-actions style="display: flex; justify-content: flex-end;">
+										<v-btn @click="deleteReply()" color="green" text>Delete</v-btn>
+										<v-btn @click="deleteWarning = false" text>Cancel</v-btn>
+									</v-card-actions>
+								</v-card>
+				</v-dialog>
 		<v-dialog absolute v-model="dialog2" width="395">
 			<v-card class="cardStyle py-2">
 				<div class="d-flex mb-2 align-center justify-space-between">
@@ -337,6 +349,8 @@ export default {
 		const dialog = ref(false)
 		const reviewReply = ref("")
 		const sending = ref(false)
+		const deleteWarning = ref(false)
+		const deleteId = ref(null)
 
 		const leaveComment = (review) => {
 			reviewToReply.value = review
@@ -346,10 +360,15 @@ export default {
 			reviewToEdit.value = review
 			dialog2.value = true
 		}
-		const deleteReply = async (id) => {
-			const res = await deleteReview(id)
+		const confirmDelete = (id) => {
+			deleteId.value = id
+			deleteWarning.value = true
+		}
+		const deleteReply = async () => {
+			const res = await deleteReview(deleteId.value)
 			if (res){
 				allReviews.value = await getAllReview()
+				deleteWarning.value = false
 			}
 		}
 		async function commentReview(){
@@ -399,7 +418,10 @@ export default {
 			commentReview,
 			reviewReply,
 			editComment,
-			editVendorReview
+			editVendorReview,
+			deleteWarning,
+			deleteId,
+			confirmDelete
 		}
 	},
 	data() {

@@ -96,9 +96,20 @@
 
 	<!-- View Business Section -->
 	<v-sheet class="px-6 pt-8" max-width="550" width="100%" style="padding: 40px; margin: auto; border-radius: 15px">
-		<v-avatar class="mx-auto"  size="100">
-			<v-img class="bg-grey-lighten-3 rounded-xl" src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img>
+		<v-img
+			style="height: 185px; position: relative;"
+			width="100%"
+			cover
+			class="d-flex bg-grey justify-end align-end mb-4"
+			:src="cover_photo || vendor?.cover_image || 'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"
+		>
+		</v-img>
+		<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">Profile Photo</h3>
+
+		<v-avatar class="mx-auto my-2"  size="100">
+			<v-img class="bg-grey-lighten-3 rounded-xl" cover :src="profile_photo || vendor?.profile_photo || 'https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png'"></v-img>
 		</v-avatar>
+		
 
 		<v-sheet class="pt-8">
 			<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{vendor.business_type}})</span></h3>
