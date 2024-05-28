@@ -3,30 +3,6 @@
 		<v-card flat :class="$vuetify.display.mobile ? '' : 'cardStyle'">
 			<p class="d-none d-md-block" style="font-size: 24px; font-weight: 600; letter-spacing: -0.72px">Filter</p>
 
-			<div @click="categoryExpand = !categoryExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
-				<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Category</p>
-				<v-icon icon="mdi mdi-chevron-down"></v-icon>
-			</div>
-			<v-expand-transition leave-absolute>
-				<div v-if="categoryExpand">
-					<v-chip-group v-model="category" color="green" column>
-						<v-chip
-							:value="n"
-							style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
-							v-for="n in categories"
-							:key="n"
-							rounded="lg"
-							class="px-6 py-3"
-							variant="outlined"
-							grow
-							active-class="bordergreen text--green"
-						>
-							<span style="font-size: 14px; font-weight: 500; letter-spacing: -0.42px"> {{ n }}</span>
-						</v-chip>
-					</v-chip-group>
-				</div>
-			</v-expand-transition>
-			<v-divider class="my-4"></v-divider>
 			<div @click="genderExpand = !genderExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
 				<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Gender</p>
 				<v-icon icon="mdi mdi-chevron-down"></v-icon>
@@ -50,6 +26,66 @@
 					</v-chip-group>
 				</div>
 			</v-expand-transition>
+
+			<v-divider class="my-4"></v-divider>
+
+			<div @click="categoryExpand = !categoryExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
+				<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Category</p>
+				<v-icon icon="mdi mdi-chevron-down"></v-icon>
+			</div>
+			<v-expand-transition leave-absolute>
+				<div v-if="categoryExpand">
+					<v-chip-group v-model="category" color="green" column>
+						<v-chip
+							:value="n"
+							style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
+							v-for="n in categories"
+							:key="n"
+							rounded="lg"
+							class="px-6 py-3"
+							variant="outlined"
+							grow
+							active-class="bordergreen text--green"
+						>
+							<span style="font-size: 14px; font-weight: 500; letter-spacing: -0.42px"> {{ n }}</span>
+						</v-chip>
+					</v-chip-group>
+				</div>
+			</v-expand-transition>
+
+			<div>
+				<v-divider class="my-4"></v-divider>
+				<div @click="subCategoryExpand = !subCategoryExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
+					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Sub Category</p>
+					<v-icon>{{ subCategoryExpand ? "mdi mdi-chevron-up" : "mdi mdi-chevron-down" }}</v-icon>
+				</div>
+				<!-- <v-expand-transition leave-absolute>
+					<v-list v-if="subCategoryExpand">
+						<v-list-group>
+							<template v-slot:activator="{ props }">
+								<v-list-item style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px" v-bind="props" title="Clothing Male"></v-list-item>
+							</template>
+							<v-list-item v-for="(title, i) in admins" :key="i" :title="title" style="cursor: pointer"></v-list-item>
+						</v-list-group>
+					</v-list>
+				</v-expand-transition> -->
+				<v-expand-transition leave-absolute>
+					<v-list v-if="subCategoryExpand">
+						<v-list-group v-for="(category, index) in categories" :key="index">
+							<template v-slot:activator="{ props }">
+								<v-list-item style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px" v-bind="props" :title="category.title"></v-list-item>
+							</template>
+							<v-list-item
+								v-for="(sub, subIndex) in category.subcategories"
+								:key="subIndex"
+								:title="sub"
+								style="cursor: pointer; font-size: 10px"
+							></v-list-item>
+						</v-list-group>
+					</v-list>
+				</v-expand-transition>
+			</div>
+
 			<!-- <div>
 				<v-divider class="my-4"></v-divider>
 				<div @click="sellingExpand = !sellingExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
@@ -120,57 +156,6 @@
 
 			<div>
 				<v-divider class="my-4"></v-divider>
-				<div @click="payExpand = !payExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
-					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Payment</p>
-					<v-icon icon="mdi mdi-chevron-down"></v-icon>
-				</div>
-				<v-expand-transition leave-absolute>
-					<div v-if="payExpand">
-						<v-checkbox
-							class="mb-1"
-							hide-details=""
-							density="compact"
-							v-for="n in ['Cash on Delivery', 'Gengspayler', 'Card Payment']"
-							color="green"
-							inset
-						>
-							<template v-slot:label>
-								<div>
-									<p class="pl-2" style="color: #000 !important; font-size: 14px; font-weight: 500">{{ n }}</p>
-								</div>
-							</template>
-						</v-checkbox>
-					</div>
-				</v-expand-transition>
-			</div>
-			<div>
-				<v-divider class="my-4"></v-divider>
-				<div @click="productExpand = !productExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
-					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Product Rating</p>
-					<v-icon icon="mdi mdi-chevron-down"></v-icon>
-				</div>
-				<v-expand-transition leave-absolute>
-					<div v-if="productExpand">
-						<v-checkbox class="mb-1 prat" hide-details="" density="compact" v-for="n in [4, 3, 2, 1]" color="green" inset>
-							<template style="opacity: 1 !important" v-slot:label>
-								<div class="d-flex pb-1 align-center">
-									<v-rating
-										:model-value="n"
-										active-color="#F0B136"
-										half-increments
-										density="comfortable"
-										color="grey-lighten-1"
-										size="x-small"
-									></v-rating>
-									<p class="pl-2" style="color: #000 !important; font-size: 14px; font-weight: 500">and above</p>
-								</div>
-							</template>
-						</v-checkbox>
-					</div>
-				</v-expand-transition>
-			</div>
-			<div>
-				<v-divider class="my-4"></v-divider>
 				<div @click="sizeExpand = !sizeExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
 					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Sizes</p>
 					<v-icon icon="mdi mdi-chevron-down"></v-icon>
@@ -205,6 +190,59 @@
 					</div>
 				</v-expand-transition>
 			</div>
+
+			<!-- <div>
+				<v-divider class="my-4"></v-divider>
+				<div @click="payExpand = !payExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
+					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Payment</p>
+					<v-icon icon="mdi mdi-chevron-down"></v-icon>
+				</div>
+				<v-expand-transition leave-absolute>
+					<div v-if="payExpand">
+						<v-checkbox
+							class="mb-1"
+							hide-details=""
+							density="compact"
+							v-for="n in ['Cash on Delivery', 'Gengspayler', 'Card Payment']"
+							color="green"
+							inset
+						>
+							<template v-slot:label>
+								<div>
+									<p class="pl-2" style="color: #000 !important; font-size: 14px; font-weight: 500">{{ n }}</p>
+								</div>
+							</template>
+						</v-checkbox>
+					</div>
+				</v-expand-transition>
+			</div> -->
+			<div>
+				<v-divider class="my-4"></v-divider>
+				<div @click="productExpand = !productExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
+					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Product Rating</p>
+					<v-icon icon="mdi mdi-chevron-down"></v-icon>
+				</div>
+				<v-expand-transition leave-absolute>
+					<div v-if="productExpand">
+						<v-checkbox class="mb-1 prat" hide-details="" density="compact" v-for="n in [4, 3, 2, 1]" color="green" inset>
+							<template style="opacity: 1 !important" v-slot:label>
+								<div class="d-flex pb-1 align-center">
+									<v-rating
+										:model-value="n"
+										active-color="#F0B136"
+										half-increments
+										density="comfortable"
+										color="grey-lighten-1"
+										size="x-small"
+									></v-rating>
+									<p class="pl-2" style="color: #000 !important; font-size: 14px; font-weight: 500">and above</p>
+								</div>
+							</template>
+						</v-checkbox>
+					</div>
+				</v-expand-transition>
+			</div>
+
 			<div>
 				<v-divider class="my-4"></v-divider>
 				<div @click="discountExpand = !discountExpand" style="cursor: pointer" class="d-flex mt-4 mb-2 justify-space-between align-center">
@@ -248,8 +286,9 @@ export default {
 	},
 	data() {
 		return {
-			categoryExpand: true,
-			genderExpand: true,
+			categoryExpand: false,
+			subCategoryExpand: true,
+			genderExpand: false,
 			country: "All of Africa",
 			sellingExpand: false,
 			priceExpand: false,
@@ -263,6 +302,114 @@ export default {
 			category: "Fashion",
 			categories: ["Fashion", "Cosmetics", "Art", "Home Decoration"],
 			discounts: ["10%", "20%", "30%", "45%", "50%", "60%", "75%"],
+			categories: [
+				{
+					title: "Clothing Male",
+					subcategories: [
+						"T-shirts & Polos",
+						"Shirts",
+						"Sweatshirts & Hoodies",
+						"Trousers",
+						"Jeans",
+						"Shorts",
+						"Jackets",
+						"Knitwear",
+						"Sportswear",
+						"Tracksuits & Joggers",
+						"Suits & Tailoring",
+						"Coats",
+						"Underwear & Socks",
+						"Swimwear",
+						"Loungewear & Sleepwear",
+					],
+				},
+				{
+					title: "Clothing Female",
+					subcategories: [
+						"Dresses",
+						"T-shirts & tops",
+						"Trousers",
+						"Jeans",
+						"Shirts & Blouses",
+						"Jackets & Blazers",
+						"Swimwear",
+						"Sweatshirts & Hoodies",
+						"Skirts",
+						"Knitwear & Cardigans",
+						"Sportswear",
+						"Shorts",
+						"Jumpsuits",
+						"Coats",
+						"Underwear",
+						"Nightwear & Loungewear",
+						"Socks & Tights",
+					],
+				},
+				{
+					title: "Accessories Male",
+					subcategories: [
+						"Bags & cases",
+						"Shoes",
+						"Sneakers",
+						"Beanies, hats & caps",
+						"Sunglasses",
+						"Jewellery",
+						"Watches",
+						"Belts",
+						"Wallets & card holders",
+						"Blue-light glasses",
+						"Ties & accessories",
+						"Scarves & Shawls",
+						"Gloves",
+						"Lifestyle Electronics",
+						"Umbrellas",
+						"Miscellaneous",
+					],
+				},
+				{
+					title: "Accessories Female",
+					subcategories: [
+						"Bags & cases",
+						"Shoes",
+						"Sneakers",
+						"Jewellery",
+						"Sunglasses",
+						"Hats & headscarves",
+						"Belts",
+						"Watches",
+						"Wallets & card holders",
+						"Scarves",
+						"Blue-light glasses",
+						"Gloves",
+						"Umbrellas",
+						"Miscellaneous",
+						"Lifestyle Electronics",
+					],
+				},
+				{
+					title: "Cosmetics Male",
+					subcategories: ["Fragrance", "Shaving", "Skincare", "Hair care", "Luxe", "Gifts"],
+				},
+				{
+					title: "Cosmetics Female",
+					subcategories: ["Luxe", "Gifts", "Solutions", "Skin", "Makeup", "Fragrance", "Hair"],
+				},
+				{
+					title: "Home decoration",
+					subcategories: [
+						"Traditional Textiles",
+						"Handcrafted Furniture",
+						"Lighting and Lamps",
+						"Ethnic Wall Art",
+						"Ceramics and Pottery",
+						"Woven Baskets",
+					],
+				},
+				{
+					title: "Art",
+					subcategories: ["Drawing", "Painting", "Sculpting", "Photography", "Decorative Ads"],
+				},
+			],
 		};
 	},
 	methods: {
