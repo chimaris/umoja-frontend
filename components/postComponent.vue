@@ -8,7 +8,7 @@
 			<div class="pl-1 w-100" style="min-width: 0">
 				<div class="d-flex justify-space-between align-center w-100">
 					<div class="d-flex align-center">
-						<p style="color: #1e1e1e; font-size: 13px; width: 87px; font-weight: 600; line-height: 140%" class="text-truncate mr-0">
+						<p style="color: #1e1e1e; text-transform: capitalize; font-size: 13px; width: 87px; font-weight: 600; line-height: 140%" class="text-truncate mr-0">
 							{{ item?.vendor_firstname }} {{ item?.vendor_lastname }}
 						</p>
 						<v-icon class="mr-1" size="3" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>

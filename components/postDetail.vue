@@ -21,7 +21,7 @@
 							<div class="w-100 d-flex justify-space-between">
 								<div>
 									<div class="d-flex">
-										<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">
+										<p style="font-weight: 700; font-size: 16px; text-transform: capitalize; line-height: 140%; color: #1e1e1e">
 											{{ post?.vendor_firstname }} {{ post?.vendor_lastname }}
 										</p>
 										<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">

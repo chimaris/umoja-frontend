@@ -132,7 +132,7 @@
 								<div class="w-100 d-flex justify-space-between">
 									<div>
 										<div class="d-flex">
-											<p style="font-weight: 700; font-size: 16px; line-height: 140%; color: #1e1e1e">{{selectedPost.vendor_lastname}} {{selectedPost.vendor_firstname}}</p>
+											<p style="font-weight: 700; text-transform: capitalize; font-size: 16px; line-height: 140%; color: #1e1e1e">{{selectedPost.vendor_lastname}} {{selectedPost.vendor_firstname}}</p>
 											<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
 												<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{getdateRegistered(selectedPost.created_at)}}
 											</p>
