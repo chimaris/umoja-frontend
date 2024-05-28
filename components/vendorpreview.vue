@@ -57,17 +57,19 @@
 									</h3>
 									<v-divider></v-divider>
 								</div>
-								<div class="pa-2">
-									<div class="pa-4 align-center justify-space-between d-flex">
+								<div class="px-4">
+									<div class="pa-4 px-6 align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
 												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684592715/umoja/profile-2user_2_jcekww.png"></v-img
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Followers</p>
 										</div>
+										
 										<p class="priceClass">0</p>
 									</div>
-									<div class="px-4 align-center justify-space-between d-flex">
+									<v-divider></v-divider>
+									<div class="pa-4 px-6  align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
 												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686310494/game-icons_africa_b7x2hf.png"></v-img
@@ -77,15 +79,17 @@
 										<span style="font-size: 1.5rem;">{{getFlag()}}</span>
 										<!-- <span style="font-size: 1.5rem;" :class="getCountryIconClass"></span> -->
 									</div>
-								</div>
-								<v-divider></v-divider>
-								<div class="pa-4 px-6 align-center d-flex">
-									<v-avatar rounded="0" size="19"
+									<v-divider></v-divider>
+									<div class="pa-4 px-6 align-center d-flex">
+										<v-avatar rounded="0" size="19"
 										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 									></v-avatar>
 									<p class="textClass px-4"> {{ vendor.vendor_details?.address }}, {{ vendor.vendor_details?.city }}, {{ vendor.vendor_details?.state }} {{ vendor.vendor_details?.country_name }}</p>
+									</div>
+									<v-divider></v-divider>
 								</div>
-								<v-divider></v-divider>
+									
+								
 								<v-sheet class="px-6 pt-8">
 									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor.vendor_details?.business_type }})</span></h3>
 

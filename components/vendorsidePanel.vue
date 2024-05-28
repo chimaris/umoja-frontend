@@ -124,12 +124,12 @@
       </div>  
       <div style=" position: fixed; bottom: 10px; width: 100%; left: -5px; background-color: #f6f7f9">
         <div v-if="!sidebar" class="d-flex pt-12 px-4 justify-space-between align-center style-4" >
-        <v-avatar style="cursor: pointer;" @click="$router.push('/home2')" size="57" rounded="0">
+        <v-avatar style="cursor: pointer; padding-top: 20px"  size="57" rounded="0">
         <v-img eager="" src="https://res.cloudinary.com/payhospi/image/upload/v1688141514/Frame_2_gfd65l.png"></v-img>
         </v-avatar>
         </div>
         <div v-else class="d-flex pt-12 px-8 justify-space-between align-center style-6">
-          <v-avatar size="135" rounded="0" style="cursor: pointer;">
+          <v-avatar size="135" rounded="0" style="cursor: pointer; padding-top: 20px">
               <v-img src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
           </v-avatar>
           <!-- <v-avatar style="cursor: pointer;" class="style-7" @click="$router.push('/home2')" size="135" rounded="0">

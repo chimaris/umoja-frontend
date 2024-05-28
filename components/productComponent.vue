@@ -5,11 +5,11 @@
 		v-if="loaded"
 		style="overflow: visible; background: transparent !important"
 		flat
-		class="bg-white parent-card rounded-lg mb-2"
+		class="bg-white parent-card rounded-lg mb-2 pa-1"
 	>
 		<v-img
 			class="rounded-lg bg-grey-lighten-5"
-			:cover="coverbol"
+			cover
 			v-if="item.photo == null"
 			@click="$router.push(`/product_page/${item.id}`)"
 			eager
@@ -95,8 +95,8 @@
 			style="cursor: pointer; color: #1e1e1e; letter-spacing: -0.14px"
 		>
 			<span class="mr-2">
-				{{ item.vendor_firstname }} {{ item.vendor_lastname }}
-				<span style="font-size: 1rem; margin-left: 5px">{{getCountryIconClass(item.vendor_country)}}</span>
+				{{ item.vendor_firstname.toUpperCase() }} {{ item.vendor_lastname.toUpperCase() }}
+				<span style="font-size: 1rem; margin-left: 5px; margin-top: 3px">{{getCountryIconClass(item.vendor_country)}}</span>
 			</span>
 			<v-icon icon="mdi mdi-information-outline" color="#969696" />
 		</div>
@@ -125,12 +125,12 @@
 		>
 		<div v-if="vendorShow" class="d-none d-md-block">
 			<div class="d-flex mt-2">
-				<v-avatar @click="$router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img :src="item.vendor_profile_photo"></v-img></v-avatar>
+				<v-avatar @click="$router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img cover :src="item.vendor_profile_photo"></v-img></v-avatar>
 				<div style="cursor: pointer" @click="$router.push(`/vendor_page/${item.vendor_id}`)" class="ml-2">
 					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
-						{{ item.vendor_firstname }} {{ item.vendor_lastname }}
+						{{ item.vendor_firstname.toUpperCase() }} {{ item.vendor_lastname.toUpperCase() }}
 					</p>
-					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">{{ item.vendor_country }}: <span style="font-size: 1rem; margin-left: 5px">{{getCountryIconClass(item.vendor_country)}}</span></p>
+						<p  style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">{{ item.vendor_country }}: <span style="font-size: 1rem; margin-top: 3px; margin-left: 5px">{{getCountryIconClass(item.vendor_country)}}</span></p>
 				</div>
 			</div>
 			<v-divider color="#a4a4a4" class="mt-4"></v-divider>
