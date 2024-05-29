@@ -14,7 +14,7 @@
 				</h1>
 				<div class="d-flex align-center">
 					<p class="mr-2" style="font-weight: 400; font-size: 14px; color: #969696">by</p>
-					<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{article?.vendor_firstname}} {{article?.vendor_lastname}}</p>
+					<p style="font-weight: 500; text-transform: capitalize; font-size: 14px; line-height: 140%; color: #333333">{{article?.vendor_firstname}} {{article?.vendor_lastname}}</p>
 					<!-- <v-icon class="ml-1" icon="mdi mdi-twitter" size="16" color="#55ACEE"></v-icon> -->
 				</div>
 				<v-img
@@ -52,7 +52,7 @@
 								<div class="d-flex pt-4 justify-space-between align-center">
 									<div class="d-flex align-center">
 										<p class="mr-2" style="font-weight: 400; font-size: 14px; color: #969696">by</p>
-										<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{ n.vendor_firstname }} {{ n.vendor_lastname }}</p>
+										<p style="font-weight: 500; text-transform: capitalize; font-size: 14px; line-height: 140%; color: #333333">{{ n.vendor_firstname }} {{ n.vendor_lastname }}</p>
 										<!-- <v-icon class="ml-1" icon="mdi mdi-twitter" size="16" color="#55ACEE"></v-icon> -->
 									</div>
 								</div>
@@ -72,7 +72,7 @@
 					</v-avatar>
 					<div class="ml-3">
 						<div class="d-flex align-center">
-							<p style="color: #1e1e1e; font-size: 16px; font-weight: 600; line-height: 140%">{{n.vendor_firstname}} {{ n.vendor_lastname }}</p>
+							<p style="color: #1e1e1e; font-size: 16px; text-transform: capitalize; font-weight: 600; line-height: 140%">{{n.vendor_firstname}} {{ n.vendor_lastname }}</p>
 							<v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
 							<p style="color: #969696; font-size: 14px; font-weight: 400; line-height: 140%">{{getdateRegistered(n.created_at)}}</p>
 						</div>

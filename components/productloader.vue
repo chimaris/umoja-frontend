@@ -1,5 +1,5 @@
 <template>
-    <v-card flat width="100%" max-width="290"  class="bg-transparent  rounded-lg mb-2">
+    <v-card flat width="100%" max-width="290"  class="bg-transparent  rounded-lg mb-2 pa-1">
         <v-img class="rounded-lg bg-grey-lighten-4"  width="100%" :height="short?'221px': '303px'" >
        </v-img>
  

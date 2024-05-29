@@ -94,7 +94,7 @@
 							</div>
 							<div class="d-flex align-center">
 								<p class="mr-2" style="font-weight: 400; font-size: 14px; color: #969696">by</p>
-								<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{item.vendor_firstname}} {{item.vendor_lastname}}</p> -->
+								<p style="font-weight: 500; text-transform: capitalize; font-size: 14px; line-height: 140%; color: #333333">{{item.vendor_firstname}} {{item.vendor_lastname}}</p> -->
 								<!-- <v-icon class="ml-1" icon="mdi mdi-twitter" size="16" color="#55ACEE"></v-icon> -->
 							</div>
 						</div>
@@ -120,7 +120,7 @@
 								<div class="d-flex pt-4 justify-space-between align-center">
 									<div class="d-flex align-center">
 										<p class="mr-2" style="font-weight: 400; font-size: 14px; color: #969696">by</p>
-										<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{ n.vendor_firstname }} {{ n.vendor_lastname }}</p>
+										<p style="font-weight: 500; text-transform: capitalize; font-size: 14px; line-height: 140%; color: #333333">{{ n.vendor_firstname }} {{ n.vendor_lastname }}</p>
 										<!-- <v-icon class="ml-1" icon="mdi mdi-twitter" size="16" color="#55ACEE"></v-icon> -->
 									</div>
 								</div>
@@ -169,7 +169,7 @@
 									<div class="d-flex pt-4 justify-space-between align-center">
 										<div class="d-flex align-center">
 											<p class="mr-2" style="font-weight: 400; font-size: 14px; color: #969696">by</p>
-											<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{ selectedArticle.vendor_firstname }} {{selectedArticle.vendor_lastname}}</p>
+											<p style="font-weight: 500; text-transform: capitalize; font-size: 14px; line-height: 140%; color: #333333">{{ selectedArticle.vendor_firstname }} {{selectedArticle.vendor_lastname}}</p>
 											<!-- <v-icon class="ml-1" icon="mdi mdi-twitter" size="16" color="#55ACEE"></v-icon> -->
 										</div>
 									</div>
@@ -204,7 +204,7 @@
 											<div class="d-flex pt-4 justify-space-between align-center">
 												<div class="d-flex align-center">
 													<p class="mr-2" style="font-weight: 400; font-size: 14px; color: #969696">by</p>
-													<p style="font-weight: 500; font-size: 14px; line-height: 140%; color: #333333">{{ nextArticle.vendor_firstname }} {{ nextArticle.vendor_lastname }}</p>
+													<p style="font-weight: 500; text-transform: capitalize; font-size: 14px; line-height: 140%; color: #333333">{{ nextArticle.vendor_firstname }} {{ nextArticle.vendor_lastname }}</p>
 													<!-- <v-icon class="ml-1" icon="mdi mdi-twitter" size="16" color="#55ACEE"></v-icon> -->
 												</div>
 											</div>

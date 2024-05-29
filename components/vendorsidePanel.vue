@@ -16,11 +16,11 @@
               <v-img v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
             </v-avatar>
             <div class="text-left px-4">
-            <p style="color: #1A1D1F;
+            <p style="color: #1A1D1F; 
             font-weight: 600;
             font-size: 16px;
             line-height: 24px;"> {{vendor.vendor_details?.business_name}}</p>
-            <p style="font-weight: 500;
+            <p style="font-weight: 500; text-transform: capitalize;
             font-size: 12px;
             line-height: 18px;
             display: flex;
