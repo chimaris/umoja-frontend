@@ -6,6 +6,15 @@ import { debounce } from 'lodash';
 
 export const useProductStore = defineStore('productStore', {
   state: () => ({
+    params: {
+      gender: "",
+      category_name: "",
+      price: "",
+      sizes: "",
+      product_rating: "",
+      compare_at_price: "",
+      sub_category_name: ""
+    },
     recentSearches: [],
     productFrom: "",
     allProducts: [],
@@ -19,7 +28,6 @@ export const useProductStore = defineStore('productStore', {
       row: [],
       hotDeals: [],
       popular: [],
-      vendorProducts: [],
       recently_viewed: [],
       sale: [],
       customArray: [],
@@ -31,13 +39,27 @@ export const useProductStore = defineStore('productStore', {
     storage: persistedState.localStorage,
   },
   actions: {
-    filteredProducts() {
-      let result = this.products.main
-
-      if (!this.searchTerm) {
-        result = this.products.main
+    saveParams(data){
+      this.params = data
+    },
+    removeParam(key) {
+      this.params[key] = "";
+    },
+    async fetchFilteredProducts() {
+      const api = useApi()
+      const params = new URLSearchParams(this.params).toString();
+      try{
+        const res = await api({
+          url: `allproducts?${params}`,
+          method: 'GET'
+        });
+        this.products.main = res.data.data
+        this.productFrom = res.data.meta.from;
+        this.productTo = res.data.meta.to;
+        this.totalProducts = res.data.meta.total
+      }catch(error){
+        console.error(error)
       }
-      return result
     },
     search: debounce(async function() {
       const api = useApi()
@@ -88,13 +110,9 @@ export const useProductStore = defineStore('productStore', {
     async fetchProducts() {
       const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');
       this.products.row = response.data.data.slice(0, 15);
-      this.products.main = response.data.data
+      this.products.popular = response.data.data
       this.allProducts = response.data.data
-      this.products.vendorProducts = response.data.data.slice(0, 20);
       this.products.hotDeals = response.data.data.slice(0, 10);
-      this.productFrom = response.data.meta.from;
-      this.productTo = response.data.meta.to;
-      this.totalProducts = response.data.meta.total
     },
     // Method to add a product to a specific array
     addProductToArray(product, arrayName) {

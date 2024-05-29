@@ -490,8 +490,8 @@
 							
 								<p v-if="errorMessage" style="color: red">{{errorMessage}}</p>
 								<div style=" width: 100%; display: flex; justify-content: end">
-									<v-btn @click="postReview()"  class="mt-4" size="large" :disabled="!editorContent" flat color="green" rounded="xl">
-										post review
+									<v-btn @click="postReview()"  class="mt-4" size="large" :disabled="!canReview" flat color="green" rounded="xl">
+										{{ posting ? 'posting' : 'post review' }}
 									</v-btn>
 								</div>
 							
@@ -675,6 +675,7 @@ export default {
 	data() {
 		return {
 			loading: true,
+			posting: false,
 			editorContent: "",
 			rating: 0,
 			errorMessage: "",
@@ -763,13 +764,23 @@ export default {
 		displayedSpecs() {
 			return this.product.product_spec.split(",");
 		},
+		canReview(){
+			if (this.editorContent || this.rating > 0 ){
+				return true
+			}
+			if (this.posting){
+				return false
+			}
+			return false
+		},
 	},
 	methods: {
 		async postReview(){
+			this.posting = true
 			const data = {
 				product_id: this.product.id,
 				vendor_id: this.product.vendor_id,
-				rating: this.rating,
+				rating: this.rating > 0 ? this.rating : null,
 				review_comment: this.editorContent
 			}
 			try{
@@ -777,7 +788,6 @@ export default {
 				this.editor.commands.setContent('');
 				this.editorContent = ""
 				this.rating = 0
-				console.log(res)
 			}catch(error){
 				if (error.response) {
 					this.errorMessage  = error.response.data.message || 'An error occurred while posting review.';
@@ -787,6 +797,8 @@ export default {
 					this.errorMessage  = 'An error occurred. Please try again later.';
 				}
 				return false;
+				}finally{
+					this.posting = false
 				}
 		},
 		mockLoading(){

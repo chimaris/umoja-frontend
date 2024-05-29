@@ -96,15 +96,15 @@
 							</div>
 						</div>
 
-						<p class="mt-4" :style="{ fontSize: $vuetify.display.mobile ? '14px' : '15.281px' }" style="font-weight: 500; letter-spacing: -0.153px">
+						<!-- <p class="mt-4" :style="{ fontSize: $vuetify.display.mobile ? '14px' : '15.281px' }" style="font-weight: 500; letter-spacing: -0.153px">
 							Showing {{ productStore.productFrom }} - {{ productStore.productTo }} items out of a total of {{ productStore.totalProducts }} for
 							“fashion”
-						</p>
+						</p> -->
 					</div>
 
 					<div class="d-none d-md-flex align-center justify-space-between">
-						<p style="font-size: 15.281px; font-weight: 500; letter-spacing: -0.153px">
-							Showing 1 - 60 items out of a total of 1.2k for “Home Decoration”
+						<p v-if="useProductStore().params.category_name" style="font-size: 15.281px; font-weight: 500; letter-spacing: -0.153px">
+							Showing {{ productStore.productFrom }} - {{ productStore.productTo }} items out of a total of {{ productStore.totalProducts }} for “{{useProductStore().params.category_name}}”
 						</p>
 						<div class="d-flex align-center">
 							<p class="mr-2" style="font-size: 14.995px; font-weight: 500">Sort by :</p>
@@ -134,23 +134,24 @@
 						</div>
 					</div>
 					<div class="pt-4 d-none d-md-block">
-						<v-chip-group v-model="category" color="green" column>
+						<v-chip-group color="green" column>
 							<v-chip
-								:value="n"
+								:value="value"
 								style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
-								v-for="n in filters"
-								:key="n"
+								v-for="(value, key) in filters"
+								:key="key"
 								rounded="xl"
 								closable=""
 								close-icon="mdi mdi-close-circle-outline"
+								@click:close="removeFilter(key)"
 								class="px-5 py-4"
 								variant="outlined"
 								grow
 								active-class="bordergreen text--green"
 							>
-								<span style="font-size: 13px; font-weight: 600; letter-spacing: -0.42px" class="pr-3"> {{ n }}</span>
+								<span style="font-size: 13px; font-weight: 600; letter-spacing: -0.42px" class="pr-3"> {{ value }}</span>
 							</v-chip>
-							<v-chip
+							<!-- <v-chip
 								style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
 								rounded="xl"
 								closable=""
@@ -171,7 +172,7 @@
 									></v-rating>
 									<span style="font-size: 13px; font-weight: 600; letter-spacing: -0.42px" class="px-2"> and above</span>
 								</div>
-							</v-chip>
+							</v-chip> -->
 						</v-chip-group>
 					</div>
 					<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px">
@@ -185,7 +186,7 @@
 						</v-row> -->
 
 						<v-row dense class="mt-2">
-							<v-col v-for="(n, i) in productStore.filteredProducts()" :key="i" cols="6" :md="3" :lg="3">
+							<v-col v-for="(n, i) in productStore.getProductsArray('main')" :key="i" cols="6" :md="3" :lg="3">
 								<product-component :item="n" :index="i" />
 							</v-col>
 						</v-row>
@@ -242,7 +243,8 @@ export default {
 	created() {
 		this.productStore = useProductStore();
 	},
-	mounted() {
+	async mounted() {
+		await this.productStore.fetchFilteredProducts();
 		this.editor = new Editor({
 			extensions: [
 				StarterKit,
@@ -263,23 +265,10 @@ export default {
 			filterDrawer: false,
 			productStore: null,
 			editor: null,
-			categoryExpand: true,
-			genderExpand: true,
 			country: "All of Africa",
-			sellingExpand: false,
-			priceExpand: false,
-			payExpand: false,
-			productExpand: false,
 			sizeExpand: false,
 			sort: "Popular",
 			sortTypes: ["Popular", "Newest", "Price: Low to High", "Price: High to Low"],
-			discountExpand: false,
-			gender: "Male",
-			filters: ["Fashion", "In-store selling only", "€50.00 - €100.00", "Cash on Delivery"],
-			genders: ["Male", "Female", "Unisex"],
-			category: "Fashion",
-			categories: ["Fashion", "Cosmetics", "Art", "Home Decoration"],
-			discounts: ["10%", "20%", "30%", "45%", "50%", "60%", "75%"],
 			africanCountries: [
 				"Algeria",
 				"Angola",
@@ -338,7 +327,22 @@ export default {
 			],
 		};
 	},
+	computed: {
+		filters(){
+			const params = this.productStore.params;
+				return Object.keys(params).reduce((filtered, key) => {
+					if (params[key] !== "") {
+					filtered[key] = params[key];
+					}
+					return filtered;
+				}, {});
+		}
+	},
 	methods: {
+		async removeFilter(key) {
+			this.productStore.removeParam(key);
+			await this.productStore.fetchFilteredProducts();
+		},
 		selectCountry(item) {
 			this.country = item;
 		},

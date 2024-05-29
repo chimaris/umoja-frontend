@@ -488,7 +488,7 @@ export default {
 			return useProductStore();
 		},
 		items() {
-			return this.productStore.filteredProducts();
+			return this.productStore.getProductsArray('popular');
 		},
 		buttons() {
 			return [
