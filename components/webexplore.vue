@@ -94,13 +94,13 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
                          font-weight: 600;
                          line-height: 120%; /* 43.2px */
                          letter-spacing: -1.08px;">
-               Gain full transparency of your e-commerce business
+               Customized Vendor Dashboard
              </p>
              <p style="color: var(--carbon-4, #F7EDEE);
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 160%; /* 32px */
-                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendors full financial, commercial and market transparency of their e-commerce businesses.</p>
+                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors have access to a variety of dashboards that helps them oversee and manage their businesses on the platform.</p>
                </div>  
 </v-col>
                
@@ -158,13 +158,13 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage ord
                         font-weight: 600;
                         line-height: 120%; /* 43.2px */
                         letter-spacing: -1.08px;">
-                Umoja partnership
+                Gain full transparency of your e-commerce business
             </p>
             <p style="color: var(--carbon-4, #333);
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja's aim is to build a partnership with our vendors through dedicated and targeted customer & logistics support, so that they can concentrate fully on their creativity, realize their potential and grow.
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendors full financial, commercial and market transparency of their e-commerce businesses.
 </p>
 
 </div>
@@ -207,7 +207,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja's aim is to build a partner
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 160%; /* 32px */
-                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a ERP Tool, we offer our vendors a variety of apps to better manage and scale their business to its full potential.</p>
+                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a CRM Tool, offers our vendors a variety of apps to better manage and scale your business to its full potential</p>
                </div>  
 </v-col>
                
@@ -272,26 +272,26 @@ export default {
             {
                 color: '#F7EDEE',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497083/bold-messages-coversation-pen-2_bm9ici.png',
-                title: 'Create an account',
-                content: 'Sign up for free to start using Umoja. Customize your account as it fits your business by setting up your vendor profile, company details, dashboards and upload your products.'
+                title: 'African Marketplace',
+                content: 'Our marketplace is dedicated to vendors with connections to Africa. Experience a closer cooperation between seller and buyers. Get direct channels to customers from all parts of the world and share your potential with a global audience.'
             },
             {
                 color: '#FEF6ED',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-text-formatting-link_hica4l.png',
-                title: 'Engage with a network of buyers',
-                content: 'Experience a closer cooperation between seller and buyers. Get direct channels to customers from all parts of the world and share your potential with a global audience.'
+                title: 'CRM Solution',
+                content: 'The platform offers more than just a marketplace. We offer a CRM tool that comes with different apps and features which aims to cover all areas of your businesses.'
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-settings-fine-tuning-widget_c23nms.png',
                 color: '#FEF6ED',
-                title: 'Exploit CRM features',
-                content: 'The platform offers more than just a marketplace. We offer a CRM tool that comes with different apps and features which aims to cover all areas of your businesses.'
+                title: 'Umoja Business Partner',
+                content: "Umoja is your partner. We want to support you and help you mana- ge your business with ease, so you're able to focus on your creativity, realise your potential and grow."
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-business-statistic-graph-new_qqphec.png',
                 color: '#EDF0EF',
-                title: 'Scale up your business',
-                content: "Umoja is your partner. We want to support you and help you manage your business with ease, so you're able to focus on your creativity, realize your potential and grow."
+                title: 'Umoja Logistics',
+                content: "With the Umoja logistics (TMS) solution, we aim to support our vendors through our global transport activities. Umoja logistics strives to ensure our Partners are able to fulfils the customers expectation."
             },
         ],
      

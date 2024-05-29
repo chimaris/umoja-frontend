@@ -1066,7 +1066,7 @@ export default {
       		return this.Categories.map(category => category.name);
        },
 	   commission(){
-			return ((1/100) * this.product.price).toFixed(2)
+			return ((10/100) * this.product.price).toFixed(2)
 	   },
 	   profit(){
 			return (this.product.price - this.product.cost_per_item).toFixed(2)

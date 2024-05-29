@@ -185,11 +185,11 @@
 								</div>
 								<div>
 									<p class="inputLabel">Category</p>
-									<v-select  @change="fetchSubCategories()" :items="Categories.map(category => category.name)" v-model="selectedCategory" :rules="inputRules"  placeholder="Fashion and style" density="comfortable"> </v-select>
+									<v-select  @change="fetchSubCategories()" :items="categoryNames" v-model="selectedCategory" :rules="inputRules"  placeholder="Fashion and style" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Sub Category</p>
-									<v-select :loading="isFetching" color="green" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="selectedSubCategory" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
+									<v-select :loading="loadingSub" color="green" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="selectedSubCategory" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Gender</p>
@@ -778,7 +778,7 @@ import { ref, computed, onMounted, watchEffect } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
-import {fetchCategories, getCategoryId, getCategoryName} from '~/composables/useCategories';
+import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
 
 export default {
 
@@ -788,8 +788,8 @@ export default {
 		const Categories = ref([])
 		const isFetching =  ref(false)
 
-		watch(() => selectedCategory.value, () => {
-			fetchSubCategories(selectedCategory.value);
+		watch(() => selectedCategory.value, async () => {
+			subCategories.value = await fetchSubCategories(selectedCategory.value, Categories.value);
 		});
 
 		onMounted(async () => {
@@ -805,30 +805,30 @@ export default {
 			const subCategory_id = subCategories.value[subCat].id
 			return subCategory_id
 		}
-		async function fetchSubCategories() {
-			const api = vendorUseApi()
-			isFetching.value = true;
-			const category_id = getCategoryId(selectedCategory.value, Categories.value)
-			const category_name = getCategoryName(selectedCategory.value, Categories.value)
-			try {
-				const response = await api({
-					url: `admin/sub_categories/category/${category_id}`,
-					data: {
-						name: category_name,
-						category_id: category_id,
-						photo: ""
-					}
-				});
-				const subCategory = response.data.data;
-   				subCategories.value = subCategory
-				return
-			} catch(error) {
-				console.error(error)
-				return [];
-			} finally {
-				isFetching.value = false;
-			}
-		}
+		// async function fetchSubCategories() {
+		// 	const api = vendorUseApi()
+		// 	isFetching.value = true;
+		// 	const category_id = getCategoryId(selectedCategory.value, Categories.value)
+		// 	const category_name = getCategoryName(selectedCategory.value, Categories.value)
+		// 	try {
+		// 		const response = await api({
+		// 			url: `admin/sub_categories/category/${category_id}`,
+		// 			data: {
+		// 				name: category_name,
+		// 				category_id: category_id,
+		// 				photo: ""
+		// 			}
+		// 		});
+		// 		const subCategory = response.data.data;
+   		// 		subCategories.value = subCategory
+		// 		return
+		// 	} catch(error) {
+		// 		console.error(error)
+		// 		return [];
+		// 	} finally {
+		// 		isFetching.value = false;
+		// 	}
+		// }
 		const tab1 = ref('General');
 		const vendorProducts = useVendorProductStore()
 		const nonNegValue = [
@@ -1021,7 +1021,7 @@ export default {
       		return this.Categories.map(category => category.name);
        },
 	   commission(){
-			return ((1/100) * this.price).toFixed(2)
+			return ((10/100) * this.price).toFixed(2)
 	   },
 	   profit(){
 			return (this.price - this.itemCost).toFixed(2)

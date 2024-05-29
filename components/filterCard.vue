@@ -9,7 +9,7 @@
 			</div>
 			<v-expand-transition leave-absolute>
 				<div v-if="genderExpand">
-					<v-chip-group v-model="gender" color="green" column>
+					<v-chip-group v-model="productStore.params.gender" color="green" column>
 						<v-chip
 							:value="n"
 							style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
@@ -35,14 +35,14 @@
 			</div>
 			<v-expand-transition leave-absolute>
 				<div v-if="categoryExpand">
-					<v-chip-group v-model="category" color="green" column>
+					<v-chip-group v-model="productStore.params.category_name" color="green" column>
 						<v-chip
 							:value="n"
 							style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
-							v-for="n in categories"
+							v-for="n in categoryNames"
 							:key="n"
 							rounded="lg"
-							class="px-6 py-3"
+							class="px-5 py-3"
 							variant="outlined"
 							grow
 							active-class="bordergreen text--green"
@@ -62,19 +62,24 @@
 
 				<v-expand-transition leave-absolute>
 					<v-list v-if="subCategoryExpand">
-						<v-list-group v-for="(subCategory, index) in subCategories" :key="index">
+						<v-list-group v-for="(subCategory, index) in subCatNames" :key="index">
 							<template v-slot:activator="{ props }">
 								<v-list-item
 									style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px"
 									v-bind="props"
-									:title="subCategory.title"
+									:title="subCategory"
 								></v-list-item>
 							</template>
 							<v-list-item
-								v-for="(sub, subIndex) in subCategory.subcategories"
+								v-for="(sub, subIndex) in subCategories[index].neted_subcategories"
 								:key="subIndex"
+								:style="{
+									color: productStore.params.sub_category_name === sub ? '#2C6E63' : '',
+									backgroundColor: productStore.params.sub_category_name === sub ? '#E5EDEC' : '',
+								}"
 								:title="sub"
 								style="cursor: pointer; font-size: 10px"
+								@click="productStore.params.sub_category_name = sub"
 							></v-list-item>
 						</v-list-group>
 					</v-list>
@@ -131,20 +136,21 @@
 							prepend-inner-icon="mdi mdi-currency-eur"
 							placeholder="Maximum"
 						></v-text-field>
-						<v-row dense>
-							<v-col cols="6" v-for="(n, i) in ['€5.00 - €10.00', '€50.00 - €100.00', '€5.00 - €1000.00', '€50.00 - €5000.00']">
-								<v-chip
+								<v-chip-group v-model="productStore.params.price" color="green" column>
+									<v-chip
 									:value="n"
+									:key="n"
+									v-for="n in ['€5.00 - €10.00', '€50.00 - €100.00', '€5.00 - €1000.00', '€50.00 - €5000.00']"
 									style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
 									rounded="lg"
-									class="w-100 d-flex justify-center py-5"
+									class="px-4 py-3"
 									variant="outlined"
+									grow
 									active-class="bordergreen text--green"
 								>
-									<span style="font-size: 12px; font-weight: 500; letter-spacing: -0.42px"> {{ n }}</span>
+								<span style="font-size: 12px; font-weight: 500; letter-spacing: -0.42px"> {{ n }}</span>
 								</v-chip>
-							</v-col>
-						</v-row>
+								</v-chip-group>
 					</div>
 				</v-expand-transition>
 			</div>
@@ -166,17 +172,20 @@
 							placeholder="Search to add sizes"
 						></v-text-field>
 						<v-row dense>
-							<v-col cols="4" v-for="(n, i) in ['XXS', 'XL', 'XS', 'S', 'M', 'L', 'XXL', '3XL', '4XL']">
+							<v-col @click="productStore.params.sizes = n" cols="4" :key="i" v-for="(n, i) in ['XXS', 'XL', 'XS', 'S', 'M', 'L', 'XXL', '3XL', '4XL']">
 								<p
 									class="w-100 d-flex align-center justify-center"
 									style="
-										color: #1e1e1e;
 										font-size: 14px;
 										font-weight: 400;
 										height: 40px;
 										border-radius: 6px;
 										border: 1px solid var(--carbon-1, #ededed);
 									"
+									:style="{
+										backgroundColor: productStore.params.sizes === n ? '#E5EDEC' : '',
+										color: productStore.params.sizes === n ? '#2C6E63' : '#1e1e1e'
+									}"
 								>
 									{{ n }}
 								</p>
@@ -254,164 +263,188 @@
 							prepend-inner-icon="mdi mdi-magnify"
 							placeholder="Search to add sizes"
 						></v-text-field>
-						<v-checkbox class="mb-1" hide-details="" density="compact" color="green" inset>
+						<v-checkbox class="mb-1"  hide-details="" density="compact" color="green" inset>
 							<template v-slot:label>
 								<div>
 									<p class="pl-2" style="color: #000 !important; font-size: 14px; font-weight: 500">Free Delivery</p>
 								</div>
 							</template>
 						</v-checkbox>
-						<v-checkbox class="mb-1" hide-details="" density="compact" v-for="n in discounts" color="green" inset>
-							<template v-slot:label>
-								<div>
-									<p class="pl-2" style="color: #000 !important; font-size: 14px; font-weight: 500">{{ n + " Discount" }}</p>
-								</div>
-							</template>
-						</v-checkbox>
+						<v-radio-group v-model="productStore.params.compare_at_price" hide-details="" dense>
+							<v-radio
+								class="mb-1"
+								v-for="(n, index) in discounts"
+								:key="index"
+								:value="n"
+								color="green"
+								:label="n + '%' + ' Discount'"
+							></v-radio>
+						</v-radio-group>
 					</div>
 				</v-expand-transition>
 			</div>
 		</v-card>
 	</v-col>
 </template>
-<script>
-export default {
-	props: {
-		closeModal: Function, // Prop to receive the function to close the modal
+<script setup>
+import { ref, onMounted, computed } from 'vue';
+import { useProductStore } from "~/stores/productStore";
+import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
+
+const props = defineProps({
+	closeModal: {
+		type: Function,
+		required: true,
 	},
-	data() {
-		return {
-			categoryExpand: true,
-			subCategoryExpand: false,
-			genderExpand: true,
-			country: "All of Africa",
-			sellingExpand: false,
-			priceExpand: false,
-			payExpand: false,
-			productExpand: false,
-			sizeExpand: false,
-			discountExpand: false,
-			gender: "Male",
-			filters: ["Fashion", "In-store selling only", "€50.00 - €100.00", "Cash on Delivery"],
-			genders: ["Male", "Female", "Unisex"],
-			category: "Fashion",
-			categories: ["Fashion", "Cosmetics", "Art", "Home Decoration"],
-			discounts: ["10%", "20%", "30%", "45%", "50%", "60%", "75%"],
-			subCategories: [
-				{
-					title: "Clothing Male",
-					subcategories: [
-						"T-shirts & Polos",
-						"Shirts",
-						"Sweatshirts & Hoodies",
-						"Trousers",
-						"Jeans",
-						"Shorts",
-						"Jackets",
-						"Knitwear",
-						"Sportswear",
-						"Tracksuits & Joggers",
-						"Suits & Tailoring",
-						"Coats",
-						"Underwear & Socks",
-						"Swimwear",
-						"Loungewear & Sleepwear",
-					],
-				},
-				{
-					title: "Clothing Female",
-					subcategories: [
-						"Dresses",
-						"T-shirts & tops",
-						"Trousers",
-						"Jeans",
-						"Shirts & Blouses",
-						"Jackets & Blazers",
-						"Swimwear",
-						"Sweatshirts & Hoodies",
-						"Skirts",
-						"Knitwear & Cardigans",
-						"Sportswear",
-						"Shorts",
-						"Jumpsuits",
-						"Coats",
-						"Underwear",
-						"Nightwear & Loungewear",
-						"Socks & Tights",
-					],
-				},
-				{
-					title: "Accessories Male",
-					subcategories: [
-						"Bags & cases",
-						"Shoes",
-						"Sneakers",
-						"Beanies, hats & caps",
-						"Sunglasses",
-						"Jewellery",
-						"Watches",
-						"Belts",
-						"Wallets & card holders",
-						"Blue-light glasses",
-						"Ties & accessories",
-						"Scarves & Shawls",
-						"Gloves",
-						"Lifestyle Electronics",
-						"Umbrellas",
-						"Miscellaneous",
-					],
-				},
-				{
-					title: "Accessories Female",
-					subcategories: [
-						"Bags & cases",
-						"Shoes",
-						"Sneakers",
-						"Jewellery",
-						"Sunglasses",
-						"Hats & headscarves",
-						"Belts",
-						"Watches",
-						"Wallets & card holders",
-						"Scarves",
-						"Blue-light glasses",
-						"Gloves",
-						"Umbrellas",
-						"Miscellaneous",
-						"Lifestyle Electronics",
-					],
-				},
-				{
-					title: "Cosmetics Male",
-					subcategories: ["Fragrance", "Shaving", "Skincare", "Hair care", "Luxe", "Gifts"],
-				},
-				{
-					title: "Cosmetics Female",
-					subcategories: ["Luxe", "Gifts", "Solutions", "Skin", "Makeup", "Fragrance", "Hair"],
-				},
-				{
-					title: "Home decoration",
-					subcategories: [
-						"Traditional Textiles",
-						"Handcrafted Furniture",
-						"Lighting and Lamps",
-						"Ethnic Wall Art",
-						"Ceramics and Pottery",
-						"Woven Baskets",
-					],
-				},
-				{
-					title: "Art",
-					subcategories: ["Drawing", "Painting", "Sculpting", "Photography", "Decorative Ads"],
-				},
-			],
-		};
-	},
-	methods: {
-		closeModal() {
-			// Call the function received from props to close the modal
-			this.closeModal();
-		},
-	},
-};
+});
+
+
+const productStore = useProductStore();
+
+const categories = ref([])
+const subCategories = ref([])
+
+const categoryNames = computed(() => categories.value.map(category => category.name))
+const subCatNames = computed(() => subCategories.value.map(subCategory => subCategory.subcategory_name))
+// const innerSubCat = computed(() => subCategories.value.map(subCategory => subCategory.neted_subcategories))
+
+onMounted(async () => {
+			categories.value = await fetchCategories()
+			if (productStore.params.category_name){
+				subCategories.value = await fetchSubCategories(productStore.params.category_name, categories.value);
+			}
+})
+			// watch for change ins any of the filter value
+			watch(() => [productStore.params.gender, productStore.params.category_name, productStore.params.price, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], async () => {
+				await productStore.fetchFilteredProducts()
+			});
+			watch(() => productStore.params.category_name, async () => {
+				subCategories.value = await fetchSubCategories(productStore.params.category_name, categories.value);
+			})
+
+			
+			const categoryExpand = ref(true);
+			const subCategoryExpand = ref(true);
+			const genderExpand = ref(true);
+			const country = ref("All of Africa");
+			const sellingExpand = ref(false);
+			const priceExpand = ref(false);
+			const payExpand = ref(false);
+			const productExpand = ref(false);
+			const sizeExpand = ref(false);
+			const discountExpand = ref(false);
+			const genders = ref(["Men", "Women", "Unisex"]);
+			const discounts = ref(["10", "20", "30", "45", "50", "60", "75"]);
+			// const subCategories = ref([
+			// 	{
+			// 		title: "Clothing Male",
+			// 		subcategories: [
+			// 			"T-shirts & Polos",
+			// 			"Shirts",
+			// 			"Sweatshirts & Hoodies",
+			// 			"Trousers",
+			// 			"Jeans",
+			// 			"Shorts",
+			// 			"Jackets",
+			// 			"Knitwear",
+			// 			"Sportswear",
+			// 			"Tracksuits & Joggers",
+			// 			"Suits & Tailoring",
+			// 			"Coats",
+			// 			"Underwear & Socks",
+			// 			"Swimwear",
+			// 			"Loungewear & Sleepwear",
+			// 		],
+			// 	},
+			// 	{
+			// 		title: "Clothing Female",
+			// 		subcategories: [
+			// 			"Dresses",
+			// 			"T-shirts & tops",
+			// 			"Trousers",
+			// 			"Jeans",
+			// 			"Shirts & Blouses",
+			// 			"Jackets & Blazers",
+			// 			"Swimwear",
+			// 			"Sweatshirts & Hoodies",
+			// 			"Skirts",
+			// 			"Knitwear & Cardigans",
+			// 			"Sportswear",
+			// 			"Shorts",
+			// 			"Jumpsuits",
+			// 			"Coats",
+			// 			"Underwear",
+			// 			"Nightwear & Loungewear",
+			// 			"Socks & Tights",
+			// 		],
+			// 	},
+			// 	{
+			// 		title: "Accessories Male",
+			// 		subcategories: [
+			// 			"Bags & cases",
+			// 			"Shoes",
+			// 			"Sneakers",
+			// 			"Beanies, hats & caps",
+			// 			"Sunglasses",
+			// 			"Jewellery",
+			// 			"Watches",
+			// 			"Belts",
+			// 			"Wallets & card holders",
+			// 			"Blue-light glasses",
+			// 			"Ties & accessories",
+			// 			"Scarves & Shawls",
+			// 			"Gloves",
+			// 			"Lifestyle Electronics",
+			// 			"Umbrellas",
+			// 			"Miscellaneous",
+			// 		],
+			// 	},
+			// 	{
+			// 		title: "Accessories Female",
+			// 		subcategories: [
+			// 			"Bags & cases",
+			// 			"Shoes",
+			// 			"Sneakers",
+			// 			"Jewellery",
+			// 			"Sunglasses",
+			// 			"Hats & headscarves",
+			// 			"Belts",
+			// 			"Watches",
+			// 			"Wallets & card holders",
+			// 			"Scarves",
+			// 			"Blue-light glasses",
+			// 			"Gloves",
+			// 			"Umbrellas",
+			// 			"Miscellaneous",
+			// 			"Lifestyle Electronics",
+			// 		],
+			// 	},
+			// 	{
+			// 		title: "Cosmetics Male",
+			// 		subcategories: ["Fragrance", "Shaving", "Skincare", "Hair care", "Luxe", "Gifts"],
+			// 	},
+			// 	{
+			// 		title: "Cosmetics Female",
+			// 		subcategories: ["Luxe", "Gifts", "Solutions", "Skin", "Makeup", "Fragrance", "Hair"],
+			// 	},
+			// 	{
+			// 		title: "Home decoration",
+			// 		subcategories: [
+			// 			"Traditional Textiles",
+			// 			"Handcrafted Furniture",
+			// 			"Lighting and Lamps",
+			// 			"Ethnic Wall Art",
+			// 			"Ceramics and Pottery",
+			// 			"Woven Baskets",
+			// 		],
+			// 	},
+			// 	{
+			// 		title: "Art",
+			// 		subcategories: ["Drawing", "Painting", "Sculpting", "Photography", "Decorative Ads"],
+			// 	},
+			// ]);
+function closeModal() {
+	props.closeModal();
+}
 </script>
+
