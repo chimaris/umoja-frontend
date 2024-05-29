@@ -96,7 +96,7 @@
 		>
 			<span class="mr-2">
 				{{ item.vendor_firstname.toUpperCase() }} {{ item.vendor_lastname.toUpperCase() }}
-				<span style="font-size: 1rem; margin-left: 5px; margin-top: 3px">{{getCountryIconClass(item.vendor_country)}}</span>
+				<span style="font-size: 1rem; margin-left: 5px; margin-top: 3px">{{ getCountryIconClass(item.vendor_country) }}</span>
 			</span>
 			<v-icon icon="mdi mdi-information-outline" color="#969696" />
 		</div>
@@ -130,7 +130,10 @@
 					<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
 						{{ item.vendor_firstname.toUpperCase() }} {{ item.vendor_lastname.toUpperCase() }}
 					</p>
-						<p  style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">{{ item.vendor_country }}: <span style="font-size: 1rem; margin-top: 3px; margin-left: 5px">{{getCountryIconClass(item.vendor_country)}}</span></p>
+					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">
+						{{ item.vendor_country }}:
+						<span style="font-size: 1rem; margin-top: 3px; margin-left: 5px">{{ getCountryIconClass(item.vendor_country) }}</span>
+					</p>
 				</div>
 			</div>
 			<v-divider color="#a4a4a4" class="mt-4"></v-divider>
@@ -140,9 +143,16 @@
 				<h1 :style="{ fontSize: $vuetify.display.mobile ? '14px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">
 					{{ formattedPrice(item.price) }}
 				</h1>
-				<div  class="d-flex align-center">
-					<p v-if="item.compare_at_price" style="color: var(--carbon-3, #969696); font-weight: 600; line-height: 17.673px; text-decoration: line-through">{{formattedPrice(item.compare_at_price)}}</p>
-					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg"> {{Math.floor((item.compare_at_price - item.price) / item.compare_at_price * 100)}}% OFF </v-chip>
+				<div class="d-flex align-center">
+					<p
+						v-if="item.compare_at_price"
+						style="color: var(--carbon-3, #969696); font-weight: 600; line-height: 17.673px; text-decoration: line-through"
+					>
+						{{ formattedPrice(item.compare_at_price) }}
+					</p>
+					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg">
+						{{ Math.floor(((item.compare_at_price - item.price) / item.compare_at_price) * 100) }}% OFF
+					</v-chip>
 				</div>
 			</div>
 			<v-btn
@@ -150,7 +160,6 @@
 				@click="addToCart(item)"
 				rounded="xl"
 				style="border: 0.66px solid #ced2d6; border-radius: 6px"
-				:width="$vuetify.display.mobile ? '100%' : 106"
 				:height="$vuetify.display.mobile ? 40 : 28"
 				color="green"
 				variant="outlined"
@@ -171,7 +180,7 @@ import { formattedPrice } from "~/utils/price";
 import { countryCodes } from "~/utils/countryapi";
 import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
-import emojiFlags from 'emoji-flags';
+import emojiFlags from "emoji-flags";
 
 export default {
 	props: ["item", "short", "category", "cover", "index", "showVendor", "showdisco", "role"],
