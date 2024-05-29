@@ -6,7 +6,7 @@
 			<v-row>
 				<v-col cols="12" lg="8">
 					<v-card class="overflow-visible" flat color="#F7F7F7" min-height="" width="100%">
-						<v-card flat style="border-radius: 10px" class="pt-2 pb-4 px-4">
+						<v-card flat style="border-radius: 10px" class="pt-2 pb-4">
 							<div class="d-flex align-center justify-space-between">
 								<h1 :style="{ fontSize: $vuetify.display.mobile ? '24px' : '32px' }" style="font-weight: 600; line-height: 40px">
 									Cart ({{ cartStore.totalCartItems }})
@@ -114,18 +114,18 @@
 
 								<!-- Cart Card for Mobile view -->
 								<div class="d-block d-md-none">
-									<div class="d-flex align-center justify-start">
-										<div class="mr-4">
+									<div class="d-flex align-center justify-start px-3">
+										<div class="mr-5">
 											<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
 										</div>
 										<span style="font-size: 14px; width: 100px" class="font-weight-medium">Select all</span>
 									</div>
 									<div v-for="item in cartStore.items" :key="item.id" class="mt-3" style="border-bottom: 1px solid #ededed">
-										<div class="d-flex justify-space-between">
-											<div class="mr-2">
+										<div class="d-flex px-3">
+											<div class="mr-5">
 												<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
 											</div>
-											<div class="mr-2">
+											<div class="mr-3">
 												<v-avatar color="grey-lighten-4" style="border-radius: 15px" class="" size="100">
 													<v-img
 														v-if="item.photo == null"
@@ -155,7 +155,7 @@
 											</div>
 										</div>
 
-										<div class="w-100 py-8 d-flex justify-space-between">
+										<div class="py-8 d-flex justify-space-between">
 											<v-btn @click="showConfirmModal(item.id)" color="#333" variant="text" class="red-hover pl-0"
 												><span class="smallBtn"></span> <v-icon size="15" class="" icon="mdi mdi-trash-can-outline"></v-icon>Remove</v-btn
 											>
@@ -394,3 +394,9 @@ function filt(text) {
 	return text.length > 50 ? text.slice(0, 50) + "..." : text;
 }
 </script>
+
+<style>
+.v-selection-control--density-default {
+	--v-selection-control-size: 0;
+}
+</style>
