@@ -114,16 +114,16 @@
 
 								<!-- Cart Card for Mobile view -->
 								<div class="d-block d-md-none">
-									<div class="d-flex align-center justify-start px-3">
-										<div class="mr-5">
-											<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
+									<div class="d-flex align-center justify-start">
+										<div class="mr-3">
+											<v-checkbox density="compact" color="green" v-model="selectAll" hide-details></v-checkbox>
 										</div>
 										<span style="font-size: 14px; width: 100px" class="font-weight-medium">Select all</span>
 									</div>
 									<div v-for="item in cartStore.items" :key="item.id" class="mt-3" style="border-bottom: 1px solid #ededed">
-										<div class="d-flex px-3">
-											<div class="mr-5">
-												<v-checkbox color="green" v-model="selectAll" hide-details></v-checkbox>
+										<div class="d-flex">
+											<div class="mr-3">
+												<v-checkbox density="compact" color="green" v-model="selectAll" hide-details></v-checkbox>
 											</div>
 											<div class="mr-3">
 												<v-avatar color="grey-lighten-4" style="border-radius: 15px" class="" size="100">
@@ -394,9 +394,3 @@ function filt(text) {
 	return text.length > 50 ? text.slice(0, 50) + "..." : text;
 }
 </script>
-
-<style>
-.v-selection-control--density-default {
-	--v-selection-control-size: 0;
-}
-</style>
