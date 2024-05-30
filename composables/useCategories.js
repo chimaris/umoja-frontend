@@ -10,7 +10,7 @@ export 	async function fetchCategories(role) {
     }
     try {
         const response = await api({
-            url: 'admin/categories',
+            url: 'allcategory',
             method: 'get'
         });
         return response.data.data;
@@ -50,7 +50,7 @@ export const fetchSubCategories = async (selectedCat, Categories, role) => {
     const category_name = getCategoryName(selectedCat, Categories)
     try {
         const response = await api({
-            url: `admin/sub_categories/category/${category_id}`,
+            url: `sub_categories/category/${category_id}`,
             data: {
                 name: category_name,
                 category_id: category_id,

@@ -194,7 +194,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Gender</p>
-									<v-select v-model="product.gender" :items="['Men', 'Women', 'Unisex']" append-inner-icon="mdi mdi-chevron-down" placeholder="Unisex" density="comfortable"> </v-select>
+									<v-select v-model="product.gender" :items="['Male', 'Female', 'Unisex']" append-inner-icon="mdi mdi-chevron-down" placeholder="Unisex" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Tags</p>

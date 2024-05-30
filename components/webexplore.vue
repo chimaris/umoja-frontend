@@ -94,13 +94,13 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
                          font-weight: 600;
                          line-height: 120%; /* 43.2px */
                          letter-spacing: -1.08px;">
-               Customized Vendor Dashboard
+               Gain full transparency of your e-commerce business
              </p>
              <p style="color: var(--carbon-4, #F7EDEE);
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 160%; /* 32px */
-                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors have access to a variety of dashboards that helps them oversee and manage their businesses on the platform.</p>
+                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendors full financial, commercial and market transparency of their e-commerce businesses.</p>
                </div>  
 </v-col>
                
@@ -158,13 +158,14 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage ord
                         font-weight: 600;
                         line-height: 120%; /* 43.2px */
                         letter-spacing: -1.08px;">
-                Gain full transparency of your e-commerce business
+                Umoja partnership
             </p>
             <p style="color: var(--carbon-4, #333);
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendors full financial, commercial and market transparency of their e-commerce businesses.
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja's aim is to build a partnership with our vendors through dedicated and targeted customer & logistics support, so that they can concentrate fully on their creativity, realize their potential and grow.
+
 </p>
 
 </div>
@@ -207,7 +208,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a platform offers vendor
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 160%; /* 32px */
-                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a CRM Tool, offers our vendors a variety of apps to better manage and scale your business to its full potential</p>
+                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a ERP Tool, we offer our vendors a variety of apps to better manage and scale their business to its full potential.</p>
                </div>  
 </v-col>
                

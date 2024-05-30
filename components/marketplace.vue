@@ -331,7 +331,7 @@ export default {
 		filters(){
 			const params = this.productStore.params;
 				return Object.keys(params).reduce((filtered, key) => {
-					if (params[key] !== "") {
+					if (params[key] !== "" && params[key] !== null) {
 					filtered[key] = params[key];
 					}
 					return filtered;
