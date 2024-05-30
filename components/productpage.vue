@@ -655,7 +655,7 @@ import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
-import { ref, onMounted } from "vue";
+import { ref, onMounted , defineProps} from "vue";
 import {makeReview, getReview} from '~/composables/useReview'
 import {getDateTime} from '~/utils/date'
 import { useProductStore } from "~/stores/productStore";
@@ -664,11 +664,11 @@ export default {
 	setup() {
 		const quantity = ref(1);
 		const productStore = useProductStore()
-
 	
 		return {
 			quantity,
-			productStore
+			productStore,
+
 		};
 	},
 	props: ["product", "review"],
@@ -722,24 +722,29 @@ export default {
 				},
 			],
 			item: "Green and brown kente scarf...",
-			items: [
-				{
+			items: [],
+		};
+	},
+	watch: {
+    	product(newVal, oldVal) {
+			this.items = [
+			{
 					title: "Market Place",
 					disabled: false,
 					href: "/market_place",
 				},
 				{
-					title: this.category,
+					title: this.product?.category_name,
 					disabled: false,
-					href: `/${this.category}`,
+					href: `/${this.product?.category_name}`,
 				},
 				{
 					title: this.product?.name,
 					disabled: true,
 				},
-			],
-		};
-	},
+			]
+    },
+  },
 	mounted() {
 		this.mockLoading()
 		this.editor = new Editor({

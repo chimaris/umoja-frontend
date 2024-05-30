@@ -346,7 +346,7 @@ onMounted(async () => {
 			const productExpand = ref(false);
 			const sizeExpand = ref(false);
 			const discountExpand = ref(false);
-			const genders = ref(["Men", "Women", "Unisex"]);
+			const genders = ref(['Male', 'Female', 'Unisex']);
 			const discounts = ref(["10", "20", "30", "45", "50", "60", "75"]);
 			// const subCategories = ref([
 			// 	{

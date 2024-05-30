@@ -193,7 +193,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Gender</p>
-									<v-select v-model="selectedGender" :items="['Men', 'Women', 'Unisex']"  placeholder="Unisex" density="comfortable"> </v-select>
+									<v-select v-model="selectedGender" :items="['Male', 'Female', 'Unisex']"  placeholder="Unisex" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Tags</p>
