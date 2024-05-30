@@ -9,11 +9,12 @@ export const useProductStore = defineStore('productStore', {
     params: {
       gender: "",
       category_name: "",
-      price: "",
       sizes: "",
       product_rating: "",
       compare_at_price: "",
-      sub_category_name: ""
+      sub_category_name: "",
+      priceMinimum: null,
+      priceMaximum: null
     },
     recentSearches: [],
     productFrom: "",

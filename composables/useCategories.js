@@ -1,15 +1,18 @@
 import { vendorUseApi } from "./vendorApi";
+import { useApi } from "./useApi";
 import {ref} from 'vue'
 
 export const loadingSub = ref(false)
-export 	async function fetchCategories() {
-    const api = vendorUseApi()
+export 	async function fetchCategories(role) {
+    let api = vendorUseApi()
+    if (role = "customer"){
+        api = useApi()
+    }
     try {
         const response = await api({
             url: 'admin/categories',
             method: 'get'
         });
-        const categoryNames = response.data.data;
         return response.data.data;
 
     }catch(error) {
@@ -37,9 +40,12 @@ export const getCategoryName = (selectedCat, Categories) => {
     return category_name
 }
 
-export const fetchSubCategories = async (selectedCat, Categories) => {
+export const fetchSubCategories = async (selectedCat, Categories, role) => {
     loadingSub.value = true
-    const api = vendorUseApi()
+    let api = vendorUseApi()
+    if (role = "customer"){
+        api = useApi()
+    }
     const category_id = getCategoryId(selectedCat, Categories)
     const category_name = getCategoryName(selectedCat, Categories)
     try {

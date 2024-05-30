@@ -248,7 +248,7 @@
 									<p >Compare-at price (Optional)</p>
 									<v-tooltip text="" location="end" depressed class="elevation-24" >
 										<template v-slot:activator="{ props }">
-										<v-text-field v-bind="props" :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="product.compare_at_price" placeholder="€ 0.00" density="comfortable"></v-text-field>
+										<v-text-field v-bind="props" v-model="product.compare_at_price" placeholder="€ 0.00" density="comfortable"></v-text-field>
 										</template>
 										<template v-slot:default="{ attrs }">
 										<div class="tooltip-content" v-bind="attrs">
@@ -1266,7 +1266,7 @@ export default {
 			}
 			
 			if (this.product.price && this.product.cost_per_item) {
-				if (Number(this.product.price) > Number(this.product.compare_at_price)) {
+				if (this.product.compare_at_price > 0 && Number(this.product.price) > Number(this.product.compare_at_price)) {
 				this.checkError = "Compare at price cannot be less than the price"
 				return
 				}
