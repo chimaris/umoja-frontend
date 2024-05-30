@@ -136,10 +136,9 @@
 						</v-col>
 						<v-col cols="12" md="3">
 							<div class="w-100">
-								<v-btn color="#F8F8F8" flat icon="mdi mdi-instagram" class="mx-0 mx-md-2 dark-hover" rounded="xl" style="color: #333"></v-btn>
-								<v-btn color="#F8F8F8" flat icon="mdi mdi-twitter" class="mx-2 dark-hover" rounded="xl" style="color: #333"></v-btn>
+								<v-btn color="#F8F8F8" flat icon="mdi mdi-instagram" class="mx-2 dark-hover" rounded="xl" style="color: #333"></v-btn>
+								<v-btn color="#F8F8F8" flat icon="mdi mdi-twitter" class="dark-hover" rounded="xl" style="color: #333"></v-btn>
 								<v-btn color="#F8F8F8" flat icon="fab fa-facebook-f" class="mx-2 dark-hover" rounded="xl" style="color: #333"></v-btn>
-
 								<v-btn color="#F8F8F8" flat icon="fab fa-linkedin-in" class="dark-hover" rounded="xl" style="color: #333"></v-btn></div
 						></v-col>
 					</v-row>

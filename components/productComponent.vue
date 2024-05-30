@@ -112,7 +112,7 @@
 		</p>
 		<p style="font-weight: 600; font-size: 10px; line-height: 10px; color: #000000" class="d-flex mb-1 pb-0 pt-1 align-center">
 			<v-rating readonly model-value="4" color="grey-lighten-2" active-color="#E7CE5D" class="rts" density="compact" size="x-small"></v-rating
-			><span style="margin-left: 3px; margin-top: 3px" :style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }">(65)</span>
+			><span style="margin-left: 3px" :style="{ fontSize: $vuetify.display.mobile ? '8px' : '12px' }">(65)</span>
 		</p>
 		<v-chip
 			v-if="item.deliv"
