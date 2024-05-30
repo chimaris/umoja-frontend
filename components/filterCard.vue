@@ -71,7 +71,7 @@
 								></v-list-item>
 							</template>
 							<v-list-item
-								v-for="(sub, subIndex) in subCategories[index].neted_subcategories"
+								v-for="(sub, subIndex) in subCategories[index].neted_subcategories || [subCategories[index].subcategory_name]"
 								:key="subIndex"
 								:style="{
 									color: productStore.params.sub_category_name === sub ? '#2C6E63' : '',
@@ -123,10 +123,12 @@
 						<v-text-field
 							class="mb-2"
 							hide-details=""
+							v-model="productStore.params.priceMinimum"
 							density="compact"
 							style="text-align: center; font-size: 14px; font-weight: 400"
 							prepend-inner-icon="mdi mdi-currency-eur"
 							placeholder="Minimum"
+							@input="productStore.fetchFilteredProducts()"
 						></v-text-field>
 						<v-text-field
 							class="mb-4"
@@ -135,8 +137,10 @@
 							style="text-align: center; font-size: 14px; font-weight: 400"
 							prepend-inner-icon="mdi mdi-currency-eur"
 							placeholder="Maximum"
+							v-model="productStore.params.priceMaximum"
+							@input="productStore.fetchFilteredProducts()"
 						></v-text-field>
-								<v-chip-group v-model="productStore.params.price" color="green" column>
+								<v-chip-group v-model="price" color="green" column>
 									<v-chip
 									:value="n"
 									:key="n"
@@ -303,28 +307,37 @@ const productStore = useProductStore();
 
 const categories = ref([])
 const subCategories = ref([])
-
+const price = ref("")
 const categoryNames = computed(() => categories.value.map(category => category.name))
 const subCatNames = computed(() => subCategories.value.map(subCategory => subCategory.subcategory_name))
 // const innerSubCat = computed(() => subCategories.value.map(subCategory => subCategory.neted_subcategories))
 
 onMounted(async () => {
-			categories.value = await fetchCategories()
-			if (productStore.params.category_name){
-				subCategories.value = await fetchSubCategories(productStore.params.category_name, categories.value);
-			}
+	categories.value = await fetchCategories("customer")
+	if (productStore.params.category_name){
+		subCategories.value = await fetchSubCategories(productStore.params.category_name, categories.value, "customer");
+	}
 })
 			// watch for change ins any of the filter value
-			watch(() => [productStore.params.gender, productStore.params.category_name, productStore.params.price, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], async () => {
+			watch(() => [productStore.params.gender, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], async () => {
 				await productStore.fetchFilteredProducts()
 			});
 			watch(() => productStore.params.category_name, async () => {
-				subCategories.value = await fetchSubCategories(productStore.params.category_name, categories.value);
+				subCategories.value = await fetchSubCategories(productStore.params.category_name, categories.value, "customer");
 			})
+			watch(() => price.value, (newPrice) => {
+					if (newPrice) {
+					const [min, max] = newPrice.split(' - ').map(price => price.replace('€', '').trim());
+					productStore.params.priceMinimum = min;
+					productStore.params.priceMaximum = max;
+					productStore.fetchFilteredProducts();
+					}
+				}
+				);
 
 			
 			const categoryExpand = ref(true);
-			const subCategoryExpand = ref(true);
+			const subCategoryExpand = ref(false);
 			const genderExpand = ref(true);
 			const country = ref("All of Africa");
 			const sellingExpand = ref(false);

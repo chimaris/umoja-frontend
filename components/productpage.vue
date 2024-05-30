@@ -658,14 +658,17 @@ import { useUserStore } from "~/stores/userStore";
 import { ref, onMounted } from "vue";
 import {makeReview, getReview} from '~/composables/useReview'
 import {getDateTime} from '~/utils/date'
+import { useProductStore } from "~/stores/productStore";
 
 export default {
 	setup() {
 		const quantity = ref(1);
+		const productStore = useProductStore()
 
 	
 		return {
 			quantity,
+			productStore
 		};
 	},
 	props: ["product", "review"],
@@ -726,12 +729,12 @@ export default {
 					href: "/market_place",
 				},
 				{
-					title: "Fashion",
+					title: this.category,
 					disabled: false,
-					href: "/fashion",
+					href: `/${this.category}`,
 				},
 				{
-					title: "Green and brown kente scarf...",
+					title: this.product?.name,
 					disabled: true,
 				},
 			],
@@ -760,6 +763,9 @@ export default {
 	computed: {
 		cartStore() {
 			return useCartStore();
+		},
+		category(){
+			return this.product.category_name
 		},
 		displayedSpecs() {
 			return this.product.product_spec.split(",");

@@ -150,7 +150,7 @@
 					>
 						{{ formattedPrice(item.compare_at_price) }}
 					</p>
-					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg">
+					<v-chip v-if="item.compare_at_price" style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg">
 						{{ Math.floor(((item.compare_at_price - item.price) / item.compare_at_price) * 100) }}% OFF
 					</v-chip>
 				</div>
