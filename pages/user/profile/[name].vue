@@ -122,8 +122,55 @@
 					<div
 						class="d-flex flex-column flex-md-row px-4 pt-0 pb-0 pt-md-6 justify-space-around bg-white"
 						:class="$vuetify.display.mobile ? 'cardStyle mx-4' : ''"
-					>
-						<div
+					>	
+					<v-expand-transition leave-absolute>
+					<v-list>
+						<template v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']" :key="index">
+							<!-- Render with dropdown for nested subcategories -->
+							<v-list-group v-model="selected" :value="n">
+							<template v-slot:activator="{ props }">
+								<v-list-item
+								style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px"
+								v-bind="props"
+								>
+								<v-btn @click="selected = n" size="large" variant="tonal" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
+								<v-scale-transition leave-absolute="">
+									<v-icon v-if="selected == n" icon="mdi mdi-star-four-points" class="mr-2"></v-icon>
+								</v-scale-transition>
+								<span style="font-size: 14px; color: #333; font-weight: 600" :style="selected == n ? 'color:#2C6E63' : ''">
+									{{ n }}
+								</span>
+							</v-btn>
+							</v-list-item>
+							</template>
+							<v-window v-model="selected">
+							<v-window-item value="Account Settings">
+								<Useraccountsettings />
+							</v-window-item>
+							<v-window-item value="Following">
+								<Userfollowing />
+							</v-window-item>
+							<v-window-item value="Manage Password">
+								<Usermanagepassword />
+							</v-window-item>
+							<v-window-item value="Order History">
+								<Userorderhistory />
+							</v-window-item>
+							<v-window-item value="Payment method">
+								<Userpaymentmenthod />
+							</v-window-item>
+							<v-window-item value="Address">
+								<Useraddressbook />
+							</v-window-item>
+							<v-window-item value="Notification">
+								<Usernotification />
+							</v-window-item>
+						</v-window>
+							</v-list-group>
+						</template>
+					</v-list>
+					</v-expand-transition>
+						<!-- <div
 							class="d-flex justify-space-between align-center py-4 py-md-0"
 							:style="{ borderTop: index !== 0 ? ($vuetify.display.mobile ? '1px solid #EDEDED' : '') : '' }"
 							:key="n"
@@ -140,11 +187,11 @@
 							<div class="d-block d-md-none">
 								<v-img height="11" width="16" src="https://res.cloudinary.com/payhospi/image/upload/v1716302680/umoja/arrow.svg" />
 							</div>
-						</div>
+						 </div> -->
 					</div>
 					<v-divider class="mt-6 d-none d-md-block"></v-divider>
 
-					<div>
+					<!-- <div>
 						<v-window v-model="selected">
 							<v-window-item value="Account Settings">
 								<Useraccountsettings />
@@ -168,7 +215,7 @@
 								<Usernotification />
 							</v-window-item>
 						</v-window>
-					</div>
+					</div> -->
 				</v-card>
 			</v-container>
 		</div>
