@@ -59,8 +59,49 @@
 					<p style="color: #1e1e1e; font-size: 18.118px; font-weight: 600; letter-spacing: -0.544px">Sub Category</p>
 					<v-icon>{{ subCategoryExpand ? "mdi mdi-chevron-up" : "mdi mdi-chevron-down" }}</v-icon>
 				</div>
-
 				<v-expand-transition leave-absolute>
+					<v-list v-if="subCategoryExpand">
+						<template v-for="(subCategory, index) in subCatNames" :key="index">
+						<template v-if="subCategories[index].neted_subcategories && subCategories[index].neted_subcategories.length > 0">
+							<!-- Render with dropdown for nested subcategories -->
+							<v-list-group>
+							<template v-slot:activator="{ props }">
+								<v-list-item
+								style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px"
+								v-bind="props"
+								:title="subCategory"
+								></v-list-item>
+							</template>
+							<v-list-item
+								v-for="(sub, subIndex) in subCategories[index].neted_subcategories"
+								:key="subIndex"
+								:style="{
+								color: productStore.params.sub_category_name === sub ? '#2C6E63' : '',
+								backgroundColor: productStore.params.sub_category_name === sub ? '#E5EDEC' : '',
+								}"
+								:title="sub"
+								style="cursor: pointer; font-size: 10px"
+								@click="productStore.params.sub_category_name = sub"
+							></v-list-item>
+							</v-list-group>
+						</template>
+						<template v-else>
+							<!-- Render as a single item without dropdown -->
+							<v-list-item
+							style="font-size: 10px; cursor: pointer; font-weight: 500; letter-spacing: -0.42px"
+							:title="subCategory"
+							:style="{
+								color: productStore.params.sub_category_name === subCategory ? '#2C6E63' : '',
+								backgroundColor: productStore.params.sub_category_name === subCategory ? '#E5EDEC' : '',
+							}"
+							@click="productStore.params.sub_category_name = subCategory"
+							></v-list-item>
+						</template>
+						</template>
+					</v-list>
+					</v-expand-transition>
+
+				<!-- <v-expand-transition leave-absolute>
 					<v-list v-if="subCategoryExpand">
 						<v-list-group v-for="(subCategory, index) in subCatNames" :key="index">
 							<template v-slot:activator="{ props }">
@@ -83,7 +124,7 @@
 							></v-list-item>
 						</v-list-group>
 					</v-list>
-				</v-expand-transition>
+				</v-expand-transition> -->
 			</div>
 
 			<!-- <div>

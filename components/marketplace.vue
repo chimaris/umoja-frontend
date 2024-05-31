@@ -27,20 +27,20 @@
 					>
 						<div class="d-flex justify-space-between w-25 w-100 h-100 align-center">
 							<div class="d-flex align-center">
-								<v-avatar size="30.88" class="mr-md-1"
+								<v-avatar v-if="!getFlag(country)" size="30.88" class="mr-md-1"
 									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
 								></v-avatar>
-								<span class="mr-2 d-none d-md-block" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
-									{{ country }}
-								</span>
+								<p class="d-flex align-center" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
+									<span class="mx-2" style="font-size: 24px;">{{ getFlag(country) }}</span><span class="d-none mr-2 d-md-flex">{{ country }}</span>
+								</p>
 							</div>
 							<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
 						</div>
 					</div>
 				</template>
 				<v-list>
-					<v-list-item v-for="(item, index) in africanCountries" :key="index" :value="index" @click="selectCountry(item)">
-						<v-list-item-title>{{ item }}</v-list-item-title>
+					<v-list-item v-for="(item, index) in countries" :key="index" :value="index" @click="selectCountry(item)">
+						<p class="d-flex align-center"><span class="mr-3" style="font-size: 25px;">{{getFlag(item)}}</span> {{ item }}</p>
 					</v-list-item>
 				</v-list>
 			</v-menu>
@@ -185,8 +185,8 @@
 							</v-col>
 						</v-row> -->
 
-						<v-row dense class="mt-2">
-							<v-col v-for="(n, i) in productStore.getProductsArray('main')" :key="i" cols="6" :md="3" :lg="3">
+						<v-row dense class="mt-2 align-items-stretch"  >
+							<v-col v-for="(n, i) in productStore.getProductsArray('main')" :key="i" cols="6" :md="3" :lg="3" >
 								<product-component :item="n" :index="i" />
 							</v-col>
 						</v-row>
@@ -228,6 +228,7 @@
 </style>
 <script>
 import { Editor, EditorContent } from "@tiptap/vue-3";
+import emojiFlags from 'emoji-flags';
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
@@ -235,6 +236,7 @@ import Link from "@tiptap/extension-link";
 import { useCartStore } from "~/stores/cartStore";
 import { useProductStore } from "~/stores/productStore";
 import { useUserStore } from "~/stores/userStore";
+import { countries, countryCodes } from "~/utils/countryapi";
 
 export default {
 	components: {
@@ -269,62 +271,6 @@ export default {
 			sizeExpand: false,
 			sort: "Popular",
 			sortTypes: ["Popular", "Newest", "Price: Low to High", "Price: High to Low"],
-			africanCountries: [
-				"Algeria",
-				"Angola",
-				"Benin",
-				"Botswana",
-				"Burkina Faso",
-				"Burundi",
-				"Cabo Verde",
-				"Cameroon",
-				"Central African Republic",
-				"Chad",
-				"Comoros",
-				"Democratic Republic of the Congo",
-				"Republic of the Congo",
-				"Cote d'Ivoire",
-				"Djibouti",
-				"Egypt",
-				"Equatorial Guinea",
-				"Eritrea",
-				"Eswatini",
-				"Ethiopia",
-				"Gabon",
-				"Gambia",
-				"Ghana",
-				"Guinea",
-				"Guinea-Bissau",
-				"Kenya",
-				"Lesotho",
-				"Liberia",
-				"Libya",
-				"Madagascar",
-				"Malawi",
-				"Mali",
-				"Mauritania",
-				"Mauritius",
-				"Morocco",
-				"Mozambique",
-				"Namibia",
-				"Niger",
-				"Nigeria",
-				"Rwanda",
-				"Sao Tome and Principe",
-				"Senegal",
-				"Seychelles",
-				"Sierra Leone",
-				"Somalia",
-				"South Africa",
-				"South Sudan",
-				"Sudan",
-				"Tanzania",
-				"Togo",
-				"Tunisia",
-				"Uganda",
-				"Zambia",
-				"Zimbabwe",
-			],
 		};
 	},
 	computed: {
@@ -339,6 +285,13 @@ export default {
 		}
 	},
 	methods: {
+		getFlag(country) {
+			const countryCode = countryCodes[country]
+			if (countryCode){
+				return emojiFlags.countryCode(countryCodes[country]).emoji;
+			}
+			
+		},
 		async removeFilter(key) {
 			this.productStore.removeParam(key);
 			await this.productStore.fetchFilteredProducts();
