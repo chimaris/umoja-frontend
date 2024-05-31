@@ -505,7 +505,7 @@ export default {
       series: [
         {
           name: 'Revenue Growth',
-          data: [300, 400, 350, 500, 490, 600, 700]
+          data: [0, 0, 0, 0, 0, 0, 0]
         }
       ],
       chartOptions: {
@@ -599,13 +599,13 @@ export default {
         sn:'#26742',
         name:'Leather crop top & pants......',
         date:'17 May',
-        total:'€2,349‎',
+        total:'€0',
     },
     {
         sn:'#21042',
         name:'Leather crop top & pants......',
         date:'17 May',
-        total:'€2,349‎',
+        total:'€0',
     },
    ],
    imgs:['https://res.cloudinary.com/payhospi/image/upload/v1685693850/Rectangle_1895_u1foj0.png','https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1896_x07ole.png','https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1897_ca06qx.png'],
@@ -614,32 +614,32 @@ export default {
         img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691668/Frame_427320547_1_vxn2kx.png',
         name: 'Total Revenue',
         tooltip: 'Total revenue made in the last seven days',
-        amount: '€‎512,987',
-        trend: '16',
+        amount: '€0',
+        trend: '0',
         trending:true
     },
     {
         img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691668/Frame_427320547_hzperi.png',
         name: 'Total Customers',
         tooltip: 'Total customers in the last seven days',
-        amount: '27,654',
-        trend: '0.4',
+        amount: '0',
+        trend: '0',
         trending:false
     },
     {
         img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691671/Frame_427320547_3_rhk1fq.png',
         name: 'Total Transactions',
         tooltip: 'Total transactions in the last seven days',
-        amount: '135,302',
-        trend: '8',
+        amount: '0',
+        trend: '0',
         trending:true
     },
     {
         img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691668/Frame_427320547_2_krqzsv.png',
         name: 'Total Products Sold',
         tooltip: 'Total products sold in the last seven days',
-        amount: '196,987',
-        trend: '2',
+        amount: '0',
+        trend: '0',
         trending:true
     },
    ]

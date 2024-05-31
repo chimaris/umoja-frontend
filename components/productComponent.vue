@@ -2,6 +2,7 @@
 	<v-card
 		max-width="290"
 		width="100%"
+		height="100%"
 		v-if="loaded"
 		style="overflow: visible; background: transparent !important"
 		flat
@@ -124,7 +125,7 @@
 			>FREE DELIVERY</v-chip
 		>
 		<div v-if="vendorShow" class="d-none d-md-block">
-			<div class="d-flex mt-2">
+			<div class="d-flex mt-8">
 				<v-avatar @click="$router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img cover :src="item.vendor_profile_photo"></v-img></v-avatar>
 				<div style="cursor: pointer" @click="$router.push(`/vendor_page/${item.vendor_id}`)" class="ml-2">
 					<p style="color: #1e1e1e; text-transform: capitalize; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
@@ -136,21 +137,20 @@
 					</p>
 				</div>
 			</div>
-			<v-divider color="#a4a4a4" class="mt-4"></v-divider>
+			<v-divider color="#a4a4a4" class="mt-6"></v-divider>
 		</div>
 		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
-			<div :class="showdisco ? 'mt-0' : 'mt-3'">
+			<div :class="item?.compare_at_price ? 'mt-4' : 'mt-9'">
 				<h1 :style="{ fontSize: $vuetify.display.mobile ? '14px' : '20px' }" style="color: #1a1d1f" class="priceClass mb-1">
 					{{ formattedPrice(item.price) }}
 				</h1>
 				<div class="d-flex align-center">
 					<p
-						v-if="item.compare_at_price"
 						style="color: var(--carbon-3, #969696); font-weight: 600; line-height: 17.673px; text-decoration: line-through"
 					>
-						{{ formattedPrice(item.compare_at_price) }}
+						{{item?.compare_at_price? formattedPrice(item?.compare_at_price) : '' }}
 					</p>
-					<v-chip style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg">
+					<v-chip v-if="item.compare_at_price" style="font-size: 9.429px; font-weight: 600" class="ml-1" size="x-small" :color="discountColor" rounded="lg">
 						{{ Math.floor(((item.compare_at_price - item.price) / item.compare_at_price) * 100) }}% OFF
 					</v-chip>
 				</div>
@@ -164,7 +164,7 @@
 				color="green"
 				variant="outlined"
 				flat
-				class="parent-btn ml-0 ml-md-2 mt-2 mt-md-0"
+				class="parent-btn ml-0 ml-md-2 mt-2 mt-md-0 justify-content-end"
 			>
 				<span style="color: #1a1d1f; font-weight: 600" :style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px' }" class="smallBtn">
 					{{ isInCart(item) ? "Added to Cart" : "Add to cart" }}

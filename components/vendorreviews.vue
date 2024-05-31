@@ -35,12 +35,12 @@
 							</div>
 						</div>
 						<div class="d-flex align-center mt-4">
-							<h1 class="bigpriceClass2">{{hasReview ? `${(allReviews.length) / 1000}K` : 0}}</h1>
-							<div class="text-left">
+							<h1 class="bigpriceClass2">{{hasReview ? `${(totalReview) / 1000}K` : 0}}</h1>
+							<!-- <div class="text-left">
 								<v-chip style="font-weight: 600; font-size: 14px; line-height: 18px; color: #00966d" class="ml-3 text-green-lighten-2"
 									><v-icon icon="mdi mdi-trending-up"></v-icon> {{hasReview ? '10%' : '0%'}}</v-chip
 								>
-							</div>
+							</div> -->
 						</div>
 						<p style="font-weight: 500; font-size: 14px; line-height: 18px; letter-spacing: -0.01em; color: #969696">
 							Growth in reviews on this year
@@ -60,9 +60,9 @@
 							</div>
 						</div>
 						<div class="d-flex align-center mt-4">
-							<h1 class="bigpriceClass2">{{hasReview ? 4.0 : 0.0}}</h1>
+							<h1 class="bigpriceClass2">{{hasReview ? averageRating : 0.0}}</h1>
 							<div class="text-left reviews">
-								<v-rating :v-model="hasReview ? 4 : 0" color="grey-lighten-2" active-color="#F0B136" class="ml-4" size="x-small"></v-rating>
+								<v-rating :model-value="hasReview ? (averageRating) : 0" readonly color="grey-lighten-2" active-color="#F0B136" class="ml-4" size="x-small"></v-rating>
 							</div>
 						</div>
 						<p style="font-weight: 500; font-size: 14px; line-height: 18px; letter-spacing: -0.01em; color: #969696">
@@ -77,45 +77,45 @@
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px !important ; font-weight: 600"> 5</span>
 							</div>
-							<v-progress-linear :model-value="hasReview ? 10 : 0" style=" left: 70px" color="#C20052" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? ratingsCount[5]: 0" style=" left: 70px" color="#C20052" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? ratingsCount[5] : 0}}</span>
 						</div>
 						<div class="d-flex align-center">
 							<div class="d-flex align-center">
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px; font-weight: 600"> 4</span>
 							</div>
-							<v-progress-linear :model-value="hasReview ? 10 : 0" style=" left: 8px; transform: none" color="#00966D" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? ratingsCount[4] : 0" style=" left: 8px; transform: none" color="#00966D" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? ratingsCount[4] : 0}}</span>
 						</div>
 						<div class="d-flex align-center">
 							<div class="d-flex align-center">
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px; font-weight: 600"> 3</span>
 							</div>
-							<v-progress-linear :model-value="hasReview ? 10 : 0" style="left: 70px" color="#F38218" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? ratingsCount[3] : 0" style="left: 70px" color="#F38218" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? ratingsCount[3] : 0}}</span>
 						</div>
 						<div class="d-flex align-center">
 							<div class="d-flex align-center">
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px; font-weight: 600"> 2</span>
 							</div>
-							<v-progress-linear :model-value="hasReview ? 10 : 0" style=" left: 70px" color="#1273EB" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? ratingsCount[2] : 0" style=" left: 70px" color="#1273EB" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? ratingsCount[2] : 0}}</span>
 						</div>
 						<div class="d-flex align-center">
 							<div class="d-flex align-center">
 								<v-icon size="15" icon="mdi mdi-star" class="mr-1" color="#CECECE"></v-icon>
 								<span style="color: #333; font-size: 16px; font-weight: 600"> 1</span>
 							</div>
-							<v-progress-linear :model-value="hasReview ? 10 : 0" style=" left: 70px" color="#F8B735" class="linearl" height="6" rounded>
+							<v-progress-linear :model-value="hasReview ? ratingsCount[1] : 0" style=" left: 70px" color="#F8B735" class="linearl" height="6" rounded>
 							</v-progress-linear>
-							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? 10 : 0}}</span>
+							<span style="color: #333; font-size: 16px; font-weight: 600" class="ml-4">{{hasReview ? ratingsCount[1] : 0}}</span>
 						</div>
 					</v-card>
 				</v-col>
@@ -123,7 +123,13 @@
 		</div>
 
 		<div v-if="hasReview" class="mt-5">
-			<v-card height="100%" class="mx-auto coolTable pb-4 mb-12" width="100%" style="overflow: hidden" flat>
+			<div v-if="loading" class="d-flex align-center justify-center" style="position: relative; height: 100%; min-height: 300px;">
+						<v-progress-circular
+							color="green"
+						indeterminate
+						></v-progress-circular>
+					</div>
+			<v-card v-if="!loading" height="100%" class="mx-auto coolTable pb-4 mb-12" width="100%" style="overflow: hidden" flat>
 				<div class="">
 					<v-table>
 						<thead>
@@ -148,8 +154,9 @@
 										<v-menu offset="9px" open-on-hover location="top">
 											<template v-slot:activator="{ props }">
 												<div v-bind="props" class="px-1 d-flex pl-2">
-													<v-avatar color="grey-lighten-4" class="rounded-lg pa-1 mr-3 ml-1" size="50"
+													<v-avatar color="grey-lighten-4" class="rounded-lg mr-3 ml-1" size="50"
 														><v-img
+															cover
 															:src="item.product.photo.split(',')[0]"
 														></v-img
 													></v-avatar>
@@ -163,6 +170,7 @@
 												<v-row class="d-flex align-start">
 													<v-avatar color="grey-lighten-4" class="pa-1" size="70" rounded="lg">
 														<v-img
+															cover
 															:src="item.product.photo.split(',')[1]"
 														></v-img>
 													</v-avatar>
@@ -182,12 +190,12 @@
 								<td style="position: relative; font-size: 14px; height: 100px; width: 200px">
 									<div style="position: absolute; top: 24px; width: 200px">
 										<div class="px-1 d-flex align-center pl-0">
-											<v-avatar color="grey-lighten-4" class="pa-1 mr-2" size="50"
-												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687517181/Rectangle_1923_oguuzi.png"></v-img
+											<v-avatar color="grey-lighten-4" class=" mr-2" size="50"
+												><v-img cover src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img
 											></v-avatar>
 											<div>
 												<p class="" style="font-weight: 500; font-size: 16px !important; line-height: 20px; color: #333333">{{item.user.first_name}} {{item.user.last_name}}</p>
-												<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696">🇺🇸 USA, New York City</p>
+												<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696"></p>
 											</div>
 										</div>
 									</div>
@@ -258,7 +266,10 @@
 									</div>
 								</td>
 								<td style="position: relative; font-size: 14px; height: ; width: ">
-									<div style="position: absolute; top: 10px; right: 10px; width: ">
+									<div v-if="item.review_status == 'pending'" style="position: absolute; top: 10px; right: 10px; width: ">
+										<v-btn color="green" @click="commentReview(item.id)" flat>approve </v-btn>
+									</div>
+									<div v-else style="position: absolute; top: 10px; right: 10px; width: ">
 										<v-btn flat variant="text" icon="mdi mdi-dots-horizontal"> </v-btn>
 									</div>
 								</td>
@@ -279,7 +290,7 @@
 				<v-textarea persistent-counter v-model="reviewReply" :counter="200" class="reviewtextarea" variant="outlined" placeholder="Add a comment"> </v-textarea>
 				<div class="d-flex my-2 align-center justify-space-between">
 					<p style="font-size: 32px">🙂</p>
-					<v-btn @click="commentReview()" :disabled = "!reviewReply || reviewReply.length > 200 || sending" color="green" flat width="97" size="large">{{sending? 'Sending': 'Send'}}</v-btn>
+					<v-btn @click="commentReview(reviewToReply.id)" :disabled = "!reviewReply || reviewReply.length > 200 || sending" color="green" flat width="97" size="large">{{sending? 'Sending': 'Send'}}</v-btn>
 				</div>
 			</v-card>
 		</v-dialog>
@@ -342,6 +353,9 @@ export default {
 		const vendorStore = useVendorStore()
 		const vendor = ref(vendorStore.vendor)
 		const hasReview = computed(() => vendor.value.vendor_details?.review_count > 0)
+		const averageRating = ref(null)
+		const totalReview = ref(null)
+		const ratingsCount = ref({})
 		const allReviews = ref([])
 		const reviewToReply = ref(null)
 		const reviewToEdit = ref(null)
@@ -351,6 +365,7 @@ export default {
 		const sending = ref(false)
 		const deleteWarning = ref(false)
 		const deleteId = ref(null)
+		const loading = ref(false)
 
 		const leaveComment = (review) => {
 			reviewToReply.value = review
@@ -367,19 +382,19 @@ export default {
 		const deleteReply = async () => {
 			const res = await deleteReview(deleteId.value)
 			if (res){
-				allReviews.value = await getAllReview()
+				await getVendorReview()
 				deleteWarning.value = false
 			}
 		}
-		async function commentReview(){
+		async function commentReview(id){
 			sending.value = true
 			const data = {
 				review_reply: reviewReply.value,
 				review_status: 'approved'
 			}
 			try{
-				await replyReview(reviewToReply.value.id, data)
-				allReviews.value = await getAllReview()
+				await replyReview(id, data)
+				await getVendorReview()
 				dialog.value = false
 				reviewReply.value = ""
 			}catch(error){
@@ -388,10 +403,24 @@ export default {
 				sending.value = false
 			}
 		}
+		async function getVendorReview(){
+			loading.value = true
+			try{
+				const res = await getAllReview()
+				allReviews.value = res.data
+				averageRating.value = res.average_rating
+				totalReview.value = res.total_reviews
+				ratingsCount.value = res.ratings_count
+			}catch(error){
+				console.error(error)
+			}finally{
+				loading.value = false
+			}
+		}
 		async function editVendorReview(){
 			try{
 				await editReview(reviewToEdit.value.id, reviewToEdit.value.review_reply)
-				allReviews.value = await getAllReview()
+				await getVendorReview()
 				dialog2.value = false
 			}catch(error){
 				console.error(error)
@@ -400,8 +429,8 @@ export default {
 		watch(() => vendorStore.vendor, async (newval, oldval) => {
 			vendor.value = newval
 			if (newval && vendor.value.vendor_details?.review_count > 0){
-			allReviews.value = await getAllReview()
-		}
+				await getVendorReview()
+			}
 		});
 		return{
 			vendor,
@@ -421,7 +450,12 @@ export default {
 			editVendorReview,
 			deleteWarning,
 			deleteId,
-			confirmDelete
+			confirmDelete,
+			getVendorReview,
+			ratingsCount,
+			totalReview,
+			averageRating,
+			loading,
 		}
 	},
 	data() {
@@ -429,105 +463,6 @@ export default {
 			rating: 4,
 			skill: 100,
 			chosen: "",
-			tab: "",
-			tabs: [
-				{ name: "All Orders", prop: null, value: null },
-				{ name: "Unfulfilled", prop: "status", value: 0 },
-				{ name: "Unpaid", prop: "payment_status", value: 0 },
-				{ name: "Open", prop: "status", value: 1 },
-				{ name: "closed", prop: "status", value: 2 },
-			],
-			items1: [
-				{
-					sn: "#23942",
-					name: "Leather crop top & pants",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#876567",
-					name: "Leather crop top & pants",
-					added_cat: "Added Manually",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: 0,
-					payment_status: 0,
-					status: 2,
-					items_no: 1,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#3456456",
-					name: "Leather crop top & pants",
-					added_cat: "Added Manually",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 4,
-					delivery_method: "DHL Delivery",
-				},
-				{
-					sn: "#65459",
-					name: "Leather crop top & pants",
-					added_cat: "Added Manually",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#098765",
-					name: "Leather crop top & pants",
-					added_cat: "Added Manually",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: 0,
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-			],
 			dashes: [
 				{
 					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320547_6_u4cwdq.png",
@@ -554,25 +489,14 @@ export default {
 					trending: true,
 				},
 			],
-			items: [],
 		};
 	},
-	mounted() {
-		this.items = this.items1;
-	},
+
 	async beforeMount(){
 		if (this.vendor.vendor_details.review_count > 0){
-			this.allReviews = await getAllReview()
+			await this.getVendorReview()
 		}
 		
-	},
-	methods: {
-		sort(x, y) {
-			var itm = this.items1;
-			this.items = itm.filter((item) => {
-				return item[x] == y;
-			});
-		},
 	},
 };
 </script>

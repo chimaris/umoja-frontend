@@ -53,7 +53,8 @@
 										></v-img>
 									</v-avatar>
 									<h3 class="py-4 pb-6" style="font-size: 24px; font-weight: 800; line-height: 30px">
-										{{ vendor.vendor_details?.business_name }} <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon>
+										{{ vendor.vendor_details?.business_name }} 
+										<!-- <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon> -->
 									</h3>
 									<v-divider></v-divider>
 								</div>

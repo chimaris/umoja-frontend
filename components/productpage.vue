@@ -490,8 +490,8 @@
 							
 								<p v-if="errorMessage" style="color: red">{{errorMessage}}</p>
 								<div style=" width: 100%; display: flex; justify-content: end">
-									<v-btn @click="postReview()"  class="mt-4" size="large" :disabled="!editorContent" flat color="green" rounded="xl">
-										post review
+									<v-btn @click="postReview()"  class="mt-4" size="large" :disabled="!canReview" flat color="green" rounded="xl">
+										{{ posting ? 'posting' : 'post review' }}
 									</v-btn>
 								</div>
 							
@@ -655,17 +655,20 @@ import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
-import { ref, onMounted } from "vue";
+import { ref, onMounted , defineProps} from "vue";
 import {makeReview, getReview} from '~/composables/useReview'
 import {getDateTime} from '~/utils/date'
+import { useProductStore } from "~/stores/productStore";
 
 export default {
 	setup() {
 		const quantity = ref(1);
-
+		const productStore = useProductStore()
 	
 		return {
 			quantity,
+			productStore,
+
 		};
 	},
 	props: ["product", "review"],
@@ -675,6 +678,7 @@ export default {
 	data() {
 		return {
 			loading: true,
+			posting: false,
 			editorContent: "",
 			rating: 0,
 			errorMessage: "",
@@ -718,24 +722,29 @@ export default {
 				},
 			],
 			item: "Green and brown kente scarf...",
-			items: [
-				{
+			items: [],
+		};
+	},
+	watch: {
+    	product(newVal, oldVal) {
+			this.items = [
+			{
 					title: "Market Place",
 					disabled: false,
 					href: "/market_place",
 				},
 				{
-					title: "Fashion",
+					title: this.product?.category_name,
 					disabled: false,
-					href: "/fashion",
+					href: `/${this.product?.category_name}`,
 				},
 				{
-					title: "Green and brown kente scarf...",
+					title: this.product?.name,
 					disabled: true,
 				},
-			],
-		};
-	},
+			]
+    },
+  },
 	mounted() {
 		this.mockLoading()
 		this.editor = new Editor({
@@ -760,16 +769,29 @@ export default {
 		cartStore() {
 			return useCartStore();
 		},
+		category(){
+			return this.product.category_name
+		},
 		displayedSpecs() {
 			return this.product.product_spec.split(",");
+		},
+		canReview(){
+			if (this.editorContent || this.rating > 0 ){
+				return true
+			}
+			if (this.posting){
+				return false
+			}
+			return false
 		},
 	},
 	methods: {
 		async postReview(){
+			this.posting = true
 			const data = {
 				product_id: this.product.id,
 				vendor_id: this.product.vendor_id,
-				rating: this.rating,
+				rating: this.rating > 0 ? this.rating : null,
 				review_comment: this.editorContent
 			}
 			try{
@@ -777,7 +799,6 @@ export default {
 				this.editor.commands.setContent('');
 				this.editorContent = ""
 				this.rating = 0
-				console.log(res)
 			}catch(error){
 				if (error.response) {
 					this.errorMessage  = error.response.data.message || 'An error occurred while posting review.';
@@ -787,6 +808,8 @@ export default {
 					this.errorMessage  = 'An error occurred. Please try again later.';
 				}
 				return false;
+				}finally{
+					this.posting = false
 				}
 		},
 		mockLoading(){

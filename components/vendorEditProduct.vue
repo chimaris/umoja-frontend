@@ -194,7 +194,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Gender</p>
-									<v-select v-model="product.gender" :items="['Men', 'Women', 'Unisex']" append-inner-icon="mdi mdi-chevron-down" placeholder="Unisex" density="comfortable"> </v-select>
+									<v-select v-model="product.gender" :items="['Male', 'Female', 'Unisex']" append-inner-icon="mdi mdi-chevron-down" placeholder="Unisex" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Tags</p>
@@ -248,7 +248,7 @@
 									<p >Compare-at price (Optional)</p>
 									<v-tooltip text="" location="end" depressed class="elevation-24" >
 										<template v-slot:activator="{ props }">
-										<v-text-field v-bind="props" :rules="[v => /^[0-9]+$/.test(v) || 'Only numbers are allowed']" v-model="product.compare_at_price" placeholder="€ 0.00" density="comfortable"></v-text-field>
+										<v-text-field v-bind="props" v-model="product.compare_at_price" placeholder="€ 0.00" density="comfortable"></v-text-field>
 										</template>
 										<template v-slot:default="{ attrs }">
 										<div class="tooltip-content" v-bind="attrs">
@@ -1066,7 +1066,7 @@ export default {
       		return this.Categories.map(category => category.name);
        },
 	   commission(){
-			return ((1/100) * this.product.price).toFixed(2)
+			return ((10/100) * this.product.price).toFixed(2)
 	   },
 	   profit(){
 			return (this.product.price - this.product.cost_per_item).toFixed(2)
@@ -1266,7 +1266,7 @@ export default {
 			}
 			
 			if (this.product.price && this.product.cost_per_item) {
-				if (Number(this.product.price) > Number(this.product.compare_at_price)) {
+				if (this.product.compare_at_price > 0 && Number(this.product.price) > Number(this.product.compare_at_price)) {
 				this.checkError = "Compare at price cannot be less than the price"
 				return
 				}

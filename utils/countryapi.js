@@ -8,13 +8,12 @@ export const loadingCities = ref(false);
 
 export const countries = [
     "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cabo Verde",
-  "Cameroon", "Central African Republic", "Chad", "Comoros", "Congo, Republic of the",
-  "Congo, Democratic Republic of the", "Cote d'Ivoire", "Djibouti", "Egypt", "Equatorial Guinea",
+  "Cameroon", "Central African Republic", "Chad", "Comoros", "Congo", "Cote d'Ivoire", "Djibouti", "Egypt", "Equatorial Guinea",
   "Eritrea", "Eswatini", "Ethiopia", "Gabon", "Gambia", "Ghana", "Guinea",
   "Guinea-Bissau", "Kenya", "Lesotho", "Liberia", "Libya", "Madagascar", "Malawi", "Mali",
   "Mauritania", "Mauritius", "Morocco", "Mozambique", "Namibia", "Niger", "Nigeria", "Rwanda",
   "Sao Tome and Principe", "Senegal", "Seychelles", "Sierra Leone", "Somalia", "South Africa",
-  "South Sudan", "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe" 
+  "Sudan, South", "Sudan", "Tanzania", "Togo", "Tunisia", "Uganda", "Zambia", "Zimbabwe" 
   ];
 
   export const fetchStates = async (selectedBusinessCountry) => {
@@ -91,7 +90,7 @@ export const countries = [
     "Comoros": "KM",
     "Congo": "CG",
     "Costa Rica": "CR",
-    "Côte d’Ivoire": "CI",
+    "Cote d'Ivoire": "CI",
     "Croatia": "HR",
     "Cuba": "CU",
     "Cyprus": "CY",
@@ -113,7 +112,7 @@ export const countries = [
     "Finland": "FI",
     "France": "FR",
     "Gabon": "GA",
-    "The Gambia": "GM",
+    "Gambia": "GM",
     "Georgia": "GE",
     "Germany": "DE",
     "Ghana": "GH",

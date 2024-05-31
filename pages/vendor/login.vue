@@ -73,7 +73,7 @@ async function handleLogin() {
 				email.value = "";
 				password.value = "";
 				vendorStore.selectedItem = 'Homepage';
-				router.push(`/vendor/dashboard/Homepage`);
+				router.push('/vendor/dashboard/Homepage');
 				vendorStore.loginError = "";
 			}
 		} catch (error) {
