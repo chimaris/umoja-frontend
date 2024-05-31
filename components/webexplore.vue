@@ -301,7 +301,6 @@
 </style>
 <script>
 export default {
-<<<<<<< HEAD
 	data() {
 		return {
 			mods: 1,
@@ -365,66 +364,5 @@ export default {
 			],
 		};
 	},
-=======
-  data() {
-    return {
-        mods:1,
-        items1: [
-            {
-                color: '#EDF0EF',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-messages-coversation-pen-2_jnbd3t.png',
-                title: 'Create an account',
-                content: 'Sign up for free to start using Umoja. Create your profile and start your journey to traverse a whole new vibe with unique african vendors from all parts of the world.'
-            },
-            {
-                color: '#FDF1ED',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-search-minimalistic-magnifer_k1wit4.png',
-                title: 'Explore a commercial/cultural Learning experience',
-                content: `In Umoja, you're able to not only buy but discover and learn about the different african cultures and feel a personal connection to each vendor and product.`
-            },
-            {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-shopping-ecommerce-cart-2_fpmwr0.png',
-                color: '#FEF6ED',
-                title: 'Buy authentic African products',
-                content: `We've partnered with original and authentic African Vendors, from whom you are able to buy a wide range of products directly from.`
-            },
-            {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-essentional-ui-delivery_nifd95.png',
-                color: '#F7EDEE',
-                title: 'Umoja Service & delivery',
-                content: "Umoja cares for our customers and ensures a premium service from order to delivery. We strive for the utmost customer satisfaction with a dedication to build trust through diligent customer service."
-            },
-        ],
-        items2: [
-            {
-                color: '#F7EDEE',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497083/bold-messages-coversation-pen-2_bm9ici.png',
-                title: 'African Marketplace',
-                content: 'Our marketplace is dedicated to vendors with connections to Africa. Experience a closer cooperation between seller and buyers. Get direct channels to customers from all parts of the world and share your potential with a global audience.'
-            },
-            {
-                color: '#FEF6ED',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-text-formatting-link_hica4l.png',
-                title: 'CRM Solution',
-                content: 'The platform offers more than just a marketplace. We offer a CRM tool that comes with different apps and features which aims to cover all areas of your businesses.'
-            },
-            {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-settings-fine-tuning-widget_c23nms.png',
-                color: '#FEF6ED',
-                title: 'Umoja Business Partner',
-                content: "Umoja is your partner. We want to support you and help you mana- ge your business with ease, so you're able to focus on your creativity, realise your potential and grow."
-            },
-            {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-business-statistic-graph-new_qqphec.png',
-                color: '#EDF0EF',
-                title: 'Umoja Logistics',
-                content: "With the Umoja logistics (TMS) solution, we aim to support our vendors through our global transport activities. Umoja logistics strives to ensure our Partners are able to fulfils the customers expectation."
-            },
-        ],
-
-    };
-  },
-
->>>>>>> 9b4c529ba40ffc10414124e54888ee01e8d111de
 };
 </script>
