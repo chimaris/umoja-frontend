@@ -23,8 +23,8 @@
 							<div class="d-flex align-center">
 								<div v-bind="props">
 									<v-slide-x-reverse-transition leave-absolute origin="center center">
-										<v-btn v-if="!isActive" icon size="24" v-bind="props" rounded="xl" flat color="transparent" class="mr-2">
-											<v-avatar rounded="0" size="24">
+										<v-btn v-if="!isActive" icon size="40" v-bind="props" rounded="xl" flat color="transparent" class="">
+											<v-avatar rounded="0" size="20">
 												<v-img
 													contain
 													src="https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png"
@@ -56,27 +56,24 @@
 						<dialogsearch :close="handleSearchClose" />
 					</v-menu>
 
-					<v-btn rounded="xl" v-if="!isLoggedIn" to="/signin-category" class="" icon flat color="transparent">
-						<v-avatar size="24"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img> </v-avatar
+					<v-btn rounded="xl" v-if="!isLoggedIn" to="/signin-category" size="40" icon flat color="transparent">
+						<v-avatar size="20"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img> </v-avatar
 					></v-btn>
-					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" class="" icon flat color="transparent">
-						<v-avatar size="24"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img> </v-avatar
+					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" size="40" icon flat color="transparent">
+						<v-avatar size="20"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img> </v-avatar
 					></v-btn>
-					<v-btn @click="toCart()" class="text-none" icon size="48" rounded="xl" flat color="transparent">
+					<v-btn @click="toCart()" class="text-none" icon size="40" rounded="xl" flat color="transparent">
 						<v-badge offset-y="20" :dot="cartStore.totalCartItems == 0" :content="cartStore.totalCartItems" color="error">
-							<v-avatar rounded="0" size="24">
+							<v-avatar rounded="0" size="20">
 								<v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png"></v-img>
 							</v-avatar>
 						</v-badge>
 					</v-btn>
-					<v-btn v-if="$vuetify.display.mobile" rounded="xl" class="" icon flat color="transparent" @click.stop="openNav">
-						<v-avatar size="24"> <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1713788195/umoja/menu.svg"></v-img> </v-avatar
-					></v-btn>
 
 					<v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px">
 						<template v-slot:activator="{ props }">
-							<v-btn class="ml-4" icon size="48" v-bind="props" rounded="xl" flat color="transparent">
-								<v-avatar rounded="0" size="23">
+							<v-btn icon size="40" v-bind="props" rounded="xl" flat color="transparent">
+								<v-avatar rounded="0" size="16">
 									<v-img
 										contain
 										src="https://res.cloudinary.com/payhospi/image/upload/v1691742990/outline-notifications-vector_vkwg9h.svg"
@@ -85,6 +82,10 @@
 						</template>
 						<dialognotification />
 					</v-menu>
+
+					<v-btn v-if="$vuetify.display.mobile" rounded="xl" size="40" icon flat color="transparent" @click.stop="openNav">
+						<v-avatar size="20"> <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1713788195/umoja/menu.svg"></v-img> </v-avatar
+					></v-btn>
 				</div>
 			</div>
 		</v-container>
