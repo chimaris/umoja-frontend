@@ -56,9 +56,9 @@
 										{{ vendor.vendor_details?.business_name }} 
 										<!-- <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon> -->
 									</h3>
-									<v-divider></v-divider>
 								</div>
-								<div class="px-4">
+								<div class="px-4 py-0 m-0">
+									<v-divider></v-divider>
 									<div class="pa-4 px-6 align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
@@ -67,7 +67,7 @@
 											<p class="textClass text-grey-darken-1 px-2">Followers</p>
 										</div>
 										
-										<p class="priceClass">0</p>
+										<p class="priceClass">{{ vendor.vendor_details?.followers_count }}</p>
 									</div>
 									<v-divider></v-divider>
 									<div class="pa-4 px-6  align-center justify-space-between d-flex">

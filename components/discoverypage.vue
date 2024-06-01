@@ -38,20 +38,20 @@
 							>
 								<div class="d-flex justify-space-between w-100 h-100 align-center">
 									<div class="d-flex align-center">
-										<v-avatar size="30.88" class="mr-1"
+										<v-avatar v-if="!getFlag(country)" size="30.88" class="mr-1"
 											><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
 										></v-avatar>
-										<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
-											{{ country }}
-										</span>
+										<p class="d-flex align-center" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
+											<span class="mx-2" style="font-size: 24px;">{{ getFlag(country) }}</span><span class="d-none mr-2 d-md-flex">{{ country }}</span>
+										</p>
 									</div>
 									<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
 								</div>
 							</div>
 						</template>
 						<v-list>
-							<v-list-item v-for="(item, index) in africanCountries" :key="index" :value="index" @click="selectCountry(item)">
-								<v-list-item-title>{{ item }}</v-list-item-title>
+							<v-list-item v-for="(item, index) in countries" :key="index" :value="index" @click="selectCountry(item)">
+								<p class="d-flex align-center"><span class="mr-3" style="font-size: 25px;">{{getFlag(item)}}</span> {{ item }}</p>
 							</v-list-item>
 						</v-list>
 					</v-menu>
@@ -176,7 +176,21 @@
 									<product-component :item="n" :index="i" />
 								</v-col>
 							</v-row>
-
+							<v-container style="max-width: 1400px">
+								<v-btn
+									class="mt-10 mx-auto"
+									block
+									color="#333"
+									size="large"
+									variant="outlined"
+									@click="loadProduct()"
+									rounded="xl"
+									style="border: 1px solid #cecece; font-size: 14px; font-weight: 600"
+								>
+									<span class="mr-4"> Load More</span>
+										<v-progress-circular v-if="productStore.loadProduct" indeterminate :width="2" :size="20"></v-progress-circular>
+								</v-btn>
+			</v-container>
 							<v-btn
 								block
 								class="d-flex d-md-none mt-8"
@@ -385,6 +399,8 @@
 import { useProductStore } from "~/stores/productStore.js";
 import { useUserStore } from "~/stores/userStore";
 import {getdateRegistered} from '~/utils/date'
+import { countries, countryCodes } from "~/utils/countryapi";
+import emojiFlags from 'emoji-flags';
 
 export default {
 	setup(){
@@ -483,6 +499,9 @@ export default {
 			],
 		};
 	},
+	async mounted() {
+		await this.productStore.discoverPageProducts()
+	},
 	computed: {
 		productStore() {
 			return useProductStore();
@@ -523,6 +542,26 @@ export default {
 		},
 	},
 	methods: {
+		getFlag(country) {
+			const countryCode = countryCodes[country]
+			if (countryCode){
+				return emojiFlags.countryCode(countryCodes[country]).emoji;
+			}
+			
+		},
+		async loadProduct(){
+			console.log(this.productStore.discoveryCurrentPage,this.productStore.discoveryLastPage, this.productStore.discoveryPage )
+			if (this.productStore.discoveryCurrentPage  == this.productStore.discoveryLastPage && this.productStore.discoveryPage > 1){
+				this.productStore.discoveryPage = this.productStore.discoveryPage - 1;
+				await this.productStore.discoverPageProducts()
+				return 
+			}
+			if (this.productStore.discoveryCurrentPage < this.productStore.discoveryLastPage){
+				this.productStore.discoveryPage = this.productStore.discoveryPage + 1;
+				await this.productStore.discoverPageProducts()
+				return
+			}
+		},
 		selectCountry(item) {
 			this.country = item;
 		},

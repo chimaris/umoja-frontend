@@ -1069,15 +1069,14 @@ export default {
 			return ((10/100) * this.product.price).toFixed(2)
 	   },
 	   profit(){
-			return (this.product.price - this.product.cost_per_item).toFixed(2)
+			return (this.product.price - this.product.cost_per_item - this.commission).toFixed(2)
 	   },
 	   margin(){
 		if ((!this.product.price) || (!this.product.cost_per_item)) {
-    		return "0.00% (0.00)"; // or any default value you prefer
+    		return "0.00%"; // or any default value you prefer
 		} else {
 			const marginPercent = (((this.product.price - this.product.cost_per_item) / this.product.price) * 100).toFixed(2);
-			const marginPrice = this.profit - this.commission
-			return  `${marginPercent} (${(marginPrice)})`
+			return  `${marginPercent}%`
 		}
 	   },
         orderDetails() {
@@ -1262,7 +1261,7 @@ export default {
 				tax_charge_on_product: this.product.tax_charge_on_product,
 				cost_per_item: this.product.cost_per_item,
 				profit: this.profit,
-				margin: this.profit - this.commission
+				margin: this.margin.split('%')[0]
 			}
 			
 			if (this.product.price && this.product.cost_per_item) {
