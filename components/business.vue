@@ -96,22 +96,20 @@
 
 	<!-- View Business Section -->
 	<v-sheet class="px-6 pt-8" max-width="550" width="100%" style="padding: 40px; margin: auto; border-radius: 15px">
+		<h6 class="mb-2" style="font-weight: 600; font-size: 20px; line-height: 30px; color: #333333">Cover Photo</h6>
 		<v-img
 			style="height: 200px; position: relative;"
 			width="100%"
 			cover
-			class="d-flex bg-grey justify-end align-end mb-4"
 			:src="cover_photo || vendor?.cover_image || 'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"
-		>
-		<v-avatar class="mx-4 my-2"  size="100">
+		></v-img>
+		<h6 class="mt-4 mb-2" style="font-weight: 600; font-size: 20px; line-height: 30px; color: #333333">Logo</h6>
+		<v-avatar  size="100">
 			<v-img class="bg-grey-lighten-3 rounded-xl" cover :src="profile_photo || vendor?.profile_photo || 'https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png'"></v-img>
 		</v-avatar>
-		</v-img>
-
-		
 		
 
-		<v-sheet class="pt-8">
+		<v-sheet class="pt-4">
 			<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{vendor.business_type}})</span></h3>
 
 			<p contenteditable="true" @input="vendor.business_bio = $event.target.innerText" class="editable text-left mt-2 mb-8" style="font-weight: 400; font-size: 14px; line-height: 19.6px; color: #333333" v-if="isEditing">{{ vendor.business_bio }}</p>

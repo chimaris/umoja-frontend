@@ -1,5 +1,5 @@
 <template>
-	<div v-if="allPosts.length == 0" style="height: 100%; min-height: 500px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+	<div v-if="vendorStore.vendor.vendor_details?.post_count == 0" style="height: 100%; min-height: 500px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
 			<p>You have no posts yet. Click the button below to create your post.</p>
 			<v-btn @click="$router.push('/vendor/dashboard/Create Post')" flat color="green" size="default" class="ml-4 justify-end menubar text-grey-darken-3">
 					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
@@ -232,6 +232,7 @@
 </style>
 <script>
 import {useCreateStore} from '~/stores/createPostStore'
+import { useVendorStore } from '~/stores/vendorStore';
 import {ref, onMounted, computed} from 'vue'
 import {getdateRegistered} from '~/utils/date'
 import {formattedPrice} from '~/utils/price'
@@ -244,6 +245,7 @@ export default {
 		const selectedPost = ref(null)
 		const dialog = ref(false)
 		const userLiked = ref(false)
+		const vendorStore  = useVendorStore();
 		
 		watch(() => selectedPost.value, async () => {
 			userLiked.value = await hasLiked(selectedPost.value.id, "vendor")
@@ -266,9 +268,6 @@ export default {
 			
 			dialog.value = true
 		}
-		onMounted(async() => {
-			await postStore.getPost()
-		})
 
 		return{
 			postStore,
@@ -278,7 +277,8 @@ export default {
 			dialog,
 			userLiked,
 			handUnLike,
-			handleLike
+			handleLike,
+			vendorStore
 		}
 	},
 	methods: {

@@ -17,11 +17,15 @@ export const useProductStore = defineStore('productStore', {
       priceMaximum: null
     },
     recentSearches: [],
+    discoveryCurrentPage: null,
+    discoveryLastPage: null,
+    discoveryPage: 1,
     productFrom: "",
     allProducts: [],
     productTo: "",
     totalProducts: '',
     searchError: "",
+    loadProduct: false,
     searchTerm: "",
     searching: false,
     products: {
@@ -111,9 +115,25 @@ export const useProductStore = defineStore('productStore', {
     async fetchProducts() {
       const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');
       this.products.row = response.data.data.slice(0, 15);
-      this.products.popular = response.data.data
       this.allProducts = response.data.data
       this.products.hotDeals = response.data.data.slice(0, 10);
+    },
+    async discoverPageProducts() {
+      const api = useApi()
+      this.loadProduct = true
+      try{
+        const response = await api({
+          url: `allproducts/?page=${this.discoveryPage}`
+        });
+        this.products.popular = response.data.data
+        this.discoveryCurrentPage = response.data.meta.current_page
+        this.discoveryLastPage = response.data.meta.last_page
+      }catch(error){
+        console.error(error)
+      }finally{
+          this.loadProduct = false
+      }
+     
     },
     // Method to add a product to a specific array
     addProductToArray(product, arrayName) {

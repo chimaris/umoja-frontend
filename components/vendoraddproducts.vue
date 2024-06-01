@@ -246,7 +246,7 @@
 									<p >Compare-at price (Optional)</p>
 									<v-tooltip text="" location="end" depressed class="elevation-24" >
 										<template v-slot:activator="{ props }">
-										<v-text-field v-bind="props"  v-model="prevPrice" placeholder="€ 0.00" density="comfortable"></v-text-field>
+										<v-text-field v-bind="props" :rules="numRules" v-model="prevPrice" placeholder="€ 0.00" density="comfortable"></v-text-field>
 										</template>
 										<template v-slot:default="{ attrs }">
 										<div class="tooltip-content" v-bind="attrs">
@@ -1024,15 +1024,14 @@ export default {
 			return ((10/100) * this.price).toFixed(2)
 	   },
 	   profit(){
-			return (this.price - this.itemCost).toFixed(2)
+			return (this.price - this.itemCost - this.commission).toFixed(2)
 	   },
 	   margin(){
 		if ((!this.price) || (!this.itemCost)) {
-    		return `0.00% (0.00)`; // or any default value you prefer
+    		return `0.00%`; // or any default value you prefer
 		} else {
 			const marginPercent = (((this.price - this.itemCost) / this.price) * 100).toFixed(2)
-			const marginPrice = this.profit - this.commission
-   			return  `${marginPercent}% (${(marginPrice)})`
+   			return  `${marginPercent}%`
 		}
 	   },
         orderDetails() {
@@ -1176,7 +1175,7 @@ export default {
 				chargeTax: this.chargeTax ? 1 : 0,
 				costPerItem: this.itemCost,
 				profit: this.profit,
-				margin: this.profit - this.commission
+				margin: this.margin.split('%')[0]
 			}
 		
 			

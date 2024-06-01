@@ -33,7 +33,7 @@
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4 cardsub" >Users have direct access to vendors which gives the users a unique experience.</p>
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Users have direct access to vendors which gives the users a unique personalized experience.</p>
 
 <div class=" pt-12" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
@@ -64,7 +64,7 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Users have direct access to vendo
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, product and cultural contents directly with the users adding a learning experience and building a personal connection.</p>
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Learn about the different African cultures & authenticity of African products throughthe Umoja discovery section and enjoy the art of storytelling.</p>
 
 <div class=" pt-8" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
     <div class="" style="width: 100%;height: ;">
@@ -124,13 +124,13 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can share business, produ
                         font-weight: 600;
                         line-height: 120%; /* 43.2px */
                         letter-spacing: -1.08px;">
-                Order management system
+                African Marketplace
             </p>
             <p style="color: var(--carbon-4, #333);
 font-size: 20px;
 font-weight: 400;
 line-height: 160%; /* 32px */
-letter-spacing: -0.6px;" class="mt-4 cardsub" >Vendors can seamlessly manage orders from all over the globe with the Umoja platform.</p>
+letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja marketplace is dedicated to empowering African related businesses from each corner of the world. It’s a marketplace where vendors creativity and potential are celebrated & highlighted and where a unique African culture is experienced.</p>
 
 </div>
 <div class=" pt-12" style="max-height:;width: 100%;position: relative;left: 0;bottom: 0;">
@@ -202,13 +202,13 @@ letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja's aim is to build a partner
                          font-weight: 600;
                          line-height: 120%; /* 43.2px */
                          letter-spacing: -1.08px;">
-                Integrated Apps to manage your business
+                Umoja business solution
              </p>
              <p style="color: var(--carbon-4, #F7EDEE);
                     font-size: 20px;
                     font-weight: 400;
                     line-height: 160%; /* 32px */
-                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja as a ERP Tool, we offer our vendors a variety of apps to better manage and scale their business to its full potential.</p>
+                    letter-spacing: -0.6px;" class="mt-4 cardsub" >Umoja business solution not only provides African-related MSMEs with the necessary business tools to support their overall business processes, but also creates financial & educational solutions that enhance the growth of the African business ecosystem for MSMEs.</p>
                </div>  
 </v-col>
                

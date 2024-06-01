@@ -176,6 +176,7 @@ import { useRouter, useRoute } from '#vue-router';
 import {useCreateStore} from '~/stores/createPostStore'
 import { useOrderStore } from '~/stores/order';
 import {useSaleStore} from '~/stores/sales'
+import {fetchProducts, fetchDetails, fetchPromos, fetchPosts, fetchArticles  } from '~/composables/useVendorPage'
 
 
 const sidebar = computed(() => useVendorStore().sideBtn)
@@ -212,17 +213,18 @@ watch(() => vendorStore.vendor, async () => {
 });
 async function loadVendorData(){
 	const vendorDetails = vendorStore.vendor.vendor_details;
+	const vendorId  = vendorStore.vendor.vendor_details.id;;
 		if (vendorDetails?.product_count > 0){
-			await vendorProducts.getAllProduct()
+			vendorProducts.allProducts = await fetchProducts(vendorId)
 		}
 		if (vendorDetails?.article_count > 0){
-			await postStore.getArticle()
+			postStore.articles = await fetchArticles(vendorId)
 		}
 		if (vendorDetails?.post_count > 0){
-			await postStore.getPost()
+			postStore.posts = await fetchPosts(vendorId)
 		}
 		if (vendorDetails?.promo_count > 0){
-			await vendorProducts.getPromoProduct()
+			vendorProducts.promoProducts = await fetchPromos(vendorId)
 		}
 }
 

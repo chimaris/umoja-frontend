@@ -76,52 +76,52 @@ export default {
             {
                 color: '#EDF0EF',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-messages-coversation-pen-2_jnbd3t.png',
-                title: 'Create an account',
-                content: 'Sign up for  free to start using Umoja. Create your profile and start your journey to traverse a whole new vibe with unique african vendors from all parts of the world.'
+                title: 'Authentic Products',
+                content: 'Umoja offers consumers a curated selection of authentic African products, ranging from fashion and art to home decor and accessories. '
             },
             {
                 color: '#FDF1ED',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-search-minimalistic-magnifer_k1wit4.png',
-                title: 'Exclusive African marketplace',
-                content: `Connect with African businesses worldwide and Buy authentic products from any part of the world and discover a unique African cultural experience.`
+                title: 'Cultural Exploration',
+                content: `Umoja provides consumers with an opportunity to explore and experience the richness and diversity of African culture, heritage, and traditions.`
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-shopping-ecommerce-cart-2_fpmwr0.png',
                 color: '#FEF6ED',
-                title: 'Explore a commercial/cultural Learning experience',
-                content: `In Umoja, you're able to not only buy but discover and learn about the different african cultures and feel a personal connection to each vendor and  product`
+                title: 'Ethical Shopping',
+                content: `Umoja promotes ethical shopping practices by prioritizing fair trade, sustainability, and social impact. `
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-essentional-ui-delivery_nifd95.png',
                 color: '#F7EDEE',
-                title: 'Umoja Service & delivery',
-                content: "Umoja cares for our  customers and ensures a premium service from order to delivery. We strive for the utmost customer satisfaction with a dedication to build trust through diligent customer service."
+                title: 'Global Connectivity',
+                content: "Umoja serves as a digital bridge connecting consumers worldwide to African creativity and culture. This fosters cross-cultural exchange, dialogue, and understanding, breaking down barriers and promoting a sense of global unity and solidarity."
             },
         ],
         items2: [
         {
                 color: '#F7EDEE',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497083/bold-messages-coversation-pen-2_bm9ici.png',
-                title: 'African Marketplace',
-                content: 'Umoja marketplace is dedicated to empowering African related businesses from each corner of the world. It’s a marketplace where vendors creativity and potential are celebrated & highlighted and where a unique African culture is experienced.'
+                title: 'Access to Global Market',
+                content: 'Umoja provides vendors, especially African-related B2C MSMEs, with access to a global marketplace, enabling them to reach a wider audience beyond their local markets and expand their customer base.'
             },
             {
                 color: '#FEF6ED',
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-text-formatting-link_hica4l.png',
-                title: 'Engage with global customers',
-                content: 'Experience a closer cooperation between seller and buyers. Get direct channels to customers from all parts of the world and share your potential with a global audience.'
+                title: 'Empowerment and Support',
+                content: 'Umoja is committed to empowering vendors by offering resources, support, and guidance to help them grow and scale their businesses. This includes tools, and networking opportunities to enhance their skills and capabilities.'
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-settings-fine-tuning-widget_c23nms.png',
                 color: '#FEF6ED',
-                title: 'ERP Business solution',
-                content: "The platform offers more than just a marketplace. We offer a ERP solution with tool that provides vendors with the resources and knowledge needed to grow & scale business globally."
+                title: 'Cultural Celebration',
+                content: "Umoja celebrates African creativity, culture, and heritage, allowing vendors to showcase their authentic products and cultural experiences to a global audience. "
             },
             {
                 src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-business-statistic-graph-new_qqphec.png',
                 color: '#EDF0EF',
-                title: '⁠Umoja Partnership',
-                content: "Umoja aim is to build a partnership with the businesses, through dedicated and intentional customer support so they can fully focus on their creativity, realize their potential and grow."
+                title: 'Community Engagement',
+                content: "Umoja fosters a sense of community among vendors, encouraging collaboration, knowledge sharing, and mutual support. This creates a supportive ecosystem where vendors can learn from each other, share best practices, and collectively grow and succeed."
             },
         ],
      
