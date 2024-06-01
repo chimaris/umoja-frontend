@@ -1,73 +1,75 @@
 <template>
-    <v-card min-height="100vh" flat style="padding-top: 200px;padding-bottom: 200px;" class="d-flex  justify-center align-center">
-    <div class=" w-100 ">
-    <div class=" w-100 text-center">
-
-        <p  class="tinytext1"
-        style="color: var(--magnetic-green-4, #2C6E63);
-            font-size: 14px;
-            font-weight: 500;
-            text-transform: uppercase;
-            line-height: 120%; /* 16.8px */
-            letter-spacing: 0.7px;" >What is the Umoja solution?</p>
-        <p style="color: var(--carbon-5, #2A2A2A);
-            font-size: 48px;
-            font-weight: 600;
-            line-height: 120%; /* 57.6px */
-            letter-spacing: -1.44px;" class="mt-4 subtitles mb-4">Discover a dynamic Marketplace</p>
-        <p style="color: var(--carbon-4, #333);
-            font-size: 20px;
-            font-weight: 400;max-width: 577px;
-            line-height: 180%;
-            letter-spacing: -0.6px;" class="mx-auto titlesub">Umoja provides a unique experience, connecting a variety of buyers and sellers to a digital african market.</p>
-               <v-btn-toggle mandatory :model-value="1"  v-model="mods" style="background:#F8F8F8" class="bto mt-8" rounded="xl" >
-            <v-btn :style="mods == 2 ? '    background: #F8F8F8!important;': ''" color="green" :width="$vuetify.display.smAndDown? '150':$vuetify.display.xsAndDown? '120': '188'" :value="1"  rounded="xl" >
-                 <span
-                 :style="mods == 2 ? 'color: var(--magnetic-green-3, #94AAA5);':''"
-                 style="
-        font-size: 14px;
-        font-weight: 600;">
-        Buyers
-            </span>
-             </v-btn>
-            <v-btn :style="mods == 1 ? '    background: #F8F8F8!important;': ''" color="green" :width="$vuetify.display.smAndDown? '150':$vuetify.display.xsAndDown? '120': '188'" :value="2" rounded="xl"> 
-                <span
-                 :style="mods == 1 ? 'color: var(--magnetic-green-3, #94AAA5);':''"
-                 style="
-
-font-size: 14px;
-font-weight: 600;">
-Vendors
-            </span>
-                </v-btn>
-          </v-btn-toggle>
-          </div>
-<v-container class="mt-12">
-
-<v-row>
-    <v-col v-for=" n in (mods == 1? items1: items2)" :key="n" cols="12" sm="6" lg="3">
-        <v-card   flat class="height0 cardStyle">
-            <v-avatar eager :color="n.color" class="mb-4 mt-6 rounded-lg" size="60"><img width="30" :src="n.src" /></v-avatar>
-            <p class="my-4" style="color: var(--carbon-4, #333);
-font-size: 20px;
-font-weight: 600;
-line-height: 140%; /* 28px */
-letter-spacing: -0.6px;">{{ n.title }}</p>
-            <p 
-    style="color: var(--carbon-3, #969696);
-font-size: 16px;
-font-weight: 400;
-line-height: 160%; /* 25.6px */
-letter-spacing: -0.16px;">{{ n.content }}</p>
-        </v-card>
-    </v-col>
-</v-row></v-container>
-</div>
-
-</v-card>
+	<v-card min-height="100vh" flat style="padding-top: 200px; padding-bottom: 200px" class="d-flex justify-center align-center">
+		<div class="w-100">
+			<div class="w-100 text-center">
+				<p
+					class="tinytext1"
+					style="
+						color: var(--magnetic-green-4, #2c6e63);
+						font-size: 14px;
+						font-weight: 500;
+						text-transform: uppercase;
+						line-height: 120%; /* 16.8px */
+						letter-spacing: 0.7px;
+					"
+				>
+					What is the Umoja solution?
+				</p>
+				<p
+					style="color: var(--carbon-5, #2a2a2a); font-size: 48px; font-weight: 600; line-height: 120%; /* 57.6px */ letter-spacing: -1.44px"
+					class="mt-4 subtitles mb-4"
+				>
+					Discover a dynamic Marketplace
+				</p>
+				<p
+					style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 400; max-width: 577px; line-height: 180%; letter-spacing: -0.6px"
+					class="mx-auto titlesub"
+				>
+					Umoja provides a unique experience, connecting a variety of buyers and sellers to a digital african market.
+				</p>
+				<v-btn-toggle mandatory :model-value="1" v-model="mods" style="background: #f8f8f8" class="bto mt-8" rounded="xl">
+					<v-btn
+						:style="mods == 2 ? '    background: #F8F8F8!important;' : ''"
+						color="green"
+						:width="$vuetify.display.smAndDown ? '150' : $vuetify.display.xsAndDown ? '120' : '188'"
+						:value="1"
+						rounded="xl"
+					>
+						<span :style="mods == 2 ? 'color: var(--magnetic-green-3, #94AAA5);' : ''" style="font-size: 14px; font-weight: 600"> Buyers </span>
+					</v-btn>
+					<v-btn
+						:style="mods == 1 ? '    background: #F8F8F8!important;' : ''"
+						color="green"
+						:width="$vuetify.display.smAndDown ? '150' : $vuetify.display.xsAndDown ? '120' : '188'"
+						:value="2"
+						rounded="xl"
+					>
+						<span :style="mods == 1 ? 'color: var(--magnetic-green-3, #94AAA5);' : ''" style="font-size: 14px; font-weight: 600"> Vendors </span>
+					</v-btn>
+				</v-btn-toggle>
+			</div>
+			<v-container class="mt-12">
+				<v-row>
+					<v-col v-for="n in mods == 1 ? items1 : items2" :key="n" cols="12" sm="6" lg="3">
+						<v-card flat class="height0 cardStyle">
+							<v-avatar eager :color="n.color" class="mb-4 mt-6 rounded-lg" size="60"><img width="30" :src="n.src" /></v-avatar>
+							<p
+								class="my-4"
+								style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 600; line-height: 140%; /* 28px */ letter-spacing: -0.6px"
+							>
+								{{ n.title }}
+							</p>
+							<p style="color: var(--carbon-3, #969696); font-size: 16px; font-weight: 400; line-height: 160%; /* 25.6px */ letter-spacing: -0.16px">
+								{{ n.content }}
+							</p>
+						</v-card>
+					</v-col>
+				</v-row></v-container
+			>
+		</div>
+	</v-card>
 </template>
 <script>
-
 export default {
   data() {
     return {
