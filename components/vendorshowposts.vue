@@ -151,7 +151,6 @@ onMounted(async() => {
 		likedPosts.value[post.id] = await hasLiked(post.id, "vendor")
 
 		}
-	// await postStore.getPost()
 });
 async function deletePost(id){
     postStore.deletePost(id)

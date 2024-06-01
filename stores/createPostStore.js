@@ -42,32 +42,7 @@ export const useCreateStore = defineStore('post', {
       setArticleToEdit(article) {
         this.articleToEdit = article;
        },
-        async getPost(){
-            const api = vendorUseApi()
-            try{
-                const response = await api ({
-                    url: "vendor/posts",
-                    method: 'GET'
-                });
-                this.posts = response.data.data
-                return
-            }catch(error){
-                console.error("error fetching post", error)
-            }
-        },
-        async getArticle(){
-          const api = vendorUseApi()
-          try{
-              const response = await api ({
-                  url: "vendor/articles",
-                  method: 'GET'
-              });
-              this.articles = response.data.data
-              return
-          }catch(error){
-              console.error("error fetching article", error)
-          }
-        },
+        
         async deleteArticle(id){
           const api = vendorUseApi();
           try{

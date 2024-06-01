@@ -35,7 +35,8 @@
 					</template>
 					<v-btn
 						@click="logoutUser()"
-						width="250"
+						:style="{ backgroundColor: $vuetify.display.mobile ? '#cecece' : '' }"
+						:width="$vuetify.display.mobile ? 200 : 250"
 						size="x-large"
 						color="red"
 						variant="outlined"
@@ -120,20 +121,13 @@
 					:style="{ backgroundColor: $vuetify.display.mobile ? '#f8f8f8' : '' }"
 				>
 					<div
-						class="d-flex flex-column flex-md-row px-4 pt-0 pb-0 pt-md-6 justify-space-around bg-white"
+						class="d-flex flex-column flex-md-row px-0 pt-0 pb-0 pt-md-6 justify-space-around bg-white"
 						:class="$vuetify.display.mobile ? 'cardStyle mx-4' : ''"
 					>	
-					<v-expand-transition leave-absolute>
-					<v-list>
-						<template v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']" :key="index">
-							<!-- Render with dropdown for nested subcategories -->
-							<v-list-group v-model="selected" :value="n">
-							<template v-slot:activator="{ props }">
-								<v-list-item
-								style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px"
-								v-bind="props"
-								>
-								<v-btn @click="selected = n" size="large" variant="tonal" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
+					<v-expansion-panels class="d-md-none d-block" v-model="selected">
+						<v-expansion-panel :value="n" :key="index" v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']">
+						<v-expansion-panel-title>
+							<v-btn @click="changeTab(n)" size="large" variant="tonal" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
 								<v-scale-transition leave-absolute="">
 									<v-icon v-if="selected == n" icon="mdi mdi-star-four-points" class="mr-2"></v-icon>
 								</v-scale-transition>
@@ -141,8 +135,8 @@
 									{{ n }}
 								</span>
 							</v-btn>
-							</v-list-item>
-							</template>
+						</v-expansion-panel-title>
+						<v-expansion-panel-text>
 							<v-window v-model="selected">
 							<v-window-item value="Account Settings">
 								<Useraccountsettings />
@@ -165,13 +159,12 @@
 							<v-window-item value="Notification">
 								<Usernotification />
 							</v-window-item>
-						</v-window>
-							</v-list-group>
-						</template>
-					</v-list>
-					</v-expand-transition>
-						<!-- <div
-							class="d-flex justify-space-between align-center py-4 py-md-0"
+							</v-window>
+						</v-expansion-panel-text>
+						</v-expansion-panel>
+					</v-expansion-panels>
+						<div
+							class="d-md-flex justify-space-between align-center py-4 py-md-0 d-none"
 							:style="{ borderTop: index !== 0 ? ($vuetify.display.mobile ? '1px solid #EDEDED' : '') : '' }"
 							:key="n"
 							v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']"
@@ -187,11 +180,11 @@
 							<div class="d-block d-md-none">
 								<v-img height="11" width="16" src="https://res.cloudinary.com/payhospi/image/upload/v1716302680/umoja/arrow.svg" />
 							</div>
-						 </div> -->
+						 </div>
 					</div>
 					<v-divider class="mt-6 d-none d-md-block"></v-divider>
 
-					<!-- <div>
+					<div class="d-none d-md-block">
 						<v-window v-model="selected">
 							<v-window-item value="Account Settings">
 								<Useraccountsettings />
@@ -215,7 +208,7 @@
 								<Usernotification />
 							</v-window-item>
 						</v-window>
-					</div> -->
+					</div>
 				</v-card>
 			</v-container>
 		</div>

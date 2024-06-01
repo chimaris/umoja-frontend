@@ -47,32 +47,6 @@ export const useVendorProductStore = defineStore('vendor-product', {
         this.allProducts = []
         this.promoProducts = []
       },
-      async getAllProduct() {
-        const api = vendorUseApi()
-        try {
-          const response = await api({
-            url: 'vendor/products',
-            method: 'get'
-          });
-          this.allProducts = response.data.data;
-          return 
-        }catch(error) {
-          console.error(error)
-        }
-      },
-      async getPromoProduct(){
-        const api = vendorUseApi()
-        try{
-          const res = await api({
-            url:'vendor/discount_price',
-            method: 'get',
-          });
-          this.promoProducts = res.data.products
-          return
-        }catch(error){
-          console.error(error)
-        }
-      },
       async addVendorProduct(){
         const vendorStore = useVendorStore()
           this.loading = true;
