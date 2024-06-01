@@ -1,6 +1,9 @@
 <template>
-<<<<<<< HEAD
-	<div v-if="allPosts.length == 0" style="height: 100%; min-height: 500px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+	<div
+		v-if="vendorStore.vendor.vendor_details?.post_count == 0"
+		style="height: 100%; min-height: 500px"
+		class="d-flex justify-center flex-column align-center ga-5 mt-10"
+	>
 		<p>You have no posts yet. Click the button below to create your post.</p>
 		<v-btn
 			@click="$router.push('/vendor/dashboard/Create Post')"
@@ -8,34 +11,6 @@
 			color="green"
 			size="default"
 			class="ml-4 justify-end menubar text-grey-darken-3"
-=======
-	<div v-if="vendorStore.vendor.vendor_details?.post_count == 0" style="height: 100%; min-height: 500px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
-			<p>You have no posts yet. Click the button below to create your post.</p>
-			<v-btn @click="$router.push('/vendor/dashboard/Create Post')" flat color="green" size="default" class="ml-4 justify-end menubar text-grey-darken-3">
-					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
-					Create Post
-				</v-btn>
-		</div>
-	<div>
-	<div v-if="allPosts.length > 0">
-		<div  style="background-color: " class="d-flex py-6 align-center justify-space-between">
-			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{allPosts.length}} posts found</p>
-			<div>
-				<v-btn style="border: 1px solid #e5e5e5; border-radius: 100px !important" variant="outlined" class="textClass text-grey-darken-3">
-					<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
-					Filter
-				</v-btn>
-			</div>
-		</div>
-
-		<v-carousel
-			style="overflow: visible"
-			height="170"
-			class="promo promoshort d-block d-md-none"
-			:show-arrows="false"
-			hide-delimiter-background=""
-			cycle
->>>>>>> f6256d704bbdafb12de7200b1a750bee41cbbe1e
 		>
 			<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
 			Create Post
@@ -142,7 +117,7 @@
 					:min-width="$vuetify.display.mobile ? '90vw' : '60vw'"
 					class="rounded-lg"
 				>
-					<v-btn flat class="ms-auto my-2" @click="dialog = false">
+					<v-btn class="ms-auto my-2" @click="dialog = false">
 						<v-icon class="" size="24" icon="mdi mdi-close"></v-icon>
 					</v-btn>
 					<v-row style="height: 100vh">
@@ -276,8 +251,8 @@
 }
 </style>
 <script>
-<<<<<<< HEAD
 import { useCreateStore } from "~/stores/createPostStore";
+import { useVendorStore } from "~/stores/vendorStore";
 import { ref, onMounted, computed } from "vue";
 import { getdateRegistered } from "~/utils/date";
 import { formattedPrice } from "~/utils/price";
@@ -290,45 +265,7 @@ export default {
 		const selectedPost = ref(null);
 		const dialog = ref(false);
 		const userLiked = ref(false);
-=======
-import {useCreateStore} from '~/stores/createPostStore'
-import { useVendorStore } from '~/stores/vendorStore';
-import {ref, onMounted, computed} from 'vue'
-import {getdateRegistered} from '~/utils/date'
-import {formattedPrice} from '~/utils/price'
-import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
-
-export default {
-	setup(){
-		const postStore = useCreateStore()
-		const allPosts = ref(postStore.posts.slice(0,12))
-		const selectedPost = ref(null)
-		const dialog = ref(false)
-		const userLiked = ref(false)
-		const vendorStore  = useVendorStore();
-		
-		watch(() => selectedPost.value, async () => {
-			userLiked.value = await hasLiked(selectedPost.value.id, "vendor")
-		});
-		watch(() => postStore.posts, async (newval, oldval) => {
-			allPosts.value = newval
-		});
-		const handUnLike = async (id) => {
-			userLiked.value = false
-			selectedPost.value.likes --;
-			await unlikePost(id, "vendor")
-		}
-		const handleLike = async (id) => {
-			userLiked.value = true
-			selectedPost.value.likes ++;
-			await likePost(id, "vendor")
-		}
-		const openPost = (post) => {
-				selectedPost.value = post
-			
-			dialog.value = true
-		}
->>>>>>> f6256d704bbdafb12de7200b1a750bee41cbbe1e
+		const vendorStore = useVendorStore();
 
 		watch(
 			() => selectedPost.value,
@@ -357,9 +294,6 @@ export default {
 
 			dialog.value = true;
 		};
-		onMounted(async () => {
-			await postStore.getPost();
-		});
 
 		return {
 			postStore,
@@ -370,12 +304,8 @@ export default {
 			userLiked,
 			handUnLike,
 			handleLike,
-<<<<<<< HEAD
+			vendorStore,
 		};
-=======
-			vendorStore
-		}
->>>>>>> f6256d704bbdafb12de7200b1a750bee41cbbe1e
 	},
 	methods: {
 		filt(text) {
