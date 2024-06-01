@@ -105,8 +105,11 @@
 					style="height: 100vh; overflow: hidden; position: relative"
 					max-width="700px"
 					:min-width="$vuetify.display.mobile ? '90vw' : '60vw'"
-					class="rounded-lg"
+					class="rounded-lg mx-auto"
 				>
+					<div class="d-flex d-md-none justify-end mx-8 mt-2 mb-4">
+						<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
+					</div>
 					<v-row style="height: 100vh">
 						<v-col cols="12" class="px-0 py-0 pb-0" md="6">
 							<v-img
@@ -127,7 +130,7 @@
 							></v-img>
 						</v-col>
 						<v-col cols="12" style="position: relative" class="px-0 pt-0 pb-10" md="6">
-							<div class="d-flex justify-end mx-8 my-3 pt-3">
+							<div class="d-none d-md-flex justify-end mx-8 my-3 pt-3">
 								<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
 							</div>
 
