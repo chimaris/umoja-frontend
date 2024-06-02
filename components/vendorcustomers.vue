@@ -1,8 +1,8 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div v-if="items1.length > 0" class="d-flex align-center justify-space-between">
+		<div v-if="hasCustomer" class="d-flex align-center justify-space-between">
 			<div>
-				<p style="font-weight: 600; font-size: 24px" class="mb-2 d-flex align-center text-left">List of all the your customers</p>
+				<p style="font-weight: 600; font-size: 24px" class="mb-2 d-flex align-center text-left">List of all your customers</p>
 			</div>
 			<div>
 				<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="large" class="ml-4 text-grey-darken-3"> Last 7 DAYS </v-btn>
@@ -17,7 +17,7 @@
 			</div>
 		</div>
 
-		<div v-if="items1.length > 0" class="d-flex pt-8 pb-6">
+		<div v-if="hasCustomer" class="d-flex pt-8 pb-6">
 			<v-row style="overflow-x: scroll; -webkit-overflow-scrolling: touch; display: grid; grid-auto-flow: column">
 				<v-col v-for="n in dashes">
 					<v-card min-width="300px" class="mx-auto cardStyle" width="100%" style="" flat>
