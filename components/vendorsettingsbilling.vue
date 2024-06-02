@@ -6,68 +6,96 @@
                     font-weight: 600;" class="pa-5">Billing</p>
                     <v-divider></v-divider>
 
-<v-row class="pa-6">
+<v-row class="pa-6 align-items-stretch">
     <v-col cols="12" md="6">
         <v-sheet class="cardStyle">
 <div  class="d-flex mb-2 justify-space-between">
     <v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large"  color="green"> <span style="font-size: 16.879px!important;
-font-weight: 500;">Basic Plan</span></v-chip>
-<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
+font-weight: 500;">Free Package</span></v-chip>
+<v-icon size="30" color="#2C6E63" icon="mdi mdi-check-circle"></v-icon>
 </div>
 <p style="color:#333;
 font-size: 40px;
-font-weight: 600;">€10/Month</p>
+font-weight: 600;">€ Free/Month</p>
 <p style="color: #333;
 font-size: 16px;
 font-weight: 400;" class="mb-8">Our free plan has...</p>
 
-<div v-for="n in 4" :key="n" class=" mb-4 d-flex align-center ">
+<div v-for="n in freeFeatures" :key="n" class=" mb-4 d-flex align-center ">
 <v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
 <p style="color: #333;
 font-size: 14px;
 font-weight: 400;
-">Lorem ipsum dolor sit amet consectetur.</p>
+">{{n}}</p>
 </div>
-<v-btn class="mt-12" size="large" block style="    border: 1px solid #e5e5e5;"  variant="outlined"><span style="color: var(--grey-1000, #1A1D1F);
+<!-- <v-btn class="mt-12" size="large" block style="    border: 1px solid #e5e5e5;"  variant="outlined"><span style="color: var(--grey-1000, #1A1D1F);
 
 font-size: 14px;
-font-weight: 600;">Join for Free</span></v-btn>
+font-weight: 600;">Join for Free</span></v-btn> -->
 
         </v-sheet>
     </v-col>
     <v-col cols="12" md="6">
-        <v-sheet class="cardStyle">
+        <v-sheet class="cardStyle" style="opacity: 0.5">
 <div  class="d-flex mb-2 justify-space-between">
     <v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large"  color="green"> <span style="font-size: 16.879px!important;
-font-weight: 500;">Premium Plan</span></v-chip>
-<v-icon size="30" color="#2C6E63" icon="mdi mdi-check-circle"></v-icon>
+font-weight: 500;">Business Package</span></v-chip>
+<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
+
 </div>
 <p style="color:#2C6E63;
 font-size: 40px;
-font-weight: 600;">€30/Month</p>
+font-weight: 600;">€ 29.99/Month</p>
 <p style="color: #333;
 font-size: 16px;
 font-weight: 400;" class="mb-8">Everything in our free plan plus...</p>
 
-<div v-for="n in 7" :key="n" class=" mb-4 d-flex align-center ">
+<div v-for="n in businessPackage" :key="n" class=" mb-4 d-flex align-center ">
 <v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
 <p style="color: #333;
 font-size: 14px;
 font-weight: 400;
-">Lorem ipsum dolor sit amet consectetur.</p>
+">{{n}}</p>
 </div>
 <v-btn class="mt-12" size="large" block flat color="green"><span style="
 
 font-size: 14px;
-font-weight: 600;">Join for Free</span></v-btn>
+font-weight: 600;">Subscribe</span></v-btn>
 
         </v-sheet>
     </v-col>
+    <v-col cols="12" md="6">
+        <v-sheet class="cardStyle" style="opacity: 0.5">
+<div  class="d-flex mb-2 justify-space-between">
+    <v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large"  color="green"> <span style="font-size: 16.879px!important;
+font-weight: 500;">Premium Plan</span></v-chip>
+<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
+</div>
+<p style="color:#2C6E63;
+font-size: 40px;
+font-weight: 600;">Customised/Month</p>
+<p style="color: #333;
+font-size: 16px;
+font-weight: 400;" class="mb-8">Everything in our free plan plus...</p>
 
+<div v-for="n in premiumPackage" :key="n" class=" mb-4 d-flex align-center ">
+<v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
+<p style="color: #333;
+font-size: 14px;
+font-weight: 400;
+">{{n}}</p>
+</div>
+<v-btn class="mt-12" size="large" block flat color="green"><span style="
+
+font-size: 14px;
+font-weight: 600;">Subscribe</span></v-btn>
+
+        </v-sheet>
+    </v-col>
 </v-row>
 <v-divider></v-divider>
 
-<div class="pa-5  py-8">
+<div class="pa-5  py-8 d-none">
 
 <div class="mb-4 d-flex align-center justify-space-between">
     <div>
@@ -167,103 +195,33 @@ font-weight: 500;">Invoice #007 - Dec 2023</p>
            
     </div>
 </template>
-<script>
-export default {
-     data() {
-          return {
-               tab: 'Customer Details',
-               chip: 'All',
-               edit: false,
-               chosen: '',
-               notes: [{
-                    name: 'Benjamin Franklin O.',
-                    image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png'
-               },
-               {
-                    name: 'Nweke Franklin',
-                    image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png'
-               },
-               {
-                    name: 'Nweke Franklin',
-                    image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png'
-               },
-
-               ],
-               summary: [
-                    {
-                         title: 'Total Quantity',
-                         value: '4 Items'
-                    },
-                    {
-                         title: 'Grand Total',
-                         value: '€ 1,829.00'
-                    }, {
-                         title: 'Sub-Total',
-                         value: '€ 1,817.00'
-                    },
-                    {
-                         title: 'Shipping International',
-                         value: '€ 12.00'
-                    },
-                    {
-                         title: 'Taxes',
-                         value: '€ 0.00'
-                    }
-               ],
-               items: [
-                    {
-                         sn: '#23942',
-                         name: 'Leather crop top & pants......',
-                         date: '17 May',
-                         total: '€2,349‎',
-                    },
-                    {
-                         sn: '#23442',
-                         name: 'Leather crop top & pants......',
-                         date: '17 May',
-                         total: '€2,349‎',
-                    },
-                    {
-                         sn: '#26042',
-                         name: 'Leather crop top & pants......',
-                         date: '17 May',
-                         total: '€2,349‎',
-                    },
-
-
-               ],
-          }
-     },
-     computed: {
-          orderDetails() {
-               return [
-                    {
-                         title: 'Name',
-                         value: 'Benjamin Franklin O.'
-                    },
-                    {
-                         title: 'Email',
-                         value: 'sylvesterfranklin007@gmail.com'
-                    },
-                    {
-                         title: 'Phone',
-                         value: '+145789900'
-                    },
-                    {
-                         title: 'Billing',
-                         value: 'Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)'
-                    },
-                    {
-                         title: 'Shipping',
-                         value: 'Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)'
-                    },
-                    {
-                         title: 'Shipping Company',
-                         value: 'Umoja Free Shipping',
-                         img: 'https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png'
-                    },
-               ]
-          }
-     }
-}
+<script setup>
+	const freeFeatures = [
+		"Basic storefront on the Umoja platform to showcase products.",
+		"Access to essential inventory management & Order processing tools.",
+		"Advanced analytics and reporting for deeper insights into sales performance.",
+		"Standard customer support via email.",
+		"Sales Commission: 10% of each sale made through the platform.",
+		"Ideal for: Businesses and start-ups looking to test the platform and get started with minimal upfront costs."
+	]
+	const businessPackage = [
+		"Verified business profile",
+		"Expanded storefront on the Umoja platform to showcase more products",
+		"Enhanced inventory management tools with additional features",
+		"Full order processing and fulfillment capabilities",
+		"Access to basic analytics and reporting",
+		"Standard customer support via email",
+		"Sales Commission: 8% of each sale made through the platform",
+		"Listing Fee: $0.15 per product listing",
+		"Ideal for: Small businesses and startups ready to expand their online presence and manage their operations more efficiently."
+	]
+	const premiumPackage = [
+		"All features included in the Basic Package",
+		"Enhanced marketing and promotional tools, including featured listings and discounts",
+		"Advanced analytics and reporting for deeper insights into sales performance",
+		"Priority customer support with faster response times and dedicated account management",
+		"Sales Commission: 6% of each sale made through the platform",
+		"Listing Fee: $0.10 per product listing",
+		"Ideal for: Growing businesses seeking to increase their sales, drive customer engagement, and optimize their operations with additional support and features"
+	]
 </script>

@@ -213,7 +213,7 @@ watch(() => vendorStore.vendor, async () => {
 });
 async function loadVendorData(){
 	const vendorDetails = vendorStore.vendor.vendor_details;
-	const vendorId  = vendorStore.vendor.vendor_details.id;;
+	const vendorId  = vendorStore.vendor.vendor_details.id;
 		if (vendorDetails?.product_count > 0){
 			vendorProducts.allProducts = await fetchProducts(vendorId)
 		}
@@ -229,6 +229,8 @@ async function loadVendorData(){
 }
 
 onMounted(async () => {
+	const vendorId  = vendorStore.vendor?.id;
+	await vendorStore.getUser(vendorId)
 	if (vendorStore.vendor.complete_setup == 1){
 		await loadVendorData();
 	}

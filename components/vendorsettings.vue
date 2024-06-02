@@ -35,7 +35,7 @@
 							<Vendorsettingsprofile :vendor="vendor" />
 						</v-window-item>
 						<v-window-item value="Billing">
-							<Vendorsettingsbilling />
+							<Vendorsettingsbilling  />
 						</v-window-item>
 						<v-window-item value="Notifications">
 							<Vendorsettingsnotifications />
@@ -44,7 +44,7 @@
 							<Vendorsettingssecurity />
 						</v-window-item>
 						<v-window-item value="Account Details">
-							<Vendorsettingsaccount />
+							<Vendorsettingsaccount :vendor="vendor" />
 						</v-window-item>
 					</v-window>
 				</v-col>

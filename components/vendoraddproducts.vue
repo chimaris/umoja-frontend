@@ -184,17 +184,18 @@
 									<p style="color: #333; font-size: 20px; font-weight: 600">Product Organization</p>
 								</div>
 								<div>
-									<p class="inputLabel">Category</p>
-									<v-select  @change="fetchSubCategories()" :items="categoryNames" v-model="selectedCategory" :rules="inputRules"  placeholder="Fashion and style" density="comfortable"> </v-select>
-								</div>
-								<div>
-									<p class="inputLabel">Sub Category</p>
-									<v-select :loading="loadingSub" color="green" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="selectedSubCategory" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
-								</div>
-								<div>
 									<p class="inputLabel">Gender</p>
 									<v-select v-model="selectedGender" :items="['Male', 'Female', 'Unisex']"  placeholder="Unisex" density="comfortable"> </v-select>
 								</div>
+								<div>
+									<p class="inputLabel">Category</p>
+									<v-select :items="categoryNames" v-model="selectedCategory" :rules="inputRules"  placeholder="Fashion and style" density="comfortable"> </v-select>
+								</div>
+								<div>
+									<p class="inputLabel">Sub Category</p>
+									<v-select :loading="loadingSub" color="green" :items="subCategories.map(subCategory => subCategory.name)" v-model="selectedSubCategory" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
+								</div>
+								
 								<div>
 									<p class="inputLabel">Tags</p>
 									<v-text-field @keyup.enter="handleTagInput()" v-model="newTag" placeholder="Find or create tags" density="comfortable"> </v-text-field>
@@ -786,10 +787,12 @@ export default {
 		const subCategories = ref([])
 		const selectedCategory = ref("")
 		const Categories = ref([])
-		const isFetching =  ref(false)
+		const selectedGender = ref("")
 
-		watch(() => selectedCategory.value, async () => {
-			subCategories.value = await fetchSubCategories(selectedCategory.value, Categories.value);
+		watch(() => [selectedCategory.value, selectedGender.value ],  async () => {
+			if (selectedCategory.value && selectedGender.value){
+				subCategories.value = await fetchSubCategories({selectedCat: selectedCategory.value, Categories: Categories.value , gender: selectedGender.value, role: 'vendor'});
+			}
 		});
 
 		onMounted(async () => {
@@ -797,7 +800,7 @@ export default {
 		})
 
 		function getSubCategoryId(subCategory) {
-			const subCat = subCategories.value.findIndex(subCat => subCat.subcategory_name === subCategory);
+			const subCat = subCategories.value.findIndex(subCat => subCat.name === subCategory);
 			if (subCat === -1) {
 				return
 			}
@@ -805,30 +808,7 @@ export default {
 			const subCategory_id = subCategories.value[subCat].id
 			return subCategory_id
 		}
-		// async function fetchSubCategories() {
-		// 	const api = vendorUseApi()
-		// 	isFetching.value = true;
-		// 	const category_id = getCategoryId(selectedCategory.value, Categories.value)
-		// 	const category_name = getCategoryName(selectedCategory.value, Categories.value)
-		// 	try {
-		// 		const response = await api({
-		// 			url: `admin/sub_categories/category/${category_id}`,
-		// 			data: {
-		// 				name: category_name,
-		// 				category_id: category_id,
-		// 				photo: ""
-		// 			}
-		// 		});
-		// 		const subCategory = response.data.data;
-   		// 		subCategories.value = subCategory
-		// 		return
-		// 	} catch(error) {
-		// 		console.error(error)
-		// 		return [];
-		// 	} finally {
-		// 		isFetching.value = false;
-		// 	}
-		// }
+
 		const tab1 = ref('General');
 		const vendorProducts = useVendorProductStore()
 		const nonNegValue = [
@@ -900,6 +880,7 @@ export default {
 			Categories,
 			getSubCategoryId,
 			fetchSubCategories,
+			selectedGender
 			
 		}
 	},
@@ -937,7 +918,6 @@ export default {
 			productSpec: "",
 			editorContent: "",
 			productStat: "",
-			selectedGender: "",
 			productName: "",
 			selectedSubCategory: "",
 			newProduct: [],
@@ -970,49 +950,6 @@ export default {
 
             ],
 			shippingOptions: ["Umoja Shipping", "DHL", "Fedex",],
-            summary: [
-                {
-                    title: 'Total Quantity',
-                    value: '4 Items'
-                },
-                {
-                    title: 'Grand Total',
-                    value: '€ 1,829.00'
-                }, {
-                    title: 'Sub-Total',
-                    value: '€ 1,817.00'
-                },
-                {
-                    title: 'Shipping International',
-                    value: '€ 12.00'
-                },
-                {
-                    title: 'Taxes',
-                    value: '€ 0.00'
-                }
-            ],
-            items: [
-                {
-                    sn: '#23942',
-                    name: 'Leather crop top & pants......',
-                    date: '17 May',
-                    total: '€2,349‎',
-                },
-                {
-                    sn: '#23442',
-                    name: 'Leather crop top & pants......',
-                    date: '17 May',
-                    total: '€2,349‎',
-                },
-                {
-                    sn: '#26042',
-                    name: 'Leather crop top & pants......',
-                    date: '17 May',
-                    total: '€2,349‎',
-                },
-
-
-            ],
         }
     },
 	
@@ -1034,35 +971,6 @@ export default {
    			return  `${marginPercent}%`
 		}
 	   },
-        orderDetails() {
-            return [
-                {
-                    title: 'Name',
-                    value: 'Benjamin Franklin O.'
-                },
-                {
-                    title: 'Email',
-                    value: 'sylvesterfranklin007@gmail.com'
-                },
-                {
-                    title: 'Phone',
-                    value: '+145789900'
-                },
-                {
-                    title: 'Billing',
-                    value: 'Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)'
-                },
-                {
-                    title: 'Shipping',
-                    value: 'Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)'
-                },
-                {
-                    title: 'Shipping Company',
-                    value: 'Umoja Free Shipping',
-                    img: 'https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png'
-                },
-            ]
-        }
     },
 	methods: {
 

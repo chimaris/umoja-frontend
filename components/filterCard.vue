@@ -61,70 +61,19 @@
 				</div>
 				<v-expand-transition leave-absolute>
 					<v-list v-if="subCategoryExpand">
-						<template v-for="(subCategory, index) in subCatNames" :key="index">
-						<template v-if="subCategories[index].neted_subcategories && subCategories[index].neted_subcategories.length > 0">
-							<!-- Render with dropdown for nested subcategories -->
-							<v-list-group>
-							<template v-slot:activator="{ props }">
-								<v-list-item
-								style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px"
-								v-bind="props"
-								:title="subCategory"
-								></v-list-item>
-							</template>
 							<v-list-item
-								v-for="(sub, subIndex) in subCategories[index].neted_subcategories"
+								v-for="(sub, subIndex) in subCategories"
 								:key="subIndex"
 								:style="{
 								color: productStore.params.sub_category_name === sub ? '#2C6E63' : '',
 								backgroundColor: productStore.params.sub_category_name === sub ? '#E5EDEC' : '',
 								}"
-								:title="sub"
+								:title="sub.name"
 								style="cursor: pointer; font-size: 10px"
-								@click="productStore.params.sub_category_name = sub"
+								@click="productStore.params.sub_category_name = sub.name"
 							></v-list-item>
-							</v-list-group>
-						</template>
-						<template v-else>
-							<!-- Render as a single item without dropdown -->
-							<v-list-item
-							style="font-size: 10px; cursor: pointer; font-weight: 500; letter-spacing: -0.42px"
-							:title="subCategory"
-							:style="{
-								color: productStore.params.sub_category_name === subCategory ? '#2C6E63' : '',
-								backgroundColor: productStore.params.sub_category_name === subCategory ? '#E5EDEC' : '',
-							}"
-							@click="productStore.params.sub_category_name = subCategory"
-							></v-list-item>
-						</template>
-						</template>
 					</v-list>
 					</v-expand-transition>
-
-				<!-- <v-expand-transition leave-absolute>
-					<v-list v-if="subCategoryExpand">
-						<v-list-group v-for="(subCategory, index) in subCatNames" :key="index">
-							<template v-slot:activator="{ props }">
-								<v-list-item
-									style="font-size: 10px; font-weight: 500; letter-spacing: -0.42px"
-									v-bind="props"
-									:title="subCategory"
-								></v-list-item>
-							</template>
-							<v-list-item
-								v-for="(sub, subIndex) in subCategories[index].neted_subcategories || [subCategories[index].subcategory_name]"
-								:key="subIndex"
-								:style="{
-									color: productStore.params.sub_category_name === sub ? '#2C6E63' : '',
-									backgroundColor: productStore.params.sub_category_name === sub ? '#E5EDEC' : '',
-								}"
-								:title="sub"
-								style="cursor: pointer; font-size: 10px"
-								@click="productStore.params.sub_category_name = sub"
-							></v-list-item>
-						</v-list-group>
-					</v-list>
-				</v-expand-transition> -->
 			</div>
 
 			<!-- <div>
@@ -355,17 +304,28 @@ const subCatNames = computed(() => subCategories.value.map(subCategory => subCat
 
 onMounted(async () => {
 	categories.value = await fetchCategories("customer")
-	if (productStore.params.category_name){
-		subCategories.value = await fetchSubCategories(productStore.params.category_name, categories.value, "customer");
+	productStore.params.category_name = 'Clothing'
+	if (productStore.params.category_name && productStore.params.gender){
+		subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
 	}
-})
+});
 			// watch for change ins any of the filter value
-			watch(() => [productStore.params.gender, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], async () => {
+			watch(() => [productStore.params.gender, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
+			async ([newGender, newCategory_name, newSizes, newProduct_rating, newCompare_at_price, newSub_category_name]) => {
+				if(!newGender){
+					productStore.params.gender = 'Unisex'
+				}
+				if (!newCategory_name){
+					productStore.params.category_name = 'Clothing'
+				}
 				await productStore.fetchFilteredProducts()
 			});
-			watch(() => productStore.params.category_name, async () => {
-				subCategories.value = await fetchSubCategories(productStore.params.category_name, categories.value, "customer");
-			})
+			watch(() => [productStore.params.gender, productStore.params.category_name], async () => {
+				if (productStore.params.category_name && productStore.params.gender){
+					subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
+				}
+			});
+
 			watch(() => price.value, (newPrice) => {
 					if (newPrice) {
 					const [min, max] = newPrice.split(' - ').map(price => price.replace('€', '').trim());

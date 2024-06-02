@@ -131,6 +131,7 @@
 import { ref, computed, defineEmits, onMounted, onBeforeMount } from 'vue';
 import profileVue from '~/pages/vendor/profile.vue';
 import { useVendorStore } from '~/stores/vendorStore';
+import {upLoadPicture} from '~/utils/upload';
 import axios from 'axios'
 import Compressor from 'compressorjs';
   	
@@ -160,14 +161,6 @@ import Compressor from 'compressorjs';
 			vendor.value =  []
 		}
 	})
-
-// watch(() => vendorStore.vendor.vendor_details, (newval, oldval) => {
-// 		if (!newval){
-// 			vendor.value = []
-// 		}
-// 		vendor.value = newval		
-// });
-
 	const emit = defineEmits(['submit']);
 	
 
@@ -211,254 +204,18 @@ import Compressor from 'compressorjs';
 					return charCount.value >= maxCount.value;
 	});
 
-function upLoadFile(event) {
-    if (upLoadedFiles.value.length == 1){
-        errorMessage.value = 'Maximum number of images allowed is 1';
-        return;
-    }
-    
-    const file = event.target.files[0];
-    if (!file) return;
-
-    const allowedFiles = [".png", ".jpeg", ".jpg"];
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-
-    if (!allowedFiles.includes("." + fileExtension)) {
-        errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-        return;
-    }
-
-    errorMessage.value = "";
-
-    new Compressor(file, {
-        quality: 0.7, // Adjust the quality as needed
-        maxWidth: 800, // Max width
-        maxHeight: 400, // Max height
-        success(compressedFile) {
-            const filename = compressedFile.name;
-            const formData = new FormData();
-            formData.append("profile_photo", compressedFile);
-            const form = { name: filename, loading: 0 };
-            profilePicture.value = [form];
-            showProgress.value = true;
-
-            axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
-                headers: {
-                    Authorization: `Bearer ${vendorStore.vendorToken}`
-                },
-                onUploadProgress: ({ loaded, total }) => {
-                    profilePicture.value[profilePicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
-                    if (loaded == total) {
-                        const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-                        upLoadedFiles.value.push({ name: filename, size: fileSize });
-                        profilePicture.value = [];
-                    }
-                }
-            })
-            .then(response => {
-                const profileImg = response.data.profile_photo;
-                profile_photo.value = profileImg;
-            })
-            .catch(error => {
-                if (error.response) {
-                    errorMessage.value = error.response.data.message || 'An error occurred during file upload.';
-                } else if (error.request) {
-                    errorMessage.value = 'No response received from server. Please try again later.';
-                } else {
-                    errorMessage.value = 'An error occurred. Please try again later.';
-                }
-            });
-        },
-        error(err) {
-            errorMessage.value = err.message || "Failed to compress the image";
-        },
-    });
-}
-function upLoadFile1(event) {
-	if (upLoadedFiles1.value.length == 1){
-		errorMessage1.value = 'Maximum number of images allowed is 1'
-		return
+	async function upLoadFile(event){
+	await upLoadPicture({event, upLoadedFiles, showProgress, profilePicture, profile_photo, errorMessage})
 	}
-		const file = event.target.files[0]
-		if(!file) return;
-		
-    const allowedFiles = [".png", ".jpeg", ".jpg"]
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-    
-    if (!allowedFiles.includes("." + fileExtension)) {
-          errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-          return;
-      }
-
-    errorMessage1.value = ""
-	new Compressor(file, {
-        quality: 0.7, // Adjust the quality as needed
-        maxWidth: 1000, // Max width
-        maxHeight: 1000, // Max height
-        success(compressedFile) {
-            const filename = compressedFile.name;
-            const formData = new FormData();
-            formData.append("profile_photo", compressedFile);
-            const form = { name: filename, loading: 0 };
-            coverPicture.value = [form]
-      		showProgress1.value = true;
-
-			  axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
-			headers: {
-					Authorization: `Bearer ${vendorStore.vendorToken}`
-					},
-			onUploadProgress: ({loaded, total}) => {
-				coverPicture.value[coverPicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
-				if (loaded == total) {
-					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-					upLoadedFiles1.value.push({name: filename, size: fileSize});
-					coverPicture.value = [];
-				}
-			}
-			
-			})
-			.then(response => {
-				const coverImg = response.data.profile_photo
-				cover_photo.value = coverImg
-			})
-			.catch(error => {
-				if (error.response) {
-				errorMessage1.value = error.response.data.message || 'An error occurred during file upload.';
-				} else if (error.request) {
-				errorMessage1.value = 'No response received from server. Please try again later.';
-				} else {
-				errorMessage1.value = 'An error occurred. Please try again later.';
-				}
-			});
-        },
-        error(err) {
-            errorMessage1.value = err.message || "Failed to compress the image";
-        },
-    });
-
-}
-function drop1(e) {
-	if (upLoadedFiles1.value.length == 1){
-		errorMessage1.value = 'Maximum number of images allowed is 1'
-		return
+	async function upLoadFile1(event){
+	await upLoadPicture({event, upLoadedFiles: upLoadedFiles1, showProgress: showProgress1, profilePicture: coverPicture, profile_photo: cover_photo, errorMessage: errorMessage1})
 	}
-		const file= e.dataTransfer.files[0]
-		const allowedFiles = [".png", ".jpeg", ".jpg"]
-    const fileExtension = file.name.split(".").pop().toLowerCase();
-    
-    if (!allowedFiles.includes("." + fileExtension)) {
-          errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-          return;
-      }
 
-    errorMessage1.value = ""
-	new Compressor(file, {
-        quality: 0.7, // Adjust the quality as needed
-        maxWidth: 1000, // Max width
-        maxHeight: 1000, // Max height
-        success(compressedFile) {
-            const filename = compressedFile.name;
-            const formData = new FormData();
-            formData.append("profile_photo", compressedFile);
-            const form = { name: filename, loading: 0 };
-            coverPicture.value = [form]
-      		showProgress1.value = true;
-
-			  axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
-			headers: {
-					Authorization: `Bearer ${vendorStore.vendorToken}`
-					},
-			onUploadProgress: ({loaded, total}) => {
-				coverPicture.value[coverPicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
-				if (loaded == total) {
-					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-					upLoadedFiles1.value.push({name: filename, size: fileSize});
-					coverPicture.value = [];
-				}
-			}
-			
-			})
-			.then(response => {
-				const coverImg = response.data.profile_photo
-				cover_photo.value = coverImg
-			})
-			.catch(error => {
-				if (error.response) {
-				errorMessage1.value = error.response.data.message || 'An error occurred during file upload.';
-				} else if (error.request) {
-				errorMessage1.value = 'No response received from server. Please try again later.';
-				} else {
-				errorMessage1.value = 'An error occurred. Please try again later.';
-				}
-			});
-        },
-        error(err) {
-            errorMessage1.value = err.message || "Failed to compress the image";
-        },
-    });
-
-}
-function drop(e) {
-	if (upLoadedFiles.value.length == 1){
-		errorMessage.value = 'Maximum number of images allowed is 1'
-		return
+	async function drop1(e) {
+		await upLoadPicture({event:e, upLoadedFiles: upLoadedFiles1, showProgress: showProgress1, profilePicture: coverPicture, profile_photo: cover_photo, errorMessage: errorMessage1, mode: 'drop'})
 	}
-	const file= e.dataTransfer.files[0]
-	if (!file) return;
-
-const allowedFiles = [".png", ".jpeg", ".jpg"];
-const fileExtension = file.name.split(".").pop().toLowerCase();
-
-if (!allowedFiles.includes("." + fileExtension)) {
-	errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-	return;
-}
-
-errorMessage.value = "";
-
-new Compressor(file, {
-	quality: 0.7, // Adjust the quality as needed
-	maxWidth: 800, // Max width
-	maxHeight: 400, // Max height
-	success(compressedFile) {
-		const filename = compressedFile.name;
-		const formData = new FormData();
-		formData.append("profile_photo", compressedFile);
-		const form = { name: filename, loading: 0 };
-		profilePicture.value = [form];
-		showProgress.value = true;
-
-		axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
-			headers: {
-				Authorization: `Bearer ${vendorStore.vendorToken}`
-			},
-			onUploadProgress: ({ loaded, total }) => {
-				profilePicture.value[profilePicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
-				if (loaded == total) {
-					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-					upLoadedFiles.value.push({ name: filename, size: fileSize });
-					profilePicture.value = [];
-				}
-			}
-		})
-		.then(response => {
-			const profileImg = response.data.profile_photo;
-			profile_photo.value = profileImg;
-		})
-		.catch(error => {
-			if (error.response) {
-				errorMessage.value = error.response.data.message || 'An error occurred during file upload.';
-			} else if (error.request) {
-				errorMessage.value = 'No response received from server. Please try again later.';
-			} else {
-				errorMessage.value = 'An error occurred. Please try again later.';
-			}
-		});
-	},
-	error(err) {
-		errorMessage.value = err.message || "Failed to compress the image";
-	},
-	});
+	async function drop(e) {
+		await upLoadPicture({event: e, upLoadedFiles, showProgress, profilePicture, profile_photo, errorMessage, mode: 'drop'})
 	}
 </script>
 
