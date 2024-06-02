@@ -13,8 +13,8 @@ export const useProductStore = defineStore('productStore', {
       product_rating: "",
       compare_at_price: "",
       sub_category_name: "",
-      priceMinimum: null,
-      priceMaximum: null
+      priceMinimum: "",
+      priceMaximum: ""
     },
     recentSearches: [],
     discoveryCurrentPage: null,
@@ -62,6 +62,7 @@ export const useProductStore = defineStore('productStore', {
         this.productFrom = res.data.meta.from;
         this.productTo = res.data.meta.to;
         this.totalProducts = res.data.meta.total
+        console.log(res)
       }catch(error){
         console.error(error)
       }
