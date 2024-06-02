@@ -91,7 +91,7 @@ font-weight: 500;">Bank Name</p>
 <div class="d-flex  align-center">
     <p style="color: #000;
 font-size: 14px;
-font-weight: 500;
+font-weight: 500; text-transform: capitalize
 ">{{vendor.vendor_details?.bank_name}}</p>
 <v-icon @click="copyToClipboard(vendor.vendor_details?.bank_name)" color="green" size="small" class="ml-3" icon="mdi mdi-content-copy"></v-icon>
 </div>
@@ -114,7 +114,7 @@ font-size: 14px;
 font-weight: 500;">Address</p>
 <div class="d-flex  align-center">
     <p class="text-right" style="color: #000;
-font-size: 14px;max-width:228px ;
+font-size: 14px;max-width:228px ; text-transform: capitalize;
 font-weight: 500;
 ">{{vendor.vendor_details?.address}}</p>
 <v-icon @click="copyToClipboard(vendor.vendor_details?.address)" color="green" size="small" class="ml-3" icon="mdi mdi-content-copy"></v-icon>

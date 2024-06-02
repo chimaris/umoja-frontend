@@ -65,8 +65,8 @@
 								v-for="(sub, subIndex) in subCategories"
 								:key="subIndex"
 								:style="{
-								color: productStore.params.sub_category_name === sub ? '#2C6E63' : '',
-								backgroundColor: productStore.params.sub_category_name === sub ? '#E5EDEC' : '',
+								color: productStore.params.sub_category_name === sub.name ? '#2C6E63' : '',
+								backgroundColor: productStore.params.sub_category_name === sub.name ? '#E5EDEC' : '',
 								}"
 								:title="sub.name"
 								style="cursor: pointer; font-size: 10px"
@@ -120,6 +120,7 @@
 							placeholder="Minimum"
 							@input="productStore.fetchFilteredProducts()"
 						></v-text-field>
+						
 						<v-text-field
 							class="mb-4"
 							hide-details=""

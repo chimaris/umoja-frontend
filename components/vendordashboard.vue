@@ -64,7 +64,7 @@ color: #333333;">{{n.name}}</p>
         <p style="font-weight: 600;
 font-size: 14px;
 line-height: 18px;
-color: #00966D;" class="text-green-lighten-2" :class="n.trending? 'text-green-lighten-2' : 'text-red'"><v-icon :icon="n.trending? 'mdi mdi-trending-up':'mdi mdi-trending-down'"></v-icon> {{n.trend}}%</p>
+color: #00966D;" class="text-grey-lighten-2" :class="n.trending? 'text-grey-lighten-2' : 'text-red'"><v-icon :icon="n.trending? 'mdi mdi-trending-up':'mdi mdi-trending-down'"></v-icon> {{n.trend}}%</p>
         <p style="font-weight: 500;
 font-size: 14px;
 line-height: 18px;
@@ -87,15 +87,15 @@ color: #969696;">vs last 7 days</p>
   </v-card>
     </v-col>
     <v-col cols="12" lg="6">
-        <v-card  class="mx-auto pa-4 coolTable" width="100%" style=""  flat >
+        <v-card  class="mx-auto pa-4 coolTable" width="100%" style="position: relative; min-height: 450px"  flat >
         <div class="d-flex justify-space-between">
             <div>
                 <p class="mb-2 timernum d-flex align-center text-left">Customer Growth</p> 
                 <p class="lightText2">of the week based on country </p>
             </div>
-            <v-menu width="auto">
+            <v-menu  width="auto">
               <template v-slot:activator="{ props }">
-              <v-btn  v-bind="props"  style="    border: 1px solid #e5e5e5;
+              <v-btn :disabled="!hasSale"  v-bind="props"  style="border: 1px solid #e5e5e5; z-index: 10;
   " variant="outlined" class="text-grey-darken-3" >
                   Country <v-icon icon="mdi mdi-chevron-down"></v-icon>
               </v-btn>
@@ -111,47 +111,49 @@ color: #969696;">vs last 7 days</p>
           <v-list-item-title>{{ item }}</v-list-item-title>
         </v-list-item>
       </v-list>
-    </v-menu>
+            </v-menu>
         </div>
-        <v-row class="mt-8">
+        <v-row class="mt-8" >
             <v-col cols="7">
-              <!-- <MapboxMap
+              <MapboxMap
                 map-id="{ID}"
-                style="position: absolute; top: 0; bottom: 0; left: 250px; width: 500px;"
+                style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: -10;"
                 :options="{
                   style: 'mapbox://styles/mapbox/light-v11', // style URL
                   center: [-68.137343, 45.137451], // starting position
                   zoom: 5 // starting zoom
                 }"
-              /> -->
-                <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685704413/Maps_ic2b3z.png">
-                    <v-card style="position: absolute;top:20px;left: 50%;transform: translate(-50%, 0);"  width="" class="pa-3 px-6 rounded-lg bg-green">
-        <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>United States</p>
-        <div class="pt-2 align-center d-flex">
-            <v-progress-circular class="mr-4" size="48" model-value="20">38%</v-progress-circular>            <div>
-                <p style="font-weight: 500;font-size: 14px" class="text-capitalize">20,489</p>
-                <p style="font-weight: 500;
-font-size: 10px;
-line-height: 100%;
-/* identical to box height, or 10px */
+              >
+                    <v-card style="position: absolute;top:30%;left: 30%;transform: translate(-50%, 0);"  width="" class="d-none pa-3 px-6 rounded-lg bg-green">
+              <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>United States</p>
+              <div class="pt-2 align-center d-flex">
+                  <v-progress-circular class="mr-4" size="48" model-value="20">38%</v-progress-circular>            <div>
+                      <p style="font-weight: 500;font-size: 14px" class="text-capitalize">20,489</p>
+                      <p style="font-weight: 500;
+      font-size: 10px;
+      line-height: 100%;
+      /* identical to box height, or 10px */
 
 
-color: rgba(255, 255, 255, 0.75);" class="text-capitalize">customers</p>
-            </div>
-        </div>
-      </v-card> 
-<div style="position: absolute;bottom:10px; left:10px" >
-<div >
-    
-    <v-btn class="mb-2" size="small"  rounded="xl" icon> <v-icon size="18" color="grey-darken-1" icon="mdi mdi-magnify-plus-outline"></v-icon></v-btn>
-</div>
-<div >
-    <v-btn size="small"  rounded="xl" icon> <v-icon size="18" color="grey-darken-1" icon="mdi mdi-magnify-minus-outline"></v-icon></v-btn>
-   </div>  
-   </div>  
-           </v-img>
+      color: rgba(255, 255, 255, 0.75);" class="text-capitalize">customers</p>
+                  </div>
+              </div>
+            </v-card> 
+      <div style="position: absolute;bottom:10px; left:10px" >
+      <div >
+          
+          <v-btn class="mb-2" size="small"  rounded="xl" icon> <v-icon size="18" color="grey-darken-1" icon="mdi mdi-magnify-plus-outline"></v-icon></v-btn>
+      </div>
+      <div >
+          <v-btn size="small"  rounded="xl" icon> <v-icon size="18" color="grey-darken-1" icon="mdi mdi-magnify-minus-outline"></v-icon></v-btn>
+        </div>  
+        </div>  
+            </MapboxMap>
+                <!-- <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685704413/Maps_ic2b3z.png"> -->
+                    
+           <!-- </v-img> -->
             </v-col>
-            <v-col cols="5">
+            <v-col  v-if="hasReview" class="" cols="5">
                 <div class="mt-3" v-for="n in countries" :key="n.name">
                     <div class="d-flex mb-1 align-center">
                         <v-avatar size="24"><v-img :src="n.img"></v-img></v-avatar>
@@ -173,7 +175,7 @@ color: #969696;" class="ml-4">{{ n.growth }}%</p>
             </v-col>
         </v-row>
 
-  </v-card>
+        </v-card>
     </v-col>
     <v-col cols="12" lg="5">
         <v-card height="100%"  class=" mx-auto coolTable py-4" width="100%" style="overflow:hidden"  flat >
@@ -182,97 +184,103 @@ color: #969696;" class="ml-4">{{ n.growth }}%</p>
                 <p class="mb-2 timernum d-flex align-center text-left">Top Transactions</p> 
                 <p class="lightText2">of the week based on total purchase </p>
             </div>
-            <v-btn variant="text" color="#1361F4" class="" >
-View All            </v-btn>
+            <v-btn v-if="hasSale" variant="text" color="#1361F4" class="" >View All</v-btn>
         </div>
-<div class="rounded- mt-5" >
-    <v-table style="    height: 190px!important;
-    overflow: scroll;">
-    <thead>
-      <tr class="bg-grey-lighten-3 ">
-        <th style="font-size: 14px;" class="  font-weight-medium  text-left">
-           #ID
-        </th>
-        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          First Item
-        </th>
-        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          Date
-        </th>
-        <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
-          Purchase
-        </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr  @click="chosen = item.sn"
-      :style="chosen == item.sn ? 'background:#DFDFDF':''"
-        v-for="item in items"
-        :key="item.sn"
-      >
-        <td style="font-size: 14px;" class="px-1 pl-2">
-            <v-menu
-      
-      location="end"
-    >
-      <template v-slot:activator="{ props }">
-   
-        <span  v-bind="props">
+        <div v-if="!hasSale" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
+							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
+							<span>No Product has been sold yet</span>
+					</div>
+        <div class="rounded- mt-5" >
+            <v-table v-if="hasSale" style="    height: 190px!important;
+            overflow: scroll;">
+            <thead>
+              <tr class="bg-grey-lighten-3 ">
+                <th style="font-size: 14px;" class="  font-weight-medium  text-left">
+                  #ID
+                </th>
+                <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+                  First Item
+                </th>
+                <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+                  Date
+                </th>
+                <th style="font-size: 14px;" class=" text-left px-1  font-weight-medium">
+                  Purchase
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr  @click="chosen = item.sn"
+              :style="chosen == item.sn ? 'background:#DFDFDF':''"
+                v-for="item in items"
+                :key="item.sn"
+              >
+                <td style="font-size: 14px;" class="px-1 pl-2">
+                    <v-menu
+              
+              location="end"
+            >
+              <template v-slot:activator="{ props }">
+          
+                <span  v-bind="props">
 
-{{ item.sn }}
-</span>
-      </template> 
-      <v-card class="pa-4 rounded-lg bg-green">
-        <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: {{ item.sn }}</p>
-        <div class="pt-2 align-center d-flex">
-            <v-avatar size="44" class="mr-2"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685693849/Rectangle_1898_gyahsj.png"></v-img></v-avatar>
-            <div>
-                <p style="font-weight: 500;font-size: 14px" class="text-capitalize">Jenny Wilson</p>
-                <p style="font-weight: 500;
-font-size: 10px;
-line-height: 100%;
-/* identical to box height, or 10px */
+        {{ item.sn }}
+        </span>
+              </template> 
+              <v-card class="pa-4 rounded-lg bg-green">
+                <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: {{ item.sn }}</p>
+                <div class="pt-2 align-center d-flex">
+                    <v-avatar size="44" class="mr-2"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685693849/Rectangle_1898_gyahsj.png"></v-img></v-avatar>
+                    <div>
+                        <p style="font-weight: 500;font-size: 14px" class="text-capitalize">Jenny Wilson</p>
+                        <p style="font-weight: 500;
+        font-size: 10px;
+        line-height: 100%;
+        /* identical to box height, or 10px */
 
 
-color: rgba(255, 255, 255, 0.75);" class="text-capitalize">
-<v-icon size="12" class="mr-1" icon="mdi mdi-map-marker"></v-icon>United States</p>
-            </div>
+        color: rgba(255, 255, 255, 0.75);" class="text-capitalize">
+        <v-icon size="12" class="mr-1" icon="mdi mdi-map-marker"></v-icon>United States</p>
+                    </div>
+                </div>
+              </v-card>
+            </v-menu>
+            </td>
+                <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.name }}</td>
+                <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.date }}</td>
+                <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">
+                    <span v-if="chosen !== item.sn ">
+                        {{ item.total }}
+                    </span>
+                    <v-btn v-else color="green" size="small" class=" rounded-lg"> See details</v-btn>
+                </td>
+              </tr>
+            </tbody>
+          </v-table>
         </div>
-      </v-card>
-    </v-menu>
-    </td>
-        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.name }}</td>
-        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.date }}</td>
-        <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">
-            <span v-if="chosen !== item.sn ">
-                {{ item.total }}
-            </span>
-            <v-btn v-else color="green" size="small" class=" rounded-lg"> See details</v-btn>
-        </td>
-      </tr>
-    </tbody>
-  </v-table>
-</div>
 
   </v-card>
     </v-col>
     <v-col cols="12" lg="4">
-        <v-card height="auto"  class="pa-4 mx-auto coolTable" width="100%"  flat >
+        <v-card height="100%"  class="pa-4 mx-auto coolTable" width="100%"  flat >
         <div class="d-flex justify-space-between">
             <div>
                 <p class="mb-2 timernum d-flex align-center text-left">Top Product</p> 
                 <p class="lightText2">of the week based on total purchase </p>
             </div>
-            <v-btn variant="text" color="#1361F4" >
-View more            </v-btn>
+            <v-btn v-if="hasSale" variant="text" color="#1361F4" >View more</v-btn>
         </div>
+        <div v-if="!hasSale" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
+							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
+							<span>No Product has been sold yet</span>
+					</div>
 
         <v-row class="mt-1">
             <v-col v-for="n in imgs" cols="4"><v-img width="100%" class="rounded-lg" :src="n"></v-img></v-col>
         </v-row>
   </v-card>
     </v-col>
-    <v-col v-if="!show_more" cols="12" lg="3">
+    <v-col v-if="!show_more" cols="12" lg="3" :style="{opacity: hasSale ? '': 0.5}">
         <v-card theme="dark" image="https://res.cloudinary.com/payhospi/image/upload/v1685693850/Rectangle_1894_auhcts.png" height="100%" min-height="300px" class="mx-auto cardStyle" width="100%" style=""  flat >
         <div class="d-flex justify-space-between">
                 <p style="font-weight: 500;
@@ -284,7 +292,7 @@ letter-spacing: -0.03em;" class=" text-left">See more detail
 statistic to analyze
 your decision</p> 
         </div>
-        <v-btn  @click="show_more = !show_more" style="position: absolute;bottom: 24px; left:24px" color="white" flat class="" >
+        <v-btn :disabled="!hasSale"  @click="show_more = !show_more" style="position: absolute;bottom: 24px; left:24px" color="white" flat class="" >
     See More</v-btn>
     </v-card>
     </v-col>
@@ -494,10 +502,13 @@ import { useVendorStore } from '~/stores/vendorStore';
 export default {
   setup() {
     const vendorStore = useVendorStore()
-    const vendor = vendorStore.getVendor
+    const vendor = ref(vendorStore.vendor)
+    // const hasSale = computed(() => vendor.value.vendor_details?.order_count > 0)
+    const hasSale = false
 
     return {
-      vendor
+      vendor,
+      hasSale
     }
   },
   data() {
@@ -624,7 +635,7 @@ export default {
         tooltip: 'Total customers in the last seven days',
         amount: '0',
         trend: '0',
-        trending:false
+        trending:true
     },
     {
         img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691671/Frame_427320547_3_rhk1fq.png',

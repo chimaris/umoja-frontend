@@ -172,7 +172,7 @@
 								<p>{{ productStore.searchError }}</p>
 							</div>
 							<v-row dense>
-								<v-col v-for="(n, i) in items" :key="i" cols="6" :md="3" :lg="24">
+								<v-col v-for="(n, i) in loadMore? items : items.slice(0, 10)" :key="i" cols="6" :md="3" :lg="24">
 									<product-component :item="n" :index="i" />
 								</v-col>
 							</v-row>
@@ -183,7 +183,7 @@
 									color="#333"
 									size="large"
 									variant="outlined"
-									@click="loadProduct()"
+									@click="load()"
 									rounded="xl"
 									style="border: 1px solid #cecece; font-size: 14px; font-weight: 600"
 								>
@@ -342,14 +342,14 @@
 					</v-sheet>
 				</v-col>
 			</v-row>
-			<v-row>
-				<v-col cols="12" v-for="(n, i) in availableArticle.slice(0, 6)" :key="i" lg="4" md="4">
-					<div class="cardStyle">
+			<v-row >
+				<v-col cols="12" v-for="(n, i) in availableArticle.slice(0, 6)" :key="i" lg="4" md="4" class="d-flex flex-column">
+					<div class="cardStyle flex-grow-1 d-flex flex-column">
 						<div class="mb-4 d-flex">
 							<v-avatar size="50">
-								<v-img :src="n.vendor_profile_photo"></v-img>
+								<v-img cover :src="n.vendor_profile_photo"></v-img>
 							</v-avatar>
-							<div class="ml-3">
+							<div class="ml-3 flex-grow-1">
 								<div class="d-flex align-center">
 									<p style="color: #1e1e1e; font-size: 16px; text-transform: capitalize; font-weight: 600; line-height: 140%">{{n.vendor_firstname}} {{ n.vendor_lastname }}</p>
 									<v-icon class="mx-1" size="5" color="grey-lighten-2" icon="mdi mdi-circle"></v-icon>
@@ -362,15 +362,11 @@
 						</div>
 						<v-card flat color="grey-lighten-4" :image="n.cover_image" width="100%" height="188px" class="d-flex align-center justify-center rounded-lg">
 						</v-card>
-						<p class="mt-4 mb-2" style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 700; line-height: 140%">
+						<p class="mt-4 mb-2" style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 700; line-height: 140%; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis">
 							{{n.title}}
 						</p>
-						<div v-html="n.content" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis" class="article-content"></div>
-						<!-- <p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 400; line-height: 140%">
-							Lorem ipsum dolor sit amet consectetur. Id et ornare tristique tempus egestas neque tincidunt lobortis. Integer arcu sit massa orci
-							phasellus ipsum tincidunt et amet.
-						</p> -->
-						<v-btn  @click="$router.push(`/article_detail/${n.id}`)" size="small" color="#1273EB" class="px-0" variant="text">
+						<div v-html="n.content" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis" class="article-content "></div>
+						<v-btn  @click="$router.push(`/article_detail/${n.id}`)" size="small" color="#1273EB" class="px-0 mt-auto align-self-start" variant="text">
 							<span style="color: var(--deep-sky-blue-4, #1273eb); font-size: 14px; font-weight: 600"> Read more </span>
 							<v-icon size="small" class="ml-4" icon="mdi mdi-arrow-right"></v-icon
 						></v-btn>
@@ -407,11 +403,28 @@ export default {
 		const userStore = useUserStore();
 		const availablePosts = computed(() => userStore.allPosts.slice(0, 10));
 		const availableArticle = computed(() => userStore.allArticles)
+		const loadMore = ref(false)
+		const productStore = useProductStore()
+		const items = ref(productStore.products.popular)
+
+		const load = () => {
+			if (loadMore.value){
+				return
+			}
+			if (!loadMore.value){
+				loadMore.value = true
+			}
+		}
+
 
 		return{
 			userStore,
 			availablePosts,
-			availableArticle
+			availableArticle,
+			loadMore,
+			items,
+			productStore,
+			load
 		}
 	},
 	data() {
@@ -503,12 +516,6 @@ export default {
 		await this.productStore.discoverPageProducts()
 	},
 	computed: {
-		productStore() {
-			return useProductStore();
-		},
-		items() {
-			return this.productStore.getProductsArray('popular');
-		},
 		buttons() {
 			return [
 				{

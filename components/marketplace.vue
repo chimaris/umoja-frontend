@@ -184,8 +184,12 @@
 								<product-component :index="i" :item="n" />
 							</v-col>
 						</v-row> -->
-
-						<v-row dense class="mt-2 align-items-stretch"  >
+						<v-row dense v-if="productStore.productLoading" class="mt-2 align-items-stretch"  >
+							<v-col v-for="(n, i) in 8" :key="i" cols="6" :md="3" :lg="3" >
+								<productloader :item="n" :index="i" />
+							</v-col>
+						</v-row>
+						<v-row v-else dense class="mt-2 align-items-stretch"  >
 							<v-col v-for="(n, i) in productStore.getProductsArray('main')" :key="i" cols="6" :md="3" :lg="3" >
 								<product-component :item="n" :index="i" />
 							</v-col>

@@ -212,7 +212,7 @@ the deletion for 14 days.</p>
 <v-dialog max-width="800" v-model="vendorDetails">
 		<v-sheet class="pa-4 pa-md-6 w-100">
 			<p style="color: var(--carbon-4, #333); font-size: 20px; font-weight: 600">Edit Personal Information</p>
-			<v-card flat class="mt-6 bg-white rounded-lg py-8">
+			<v-card flat class="mt-6 bg-white rounded-lg py-8 px-2">
 				<v-form v-model="valid" @submit.prevent="editDetails()">
 					<v-row>
 						<v-col cols="12" class="pt-0" md="6">
@@ -234,7 +234,7 @@ the deletion for 14 days.</p>
 						></v-col>
 						<v-col cols="12" md="6" class="pt-0">
 							<p class="inputLabel">Phone Number<span class="mb-2">*</span></p>
-							<MazPhoneNumberInput style="width: 150px;"
+							<MazPhoneNumberInput
                                 v-model="vendor.vendor_details.busniess_phone_number"
                                 show-code-on-list
                                 :success="results?.isValid"

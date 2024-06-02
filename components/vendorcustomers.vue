@@ -34,8 +34,8 @@
 							<div class="text-left">
 								<p
 									style="font-weight: 600; font-size: 14px; line-height: 18px; color: #00966d"
-									class="text-green-lighten-2"
-									:class="n.trending ? 'text-green-lighten-2' : 'text-red'"
+									class="text-grey-lighten-2"
+									:class="n.trending ? 'text-grey-lighten-2' : 'text-red'"
 								>
 									<v-icon :icon="n.trending ? 'mdi mdi-trending-up' : 'mdi mdi-trending-down'"></v-icon> {{ n.trend }}%
 								</p>
@@ -47,8 +47,18 @@
 			</v-row>
 		</div>
 		<div v-if="items1.length > 0" class="d-flex align-center justify-space-between">
+			<div class="pl-3" style="width: 50%; max-width: 580px">
+				<v-text-field
+					style="border: 1px solid #e5e5e5; border-radius: 6px"
+					variant="outlined"
+					density="compact"
+					hide-details
+					prepend-inner-icon="mdi mdi-magnify"
+					placeholder="Search for order id, customer, order status or something..."
+				></v-text-field>
+			</div>
 			<div class="d-flex align-center">
-				<v-chip-group selected-class="text-primary" column>
+				<!-- <v-chip-group selected-class="text-primary" column>
 					<v-chip
 						style="font-weight: 600; font-size: 14px; line-height: 20px; color: #2c6e63"
 						rounded="lg"
@@ -62,22 +72,13 @@
 					>
 						{{ tag }}
 					</v-chip>
-				</v-chip-group>
+				</v-chip-group> -->
 				<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="large" class="ml-0 text-grey-darken-3">
 					<v-icon class="mr-2" icon="mdi mdi-tune-vertical-variant"></v-icon>
-					More Filters
+					Filter
 				</v-btn>
 			</div>
-			<div class="pl-3" style="width: 50%; max-width: 580px">
-				<v-text-field
-					style="border: 1px solid #e5e5e5; border-radius: 6px"
-					variant="outlined"
-					density="compact"
-					hide-details
-					prepend-inner-icon="mdi mdi-magnify"
-					placeholder="Search for order id, customer, order status or something..."
-				></v-text-field>
-			</div>
+			
 		</div>
 
 		<div v-if="items1.length > 0" class="mt-5">
@@ -663,7 +664,7 @@
 		</v-dialog>
 		<!-- If there is no Product show this -->
 		<div
-			v-if="items1.length === 0"
+			v-if="!hasCustomer"
 			class="d-flex flex-column justify-center align-center"
 			style="max-height: 100%; height: 90vh; border: 1px solid #cecece; border-radius: 15px"
 		>
@@ -671,7 +672,7 @@
 				<v-img :width="100" cover src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/customer-empty-box.png"></v-img>
 				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Everything customer in a single place</h2>
 				<p style="color: #969696; font-size: 16px; font-weight: 500">
-					When you have added customers, you will be to update their details, get a summary of their order history, create segment to send
+					When you have a customer, you will be to update their details, get a summary of their order history, create segment to send
 					personalized communications that drive sales and more
 				</p>
 				<!-- <div class="mt-10">
@@ -713,8 +714,18 @@ import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
+import { useVendorStore } from '~/stores/vendorStore';
 
 export default {
+	setup(){
+		const vendorStore = useVendorStore()
+		const vendor = ref(vendorStore.vendor)
+		const hasCustomer = computed(() => vendor.value.vendor_details?.order_count > 0)
+		return {
+			vendor,
+			hasCustomer
+		}
+	},
 	components: {
 		EditorContent,
 	},
@@ -731,97 +742,98 @@ export default {
 				{ name: "Customer Orders", prop: null, value: "Customer Orders" },
 				{ name: "Activities", prop: "status", value: "Activities" },
 			],
-			items1: [
-				{
-					sn: "#23942",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#876567",
-					name: "Leather crop top & pants......",
-					added_cat: "Added Manually",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: 0,
-					payment_status: 0,
-					status: 2,
-					items_no: 1,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#3456456",
-					name: "Leather crop top & pants......",
-					added_cat: "Added Manually",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 4,
-					delivery_method: "DHL Delivery",
-				},
-				{
-					sn: "#65459",
-					name: "Leather crop top & pants......",
-					added_cat: "Added Manually",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#098765",
-					name: "Leather crop top & pants......",
-					added_cat: "Added Manually",
-					date: "17 May",
-					total: "€2,349‎",
-					country: "🇺🇸 United States",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-					city: "New York City",
-					added_cat: "Added Manually",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: 0,
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-			],
+			items1: [],
+			// items1: [
+			// 	{
+			// 		sn: "#23942",
+			// 		name: "Leather crop top & pants......",
+			// 		date: "17 May",
+			// 		total: "€2,349‎",
+			// 		country: "🇺🇸 United States",
+			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
+			// 		city: "New York City",
+			// 		added_cat: "Added Manually",
+			// 		date: "May 29, 2023",
+			// 		customer: "Okoli Bonaventure",
+			// 		delivery: "€ 24.08",
+			// 		payment_status: 1,
+			// 		status: 2,
+			// 		items_no: 7,
+			// 		delivery_method: "Umoja Delivery",
+			// 	},
+			// 	{
+			// 		sn: "#876567",
+			// 		name: "Leather crop top & pants......",
+			// 		added_cat: "Added Manually",
+			// 		date: "17 May",
+			// 		total: "€2,349‎",
+			// 		country: "🇺🇸 United States",
+			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
+			// 		city: "New York City",
+			// 		added_cat: "Added Manually",
+			// 		date: "May 29, 2023",
+			// 		customer: "David",
+			// 		delivery: 0,
+			// 		payment_status: 0,
+			// 		status: 2,
+			// 		items_no: 1,
+			// 		delivery_method: "Fedex Delivery",
+			// 	},
+			// 	{
+			// 		sn: "#3456456",
+			// 		name: "Leather crop top & pants......",
+			// 		added_cat: "Added Manually",
+			// 		date: "17 May",
+			// 		total: "€2,349‎",
+			// 		country: "🇺🇸 United States",
+			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
+			// 		city: "New York City",
+			// 		added_cat: "Added Manually",
+			// 		date: "May 29, 2023",
+			// 		customer: "Frank",
+			// 		delivery: "€ 24.08",
+			// 		payment_status: 1,
+			// 		status: 2,
+			// 		items_no: 4,
+			// 		delivery_method: "DHL Delivery",
+			// 	},
+			// 	{
+			// 		sn: "#65459",
+			// 		name: "Leather crop top & pants......",
+			// 		added_cat: "Added Manually",
+			// 		date: "17 May",
+			// 		total: "€2,349‎",
+			// 		country: "🇺🇸 United States",
+			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
+			// 		city: "New York City",
+			// 		added_cat: "Added Manually",
+			// 		date: "May 29, 2023",
+			// 		customer: "Okoli Bonaventure",
+			// 		delivery: "€ 24.08",
+			// 		payment_status: 1,
+			// 		status: 1,
+			// 		items_no: 7,
+			// 		delivery_method: "Umoja Delivery",
+			// 	},
+			// 	{
+			// 		sn: "#098765",
+			// 		name: "Leather crop top & pants......",
+			// 		added_cat: "Added Manually",
+			// 		date: "17 May",
+			// 		total: "€2,349‎",
+			// 		country: "🇺🇸 United States",
+			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
+			// 		city: "New York City",
+			// 		added_cat: "Added Manually",
+			// 		date: "May 29, 2023",
+			// 		customer: "Okoli Bonaventure",
+			// 		delivery: 0,
+			// 		payment_status: 1,
+			// 		status: 1,
+			// 		items_no: 7,
+			// 		delivery_method: "Umoja Delivery",
+			// 	},
+			// ],
 			dashes: [
 				{
 					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320547_6_u4cwdq.png",
@@ -837,7 +849,7 @@ export default {
 					tooltip: "Total members in the last seven days",
 					amount: "0",
 					trend: "0",
-					trending: false,
+					trending: true,
 				},
 				{
 					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906397/Frame_427320547_7_znnge2.png",
