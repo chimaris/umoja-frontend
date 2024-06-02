@@ -12,11 +12,11 @@
             <div class="d-flex pa-4 align-center justify-space-between ">
 
             <v-avatar size="48" color="white">
-              <v-img v-if="vendor.vendor_details?.profile_photo" :src="vendor.vendor_details?.profile_photo"></v-img>
-              <v-img v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
+              <v-img cover v-if="vendor.vendor_details?.profile_photo" :src="vendor.vendor_details?.profile_photo"></v-img>
+              <v-img cover v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
             </v-avatar>
             <div class="text-left px-4">
-            <p style="color: #1A1D1F; 
+            <p style="color: #1A1D1F; text-transform: capitalize;
             font-weight: 600;
             font-size: 16px;
             line-height: 24px;"> {{vendor.vendor_details?.business_name}}</p>
@@ -49,8 +49,8 @@
             <template v-slot:activator="{ props }">
             <div v-bind="props" class="px-5">
             <v-avatar size="48" color="white">
-              <v-img v-if="vendor.vendor_details?.profile_photo" :src="vendor.vendor_details?.profile_photo"></v-img>
-              <v-img v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
+              <v-img cover v-if="vendor.vendor_details?.profile_photo" :src="vendor.vendor_details?.profile_photo"></v-img>
+              <v-img cover v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
             </v-avatar>
             </div>
             </template>

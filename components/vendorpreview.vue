@@ -52,7 +52,7 @@
 											src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"
 										></v-img>
 									</v-avatar>
-									<h3 class="py-4 pb-6" style="font-size: 24px; font-weight: 800; line-height: 30px">
+									<h3 class="py-4 pb-6" style="font-size: 24px; font-weight: 800; line-height: 30px; text-transform: capitalize;">
 										{{ vendor.vendor_details?.business_name }} 
 										<!-- <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon> -->
 									</h3>
@@ -359,7 +359,10 @@ async function upLoadFile1(event) {
 	methods: {
 		getFlag() {
 			const countryCode = this.getCountryCode()
-			return emojiFlags.countryCode(countryCode).emoji;
+			if (countryCode){
+				return emojiFlags.countryCode(countryCode).emoji;
+			}
+
 			},
 		getCountryCode() {
       		const country = this.vendor.vendor_details?.rep_country;

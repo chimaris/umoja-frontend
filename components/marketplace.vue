@@ -141,9 +141,9 @@
 								v-for="(value, key) in filters"
 								:key="key"
 								rounded="xl"
-								closable=""
+								closable="true"
 								close-icon="mdi mdi-close-circle-outline"
-								@click:close="removeFilter(key)"
+								@click:close.prevent="removeFilter(key)"
 								class="px-5 py-4"
 								variant="outlined"
 								grow
@@ -293,9 +293,17 @@ export default {
 			
 		},
 		async removeFilter(key) {
-			this.productStore.removeParam(key);
-			await this.productStore.fetchFilteredProducts();
-		},
+        // Reset gender and category_name to default values if they are removed
+        if (key === 'gender') {
+            this.productStore.params.gender = "Unisex";
+        } else if (key === 'category_name') {
+            this.productStore.params.category_name = "Clothing";
+        } else {
+            this.productStore.removeParam(key);
+        }
+        
+        await this.productStore.fetchFilteredProducts();
+    },
 		selectCountry(item) {
 			this.country = item;
 		},

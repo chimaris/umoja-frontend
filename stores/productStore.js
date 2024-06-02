@@ -7,8 +7,8 @@ import { debounce } from 'lodash';
 export const useProductStore = defineStore('productStore', {
   state: () => ({
     params: {
-      gender: "",
-      category_name: "",
+      gender: "Unisex",
+      category_name: "Clothing",
       sizes: "",
       product_rating: "",
       compare_at_price: "",

@@ -12,7 +12,7 @@
 				<v-sheet style="background-color: #edf0ef; border: 1px solid #2c6e63; padding: 24px; border-radius: 15px">
 					<div class="d-flex mb-2 justify-space-between">
 						<v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large" color="green">
-							<span style="font-size: 16.879px !important; font-weight: 500">Freemium Package</span></v-chip
+							<span style="font-size: 16.879px !important; font-weight: 500">Free Package</span></v-chip
 						>
 						<v-icon size="30" color="#2C6E63" icon="mdi mdi-check-circle"></v-icon>
 					</div>
@@ -28,14 +28,14 @@
 				<v-sheet class="my-10" style="border: 1px solid #ededed; padding: 24px; border-radius: 15px; opacity: 0.5">
 					<div class="d-flex mb-2 justify-space-between">
 						<v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large" color="green">
-							<span style="font-size: 16.879px !important; font-weight: 500">Medium Plan</span></v-chip
+							<span style="font-size: 16.879px !important; font-weight: 500">Business Package</span></v-chip
 						>
 						<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
 					</div>
-					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ 30/Month</p>
-					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything  our medium plan has...</p>
+					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ 29.99/Month</p>
+					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything  our business plan has...</p>
 
-					<div v-for="n in freeFeatures" :key="n" class="mb-4 d-flex align-center">
+					<div v-for="n in businessPackage" :key="n" class="mb-4 d-flex align-center">
 						<v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
 						<p style="color: #333; font-size: 14px; font-weight: 400">{{n}}</p>
 					</div>
@@ -48,10 +48,10 @@
 						>
 						<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
 					</div>
-					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ 39/Month</p>
+					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ Customised/Month</p>
 					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything our premium plan has...</p>
 
-					<div v-for="n in freeFeatures" :key="n" class="mb-4 d-flex align-center">
+					<div v-for="n in premiumPackage" :key="n" class="mb-4 d-flex align-center">
 						<v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
 						<p style="color: #333; font-size: 14px; font-weight: 400">{{ n }}</p>
 					</div>
@@ -163,7 +163,26 @@
 		"Sales Commission: 10% of each sale made through the platform.",
 		"Ideal for: Businesses and start-ups looking to test the platform and get started with minimal upfront costs."
 	]
-
+	const businessPackage = [
+		"Verified business profile",
+		"Expanded storefront on the Umoja platform to showcase more products",
+		"Enhanced inventory management tools with additional features",
+		"Full order processing and fulfillment capabilities",
+		"Access to basic analytics and reporting",
+		"Standard customer support via email",
+		"Sales Commission: 8% of each sale made through the platform",
+		"Listing Fee: $0.15 per product listing",
+		"Ideal for: Small businesses and startups ready to expand their online presence and manage their operations more efficiently."
+	]
+	const premiumPackage = [
+		"All features included in the Basic Package",
+		"Enhanced marketing and promotional tools, including featured listings and discounts",
+		"Advanced analytics and reporting for deeper insights into sales performance",
+		"Priority customer support with faster response times and dedicated account management",
+		"Sales Commission: 6% of each sale made through the platform",
+		"Listing Fee: $0.10 per product listing",
+		"Ideal for: Growing businesses seeking to increase their sales, drive customer engagement, and optimize their operations with additional support and features"
+	]
 	const lineItems = [
 		{
 			price: 'price_1PFHkMP7XylLhhgiIodwtUZX',

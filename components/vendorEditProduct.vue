@@ -29,7 +29,7 @@
 						</div>
 						<div>
 							<p class="inputLabel">Unit</p>
-							<v-select v-model="product.unit" :rules="inputRules" :items="units" append-inner-icon="mdi mdi-chevron-down" placeholder="Select unit" density="comfortable"> </v-select>
+							<v-select v-model="product.unit" :rules="inputRules" :items="units" placeholder="Select unit" density="comfortable"> </v-select>
 						</div>
 						<div>
 							<p class="inputLabel">Unit Per Item</p>
@@ -41,7 +41,7 @@
 						</div>
 						<div>
 							<p class="inputLabel">Condition</p>
-							<v-select v-model="product.condition" :items="conditions" append-inner-icon="mdi mdi-chevron-down" placeholder="Select product condition" density="comfortable"> </v-select>
+							<v-select v-model="product.condition" :items="conditions"  placeholder="Select product condition" density="comfortable"> </v-select>
 						</div>
 					</v-sheet>
 					<!-- <v-sheet class="cardStyle my-4" width="800">
@@ -178,24 +178,25 @@
 								<div class="d-flex align-center">
 									<p style="color: #333; font-size: 20px; font-weight: 600">Product status</p>
 								</div>
-								<v-select class="mt-4" :items="['Active', 'Draft']" v-model = "product.status" append-inner-icon="mdi mdi-chevron-down" placeholder="Active" density="comfortable"> </v-select>
+								<v-select class="mt-4" :items="['Active', 'Draft']" v-model = "product.status"  placeholder="Active" density="comfortable"> </v-select>
 							</v-sheet>
 							<v-sheet class="cardStyle mt-4">
 								<div class="d-flex align-center mb-6">
 									<p style="color: #333; font-size: 20px; font-weight: 600">Product Organization</p>
 								</div>
 								<div>
+									<p class="inputLabel">Gender</p>
+									<v-select v-model="product.gender" :items="['Male', 'Female', 'Unisex']"  placeholder="Unisex" density="comfortable"> </v-select>
+								</div>
+								<div>
 									<p class="inputLabel">Category</p>
-									<v-select  @change="fetchSubCategories()" :items="Categories.map(category => category.name)" v-model="product.category_name" :rules="inputRules" append-inner-icon="mdi mdi-chevron-down" placeholder="Fashion and style" density="comfortable"> </v-select>
+									<v-select  :items="Categories.map(category => category.name)" v-model="product.category_name" :rules="inputRules" placeholder="Fashion and style" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Sub Category</p>
-									<v-select :loading="isFetching" color="green" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="product.sub_category_name" :rules="inputRules" append-inner-icon="mdi mdi-chevron-down" placeholder="Sneakers" density="comfortable"> </v-select>
+									<v-select :loading="loadingSub" color="green" :items="subCategories.map(subCategory => subCategory.name)" v-model="product.sub_category_name" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
 								</div>
-								<div>
-									<p class="inputLabel">Gender</p>
-									<v-select v-model="product.gender" :items="['Male', 'Female', 'Unisex']" append-inner-icon="mdi mdi-chevron-down" placeholder="Unisex" density="comfortable"> </v-select>
-								</div>
+							
 								<div>
 									<p class="inputLabel">Tags</p>
 									<v-text-field @keyup.enter="handleTagInput()" v-model="newTag" placeholder="Find or create tags" density="comfortable"> </v-text-field>
@@ -233,7 +234,7 @@
 							</div>
 							<div class="mt-6">
 								<p class="inputLabel">Ust Index (Optional)</p>
-								<v-select append-inner-icon="mdi mdi-chevron-down" v-model="product.ust_index" :items="['0%', '5%', '19%', '20%']" placeholder="Eg. 19%" density="comfortable"> </v-select>
+								<v-select v-model="product.ust_index" :items="['0%', '5%', '19%', '20%']" placeholder="Eg. 19%" density="comfortable"> </v-select>
 							</div>
 							<v-row>
 								<v-col>
@@ -782,28 +783,31 @@ import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
 import {useEditVendorStore} from '~/stores/editProduct';
 import { useRouter } from 'vue-router'
+import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
 
 export default {
 
 	setup() {
 		const subCategories = ref([])
 		const Categories = ref([])
-		const isFetching =  ref(false)
         const editStore = useEditVendorStore()
         const product = computed(() => editStore.currentEditProduct);
         const router = useRouter()
 
-		watchEffect(() => {
-    	fetchSubCategories(product.value.category_name);
+		watch(() => [product.value.category_name, product.value.gender ],  async () => {
+			if (product.value.category_name && product.value.gender){
+				subCategories.value = await fetchSubCategories({selectedCat: product.value.category_name, Categories: Categories.value , gender: product.value.gender, role: 'vendor'});
+			}
 		});
-		
 
-		onMounted(() => {
+		onMounted(async () => {
             if (!product) {
                 router.push('/vendor/dashboard/Products')
             }
-			fetchCategories()
-            fetchSubCategories(product.value.category_name)
+			Categories.value = await fetchCategories()
+			if (product.value.category_name && product.value.gender){
+				subCategories.value = await fetchSubCategories({selectedCat: product.value.category_name, Categories: Categories.value , gender: product.value.gender, role: 'vendor'});
+			}
 			if (!product.value.colors || !product.value.sizes || !product.value.materials || !product.value.styles) {
 			product.value.colors = [];
 			product.value.sizes = [];
@@ -813,56 +817,14 @@ export default {
             
 		});
    
-
-
-		function getCategoryId(selectedCat) {
-			const category = Categories.value.findIndex(category => category.name === selectedCat);
-			if (category === -1) {
-				return
-			}
-			const category_id = Categories.value[category].id
-			return category_id
-		}
-		function getCategoryName(selectedCat) {
-			const category = Categories.value.findIndex(category => category.name === selectedCat);
-			if (category === -1) {
-				return
-			}
-			const category_name = Categories.value[category].name
-			return category_name
-		}
 		function getSubCategoryId(subCategory) {
-			const subCat = subCategories.value.findIndex(subCat => subCat.subcategory_name === subCategory);
+			const subCat = subCategories.value.findIndex(subCat => subCat.name === subCategory);
 			if (subCat === -1) {
 				return
 			}
 
 			const subCategory_id = subCategories.value[subCat].id
 			return subCategory_id
-		}
-		async function fetchSubCategories() {
-			const api = vendorUseApi()
-			isFetching.value = true;
-			const category_id = getCategoryId(product.value.category_name)
-			const category_name = getCategoryName(product.value.category_name)
-			try {
-				const response = await api({
-					url: `admin/sub_categories/category/${category_id}`,
-					data: {
-						name: category_name,
-						category_id: category_id,
-						photo: ""
-					}
-				});
-				const subCategory = response.data.data;
-   				subCategories.value = subCategory
-				return
-			} catch(error) {
-				console.error(error)
-				return [];
-			} finally {
-				isFetching.value = false;
-			}
 		}
 		const tab1 = ref('General');
 		const vendorProducts = useVendorProductStore()
@@ -912,22 +874,7 @@ export default {
 			}
 	
 		}
-	
-		async function fetchCategories() {
-			const api = vendorUseApi()
-			try {
-				const response = await api({
-					url: 'admin/categories',
-					method: 'get'
-				});
-				const categoryNames = response.data.data;
-				Categories.value = categoryNames;
-	
-			}catch(error) {
-				console.error(error)
-			}
-			
-		}
+
 
 		return {
 			nonNegValue,
@@ -1079,35 +1026,6 @@ export default {
 			return  `${marginPercent}%`
 		}
 	   },
-        orderDetails() {
-            return [
-                {
-                    title: 'Name',
-                    value: 'Benjamin Franklin O.'
-                },
-                {
-                    title: 'Email',
-                    value: 'sylvesterfranklin007@gmail.com'
-                },
-                {
-                    title: 'Phone',
-                    value: '+145789900'
-                },
-                {
-                    title: 'Billing',
-                    value: 'Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)'
-                },
-                {
-                    title: 'Shipping',
-                    value: 'Michael Johnson, Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)'
-                },
-                {
-                    title: 'Shipping Company',
-                    value: 'Umoja Free Shipping',
-                    img: 'https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png'
-                },
-            ]
-        }
     },
 	methods: {
         toggleTax() {
@@ -1217,7 +1135,7 @@ export default {
 				name: this.product.name,
 				status: this.product.status,
 				product_spec: this.product.product_spec,
-				category_id: this.getCategoryId(this.product.category_name).toString(),
+				category_id: getCategoryId(this.product.category_name, this.Categories).toString(),
                 sub_category_id: this.getSubCategoryId(this.product.sub_category_name)?.toString(),
 				gender: this.product.gender,
 				description: this.editorContent,
