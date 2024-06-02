@@ -1,5 +1,8 @@
 <template>
-	<div>
+	<div v-if="items.length == 0" style="height: 100%; min-height: 200px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+			<p>This vendor do not have any product on promo at the moment.</p>
+	</div>
+	<div v-else>
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
 			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{items?.length}} live promos%</p>
 			<div>

@@ -16,6 +16,7 @@
 							v-for="n in genders"
 							:key="n"
 							rounded="lg"
+							:disabled="disable && (n== 'Female' || n== 'Male')"
 							class="px-8 py-3"
 							variant="outlined"
 							grow
@@ -65,8 +66,8 @@
 								v-for="(sub, subIndex) in subCategories"
 								:key="subIndex"
 								:style="{
-								color: productStore.params.sub_category_name === sub ? '#2C6E63' : '',
-								backgroundColor: productStore.params.sub_category_name === sub ? '#E5EDEC' : '',
+								color: productStore.params.sub_category_name === sub.name ? '#2C6E63' : '',
+								backgroundColor: productStore.params.sub_category_name === sub.name ? '#E5EDEC' : '',
 								}"
 								:title="sub.name"
 								style="cursor: pointer; font-size: 10px"
@@ -120,6 +121,7 @@
 							placeholder="Minimum"
 							@input="productStore.fetchFilteredProducts()"
 						></v-text-field>
+						
 						<v-text-field
 							class="mb-4"
 							hide-details=""
@@ -301,10 +303,15 @@ const price = ref("")
 const categoryNames = computed(() => categories.value.map(category => category.name))
 const subCatNames = computed(() => subCategories.value.map(subCategory => subCategory.subcategory_name))
 // const innerSubCat = computed(() => subCategories.value.map(subCategory => subCategory.neted_subcategories))
-
+const disable = computed(() => {
+	if (productStore.params.category_name == 'Art' || productStore.params.category_name == "Home decoration"){
+		return true
+	}
+})
 onMounted(async () => {
 	categories.value = await fetchCategories("customer")
 	productStore.params.category_name = 'Clothing'
+	productStore.params.gender = 'Unisex'
 	if (productStore.params.category_name && productStore.params.gender){
 		subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
 	}

@@ -1,12 +1,8 @@
 <template>
-	<!-- <div v-if="items.length == 0" style="height: 100%; min-height: 500px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
-		<p>You have no products yet. Click the button below to add your first product.</p>
-			<v-btn @click="$router.push('/vendor/dashboard/Add Products')" flat color="green" size="default" class="ml-4 justify-end menubar text-grey-darken-3">
-					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
-					Add Product
-				</v-btn>
-	</div> -->
-	<div >
+	<div v-if="items.length == 0" style="height: 100%; min-height: 200px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+		<p>This vendor has not added any product to their store yet. </p>
+	</div>
+	<div v-else>
 		<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
 			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{items?.length}} products found</p>
 			<div>

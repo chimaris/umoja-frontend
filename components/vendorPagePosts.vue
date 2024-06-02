@@ -1,12 +1,8 @@
 <template>
-	<!-- <div v-if="allPosts.length == 0" style="height: 100%; min-height: 500px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
-			<p>You have no posts yet. Click the button below to create your post.</p>
-			<v-btn @click="$router.push('/vendor/dashboard/Create Post')" flat color="green" size="default" class="ml-4 justify-end menubar text-grey-darken-3">
-					<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
-					Create Post
-				</v-btn>
-		</div> -->
-	<div>
+	<div v-if="allPosts.length == 0" style="height: 100%; min-height: 200px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
+			<p>This vendor has not created any post yet.</p>
+	</div>
+	<div v-else>
 		<div>
 			<div style="background-color: " class="d-flex py-6 align-center justify-space-between">
 				<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">

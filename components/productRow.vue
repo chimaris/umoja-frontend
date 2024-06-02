@@ -26,14 +26,14 @@
 			:style="vendorBol ? 'height: 470px!important;' : showVendor ? 'height: 545px !important;' : ''"
 			style="background: transparent !important"
 			:class="maxwidth == '1400px' ? 'maxw' : ''"
-			class="rower mt-8 d-none d-md-block"
+			class="rower mt-8 d-none d-md-flex"
 		>
-			<div class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in items" :key="i">
+			<div class="d-inline-block mr-4" style="min-width: 250px;" v-for="(n, i) in items" :key="i">
 				<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
 				<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 			</div>
 
-			<div class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in items" :key="i">
+			<div class="d-inline-block mr-4" style="min-width: 250px" v-for="(n, i) in items" :key="i">
 				<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
 				<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 			</div>

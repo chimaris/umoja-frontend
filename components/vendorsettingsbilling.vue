@@ -6,37 +6,37 @@
                     font-weight: 600;" class="pa-5">Billing</p>
                     <v-divider></v-divider>
 
-<v-row class="pa-6 align-items-stretch">
+<v-row  class="pa-6">
     <v-col cols="12" md="6">
-        <v-sheet class="cardStyle">
-<div  class="d-flex mb-2 justify-space-between">
-    <v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large"  color="green"> <span style="font-size: 16.879px!important;
-font-weight: 500;">Free Package</span></v-chip>
-<v-icon size="30" color="#2C6E63" icon="mdi mdi-check-circle"></v-icon>
-</div>
-<p style="color:#333;
-font-size: 40px;
-font-weight: 600;">€ Free/Month</p>
-<p style="color: #333;
-font-size: 16px;
-font-weight: 400;" class="mb-8">Our free plan has...</p>
+        <v-sheet class="cardStyle d-flex flex-column" style="height: 100%;" >
+            <div  class="d-flex mb-2 justify-space-between">
+                <v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large"  color="green"> <span style="font-size: 16.879px!important;
+            font-weight: 500;">Free Package</span></v-chip>
+            <v-icon size="30" color="#2C6E63" icon="mdi mdi-check-circle"></v-icon>
+            </div>
+            <p style="color:#333;
+            font-size: 40px;
+            font-weight: 600;">€ 0.00/Month</p>
+            <p style="color: #333;
+            font-size: 16px;
+            font-weight: 400;" class="mb-8">Our free plan has...</p>
 
-<div v-for="n in freeFeatures" :key="n" class=" mb-4 d-flex align-center ">
-<v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
-<p style="color: #333;
-font-size: 14px;
-font-weight: 400;
-">{{n}}</p>
-</div>
-<!-- <v-btn class="mt-12" size="large" block style="    border: 1px solid #e5e5e5;"  variant="outlined"><span style="color: var(--grey-1000, #1A1D1F);
-
-font-size: 14px;
-font-weight: 600;">Join for Free</span></v-btn> -->
+            <div v-for="n in freeFeatures" :key="n" class=" mb-4 d-flex align-center ">
+            <v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
+            <p style="color: #333;
+            font-size: 14px;
+            font-weight: 400;
+            ">{{n}}</p>
+            </div>
+           
+            <v-btn style="flex-grow: 0; margin-top: auto;" size="large" block flat color="green"><span style="
+            font-size: 14px;
+            font-weight: 600;">Subscribed</span></v-btn>
 
         </v-sheet>
     </v-col>
     <v-col cols="12" md="6">
-        <v-sheet class="cardStyle" style="opacity: 0.5">
+        <v-sheet class="cardStyle" style="opacity: 0.5;">
 <div  class="d-flex mb-2 justify-space-between">
     <v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large"  color="green"> <span style="font-size: 16.879px!important;
 font-weight: 500;">Business Package</span></v-chip>
@@ -57,7 +57,7 @@ font-size: 14px;
 font-weight: 400;
 ">{{n}}</p>
 </div>
-<v-btn class="mt-12" size="large" block flat color="green"><span style="
+<v-btn class="mt-12" size="large" variant="outlined" block flat color="green"><span style="
 
 font-size: 14px;
 font-weight: 600;">Subscribe</span></v-btn>
@@ -85,7 +85,7 @@ font-size: 14px;
 font-weight: 400;
 ">{{n}}</p>
 </div>
-<v-btn class="mt-12" size="large" block flat color="green"><span style="
+<v-btn class="mt-12" size="large" variant="outlined" block flat color="green"><span style="
 
 font-size: 14px;
 font-weight: 600;">Subscribe</span></v-btn>

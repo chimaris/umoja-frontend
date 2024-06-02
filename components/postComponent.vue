@@ -2,7 +2,7 @@
 	<v-card width="100%" flat class="cardStyle pa-4 pb-3">
 		<div class="mb-4 d-flex">
 			<v-avatar size="45">
-				<v-img eager :src="item?.vendor_profile_photo"></v-img>
+				<v-img cover eager :src="item?.vendor_profile_photo"></v-img>
 			</v-avatar>
 
 			<div class="pl-1 w-100" style="min-width: 0">

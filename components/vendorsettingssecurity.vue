@@ -177,7 +177,7 @@ font-weight: 400;">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Comm
     <v-btn  color="green" flat size="large" class="mt-5 mb-8 menubar text-grey-darken-3" >
         Sign out from all devices
 </v-btn>
-<div v-for="(n, i) in [{icon:'cellphone', name: 'iPhone 11'}, {icon:'laptop', name: 'Macbook Pro'},  {icon:'cellphone', name: 'iphone SE'},{icon:'cellphone', name: 'iPhone 11'}  ]" :key="i">
+<!-- <div v-for="(n, i) in [{icon:'cellphone', name: 'iPhone 11'}, {icon:'laptop', name: 'Macbook Pro'},  {icon:'cellphone', name: 'iphone SE'},{icon:'cellphone', name: 'iPhone 11'}  ]" :key="i">
     <v-divider  class=" my-5"></v-divider>
 <div class="d-flex justify-space-between">
     <div class="d-flex">
@@ -193,7 +193,7 @@ font-weight: 500;">London, UK . Oct 23 at 1:15 AM</p>
 </div>
 <v-icon class="ml-3" icon="mdi mdi-dots-vertical"></v-icon>
 </div>
-</div>
+</div> -->
 <v-btn block style="    border: 1px solid #e5e5e5;
 " variant="outlined" size="large" class=" mt-8 menubar text-grey-darken-3" >
 Need help?

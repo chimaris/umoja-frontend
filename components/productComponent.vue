@@ -125,7 +125,7 @@
 			>FREE DELIVERY</v-chip
 		>
 		<div v-if="vendorShow" class="d-none d-md-block">
-			<div class="d-flex mt-8">
+			<div class="d-flex mt-6">
 				<v-avatar @click="$router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img cover :src="item.vendor_profile_photo"></v-img></v-avatar>
 				<div style="cursor: pointer" @click="$router.push(`/vendor_page/${item.vendor_id}`)" class="ml-2">
 					<p style="color: #1e1e1e; text-transform: capitalize; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
@@ -137,7 +137,7 @@
 					</p>
 				</div>
 			</div>
-			<v-divider color="#a4a4a4" class="mt-6"></v-divider>
+			<v-divider color="#a4a4a4" class="mt-4"></v-divider>
 		</div>
 		<div class="d-flex flex-column flex-md-row justify-md-space-between align-md-end">
 			<div :class="item?.compare_at_price ? 'mt-4' : 'mt-9'">

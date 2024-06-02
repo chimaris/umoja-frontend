@@ -23,7 +23,7 @@
 		<div
 			dense
 			id="homepage"
-			style="width: 100%; position: relative; height: 572px !important; background-color: #fff"
+			style="width: 100%; position: relative; height: 600px !important; background-color: #fff"
 			:style="'max-width:' + maxw2 + '!important'"
 			class="rower my-8 d-none d-md-block"
 		>
