@@ -1,6 +1,6 @@
 <template>
 	<div v-if="allPosts.length == 0" style="height: 100%; min-height: 200px" class="d-flex justify-center flex-column align-center ga-5 mt-10">
-			<p>This vendor has not created any post yet.</p>
+		<p>This vendor has not created any post yet.</p>
 	</div>
 	<div v-else>
 		<div>
@@ -53,7 +53,7 @@
 				</v-carousel-item>
 			</v-carousel>
 
-			<v-row style="background-color: #fff" class="mt-8">
+			<v-row dense style="background-color: #fff" class="mt-8">
 				<v-col cols="4" v-for="(n, i) in allPosts" :key="i" lg="4" md="6">
 					<v-card flat style="border-radius: 15px" class="bg-white rounded-lg">
 						<v-img
@@ -106,12 +106,12 @@
 					<div class="d-flex d-md-none justify-end mx-8 mt-2 mb-4">
 						<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
 					</div>
-					<v-row style="height: 100vh">
-						<v-col cols="12" class="px-0 py-0 pb-0" md="6">
+					<v-row dense style="height: 100vh">
+						<v-col cols="12" class="py-0 pb-0 pl-0 pr-0 pl-md-6" md="6">
 							<v-img
 								v-if="selectedPost.featured_img.includes(',')"
 								class="pb-0"
-								cover
+								contain
 								width="100%"
 								height="100%"
 								:src="selectedPost.featured_img.split(',')[1]"
@@ -119,7 +119,7 @@
 							<v-img
 								v-if="!selectedPost.featured_img.includes(',')"
 								class="pb-0"
-								cover
+								contain
 								width="100%"
 								height="100%"
 								:src="selectedPost.featured_img"
@@ -129,7 +129,6 @@
 							<div class="d-none d-md-flex justify-end mx-8 my-3 pt-3">
 								<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
 							</div>
-
 							<v-sheet style="height: calc(100% - 50px); overflow-y: auto; position: absolute; width: 100%; bottom: 0" class="py-2">
 								<div class="d-flex px-6 pt-6 pb-4">
 									<v-avatar size="48" class="mr-5">
@@ -215,6 +214,7 @@
 							</v-sheet>
 						</v-col>
 					</v-row>
+					<div class="py-5 bg-white w-100" style="z-index: 20"></div>
 				</v-card>
 			</v-dialog>
 		</div>
