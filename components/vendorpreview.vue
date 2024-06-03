@@ -67,7 +67,7 @@
 											<p class="textClass text-grey-darken-1 px-2">Followers</p>
 										</div>
 										
-										<p class="priceClass">{{ vendor.vendor_details?.followers_count }}</p>
+										<p style="font-size: 1.5rem;">{{ vendor.vendor_details?.followers_count }}</p>
 									</div>
 									<v-divider></v-divider>
 									<div class="pa-4 px-6  align-center justify-space-between d-flex">
@@ -85,7 +85,7 @@
 										<v-avatar rounded="0" size="19"
 										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 									></v-avatar>
-									<p class="textClass px-4"> {{ vendor.vendor_details?.address }}, {{ vendor.vendor_details?.city }}, {{ vendor.vendor_details?.state }} {{ vendor.vendor_details?.country_name }}</p>
+									<p class="textClass px-4" style="text-transform: capitalize;"> {{ vendor.vendor_details?.address }}, {{ vendor.vendor_details?.city }}, {{ vendor.vendor_details?.state }} {{ vendor.vendor_details?.country_name }}</p>
 									</div>
 									<v-divider></v-divider>
 								</div>

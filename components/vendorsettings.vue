@@ -16,7 +16,7 @@
 					</div>
 					<div class="px-4" style="min-height: 50px; position: absolute; bottom: 30px; left: -4px; width: 100%">
 						<v-btn
-							@click="logOut()"
+							@click="logOutUser = true"
 							block
 							size="x-large"
 							color="red"
@@ -50,6 +50,32 @@
 				</v-col>
 			</v-row>
 		</v-sheet>
+		<v-dialog v-model="logOutUser" persistent max-width="600">
+		<v-card class="pa-5 text-center rounded-lg" style="align-items: center" flat tile>
+			<v-card-title style="font-weight: 700" :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" class="justify-center"
+				>Logout</v-card-title
+			>
+			<v-card-text class="text-center mb-5">Are you sure you want to logout of your account?</v-card-text>
+			<v-card-actions class="justify-center w-100">
+				<v-btn
+					rounded="xl"
+					size="large"
+					style="border: 1px solid #cecece; flex: 1"
+					@click="logOutUser = false"
+					:style="{ fontSize: $vuetify.display.mobile ? '14px' : '18px' }"
+					>Cancel</v-btn
+				>
+				<v-btn
+					rounded="xl"
+					@click="logOut()"
+					size="large"
+					style="background-color: #c20052; color: #fff; flex: 1"
+					:style="{ fontSize: $vuetify.display.mobile ? '14px' : '18px' }"
+					>Logout</v-btn
+				>
+			</v-card-actions>
+		</v-card>
+</v-dialog>
 	</v-container>
 </template>
 
@@ -64,15 +90,15 @@ export default {
 		const vendorStore = useVendorStore();
 		const vendor = ref(vendorStore.vendor);
 		const router = useRouter()
+		const logOutUser = ref(false)
 
 		watch(() => vendorStore.vendor, (newpost, oldpost) => {
 			vendor.value = newpost
 		});
-
 		async function logOut(){
 			const response = await vendorStore.logout();
 			if (response) {
-			router.push('/vendor/login')
+				window.location.reload()
 			}
 		}
 
@@ -80,7 +106,8 @@ export default {
 			vendorStore,
 			vendor,
 			logOut,
-			router
+			router,
+			logOutUser
 		}
 	},
 	data() {

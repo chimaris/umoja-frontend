@@ -1,12 +1,12 @@
 import { vendorUseApi } from "./vendorApi";
 
-export const getAllReview = async () => {
+export const getAllReview = async (page) => {
     const api = vendorUseApi()
         const res = await api({
-            url: 'customer/reviews',
+            url: `customer/reviews/?page=${page}`,
             method: 'GET'
         });
-        return res.data
+        return res
 }
 
 export const replyReview = async (id, data) => {

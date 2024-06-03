@@ -55,7 +55,7 @@ const chartOptions2 = ref(
 				yaxis: {
 					labels: {
 						formatter: function (value) {
-						return '£' + value + 'k';
+						return '£' + value.toFixed(2) + 'k';
 						},
 						style: {
 						fontSize: '16px',
