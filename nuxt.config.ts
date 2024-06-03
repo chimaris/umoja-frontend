@@ -8,7 +8,7 @@ export default defineNuxtConfig({
 		  meta: [
 			{ charset: 'utf-8' },
 			{ name: 'viewport', content: 'width=device-width, initial-scale=1' },
-			{ name: 'description', content: 'The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.' }
+			{ hid: 'description', name: 'description', content: 'The world first and largest e-commerce platform with a wide variety of authentic and sustainable African products.'}
 		  ],
 		  link: [
 			{ rel: 'icon', type: 'image/x-icon', href: 'https://res.cloudinary.com/payhospi/image/upload/v1717407683/umoja/favicon_fpqa9y.png' },
