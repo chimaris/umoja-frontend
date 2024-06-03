@@ -41,7 +41,6 @@
 									</thead>
 
 									<tbody>
-										<!-- @click="chosen = item.sn" -->
 										<template v-if="cartStore.items.length >= 1">
 											<tr v-for="item in cartStore.items" :key="item.id">
 												<td class="text-grey-lighten-1 pl-1">
@@ -115,14 +114,14 @@
 								<!-- Cart Card for Mobile view -->
 								<div class="d-block d-md-none">
 									<div class="d-flex align-center justify-start">
-										<div class="mr-3">
+										<div class="text-grey-lighten-1 mr-3">
 											<v-checkbox density="compact" color="green" v-model="selectAll" hide-details></v-checkbox>
 										</div>
 										<span style="font-size: 14px; width: 100px" class="font-weight-medium">Select all</span>
 									</div>
 									<div v-for="item in cartStore.items" :key="item.id" class="mt-3" style="border-bottom: 1px solid #ededed">
 										<div class="d-flex">
-											<div class="mr-3">
+											<div class="text-grey-lighten-1 mr-3">
 												<v-checkbox density="compact" color="green" v-model="selectAll" hide-details></v-checkbox>
 											</div>
 											<div class="mr-3">
