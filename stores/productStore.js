@@ -17,6 +17,7 @@ export const useProductStore = defineStore('productStore', {
       priceMaximum: ""
     },
     productLoading: false,
+    notFound: false,
     recentSearches: [],
     discoveryCurrentPage: null,
     discoveryLastPage: null,
@@ -55,21 +56,28 @@ export const useProductStore = defineStore('productStore', {
       const api = useApi()
       const params = new URLSearchParams(this.params).toString();
       this.productLoading = true;
+      this.notFound = false;
       try{
         const res = await api({
           url: `allproducts?${params}`,
           method: 'GET'
         });
         if (res.data.data.length == 0){
-          this.productLoading = true;
-          this.products.main = []
+          this.notFound = true
+          this.productLoading = false
+          this.productFrom = res.data.meta.from;
+          this.productTo = res.data.meta.to;
+          this.totalProducts = res.data.meta.total
+          return
+        }else{
+          this.products.main = res.data.data
+          this.productFrom = res.data.meta.from;
+          this.productTo = res.data.meta.to;
+          this.totalProducts = res.data.meta.total
+          this.notFound = false;
+          this.productLoading = false
           return
         }
-        this.products.main = res.data.data
-        this.productFrom = res.data.meta.from;
-        this.productTo = res.data.meta.to;
-        this.totalProducts = res.data.meta.total
-        this.productLoading = false
       }catch(error){
         console.error(error)
       }

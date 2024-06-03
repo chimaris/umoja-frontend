@@ -110,7 +110,7 @@
 								<v-menu class="pl-0" offset="9px" open-on-hover location="top">
 									<template v-slot:activator="{ props }">
 										<div v-bind="props" class="d-flex align-center pr-4 pl-2">
-											<v-avatar color="grey-lighten-4" class="rounded-lg pa-1 mr-3 ml-0" size="50"
+											<v-avatar color="grey-lighten-4" class="rounded-lg mr-3 ml-0" size="50"
 												><v-img
 													:src="item.photo.split(',')[0]"
 													cover
@@ -128,7 +128,7 @@
 									>
 									<v-card max-width="310" class="pa-6 rounded-lg" color="#2C6E63">
 										<v-row class="d-flex align-start">
-											<v-avatar color="grey-lighten-4" class="pa-1" size="70" rounded="lg">
+											<v-avatar color="grey-lighten-4" size="70" rounded="lg">
 												<v-img
 													:src="item.photo.split(',')[1]"
 													cover
