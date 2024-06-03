@@ -70,7 +70,21 @@
 						</v-badge>
 					</v-btn>
 
-					<v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px">
+					<!-- <v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px">
+						<template v-slot:activator="{ props }">
+							<v-btn icon size="40" v-bind="props" rounded="xl" flat color="transparent">
+								<v-avatar rounded="0" size="16">
+									<v-img
+										contain
+										src="https://res.cloudinary.com/payhospi/image/upload/v1691742990/outline-notifications-vector_vkwg9h.svg"
+									></v-img> </v-avatar
+							></v-btn>
+						</template>
+						<dialognotification />
+					</v-menu> -->
+
+					<!-- <v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px"> -->
+					<v-menu persistent="" v-if="isLoggedIn" v-model="notification" :close-on-content-click="false" location="bottom" offset="28px">
 						<template v-slot:activator="{ props }">
 							<v-btn icon size="40" v-bind="props" rounded="xl" flat color="transparent">
 								<v-avatar rounded="0" size="16">
@@ -151,6 +165,7 @@ export default {
 			theme: useTheme(),
 			btn_radio: null,
 			searchmenu: false,
+			notification: false,
 			drawer: false,
 			group: null,
 			items: [
@@ -182,7 +197,7 @@ export default {
 			return this.maxwidth ? this.maxwidth : "1400px";
 		},
 		inpwidth() {
-			return this.maxwidth == undefined ? "500px" : "295px";
+			return this.maxwidth == undefined ? "300px" : "295px";
 		},
 		urls() {
 			const loggedIn = this.isLoggedIn;
