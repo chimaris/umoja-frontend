@@ -20,6 +20,7 @@
 						hide-details
 						prepend-inner-icon="mdi mdi-magnify"
 						placeholder="Search"
+						v-model="searchTerm"
 					></v-text-field>
 				</div>
 			</div>
@@ -275,7 +276,7 @@
 										<v-btn color="green" @click="commentReview(item.id)" flat>approve </v-btn>
 									</div>
 									<div v-else style="position: absolute; top: 20px; right: 10px; width: ">
-										<v-btn color="green" variant="outlined" flat>disapprove </v-btn>
+										<v-btn @click="undoApprove(item.id)" color="green" variant="outlined" flat>disapprove </v-btn>
 									</div>
 								</td>
 							</tr>
@@ -378,7 +379,7 @@
 }
 </style>
 <script setup>
-import {getAllReview, replyReview, deleteReview, editReview} from '~/composables/useVendorReview';
+import {getAllReview, replyReview, deleteReview, editReview, dissapproveReview, searchReview} from '~/composables/useVendorReview';
 import { formattedPrice } from '~/utils/price';
 import { useVendorStore } from '~/stores/vendorStore';
 import {getDateTime} from '~/utils/date'
@@ -401,6 +402,7 @@ import {ref, onBeforeMount} from 'vue';
 		const deleteId = ref(null)
 		const selectedDate = ref()
 		const loading = ref(false)
+		const searchTerm = ref("")
 
 		const pagesNo = ref(null)
 		const selectedPage = ref(1)
@@ -409,7 +411,9 @@ import {ref, onBeforeMount} from 'vue';
 		watch(() => selectedPage.value, async () =>  {
 			await getVendorReview()
 		})
-
+		watch(() => searchTerm.value, async () => {
+			await getVendorReview()
+		})
 		const pageOptions = computed(() => {
 			return Array.from({ length: pagesNo.value }, (_, index) => index + 1);
 		})
@@ -446,6 +450,16 @@ import {ref, onBeforeMount} from 'vue';
 				deleteWarning.value = false
 			}
 		}
+		async function undoApprove(id){
+			try{
+				const res = await dissapproveReview(id)
+				if (res) {
+					await getVendorReview()
+				}
+			}catch(error){
+				console.error(error)
+			}
+		}
 		async function commentReview(id){
 			sending.value = true
 			const data = {
@@ -466,7 +480,10 @@ import {ref, onBeforeMount} from 'vue';
 		async function getVendorReview(){
 			loading.value = true
 			try{
-				const res = await getAllReview(selectedPage.value)
+				let res = await getAllReview(selectedPage.value)
+				if (searchTerm.value.trim()){
+					res = await searchReview(searchTerm.value)
+				}
 				allReviews.value = res.data.data
 				averageRating.value = res.data.average_rating
 				totalReview.value = res.data.total_reviews

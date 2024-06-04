@@ -86,7 +86,6 @@ export const getRecentOrders = async () => {
             url: 'vendor/recent_weekly_orders',
             method: 'GET'
         });
-        console.log(res.data)
         return res.data
     }catch(error){
         console.error(error)
@@ -100,7 +99,6 @@ export const getOutOfStock = async () => {
             url: 'vendor/weekly_out_of_stock_products',
             method: 'GET'
         });
-        console.log(res.data)
         return res.data
     }catch(error){
         console.error(error)

@@ -38,7 +38,7 @@ line-height: 30px;">Hi {{vendor.first_name}} {{ vendor.last_name }}, Welcome bac
   -webkit-overflow-scrolling: touch;
   display: grid;
   grid-auto-flow: column;">
-<v-col cols="12" lg="3" v-for="n in dashes">
+<v-col cols="12" lg="3" v-for="n in dashes" :key = 'n'>
 
     <v-card min-width="300px" class="mx-auto cardStyle" width="100%" style=""  flat >
         <div class="d-flex  align-center">
@@ -122,11 +122,11 @@ color: #969696;">vs last 7 days</p>
                 style="position: absolute; top: 0; bottom: 0; left: 0; right: 0; z-index: -10;"
                 :options="mapOptions"
               >
-                    <v-card style="position: absolute;top:30%;left: 30%;transform: translate(-50%, 0);"  width="" class="d-none pa-3 px-6 rounded-lg bg-green">
-              <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>United States</p>
+                <v-card v-if="hasSale" style="position: absolute;top:20%;left: 30%;transform: translate(-50%, 0);"  width="" class=" pa-3 px-6 rounded-lg bg-green">
+              <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>{{mapCountry}}</p>
               <div class="pt-2 align-center d-flex">
-                  <v-progress-circular class="mr-4" size="48" model-value="20">38%</v-progress-circular>            <div>
-                      <p style="font-weight: 500;font-size: 14px" class="text-capitalize">20,489</p>
+                  <v-progress-circular class="mr-4" size="48" :model-value="currentCountry?.percentage">{{currentCountry?.percentage}}%</v-progress-circular>            <div>
+                      <p style="font-weight: 500;font-size: 14px" class="text-capitalize">{{currentCountry?.user_count}}</p>
                       <p style="font-weight: 500;
       font-size: 10px;
       line-height: 100%;
@@ -147,9 +147,6 @@ color: #969696;">vs last 7 days</p>
         </div>  
         </div>  
             </MapboxMap>
-                <!-- <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685704413/Maps_ic2b3z.png"> -->
-                    
-           <!-- </v-img> -->
             </v-col>
             <v-col  v-if="hasSale" class="" cols="5">
                 <div class="mt-3" v-for="n in soldByCountry" :key="n.name">
@@ -278,9 +275,16 @@ color: #969696;" class="ml-4">{{ n?.percentage }}%</p>
 							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
 							<span>No Product has been sold yet</span>
 				</div>
-
-        <v-row v-if="hasSale" class="mt-1">
-            <v-col v-for="n in imgs" cols="4" :key="n"><v-img width="100%" class="rounded-lg" :src="n"></v-img></v-col>
+		<div v-if="hasSale && recentLoading" class="d-flex align-center justify-center" style="height: 200px">
+            <v-progress-circular
+              color="green"
+              indeterminate
+            ></v-progress-circular>
+        </div>
+        <v-row v-if="hasSale && !recentLoading" class="mt-0">
+             <v-col v-for="n in recentOrders.slice(0,3)" cols="4" :key="n">
+				<v-img width="100%" cover height="200" class="rounded-lg" :src="n.product_photo.split(',')[0]"></v-img>
+			</v-col>
         </v-row>
   </v-card>
     </v-col>
@@ -371,8 +375,14 @@ color: #333333;" class="px-4">{{item?.review_comment}}
             <v-btn :disabled="recentOrders.length == 0" variant="text" color="#1361F4" class="" >
 View More            </v-btn>
         </div>
+		<div v-if="hasSale && recentLoading" class="d-flex align-center justify-center" style="height: 200px">
+            <v-progress-circular
+              color="green"
+              indeterminate
+            ></v-progress-circular>
+        </div>
 <div class="rounded- mt-5" >
-    <v-table v-if="recentOrders.length > 0" style="    height: 190px!important;
+    <v-table v-if="hasSale && !recentLoading"  style="    height: 190px!important;
     overflow: scroll;">
     <thead>
       <tr class="bg-grey-lighten-3  ">
@@ -393,26 +403,26 @@ View More            </v-btn>
     <tbody>
       <tr  @click="chosen = item.sn"
       :style="chosen == item.sn ? 'background:#DFDFDF':''"
-        v-for="item in items"
+        v-for="item in recentOrders"
         :key="item.sn"
       >
         <td style="font-size: 14px;" class="px-1  d-flex align-center pl-2">
-          <v-avatar color="grey-lighten-2" class="pa-1 mr-3 ml-1" size="30" ><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img></v-avatar>
+          <v-avatar color="grey-lighten-2" class=" mr-3 ml-1" size="30" ><v-img cover :src="item.product_photo.split(',')[0]"></v-img></v-avatar>
           <div >
 
             <p class="" style="font-weight: 600;
 font-size: 16px;
 line-height: 20px;
-color: #333333;">{{ item.name }}</p>
+color: #333333;">{{ item.product_name }}</p>
             <p style="font-weight: 400;
 font-size: 14px;
 line-height: 18px;
-color: #969696;">Fashion and Style</p>
+color: #969696;">{{item.category_name}}</p>
           </div>
     </td>
-        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">240</td>
-        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">{{ item.total }}</td>
-        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">{{ item.total }}</td>
+        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">{{ item.product_quantity }}</td>
+        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">{{ formattedPrice(item.sales_price) }}</td>
+        <td style="font-size: 14px;" class="text-grey-darken-1 px-1">{{ formattedPrice(item.total_price) }}</td>
        
       </tr>
     </tbody>
@@ -432,7 +442,11 @@ color: #969696;">Fashion and Style</p>
 View Details            </v-btn>
         </div>
 <div class="rounded- mt-5" >
-    <v-table v-if="noStock.length > 0" style="    height: 190px!important;
+	<div v-if="hasSale && noStock.length == 0" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; min-height: 200px; gap: 10px; align-items: center" class="">
+		<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
+		<span>No Product is out of stock yet</span>
+	</div>
+    <v-table v-if="hasSale && noStock.length > 0" style="    height: 190px!important;
     overflow: scroll;">
     <thead>
       <tr class="bg-grey-lighten-3 ">
@@ -508,7 +522,8 @@ import {formattedPrice} from '~/utils/price'
 import {getAllReview} from '~/composables/useVendorReview';
 import {allCountries} from '~/utils/countryapi';
 import {getdateRegistered} from '~/utils/date'
-import {getWeeklyRevenue, getTotalRevenue, getCountrySold, getRecentOrders, getTransactions, getCustomers, getNoSold, getTopTransaction } from '~/composables/useDashboard';
+import {getWeeklyRevenue, getTotalRevenue, getCountrySold, getRecentOrders, getTransactions, getCustomers, getNoSold, getOutOfStock, getTopTransaction } from '~/composables/useDashboard';
+import { findIndex } from 'lodash';
 
     const vendorStore = useVendorStore()
     const vendor = ref(vendorStore.vendor)
@@ -527,10 +542,11 @@ import {getWeeklyRevenue, getTotalRevenue, getCountrySold, getRecentOrders, getT
     const noTransactions = ref(null)
     const noProductSold = ref(null)
     const topTranLoading = ref(true)
+	const recentLoading = ref(true)
     const Review = ref([])
     const soldByCountry = ref([])
-
-    const mapCountry = ref("")
+	const currentCountry = ref(null)
+    const mapCountry = ref("Nigeria")
     const map = ref(null);
 
     const config = useRuntimeConfig();
@@ -540,7 +556,16 @@ import {getWeeklyRevenue, getTotalRevenue, getCountrySold, getRecentOrders, getT
       zoom: 5, // starting zoom
       accessToken: config.public.mapboxAccessToken // Include the token here
     });
-
+	function updateCurrentCountry(){
+		if(mapCountry.value){
+			const index = findIndex((con) => {
+				return con.country == mapCountry.value
+			});
+			if (index !== -1){
+				currentCountry.value = soldByCountry.value[index]
+			}
+		}
+	}
     onBeforeMount(async () => {
       if (hasSale.value){
         weeklyRevenue.value = await getWeeklyRevenue()
@@ -553,15 +578,20 @@ import {getWeeklyRevenue, getTotalRevenue, getCountrySold, getRecentOrders, getT
           topTranLoading.value = false
         }
         recentOrders.value = await getRecentOrders()
+		if (recentOrders.value){
+			recentLoading.value = false
+		}
         if (hasReview.value){
           const res = await getAllReview()
           Review.value = res.data.data
         }
         soldByCountry.value = await getCountrySold()
+		noStock.value = await getOutOfStock()
       }
     });
 
     const zoomToCountry = async () => {
+		updateCurrentCountry()
       if (mapCountry.value && map.value) {
         const accessToken = config.public.mapboxAccessToken;
         const country = mapCountry.value;

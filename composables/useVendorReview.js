@@ -46,3 +46,19 @@ export const deleteReview = async (id) => {
         return false
     }
 }
+export const dissapproveReview = async (id) => {
+    const api = vendorUseApi()
+        const res = await api({
+            url: `customer/reviews/${id}/mark_as_pending`,
+            method: 'POST'
+        });
+        return res
+}
+export const searchReview = async (search) => {
+    const api = vendorUseApi()
+        const res = await api({
+            url: `customer/review_search?search_global=${search}`,
+            method: 'GET'
+        });
+        return res
+}
