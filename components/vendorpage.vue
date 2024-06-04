@@ -1,14 +1,11 @@
 <template>
 	<div v-if="fetchingAll" style="min-height: 90vh; width: 100%" class="d-flex justify-center flex-column align-center">
-		<v-progress-circular
-			color="green"
-			indeterminate
-		></v-progress-circular>
-		</div>
+		<v-progress-circular color="green" indeterminate></v-progress-circular>
+	</div>
 	<div v-else id="homepage" style="min-height: 100vh; width: 100%">
 		<v-img
 			style="height: 185px; position: relative"
-			width="auto"
+			width="100%"
 			cover
 			class="d-flex bg-grey justify-end align-end"
 			:src="vendor?.cover_image ? vendor.cover_image : 'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"
@@ -38,17 +35,15 @@
 							<v-sheet max-width="455" class="mx-auto" width="100%" style="padding-top: 20px">
 								<div class="text-center pa-4">
 									<v-avatar class="mx-auto" :style="`border: 3px solid ${profileBorderColor};`" size="100">
-										<v-img
-											class="bg-grey-lighten-3 rounded-xl"
-											cover
-											:src="vendor?.profile_photo"
-										></v-img>
+										<v-img class="bg-grey-lighten-3 rounded-xl" cover :src="vendor?.profile_photo"></v-img>
 									</v-avatar>
 									<h3 class="py-4" style="font-size: 24px; font-weight: 800; line-height: 30px">
-										{{vendor?.business_name}} 
+										{{ vendor?.business_name }}
 									</h3>
 									<!-- <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon> -->
-									<v-btn :disabled="loading" @click="followVendor()" color="orange" size="large" rounded="xl" width="80%" flat> {{ hasFollowed? 'Following' : 'Follow' }}</v-btn>
+									<v-btn :disabled="loading" @click="followVendor()" color="orange" size="large" rounded="xl" width="80%" flat>
+										{{ hasFollowed ? "Following" : "Follow" }}</v-btn
+									>
 								</div>
 								<div class="pa-2">
 									<div class="pa-4 align-center justify-space-between d-flex">
@@ -67,7 +62,7 @@
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
-										<span style="font-size: 1.5rem;">{{flag}}</span>
+										<span style="font-size: 1.5rem">{{ flag }}</span>
 									</div>
 								</div>
 								<v-divider></v-divider>
@@ -79,7 +74,9 @@
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="px-6 pt-8">
-									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor?.business_type }})</span></h3>
+									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">
+										BIO <span class="text-grey">({{ vendor?.business_type }})</span>
+									</h3>
 
 									<p class="textClass text-left mt-4 mb-8">
 										{{ vendor?.business_bio }}
@@ -102,7 +99,7 @@
 										</v-btn>
 									</div>
 									<div class="pt-12 mt-12 justify-start align-center d-flex"></div>
-									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{getdateRegistered(vendor?.created_at)}}</p>
+									<p class="text-center textClass text-grey-darken-1">MEMBER SINCE: {{ getdateRegistered(vendor?.created_at) }}</p>
 								</v-sheet>
 							</v-sheet>
 						</v-card>
@@ -111,18 +108,16 @@
 							<div max-width="455" class="mx-auto" width="100%" style="padding-top: 20px">
 								<div class="pa-1">
 									<v-avatar class="mx-auto" :style="`border: 3px solid ${profileBorderColor};`" size="100">
-										<v-img
-											class="bg-grey-lighten-3 rounded-xl"
-											cover
-											:src="vendor?.profile_photo"
-										></v-img>
+										<v-img class="bg-grey-lighten-3 rounded-xl" cover :src="vendor?.profile_photo"></v-img>
 									</v-avatar>
 									<div class="d-flex justify-space-between align-center py-5">
 										<h3 style="font-size: 20px; font-weight: 600; line-height: 25px">
-											{{vendor?.business_name}} 
+											{{ vendor?.business_name }}
 										</h3>
 										<!-- <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon> -->
-										<v-btn :disabled="loading" @click="followVendor()" color="orange" size="large" rounded="xl" flat width="157">{{ hasFollowed? 'Following' : 'Follow' }}</v-btn>
+										<v-btn :disabled="loading" @click="followVendor()" color="orange" size="large" rounded="xl" flat width="157">{{
+											hasFollowed ? "Following" : "Follow"
+										}}</v-btn>
 									</div>
 								</div>
 								<div class="d-flex">
@@ -142,7 +137,7 @@
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
-										<h1>{{flag}}</h1>
+										<h1>{{ flag }}</h1>
 									</div>
 								</div>
 								<v-divider></v-divider>
@@ -154,7 +149,9 @@
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="pt-8">
-									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">BIO <span class="text-grey">({{ vendor?.business_type }})</span></h3>
+									<h3 style="font-weight: 700; font-size: 24px; line-height: 30px; color: #333333">
+										BIO <span class="text-grey">({{ vendor?.business_type }})</span>
+									</h3>
 
 									<p class="textClass text-left mt-4 mb-8">
 										{{ vendor?.business_bio }}
@@ -177,7 +174,7 @@
 										</v-btn>
 									</div>
 
-									<p class="textClass text-grey-darken-1 mt-10">MEMBER SINCE: {{getdateRegistered(vendor?.created_at)}}</p>
+									<p class="textClass text-grey-darken-1 mt-10">MEMBER SINCE: {{ getdateRegistered(vendor?.created_at) }}</p>
 								</v-sheet>
 							</div>
 						</v-card>
@@ -187,25 +184,53 @@
 							<v-tabs v-model="tab" color="green" grow>
 								<v-tab v-for="item in ['products', 'posts', 'articles', 'promo%']" :key="item" :value="item" class="d-flex align-center">
 									{{ item }}
-									<v-badge v-if="item == 'promo%'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendor?.promo_count" size="12"></v-badge>
-									<v-badge v-if="item == 'products'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendor?.product_count" size="12"></v-badge>
-									<v-badge v-if="item == 'posts'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendor?.post_count" size="12"></v-badge>
-									<v-badge v-if="item == 'articles'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="vendor?.article_count" size="12"></v-badge>
+									<v-badge
+										v-if="item == 'promo%'"
+										class="ml-4 mb-1 px-1"
+										rounded="lg"
+										color="grey-lighten-2"
+										:content="vendor?.promo_count"
+										size="12"
+									></v-badge>
+									<v-badge
+										v-if="item == 'products'"
+										class="ml-4 mb-1 px-1"
+										rounded="lg"
+										color="grey-lighten-2"
+										:content="vendor?.product_count"
+										size="12"
+									></v-badge>
+									<v-badge
+										v-if="item == 'posts'"
+										class="ml-4 mb-1 px-1"
+										rounded="lg"
+										color="grey-lighten-2"
+										:content="vendor?.post_count"
+										size="12"
+									></v-badge>
+									<v-badge
+										v-if="item == 'articles'"
+										class="ml-4 mb-1 px-1"
+										rounded="lg"
+										color="grey-lighten-2"
+										:content="vendor?.article_count"
+										size="12"
+									></v-badge>
 								</v-tab>
 							</v-tabs>
 							<v-divider></v-divider>
 							<v-window v-model="tab">
 								<v-window-item value="products">
-									<VendorPageProducts :items = "products" />
+									<VendorPageProducts :items="products" />
 								</v-window-item>
 								<v-window-item value="posts">
-									<VendorPagePosts :allPosts = "posts" />
+									<VendorPagePosts :allPosts="posts" />
 								</v-window-item>
 								<v-window-item value="articles">
 									<VendorPageArticles :allArticles="articles" />
 								</v-window-item>
 								<v-window-item value="promo%">
-									<VendorPagePromo :items = "promos" />
+									<VendorPagePromo :items="promos" />
 								</v-window-item>
 							</v-window>
 						</v-sheet>
@@ -214,187 +239,185 @@
 			</v-container>
 		</v-card>
 		<v-dialog v-model="loginDialog" persistent max-width="350">
-					<v-card>
-						<v-card-title class="headline">Login Required</v-card-title>
-						<v-card-text>You need to be logged in to follow a vendor.</v-card-text>
-						<v-card-actions>
-							<v-spacer></v-spacer>
-							<v-btn color="green darken-1" text @click="loginDialog = false">Close</v-btn>
-							<v-btn color="green darken-1" text @click="toLogin()">Login</v-btn>
-						</v-card-actions>
-					</v-card>
-				</v-dialog>
+			<v-card>
+				<v-card-title class="headline">Login Required</v-card-title>
+				<v-card-text>You need to be logged in to follow a vendor.</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn color="green darken-1" text @click="loginDialog = false">Close</v-btn>
+					<v-btn color="green darken-1" text @click="toLogin()">Login</v-btn>
+				</v-card-actions>
+			</v-card>
+		</v-dialog>
 	</div>
 </template>
 <script setup>
-import { ref, defineProps, onMounted, watch, computed } from 'vue';
-import emojiFlags from 'emoji-flags';
-import ColorThief from 'colorthief';
-import { getdateRegistered } from '~/utils/date';
-import { countryCodes } from '~/utils/countryapi';
+import { ref, defineProps, onMounted, watch, computed } from "vue";
+import emojiFlags from "emoji-flags";
+import ColorThief from "colorthief";
+import { getdateRegistered } from "~/utils/date";
+import { countryCodes } from "~/utils/countryapi";
 import { useUserStore } from "~/stores/userStore";
-import { useRouter } from '#vue-router';
-import {follow, unFollowVendor, isFollowing } from '~/composables/usefollowVendor'
+import { useRouter } from "#vue-router";
+import { follow, unFollowVendor, isFollowing } from "~/composables/usefollowVendor";
 
 const profileBorderColor = ref(null);
-const router = useRouter
-const loginDialog = ref(false)
-const flag = ref(null)
+const router = useRouter;
+const loginDialog = ref(false);
+const flag = ref(null);
 const placescards = ref(false);
 const mods = ref(1);
 const rating = ref(4);
 const tab = ref(null);
-const userStore = useUserStore()
-const hasFollowed = ref(false)
-const loading = ref(false)
+const userStore = useUserStore();
+const hasFollowed = ref(false);
+const loading = ref(false);
 
-const emits = defineEmits(['refreshVendor'])
+const emits = defineEmits(["refreshVendor"]);
 
 const props = defineProps({
-  vendor: {
-    type: Array,
-    required: true
-  },
-  posts: {
-	type: Array,
-    required: true
-  },
-  articles: {
-	type: Array,
-    required: true
-  },
-  products: {
-	type: Array,
-    required: true
-  },
-  promos: {
-	type: Array,
-    required: true
-  },
-  fetchingAll: {
-	type: Boolean,
-	required: true
-  }
-
+	vendor: {
+		type: Array,
+		required: true,
+	},
+	posts: {
+		type: Array,
+		required: true,
+	},
+	articles: {
+		type: Array,
+		required: true,
+	},
+	products: {
+		type: Array,
+		required: true,
+	},
+	promos: {
+		type: Array,
+		required: true,
+	},
+	fetchingAll: {
+		type: Boolean,
+		required: true,
+	},
 });
-if (props.vendor){
-	flag.value = getFlag()
-		if (userStore.isLoggedIn){
-			hasFollowed.value = await isFollowing(props.vendor?.id)
-		}
-	  try {
-	    profileBorderColor.value = await getBorderColor();
-	  } catch (error) {
-	    console.error(error);
-	  }
+if (props.vendor) {
+	flag.value = getFlag();
+	if (userStore.isLoggedIn) {
+		hasFollowed.value = await isFollowing(props.vendor?.id);
+	}
+	try {
+		profileBorderColor.value = await getBorderColor();
+	} catch (error) {
+		console.error(error);
+	}
 }
 
-
-async function followVendor(){
-	if (!userStore.isLoggedIn){
-		loginDialog.value = true
-		return
+async function followVendor() {
+	if (!userStore.isLoggedIn) {
+		loginDialog.value = true;
+		return;
 	}
-	try{
-		loading.value = true
-		if (!hasFollowed.value){
-		const res = await follow(props.vendor?.id)
-		if (res) {
-			emits('refreshVendor')
-		}
-		}
-		if (hasFollowed.value){
-			const res = await unFollowVendor(props.vendor?.id)
+	try {
+		loading.value = true;
+		if (!hasFollowed.value) {
+			const res = await follow(props.vendor?.id);
 			if (res) {
-				emits('refreshVendor')
+				emits("refreshVendor");
 			}
 		}
-		}catch(error){
-			console.error(error)
-		}finally{
-			loading.value = false
+		if (hasFollowed.value) {
+			const res = await unFollowVendor(props.vendor?.id);
+			if (res) {
+				emits("refreshVendor");
+			}
 		}
-
-	
+	} catch (error) {
+		console.error(error);
+	} finally {
+		loading.value = false;
+	}
 }
-function toLogin(){
-	loginDialog.value = false
-	router.push('/user/login')
+function toLogin() {
+	loginDialog.value = false;
+	router.push("/user/login");
 }
 async function getBorderColor() {
-  return new Promise((resolve, reject) => {
-    const img = new Image();
-    img.crossOrigin = 'Anonymous'; 
-    img.src = props.vendor.profile_photo;
-    img.onload = () => {
-      const colorThief = new ColorThief();
-      const dominantColor = colorThief.getColor(img);
-      resolve(`rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`);
-    };
-    img.onerror = () => {
-      console.error('Cannot load image');
-      reject('Cannot load image');
-    };
-  });
+	return new Promise((resolve, reject) => {
+		const img = new Image();
+		img.crossOrigin = "Anonymous";
+		img.src = props.vendor.profile_photo;
+		img.onload = () => {
+			const colorThief = new ColorThief();
+			const dominantColor = colorThief.getColor(img);
+			resolve(`rgb(${dominantColor[0]}, ${dominantColor[1]}, ${dominantColor[2]})`);
+		};
+		img.onerror = () => {
+			console.error("Cannot load image");
+			reject("Cannot load image");
+		};
+	});
 }
 
-watch(() => props.vendor, async () => {
-	flag.value = getFlag()
-	if (userStore.isLoggedIn){
-		hasFollowed.value = await isFollowing(props.vendor?.id)
+watch(
+	() => props.vendor,
+	async () => {
+		flag.value = getFlag();
+		if (userStore.isLoggedIn) {
+			hasFollowed.value = await isFollowing(props.vendor?.id);
+		}
+		try {
+			profileBorderColor.value = await getBorderColor();
+		} catch (error) {
+			console.error(error);
+		}
 	}
-  try {
-    profileBorderColor.value = await getBorderColor();
-  } catch (error) {
-    console.error(error);
-  }
-});
+);
 
 const buttons = computed(() => {
-  return [
-    {
-      icon: "youtube",
-      handle: props.vendor?.youtube_handle
-    },
-    {
-      icon: "twitter",
-      handle: props.vendor?.twitter_handle
-    },
-    {
-      icon: "facebook",
-      handle: props.vendor?.facebook_handle
-    },
-    {
-      icon: "instagram",
-      handle: props.vendor?.instagram_handle
-    },
-  ];
+	return [
+		{
+			icon: "youtube",
+			handle: props.vendor?.youtube_handle,
+		},
+		{
+			icon: "twitter",
+			handle: props.vendor?.twitter_handle,
+		},
+		{
+			icon: "facebook",
+			handle: props.vendor?.facebook_handle,
+		},
+		{
+			icon: "instagram",
+			handle: props.vendor?.instagram_handle,
+		},
+	];
 });
 
 function filt(text) {
-  return text.length > 40 ? text.slice(0, 40) + "..." : text;
+	return text.length > 40 ? text.slice(0, 40) + "..." : text;
 }
 
 const openSocialMedia = (icon, handle) => {
-      	window.open(`https://${icon}.com/${handle}`, '_blank');
+	window.open(`https://${icon}.com/${handle}`, "_blank");
 };
 
 function getFlag() {
 	const country = props.vendor?.rep_country;
-	const countryCode = countryCodes[country]
-  	return emojiFlags.countryCode(countryCode).emoji;
+	const countryCode = countryCodes[country];
+	return emojiFlags.countryCode(countryCode).emoji;
 }
 
-
 const cols = computed(() => {
-  const { lg, sm, md } = this.$vuetify.display;
-  return lg
-    ? [4, 6, 6, 6, 4, 8, 4, 3, 10, 2]
-    : md
-    ? [4, 6, 6, 12, 6, 8, 4, 3, 10, 2]
-    : sm
-    ? [6, 12, 12, 12, 12, 12, 12, 12, 12]
-    : [6, 12, 12, 12, 12, 12, 12, 12, 12];
+	const { lg, sm, md } = this.$vuetify.display;
+	return lg
+		? [4, 6, 6, 6, 4, 8, 4, 3, 10, 2]
+		: md
+		? [4, 6, 6, 12, 6, 8, 4, 3, 10, 2]
+		: sm
+		? [6, 12, 12, 12, 12, 12, 12, 12, 12]
+		: [6, 12, 12, 12, 12, 12, 12, 12, 12];
 });
 </script>
 
@@ -415,5 +438,3 @@ const cols = computed(() => {
 	bottom: -46px;
 }
 </style>
-
-

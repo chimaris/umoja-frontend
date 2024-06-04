@@ -103,34 +103,35 @@
 					:min-width="$vuetify.display.mobile ? '90vw' : '60vw'"
 					class="rounded-lg mx-auto"
 				>
-					<div class="d-flex d-md-none justify-end mx-8 mt-2 mb-4">
+					<div class="d-flex justify-end mx-8 mt-2 mb-4">
 						<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
 					</div>
 					<v-row dense style="height: 100vh">
-						<v-col cols="12" class="py-0 pb-0 pl-0 pr-0 pl-md-6" md="6">
+						<v-col cols="12" md="6">
 							<v-img
 								v-if="selectedPost.featured_img.includes(',')"
 								class="pb-0"
-								contain
+								:cover="$vuetify.display.mobile"
 								width="100%"
 								height="100%"
 								:src="selectedPost.featured_img.split(',')[1]"
 							></v-img>
+
 							<v-img
 								v-if="!selectedPost.featured_img.includes(',')"
 								class="pb-0"
-								contain
+								:cover="$vuetify.display.mobile"
 								width="100%"
 								height="100%"
 								:src="selectedPost.featured_img"
 							></v-img>
 						</v-col>
-						<v-col cols="12" style="position: relative" class="px-0 pt-0 pb-10" md="6">
-							<div class="d-none d-md-flex justify-end mx-8 my-3 pt-3">
-								<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
-							</div>
-							<v-sheet style="height: calc(100% - 50px); overflow-y: auto; position: absolute; width: 100%; bottom: 0" class="py-2">
-								<div class="d-flex px-6 pt-6 pb-4">
+						<v-col cols="12" style="position: relative" md="6">
+							<v-sheet
+								style="height: 100%; overflow-y: auto; position: absolute; width: 100%; bottom: 0; border-left: 1px solid #e4e4e4"
+								class="py-2"
+							>
+								<div class="d-flex px-6 pb-4">
 									<v-avatar size="48" class="mr-5">
 										<v-img :src="selectedPost.vendor_profile_photo"></v-img>
 									</v-avatar>

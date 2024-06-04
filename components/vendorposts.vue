@@ -115,33 +115,37 @@
 					style="height: 100vh; overflow: hidden; position: relative"
 					max-width="700px"
 					:min-width="$vuetify.display.mobile ? '90vw' : '60vw'"
-					class="rounded-lg"
+					class="rounded-lg mx-auto"
 				>
-					<v-btn class="ms-auto my-2" @click="dialog = false">
-						<v-icon class="" size="24" icon="mdi mdi-close"></v-icon>
-					</v-btn>
-					<v-row style="height: 100vh">
-						<v-col cols="12" class="px-0 py-0 pb-0" md="6">
+					<div class="d-flex justify-end mx-8 mt-2 mb-4">
+						<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
+					</div>
+					<v-row dense style="height: 100vh">
+						<v-col cols="12" md="6">
 							<v-img
 								v-if="selectedPost.featured_img.includes(',')"
 								class="pb-0"
-								cover
+								:cover="$vuetify.display.mobile"
 								width="100%"
 								height="100%"
 								:src="selectedPost.featured_img.split(',')[1]"
 							></v-img>
+
 							<v-img
 								v-if="!selectedPost.featured_img.includes(',')"
 								class="pb-0"
-								cover
+								:cover="$vuetify.display.mobile"
 								width="100%"
 								height="100%"
 								:src="selectedPost.featured_img"
 							></v-img>
 						</v-col>
-						<v-col cols="12" style="position: relative" class="px-0 py-0" md="6">
-							<v-sheet style="height: 100%; overflow: scroll; position: absolute; width: 100%" class="py-2">
-								<div class="d-flex px-6 pt-6 pb-4">
+						<v-col cols="12" style="position: relative" md="6">
+							<v-sheet
+								style="height: 100%; overflow-y: auto; position: absolute; width: 100%; bottom: 0; border-left: 1px solid #e4e4e4"
+								class="py-2"
+							>
+								<div class="d-flex px-6 pb-4">
 									<v-avatar size="48" class="mr-5">
 										<v-img :src="selectedPost.vendor_profile_photo"></v-img>
 									</v-avatar>
@@ -152,14 +156,15 @@
 													{{ selectedPost.vendor_lastname }} {{ selectedPost.vendor_firstname }}
 												</p>
 												<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
-													<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon
-													>{{ getdateRegistered(selectedPost.created_at) }}
+													<v-icon class="mx-1" icon="mdi mdi-circle" size="6" color="grey-lighten-2"></v-icon>
+													{{ getdateRegistered(selectedPost.created_at) }}
 												</p>
 											</div>
 											<div class="d-flex">
 												<v-chip size="x-small" class="px-3" color="#936900" rounded="0">{{ selectedPost.category_name }}</v-chip>
 												<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
-													<v-icon class="mx-1" icon="mdi  mdi-circle" size="6" color="grey-lighten-2"></v-icon>{{ selectedPost.location }}
+													<v-icon class="mx-1" icon="mdi mdi-circle" size="6" color="grey-lighten-2"></v-icon>
+													{{ selectedPost.location }}
 												</p>
 											</div>
 										</div>
@@ -174,14 +179,19 @@
 									</p>
 									<div class="d-flex align-center py-2">
 										<v-btn flat v-if="userLiked">
-											<v-icon @click="handUnLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart"></v-icon> {{ selectedPost.likes }}
+											<v-icon @click="handUnLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart"></v-icon>
+											{{ selectedPost.likes }}
 											{{ selectedPost.likes <= 1 ? "Like" : "Likes" }}
 										</v-btn>
 										<v-btn flat v-if="!userLiked">
-											<v-icon @click="handleLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon> {{ selectedPost.likes }}
+											<v-icon @click="handleLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon>
+											{{ selectedPost.likes }}
 											{{ selectedPost.likes <= 1 ? "Like" : "Likes" }}
 										</v-btn>
-										<v-btn flat> <v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon> Share Post </v-btn>
+										<v-btn flat>
+											<v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon>
+											Share Post
+										</v-btn>
 									</div>
 								</div>
 
@@ -194,44 +204,32 @@
 											<v-btn rounded="xl" flat size="x-small" style="position: absolute; top: 15px; right: 15px" icon="mdi mdi-heart-outline"></v-btn>
 											<v-img cover height="100%" width="100%" :src="item.photo.split(',')[0]"></v-img>
 										</v-card>
-										<p
-											style="
-												font-weight: 600;
-												font-size: 14px;
-												line-height: 18px;
-
-												color: #000000;
-											"
-											class="mt-2"
-										>
+										<p style="font-weight: 600; font-size: 14px; line-height: 18px; color: #000000" class="mt-2">
 											{{ item.name }}
 										</p>
-										<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">{{ item.category_name }}</p>
+										<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">
+											{{ item.category_name }}
+										</p>
 										<p style="font-weight: 600; font-size: 12px; line-height: 13px; color: #000000" class="d-flex my-1 align-center">
-											<v-rating v-model="rating" color="grey-lighten-2 " active-color="#E7CE5D" class="" density="compact" size="small"></v-rating
-											><span style="margin-left: 9px">(0)</span>
+											<v-rating v-model="rating" color="grey-lighten-2" active-color="#E7CE5D" class="" density="compact" size="small"></v-rating>
+											<span style="margin-left: 9px">(0)</span>
 										</p>
 										<div class="d-flex align-center justify-space-between">
 											<div class="d-flex align-center">
-												<h1 style="font-size: 16px; line-height: 20px; color: #1a1d1f" class="priceClass">{{ formattedPrice(item.price) }}</h1>
+												<h1 style="font-size: 16px; line-height: 20px; color: #1a1d1f" class="priceClass">
+													{{ formattedPrice(item.price) }}
+												</h1>
 											</div>
-											<v-btn style="border: 1px solid #e5e5e5" size="small" variant="outlined"
-												><span
-													style="
-														color: var(--grey-1000, #1a1d1f);
-
-														font-size: 12px;
-														font-weight: 600;
-													"
-													>Pre-Order</span
-												></v-btn
-											>
+											<v-btn style="border: 1px solid #e5e5e5" size="small" variant="outlined">
+												<span style="color: var(--grey-1000, #1a1d1f); font-size: 12px; font-weight: 600"> Pre-Order </span>
+											</v-btn>
 										</div>
 									</div>
 								</div>
 							</v-sheet>
 						</v-col>
 					</v-row>
+					<div class="py-5 bg-white w-100" style="z-index: 20"></div>
 				</v-card>
 			</v-dialog>
 		</div>
