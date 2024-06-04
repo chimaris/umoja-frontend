@@ -8,7 +8,7 @@
 	<div v-else id="homepage" style="min-height: 100vh; width: 100%">
 		<v-img
 			style="height: 185px; position: relative"
-			width="auto"
+			width="100%"
 			cover
 			class="d-flex bg-grey justify-end align-end"
 			:src="vendor?.cover_image ? vendor.cover_image : 'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"
@@ -20,7 +20,7 @@
 			>
 				<v-btn to="/discovery_page" flat="" rounded="xl" color="rgba(0, 0, 0, 0.70)">
 					<v-icon class="mr-2" color="white" icon="mdi mdi-information-outline"></v-icon>
-					<span style="color: #fff; font-size: 12px; font-style: normal; font-weight: 400"> Tap to read more about Ghana 🇬🇭 </span>
+					<span style="color: #fff; font-size: 12px; font-style: normal; font-weight: 400"> Tap to read more about {{vendor?.rep_country}} {{flag}} </span>
 				</v-btn>
 			</v-container>
 		</v-img>

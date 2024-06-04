@@ -97,13 +97,14 @@
 				</v-dialog>
 			</div>
 			<div>
-				<v-img width="19" height="19" src="https://res.cloudinary.com/payhospi/image/upload/v1716240124/umoja/export_n0gjxv.svg" />
+				<v-img width="19" height="19" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716240124/umoja/export_n0gjxv.svg', 19)" />
 			</div>
 		</div>
 	</v-card>
 </template>
 <script>
 import {getdateRegistered} from '~/utils/date'
+import { getCloudinaryImageUrl } from '~/utils/cloudinary';
 import { useUserStore } from "~/stores/userStore";
 import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
 export default {

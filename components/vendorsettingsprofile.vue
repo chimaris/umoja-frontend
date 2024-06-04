@@ -17,6 +17,8 @@
 <div class="ml-3">
     <p style="font-size: 20px; text-transform: capitalize;
 font-weight: 600;">{{vendor?.vendor_details.business_name}} </p>
+<p style="font-size: 16px; text-transform: capitalize;
+font-weight: 600;">{{vendor?.vendor_details.rep_country}} <span>{{getFlag()}}</span> </p>
     <p style="color:#969696;
 font-size: 16px;
 font-weight: 500;">{{vendor?.vendor_details.business_type}}</p>
@@ -380,7 +382,8 @@ the deletion for 14 days.</p>
 				</ul>
 				<p class="inputLabel">Business name</p>
 				<v-text-field :rules="inputRules" v-model="vendor.vendor_details.business_name" placeholder="Type your official business name" density="comfortable"></v-text-field>
-				
+				<p class="inputLabel">What African country are you representing</p>
+				<v-text-field :rules="inputRules" v-model="vendor.vendor_details.rep_country" placeholder="Type your official business name" density="comfortable"></v-text-field>
 				<p class="inputLabel" >Business Category</p>
 
 				<v-select
@@ -404,6 +407,8 @@ the deletion for 14 days.</p>
 </template>
 <script setup>
 import {ref} from 'vue'
+import emojiFlags from 'emoji-flags';
+import { countryCodes } from '~/utils/countryapi';
 import {upLoadPicture} from '~/utils/upload';
 import { useVendorStore } from '~/stores/vendorStore';
 const props = defineProps({
@@ -453,6 +458,15 @@ const charCount = computed(() => {
       return props.vendor.vendor_details.business_bio?.length;
     });
 
+function getFlag() {
+	const country = props.vendor?.vendor_details?.rep_country;
+	const countryCode = countryCodes[country]
+	if (countryCode){
+		return emojiFlags.countryCode(countryCode).emoji;
+	}
+  	
+}
+
 async function upLoadFile(event){
 	await upLoadPicture({event, upLoadedFiles, showProgress, profilePicture, profile_photo, errorMessage})
 }
@@ -460,12 +474,13 @@ async function drop(e) {
 		await upLoadPicture({event: e, upLoadedFiles, showProgress, profilePicture, profile_photo, errorMessage, mode: 'drop'})
 }
 async function editProfile(){
-	if (!props.vendor.vendor_details.business_type || !props.vendor.vendor_details.business_name){
+	if (!props.vendor.vendor_details.business_type || !props.vendor.vendor_details.business_name || !props.vendor.vendor_details.rep_country){
 		return
 	}
 	const data = {
 		business_type: props.vendor.vendor_details.business_type,
 		business_name : props.vendor.vendor_details.business_name,
+		rep_country: props.vendor.vendor_details.rep_country,
 		profile_photo: profile_photo.value ? profile_photo.value : props.vendor.vendor_details.profile_photo
 	}
 	try{
