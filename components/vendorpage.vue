@@ -17,7 +17,7 @@
 			>
 				<v-btn to="/discovery_page" flat="" rounded="xl" color="rgba(0, 0, 0, 0.70)">
 					<v-icon class="mr-2" color="white" icon="mdi mdi-information-outline"></v-icon>
-					<span style="color: #fff; font-size: 12px; font-style: normal; font-weight: 400"> Tap to read more about Ghana 🇬🇭 </span>
+					<span style="color: #fff; font-size: 12px; font-style: normal; font-weight: 400"> Tap to read more about {{vendor?.rep_country}} {{flag}} </span>
 				</v-btn>
 			</v-container>
 		</v-img>

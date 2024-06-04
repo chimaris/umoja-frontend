@@ -398,10 +398,12 @@
 	</v-card> 
     <p style="color: #B00020; font-size: 14px; margin-top: 20px">{{error}}</p>
     <v-btn @click="saveVariant()"   class="my-6" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
-		<span class="mr-4"> Save</span>
+		<span class="mr-4"> Save changes</span>
 		<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
 	</v-btn>
-
+	<v-btn @click="$emit('discardChange')" class="my-5 ml-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+		Discard changes
+	</v-btn>
 	
 </template>
 
@@ -421,8 +423,6 @@ export default {
     setup() {
         const vendorProducts = useVendorProductStore()
         const route = useRoute()
-		
-
         return {
             vendorProducts,
             route

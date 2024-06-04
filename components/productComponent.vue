@@ -12,7 +12,7 @@
 			class="rounded-lg bg-grey-lighten-5"
 			cover
 			v-if="item.photo == null"
-			@click="$router.push(`/product_page/${item.id}`)"
+			@click="role ? '' : $router.push(`/product_page/${item.id}`)"
 			eager
 			width="100%"
 			:height="$vuetify.display.mobile ? '200px' : '236px'"
@@ -35,7 +35,7 @@
 			class="rounded-lg bg-grey-lighten-5"
 			cover
 			v-else-if="item.photo.includes(',')"
-			@click="$router.push(`/product_page/${item.id}`)"
+			@click="role ? '' : $router.push(`/product_page/${item.id}`)"
 			eager
 			width="100%"
 			:height="$vuetify.display.mobile ? '200px' : '236px'"
@@ -55,7 +55,7 @@
 					width="15"
 					height="15"
 					:color="!isLiked(index) ? '#1C274C' : 'red'"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg"
+					:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg', 15)"
 				/>
 				<!-- <v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon> -->
 			</v-btn>
@@ -64,7 +64,7 @@
 			class="rounded-lg bg-grey-lighten-5"
 			cover
 			v-else
-			@click="$router.push(`/product_page/${item.id}`)"
+			@click="role ? '' : $router.push(`/product_page/${item.id}`)"
 			eager
 			width="100%"
 			:height="$vuetify.display.mobile ? '200px' : '236px'"
@@ -84,13 +84,13 @@
 					width="15"
 					height="15"
 					:color="!isLiked(index) ? '#1C274C' : 'red'"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg"
+					:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg', 15)"
 				/>
 				<!-- <v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon> -->
 			</v-btn>
 		</v-img>
 		<div
-			@click="$router.push(`/vendor_page/${item.vendor_id}`)"
+			@click="role ? '' : $router.push(`/vendor_page/${item.vendor_id}`)"
 			class="mt-3 d-block d-md-none"
 			:style="{ fontSize: $vuetify.display.mobile ? '12px' : '14px', fontWeight: $vuetify.display.mobile ? 500 : 600 }"
 			style="cursor: pointer; color: #1e1e1e; letter-spacing: -0.14px"
@@ -102,7 +102,7 @@
 			<v-icon icon="mdi mdi-information-outline" color="#969696" />
 		</div>
 		<p
-			@click="$router.push(`/product_page/${item.id}`)"
+			@click="role? '' : $router.push(`/product_page/${item.id}`)"
 			style="font-weight: 600; font-size: 14px; line-height: 18px; cursor: pointer; color: #000000"
 			class="mt-1 mt-md-3 text-wrap"
 		>
@@ -126,8 +126,8 @@
 		>
 		<div v-if="vendorShow" class="d-none d-md-block">
 			<div class="d-flex mt-6">
-				<v-avatar @click="$router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img cover :src="item.vendor_profile_photo"></v-img></v-avatar>
-				<div style="cursor: pointer" @click="$router.push(`/vendor_page/${item.vendor_id}`)" class="ml-2">
+				<v-avatar @click="role ? '' : $router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img cover :src="item.vendor_profile_photo"></v-img></v-avatar>
+				<div style="cursor: pointer" @click="role ? '' : $router.push(`/vendor_page/${item.vendor_id}`)" class="ml-2">
 					<p style="color: #1e1e1e; text-transform: capitalize; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
 						{{ item.vendor_business_name }}
 					</p>
@@ -181,6 +181,7 @@ import { countryCodes } from "~/utils/countryapi";
 import { useCartStore } from "~/stores/cartStore";
 import { useUserStore } from "~/stores/userStore";
 import emojiFlags from "emoji-flags";
+import { getCloudinaryImageUrl } from '~/utils/cloudinary';
 
 export default {
 	props: ["item", "short", "category", "cover", "index", "showVendor", "showdisco", "role"],

@@ -287,7 +287,7 @@
 				style="background-color: #f8f8f8; border: 1px solid #ededed;  padding: 10px 20px; height: 60px; overflow: hidden;"
 			>
 				<div style="display: flex; align-items: center">
-					<span style="font-size: 14px; font-weight: 400">{{from}} - {{toPage}} of {{pagesNo}} Pages</span>
+					<span style="font-size: 14px; font-weight: 400">{{currentPage}} of {{pagesNo}} Pages</span>
 				</div>
 				<div class="d-flex align-center" style="margin-left: auto">
 					<span style="font-size: 12px; font-weight: 400; margin-right: 10px">The Page you’re on</span>
@@ -402,11 +402,13 @@ import {ref, onBeforeMount} from 'vue';
 		const selectedDate = ref()
 		const loading = ref(false)
 
-		const from = ref(null)
-		const toPage = ref(null)
 		const pagesNo = ref(null)
 		const selectedPage = ref(1)
 		const currentPage = ref(null)
+
+		watch(() => selectedPage.value, async () =>  {
+			await getVendorReview()
+		})
 
 		const pageOptions = computed(() => {
 			return Array.from({ length: pagesNo.value }, (_, index) => index + 1);
@@ -469,6 +471,8 @@ import {ref, onBeforeMount} from 'vue';
 				averageRating.value = res.data.average_rating
 				totalReview.value = res.data.total_reviews
 				ratingsCount.value = res.data.ratings_count
+				currentPage.value = res.data.pagination.current_page
+				pagesNo.value = res.data.pagination.last_page
 			}catch(error){
 				console.error(error)
 			}finally{

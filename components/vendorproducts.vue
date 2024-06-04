@@ -344,6 +344,7 @@ import {useEditVendorStore} from '~/stores/editProduct';
 import {vendorUseApi} from '~/composables/vendorApi';
 import { debounce } from 'lodash';
 import { useVendorStore } from '~/stores/vendorStore';
+import { onEvent } from '@/utils/eventBus';
 
 export default {
 	setup(props, ctx) {
@@ -375,7 +376,7 @@ export default {
 				await fetchFilteredProducts();
 			}
 		});
-		
+		onEvent('product-updated', fetchFilteredProducts);
 		
 		onBeforeMount(async () => {
 			if (vendor.value.vendor_details?.product_count > 0){

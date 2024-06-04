@@ -70,8 +70,11 @@
 					</v-checkbox> -->
 					<!-- </v-sheet> --> 
                     <v-btn type="submit" class="my-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
-						<span class="mr-4">Save</span>
+						<span class="mr-4">Save changes</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
+					</v-btn>
+					<v-btn @click="discardChanges()" class="my-5 ml-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						Discard changes
 					</v-btn>
                     </v-form>
 				</v-window-item>
@@ -220,8 +223,11 @@
 						</v-col>
 					</v-row>
 					<v-btn type="submit" class="my-2" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
-						<span class="mr-4">Save</span>
+						<span class="mr-4">Save changes</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
+					</v-btn>
+					<v-btn @click="discardChanges()" class="my-5 ml-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						Discard changes
 					</v-btn>
 					</v-form>
 						
@@ -285,8 +291,11 @@
 					</v-sheet>
 					<p class="my-2" style="color: #B00020; font-size: 14px;">{{checkError}}</p>
 					<v-btn @click="savePrice"  class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
-						<span class="mr-4">Save</span>
+						<span class="mr-4">Save changes</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
+					</v-btn>
+					<v-btn @click="discardChanges()" class="my-5 ml-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						Discard changes
 					</v-btn>
 				</v-window-item>
 				<v-window-item value="Picture" >
@@ -416,8 +425,11 @@
 					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureError}}</p>
 					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{vendorProducts.pictureError}}</p>
 					<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
-						<span class="mr-4">Save</span>
+						<span class="mr-4">Save changes</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
+					</v-btn>
+					<v-btn @click="discardChanges()" class="my-5 ml-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						Discard changes
 					</v-btn>
 					</v-form>
 				</v-window-item>
@@ -522,9 +534,12 @@
 						</v-sheet>
                         <p style="color: #B00020; font-size: 14px; margin-top: 20px">{{inventoryError}}</p>
 						<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
-						<span class="mr-4">Save</span>
+						<span class="mr-4">Save changes</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
 					    </v-btn>
+						<v-btn @click="discardChanges()" class="my-5 ml-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						Discard changes
+					</v-btn>
 					</v-form>
 				</v-window-item>
 				<v-window-item value="Shipping">
@@ -758,13 +773,16 @@
 						</v-sheet>
 						<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{shippingError}}</p>
 						<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
-						<span class="mr-4">Save</span>
+						<span class="mr-4">Save changes</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
 					    </v-btn>
+						<v-btn @click="discardChanges()" class="my-5 ml-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						Discard changes
+					</v-btn>
 					</v-form>
 				</v-window-item>
 				<v-window-item value="Variants">
-					<editVariant :product= "product"/>
+					<editVariant @discardChange="discardChanges()" :product= "product"/>
 				</v-window-item>
 			</v-window>
 		</v-sheet>
@@ -782,6 +800,7 @@ import {useVendorProductStore} from '~/stores/vendorProducts'
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
 import {useEditVendorStore} from '~/stores/editProduct';
+import { emitEvent } from '~/utils/eventBus';
 import { useRouter } from 'vue-router'
 import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
 
@@ -792,6 +811,7 @@ export default {
 		const Categories = ref([])
         const editStore = useEditVendorStore()
         const product = computed(() => editStore.currentEditProduct);
+		const originalProduct = ref(null)
         const router = useRouter()
 
 		watch(() => [product.value.category_name, product.value.gender ],  async () => {
@@ -801,6 +821,7 @@ export default {
 		});
 
 		onMounted(async () => {
+			originalProduct.value = {...product.value}
             if (!product) {
                 router.push('/vendor/dashboard/Products')
             }
@@ -816,7 +837,10 @@ export default {
 		}
             
 		});
-   
+		const discardChanges = () => {
+			// Reset the product data to its original state
+			editStore.currentEditProduct = { ...originalProduct.value };
+			};
 		function getSubCategoryId(subCategory) {
 			const subCat = subCategories.value.findIndex(subCat => subCat.name === subCategory);
 			if (subCat === -1) {
@@ -843,6 +867,7 @@ export default {
 		]
 		const newTag = ref("");
 		const window = ref("General");
+
 
 		const addTag = (newTag) => {
 			const trimmedNewTag = newTag.trim().toLowerCase();
@@ -884,7 +909,9 @@ export default {
 			handleTagInput,
 			newTag,
 			window,
+			originalProduct,
 			vendorProducts,
+			discardChanges,
 			tabs,
 			tab1,
 			nextTab,
@@ -923,20 +950,6 @@ export default {
             tab: 'Customer Details',
             chip: 'All',
             chosen: '',
-            notes: [{
-                name: 'Benjamin Franklin O.',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png'
-            },
-            {
-                name: 'Nweke Franklin',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png'
-            },
-            {
-                name: 'Nweke Franklin',
-                image: 'https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png'
-            },
-
-            ],
 			shippingOptions: ["Umoja Shipping", "DHL", "Fedex",],
             summary: [
                 {
@@ -958,28 +971,6 @@ export default {
                     title: 'Taxes',
                     value: '€ 0.00'
                 }
-            ],
-            items: [
-                {
-                    sn: '#23942',
-                    name: 'Leather crop top & pants......',
-                    date: '17 May',
-                    total: '€2,349‎',
-                },
-                {
-                    sn: '#23442',
-                    name: 'Leather crop top & pants......',
-                    date: '17 May',
-                    total: '€2,349‎',
-                },
-                {
-                    sn: '#26042',
-                    name: 'Leather crop top & pants......',
-                    date: '17 May',
-                    total: '€2,349‎',
-                },
-
-
             ],
         }
     },
@@ -1119,9 +1110,13 @@ export default {
 			if (this.product.sku && this.product.unit_per_item && this.product.unit_per_item> 0) {
 				try {
                     this.editStore.loading = true;
-                    await this.editStore.editProduct(data)
-					this.nextTab()
-                    setLocalStorageItem("current-edit", this.product)
+                    const res = await this.editStore.editProduct(data)
+					if (res){
+						emitEvent('product-updated', this.product);
+						this.nextTab()
+                    	setLocalStorageItem("current-edit", this.product)
+					}
+					
                 }catch(error){
                     console.error("error", error)
                 }finally {
@@ -1153,9 +1148,12 @@ export default {
                 try {
                     this.descError = ""
                     this.editStore.loading = true;
-                    await this.editStore.editProduct(data)
-					this.nextTab()
-                    setLocalStorageItem("current-edit", this.product)
+                    const res = await this.editStore.editProduct(data)
+					if (res){
+						emitEvent('product-updated', this.product);
+						this.nextTab()
+                    	setLocalStorageItem("current-edit", this.product)
+					}
                 }catch(error){
                     if (error.response) {
                         this.descError = error.response.data.message || 'An error occurred while saving changes.';
@@ -1194,9 +1192,12 @@ export default {
                 try {
                     this.checkError= ""
                     this.editStore.loading = true;
-                    await this.editStore.editProduct(data)
-					this.nextTab()
-                    setLocalStorageItem("current-edit", this.product)
+                    const res = await this.editStore.editProduct(data)
+					if (res){
+						emitEvent('product-updated', this.product);
+						this.nextTab()
+                    	setLocalStorageItem("current-edit", this.product)
+					}
                 }catch(error){
                     if (error.response) {
                         this.checkError = error.response.data.message || 'An error occurred while saving changes.';
@@ -1216,9 +1217,12 @@ export default {
                 try {
                     this.pictureError = "";
                     this.editStore.loading = true;
-                    await this.editStore.handleEditphotoUpload(this.imagePreviews);
-					this.nextTab()
-                    setLocalStorageItem("current-edit", this.product);
+                    const res = await this.editStore.handleEditphotoUpload(this.imagePreviews);
+					if (res){
+						emitEvent('product-updated', this.product);
+						this.nextTab()
+                    	setLocalStorageItem("current-edit", this.product)
+					}
                 } catch (error) {
                     if (error.response) {
                         this.pictureError = error.response.data.message || 'An error occurred during photo upload.';
@@ -1247,9 +1251,12 @@ export default {
 			try {
                     this.inventoryError = ""
                     this.editStore.loading = true;
-                    await this.editStore.editProduct(data)
-					this.nextTab()
-                    setLocalStorageItem("current-edit", this.product)
+                    const res = await this.editStore.editProduct(data)
+					if (res){
+						emitEvent('product-updated', this.product);
+						this.nextTab()
+                    	setLocalStorageItem("current-edit", this.product)
+					}
                 }catch(error){
                     if (error.response) {
                         this.inventoryError = error.response.data.message || 'An error occurred while saving changes.';
@@ -1288,9 +1295,12 @@ export default {
                 try {
                     this.shippingError = ""
                     this.editStore.loading = true;
-                    await this.editStore.editProduct(data)
-					this.nextTab()
-                    setLocalStorageItem("current-edit", this.product)
+                    const res = await this.editStore.editProduct(data)
+					if (res){
+						emitEvent('product-updated', this.product);
+						this.nextTab()
+                    	setLocalStorageItem("current-edit", this.product)
+					}
                 }catch(error){
                         if (error.response) {
                             this.shippingError = error.response.data.message || 'An error occurred while saving changes.';
