@@ -179,11 +179,10 @@
 						<p>{{ productStore.searchError }}</p>
 					</div>
 					<div>
-						<!-- <v-row id="homepage" style="background-color: #fff" class="mt-2">
-							<v-col v-for="(n, i) in productStore.filteredProducts()" :key="i" lg="3" cols="6" sm="6" md="4">
-								<product-component :index="i" :item="n" />
-							</v-col>
-						</v-row> -->
+						<div v-if="productStore.notFound && !productStore.productLoading" class="d-flex align-center justify-center" style="height: 100%; min-height: 300px;">
+							<p style="font-weight: 700; font-size: 20px; color: red;">No results found for selected category. Please try a different category.</p>
+						</div>
+					<template v-else>
 						<v-row dense v-if="productStore.productLoading" class="mt-2 align-items-stretch"  >
 							<v-col v-for="(n, i) in 8" :key="i" cols="6" :md="3" :lg="3" >
 								<productloader :item="n" :index="i" />
@@ -194,6 +193,7 @@
 								<product-component :item="n" :index="i" />
 							</v-col>
 						</v-row>
+					</template>
 					</div>
 				</div>
 				<!-- Responsive fILTER dRAWER -->

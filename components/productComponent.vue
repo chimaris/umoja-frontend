@@ -132,7 +132,7 @@
 						{{ item.vendor_business_name }}
 					</p>
 					<p style="color: #969696; font-size: 12px; font-weight: 500; letter-spacing: -0.12px">
-						{{ item.vendor_country }}:
+						{{ item.vendor_country }}
 						<span style="font-size: 1rem; margin-top: 3px; margin-left: 5px">{{ getCountryIconClass(item.vendor_country) }}</span>
 					</p>
 				</div>

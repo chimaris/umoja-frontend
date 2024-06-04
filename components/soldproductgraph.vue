@@ -20,7 +20,7 @@ const chartOptions =ref(
 				},
 				colors:['#CBDED6', '#00966D', '#005A41'],
 				xaxis: {
-				categories: ['Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat', 'Sun'],
+					categories: ['Sun','Mon', 'Tue', 'Wed', 'Thur', 'Fri', 'Sat'],
 				labels: {
 					style: {
 					fontSize: '16px',
@@ -31,7 +31,7 @@ const chartOptions =ref(
 				yaxis: {
 					labels: {
 						formatter: function (value) {
-						return '£' + value + 'k';
+						return '£' + value.toFixed(2) + 'k';
 						},
 						style: {
 						fontSize: '16px',

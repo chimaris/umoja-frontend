@@ -1,5 +1,5 @@
 <template>
-    <apexchart type="line" color="green" :options="chartOptions3" :series="series3"></apexchart>
+    <apexchart type="line"  color="green" :options="chartOptions3" :series="series3"></apexchart>
 </template>
 <script setup>
 import {ref} from 'vue'
@@ -31,7 +31,7 @@ function updateSeries() {
 const chartOptions3 =ref(
     {
 				chart: {
-				height: '100%',
+				height: 300,
 				type: 'line'
 				},
 				xaxis: {
@@ -50,7 +50,7 @@ const chartOptions3 =ref(
 				yaxis: {
 				labels: {
 					formatter: function (value) {
-					return '£' + value + 'k';
+						return '£' + value.toFixed(2) + 'k';
 					},
 					style: {
 					fontSize: '16px',

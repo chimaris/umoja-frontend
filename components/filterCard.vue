@@ -310,11 +310,12 @@ const disable = computed(() => {
 })
 onMounted(async () => {
 	categories.value = await fetchCategories("customer")
-	productStore.params.category_name = 'Clothing'
-	productStore.params.gender = 'Unisex'
 	if (productStore.params.category_name && productStore.params.gender){
 		subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
 	}
+	productStore.params.category_name = 'Clothing'
+	productStore.params.gender = 'Unisex'
+	productStore.params.sub_category_name = subCategories.value[0].name
 });
 			// watch for change ins any of the filter value
 			watch(() => [productStore.params.gender, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
@@ -330,6 +331,7 @@ onMounted(async () => {
 			watch(() => [productStore.params.gender, productStore.params.category_name], async () => {
 				if (productStore.params.category_name && productStore.params.gender){
 					subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
+					productStore.params.sub_category_name = subCategories.value[0].name
 				}
 			});
 

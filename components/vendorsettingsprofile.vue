@@ -398,7 +398,8 @@ the deletion for 14 days.</p>
 		
 		</div>
 	</v-sheet>
-</v-dialog>  
+</v-dialog> 
+  
     </div>
 </template>
 <script setup>

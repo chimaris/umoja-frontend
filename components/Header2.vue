@@ -155,6 +155,7 @@ import { useTheme } from "vuetify";
 import { useCartStore } from "~/stores/cartStore";
 import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
+import {useVendorStore} from '~/stores/vendorStore'
 import { useProductStore } from "~/stores/productStore";
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from "~/utils/storage";
 
@@ -202,17 +203,20 @@ export default {
 		urls() {
 			const loggedIn = this.isLoggedIn;
 			return [
-				{ title: "Buy", route: "/user/login", disabled: false },
-				{ title: "Sell", route: "/vendor/login", disabled: false },
+				{ title: "Buy", route: "/user/login", disabled: this.isLoggedIn },
+				{ title: "Sell", route: "/vendor/login", disabled: this.vendorStore.vendorIsLoggedIn },
 				{ title: "Discovery", route: "/discovery_page", disabled: false },
 				{ title: "Market Place", route: "/market_place", disabled: false },
 				{ title: "About Us", route: "/about/*", disabled: false },
-				{ title: "Create Account", route: "/signup-category", disabled: false },
+				{ title: "Create Account", route: "/signup-category", disabled: this.isLoggedIn || this.vendorStore.vendorIsLoggedIn },
 				// { title: "ERP Solution", route: "/vendor/dashboard/Homepage", disabled: false },
 			];
 		},
 		cartStore() {
 			return useCartStore();
+		},
+		vendorStore(){
+			return useVendorStore();
 		},
 		productStore() {
 			return useProductStore();
@@ -224,7 +228,7 @@ export default {
 			return useUserStore();
 		},
 		isLoggedIn() {
-			return this.userStore.getIsLoggedIn ? this.userStore.getIsLoggedIn : false;
+			return this.userStore.isLoggedIn
 		},
 	},
 	methods: {

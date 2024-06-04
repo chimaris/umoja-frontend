@@ -95,7 +95,7 @@
 										<v-avatar rounded="0" size="19"
 											><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 										></v-avatar>
-										<p class="textClass px-4">
+										<p class="textClass px-4" style="text-transform: capitalize">
 											{{ vendor.vendor_details?.address }}, {{ vendor.vendor_details?.city }}, {{ vendor.vendor_details?.state }}
 											{{ vendor.vendor_details?.country_name }}
 										</p>

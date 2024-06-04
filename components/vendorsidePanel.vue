@@ -40,7 +40,7 @@
             <v-list-item style="cursor: pointer">
             Settings
             </v-list-item>
-            <v-list-item style="cursor: pointer" @click="logOut">
+            <v-list-item style="cursor: pointer" @click="logOutUser = true">
               Logout
             </v-list-item>
       </v-list>
@@ -124,7 +124,7 @@
       </div>  
       <div style=" position: fixed; bottom: 10px; width: 100%; left: -5px; background-color: #f6f7f9">
         <div v-if="!sidebar" class="d-flex pt-12 px-4 justify-space-between align-center style-4" >
-        <v-avatar style="cursor: pointer; padding-top: 20px"  size="57" rounded="0">
+        <v-avatar style="cursor: pointer; padding-top: 20px; margin-bottom: 32px;"  size="57" rounded="0">
         <v-img eager="" src="https://res.cloudinary.com/payhospi/image/upload/v1688141514/Frame_2_gfd65l.png"></v-img>
         </v-avatar>
         </div>
@@ -137,6 +137,32 @@
           </v-avatar> -->
         </div>
       </div>
+      <v-dialog v-model="logOutUser" persistent max-width="600">
+		<v-card class="pa-5 text-center rounded-lg" style="align-items: center" flat tile>
+			<v-card-title style="font-weight: 700" :style="{ fontSize: $vuetify.display.mobile ? '20px' : '24px' }" class="justify-center"
+				>Logout</v-card-title
+			>
+			<v-card-text class="text-center mb-5">Are you sure you want to logout of your account?</v-card-text>
+			<v-card-actions class="justify-center w-100">
+				<v-btn
+					rounded="xl"
+					size="large"
+					style="border: 1px solid #cecece; flex: 1"
+					@click="logOutUser = false"
+					:style="{ fontSize: $vuetify.display.mobile ? '14px' : '18px' }"
+					>Cancel</v-btn
+				>
+				<v-btn
+					rounded="xl"
+					@click="logOut()"
+					size="large"
+					style="background-color: #2C6E63; color: #fff; flex: 1"
+					:style="{ fontSize: $vuetify.display.mobile ? '14px' : '18px' }"
+					>Logout</v-btn
+				>
+			</v-card-actions>
+		</v-card>
+</v-dialog>
   </v-card>
 </template>
 <style>.style-0 { z-index: 99;position: relative; }
@@ -165,6 +191,7 @@ setup() {
 const appStore = useAppStore();
 const vendorStore = useVendorStore();
 const vendor = ref(vendorStore.vendor)
+const logOutUser = ref(false)
 
 watch(() => vendorStore.vendor, (newpost, oldpost) => {
 			vendor.value = newpost
@@ -174,7 +201,8 @@ watch(() => vendorStore.vendor, (newpost, oldpost) => {
 return {
 integratedApps: appStore.integratedApps,
 vendorStore,
-vendor
+vendor,
+logOutUser
 };
 },
 beforeMount(){

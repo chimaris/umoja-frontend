@@ -4,8 +4,13 @@
 			<div>
 				<p style="font-weight: 500; font-size: 24px" class="mb-2 d-flex align-center text-left">Reviews from your customers</p>
 			</div>
-			<div class="d-flex align-center">
-				<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="large" class="text-grey-darken-3"> July 2022 - June 2023 </v-btn>
+			<div class="d-flex align-center h-100 ">
+				<v-menu open-on-hover :close-on-content-click="false">
+					<template v-slot:activator="{ props }">
+					<v-text-field v-bind="props" v-model="formattedDate" style="width: 250px; " placeholder="Select Date"></v-text-field>
+					</template>
+					<v-date-picker style="width: 100%;" v-model="selectedDate" :max="new Date().toISOString().substr(0, 10)"></v-date-picker>
+				</v-menu>
 				<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="large" class="mx-2 text-grey-darken-3"> Filter </v-btn>
 				<div class="" style="width: 100vw; max-width: 391px">
 					<v-text-field
@@ -129,7 +134,7 @@
 						indeterminate
 						></v-progress-circular>
 					</div>
-			<v-card v-if="!loading" height="100%" class="mx-auto coolTable pb-4 mb-12" width="100%" style="overflow: hidden" flat>
+			<v-card v-if="!loading" height="100%" class="mx-auto coolTable mb-12" width="100%" style="overflow: hidden" flat>
 				<div class="">
 					<v-table>
 						<thead>
@@ -168,7 +173,7 @@
 											>
 											<v-card max-width="310" class="pa-6 rounded-lg" color="#2C6E63">
 												<v-row class="d-flex align-start">
-													<v-avatar color="grey-lighten-4" class="pa-1" size="70" rounded="lg">
+													<v-avatar color="grey-lighten-4"  size="70" rounded="lg">
 														<v-img
 															cover
 															:src="item.product.photo.split(',')[1]"
@@ -266,17 +271,46 @@
 									</div>
 								</td>
 								<td style="position: relative; font-size: 14px; height: ; width: ">
-									<div v-if="item.review_status == 'pending'" style="position: absolute; top: 10px; right: 10px; width: ">
+									<div v-if="item.review_status == 'pending'" style="position: absolute; top: 20px; right: 10px; width: ">
 										<v-btn color="green" @click="commentReview(item.id)" flat>approve </v-btn>
 									</div>
-									<div v-else style="position: absolute; top: 10px; right: 10px; width: ">
-										<v-btn flat variant="text" icon="mdi mdi-dots-horizontal"> </v-btn>
+									<div v-else style="position: absolute; top: 20px; right: 10px; width: ">
+										<v-btn color="green" variant="outlined" flat>disapprove </v-btn>
 									</div>
 								</td>
 							</tr>
 						</tbody>
 					</v-table>
 				</div>
+				<div
+				class="w-100 d-flex justify-space-between align-center"
+				style="background-color: #f8f8f8; border: 1px solid #ededed;  padding: 10px 20px; height: 60px; overflow: hidden;"
+			>
+				<div style="display: flex; align-items: center">
+					<span style="font-size: 14px; font-weight: 400">{{from}} - {{toPage}} of {{pagesNo}} Pages</span>
+				</div>
+				<div class="d-flex align-center" style="margin-left: auto">
+					<span style="font-size: 12px; font-weight: 400; margin-right: 10px">The Page you’re on</span>
+					<v-select class="mt-5" 
+						variant="outlined"
+						placeholder="1"
+						style="background-color: #f8f8f8; min-width: 40px"
+						:items = pageOptions
+						v-model = "selectedPage"
+					>
+					</v-select>
+					
+					<v-img
+						:width="10"
+						:height="40"
+						src="https://res.cloudinary.com/payhospi/image/upload/v1713471908/umoja/vertical-line.svg"
+						class="mx-2"
+					></v-img>
+
+					<v-btn :disabled = "currentPage == 1" @click="selectedPage --;"  class="mr-1" flat><v-icon icon="mdi mdi-undo"></v-icon></v-btn>
+					<v-btn :disabled = "currentPage == pagesNo" @click="selectedPage ++;" flat><v-icon icon="mdi mdi-redo"></v-icon></v-btn>
+				</div>
+			</div>
 			</v-card>
 		</div>
 		<v-dialog absolute v-model="dialog" width="395">
@@ -343,13 +377,13 @@
 	border: 1px solid var(--carbon-2, #cecece) !important;
 }
 </style>
-<script>
+<script setup>
 import {getAllReview, replyReview, deleteReview, editReview} from '~/composables/useVendorReview';
 import { formattedPrice } from '~/utils/price';
 import { useVendorStore } from '~/stores/vendorStore';
 import {getDateTime} from '~/utils/date'
-export default {
-	setup(){
+import {ref, onBeforeMount} from 'vue';
+
 		const vendorStore = useVendorStore()
 		const vendor = ref(vendorStore.vendor)
 		const hasReview = computed(() => vendor.value.vendor_details?.review_count > 0)
@@ -365,8 +399,32 @@ export default {
 		const sending = ref(false)
 		const deleteWarning = ref(false)
 		const deleteId = ref(null)
+		const selectedDate = ref()
 		const loading = ref(false)
 
+		const from = ref(null)
+		const toPage = ref(null)
+		const pagesNo = ref(null)
+		const selectedPage = ref(1)
+		const currentPage = ref(null)
+
+		const pageOptions = computed(() => {
+			return Array.from({ length: pagesNo.value }, (_, index) => index + 1);
+		})
+
+		const formattedDate = computed(() => {
+			if (!selectedDate.value) {
+				return "";
+			}
+			const date = new Date(selectedDate.value);
+			const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+			return localDate.toISOString().substring(0, 10);
+		});
+		onBeforeMount(async () => {
+			if (vendor.value.vendor_details.review_count > 0){
+			await getVendorReview()
+		}
+		})
 		const leaveComment = (review) => {
 			reviewToReply.value = review
 			dialog.value = true
@@ -406,11 +464,11 @@ export default {
 		async function getVendorReview(){
 			loading.value = true
 			try{
-				const res = await getAllReview()
-				allReviews.value = res.data
-				averageRating.value = res.average_rating
-				totalReview.value = res.total_reviews
-				ratingsCount.value = res.ratings_count
+				const res = await getAllReview(selectedPage.value)
+				allReviews.value = res.data.data
+				averageRating.value = res.data.average_rating
+				totalReview.value = res.data.total_reviews
+				ratingsCount.value = res.data.ratings_count
 			}catch(error){
 				console.error(error)
 			}finally{
@@ -432,71 +490,6 @@ export default {
 				await getVendorReview()
 			}
 		});
-		return{
-			vendor,
-			reviewToReply,
-			reviewToEdit,
-			deleteReply,
-			leaveComment,
-			vendorStore,
-			hasReview,
-			allReviews,
-			dialog,
-			dialog2,
-			sending,
-			commentReview,
-			reviewReply,
-			editComment,
-			editVendorReview,
-			deleteWarning,
-			deleteId,
-			confirmDelete,
-			getVendorReview,
-			ratingsCount,
-			totalReview,
-			averageRating,
-			loading,
-		}
-	},
-	data() {
-		return {
-			rating: 4,
-			skill: 100,
-			chosen: "",
-			dashes: [
-				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320547_6_u4cwdq.png",
-					name: "Total Customers",
-					tooltip: "Total customers in your shop",
-					amount: "512,987",
-					trend: "16",
-					trending: true,
-				},
-				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320548_1_bvohqz.png",
-					name: "Members",
-					tooltip: "Total members in the last seven days",
-					amount: "27,654",
-					trend: "0.4",
-					trending: false,
-				},
-				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906397/Frame_427320547_7_znnge2.png",
-					name: "Active",
-					tooltip: "Active customers in the last seven days",
-					amount: "135,302",
-					trend: "8",
-					trending: true,
-				},
-			],
-		};
-	},
 
-	async beforeMount(){
-		if (this.vendor.vendor_details.review_count > 0){
-			await this.getVendorReview()
-		}
-		
-	},
-};
+
 </script>
