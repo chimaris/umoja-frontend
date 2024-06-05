@@ -131,7 +131,7 @@
 import { ref, computed, defineEmits, onMounted, onBeforeMount } from 'vue';
 import profileVue from '~/pages/vendor/profile.vue';
 import { useVendorStore } from '~/stores/vendorStore';
-import {upLoadPicture} from '~/utils/upload';
+import {upLoadPicture, uploadCoverImage} from '~/utils/upload';
 import axios from 'axios'
 import Compressor from 'compressorjs';
   	
@@ -208,11 +208,11 @@ import Compressor from 'compressorjs';
 	await upLoadPicture({event, upLoadedFiles, showProgress, profilePicture, profile_photo, errorMessage})
 	}
 	async function upLoadFile1(event){
-	await upLoadPicture({event, upLoadedFiles: upLoadedFiles1, showProgress: showProgress1, profilePicture: coverPicture, profile_photo: cover_photo, errorMessage: errorMessage1})
+	await uploadCoverImage({event, upLoadedFiles1, showProgress1, coverPicture, cover_photo, errorMessage1})
 	}
 
 	async function drop1(e) {
-		await upLoadPicture({event:e, upLoadedFiles: upLoadedFiles1, showProgress: showProgress1, profilePicture: coverPicture, profile_photo: cover_photo, errorMessage: errorMessage1, mode: 'drop'})
+		await uploadCoverImage({event:e, upLoadedFiles1, showProgress1, coverPicture, cover_photo, errorMessage1, mode: 'drop'})
 	}
 	async function drop(e) {
 		await upLoadPicture({event: e, upLoadedFiles, showProgress, profilePicture, profile_photo, errorMessage, mode: 'drop'})

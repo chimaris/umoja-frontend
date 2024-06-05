@@ -78,6 +78,19 @@ export const getTopTransaction = async () => {
         return []
     }
 }
+export const getTopProducts = async () => {
+    const api = vendorUseApi()
+    try{
+        const res = await api({
+            url: 'vendor/top_weekly_products',
+            method: 'GET'
+        });
+        return res.data
+    }catch(error){
+        console.error(error)
+        return []
+    }
+}
 
 export const getRecentOrders = async () => {
     const api = vendorUseApi()
@@ -86,7 +99,6 @@ export const getRecentOrders = async () => {
             url: 'vendor/recent_weekly_orders',
             method: 'GET'
         });
-        console.log(res.data)
         return res.data
     }catch(error){
         console.error(error)
@@ -100,7 +112,6 @@ export const getOutOfStock = async () => {
             url: 'vendor/weekly_out_of_stock_products',
             method: 'GET'
         });
-        console.log(res.data)
         return res.data
     }catch(error){
         console.error(error)

@@ -7,11 +7,24 @@
 			<div class="d-flex align-center h-100 ">
 				<v-menu open-on-hover :close-on-content-click="false">
 					<template v-slot:activator="{ props }">
-					<v-text-field v-bind="props" v-model="formattedDate" style="width: 250px; " placeholder="Select Date"></v-text-field>
+					<v-text-field v-bind="props"  v-model="formattedDate" style="width: 250px; " placeholder="Select Date"></v-text-field>
 					</template>
 					<v-date-picker style="width: 100%;" v-model="selectedDate" :max="new Date().toISOString().substr(0, 10)"></v-date-picker>
 				</v-menu>
-				<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="large" class="mx-2 text-grey-darken-3"> Filter </v-btn>
+				
+				<v-menu >
+					<template v-slot:activator="{ props }">
+						<v-btn style="border: 1px solid #e5e5e5" v-bind="props" variant="outlined" size="large" class="mx-2 text-grey-darken-3"> Filter </v-btn>
+					</template> 
+					<v-list>
+						<v-list-item style="cursor: pointer" @click="setReview('approved')">
+							Approved
+						</v-list-item>
+						<v-list-item style="cursor: pointer" @click="setReview('pending')">
+							Unapproved
+						</v-list-item>
+					</v-list>
+				</v-menu> 
 				<div class="" style="width: 100vw; max-width: 391px">
 					<v-text-field
 						style="border: 1px solid #e5e5e5; border-radius: 6px"
@@ -20,6 +33,8 @@
 						hide-details
 						prepend-inner-icon="mdi mdi-magnify"
 						placeholder="Search"
+						@input="getVendorReview()"
+						v-model="searchTerm"
 					></v-text-field>
 				</div>
 			</div>
@@ -275,7 +290,7 @@
 										<v-btn color="green" @click="commentReview(item.id)" flat>approve </v-btn>
 									</div>
 									<div v-else style="position: absolute; top: 20px; right: 10px; width: ">
-										<v-btn color="green" variant="outlined" flat>disapprove </v-btn>
+										<v-btn @click="undoApprove(item.id)" color="green" variant="outlined" flat>disapprove </v-btn>
 									</div>
 								</td>
 							</tr>
@@ -287,7 +302,7 @@
 				style="background-color: #f8f8f8; border: 1px solid #ededed;  padding: 10px 20px; height: 60px; overflow: hidden;"
 			>
 				<div style="display: flex; align-items: center">
-					<span style="font-size: 14px; font-weight: 400">{{from}} - {{toPage}} of {{pagesNo}} Pages</span>
+					<span style="font-size: 14px; font-weight: 400">{{currentPage}} of {{pagesNo}} Pages</span>
 				</div>
 				<div class="d-flex align-center" style="margin-left: auto">
 					<span style="font-size: 12px; font-weight: 400; margin-right: 10px">The Page you’re on</span>
@@ -378,11 +393,12 @@
 }
 </style>
 <script setup>
-import {getAllReview, replyReview, deleteReview, editReview} from '~/composables/useVendorReview';
+import {getAllReview, filterReview, replyReview, deleteReview, editReview, dissapproveReview, searchReview} from '~/composables/useVendorReview';
 import { formattedPrice } from '~/utils/price';
 import { useVendorStore } from '~/stores/vendorStore';
 import {getDateTime} from '~/utils/date'
 import {ref, onBeforeMount} from 'vue';
+import { vendorUseApi } from "~/composables/vendorApi";
 
 		const vendorStore = useVendorStore()
 		const vendor = ref(vendorStore.vendor)
@@ -399,15 +415,15 @@ import {ref, onBeforeMount} from 'vue';
 		const sending = ref(false)
 		const deleteWarning = ref(false)
 		const deleteId = ref(null)
-		const selectedDate = ref()
+		const selectedDate = ref(null)
 		const loading = ref(false)
-
-		const from = ref(null)
-		const toPage = ref(null)
+		const searchTerm = ref("")
+		const status = ref("")
 		const pagesNo = ref(null)
 		const selectedPage = ref(1)
 		const currentPage = ref(null)
 
+		
 		const pageOptions = computed(() => {
 			return Array.from({ length: pagesNo.value }, (_, index) => index + 1);
 		})
@@ -425,6 +441,19 @@ import {ref, onBeforeMount} from 'vue';
 			await getVendorReview()
 		}
 		})
+		watch(() => selectedPage.value, async () => {
+			await getVendorReview()
+		});
+		watch(() => formattedDate.value, async (newval) => {
+			if (!newval){
+				return 
+			}
+			await getVendorReview()
+		});
+		async function setReview(stats){
+			status.value = stats
+			await getVendorReview()
+		}
 		const leaveComment = (review) => {
 			reviewToReply.value = review
 			dialog.value = true
@@ -442,6 +471,16 @@ import {ref, onBeforeMount} from 'vue';
 			if (res){
 				await getVendorReview()
 				deleteWarning.value = false
+			}
+		}
+		async function undoApprove(id){
+			try{
+				const res = await dissapproveReview(id)
+				if (res) {
+					await getVendorReview()
+				}
+			}catch(error){
+				console.error(error)
 			}
 		}
 		async function commentReview(id){
@@ -463,16 +502,36 @@ import {ref, onBeforeMount} from 'vue';
 		}
 		async function getVendorReview(){
 			loading.value = true
-			try{
-				const res = await getAllReview(selectedPage.value)
+			const api = vendorUseApi()
+				let url;
+				if (searchTerm.value.trim() || formattedDate.value){
+					url = `customer/review_search?search_global=${searchTerm.value}&start_date=${formattedDate.value}$end_date=${formattedDate.value}`
+				}
+				else if (status.value){
+					url = `customer/review_filter?review_status=${status.value}`
+				}else{
+					url = `customer/reviews/?page=${selectedPage.value}`
+				}
+				try{
+					const res = await api({
+						url: url,
+						method: 'GET'
+					});
 				allReviews.value = res.data.data
 				averageRating.value = res.data.average_rating
 				totalReview.value = res.data.total_reviews
 				ratingsCount.value = res.data.ratings_count
+				currentPage.value = res.data.pagination.current_page
+				pagesNo.value = res.data.pagination.last_page
+
+				searchTerm.value = ""
+				status.value = ""
+				selectedDate.value = null
 			}catch(error){
 				console.error(error)
 			}finally{
 				loading.value = false
+				
 			}
 		}
 		async function editVendorReview(){

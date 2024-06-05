@@ -9,7 +9,7 @@
 			<div class="d-flex justify-space-between align-center">
 				<div class="d-flex align-center">
 					<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
-						<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
+						<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png', 200)"></v-img>
 					</v-avatar>
 					<div class="d-none d-sm-flex">
 						<v-btn :to="n.route" variant="text" v-show="!n.disabled" class="mx-2" flat v-for="n in urls" :key="n.title">
@@ -27,7 +27,7 @@
 											<v-avatar rounded="0" size="20">
 												<v-img
 													contain
-													src="https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png"
+													:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png', 50)"
 												></v-img> </v-avatar
 										></v-btn>
 									</v-slide-x-reverse-transition>
@@ -57,15 +57,15 @@
 					</v-menu>
 
 					<v-btn rounded="xl" v-if="!isLoggedIn" to="/signin-category" size="40" icon flat color="transparent">
-						<v-avatar size="20"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png"></v-img> </v-avatar
+						<v-avatar size="20"> <v-img :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png', 50)"></v-img> </v-avatar
 					></v-btn>
 					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" size="40" icon flat color="transparent">
-						<v-avatar size="20"> <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png"></v-img> </v-avatar
+						<v-avatar size="20"> <v-img :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png', 50)"></v-img> </v-avatar
 					></v-btn>
 					<v-btn @click="toCart()" class="text-none" icon size="40" rounded="xl" flat color="transparent">
 						<v-badge offset-y="20" :dot="cartStore.totalCartItems == 0" :content="cartStore.totalCartItems" color="error">
 							<v-avatar rounded="0" size="20">
-								<v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png"></v-img>
+								<v-img contain :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png', 50)"></v-img>
 							</v-avatar>
 						</v-badge>
 					</v-btn>
@@ -90,7 +90,7 @@
 								<v-avatar rounded="0" size="16">
 									<v-img
 										contain
-										src="https://res.cloudinary.com/payhospi/image/upload/v1691742990/outline-notifications-vector_vkwg9h.svg"
+										:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1691742990/outline-notifications-vector_vkwg9h.svg', 50)"
 									></v-img> </v-avatar
 							></v-btn>
 						</template>
@@ -98,7 +98,7 @@
 					</v-menu>
 
 					<v-btn v-if="$vuetify.display.mobile" rounded="xl" size="40" icon flat color="transparent" @click.stop="openNav">
-						<v-avatar size="20"> <v-img contain src="https://res.cloudinary.com/payhospi/image/upload/v1713788195/umoja/menu.svg"></v-img> </v-avatar
+						<v-avatar size="20"> <v-img contain :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1713788195/umoja/menu.svg', 50)"></v-img> </v-avatar
 					></v-btn>
 				</div>
 			</div>
@@ -110,7 +110,7 @@
 		<v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'left' : undefined" temporary style="width: 100%; height: 100vh">
 			<div class="d-flex align-center justify-space-between px-4">
 				<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
-					<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
+					<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png', 200)"></v-img>
 				</v-avatar>
 				<v-icon icon="mdi mdi-close" @click.stop="drawer = false"></v-icon>
 			</div>
@@ -157,7 +157,8 @@ import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
 import { useVendorStore } from "~/stores/vendorStore";
 import { useProductStore } from "~/stores/productStore";
-import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from "~/utils/storage";
+import { getCloudinaryImageUrl } from '~/utils/cloudinary';
+
 
 export default {
 	data() {

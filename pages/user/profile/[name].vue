@@ -122,10 +122,10 @@
 				>
 					<div
 						class="d-flex flex-column flex-md-row px-0 pt-0 pb-0 pt-md-6 justify-space-around bg-white"
-						:class="$vuetify.display.mobile ? 'cardStyle mx-4' : ''"
+						:class="$vuetify.display.mobile ? 'mx-4 rounded-xl' : ''"
 					>	
-					<v-expansion-panels class="d-md-none d-block" v-model="selected">
-						<v-expansion-panel :value="n" :key="index" v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']">
+					<v-expansion-panels flat rounded="xl" class="d-md-none d-block roundes-xl" v-model="selected">
+						<v-expansion-panel class="w-100" :value="n" :key="index" v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']">
 						<v-expansion-panel-title>
 							<v-btn @click="changeTab(n)" size="large" variant="tonal" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
 								<v-scale-transition leave-absolute="">
@@ -381,3 +381,9 @@ export default {
 	},
 };
 </script>
+
+<style>
+.v-expansion-panel-title__icon{
+	font-size: 12px;
+}
+</style>
