@@ -180,7 +180,7 @@
 					</div>
 					<div>
 						<div v-if="productStore.notFound && !productStore.productLoading" class="d-flex align-center justify-center" style="height: 100%; min-height: 300px;">
-							<p style="font-weight: 700; font-size: 20px; color: red;">No results found for selected category. Please try a different category.</p>
+							<p style="font-weight: 500; font-size: 16px; text-align: center; color: #969696;">No results found for selected category. <br/> Please try a different category.</p>
 						</div>
 					<template v-else>
 						<v-row dense v-if="productStore.productLoading" class="mt-2 align-items-stretch"  >

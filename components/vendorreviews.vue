@@ -148,7 +148,7 @@
 							color="green"
 						indeterminate
 						></v-progress-circular>
-					</div>
+			</div>
 			<v-card v-if="!loading" height="100%" class="mx-auto coolTable mb-12" width="100%" style="overflow: hidden" flat>
 				<div class="">
 					<v-table>

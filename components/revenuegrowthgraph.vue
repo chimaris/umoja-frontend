@@ -1,5 +1,5 @@
 <template>
-    <apexchart type="line"  color="green" :options="chartOptions3" :series="series3"></apexchart>
+    <apexchart :key="$route.fullPath" type="line"  color="green" :options="chartOptions3" :series="series3"></apexchart>
 </template>
 <script setup>
 import {ref} from 'vue'

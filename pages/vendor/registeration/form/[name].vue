@@ -6,7 +6,7 @@
 			<v-col cols="12" style="max-width: 400px" class="pb-0 dash" md="3">
 				<div class="w-100" style="height: calc(100vh - 96px); position: sticky; top: 69px">
 					<div style="position: absolute; left: 24px; bottom: 22px" class="d-flex pt-12 mt-12 justify-space-between align-center">
-						<v-avatar class="" @click="$router.push('/home2')" size="135" style="cursor: pointer; height: auto !important" rounded="0">
+						<v-avatar class="" @click="$router.push('/')" size="135" style="cursor: pointer; height: auto !important" rounded="0">
 							<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
 						</v-avatar>
 					</div>

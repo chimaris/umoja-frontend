@@ -139,7 +139,7 @@ beforeUnmount() {
     },
 watch: {   
     tutorialbol(x) {
-        if (this.$route.path == '/home2') {
+        if (this.$route.path == '/') {
 
             if(x) this.startTutorial(true)
         }
@@ -225,10 +225,10 @@ watch: {
       } else {
         duration = 15;
       }
-            const delay = this.$route.path == '/home2' ? 18: 2; 
-            const from = this.$route.path == '/home2' ? 500: 0; 
+            const delay = this.$route.path == '/' ? 18: 2; 
+            const from = this.$route.path == '/' ? 500: 0; 
             setTimeout(() => {
-                    if(this.$route.path == '/home2' && this.started){
+                    if(this.$route.path == '/' && this.started){
                     gsap.to(sn.scrollTarget, { scrollTop: 500, duration:1.5 })
                 }
                 }, 8000);   // Delay in seconds

@@ -1,10 +1,10 @@
 <template>
-    <apexchart type="line" color="green" :options="chartOptions2" :series="series2"></apexchart>
+    <apexchart :key="$route.fullPath" type="line" color="green" :options="chartOptions2" :series="series2"></apexchart>
 </template>
 <script setup>
 import {ref, onBeforeUnmount} from 'vue'
 
-const series2 =ref(updateSeries())
+const series2 =ref([])
 const props = defineProps({
     soldCategories: {
         type: Array,
@@ -12,11 +12,17 @@ const props = defineProps({
     }
 })
 
-watch(() => props.soldCategories, () => {
-        series2.value = updateSeries();
+watch(() => props.soldCategories, (newval) => {
+	if (newval){
+		series2.value = updateSeries();
+	}
+        
 });
 
 function updateSeries(){
+	if (!props.soldCategories || props.soldCategories.length === 0) {
+    return [];
+  }
     const formatData = props.soldCategories.map((category) => {
         const monthlyAmount = Array(12).fill(0);
         category.monthly_data.forEach(monthData => {
@@ -34,7 +40,7 @@ function updateSeries(){
 const chartOptions2 = ref(
     {
 				chart: {
-				height: '100%',
+				height: 400,
 				type: 'line'
 				},
 				colors:['#F38218', '#914E0E', '#FADACC'],

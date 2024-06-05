@@ -662,7 +662,7 @@
 import { useOrderStore } from '~/stores/order';
 import { formattedPrice } from '~/utils/price';
 import {vendorUseApi} from '~/composables/vendorApi'
-import {ref, onBeforeMount} from 'vue'
+import {ref, onBeforeMount, onMounted} from 'vue'
 import { useVendorStore } from '~/stores/vendorStore';
 
 export default {
@@ -690,20 +690,20 @@ export default {
 		watch(() => vendorStore.vendor, async (newval, oldval) => {
 			vendor.value = newval
 			if (hasOrder.value && vendorStore.vendorToken){
-				await getSales()
-				await getCategories()
-				await getRevenue()
+				soldProducts.value = await getSales()
+				soldCategories.value = await getCategories()
+				saleRevenue.value = await getRevenue()
 				await useOrderStore().getRevenues()
 			}
 		});
 		watch(() => filterProduct.value, async () => {
-			await getSales()
+			soldProducts.value = await getSales()
 		})
 		watch(() => filterCategory.value, async () => {
-			await getCategories()
+			soldCategories.value = await getCategories()
 		})
 		watch(() => filterRevenue.value, async () => {
-			await getRevenue()
+			saleRevenue.value = await getRevenue()
 		})
 
 		function getCurrentMonthIndex() {
@@ -726,7 +726,7 @@ export default {
                     url: url,
                     method: 'GET'
                 });
-				soldCategories.value = res.data
+				 return res.data
             }catch(error){
                 console.error(error)
             }
@@ -747,7 +747,7 @@ export default {
                     url: url,
                     method: 'GET'
                 });
-				soldProducts.value = res.data
+				 return res.data
             }catch(error){
                 console.error(error)
             }
@@ -773,7 +773,7 @@ export default {
                     url: url,
                     method: 'GET'
                 });
-				saleRevenue.value = res.data
+				return res.data
             }catch(error){
                 console.error(error)
             }
@@ -807,46 +807,6 @@ export default {
 			dialog1: false,
 			showFilter: false,
 			chip: "Last 24 hours",
-			tags: [
-				{
-					name: "POPULAR products",
-					image: "",
-				},
-				{
-					name: "top selling products",
-					image: "seal-variant",
-				},
-				{
-					name: "products on promo",
-					image: "sale-outline",
-				},
-				{
-					name: "top auction",
-					image: "trending-up",
-				},
-			],
-			countries: [
-				{
-					name: "united states",
-					growth: 38,
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1685693849/Flags_q0wr5w.png",
-				},
-				{
-					name: "united kingdom",
-					growth: 27,
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1685693849/Flags_1_tjfkib.png",
-				},
-				{
-					name: "France",
-					growth: 20,
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1685693849/Flags_2_gq15ze.png",
-				},
-				{
-					name: "Argentina",
-					growth: 16,
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1685693849/Flags_3_hqmdge.png",
-				},
-			],
 			colors: ["#CBDED6", "#00966D", "#005A41"],
 			items: [
 				{
@@ -867,31 +827,6 @@ export default {
 					color: "#005A41",
 					img: "https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png",
 				},
-			],
-			items2: [
-				{
-					name: "Clothing",
-					sales: 70,
-					color: "#F38218",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686877087/Rectangle_1916_s0h5tz.png",
-				},
-				{
-					name: "Shoes",
-					sales: 40,
-					color: "#FADACC",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686877087/Rectangle_1916_1_lacsng.png",
-				},
-				{
-					name: "Bracelets",
-					sales: 50,
-					color: "#914E0E",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png",
-				},
-			],
-			imgs: [
-				"https://res.cloudinary.com/payhospi/image/upload/v1685693850/Rectangle_1895_u1foj0.png",
-				"https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1896_x07ole.png",
-				"https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1897_ca06qx.png",
 			],
 			items1: [
 				{

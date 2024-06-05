@@ -1,4 +1,5 @@
 <template>
+  <beta-test />
     <v-app>
         <v-card
           class="py-8 px-6 text-center mx-auto ma-4 z"

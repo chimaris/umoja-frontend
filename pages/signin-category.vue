@@ -1,5 +1,7 @@
 <template>
+		<beta-test />
 	<div style="background-color: #f8f8f8; min-height: 100vh">
+	
 		<authHeader />
 
 		<div style="min-height: 80vh" class="d-flex align-center justify-center pa-3">
@@ -70,10 +72,12 @@
 </template>
 
 <script>
+import BetaTest from '~/components/betaTest.vue';
 export default {
 	computed: {
 		cols() {
-			const { lg, sm, md } = this.$vuetify.display;
+
+ const { lg, sm, md } = this.$vuetify.display;
 			return lg
 				? [4, 6, 6, 6, 4, 8, 4, 3, 10, 2]
 				: md
