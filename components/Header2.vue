@@ -84,7 +84,7 @@
 					</v-menu> -->
 
 					<!-- <v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px"> -->
-					<v-menu persistent="" v-if="isLoggedIn" v-model="notification" :close-on-content-click="false" location="bottom" offset="28px">
+					<v-menu v-if="isLoggedIn" v-model="notification" :close-on-content-click="false" location="bottom" offset="28px">
 						<template v-slot:activator="{ props }">
 							<v-btn icon size="40" v-bind="props" rounded="xl" flat color="transparent">
 								<v-avatar rounded="0" size="16">
@@ -155,7 +155,7 @@ import { useTheme } from "vuetify";
 import { useCartStore } from "~/stores/cartStore";
 import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
-import {useVendorStore} from '~/stores/vendorStore'
+import { useVendorStore } from "~/stores/vendorStore";
 import { useProductStore } from "~/stores/productStore";
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from "~/utils/storage";
 
@@ -215,7 +215,7 @@ export default {
 		cartStore() {
 			return useCartStore();
 		},
-		vendorStore(){
+		vendorStore() {
 			return useVendorStore();
 		},
 		productStore() {
@@ -228,7 +228,7 @@ export default {
 			return useUserStore();
 		},
 		isLoggedIn() {
-			return this.userStore.isLoggedIn
+			return this.userStore.isLoggedIn;
 		},
 	},
 	methods: {
