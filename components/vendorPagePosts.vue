@@ -103,11 +103,11 @@
 					:min-width="$vuetify.display.mobile ? '90vw' : '60vw'"
 					class="rounded-lg mx-auto"
 				>
-					<div class="d-flex justify-end mx-8 mt-2 mb-4">
+					<div class="d-flex d-md-none justify-end px-6 mt-2 mb-4">
 						<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
 					</div>
 					<v-row dense style="height: 100vh">
-						<v-col cols="12" md="6">
+						<v-col cols="12" md="6" class="pr-md-0 mr-md-0" :style="{ borderRight: $vuetify.display.mobile ? '' : '1px solid #e4e4e4' }">
 							<v-img
 								v-if="selectedPost.featured_img.includes(',')"
 								class="pb-0"
@@ -126,96 +126,108 @@
 								:src="selectedPost.featured_img"
 							></v-img>
 						</v-col>
-						<v-col cols="12" style="position: relative" md="6">
-							<v-sheet
-								style="height: 100%; overflow-y: auto; position: absolute; width: 100%; bottom: 0; border-left: 1px solid #e4e4e4"
-								class="py-2"
+						<v-col cols="12" md="6">
+							<div class="d-none d-md-flex justify-end mt-2 mb-4 px-6" style="">
+								<v-icon class="" @click="dialog = false" size="24" icon="mdi mdi-close"></v-icon>
+							</div>
+							<div
+								:style="{ height: $vuetify.display.mobile ? 'calc(100vh - 100%)' : 'calc(100vh - 100px)' }"
+								style="position: relative; margin-bottom: 100px"
 							>
-								<div class="d-flex px-6 pb-4">
-									<v-avatar size="48" class="mr-5">
-										<v-img :src="selectedPost.vendor_profile_photo"></v-img>
-									</v-avatar>
-									<div class="w-100 d-flex justify-space-between">
-										<div>
-											<div class="d-flex">
-												<p style="font-weight: 700; text-transform: capitalize; font-size: 16px; line-height: 140%; color: #1e1e1e">
-													{{ selectedPost.vendor_lastname }} {{ selectedPost.vendor_firstname }}
-												</p>
-												<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
-													<v-icon class="mx-1" icon="mdi mdi-circle" size="6" color="grey-lighten-2"></v-icon>
-													{{ getdateRegistered(selectedPost.created_at) }}
-												</p>
+								<v-sheet style="height: 100%; overflow-y: auto; position: absolute; width: 100%; bottom: 0" class="py-2">
+									<div class="d-flex px-6 pb-4">
+										<v-avatar size="48" class="mr-5">
+											<v-img :src="selectedPost.vendor_profile_photo"></v-img>
+										</v-avatar>
+										<div class="w-100 d-flex justify-space-between">
+											<div>
+												<div class="d-flex">
+													<p style="font-weight: 700; text-transform: capitalize; font-size: 16px; line-height: 140%; color: #1e1e1e">
+														{{ selectedPost.vendor_lastname }} {{ selectedPost.vendor_firstname }}
+													</p>
+													<p class="" style="font-weight: 400; font-size: 14px; line-height: 140%; color: #969696">
+														<v-icon class="mx-1" icon="mdi mdi-circle" size="6" color="grey-lighten-2"></v-icon>
+														{{ getdateRegistered(selectedPost.created_at) }}
+													</p>
+												</div>
+												<div class="d-flex">
+													<v-chip size="x-small" class="px-3" color="#936900" rounded="0">{{ selectedPost.category_name }}</v-chip>
+													<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
+														<v-icon class="mx-1" icon="mdi mdi-circle" size="6" color="grey-lighten-2"></v-icon>
+														{{ selectedPost.location }}
+													</p>
+												</div>
 											</div>
-											<div class="d-flex">
-												<v-chip size="x-small" class="px-3" color="#936900" rounded="0">{{ selectedPost.category_name }}</v-chip>
-												<p class="" style="font-weight: 400; font-size: 14px; color: #1e1e1e">
-													<v-icon class="mx-1" icon="mdi mdi-circle" size="6" color="grey-lighten-2"></v-icon>
-													{{ selectedPost.location }}
-												</p>
+											<div class="pr-2">
+												<v-icon icon="mdi mdi-dots-horizontal"></v-icon>
 											</div>
 										</div>
-										<div class="pr-2">
-											<v-icon icon="mdi mdi-dots-horizontal"></v-icon>
-										</div>
 									</div>
-								</div>
-								<div class="px-6">
-									<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
-										{{ selectedPost.description }}
-									</p>
-									<div class="d-flex align-center py-2">
-										<v-btn flat v-if="userLiked">
-											<v-icon @click="handUnLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart"></v-icon>
-											{{ selectedPost.likes }}
-											{{ selectedPost.likes <= 1 ? "Like" : "Likes" }}
-										</v-btn>
-										<v-btn flat v-if="!userLiked">
-											<v-icon @click="handleLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon>
-											{{ selectedPost.likes }}
-											{{ selectedPost.likes <= 1 ? "Like" : "Likes" }}
-										</v-btn>
-										<v-btn flat>
-											<v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon>
-											Share Post
-										</v-btn>
-									</div>
-								</div>
-
-								<v-divider></v-divider>
-								<div style="display: flex; flex-direction: column; justify-content: center; width: 100%; align-items: center">
-									<p class="my-5" style="color: #333; font-size: 20px; text-align: center; font-weight: 600; line-height: 20px">Related products</p>
-
-									<div v-if="selectedPost.products.length > 0" v-for="item in selectedPost.products" :key="item" class="cardStyle mb-4 w-75">
-										<v-card flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg">
-											<v-btn rounded="xl" flat size="x-small" style="position: absolute; top: 15px; right: 15px" icon="mdi mdi-heart-outline"></v-btn>
-											<v-img cover height="100%" width="100%" :src="item.photo.split(',')[0]"></v-img>
-										</v-card>
-										<p style="font-weight: 600; font-size: 14px; line-height: 18px; color: #000000" class="mt-2">
-											{{ item.name }}
+									<div class="px-6">
+										<p style="font-weight: 400; font-size: 16px; line-height: 140%; letter-spacing: 0.03em">
+											{{ selectedPost.description }}
 										</p>
-										<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">
-											{{ item.category_name }}
-										</p>
-										<p style="font-weight: 600; font-size: 12px; line-height: 13px; color: #000000" class="d-flex my-1 align-center">
-											<v-rating v-model="rating" color="grey-lighten-2" active-color="#E7CE5D" class="" density="compact" size="small"></v-rating>
-											<span style="margin-left: 9px">(0)</span>
-										</p>
-										<div class="d-flex align-center justify-space-between">
-											<div class="d-flex align-center">
-												<h1 style="font-size: 16px; line-height: 20px; color: #1a1d1f" class="priceClass">
-													{{ formattedPrice(item.price) }}
-												</h1>
-											</div>
-											<v-btn style="border: 1px solid #e5e5e5" size="small" variant="outlined">
-												<span style="color: var(--grey-1000, #1a1d1f); font-size: 12px; font-weight: 600"> Pre-Order </span>
+										<div class="d-flex align-center py-2">
+											<v-btn flat v-if="userLiked">
+												<v-icon @click="handUnLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart"></v-icon>
+												{{ selectedPost.likes }}
+												{{ selectedPost.likes <= 1 ? "Like" : "Likes" }}
+											</v-btn>
+											<v-btn flat v-if="!userLiked">
+												<v-icon @click="handleLike(selectedPost.id)" class="mr-1" icon="mdi mdi-heart-outline"></v-icon>
+												{{ selectedPost.likes }}
+												{{ selectedPost.likes <= 1 ? "Like" : "Likes" }}
+											</v-btn>
+											<v-btn flat>
+												<v-icon class="mr-1" icon="mdi mdi-tray-arrow-up"></v-icon>
+												Share Post
 											</v-btn>
 										</div>
 									</div>
-								</div>
-							</v-sheet>
+
+									<v-divider></v-divider>
+									<div style="display: flex; flex-direction: column; justify-content: center; width: 100%; align-items: center">
+										<p class="my-5" style="color: #333; font-size: 20px; text-align: center; font-weight: 600; line-height: 20px">Related products</p>
+
+										<div v-if="selectedPost.products.length > 0" v-for="item in selectedPost.products" :key="item" class="cardStyle mb-4 w-75">
+											<v-card flat color="grey-lighten-4" width="100%" height="313px" class="d-flex align-center justify-center rounded-lg">
+												<v-btn
+													rounded="xl"
+													flat
+													size="x-small"
+													style="position: absolute; top: 15px; right: 15px"
+													icon="mdi mdi-heart-outline"
+												></v-btn>
+												<v-img cover height="100%" width="100%" :src="item.photo.split(',')[0]"></v-img>
+											</v-card>
+											<p style="font-weight: 600; font-size: 14px; line-height: 18px; color: #000000" class="mt-2">
+												{{ item.name }}
+											</p>
+											<p style="font-weight: 500; font-size: 12px; line-height: 15px; color: #000000" class="mt-1">
+												{{ item.category_name }}
+											</p>
+											<p style="font-weight: 600; font-size: 12px; line-height: 13px; color: #000000" class="d-flex my-1 align-center">
+												<v-rating v-model="rating" color="grey-lighten-2" active-color="#E7CE5D" class="" density="compact" size="small"></v-rating>
+												<span style="margin-left: 9px">(0)</span>
+											</p>
+											<div class="d-flex align-center justify-space-between">
+												<div class="d-flex align-center">
+													<h1 style="font-size: 16px; line-height: 20px; color: #1a1d1f" class="priceClass">
+														{{ formattedPrice(item.price) }}
+													</h1>
+												</div>
+												<v-btn style="border: 1px solid #e5e5e5" size="small" variant="outlined">
+													<span style="color: var(--grey-1000, #1a1d1f); font-size: 12px; font-weight: 600"> Pre-Order </span>
+												</v-btn>
+											</div>
+										</div>
+									</div>
+								</v-sheet>
+							</div>
+
+							<!-- <div class="py-5 bg-white w-100 bg-red" style=""></div> -->
 						</v-col>
 					</v-row>
-					<div class="py-5 bg-white w-100" style="z-index: 20"></div>
 				</v-card>
 			</v-dialog>
 		</div>
