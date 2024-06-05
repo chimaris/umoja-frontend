@@ -9,7 +9,10 @@
 			<div class="d-flex justify-space-between align-center">
 				<div class="d-flex align-center">
 					<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
-						<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png', 200)"></v-img>
+						<v-img
+							eager
+							:src="getCloudinaryImageUrl('https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png', 200)"
+						></v-img>
 					</v-avatar>
 					<div class="d-none d-sm-flex">
 						<v-btn :to="n.route" variant="text" v-show="!n.disabled" class="mx-2" flat v-for="n in urls" :key="n.title">
@@ -27,7 +30,12 @@
 											<v-avatar rounded="0" size="20">
 												<v-img
 													contain
-													:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png', 50)"
+													:src="
+														getCloudinaryImageUrl(
+															'https://res.cloudinary.com/payhospi/image/upload/v1691742708/outline-search-minimalistic-magnifer_eez0ab.png',
+															50
+														)
+													"
 												></v-img> </v-avatar
 										></v-btn>
 									</v-slide-x-reverse-transition>
@@ -57,40 +65,45 @@
 					</v-menu>
 
 					<v-btn rounded="xl" v-if="!isLoggedIn" to="/signin-category" size="40" icon flat color="transparent">
-						<v-avatar size="20"> <v-img :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png', 50)"></v-img> </v-avatar
+						<v-avatar size="20">
+							<v-img
+								:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1693034207/User_Rounded_xfgovv.png', 50)"
+							></v-img> </v-avatar
 					></v-btn>
 					<v-btn v-else rounded="xl" to="/user/profile/Account Settings" size="40" icon flat color="transparent">
-						<v-avatar size="20"> <v-img :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png', 50)"></v-img> </v-avatar
+						<v-avatar size="20">
+							<v-img
+								:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png', 50)"
+							></v-img> </v-avatar
 					></v-btn>
 					<v-btn @click="toCart()" class="text-none" icon size="40" rounded="xl" flat color="transparent">
 						<v-badge offset-y="20" :dot="cartStore.totalCartItems == 0" :content="cartStore.totalCartItems" color="error">
 							<v-avatar rounded="0" size="20">
-								<v-img contain :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png', 50)"></v-img>
+								<v-img
+									contain
+									:src="
+										getCloudinaryImageUrl(
+											'https://res.cloudinary.com/payhospi/image/upload/v1691742709/outline-shopping-ecommerce-bag-4_aibbld.png',
+											50
+										)
+									"
+								></v-img>
 							</v-avatar>
 						</v-badge>
 					</v-btn>
 
-					<!-- <v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px">
+					<v-menu v-if="isLoggedIn" v-model="notification" :close-on-content-click="false" location="bottom" offset="28px">
 						<template v-slot:activator="{ props }">
 							<v-btn icon size="40" v-bind="props" rounded="xl" flat color="transparent">
 								<v-avatar rounded="0" size="16">
 									<v-img
 										contain
-										src="https://res.cloudinary.com/payhospi/image/upload/v1691742990/outline-notifications-vector_vkwg9h.svg"
-									></v-img> </v-avatar
-							></v-btn>
-						</template>
-						<dialognotification />
-					</v-menu> -->
-
-					<!-- <v-menu v-if="isLoggedIn" open-on-hover="" :close-on-content-click="false" location="bottom" offset="10px"> -->
-					<v-menu persistent="" v-if="isLoggedIn" v-model="notification" :close-on-content-click="false" location="bottom" offset="28px">
-						<template v-slot:activator="{ props }">
-							<v-btn icon size="40" v-bind="props" rounded="xl" flat color="transparent">
-								<v-avatar rounded="0" size="16">
-									<v-img
-										contain
-										:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1691742990/outline-notifications-vector_vkwg9h.svg', 50)"
+										:src="
+											getCloudinaryImageUrl(
+												'https://res.cloudinary.com/payhospi/image/upload/v1691742990/outline-notifications-vector_vkwg9h.svg',
+												50
+											)
+										"
 									></v-img> </v-avatar
 							></v-btn>
 						</template>
@@ -98,7 +111,11 @@
 					</v-menu>
 
 					<v-btn v-if="$vuetify.display.mobile" rounded="xl" size="40" icon flat color="transparent" @click.stop="openNav">
-						<v-avatar size="20"> <v-img contain :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1713788195/umoja/menu.svg', 50)"></v-img> </v-avatar
+						<v-avatar size="20">
+							<v-img
+								contain
+								:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1713788195/umoja/menu.svg', 50)"
+							></v-img> </v-avatar
 					></v-btn>
 				</div>
 			</div>
@@ -155,10 +172,9 @@ import { useTheme } from "vuetify";
 import { useCartStore } from "~/stores/cartStore";
 import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
-import {useVendorStore} from '~/stores/vendorStore'
+import { useVendorStore } from "~/stores/vendorStore";
 import { useProductStore } from "~/stores/productStore";
-import { getCloudinaryImageUrl } from '~/utils/cloudinary';
-
+import { getCloudinaryImageUrl } from "~/utils/cloudinary";
 
 export default {
 	data() {
@@ -216,7 +232,7 @@ export default {
 		cartStore() {
 			return useCartStore();
 		},
-		vendorStore(){
+		vendorStore() {
 			return useVendorStore();
 		},
 		productStore() {
@@ -229,7 +245,7 @@ export default {
 			return useUserStore();
 		},
 		isLoggedIn() {
-			return this.userStore.isLoggedIn
+			return this.userStore.isLoggedIn;
 		},
 	},
 	methods: {
