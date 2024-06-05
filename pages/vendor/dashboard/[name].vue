@@ -1,4 +1,5 @@
 <template>
+	<beta-test />
 	<div>
 		<v-row class="d-flex">
 			<v-col

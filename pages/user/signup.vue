@@ -1,4 +1,5 @@
 <template>
+	<beta-test />
 	<div class="authBg">
 		<authHeader />
 		<div class="d-flex justify-center py-md-12 px-md-2">
@@ -135,7 +136,7 @@ async function handleSubmit() {
 				terms_accepted: 1,
 			});
 			if (isSignedUp) {
-				router.push("/home2");
+				router.push("/");
 				userStore.signUpError = "";
 				first_name.value = "";
 				last_name.value = "";

@@ -1,6 +1,6 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div v-if="hasCustomer" class="d-flex align-center justify-space-between">
+		<div  class="d-flex align-center justify-space-between">
 			<div>
 				<p style="font-weight: 600; font-size: 24px" class="mb-2 d-flex align-center text-left">List of all your customers</p>
 			</div>
@@ -17,7 +17,7 @@
 			</div>
 		</div>
 
-		<div v-if="hasCustomer" class="d-flex pt-8 pb-6">
+		<div class="d-flex pt-8 pb-6">
 			<v-row style="overflow-x: scroll; -webkit-overflow-scrolling: touch; display: grid; grid-auto-flow: column">
 				<v-col v-for="n in dashes">
 					<v-card min-width="300px" class="mx-auto cardStyle" width="100%" style="" flat>
@@ -46,7 +46,7 @@
 				</v-col>
 			</v-row>
 		</div>
-		<div v-if="items1.length > 0" class="d-flex align-center justify-space-between">
+		<div v-if="hasCustomer && vendorFollowers?.followers?.length > 0" class="d-flex align-center justify-space-between">
 			<div class="pl-3" style="width: 50%; max-width: 580px">
 				<v-text-field
 					style="border: 1px solid #e5e5e5; border-radius: 6px"
@@ -81,11 +81,15 @@
 			
 		</div>
 
-		<div v-if="items1.length > 0" class="mt-5">
-			<v-table
-				style="    height: 80%; !important;
-   overflow: scroll;"
-			>
+		<div v-if="hasCustomer && vendorFollowers?.followers?.length > 0" class="mt-5">
+		<div v-if="loading" class="d-flex align-center justify-center" style="position: relative; height: 100%; min-height: 300px;">
+						<v-progress-circular
+							color="green"
+						indeterminate
+						></v-progress-circular>
+			</div>
+			<v-table v-if="!loading"
+				style=" height: 80% !important; overflow: scroll;">
 				<thead>
 					<tr style="background: #e6edec; border-radius: 6px; height: 55px" class="rounded-lg">
 						<th style="width: 50px" class="font-weight-medium text-left">
@@ -94,37 +98,40 @@
 						<th style="font-size: 14px; color: #333333; width: 100px" class="font-weight-medium text-left">ID</th>
 						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Username</th>
 						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Gender</th>
-						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Following Category</th>
+						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Joined Date</th>
 						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Country/State</th>
 						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">status</th>
 						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr @click="dialog = true" :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="item in items" :key="item.sn">
+					<tr @click="dialog = true" :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="(item, index) in vendorFollowers.followers" :key="item.sn">
 						<td class="text-grey-lighten-1 pl-4 px-1">
 							<v-checkbox color="green" hide-details></v-checkbox>
 						</td>
 						<td style="font-size: 14px" class="tableLight px-1 pl-2">
-							{{ item.sn }}
+							{{ index + 1 }}
 						</td>
 						<td class="tableThick px-1">
-							<div class="d-flex align-center">
-								<v-avatar size="30" class="mr-2"><v-img :src="item.img"></v-img></v-avatar>{{ item.customer }}
+							<div class="d-flex align-center" style="text-transform: capitalize">
+								<v-avatar size="30" class="mr-2">
+									<v-img :src="item.picture"></v-img>
+								</v-avatar>
+								{{ item.first_name }} {{ item.last_name }}
 							</div>
 						</td>
 						<td class="tableLight text-center px-1">
-							<span v-if="item.delivery != 0">
+							<span >
 								<v-chip
 									style="width: 70px; font-weight: 500; font-size: 10px"
 									class="rounded-lg elevation-0 d-flex justify-center"
 									size="small"
 									variant="elevated"
 									color="#1273EB"
-									>Male</v-chip
+									></v-chip
 								>
 							</span>
-							<span v-else class="d-flex align-center">
+							<!-- <span v-else class="d-flex align-center">
 								<v-chip
 									style="width: 70px; font-weight: 500; font-size: 10px"
 									class="rounded-lg elevation-0 d-flex justify-center"
@@ -133,13 +140,13 @@
 									color="#F38218"
 									>Female</v-chip
 								></span
-							>
+							> -->
 						</td>
-						<td class="tableLight px-1">{{ item.added_cat }}</td>
+						<td class="tableLight px-1">{{ getdateRegistered(item.created) }}</td>
 
 						<td style="font-weight: 600; font-size: 14px; line-height: 18px" class="tableLight px-1">
-							<span style="color: #333333">{{ item.country }}, </span>
-							<span style="color: #969696">{{ item.city }}</span>
+							<span style="color: #333333">{{ item.user_country }}, </span>
+							<span style="color: #969696">{{ item.user_city }}</span>
 						</td>
 						<td class="text-grey-lighten-1 text-center px-1">
 							<v-chip
@@ -147,10 +154,10 @@
 								size="small"
 								rounded="lg"
 								class="tablechip text-center d-flex justify-center"
-								:color="item.status == 2 ? 'green' : 'red'"
+								:color="item.status == 'active' ? 'green' : 'red'"
 								variant="tonal"
 							>
-								{{ item.status == 2 ? "Active" : "Inactive" }}
+								{{ item.status }}
 							</v-chip>
 						</td>
 						<td class="text-grey-lighten-1 text-center px-1">
@@ -663,7 +670,7 @@
 			</v-sheet>
 		</v-dialog>
 		<!-- If there is no Product show this -->
-		<div
+		<!-- <div
 			v-if="!hasCustomer"
 			class="d-flex flex-column justify-center align-center"
 			style="max-height: 100%; height: 90vh; border: 1px solid #cecece; border-radius: 15px"
@@ -675,7 +682,7 @@
 					When you have a customer, you will be to update their details, get a summary of their order history, create segment to send
 					personalized communications that drive sales and more
 				</p>
-				<!-- <div class="mt-10">
+				 <div class="mt-10">
 					<v-btn class="mr-4" size="x-large" width="191" style="border: 1px solid #cecece; padding: 12px 20px" flat>
 						<v-icon class="mr-2" icon="mdi mdi-tray-arrow-down"></v-icon>
 						<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 20px"> Import Customers</span></v-btn
@@ -684,9 +691,9 @@
 						<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
 						<span style="font-size: 16px; font-weight: 600; line-height: 20px">Add Customer</span></v-btn
 					>
-				</div> -->
+				</div> 
 			</v-sheet>
-		</div>
+		</div> -->
 	</v-container>
 </template>
 <style>
@@ -715,15 +722,63 @@ import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import { useVendorStore } from '~/stores/vendorStore';
+import { getVendorFollowers, getNoFollowers } from "~/composables/vendorCustomers";
+import { formattedPrice } from "~/utils/price";
+import { getdateRegistered } from "~/utils/date";
 
 export default {
 	setup(){
 		const vendorStore = useVendorStore()
 		const vendor = ref(vendorStore.vendor)
 		const hasCustomer = computed(() => vendor.value.vendor_details?.order_count > 0)
+		const vendorFollowers = ref([])
+		const loading = ref(true)
+		
+
+		onBeforeMount(async () => {
+			if (hasCustomer.value){
+				const id = vendor.value.vendor_details?.id
+				vendorFollowers.value = await getVendorFollowers(id)
+				if (vendorFollowers.value){
+					loading.value = false
+				}
+			}
+			
+		})
+		const dashes = computed(() => {
+			return [
+				{
+					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320547_6_u4cwdq.png",
+					name: "Total Customers",
+					tooltip: "Total customers in your shop",
+					amount: hasCustomer.value ? vendorFollowers.value?.total_order_users : "0",
+					trend: "0",
+					trending: true,
+				},
+				{
+					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320548_1_bvohqz.png",
+					name: "Followers",
+					tooltip: "Total members in the last seven days",
+					amount: hasCustomer.value ? vendorFollowers.value?.total_followers :"0",
+					trend: "0",
+					trending: true,
+				},
+				{
+					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906397/Frame_427320547_7_znnge2.png",
+					name: "Active",
+					tooltip: "Active customers in the last seven days",
+					amount: hasCustomer.value ? vendorFollowers.value?.active_followers : "0",
+					trend: "0",
+					trending: true,
+				},
+			]
+		})
 		return {
 			vendor,
-			hasCustomer
+			hasCustomer,
+			vendorFollowers,
+			dashes,
+			loading
 		}
 	},
 	components: {
@@ -743,123 +798,6 @@ export default {
 				{ name: "Activities", prop: "status", value: "Activities" },
 			],
 			items1: [],
-			// items1: [
-			// 	{
-			// 		sn: "#23942",
-			// 		name: "Leather crop top & pants......",
-			// 		date: "17 May",
-			// 		total: "€2,349‎",
-			// 		country: "🇺🇸 United States",
-			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-			// 		city: "New York City",
-			// 		added_cat: "Added Manually",
-			// 		date: "May 29, 2023",
-			// 		customer: "Okoli Bonaventure",
-			// 		delivery: "€ 24.08",
-			// 		payment_status: 1,
-			// 		status: 2,
-			// 		items_no: 7,
-			// 		delivery_method: "Umoja Delivery",
-			// 	},
-			// 	{
-			// 		sn: "#876567",
-			// 		name: "Leather crop top & pants......",
-			// 		added_cat: "Added Manually",
-			// 		date: "17 May",
-			// 		total: "€2,349‎",
-			// 		country: "🇺🇸 United States",
-			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-			// 		city: "New York City",
-			// 		added_cat: "Added Manually",
-			// 		date: "May 29, 2023",
-			// 		customer: "David",
-			// 		delivery: 0,
-			// 		payment_status: 0,
-			// 		status: 2,
-			// 		items_no: 1,
-			// 		delivery_method: "Fedex Delivery",
-			// 	},
-			// 	{
-			// 		sn: "#3456456",
-			// 		name: "Leather crop top & pants......",
-			// 		added_cat: "Added Manually",
-			// 		date: "17 May",
-			// 		total: "€2,349‎",
-			// 		country: "🇺🇸 United States",
-			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-			// 		city: "New York City",
-			// 		added_cat: "Added Manually",
-			// 		date: "May 29, 2023",
-			// 		customer: "Frank",
-			// 		delivery: "€ 24.08",
-			// 		payment_status: 1,
-			// 		status: 2,
-			// 		items_no: 4,
-			// 		delivery_method: "DHL Delivery",
-			// 	},
-			// 	{
-			// 		sn: "#65459",
-			// 		name: "Leather crop top & pants......",
-			// 		added_cat: "Added Manually",
-			// 		date: "17 May",
-			// 		total: "€2,349‎",
-			// 		country: "🇺🇸 United States",
-			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-			// 		city: "New York City",
-			// 		added_cat: "Added Manually",
-			// 		date: "May 29, 2023",
-			// 		customer: "Okoli Bonaventure",
-			// 		delivery: "€ 24.08",
-			// 		payment_status: 1,
-			// 		status: 1,
-			// 		items_no: 7,
-			// 		delivery_method: "Umoja Delivery",
-			// 	},
-			// 	{
-			// 		sn: "#098765",
-			// 		name: "Leather crop top & pants......",
-			// 		added_cat: "Added Manually",
-			// 		date: "17 May",
-			// 		total: "€2,349‎",
-			// 		country: "🇺🇸 United States",
-			// 		img: "https://res.cloudinary.com/payhospi/image/upload/v1686908453/Rectangle_1917_gyabxr.png",
-			// 		city: "New York City",
-			// 		added_cat: "Added Manually",
-			// 		date: "May 29, 2023",
-			// 		customer: "Okoli Bonaventure",
-			// 		delivery: 0,
-			// 		payment_status: 1,
-			// 		status: 1,
-			// 		items_no: 7,
-			// 		delivery_method: "Umoja Delivery",
-			// 	},
-			// ],
-			dashes: [
-				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320547_6_u4cwdq.png",
-					name: "Total Customers",
-					tooltip: "Total customers in your shop",
-					amount: "0",
-					trend: "0",
-					trending: true,
-				},
-				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320548_1_bvohqz.png",
-					name: "Followers",
-					tooltip: "Total members in the last seven days",
-					amount: "0",
-					trend: "0",
-					trending: true,
-				},
-				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906397/Frame_427320547_7_znnge2.png",
-					name: "Active",
-					tooltip: "Active customers in the last seven days",
-					amount: "0",
-					trend: "0",
-					trending: true,
-				},
-			],
 			customer_details: [
 				{
 					item: "Gender",
@@ -896,9 +834,9 @@ export default {
 			content: "",
 		});
 	},
-	beforeUnmount() {
-		this.editor.destroy();
-	},
+	// beforeUnmount() {
+	// 	this.editor.destroy();
+	// },
 	methods: {
 		select(x) {
 			if (this.selected == x) {

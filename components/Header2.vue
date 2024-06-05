@@ -1,4 +1,5 @@
 <template>
+	<beta-test />
 	<div @click="$router.push('/user/signup')" class="tophead heroimg" id="topbar">
 		<p class="text-white text-center pa-4" :style="{ fontSize: $vuetify.display.mobile ? '12px' : '16px' }">
 			Sign up and GET 20% OFF for your first order🎉. <span class="pointhere">Sign up now </span>
@@ -8,7 +9,7 @@
 		<v-container class="py-0" :style="'max-width:' + maxw">
 			<div class="d-flex justify-space-between align-center">
 				<div class="d-flex align-center">
-					<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
+					<v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
 						<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png', 200)"></v-img>
 					</v-avatar>
 					<div class="d-none d-sm-flex">
@@ -109,7 +110,7 @@
 	<v-layout v-if="$vuetify.display.mobile">
 		<v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'left' : undefined" temporary style="width: 100%; height: 100vh">
 			<div class="d-flex align-center justify-space-between px-4">
-				<v-avatar class="mr-8" @click="$router.push('/home2')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
+				<v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
 					<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png', 200)"></v-img>
 				</v-avatar>
 				<v-icon icon="mdi mdi-close" @click.stop="drawer = false"></v-icon>
