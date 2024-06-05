@@ -7,11 +7,24 @@
 			<div class="d-flex align-center h-100 ">
 				<v-menu open-on-hover :close-on-content-click="false">
 					<template v-slot:activator="{ props }">
-					<v-text-field v-bind="props" v-model="formattedDate" style="width: 250px; " placeholder="Select Date"></v-text-field>
+					<v-text-field v-bind="props"  v-model="formattedDate" style="width: 250px; " placeholder="Select Date"></v-text-field>
 					</template>
 					<v-date-picker style="width: 100%;" v-model="selectedDate" :max="new Date().toISOString().substr(0, 10)"></v-date-picker>
 				</v-menu>
-				<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="large" class="mx-2 text-grey-darken-3"> Filter </v-btn>
+				
+				<v-menu >
+					<template v-slot:activator="{ props }">
+						<v-btn style="border: 1px solid #e5e5e5" v-bind="props" variant="outlined" size="large" class="mx-2 text-grey-darken-3"> Filter </v-btn>
+					</template> 
+					<v-list>
+						<v-list-item style="cursor: pointer" @click="setReview('approved')">
+							Approved
+						</v-list-item>
+						<v-list-item style="cursor: pointer" @click="setReview('pending')">
+							Unapproved
+						</v-list-item>
+					</v-list>
+				</v-menu> 
 				<div class="" style="width: 100vw; max-width: 391px">
 					<v-text-field
 						style="border: 1px solid #e5e5e5; border-radius: 6px"
@@ -20,6 +33,7 @@
 						hide-details
 						prepend-inner-icon="mdi mdi-magnify"
 						placeholder="Search"
+						@input="getVendorReview()"
 						v-model="searchTerm"
 					></v-text-field>
 				</div>
@@ -379,11 +393,12 @@
 }
 </style>
 <script setup>
-import {getAllReview, replyReview, deleteReview, editReview, dissapproveReview, searchReview} from '~/composables/useVendorReview';
+import {getAllReview, filterReview, replyReview, deleteReview, editReview, dissapproveReview, searchReview} from '~/composables/useVendorReview';
 import { formattedPrice } from '~/utils/price';
 import { useVendorStore } from '~/stores/vendorStore';
 import {getDateTime} from '~/utils/date'
 import {ref, onBeforeMount} from 'vue';
+import { vendorUseApi } from "~/composables/vendorApi";
 
 		const vendorStore = useVendorStore()
 		const vendor = ref(vendorStore.vendor)
@@ -400,20 +415,15 @@ import {ref, onBeforeMount} from 'vue';
 		const sending = ref(false)
 		const deleteWarning = ref(false)
 		const deleteId = ref(null)
-		const selectedDate = ref()
+		const selectedDate = ref(null)
 		const loading = ref(false)
 		const searchTerm = ref("")
-
+		const status = ref("")
 		const pagesNo = ref(null)
 		const selectedPage = ref(1)
 		const currentPage = ref(null)
 
-		watch(() => selectedPage.value, async () =>  {
-			await getVendorReview()
-		})
-		watch(() => searchTerm.value, async () => {
-			await getVendorReview()
-		})
+		
 		const pageOptions = computed(() => {
 			return Array.from({ length: pagesNo.value }, (_, index) => index + 1);
 		})
@@ -431,6 +441,19 @@ import {ref, onBeforeMount} from 'vue';
 			await getVendorReview()
 		}
 		})
+		watch(() => selectedPage.value, async () => {
+			await getVendorReview()
+		});
+		watch(() => formattedDate.value, async (newval) => {
+			if (!newval){
+				return 
+			}
+			await getVendorReview()
+		});
+		async function setReview(stats){
+			status.value = stats
+			await getVendorReview()
+		}
 		const leaveComment = (review) => {
 			reviewToReply.value = review
 			dialog.value = true
@@ -479,21 +502,36 @@ import {ref, onBeforeMount} from 'vue';
 		}
 		async function getVendorReview(){
 			loading.value = true
-			try{
-				let res = await getAllReview(selectedPage.value)
-				if (searchTerm.value.trim()){
-					res = await searchReview(searchTerm.value)
+			const api = vendorUseApi()
+				let url;
+				if (searchTerm.value.trim() || formattedDate.value){
+					url = `customer/review_search?search_global=${searchTerm.value}&start_date=${formattedDate.value}$end_date=${formattedDate.value}`
 				}
+				else if (status.value){
+					url = `customer/review_filter?review_status=${status.value}`
+				}else{
+					url = `customer/reviews/?page=${selectedPage.value}`
+				}
+				try{
+					const res = await api({
+						url: url,
+						method: 'GET'
+					});
 				allReviews.value = res.data.data
 				averageRating.value = res.data.average_rating
 				totalReview.value = res.data.total_reviews
 				ratingsCount.value = res.data.ratings_count
 				currentPage.value = res.data.pagination.current_page
 				pagesNo.value = res.data.pagination.last_page
+
+				searchTerm.value = ""
+				status.value = ""
+				selectedDate.value = null
 			}catch(error){
 				console.error(error)
 			}finally{
 				loading.value = false
+				
 			}
 		}
 		async function editVendorReview(){

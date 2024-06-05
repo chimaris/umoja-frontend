@@ -54,10 +54,18 @@ export const dissapproveReview = async (id) => {
         });
         return res
 }
-export const searchReview = async (search) => {
+export const searchReview = async (search, date) => {
     const api = vendorUseApi()
         const res = await api({
-            url: `customer/review_search?search_global=${search}`,
+            url: `customer/review_search?search_global=${search}&start_date=${date}`,
+            method: 'GET'
+        });
+        return res
+}
+export const filterReview = async (status) => {
+    const api = vendorUseApi()
+        const res = await api({
+            url: `customer/review_filter?review_status=${status}`,
             method: 'GET'
         });
         return res
