@@ -126,7 +126,7 @@ color: #969696;">vs last 7 days</p>
               <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>{{mapCountry}}</p>
               <div class="pt-2 align-center d-flex">
                   <v-progress-circular class="mr-4" size="48" :model-value="currentCountry?.percentage">{{currentCountry?.percentage}}%</v-progress-circular>            <div>
-                      <p style="font-weight: 500;font-size: 14px" class="text-capitalize">{{currentCountry?.user_count}}</p>
+                      <p style="font-weight: 500;font-size: 14px" class="text-capitalize">{{currentCountry?.order_count}}</p>
                       <p style="font-weight: 500;
       font-size: 10px;
       line-height: 100%;
@@ -151,14 +151,14 @@ color: #969696;">vs last 7 days</p>
             <v-col  v-if="hasSale" class="" cols="5">
                 <div class="mt-3" v-for="n in soldByCountry" :key="n.name">
                     <div class="d-flex mb-1 align-center">
-                        <v-avatar size="24"><v-img :src="n.img"></v-img></v-avatar>
+                        <span style="font-size: 1.5rem;">{{getFlag(n?.country)}}</span>
                         <p style="font-weight: 500;
 font-size: 16px;" class="ml-3 text-capitalize">{{ n?.country }}</p>
                     </div>
                     <div class="d-flex align-center">
                        <div style="width: 80%;">
 
-                           <v-progress-linear style="width:100%;border-radius: 5px;" class="mr-2" color="#1361F4" :model-value="n?.user_count" :height="6"></v-progress-linear>
+                           <v-progress-linear style="width:100%;border-radius: 5px;" class="mr-2" color="#1361F4" :model-value="n?.order_count" :height="6"></v-progress-linear>
                         </div> 
                         <p
     style="font-weight: 500;
@@ -275,14 +275,14 @@ color: #969696;" class="ml-4">{{ n?.percentage }}%</p>
 							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
 							<span>No Product has been sold yet</span>
 				</div>
-		<div v-if="hasSale && recentLoading" class="d-flex align-center justify-center" style="height: 200px">
+		<div v-if="hasSale && topProdLoading" class="d-flex align-center justify-center" style="height: 200px">
             <v-progress-circular
               color="green"
               indeterminate
             ></v-progress-circular>
         </div>
-        <v-row v-if="hasSale && !recentLoading" class="mt-0">
-             <v-col v-for="n in recentOrders.slice(0,3)" cols="4" :key="n">
+        <v-row v-if="hasSale && !topProdLoading" class="mt-0">
+             <v-col v-for="n in topProducts.slice(0,3)"  :key="n">
 				<v-img width="100%" cover height="200" class="rounded-lg" :src="n.product_photo.split(',')[0]"></v-img>
 			</v-col>
         </v-row>
@@ -516,13 +516,14 @@ color: orange;
 </style>
 <script setup>
 import { useVendorStore } from '~/stores/vendorStore';
+import emojiFlags from 'emoji-flags';
 import axios from 'axios'
 import {ref, onBeforeMount, onMounted} from 'vue';
 import {formattedPrice} from '~/utils/price'
 import {getAllReview} from '~/composables/useVendorReview';
-import {allCountries} from '~/utils/countryapi';
+import {countryCodes} from '~/utils/countryapi';
 import {getdateRegistered} from '~/utils/date'
-import {getWeeklyRevenue, getTotalRevenue, getCountrySold, getRecentOrders, getTransactions, getCustomers, getNoSold, getOutOfStock, getTopTransaction } from '~/composables/useDashboard';
+import {getWeeklyRevenue, getTopProducts, getTotalRevenue, getCountrySold, getRecentOrders, getTransactions, getCustomers, getNoSold, getOutOfStock, getTopTransaction } from '~/composables/useDashboard';
 import { findIndex } from 'lodash';
 
     const vendorStore = useVendorStore()
@@ -535,6 +536,7 @@ import { findIndex } from 'lodash';
     const text = ref(1)
     const weeklyRevenue = ref([])
     const topTransactions = ref([])
+    const topProducts = ref([])
     const recentOrders = ref([])
     const noStock = ref([])
     const totalRevenue = ref(null)
@@ -542,12 +544,22 @@ import { findIndex } from 'lodash';
     const noTransactions = ref(null)
     const noProductSold = ref(null)
     const topTranLoading = ref(true)
+    const topProdLoading = ref(true)
 	const recentLoading = ref(true)
     const Review = ref([])
     const soldByCountry = ref([])
 	const currentCountry = ref(null)
-    const mapCountry = ref("Nigeria")
+    const mapCountry = ref("")
     const map = ref(null);
+    const allCountries = ref([])
+
+    function getFlag(country) {
+			const countryCode = countryCodes[country]
+			if (countryCode){
+				return emojiFlags.countryCode(countryCodes[country]).emoji;
+			}
+			
+		}
 
     const config = useRuntimeConfig();
     const mapOptions = ref({
@@ -558,7 +570,7 @@ import { findIndex } from 'lodash';
     });
 	function updateCurrentCountry(){
 		if(mapCountry.value){
-			const index = findIndex((con) => {
+			const index = soldByCountry.value.findIndex((con) => {
 				return con.country == mapCountry.value
 			});
 			if (index !== -1){
@@ -573,20 +585,29 @@ import { findIndex } from 'lodash';
         noTransactions.value = await getTransactions()
         noCusomers.value = await getCustomers()
         noProductSold.value = await getNoSold()
+        soldByCountry.value = await getCountrySold()
+        if (soldByCountry.value){
+          mapCountry.value = soldByCountry.value[0].country
+          updateCurrentCountry()
+          allCountries.value = soldByCountry.value.map((item) => item.country)
+        }
         topTransactions.value = await getTopTransaction()
         if (topTransactions.value){
           topTranLoading.value = false
         }
+        topProducts.value = await getTopProducts()
+        if (topProducts.value){
+          topProdLoading.value = false
+        }
         recentOrders.value = await getRecentOrders()
-		if (recentOrders.value){
-			recentLoading.value = false
-		}
+        if (recentOrders.value){
+          recentLoading.value = false
+        }
         if (hasReview.value){
           const res = await getAllReview()
           Review.value = res.data.data
         }
-        soldByCountry.value = await getCountrySold()
-		noStock.value = await getOutOfStock()
+		    noStock.value = await getOutOfStock()
       }
     });
 
