@@ -11,7 +11,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background-color: rgba(255, 0, 0, 0.8);
+    background-color: rgb(255, 0, 0);
     color: #fff;
     padding: 10px 20px;
     text-align: center;
@@ -30,6 +30,8 @@
     display: inline-block;
     padding-left: -100%;
     animation: scrollText 5s linear infinite;
+    font-weight: 600;
+    font-size: 20px;
   }
   
   @keyframes scrollText {

@@ -190,7 +190,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
                     new Compressor(blob, {
                       quality: 1,
                       maxWidth: 1000,
-                      maxHeight: 600,
+                      maxHeight: 1000,
 
                       success(result) {
                         resolve(result);
