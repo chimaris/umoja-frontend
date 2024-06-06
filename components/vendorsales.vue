@@ -658,15 +658,13 @@
 	color: orange;
 }
 </style>
-<script>
+<script setup>
 import { useOrderStore } from '~/stores/order';
 import { formattedPrice } from '~/utils/price';
 import {vendorUseApi} from '~/composables/vendorApi'
 import {ref, onBeforeMount, onMounted} from 'vue'
 import { useVendorStore } from '~/stores/vendorStore';
 
-export default {
-	setup(){
 		const soldProducts =ref([])
 		const vendorStore  = useVendorStore();
 		const soldCategories = ref([])
@@ -676,20 +674,17 @@ export default {
 		const filterRevenue = ref("Last 24 hours")
 		const orderStore = useOrderStore()
 		const vendor = ref(vendorStore.vendor)
+		const chip = ref("Last 24 hours")
+		const text = ref("1")
+		const chosen =ref("")
+		const dialog = ref(false)
+		const dialog1 = ref(false)
+		const showFilter = ref(false)
 
 		const hasOrder = computed(() => vendor.value.vendor_details?.order_count > 0)
 
 		onBeforeMount(async () => {
 			if (hasOrder.value){
-				await getSales()
-				await getCategories()
-				await getRevenue()
-				await useOrderStore().getRevenues()
-			}
-		});
-		watch(() => vendorStore.vendor, async (newval, oldval) => {
-			vendor.value = newval
-			if (hasOrder.value && vendorStore.vendorToken){
 				soldProducts.value = await getSales()
 				soldCategories.value = await getCategories()
 				saleRevenue.value = await getRevenue()
@@ -778,57 +773,7 @@ export default {
                 console.error(error)
             }
     }
-
-		return {
-			soldProducts,
-			getSales,
-			filterProduct,
-			filterCategory,
-			getCurrentMonthIndex,
-			getCategories,
-			hasOrder,
-			soldCategories,
-			saleRevenue,
-			getRevenue,
-			filterRevenue,
-			orderStore,
-			vendorStore,
-			vendor
-		}
-	},
-	data() {
-		return {
-			menu: true,
-			rating: 4,
-			show_more: false,
-			text: "1",
-			chosen: "",
-			dialog: false,
-			dialog1: false,
-			showFilter: false,
-			chip: "Last 24 hours",
-			colors: ["#CBDED6", "#00966D", "#005A41"],
-			items: [
-				{
-					name: "Buju Golden Bracelet",
-					sales: 80,
-					color: "#CBDED6",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686877087/Rectangle_1916_s0h5tz.png",
-				},
-				{
-					name: "Ankara Sneaker",
-					sales: 20,
-					color: "#00966D",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686877087/Rectangle_1916_1_lacsng.png",
-				},
-				{
-					name: "Multi-Colored Kente",
-					sales: 90,
-					color: "#005A41",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png",
-				},
-			],
-			items1: [
+const items1 = ref( [
 				{
 					sn: "#23942",
 					name: "Leather crop top & pants......",
@@ -882,11 +827,28 @@ export default {
 					items_no: 7,
 					delivery_method: "DHL Delivery",
 				},
-			],
-		};
-	},
+			])
+		
+const items =  ref([
+				{
+					name: "Buju Golden Bracelet",
+					sales: 80,
+					color: "#CBDED6",
+					img: "https://res.cloudinary.com/payhospi/image/upload/v1686877087/Rectangle_1916_s0h5tz.png",
+				},
+				{
+					name: "Ankara Sneaker",
+					sales: 20,
+					color: "#00966D",
+					img: "https://res.cloudinary.com/payhospi/image/upload/v1686877087/Rectangle_1916_1_lacsng.png",
+				},
+				{
+					name: "Multi-Colored Kente",
+					sales: 90,
+					color: "#005A41",
+					img: "https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png",
+				},
+			])	
+const colors = ["#CBDED6", "#00966D", "#005A41"]
 
-
-
-}
 </script>

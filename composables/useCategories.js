@@ -23,7 +23,7 @@ export 	async function fetchCategories(role) {
 }
 
 export const getCategoryId = (selectedCat, Categories) => {
-    const category = Categories.findIndex(category => category.name === selectedCat);
+    const category = Categories?.findIndex(category => category.name === selectedCat);
     if (category === -1) {
         return
     }
@@ -33,7 +33,7 @@ export const getCategoryId = (selectedCat, Categories) => {
 
 
 export const getCategoryName = (selectedCat, Categories) => {
-    const category = Categories.findIndex(category => category.name === selectedCat);
+    const category = Categories?.findIndex(category => category.name === selectedCat);
     if (category === -1) {
         return
     }
