@@ -91,21 +91,21 @@
 			<v-table v-if="!loading"
 				style=" height: 80% !important; overflow: scroll;">
 				<thead>
-					<tr style="background: #e6edec; border-radius: 6px; height: 55px" class="rounded-lg">
+					<tr style="background: #f8f8f8; border-radius: 6px; height: 55px" class="rounded-lg">
 						<th style="width: 50px" class="font-weight-medium text-left">
 							<v-checkbox color="green" hide-details></v-checkbox>
 						</th>
-						<th style="font-size: 14px; color: #333333; width: 100px" class="font-weight-medium text-left">ID</th>
-						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Username</th>
-						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Gender</th>
-						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Joined Date</th>
-						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">Country/State</th>
-						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium text-capitalize">status</th>
-						<th style="font-size: 14px; color: #333333" class="text-left px-1 font-weight-medium"></th>
+						<th style="font-size: 14px; ; width: 100px" class="font-weight-medium text-left">ID</th>
+						<th style="font-size: 14px; " class="text-left px-1 font-weight-medium">Username</th>
+						<th style="font-size: 14px; " class="text-left px-1 font-weight-medium">Gender</th>
+						<th style="font-size: 14px; " class="text-left px-1 font-weight-medium">Joined Date</th>
+						<th style="font-size: 14px; " class="text-left px-1 font-weight-medium">Country/State</th>
+						<th style="font-size: 14px; " class="text-left px-1 font-weight-medium">status</th>
+						<th style="font-size: 14px; " class="text-left px-1 font-weight-medium"></th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr @click="dialog = true" :style="chosen == item.sn ? 'background:#DFDFDF' : ''" v-for="(item, index) in vendorFollowers.followers" :key="item.sn">
+					<tr @click="dialog = true"  v-for="(item, index) in vendorFollowers.followers" :key="item.sn">
 						<td class="text-grey-lighten-1 pl-4 px-1">
 							<v-checkbox color="green" hide-details></v-checkbox>
 						</td>
@@ -725,6 +725,7 @@ import { useVendorStore } from '~/stores/vendorStore';
 import { getVendorFollowers, getNoFollowers } from "~/composables/vendorCustomers";
 import { formattedPrice } from "~/utils/price";
 import { getdateRegistered } from "~/utils/date";
+import { sortedIndexBy } from "lodash";
 
 export default {
 	setup(){

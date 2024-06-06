@@ -9,7 +9,7 @@
   <style scoped>
   .beta-testing-sign {
     position: fixed;
-    top: 0;
+    bottom: 0;
     left: 0;
     background-color: rgb(255, 0, 0);
     color: #fff;

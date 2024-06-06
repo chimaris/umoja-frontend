@@ -61,7 +61,7 @@
 					<v-icon>{{ subCategoryExpand ? "mdi mdi-chevron-up" : "mdi mdi-chevron-down" }}</v-icon>
 				</div>
 				<v-expand-transition leave-absolute>
-					<v-list v-if="subCategoryExpand">
+					<v-list v-if="subCategoryExpand" dense>
 							<v-list-item
 								v-for="(sub, subIndex) in subCategories"
 								:key="subIndex"
@@ -70,7 +70,7 @@
 								backgroundColor: productStore.params.sub_category_name === sub.name ? '#E5EDEC' : '',
 								}"
 								:title="sub.name"
-								style="cursor: pointer; font-size: 10px"
+								style="cursor: pointer; font-size: 10px; border-radius: 10px; width: 200px;"
 								@click="productStore.params.sub_category_name = sub.name"
 							></v-list-item>
 					</v-list>
@@ -300,9 +300,8 @@ const productStore = useProductStore();
 const categories = ref([])
 const subCategories = ref([])
 const price = ref("")
-const categoryNames = computed(() => categories.value.map(category => category.name))
-const subCatNames = computed(() => subCategories.value.map(subCategory => subCategory.subcategory_name))
-// const innerSubCat = computed(() => subCategories.value.map(subCategory => subCategory.neted_subcategories))
+const categoryNames = computed(() => categories.value?.map(category => category.name))
+
 const disable = computed(() => {
 	if (productStore.params.category_name == 'Art' || productStore.params.category_name == "Home decoration"){
 		return true
