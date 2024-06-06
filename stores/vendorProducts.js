@@ -173,27 +173,28 @@ export const useVendorProductStore = defineStore('vendor-product', {
             this.generalInfo = info
           },
           async handlephotoUpload(imagePreviews) {
-            const api = vendorUseApi()
+            const api = vendorUseApi();
             this.loading = true;
             try {
               const tempCloudinaryLinks = [];
-              
+              const maxFileSize = 5 * 1024 * 1024; // 5MB
+          
               for (let index = 0; index < imagePreviews.length; index++) {
                 const imageData = imagePreviews[index];
-                
+          
                 if (imageData) {
-                  // Convert imageData to a Blob object if it's not already a Blob
                   const blob = imageData instanceof Blob ? imageData : await fetch(imageData).then(res => res.blob());
-                  
+          
                   // Compress the image using Compressor.js
                   const compressedImage = await new Promise((resolve, reject) => {
                     new Compressor(blob, {
-                      quality: 1,
-                      maxWidth: 1000,
-                      maxHeight: 1000,
-
+                      quality: 0.8,
                       success(result) {
-                        resolve(result);
+                        if (result.size > maxFileSize) {
+                          reject(new Error('Compressed file size exceeds 5MB.'));
+                        } else {
+                          resolve(result);
+                        }
                       },
                       error(error) {
                         reject(error);
@@ -203,7 +204,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
           
                   const formData = new FormData();
                   formData.append('photo', compressedImage, 'compressed.jpg'); // Set a filename for the compressed image
-                
+          
                   const response = await api({
                     url: 'vendor/products/upload',
                     method: 'post',
@@ -212,18 +213,19 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   const cloudinaryLink = response.data.secure_url;
                   tempCloudinaryLinks.push(cloudinaryLink);
                 }
-              } 
+              }
+          
               this.pictureInfo = tempCloudinaryLinks.join(', ');
               return true;
-              
+          
             } catch (error) {
               console.error('Failed to upload file:', error);
               if (error.response) {
                 this.pictureError = error.response.data.message || 'An error occurred during photo upload.';
               } else if (error.request) {
-                this.pictureError  = 'No response received from server. Please try again later.';
+                this.pictureError = 'No response received from server. Please try again later.';
               } else {
-                this.pictureError   = 'An error occurred. Please try again later.';
+                this.pictureError = 'An error occurred. Please try again later.';
               }
               return false;
             } finally {

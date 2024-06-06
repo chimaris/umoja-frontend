@@ -11,35 +11,12 @@
 		<v-img
 			class="rounded-lg bg-grey-lighten-5"
 			cover
-			v-if="item.photo == null"
+			v-if="item.photo.includes(',')"
 			@click="role ? '' : $router.push(`/product_page/${item.id}`)"
 			eager
 			width="100%"
 			:height="$vuetify.display.mobile ? '200px' : '236px'"
-			src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"
-		>
-			<v-btn
-				@click.self="toggleLike(item, index)"
-				:ref="item.name + index"
-				rounded="xl"
-				icon
-				style="position: absolute; right: 12px; top: 12px"
-				class="pa-0"
-				flat
-				size="x-small"
-			>
-				<v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon
-			></v-btn>
-		</v-img>
-		<v-img
-			class="rounded-lg bg-grey-lighten-5"
-			cover
-			v-else-if="item.photo.includes(',')"
-			@click="role ? '' : $router.push(`/product_page/${item.id}`)"
-			eager
-			width="100%"
-			:height="$vuetify.display.mobile ? '200px' : '236px'"
-			:src="item.photo.split(',')[0]"
+			:src="getCloudinaryImageUrl(item.photo.split(',')[0], 600)"
 		>
 			<v-btn
 				@click="toggleLike(item, index)"
@@ -55,7 +32,7 @@
 					width="15"
 					height="15"
 					:color="!isLiked(index) ? '#1C274C' : 'red'"
-					:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg', 15)"
+					:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg', 30)"
 				/>
 				<!-- <v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon> -->
 			</v-btn>
@@ -68,7 +45,7 @@
 			eager
 			width="100%"
 			:height="$vuetify.display.mobile ? '200px' : '236px'"
-			:src="item.photo"
+			:src="getCloudinaryImageUrl(item.photo, 600)"
 		>
 			<v-btn
 				@click="toggleLike(item, index)"
@@ -84,7 +61,7 @@
 					width="15"
 					height="15"
 					:color="!isLiked(index) ? '#1C274C' : 'red'"
-					:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg', 15)"
+					:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg', 30)"
 				/>
 				<!-- <v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon> -->
 			</v-btn>
@@ -126,7 +103,7 @@
 		>
 		<div v-if="vendorShow" class="d-none d-md-block">
 			<div class="d-flex mt-6">
-				<v-avatar @click="role ? '' : $router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img cover :src="item.vendor_profile_photo"></v-img></v-avatar>
+				<v-avatar @click="role ? '' : $router.push(`/vendor_page/${item.vendor_id}`)" size="40"><v-img cover :src="getCloudinaryImageUrl(item.vendor_profile_photo, 300)"></v-img></v-avatar>
 				<div style="cursor: pointer" @click="role ? '' : $router.push(`/vendor_page/${item.vendor_id}`)" class="ml-2">
 					<p style="color: #1e1e1e; text-transform: capitalize; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">
 						{{ item.vendor_business_name }}
