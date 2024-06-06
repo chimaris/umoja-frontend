@@ -1,6 +1,5 @@
 <template>
 	<Header2 />
-	<!-- <div style="min-height: 120vh; width: 100%"> -->
 	<div id="homepage" style="min-height: 100vh; width: 100%">
 		<v-img
 			height="185"
@@ -123,46 +122,59 @@
 					<div
 						class="d-flex flex-column flex-md-row px-0 pt-0 pb-0 pt-md-6 justify-space-around bg-white"
 						:class="$vuetify.display.mobile ? 'mx-4 rounded-xl' : ''"
-					>	
-					<v-expansion-panels flat rounded="xl" class="d-md-none d-block roundes-xl" v-model="selected">
-						<v-expansion-panel class="w-100" :value="n" :key="index" v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']">
-						<v-expansion-panel-title>
-							<v-btn @click="changeTab(n)" size="large" variant="tonal" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
-								<v-scale-transition leave-absolute="">
-									<v-icon v-if="selected == n" icon="mdi mdi-star-four-points" class="mr-2"></v-icon>
-								</v-scale-transition>
-								<span style="font-size: 14px; color: #333; font-weight: 600" :style="selected == n ? 'color:#2C6E63' : ''">
-									{{ n }}
-								</span>
-							</v-btn>
-						</v-expansion-panel-title>
-						<v-expansion-panel-text>
-							<v-window v-model="selected">
-							<v-window-item value="Account Settings">
-								<Useraccountsettings />
-							</v-window-item>
-							<v-window-item value="Following">
-								<Userfollowing />
-							</v-window-item>
-							<v-window-item value="Manage Password">
-								<Usermanagepassword />
-							</v-window-item>
-							<v-window-item value="Order History">
-								<Userorderhistory />
-							</v-window-item>
-							<v-window-item value="Payment method">
-								<Userpaymentmenthod />
-							</v-window-item>
-							<v-window-item value="Address">
-								<Useraddressbook />
-							</v-window-item>
-							<v-window-item value="Notification">
-								<Usernotification />
-							</v-window-item>
-							</v-window>
-						</v-expansion-panel-text>
-						</v-expansion-panel>
-					</v-expansion-panels>
+					>
+						<v-expansion-panels flat rounded="xl" class="d-md-none d-block roundes-xl" v-model="selected">
+							<v-expansion-panel
+								class="w-100"
+								:value="n"
+								:key="index"
+								v-for="(n, index) in [
+									'Account Settings',
+									'Following',
+									'Manage Password',
+									'Order History',
+									'Payment method',
+									'Address',
+									'Notification',
+								]"
+							>
+								<v-expansion-panel-title>
+									<v-btn @click="changeTab(n)" size="large" variant="tonal" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
+										<v-scale-transition leave-absolute="">
+											<v-icon v-if="selected == n" icon="mdi mdi-star-four-points" class="mr-2"></v-icon>
+										</v-scale-transition>
+										<span style="font-size: 14px; color: #333; font-weight: 600" :style="selected == n ? 'color:#2C6E63' : ''">
+											{{ n }}
+										</span>
+									</v-btn>
+								</v-expansion-panel-title>
+								<v-expansion-panel-text>
+									<v-window v-model="selected">
+										<v-window-item value="Account Settings">
+											<Useraccountsettings />
+										</v-window-item>
+										<v-window-item value="Following">
+											<Userfollowing />
+										</v-window-item>
+										<v-window-item value="Manage Password">
+											<Usermanagepassword />
+										</v-window-item>
+										<v-window-item value="Order History">
+											<Userorderhistory />
+										</v-window-item>
+										<v-window-item value="Payment method">
+											<Userpaymentmenthod />
+										</v-window-item>
+										<v-window-item value="Address">
+											<Useraddressbook />
+										</v-window-item>
+										<v-window-item value="Notification">
+											<Usernotification />
+										</v-window-item>
+									</v-window>
+								</v-expansion-panel-text>
+							</v-expansion-panel>
+						</v-expansion-panels>
 						<div
 							class="d-md-flex justify-space-between align-center py-4 py-md-0 d-none"
 							:style="{ borderTop: index !== 0 ? ($vuetify.display.mobile ? '1px solid #EDEDED' : '') : '' }"
@@ -180,7 +192,7 @@
 							<div class="d-block d-md-none">
 								<v-img height="11" width="16" src="https://res.cloudinary.com/payhospi/image/upload/v1716302680/umoja/arrow.svg" />
 							</div>
-						 </div>
+						</div>
 					</div>
 					<v-divider class="mt-6 d-none d-md-block"></v-divider>
 
@@ -366,7 +378,7 @@ export default {
 	methods: {
 		changeTab(n) {
 			this.selected = n;
-			this.$router.push(`/user/profile/${n}`);
+			// this.$router.push(`/user/profile/${n}`);
 		},
 		logoutUser() {
 			const response = this.userStore.logout();
@@ -383,7 +395,7 @@ export default {
 </script>
 
 <style>
-.v-expansion-panel-title__icon{
+.v-expansion-panel-title__icon {
 	font-size: 12px;
 }
 </style>
