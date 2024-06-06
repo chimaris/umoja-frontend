@@ -188,7 +188,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   // Compress the image using Compressor.js
                   const compressedImage = await new Promise((resolve, reject) => {
                     new Compressor(blob, {
-                      quality: 0.8,
+                      quality: 1,
                       success(result) {
                         if (result.size > maxFileSize) {
                           reject(new Error('Compressed file size exceeds 5MB.'));

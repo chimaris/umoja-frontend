@@ -223,7 +223,7 @@ export default {
 				{ title: "Discovery", route: "/discovery_page", disabled: false },
 				{ title: "Market Place", route: "/market_place", disabled: false },
 				{ title: "About Us", route: "/about/*", disabled: false },
-				{ title: "Create Account", route: "/signup-category", disabled: this.isLoggedIn || this.vendorStore.vendorIsLoggedIn },
+				{ title: "Create Account", route: "/signup-category", disabled: this.isLoggedIn},
 				// { title: "ERP Solution", route: "/vendor/dashboard/Homepage", disabled: false },
 			];
 		},

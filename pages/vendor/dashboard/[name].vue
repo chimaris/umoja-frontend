@@ -207,11 +207,7 @@ watch(() => route.params.name, (name) => {
 watch(() => window.innerWidth, () => {
  checkScreenSize()
 });
-watch(() => vendorStore.vendor, async () => {
-	if (vendorStore.vendor.complete_setup == 1){
-		await loadVendorData();
-	}
-});
+
 async function loadVendorData(){
 	const vendorDetails = vendorStore.vendor.vendor_details;
 	const vendorId  = vendorStore.vendor.vendor_details.id;
