@@ -39,10 +39,10 @@
 										cover
 										width = "100%"
 										height="349px"
-										:src="n"
+										:src="getCloudinaryImageUrl(n, 2000)"
 									>
 									</v-carousel-item>
-									<v-carousel-item v-else :value="n" v-for="n in 4" :key="n" cover height="349px" :src="product?.photo"> </v-carousel-item>
+									<v-carousel-item v-else :value="n" v-for="n in 4" :key="n" cover height="349px" :src="getCloudinaryImageUrl(product?.photo, 2000)"> </v-carousel-item>
 								</v-carousel>
 								<v-row dense v-if="product?.photo.includes(',')">
 									<v-col v-for="n in product?.photo.split(',')" cols="3">
@@ -53,7 +53,7 @@
 											style="border-radius: 6px !important"
 											cover
 											height="103px"
-											:src="n"
+											:src="getCloudinaryImageUrl(n, 400)"
 										>
 											<v-overlay persistent="" scrim="green" opacity="0" :model-value="carousel == n" contained></v-overlay>
 										</v-img>
@@ -68,7 +68,7 @@
 											style="border-radius: 6px !important"
 											cover
 											height="103px"
-											:src="product?.photo"
+											:src="getCloudinaryImageUrl(product?.photo, 400)"
 										>
 											<v-overlay persistent="" scrim="green" opacity="0" :model-value="carousel == n" contained></v-overlay>
 										</v-img>
@@ -203,7 +203,7 @@
 													class="mr-2"
 													width="13"
 													height="15"
-													src="https://res.cloudinary.com/payhospi/image/upload/v1716238487/umoja/share-icon.svg"
+													:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716238487/umoja/share-icon.svg', 30)"
 												/>
 
 												<span style="font-size: 14px; font-weight: 600">Share</span>
