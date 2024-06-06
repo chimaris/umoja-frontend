@@ -1,5 +1,5 @@
 <template>
-	<v-container style="margin-bottom: 50px" class="parent-container px-0" :style="'max-width:' + maxw">
+	<v-container style="margin-bottom: 50px" class="parent-container px-3 md-px-0" :style="'max-width:' + maxw">
 		<div class="d-flex my-8 align-center">
 			<div
 				class=""
@@ -40,7 +40,7 @@
 		</div>
 		<!-- For mobile View -->
 		<div class="d-block d-md-none">
-			<v-row dense class="justify">
+			<v-row dense class="justify-center">
 				<v-col v-for="(n, i) in items" :key="i" cols="6" :md="6" :lg="3">
 					<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
 					<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
