@@ -3,7 +3,7 @@
 		<p style="color: #000; font-size: 20px; font-weight: 600" class="pa-5">Shipping and Delivery</p>
 		<v-divider></v-divider>
 		<div class="pa-5 py-8">
-			<p style="font-size: 20px; font-weight: 600">Two-factor Authentication</p>
+			<p style="font-size: 20px; font-weight: 600">How do you want to handle your shipping?</p>
 
 			<v-select
 				v-model="selected"
@@ -125,6 +125,28 @@
 						<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
 						<span>Saved Packages</span>
 					</span>
+				</div>
+			</v-card>
+
+			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat rel="noopener" style="justify-content: between">
+				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
+					Packing Slip <v-icon icon="mdi mdi-information-outline" size="24"></v-icon>
+				</p>
+				<div class="cardStyle">
+					<div class="d-flex justify-space-between align-center w-100">
+						<div class="d-flex py-2">
+							<v-avatar class="mr-4" size="50" color="#FDF1ED">
+								<v-icon icon="mdi mdi-equal-box"></v-icon>
+							</v-avatar>
+							<div>
+								<p style="font-size: 16px; font-weight: 600; color: #333333">Packing Slip Template</p>
+								<p style="font-size: 16px; font-weight: 500; color: #969696">See what it looks like</p>
+							</div>
+						</div>
+						<div>
+							<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> View </v-btn>
+						</div>
+					</div>
 				</div>
 			</v-card>
 		</div>
