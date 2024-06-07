@@ -1,4 +1,5 @@
 <template>
+	<beta-test />
 	<userHeader />
 	<div style="min-height: 120vh; width: 100%">
 		<v-img

@@ -1,5 +1,5 @@
 <template>
-    <apexchart type="bar" color="green" :options="chartOptions" :series="series"></apexchart>
+    <apexchart :key="$route.fullPath"  type="bar" color="green" :options="chartOptions" :series="series"></apexchart>
 </template>
 <script setup>
 import {ref} from 'vue'
@@ -9,13 +9,16 @@ const props = defineProps({
         required: true
     }
 })
-const series = ref(updateSeries())
+const series = ref([
+		{ name: 'Revenue Growth',
+        data: Array(7).fill(0),}
+])
 
 
 const chartOptions =ref(
     {
 				chart: {
-				height: '100%',
+				height: 400,
 				type: 'bar'
 				},
 				colors:['#CBDED6', '#00966D', '#005A41'],
@@ -45,6 +48,9 @@ const chartOptions =ref(
 			}
 ) 
 function updateSeries(){
+if (!props.soldProducts || props.soldProducts.length === 0) {
+    return [];
+  }
     const formattedData = props.soldProducts.map((product) => {
         const dailyAmounts = Array(7).fill(0);
         product.daily_data.forEach(dayData => {
@@ -58,8 +64,11 @@ function updateSeries(){
         });
         return formattedData
 }
-watch(() => props.soldProducts, () => {
-        series.value = updateSeries();
+watch(() => props.soldProducts, (newval) => {
+	if(newval){
+		series.value = updateSeries();
+	}
+        
 });
 
 

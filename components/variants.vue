@@ -700,10 +700,17 @@ export default {
         this.vendorProducts.inventoryInfo &&
         this.vendorProducts.shippingInfo
     ) {
+		
 		const response =  await this.vendorProducts.addVendorProduct();
 		if (response) {	
 			this.vendorProducts.newProductAdded = true;
+			this.$emit('clear')
+			this.colorOptions = [],
+			this.sizeOptions = [],
+			this.styleOptions = [],
+			this.materialOptions = [],
 			this.$router.push('/vendor/dashboard/Products');
+			
 		}
        
     } else { 

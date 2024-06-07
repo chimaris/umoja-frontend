@@ -65,7 +65,7 @@
 						flat
 						style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px"
 						size="x-large"
-						to="/home2"
+						to="/"
 						>Go back to web page</v-btn
 					>
 					<v-btn

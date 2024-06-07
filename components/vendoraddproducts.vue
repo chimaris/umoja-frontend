@@ -761,7 +761,7 @@
 					</v-form>
 				</v-window-item>
 				<v-window-item value="Variants">
-					<variants/>
+					<variants @clear="clearAll()"/>
 				</v-window-item>
 			</v-window>
 		</v-sheet>
@@ -1160,6 +1160,43 @@ export default {
 			this.vendorProducts.saveShippingInfo(data)
 			this.nextTab()
 		},
+		clearAll(){
+			this.productNumber = ""
+			this.unit = ""
+			this.unitperItem = ""
+			this.material = ""
+			this.condition = ""
+			this.productName = ""
+			this.productStat = ""
+			this.productSpec = ""
+			this.selectedCategory = ""
+			this.selectedSubCategory = ""
+			this.selectedGender = ""
+			this.editor.commands.setContent('');
+			this.tags = ""
+			this.ustIndex = ""
+			this.price = ""
+			this.prevPrice = null
+			this.chargeTax = false
+			this.itemCost = ""
+			this.imagePreviews = []
+			this.trackQty = false
+			this.productQty = 0
+			this.minimumQty = 0
+			this.continueSellingNoStock = false
+			this.hasSkuBarCode = false
+			this.storageAddress = ""
+			this.physicalProduct = false
+			this.netWeight = 0
+			this.grossWeight = 0
+			this.shipsInternational = false
+			this.length = 0
+			this.height = 0
+			this.width = 0
+			this.digitalProduct = false
+			this.shippingOption = ""
+			this.window = "General"
+		}
 	},
 
     mounted() {

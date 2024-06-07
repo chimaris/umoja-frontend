@@ -1,4 +1,5 @@
 <template>
+	<beta-test />
 	<div class="authBg">
 		<authHeader />
 		<div class="d-flex justify-center py-12 px-2">

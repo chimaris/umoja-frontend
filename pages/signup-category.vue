@@ -1,4 +1,5 @@
 <template>
+	<beta-test />
 	<div style="background-color: #f8f8f8; min-height: 100vh">
 		<authHeader />
 

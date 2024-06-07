@@ -1,10 +1,11 @@
 <template>
+	<beta-test />
 	<div>
 		<v-row style="min-height: 100vh">
 			<v-col :cols="cols[0]" class="pb-0">
 				<v-card flat tile width="100%" height="100%">
 					<v-container style="min-height: 100vh">
-						<v-avatar class="" @click="$router.push('/home2')" size="150" style="cursor: pointer; height: auto !important" rounded="0">
+						<v-avatar class="" @click="$router.push('/')" size="150" style="cursor: pointer; height: auto !important" rounded="0">
 							<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
 						</v-avatar>
 						<div style="height: calc(100% -150px)">
@@ -140,7 +141,7 @@ export default {
 			if (this.valid) {
 					const isLoggedIn = await this.userStore.login({ email: this.email, password: this.password });
 					if (isLoggedIn) {
-						this.$router.push("/home2");
+						this.$router.push("/");
 						this.userStore.loginError = "";
 						this.email = "";
 						this.password = "";
@@ -163,7 +164,7 @@ export default {
 	watch: {
 		isLoggedIn(val) {
 			if (val) {
-				this.$router.push("/home2");
+				this.$router.push("/");
 			}
 		},
 	},

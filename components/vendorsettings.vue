@@ -131,7 +131,7 @@ export default {
 	methods: {
 		logout() {
 			this.userStore.logout();
-			this.$router.push("/home2");
+			this.$router.push("/");
 		},
 		choose(x) {
 			this.$emit("changePage", "Order details");

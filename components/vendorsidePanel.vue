@@ -132,7 +132,7 @@
           <v-avatar size="135" rounded="0" style="cursor: pointer; padding-top: 20px">
               <v-img src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
           </v-avatar>
-          <!-- <v-avatar style="cursor: pointer;" class="style-7" @click="$router.push('/home2')" size="135" rounded="0">
+          <!-- <v-avatar style="cursor: pointer;" class="style-7" @click="$router.push('/')" size="135" rounded="0">
             <v-img eager="" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
           </v-avatar> -->
         </div>

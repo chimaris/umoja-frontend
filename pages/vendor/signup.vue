@@ -43,6 +43,7 @@
  </template> -->
 
 <template>
+	<beta-test />
 	<div class="authBg">
 		<authHeader />
 		<div class="d-flex justify-center py-md-12 px-md-2">
@@ -53,7 +54,7 @@
 				<p class="font-weight-medium mb-6 mt-1">
 					Already have an account? <span style="color: #0076ff; cursor: pointer" @click="$router.push('/vendor/login')">Sign In</span>
 				</p>
-				<v-row>
+				<!-- <v-row>
 					<v-col cols="6">
 						<v-btn @click="socialMediaLogin('google')" size="x-large" flat variant="outlined" block>
 							<v-avatar rounded="0" size="24" class="mr-2">
@@ -73,7 +74,7 @@
 					<v-divider></v-divider>
 					<p class="px-2 w-100 text-center" :style="{ fontSize: $vuetify.display.mobile ? '14px' : '16px' }">or sign up with</p>
 					<v-divider></v-divider>
-				</div>
+				</div> -->
 				<v-form v-model="valid" @submit.prevent="handleSubmit">
 					<v-row>
 						<v-col>
