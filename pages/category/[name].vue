@@ -1351,7 +1351,7 @@ export default {
 			preloadImages();
 		},
 		selectCategory(n) {
-			this.$router.push("/" + n);
+			this.$router.push("/category/" + n);
 		},
 	},
 };
