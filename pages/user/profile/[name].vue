@@ -1,6 +1,5 @@
 <template>
 	<Header2 />
-	<!-- <div style="min-height: 120vh; width: 100%"> -->
 	<div id="homepage" style="min-height: 100vh; width: 100%">
 		<v-img
 			height="185"
@@ -180,7 +179,7 @@
 							<div class="d-block d-md-none">
 								<v-img height="11" width="16" src="https://res.cloudinary.com/payhospi/image/upload/v1716302680/umoja/arrow.svg" />
 							</div>
-						 </div>
+						</div>
 					</div>
 					<v-divider class="mt-6 d-none d-md-block"></v-divider>
 
@@ -367,12 +366,12 @@ export default {
 	methods: {
 		changeTab(n) {
 			this.selected = n;
-			this.$router.push(`/user/profile/${n}`);
+			// this.$router.push(`/user/profile/${n}`);
 		},
 		logoutUser() {
 			const response = this.userStore.logout();
 			if (response) {
-				this.$router.push("/user/login");
+				this.$router.push("/");
 			}
 		},
 		filt(text) {
@@ -384,7 +383,7 @@ export default {
 </script>
 
 <style>
-.v-expansion-panel-title__icon{
+.v-expansion-panel-title__icon {
 	font-size: 12px;
 }
 .v-expansion-panel:first-child{
