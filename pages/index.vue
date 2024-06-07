@@ -178,7 +178,7 @@
 					<v-img
 						cover
 						class="heroimg"
-						@click="$router.push('/fashion')"
+						@click="$router.push('/category/fashion')"
 						style="cursor: pointer; height: calc(100% - 3px); position: relative; border-radius: 15px"
 						width="100%"
 						lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529528/rectangle-64_zmh8cd.png"
@@ -210,7 +210,7 @@
 					<v-row>
 						<v-col cols="12" md="6">
 							<v-img
-								@click="$router.push('/home decoration')"
+								@click="$router.push('/category/home decoration')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
@@ -242,7 +242,7 @@
 						</v-col>
 						<v-col cols="12" md="6">
 							<v-img
-								@click="$router.push('/cosmetics')"
+								@click="$router.push('/category/cosmetics')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
@@ -280,7 +280,7 @@
 						</v-col>
 						<v-col cols="12">
 							<v-img
-								@click="$router.push('/art')"
+								@click="$router.push('/category/art')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
