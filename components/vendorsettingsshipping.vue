@@ -121,7 +121,7 @@
 						style="font-size: 16px; font-weight: 400"
 					></v-alert>
 
-					<span class="d-flex align-center mt-5" style="color: #1273eb">
+					<span class="d-flex align-center mt-5" style="color: #1273eb; font-weight: 600; font-size: 16px">
 						<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
 						<span>Saved Packages</span>
 					</span>
