@@ -215,10 +215,10 @@ async function loadVendorData(){
 			vendorProducts.allProducts = await fetchProducts(vendorId)
 		}
 		if (vendorDetails?.article_count > 0){
-			postStore.articles = await fetchArticles(vendorId)
+			postStore.getArticle()
 		}
 		if (vendorDetails?.post_count > 0){
-			postStore.posts = await fetchPosts(vendorId)
+			postStore.getPost()
 		}
 		if (vendorDetails?.promo_count > 0){
 			vendorProducts.promoProducts = await fetchPromos(vendorId)

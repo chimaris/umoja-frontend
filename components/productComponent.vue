@@ -16,7 +16,7 @@
 			eager
 			width="100%"
 			:height="$vuetify.display.mobile ? '200px' : '236px'"
-			:src="getCloudinaryImageUrl(item.photo.split(',')[0], 600)"
+			:src="getCloudinaryImageUrl(item.photo.split(',')[0], 800)"
 		>
 			<v-btn
 				@click="toggleLike(item, index)"
@@ -80,7 +80,7 @@
 		</div>
 		<p
 			@click="role? '' : $router.push(`/product_page/${item.id}`)"
-			style="font-weight: 600; font-size: 14px; line-height: 18px; cursor: pointer; color: #000000"
+			style="font-weight: 600; font-size: 14px; line-height: 18px; cursor: pointer; color: #000000; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis"
 			class="mt-1 mt-md-3 text-wrap"
 		>
 			{{ filt(item.name) }}

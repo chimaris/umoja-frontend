@@ -310,7 +310,7 @@
 						</div>
 					
 						<v-row>
-							<v-col class="text-center" v-if="imagePreviews[0]" cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 1)">
+							<v-col class="text-center" v-if="imagePreviews[0]" cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 1, 'drop')">
 								<div style="width: 100%;">
 									<v-img
 									contain
@@ -326,7 +326,7 @@
 									<input style="display: none" id="product1" type="file" @change="handleFileInputChange($event, 1)"/>
 								</div>
 							</v-col>
-							<v-col v-else  cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 1)">
+							<v-col v-else  cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 1, 'drop')">
 								<div class="d-flex justify-center align-center pa-2 rounded-lg" style="height: 298px; width: 100%; border: 3.4px dashed #e1e1e1">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
@@ -339,7 +339,7 @@
 								</div>
 							</v-col>
 							<!-- second product -->
-							<v-col class="text-center" v-if="imagePreviews[1]" cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 2)">
+							<v-col class="text-center" v-if="imagePreviews[1]" cols="12" md="4" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 2, 'drop')">
 								<div style="width: 100%;">
 									<v-img
 									contain
@@ -369,7 +369,7 @@
 							</v-col>
 							<v-col cols="12" md="4">
 								<!-- 3rd product -->
-								<div v-if="imagePreviews[2]" class="d-flex  flex-column justify-center mb-10 align-center pa-2 rounded-lg" style="height: 141px; width: 100%;" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 3)">
+								<div v-if="imagePreviews[2]" class="d-flex  flex-column justify-center mb-10 align-center pa-2 rounded-lg" style="height: 141px; width: 100%;" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 3, 'drop')">
 									<v-img
 									contain
 									width="100%"
@@ -381,7 +381,7 @@
 								<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product3" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
 								<input  style="display: none" id="product3" type="file" @change="handleFileInputChange($event, 3)" />
 								</div>
-								<div v-else class="d-flex justify-center mb-4 align-center pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 3)">
+								<div v-else class="d-flex justify-center mb-4 align-center pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 3, 'drop')">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
 											
@@ -393,7 +393,7 @@
 									</div>
 								</div>
 								<!-- 4th product -->
-								<div v-if="imagePreviews[3]" class="d-flex justify-center flex-column mt-5 mb-4 align-center pa-2 rounded-lg" style="height: 141px; width: 100%;" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 4)">
+								<div v-if="imagePreviews[3]" class="d-flex justify-center flex-column mt-5 mb-4 align-center pa-2 rounded-lg" style="height: 141px; width: 100%;" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 4, 'drop')">
 									<v-img
 									contain
 									width="100%"
@@ -405,14 +405,14 @@
 								<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product4" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
 								<input style="display: none" id="product4" type="file" @change="handleFileInputChange($event, 4)" />
 								</div>
-								<div v-else class="d-flex justify-center align-center mt-2 pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 4)">
+								<div v-else class="d-flex justify-center align-center mt-2 pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 4, 'drop')">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
 											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
 										</v-avatar>
 										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
 										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product4" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
-										<input style="display: none" id="product4" type="file" @change="handleFileInputChange($event, 4)" />
+										<input style="display: none" id="product4" type="file" @change="handleFileInputChange($event, 4, 'drop')" />
 									</div>
 								</div>
 							</v-col>
@@ -423,10 +423,10 @@
 						</p>
 					</v-sheet>
 					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureError}}</p>
-					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{vendorProducts.pictureError}}</p>
+					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureErrors}}</p>
 					<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						<span class="mr-4">Save changes</span>
-						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
+						<v-progress-circular v-if="loading" indeterminate :width="2" :size="25"></v-progress-circular>
 					</v-btn>
 					<v-btn @click="discardChanges()" class="my-5 ml-5" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						Discard changes
@@ -797,11 +797,10 @@ import Link from '@tiptap/extension-link'
 import {inputRules, numRules} from '~/utils/formrules'
 import { ref, computed, onMounted, watchEffect, onBeforeMount } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
-import {vendorUseApi} from '~/composables/vendorApi'
-import Compressor from 'compressorjs';
 import {useEditVendorStore} from '~/stores/editProduct';
 import { emitEvent } from '~/utils/eventBus';
 import { useRouter } from 'vue-router'
+import { handlephotoUpload, loading, pictureErrors } from '~/composables/uploadProducts'
 import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
 
 export default {
@@ -1040,34 +1039,15 @@ export default {
         toggleDigitalproduct() {
             this.product.digital_product_or_service = this.product.digital_product_or_service === 1 ? 0 : 1;
         },
-		drop(event, index) {
-	     const file= event.dataTransfer.files[0]
-		 if (!file) return; 
 
-			const allowedFiles = [".svg", ".png", ".jpeg", ".jpg"]
-			const maxFileSize = 5 * 1024 * 1024;
-			const fileExtension = file.name.split(".").pop().toLowerCase();
-    
-		if (!allowedFiles.includes("." + fileExtension)) {
-			this.pictureError = "Please upload files having extensions: " + allowedFiles.join(', ');
-			return;
-		}
-
-      	this.pictureError = ""
-
-		if (file.size > maxFileSize) {
-		this.pictureError = "File size exceeds the maximum allowed size of 5MB";
-		return;
-		}
-		const reader = new FileReader();
-		reader.onload = () => {
-			this.imagePreviews[index - 1] = reader.result
-		};
-		reader.readAsDataURL(file);
-     },
-
-		handleFileInputChange(event, index) {
-      const file = event.target.files[0]; // Get the first selected file
+handleFileInputChange(event, index, mode) {
+	let file;
+	if (mode == 'drop'){
+		file= event.dataTransfer.files[0]
+	}else{
+		file = event.target.files[0];
+	}
+ // Get the first selected file
       if (!file) return; // Return if no file is selected
 	  		const allowedFiles = [".svg", ".png", ".jpeg", ".jpg"]
 			const maxFileSize = 5 * 1024 * 1024;
@@ -1217,7 +1197,7 @@ export default {
                 try {
                     this.pictureError = "";
                     this.editStore.loading = true;
-                    const res = await this.editStore.handleEditphotoUpload(this.imagePreviews);
+                    const res = await handlephotoUpload(this.imagePreviews, "update");
 					if (res){
 						emitEvent('product-updated', this.product);
 						this.nextTab()

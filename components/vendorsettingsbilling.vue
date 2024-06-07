@@ -21,14 +21,14 @@
             font-size: 16px;
             font-weight: 400;" class="mb-8">Our free plan has...</p>
 
-            <div v-for="n in freeFeatures" :key="n" class=" mb-4 d-flex align-center ">
+            <div v-for="n in seeBasic ? freeFeatures : freeFeatures.slice(0,4)" :key="n" class=" mb-4 d-flex align-center ">
             <v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
             <p style="color: #333;
             font-size: 14px;
             font-weight: 400;
             ">{{n}}</p>
             </div>
-           
+           <p @click="seeBasic = !seeBasic" style="color: #2C6E63; font-weight: 500; font-size: 14px; cursor: pointer; margin-bottom: 15px">{{ seeBasic ? 'See Less' : 'See More Features' }}</p>
             <v-btn style="flex-grow: 0; margin-top: auto;" size="large" block flat color="green"><span style="
             font-size: 14px;
             font-weight: 600;">Subscribed</span></v-btn>
@@ -50,13 +50,14 @@ font-weight: 600;">€ 29.99/Month</p>
 font-size: 16px;
 font-weight: 400;" class="mb-8">Everything in our free plan plus...</p>
 
-<div v-for="n in businessPackage" :key="n" class=" mb-4 d-flex align-center ">
+<div v-for="n in seeBusiness ? businessPackage : businessPackage.slice(0, 4)" :key="n" class=" mb-4 d-flex align-center ">
 <v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
 <p style="color: #333;
 font-size: 14px;
 font-weight: 400;
 ">{{n}}</p>
 </div>
+<p @click="seeBusiness = !seeBusiness" style="color: #2C6E63; font-weight: 500; font-size: 14px; cursor: pointer; margin-bottom: 15px">{{ seeBusiness ? 'See Less' : 'See More Features' }}</p>
 <v-btn class="mt-12" size="large" variant="outlined" block flat color="green"><span style="
 
 font-size: 14px;
@@ -73,18 +74,19 @@ font-weight: 500;">Premium Plan</span></v-chip>
 </div>
 <p style="color:#2C6E63;
 font-size: 40px;
-font-weight: 600;">Customised/Month</p>
+font-weight: 600;">Custom/Month</p>
 <p style="color: #333;
 font-size: 16px;
 font-weight: 400;" class="mb-8">Everything in our free plan plus...</p>
 
-<div v-for="n in premiumPackage" :key="n" class=" mb-4 d-flex align-center ">
+<div v-for="n in seePremium ? premiumPackage : premiumPackage.slice(0, 4)" :key="n" class=" mb-4 d-flex align-center ">
 <v-icon class="mr-2" icon="mdi mdi-check-circle-outline" color="green"></v-icon>
 <p style="color: #333;
 font-size: 14px;
 font-weight: 400;
 ">{{n}}</p>
 </div>
+<p @click="seePremium = !seePremium" style="color: #2C6E63; font-weight: 500; font-size: 14px; cursor: pointer; margin-bottom: 15px">{{ seePremium ? 'See Less' : 'See More Features' }}</p>
 <v-btn class="mt-12" size="large" variant="outlined" block flat color="green"><span style="
 
 font-size: 14px;
@@ -196,7 +198,14 @@ font-weight: 500;">Invoice #007 - Dec 2023</p>
     </div>
 </template>
 <script setup>
+const seeBasic = ref(false)
+const seeBusiness = ref(false)
+const seePremium = ref(false)
 	const freeFeatures = [
+        "Price: Free",
+        "Basic Features",
+        "Limited Support",
+        "1 account",
 		"Basic storefront on the Umoja platform to showcase products.",
 		"Access to essential inventory management & Order processing tools.",
 		"Advanced analytics and reporting for deeper insights into sales performance.",
@@ -205,6 +214,10 @@ font-weight: 500;">Invoice #007 - Dec 2023</p>
 		"Ideal for: Businesses and start-ups looking to test the platform and get started with minimal upfront costs."
 	]
 	const businessPackage = [
+        "Price: €29.99",
+        "Verified business",
+        "Umoja business application",
+        "Customer support",
 		"Verified business profile",
 		"Expanded storefront on the Umoja platform to showcase more products",
 		"Enhanced inventory management tools with additional features",
@@ -216,6 +229,10 @@ font-weight: 500;">Invoice #007 - Dec 2023</p>
 		"Ideal for: Small businesses and startups ready to expand their online presence and manage their operations more efficiently."
 	]
 	const premiumPackage = [
+        "Price: *Customised*",
+        "Umoja business application",
+        "Customer support & partnership",
+        "Unlimited accounts",
 		"All features included in the Basic Package",
 		"Enhanced marketing and promotional tools, including featured listings and discounts",
 		"Advanced analytics and reporting for deeper insights into sales performance",

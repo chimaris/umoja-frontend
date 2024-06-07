@@ -1,6 +1,6 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div v-if="filteredOrderData.length > 0">
+		<div >
 			<div class="d-flex align-center justify-space-between">
 			<div>
 				<p style="font-weight: 600; font-size: 24px" class="mb-2 d-flex align-center text-left">Manage all your orders here</p>
@@ -137,7 +137,21 @@
 					</tr>
 				</tbody>
 			</v-table>
-			<div  v-if="filteredOrderData.length > 0"
+			<div v-if="vendor.vendor_details?.order_count === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
+			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
+				<v-img
+					:width="300"
+					cover
+					src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/order-empy-box.png"
+					style="filter: grayscale(100%) brightness(100%)"
+				></v-img>
+				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Your orders will show here</h2>
+				<p style="color: #969696; font-size: 16px; font-weight: 500">
+					This is where you'll fulfill orders, collect payments, and track order progress.
+				</p>
+			</v-sheet>
+		</div>
+			<div
 				class="w-100 mt-4 d-flex justify-space-between align-center"
 				style="background-color: #f8f8f8; overflow: hidden; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px"
 			>
@@ -167,20 +181,6 @@
 		</div>
 
 		<!-- If there is no orders show this -->
-		<div v-if="vendor.vendor_details?.order_count === 0" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
-			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
-				<v-img
-					:width="300"
-					cover
-					src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/order-empy-box.png"
-					style="filter: grayscale(100%) brightness(100%)"
-				></v-img>
-				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Your orders will show here</h2>
-				<p style="color: #969696; font-size: 16px; font-weight: 500">
-					This is where you'll fulfill orders, collect payments, and track order progress.
-				</p>
-			</v-sheet>
-		</div>
 	</v-container>
 </template>
 <script setup>
@@ -204,12 +204,6 @@ const toPage = ref(null)
 const orderStore = useOrderStore()
 const vendor = ref(vendorStore.vendor)
 
-watch(() => vendorStore.vendor, async (newval, oldval) => {
-			vendor.value = newval
-			if (newval && vendor.value.vendor_details?.order_count > 0){
-				await fetchFilteredOrders();
-			}
-		});
 
 const pageOptions = computed(() => {
 	return Array.from({ length: pagesNo.value }, (_, index) => index + 1);

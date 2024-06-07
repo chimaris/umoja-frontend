@@ -55,7 +55,7 @@
 					</div>
 					<v-divider class="my-4"></v-divider>
 					<p class="inputLabel">Text</p>
-					<v-textarea  counter="400" v-model="postContent" persistent-counter="" placeholder="Enter post text here" density="comfortable"> </v-textarea>
+					<v-textarea  counter="600" v-model="postContent" persistent-counter="" placeholder="Enter post text here" density="comfortable"> </v-textarea>
 					<p style="color: #B00020; font-size: 14px; margin-top: 0px">{{postError}}</p>
 					<v-divider class="my-4"></v-divider>
 					<v-row class="mt-3">
@@ -635,6 +635,7 @@ export default {
 		const categories = ref([])
 
 		onMounted(async() => {
+			postStore.relatedPosts = []
 			categories.value = await fetchCategories()
 		})
 
@@ -690,9 +691,9 @@ export default {
 			content: "<p>This sneakers is made from one of the best  ankara material in Ghana</p>",
 		});
 	},
-	beforeUnmount() {
-		this.editor.destroy();
-	},
+	// beforeUnmount() {
+	// 	this.editor.destroy();
+	// },
 
 	methods: {
 	isValid(){
@@ -702,15 +703,15 @@ export default {
 			this.pictureError = "You have to upload atleast one image"
 			return false
 		}
-		if (this.postContent.length > 400){
-			this.postError = "No of characters has exceeded the maximum limit of 400 characters"
+		if (this.postContent.length > 600){
+			this.postError = "No of characters has exceeded the maximum limit of 600 characters"
 			return false
 		}
 		if (this.postContent.length <= 100){
 			this.postError = "No of characters is below the minimum limit of 100 characters"
 			return false
 		}
-		if (this.postContent.length > 100 && this.postContent.length <= 400 && this.location && this.selectedCat && this.imagePreviews.length > 0 && this.relatedProducts.length > 0){
+		if (this.postContent.length > 100 && this.postContent.length <= 600 && this.location && this.selectedCat && this.imagePreviews.length > 0 && this.relatedProducts.length > 0){
 			return true
 		}
 	},

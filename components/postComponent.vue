@@ -2,7 +2,7 @@
 	<v-card width="100%" flat class="cardStyle pa-4 pb-3">
 		<div class="mb-4 d-flex">
 			<v-avatar size="45">
-				<v-img cover eager :src="item?.vendor_profile_photo"></v-img>
+				<v-img cover eager :src="getCloudinaryImageUrl(item?.vendor_profile_photo, 150)"></v-img>
 			</v-avatar>
 
 			<div class="pl-1 w-100" style="min-width: 0">
@@ -28,7 +28,7 @@
 				</div>
 			</div>
 		</div>
-		<v-card  @click="$router.push(`/post_detail/${item?.id}`)" v-if="item?.featured_img.includes(',')" :image="item?.featured_img.split(',')[0]" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
+		<v-card  @click="$router.push(`/post_detail/${item?.id}`)" v-if="item?.featured_img.includes(',')" :image="getCloudinaryImageUrl(item?.featured_img.split(',')[0], 800)" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
 			<p
 				class="text-white py-1 px-3"
 				rounded="lg"
@@ -50,7 +50,7 @@
 				><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693937411/vuesax-twotone-play-circle_oyfiqz.png"></v-img
 			></v-avatar>
 		</v-card>
-		<v-card  @click="$router.push(`/post_detail/${item?.id}`)" v-if="!item?.featured_img.includes(',')" :image="item?.featured_img" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
+		<v-card  @click="$router.push(`/post_detail/${item?.id}`)" v-if="!item?.featured_img.includes(',')" :image="getCloudinaryImageUrl(item?.featured_img, 800)" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
 			<v-avatar v-if="item?.video" size="39"
 				><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693937411/vuesax-twotone-play-circle_oyfiqz.png"></v-img
 			></v-avatar>
@@ -107,6 +107,7 @@ import {getdateRegistered} from '~/utils/date'
 import { getCloudinaryImageUrl } from '~/utils/cloudinary';
 import { useUserStore } from "~/stores/userStore";
 import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
+
 export default {
 	props: ["item", "short", "index", "showVendor", "showdisco", "likedPost"],
 	data(){

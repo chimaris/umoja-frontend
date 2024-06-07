@@ -4,10 +4,7 @@
 <script setup>
 import {ref, onBeforeUnmount} from 'vue'
 
-const series2 =ref([
-		{ name: 'Revenue Growth',
-        data: Array(12).fill(0),}
-])
+const series2 =ref(updateSeries())
 const props = defineProps({
     soldCategories: {
         type: Array,

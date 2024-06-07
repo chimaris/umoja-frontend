@@ -101,11 +101,13 @@
 
 <script setup>
 import { useUserStore } from "~/stores/userStore";
-import {ref, computed} from 'vue'
+import {ref, computed, onBeforeMount} from 'vue'
 import {getdateRegistered} from '~/utils/date'
 import { fetchAllArticle } from "~/composables/usePost";
 
+
 const userStore = useUserStore()
+const page = ref(1)
 const availableArticle = computed(() => userStore.allArticles)
 const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg")
 const country = ref("All of African")
@@ -165,16 +167,17 @@ const africanCountries = [
 				"Zambia",
 				"Zimbabwe",
 			]
-
+onBeforeMount(async () => {
+	userStore.allArticles = []
+	await fetchAllArticle(page.value)
+})
 async function loadArticle(){
-	if (userStore.artCurrentPage == userStore.artLastPage && userStore.articlePage > 1){
-		userStore.articlePage = userStore.articlePage - 1;
-		await fetchAllArticle(userStore.articlePage)
+	if (userStore.artCurrentPage == userStore.artLastPage ){
 		return 
 	}
 	if (userStore.artCurrentPage < userStore.artLastPage){
-		userStore.articlePage = userStore.articlePage + 1;
-		await fetchAllArticle(userStore.articlePage)
+		page.value ++;
+		await fetchAllArticle(page.value)
 		return
 	}
 }

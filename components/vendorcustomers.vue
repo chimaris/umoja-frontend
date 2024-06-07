@@ -46,7 +46,7 @@
 				</v-col>
 			</v-row>
 		</div>
-		<div v-if="hasCustomer && vendorFollowers?.followers?.length > 0" class="d-flex align-center justify-space-between">
+		<div  class="d-flex align-center justify-space-between">
 			<div class="pl-3" style="width: 50%; max-width: 580px">
 				<v-text-field
 					style="border: 1px solid #e5e5e5; border-radius: 6px"
@@ -81,7 +81,7 @@
 			
 		</div>
 
-		<div v-if="hasCustomer && vendorFollowers?.followers?.length > 0" class="mt-5">
+		<div  class="mt-5">
 		<div v-if="loading" class="d-flex align-center justify-center" style="position: relative; height: 100%; min-height: 300px;">
 						<v-progress-circular
 							color="green"
@@ -184,6 +184,20 @@
 					</tr>
 				</tbody>
 			</v-table>
+			<div
+			v-if="!hasCustomer"
+			class="d-flex flex-column justify-center align-center"
+			style="max-height: 100%; height: 70vh; "
+		>
+			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 740px">
+				<v-img :width="100" cover src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/customer-empty-box.png"></v-img>
+				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Everything customer in a single place</h2>
+				<p style="color: #969696; font-size: 16px; font-weight: 500">
+					When you have a customer, you will be updated with their details, get a summary of their order history, create segment to send
+					personalized communications that drive sales and more
+				</p>
+				
+			</v-sheet>
 		</div>
 		<v-dialog scrollable class="customerdet" v-model="dialog" transition="slide-x-reverse-transition" :scrim="true">
 			<div style="width: 100%; height: 100%; display: flex; justify-content: right">
@@ -669,31 +683,8 @@
 				</v-window>
 			</v-sheet>
 		</v-dialog>
-		<!-- If there is no Product show this -->
-		<!-- <div
-			v-if="!hasCustomer"
-			class="d-flex flex-column justify-center align-center"
-			style="max-height: 100%; height: 90vh; border: 1px solid #cecece; border-radius: 15px"
-		>
-			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 740px">
-				<v-img :width="100" cover src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/customer-empty-box.png"></v-img>
-				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Everything customer in a single place</h2>
-				<p style="color: #969696; font-size: 16px; font-weight: 500">
-					When you have a customer, you will be to update their details, get a summary of their order history, create segment to send
-					personalized communications that drive sales and more
-				</p>
-				 <div class="mt-10">
-					<v-btn class="mr-4" size="x-large" width="191" style="border: 1px solid #cecece; padding: 12px 20px" flat>
-						<v-icon class="mr-2" icon="mdi mdi-tray-arrow-down"></v-icon>
-						<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 20px"> Import Customers</span></v-btn
-					>
-					<v-btn size="x-large" width="191" style="background-color: #2c6e63; color: #edf0ef; padding: 12px 20px" flat @click="dialog2 = true">
-						<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
-						<span style="font-size: 16px; font-weight: 600; line-height: 20px">Add Customer</span></v-btn
-					>
-				</div> 
-			</v-sheet>
-		</div> -->
+		
+		</div>
 	</v-container>
 </template>
 <style>
@@ -733,11 +724,12 @@ export default {
 		const vendor = ref(vendorStore.vendor)
 		const hasCustomer = computed(() => vendor.value.vendor_details?.order_count > 0)
 		const vendorFollowers = ref([])
-		const loading = ref(true)
+		const loading = ref(false)
 		
 
 		onBeforeMount(async () => {
 			if (hasCustomer.value){
+				loading.value = true
 				const id = vendor.value.vendor_details?.id
 				vendorFollowers.value = await getVendorFollowers(id)
 				if (vendorFollowers.value){
