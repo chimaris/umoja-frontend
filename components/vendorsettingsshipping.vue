@@ -57,7 +57,9 @@
 						</p>
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
-					<v-btn class="" size="small" text="Set up" variant="outlined"></v-btn>
+					<div>
+						<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> Setup </v-btn>
+					</div>
 				</div>
 			</v-card>
 			<v-card class="my-5 pa-6 cardStyle" flat style="justify-content: between">
@@ -66,7 +68,9 @@
 						<p style="font-size: 18px; font-weight: 600; color: #333">Local Pickups <v-icon icon="mdi mdi-information-outline" size="24"></v-icon></p>
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
-					<v-btn class="" size="small" text="Set up" variant="outlined"></v-btn>
+					<div>
+						<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> Setup </v-btn>
+					</div>
 				</div>
 			</v-card>
 
@@ -82,11 +86,11 @@
 							</v-avatar>
 							<div>
 								<p style="font-size: 16px; font-weight: 600; color: #333333">Beispielbox</p>
-								<p style="font-size: 14px; font-weight: 400; color: #333333">22 × 13.7 × 4.2 cm, 0 kg</p>
+								<p style="font-size: 16px; font-weight: 500; color: #969696">22 × 13.7 × 4.2 cm, 0 kg</p>
 							</div>
 						</div>
 						<div class="d-flex">
-							<v-btn class="mr-4" size="small" text="Default package" variant="outlined"></v-btn>
+							<v-btn class="mr-4" size="small" text="Default package" variant="tonal"></v-btn>
 							<!-- <v-icon icon="mdi mdi-dots-horizontal"></v-icon> -->
 							<v-menu>
 								<template v-slot:activator="{ props }">
@@ -114,10 +118,11 @@
 						type="warning"
 						variant="tonal"
 						class="mt-5"
+						style="font-size: 16px; font-weight: 400"
 					></v-alert>
 
 					<span class="d-flex align-center mt-5" style="color: #1273eb">
-						<v-icon icon="mdi mdi-plus" size="24"></v-icon>
+						<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
 						<span>Saved Packages</span>
 					</span>
 				</div>
