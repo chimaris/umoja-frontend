@@ -383,7 +383,7 @@ export default {
 		logoutUser() {
 			const response = this.userStore.logout();
 			if (response) {
-				this.$router.push("/user/login");
+				this.$router.push("/");
 			}
 		},
 		filt(text) {

@@ -4,7 +4,11 @@
 		<v-sheet class="cardStyle mt-4 mb-12 py-0">
 			<v-row>
 				<v-col class="py-4 dash" style="position: relative; min-height: 600px" cols="12" md="3">
-					<div class="py-3" :key="n" v-for="n in ['My Profile', 'Security', 'Notifications', 'Account Details', 'Billing', 'Integrations']">
+					<div
+						class="py-3"
+						:key="n"
+						v-for="n in ['My Profile', 'Security', 'Notifications', 'Account Details', 'Billing', 'Integrations', 'Shipping and Delivery']"
+					>
 						<v-btn size="large" variant="tonal" @click="selected = n" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
 							<v-scale-transition>
 								<v-icon v-if="selected == n" icon="mdi mdi-star-four-points" class="mr-2"></v-icon>
@@ -45,6 +49,12 @@
 						</v-window-item>
 						<v-window-item value="Account Details">
 							<Vendorsettingsaccount :vendor="vendor" />
+						</v-window-item>
+						<!-- <v-window-item value="Integrations">
+							<Vendorsettingsintegrations />
+						</v-window-item> -->
+						<v-window-item value="Shipping and Delivery">
+							<Vendorsettingsshipping />
 						</v-window-item>
 					</v-window>
 				</v-col>
