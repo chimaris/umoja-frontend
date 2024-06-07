@@ -411,10 +411,10 @@
 						</p>
 					</v-sheet>
 					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureError}}</p>
-					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{vendorProducts.pictureError}}</p>
+					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureErrors}}</p>
 					<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; margin-top: 20px; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						<span class="mr-4">Save and continue</span>
-						<v-progress-circular v-if="vendorProducts.loading" indeterminate :width="2" :size="25"></v-progress-circular>
+						<v-progress-circular v-if="loading" indeterminate :width="2" :size="25"></v-progress-circular>
 					</v-btn>
 					</v-form>
 				</v-window-item>
@@ -779,6 +779,7 @@ import { ref, computed, onMounted, watchEffect } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import {vendorUseApi} from '~/composables/vendorApi'
 import Compressor from 'compressorjs';
+import { handlephotoUpload, loading, pictureErrors } from '~/composables/uploadProducts'
 import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
 
 export default {
@@ -1104,7 +1105,7 @@ export default {
 		async savePictures() {
 			if (this.imagePreviews.length >= 4) {
 				this.pictureError = "";
-				const response = await this.vendorProducts.handlephotoUpload(this.imagePreviews, this.pictureError);
+				const response = await handlephotoUpload(this.imagePreviews, this.pictureError);
 				if (response) {
 					this.nextTab();
 				}

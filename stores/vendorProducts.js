@@ -1,8 +1,8 @@
 import {defineStore} from "pinia";
 import {vendorUseApi} from '~/composables/vendorApi'
 import { useVendorStore } from './vendorStore';
-import Compressor from 'compressorjs';
-
+import imageCompression from 'browser-image-compression';
+import { useEditVendorStore } from "./editProduct";
 
 export const useVendorProductStore = defineStore('vendor-product', {
     state: () => ({
@@ -171,66 +171,6 @@ export const useVendorProductStore = defineStore('vendor-product', {
         },
         saveGeneralInfo(info) {
             this.generalInfo = info
-          },
-          async handlephotoUpload(imagePreviews) {
-            const api = vendorUseApi();
-            this.loading = true;
-            try {
-              const tempCloudinaryLinks = [];
-              const maxFileSize = 5 * 1024 * 1024; // 5MB
-          
-              for (let index = 0; index < imagePreviews.length; index++) {
-                const imageData = imagePreviews[index];
-          
-                if (imageData) {
-                  const blob = imageData instanceof Blob ? imageData : await fetch(imageData).then(res => res.blob());
-          
-                  // Compress the image using Compressor.js
-                  const compressedImage = await new Promise((resolve, reject) => {
-                    new Compressor(blob, {
-                      quality: 1,
-                      success(result) {
-                        if (result.size > maxFileSize) {
-                          reject(new Error('Compressed file size exceeds 5MB.'));
-                        } else {
-                          resolve(result);
-                        }
-                      },
-                      error(error) {
-                        reject(error);
-                      }
-                    });
-                  });
-          
-                  const formData = new FormData();
-                  formData.append('photo', compressedImage, 'compressed.jpg'); // Set a filename for the compressed image
-          
-                  const response = await api({
-                    url: 'vendor/products/upload',
-                    method: 'post',
-                    data: formData
-                  });
-                  const cloudinaryLink = response.data.secure_url;
-                  tempCloudinaryLinks.push(cloudinaryLink);
-                }
-              }
-          
-              this.pictureInfo = tempCloudinaryLinks.join(', ');
-              return true;
-          
-            } catch (error) {
-              console.error('Failed to upload file:', error);
-              if (error.response) {
-                this.pictureError = error.response.data.message || 'An error occurred during photo upload.';
-              } else if (error.request) {
-                this.pictureError = 'No response received from server. Please try again later.';
-              } else {
-                this.pictureError = 'An error occurred. Please try again later.';
-              }
-              return false;
-            } finally {
-              this.loading = false;
-            }
           },                   
         saveTextInfo(info) {
             this.textInfo = info

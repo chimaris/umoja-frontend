@@ -18,7 +18,7 @@
 					style="text-transform: none !important"
 					color="rgba(0, 0, 0, 0.5)"
 				>
-					<v-img class="mx-2" height="24" width="24" src="https://res.cloudinary.com/payhospi/image/upload/v1716540767/umoja/edit-icon.svg" />
+					<v-img class="mx-2" height="24" width="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716540767/umoja/edit-icon.svg', 60)" />
 					<span style="font-size: 12px; font-weight: 400"> Edit Cover Photo </span>
 				</v-btn>
 				<v-menu open-on-hover="" class="d-block d-md-none">
@@ -53,7 +53,7 @@
 				<div class="d-flex align-center justify-space-between">
 					<div class="d-flex flex-column flex-md-row align-md-center">
 						<v-avatar color="grey-lighten-3" style="overflow: visible" class="mr-2" :size="$vuetify.display.mobile ? '111' : '166'">
-							<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691587215/ellipse-103_o9gvrw.png"></v-img>
+							<v-img :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png', 300)"></v-img>
 							<v-btn
 								color="white"
 								rounded="xl"
@@ -63,7 +63,7 @@
 								style="position: absolute; height: 32px; width: 32px; border-radius: 50%"
 								:style="{ right: $vuetify.display.mobile ? '2px' : '11px', top: $vuetify.display.mobile ? '2px' : '8px' }"
 							>
-								<v-img height="24" width="24" src="https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg" />
+								<v-img height="24" width="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg', 60)" />
 							</v-btn>
 						</v-avatar>
 						<div class="pt-4 d-none d-md-block">
@@ -122,59 +122,46 @@
 					<div
 						class="d-flex flex-column flex-md-row px-0 pt-0 pb-0 pt-md-6 justify-space-around bg-white"
 						:class="$vuetify.display.mobile ? 'mx-4 rounded-xl' : ''"
-					>
-						<v-expansion-panels flat rounded="xl" class="d-md-none d-block roundes-xl" v-model="selected">
-							<v-expansion-panel
-								class="w-100"
-								:value="n"
-								:key="index"
-								v-for="(n, index) in [
-									'Account Settings',
-									'Following',
-									'Manage Password',
-									'Order History',
-									'Payment method',
-									'Address',
-									'Notification',
-								]"
-							>
-								<v-expansion-panel-title>
-									<v-btn @click="changeTab(n)" size="large" variant="tonal" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
-										<v-scale-transition leave-absolute="">
-											<v-icon v-if="selected == n" icon="mdi mdi-star-four-points" class="mr-2"></v-icon>
-										</v-scale-transition>
-										<span style="font-size: 14px; color: #333; font-weight: 600" :style="selected == n ? 'color:#2C6E63' : ''">
-											{{ n }}
-										</span>
-									</v-btn>
-								</v-expansion-panel-title>
-								<v-expansion-panel-text>
-									<v-window v-model="selected">
-										<v-window-item value="Account Settings">
-											<Useraccountsettings />
-										</v-window-item>
-										<v-window-item value="Following">
-											<Userfollowing />
-										</v-window-item>
-										<v-window-item value="Manage Password">
-											<Usermanagepassword />
-										</v-window-item>
-										<v-window-item value="Order History">
-											<Userorderhistory />
-										</v-window-item>
-										<v-window-item value="Payment method">
-											<Userpaymentmenthod />
-										</v-window-item>
-										<v-window-item value="Address">
-											<Useraddressbook />
-										</v-window-item>
-										<v-window-item value="Notification">
-											<Usernotification />
-										</v-window-item>
-									</v-window>
-								</v-expansion-panel-text>
-							</v-expansion-panel>
-						</v-expansion-panels>
+					>	
+					<v-expansion-panels  class="d-md-none d-block" v-model="selected">
+						<v-expansion-panel  class="w-100"  :value="n" :key="index" v-for="(n, index) in ['Account Settings', 'Following', 'Manage Password', 'Order History', 'Payment method', 'Address', 'Notification']">
+						<v-expansion-panel-title >
+							<v-btn @click="changeTab(n)" size="large" variant="tonal" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
+								<v-scale-transition leave-absolute="">
+									<v-icon v-if="selected == n" icon="mdi mdi-star-four-points" class="mr-2"></v-icon>
+								</v-scale-transition>
+								<span style="font-size: 14px; color: #333; font-weight: 600" :style="selected == n ? 'color:#2C6E63' : ''">
+									{{ n }}
+								</span>
+							</v-btn>
+						</v-expansion-panel-title>
+						<v-expansion-panel-text>
+							<v-window v-model="selected">
+							<v-window-item value="Account Settings">
+								<Useraccountsettings />
+							</v-window-item>
+							<v-window-item value="Following">
+								<Userfollowing />
+							</v-window-item>
+							<v-window-item value="Manage Password">
+								<Usermanagepassword />
+							</v-window-item>
+							<v-window-item value="Order History">
+								<Userorderhistory />
+							</v-window-item>
+							<v-window-item value="Payment method">
+								<Userpaymentmenthod />
+							</v-window-item>
+							<v-window-item value="Address">
+								<Useraddressbook />
+							</v-window-item>
+							<v-window-item value="Notification">
+								<Usernotification />
+							</v-window-item>
+							</v-window>
+						</v-expansion-panel-text>
+						</v-expansion-panel>
+					</v-expansion-panels>
 						<div
 							class="d-md-flex justify-space-between align-center py-4 py-md-0 d-none"
 							:style="{ borderTop: index !== 0 ? ($vuetify.display.mobile ? '1px solid #EDEDED' : '') : '' }"
@@ -231,6 +218,7 @@
 <script>
 import { useUserStore } from "~/stores/userStore";
 import { getdateRegistered } from "~/utils/date";
+import { getCloudinaryImageUrl } from "~/utils/cloudinary";
 export default {
 	setup() {
 		definePageMeta({
@@ -398,4 +386,14 @@ export default {
 .v-expansion-panel-title__icon {
 	font-size: 12px;
 }
+.v-expansion-panel:first-child{
+	border-radius: 15px 15px 0 0;
+}
+.v-expansion-panel:last-child{
+	border-radius: 0 0 15px 15px;
+}
+.v-expansion-panel__shadow {
+  box-shadow: none;
+}
+
 </style>

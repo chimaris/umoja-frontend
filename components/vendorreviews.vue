@@ -4,10 +4,19 @@
 			<div>
 				<p style="font-weight: 500; font-size: 24px" class="mb-2 d-flex align-center text-left">Reviews from your customers</p>
 			</div>
-			<div class="d-flex align-center h-100 ">
+			<div class="d-flex align-center h-100 " >
 				<v-menu open-on-hover :close-on-content-click="false">
 					<template v-slot:activator="{ props }">
-					<v-text-field v-bind="props"  v-model="formattedDate" style="width: 250px; " placeholder="Select Date"></v-text-field>
+						<v-text-field
+						v-bind="props" 
+						style="border: 1px solid #e5e5e5; border-radius: 6px; min-width: 300px;"
+						variant="outlined"
+						density="compact"
+						hide-details
+						prepend-inner-icon="mdi mdi-calendar"
+						placeholder="Select Date"
+						v-model="formattedDate"
+					></v-text-field>
 					</template>
 					<v-date-picker style="width: 100%;" v-model="selectedDate" :max="new Date().toISOString().substr(0, 10)"></v-date-picker>
 				</v-menu>
@@ -142,18 +151,12 @@
 			</v-row>
 		</div>
 
-		<div v-if="hasReview" class="mt-5">
-			<div v-if="loading" class="d-flex align-center justify-center" style="position: relative; height: 100%; min-height: 300px;">
-						<v-progress-circular
-							color="green"
-						indeterminate
-						></v-progress-circular>
-			</div>
-			<v-card v-if="!loading" height="100%" class="mx-auto coolTable mb-12" width="100%" style="overflow: hidden" flat>
-				<div class="">
+		<div class="mt-5">
+			<v-card height="100%" class="mx-auto coolTable mb-12" width="100%" style="overflow: hidden" flat>
+				<div>
 					<v-table>
 						<thead>
-							<tr class="  ">
+							<tr style="background: #f8f8f8;" class="  ">
 								<th style="font-size: 14px" class="font-weight-bold text-left">Product</th>
 								<th style="font-size: 14px" class="text-left px-3 font-weight-bold">Reviewer</th>
 								<th style="font-size: 14px" class="text-left px-3 font-weight-bold">Review</th>
@@ -161,13 +164,19 @@
 								<th style="font-size: 14px" class="text-left px-3 font-weight-bold"></th>
 							</tr>
 						</thead>
-						<tbody>
+						<div v-if="loading" class="d-flex align-center justify-center" style="min-width: 1200px; width: 100%;  height: 100%; min-height: 300px;">
+						<v-progress-circular
+							color="green"
+						indeterminate
+						></v-progress-circular>
+						</div>
+						<tbody v-if="!loading">
 							<tr
-								@click="chosen = item.sn"
+								@click="chosen = i"
 								style="height: 100px; width: 100%"
-								:style="chosen == item.sn ? 'background:#ececec' : ''"
+								:style="chosen == i ? 'background:#ececec' : ''"
 								v-for="(item, i) in allReviews"
-								:key="item.sn"
+								:key="i"
 							>
 								<td style="position: relative; font-size: 14px; height: 100px; width: 270px">
 									<div style="position: absolute; top: 24px; width: 270px">
@@ -209,19 +218,19 @@
 								</td>
 								<td style="position: relative; font-size: 14px; height: 100px; width: 200px">
 									<div style="position: absolute; top: 24px; width: 200px">
-										<div class="px-1 d-flex align-center pl-0">
+										<div class="px-1 d-flex  pl-0">
 											<v-avatar color="grey-lighten-4" class=" mr-2" size="50"
 												><v-img cover src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img
 											></v-avatar>
 											<div>
-												<p class="" style="font-weight: 500; font-size: 16px !important; line-height: 20px; color: #333333">{{item.user.first_name}} {{item.user.last_name}}</p>
+												<p class="" style="font-weight: 500; font-size: 16px !important; line-height: 20px; text-transform: capitalize; color: #333333">{{item.user.first_name}} {{item.user.last_name}}</p>
 												<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696"></p>
 											</div>
 										</div>
 									</div>
 								</td>
 
-								<td style="max-width: 250px" class="text-grey-darken-1 pb-4">
+								<td style="max-width: 200px" class="text-grey-darken-1 pb-4">
 									<div class="d-flex reviews2 pr-1 align-center mt-4 justify-space-between">
 										<!-- <v-rating style="    height: 37px;
     display: flex;
@@ -275,7 +284,7 @@
 								<td style="position: relative; font-size: 14px; height: 100px; width: ">
 									<div style="position: absolute; top: 24px; width: ">
 										<v-chip
-											style="width: 82px; font-size: 10px; font-weight: 500"
+											style="width: 82px; font-size: 10px; font-weight: 500; text-transform: capitalize;"
 											class="rounded-lg d-flex justify-center align-center"
 											size="small"
 											color="#C5912C"
@@ -287,15 +296,27 @@
 								</td>
 								<td style="position: relative; font-size: 14px; height: ; width: ">
 									<div v-if="item.review_status == 'pending'" style="position: absolute; top: 20px; right: 10px; width: ">
-										<v-btn color="green" @click="commentReview(item.id)" flat>approve </v-btn>
+										<v-btn color="green" @click="commentReview(item.id)" flat>Approve </v-btn>
 									</div>
 									<div v-else style="position: absolute; top: 20px; right: 10px; width: ">
-										<v-btn @click="undoApprove(item.id)" color="green" variant="outlined" flat>disapprove </v-btn>
+										<v-btn @click="undoApprove(item.id)" color="green" variant="outlined" flat>Disapprove </v-btn>
 									</div>
 								</td>
 							</tr>
 						</tbody>
 					</v-table>
+					<div v-if="!hasReview" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
+						<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
+							<v-img
+								:width="300"
+								cover
+								src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/review-empty-box.png"
+								style="filter: grayscale(100%) brightness(100%)"
+							></v-img>
+							<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">All your reviews will show here</h2>
+							<p style="color: #969696; font-size: 16px; font-weight: 500">Capture high-quality product reviews foryour store</p>
+						</v-sheet>
+					</div>
 				</div>
 				<div
 				class="w-100 d-flex justify-space-between align-center"
@@ -370,19 +391,6 @@
 				</div>
 			</v-card>
 		</v-dialog>
-		<!-- If there is no reviews show this -->
-		<div v-if="!hasReview" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 80vh">
-			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
-				<v-img
-					:width="300"
-					cover
-					src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/review-empty-box.png"
-					style="filter: grayscale(100%) brightness(100%)"
-				></v-img>
-				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">All your reviews will show here</h2>
-				<p style="color: #969696; font-size: 16px; font-weight: 500">Capture high-quality product reviews foryour store</p>
-			</v-sheet>
-		</div>
 	</v-container>
 </template>
 
@@ -442,13 +450,17 @@ import { vendorUseApi } from "~/composables/vendorApi";
 		}
 		})
 		watch(() => selectedPage.value, async () => {
+			if (vendor.value.vendor_details.review_count > 0){
 			await getVendorReview()
+		}
 		});
 		watch(() => formattedDate.value, async (newval) => {
 			if (!newval){
 				return 
 			}
+			if (vendor.value.vendor_details.review_count > 0){
 			await getVendorReview()
+		}
 		});
 		async function setReview(stats){
 			status.value = stats

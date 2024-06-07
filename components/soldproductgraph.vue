@@ -9,10 +9,7 @@ const props = defineProps({
         required: true
     }
 })
-const series = ref([
-		{ name: 'Revenue Growth',
-        data: Array(7).fill(0),}
-])
+const series = ref(updateSeries())
 
 
 const chartOptions =ref(

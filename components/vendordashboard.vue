@@ -79,7 +79,7 @@ color: #969696;">vs last 7 days</p>
 
 <v-row class="py-6">
     <v-col cols="12" lg="6">
-        <v-card  class="mx-auto cardStyle" width="100%" style=""  flat >
+        <v-card  class="mx-auto cardStyle" width="100%" min-height="450px" style=""  flat >
            <h4 class="mb-2 timernum d-flex align-center text-left">Revenue Growth <span class="ml-2 lightText">(EUR)</span></h4> 
            <p class="lightText2">Revenue growth analytics of the week </p>
            <!-- <revenuegraph /> -->

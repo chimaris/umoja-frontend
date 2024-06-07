@@ -418,6 +418,7 @@ import { ref, computed, onMounted, onBeforeUnmount } from 'vue';
 import {useVendorProductStore} from '~/stores/vendorProducts'
 import Variants from './variants.vue'
 import {useRoute} from 'vue-router'
+import { emitEvent } from '~/utils/eventBus';
 
 
 
@@ -709,6 +710,7 @@ export default {
 			this.sizeOptions = [],
 			this.styleOptions = [],
 			this.materialOptions = [],
+			emitEvent('product-updated');
 			this.$router.push('/vendor/dashboard/Products');
 			
 		}

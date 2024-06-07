@@ -1,5 +1,5 @@
 <template>
-    <apexchart :key="$route.fullPath" type="line"  color="green" :options="chartOptions3" :series="series3"></apexchart>
+    <apexchart height="450px" :key="$route.fullPath" type="line"  color="green" :options="chartOptions3" :series="series3"></apexchart>
 </template>
 <script setup>
 import {ref} from 'vue'
@@ -31,7 +31,6 @@ function updateSeries() {
 const chartOptions3 =ref(
     {
 				chart: {
-				height: 300,
 				type: 'line'
 				},
 				xaxis: {
