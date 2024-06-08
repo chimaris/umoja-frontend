@@ -192,7 +192,15 @@
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
 					<div>
-						<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> Setup </v-btn>
+						<v-btn
+							@click="localDeliveryModal = true"
+							style="border: 1px solid #e5e5e5"
+							variant="outlined"
+							size="default"
+							class="ml-4 menubar text-grey-darken-3"
+						>
+							Setup
+						</v-btn>
 					</div>
 				</div>
 			</v-card>
@@ -204,7 +212,15 @@
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
 					<div>
-						<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> Setup </v-btn>
+						<v-btn
+							@click="localPickupModal = true"
+							style="border: 1px solid #e5e5e5"
+							variant="outlined"
+							size="default"
+							class="ml-4 menubar text-grey-darken-3"
+						>
+							Setup
+						</v-btn>
 					</div>
 				</div>
 			</v-card>
@@ -502,7 +518,35 @@
 						<p style="color: #1273eb">See more rates</p>
 					</v-col>
 					<v-col>
-						<VDatePicker v-model.range="range" mode="dateTime" />
+						<v-card flat>
+							<v-menu
+								ref="menu"
+								v-model="menu"
+								:close-on-content-click="false"
+								:nudge-right="40"
+								transition="scale-transition"
+								offset-y
+								min-width="auto"
+							>
+								<template v-slot:activator="{ on, attrs }">
+									<v-text-field
+										v-bind="attrs"
+										v-on="on"
+										:value="formattedDate"
+										label="Select Date Range"
+										outlined
+										dense
+										icon-color="#2C6E63"
+										append-inner-icon="mdi mdi-calendar"
+										readonly
+										@click:append-inner="openMenu"
+									></v-text-field>
+								</template>
+								<v-card>
+									<VDatePicker v-model="dateRange" mode="range" @change="updateDate" />
+								</v-card>
+							</v-menu>
+						</v-card>
 					</v-col>
 				</v-row>
 				<v-row style="font-size: 16px; font-weight: 500; color: #333">
@@ -568,17 +612,154 @@
 			</div>
 		</v-sheet>
 	</v-dialog>
+	<v-dialog width="auto" v-model="localDeliveryModal">
+		<v-sheet width="100vw" max-width="669px" class="cardStyle px-0">
+			<div class="px-6 d-flex justify-space-between">
+				<div class="d-flex align-center">
+					<v-avatar size="70" color="#EDEDED"><v-icon icon="mdi mdi-account-plus"></v-icon></v-avatar>
+					<div class="mx-4">
+						<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Local Delivery</p>
+						<p style="color: #969696; font-size: 16px; font-weight: 500; line-height: 20px; letter-spacing: -0.16px" class="mt-2">
+							Enter office address for local delivery
+						</p>
+					</div>
+				</div>
+				<v-icon @click="localDeliveryModal = false" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
+			</div>
+			<v-divider class="my-4"></v-divider>
+
+			<div class="px-7">
+				<p class="inputLabel">Company</p>
+				<v-text-field placeholder="Company" density="comfortable"> </v-text-field>
+
+				<p class="inputLabel">Country/region</p>
+				<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Country/region" density="comfortable"> </v-select>
+
+				<p class="inputLabel">Address</p>
+
+				<v-text-field placeholder="Enter customer address" density="comfortable"> </v-text-field>
+
+				<p class="inputLabel">Apartment, suite, etc</p>
+				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
+			</div>
+			<div class="px-5">
+				<v-row class="mt-3">
+					<v-col>
+						<p class="inputLabel">City</p>
+						<v-text-field placeholder="Enter city" density="comfortable"> </v-text-field
+					></v-col>
+					<v-col>
+						<p class="inputLabel">State</p>
+						<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"> </v-select>
+					</v-col>
+					<v-col>
+						<p class="inputLabel">Zipcode</p>
+
+						<v-text-field placeholder="Enter last name" density="comfortable"> </v-text-field
+					></v-col>
+				</v-row>
+
+				<p class="inputLabel">Phone</p>
+				<v-text-field append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+
+				<div class="py-8">
+					<v-row>
+						<v-col cols="6"
+							><v-btn size="large" style="border: 1px solid #e5e5e5" flat block>
+								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
+							></v-col
+						>
+						<v-col cols="6">
+							<v-btn size="large" color="green" flat block>
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save</span></v-btn
+							></v-col
+						>
+					</v-row>
+				</div>
+			</div>
+		</v-sheet>
+	</v-dialog>
+	<v-dialog width="auto" v-model="localPickupModal">
+		<v-sheet width="100vw" max-width="669px" class="cardStyle px-0">
+			<div class="px-6 d-flex justify-space-between">
+				<div class="d-flex align-center">
+					<v-avatar size="70" color="#EDEDED"><v-icon icon="mdi mdi-account-plus"></v-icon></v-avatar>
+					<div class="mx-4">
+						<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Local Pickups</p>
+						<p style="color: #969696; font-size: 16px; font-weight: 500; line-height: 20px; letter-spacing: -0.16px" class="mt-2">
+							Enter office address for local pickups
+						</p>
+					</div>
+				</div>
+				<v-icon @click="localPickupModal = false" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
+			</div>
+			<v-divider class="my-4"></v-divider>
+
+			<div class="px-7">
+				<p class="inputLabel">Company</p>
+				<v-text-field placeholder="Company" density="comfortable"> </v-text-field>
+
+				<p class="inputLabel">Country/region</p>
+				<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Country/region" density="comfortable"> </v-select>
+
+				<p class="inputLabel">Address</p>
+
+				<v-text-field placeholder="Enter customer address" density="comfortable"> </v-text-field>
+
+				<p class="inputLabel">Apartment, suite, etc</p>
+				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
+			</div>
+			<div class="px-5">
+				<v-row class="mt-3">
+					<v-col>
+						<p class="inputLabel">City</p>
+						<v-text-field placeholder="Enter city" density="comfortable"> </v-text-field
+					></v-col>
+					<v-col>
+						<p class="inputLabel">State</p>
+						<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"> </v-select>
+					</v-col>
+					<v-col>
+						<p class="inputLabel">Zipcode</p>
+
+						<v-text-field placeholder="Enter last name" density="comfortable"> </v-text-field
+					></v-col>
+				</v-row>
+
+				<p class="inputLabel">Phone</p>
+				<v-text-field append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+
+				<div class="py-8">
+					<v-row>
+						<v-col cols="6"
+							><v-btn size="large" style="border: 1px solid #e5e5e5" flat block>
+								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
+							></v-col
+						>
+						<v-col cols="6">
+							<v-btn size="large" color="green" flat block>
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save</span></v-btn
+							></v-col
+						>
+					</v-row>
+				</div>
+			</div>
+		</v-sheet>
+	</v-dialog>
 </template>
 
 <script>
 export default {
 	data() {
 		return {
+			localDeliveryModal: false,
+			localPickupModal: false,
 			selected: null,
 			savePackageModal: false,
 			printSlipModal: false,
 			deliveryDateModal: false,
-			range: null,
+			menu: false,
+			dateRange: { start: new Date(), end: new Date() },
 			items: [
 				{
 					value: "umoja-logistics",
@@ -601,6 +782,22 @@ export default {
 		computedLabel() {
 			return this.selected ? "" : "Select Shipping Method";
 		},
+		formattedDate() {
+			const options = { year: "numeric", month: "long", day: "numeric" };
+			const start = this.dateRange.start.toLocaleDateString(undefined, options);
+			const end = this.dateRange.end.toLocaleDateString(undefined, options);
+			return `${start} - ${end}`;
+		},
+	},
+
+	methods: {
+		updateDate(value) {
+			this.dateRange = value;
+			this.menu = false;
+		},
+		openMenu() {
+			this.menu = true;
+		},
 	},
 };
 </script>
@@ -610,5 +807,8 @@ export default {
 	font-size: 14px;
 	font-weight: 500;
 	color: #333;
+}
+.v-text-field {
+	cursor: pointer;
 }
 </style>
