@@ -2,7 +2,7 @@
 	<Header2 :maxwidth="'1200px'" />
 	<div class="pt-12" id="topper" style="background: #fdf5e7">
 		<v-container style="max-width: 1200px" class="mt-4">
-			<v-row class="pb-6">
+			<v-row class="pb-6" >
 				<v-col cols="12" lg="7">
 					<p
 						:style="{
@@ -54,7 +54,7 @@
 				</v-col>
 			</v-row>
 		</v-container>
-		<div class="d-flex align-center justify-center" style="position: relative; overflow: hidden">
+		<div class="d-flex align-center justify-center" style="position: relative; overflow-y: hidden" :style="{'overflow-x': $vuetify.display.mobile ? 'scroll': 'hidden' }">
 			<div
 				style="position: absolute; top: 0; z-index: 99; width: 100%; height: 100px; background: linear-gradient(to bottom, #fdf5e7, transparent)"
 			></div>
@@ -178,7 +178,7 @@
 					<v-img
 						cover
 						class="heroimg"
-						@click="$router.push('/fashion')"
+						@click="$router.push('/category/fashion')"
 						style="cursor: pointer; height: calc(100% - 3px); position: relative; border-radius: 15px"
 						width="100%"
 						lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529528/rectangle-64_zmh8cd.png"
@@ -210,7 +210,7 @@
 					<v-row>
 						<v-col cols="12" md="6">
 							<v-img
-								@click="$router.push('/home decoration')"
+								@click="$router.push('/category/home decoration')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
@@ -242,7 +242,7 @@
 						</v-col>
 						<v-col cols="12" md="6">
 							<v-img
-								@click="$router.push('/cosmetics')"
+								@click="$router.push('/category/cosmetics')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
@@ -280,7 +280,7 @@
 						</v-col>
 						<v-col cols="12">
 							<v-img
-								@click="$router.push('/art')"
+								@click="$router.push('/category/art')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
@@ -561,7 +561,7 @@ import { gsap, Bounce, Back, CSSPlugin } from "gsap";
 import { useTutorialStore } from "~/stores/tutorialStore";
 import { Howl, Howler } from "howler";
 import { useProductStore } from "~/stores/productStore";
-
+import { getCloudinaryImageUrl } from "~/utils/cloudinary";
 export default {
 	data() {
 		return {
@@ -829,27 +829,27 @@ export default {
 			points: [
 				{
 					// icon: "cart",
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1716231082/umoja/cartIcon.svg",
+					icon: getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716231082/umoja/cartIcon.svg', 60),
 					title: "Umoja Delivery",
 					body: "Get free delivery for every order above $20",
 				},
 				{
 					// icon: "history",
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1716230312/umoja/calender.svg",
+					icon: getCloudinaryImageUrl("https://res.cloudinary.com/payhospi/image/upload/v1716230312/umoja/calender.svg", 60),
 
 					title: "90 Days Return",
 					body: "Return within 90 days of receiving your order.",
 				},
 				{
 					//icon: "credit-card",
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1716231343/umoja/credit-card.svg",
+					icon: getCloudinaryImageUrl("https://res.cloudinary.com/payhospi/image/upload/v1716231343/umoja/credit-card.svg", 60),
 
 					title: "Secure Payment",
 					body: "100% secure payment. Get easy support anytime",
 				},
 				{
 					//icon: "face-agent",
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1716231241/umoja/support-icon.svg",
+					icon: getCloudinaryImageUrl("https://res.cloudinary.com/payhospi/image/upload/v1716231241/umoja/support-icon.svg", 60),
 
 					title: "24/7 Online Support",
 					body: "100% secure payment. Get easy support anytime",
@@ -1132,3 +1132,17 @@ export default {
 	},
 };
 </script>
+<style scoped>
+::-webkit-scrollbar {
+    width: 10px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #A8A8A8; /* Customize the color */
+    border-radius: 10px;
+    background-clip: padding-box;
+}
+
+
+</style>

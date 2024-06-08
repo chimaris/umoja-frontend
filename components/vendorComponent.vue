@@ -12,7 +12,6 @@
 				<v-img eager class="bg-grey-lighten-2" cover style="border-radius: 16px" width="100%" height="237" :src="item.vendorImage"> </v-img>
 			</v-avatar>
 			<p
-				@click="$router.push('/vendor_page')"
 				style="font-weight: 600; line-height: normal; cursor: pointer; color: #000000"
 				:style="{ fontSize: $vuetify.display.mobile ? '16px' : '20px' }"
 				class="mt-0 mt-md-4"
@@ -51,7 +50,6 @@
 		</div>
 
 		<v-btn
-			to="/vendor_page"
 			variant="outlined"
 			class="bizbtn mt-8"
 			style="border: 0.66px solid #ced2d6; color: #1a1d1f; font-size: 12px; font-weight: 600; line-height: 13.11px"

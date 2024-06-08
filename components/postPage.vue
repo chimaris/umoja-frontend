@@ -9,7 +9,7 @@
 						</p>
 						<v-btn @click="$router.push('/vendor/dashboard/Posts')" rounded="xl" color="#FFFFFF" height="44" style="width: 225px; padding: 10px 20px">
 							Make a post now
-							<v-img width="24" height="24" src="https://res.cloudinary.com/payhospi/image/upload/v1714745945/umoja/star_outlined.svg"></v-img>
+							<v-img width="24" height="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1714745945/umoja/star_outlined.svg', 40)"></v-img>
 						</v-btn>
 					</div>
 				</div>
@@ -19,7 +19,7 @@
 			</v-col>
 		</v-row>
 	</div>
-	<v-container style="max-width: 1400px; width: 100%">
+	<v-container style="max-width: 1400px; width: 100%; position: sticky; z-index: 99;" :style="{top: $vuetify.display.mobile ? '31px': '16px'  }">
 		<div class="align-center justify-space-between d-flex py-5 py-md-10">
 			<div>
 				<p :style="{ fontSize: $vuetify.display.mobile ? '20px' : '32px' }" style="font-weight: 600; line-height: 40.16px">Posts</p>
@@ -40,7 +40,7 @@
 						<div class="d-flex justify-space-between w-25 w-100 h-100 align-center">
 							<div class="d-flex align-center">
 								<v-avatar size="30.88" class="mr-md-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+									><v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png', 60)"></v-img
 								></v-avatar>
 								<span class="mr-2 d-none d-md-block" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
 									{{ country }}
@@ -89,7 +89,7 @@
 					<div class="align-center justify-space-between d-flex">
 						<div class="mb-4 d-flex">
 							<v-avatar size="45">
-								<v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img>
+								<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png', 80)"></v-img>
 							</v-avatar>
 
 							<div class="pl-2" style="min-width: 0">
@@ -129,9 +129,10 @@
 import { ref, onMounted, computed } from "vue";
 import { fetchAllPosts } from "~/composables/usePost";
 import { useUserStore } from "~/stores/userStore";
-
+import { getCloudinaryImageUrl } from '~/utils/cloudinary';
 
 const likedPosts = ref([])
+const page = ref(1)
 const userStore = useUserStore();
 const availablePosts = computed(() => userStore.allPosts);
 const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg");
@@ -193,7 +194,10 @@ const africanCountries = [
 				"Zambia",
 				"Zimbabwe",
 			]
-
+onBeforeMount(async () => {
+	userStore.allPosts = []
+	await fetchAllPosts(page.value)
+})
 onMounted(async () => {
 	if (userStore.isLoggedIn){
 		for (const post of availablePosts.value) {
@@ -203,14 +207,12 @@ onMounted(async () => {
 });
 
 async function loadPost(){
-	if (userStore.currentPage == userStore.lastPage && userStore.postPage > 1){
-		userStore.postPage = userStore.postPage - 1;
-		await fetchAllPosts(userStore.postPage)
+	if (userStore.currentPage == userStore.lastPage){
 		return 
 	}
 	if (userStore.currentPage < userStore.lastPage){
-		userStore.postPage = userStore.postPage + 1;
-		await fetchAllPosts(userStore.postPage)
+		page.value ++;
+		await fetchAllPosts(page.value)
 		return
 	}
 }

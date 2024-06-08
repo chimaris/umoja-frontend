@@ -10,7 +10,8 @@ export const fetchAllPosts = async (page) => {
             url: `allposts/?page=${page}`,
             method: 'GET'
         });
-        userStore.allPosts = response.data.data
+        const data = response.data.data
+        userStore.allPosts = [...userStore.allPosts, ...data]
         userStore.currentPage = response.data.meta.current_page
         userStore.lastPage = response.data.meta.last_page
         return 
@@ -29,7 +30,8 @@ export const fetchAllArticle = async (page) => {
             url: `allarticles/?page=${page}`,
             method: 'GET'
         });
-        userStore.allArticles = response.data.data
+        const data = response.data.data
+        userStore.allArticles = [...userStore.allArticles, ...data]
         userStore.artCurrentPage = response.data.meta.current_page
         userStore.artLastPage = response.data.meta.last_page
         return 

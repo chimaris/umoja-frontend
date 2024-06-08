@@ -94,7 +94,7 @@
 					</v-row>
 				</div>
 			</v-col>
-			<v-divider style="margin-top: 11px" vertical="" class="" inset></v-divider>
+			<v-divider style="margin-top: 11px" vertical inset></v-divider>
 			<v-col cols="12" lg="4">
 				<div class="py-5 px-3">
 					<v-avatar size="60" class="mb-12"

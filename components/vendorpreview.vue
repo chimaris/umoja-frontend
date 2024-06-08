@@ -234,7 +234,7 @@ import ColorThief from "colorthief";
 import { ref, onMounted, computed } from "vue";
 import { useCreateStore } from "~/stores/createPostStore";
 import { useVendorProductStore } from "~/stores/vendorProducts";
-import Compressor from "compressorjs";
+import imageCompression from 'browser-image-compression';
 import axios from "axios";
 import emojiFlags from "emoji-flags";
 
@@ -251,65 +251,62 @@ export default {
 			ctx.emit("changePage", x);
 		};
 
-		async function upLoadFile1(event) {
-			coverLoading.value = true;
-			const file = event.target.files[0];
-			if (!file) {
-				coverLoading.value = false;
-				return;
-			}
+async function upLoadFile1(event) {
+    coverLoading.value = true;
+    const file = event.target.files[0];
+    if (!file) {
+        coverLoading.value = false;
+        return;
+    }
 
-			const allowedFiles = [".png", ".jpeg", ".jpg"];
-			const fileExtension = file.name.split(".").pop().toLowerCase();
+    const allowedFiles = ['.png', '.jpeg', '.jpg'];
+    const fileExtension = file.name.split('.').pop().toLowerCase();
 
-			if (!allowedFiles.includes("." + fileExtension)) {
-				errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(", ");
-				coverLoading.value = false;
-				return;
-			}
+    if (!allowedFiles.includes('.' + fileExtension)) {
+        errorMessage.value = 'Please upload files having extensions: ' + allowedFiles.join(', ');
+        coverLoading.value = false;
+        return;
+    }
 
-			errorMessage.value = "";
+    errorMessage.value = '';
 
-			new Compressor(file, {
-				quality: 0.7, // Adjust the quality as needed
-				maxWidth: 1000, // Max width
-				maxHeight: 1000, // Max height
-				success: async (compressedFile) => {
-					// Make the success callback async
-					const formData = new FormData();
-					formData.append("cover_image", compressedFile);
+    const options = {
+        maxSizeMB: 1,
+        useWebWorker: true,
+    };
 
-					try {
-						const res = await axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload/cover_image", formData, {
-							headers: {
-								Authorization: `Bearer ${vendorStore.vendorToken}`,
-							},
-						});
-						const data = {
-							cover_image: res.data.cover_image,
-						};
-						if (res.data.cover_image) {
-							const response = await vendorStore.registerVendor(data);
-						}
-					} catch (error) {
-						console.error(error);
-						if (error.response) {
-							errorMessage.value = error.response.data.message || "An error occurred during file upload.";
-						} else if (error.request) {
-							errorMessage.value = "No response received from server. Please try again later.";
-						} else {
-							errorMessage.value = "An error occurred. Please try again later.";
-						}
-					} finally {
-						coverLoading.value = false;
-					}
-				},
-				error(err) {
-					errorMessage.value = err.message || "Failed to compress the image";
-					coverLoading.value = false;
-				},
-			});
-		}
+    try {
+        const compressedFile = await imageCompression(file, options);
+
+        const formData = new FormData();
+        formData.append('cover_image', compressedFile);
+
+        const res = await axios.post('https://umoja-production-9636.up.railway.app/api/vendor/upload/cover_image', formData, {
+            headers: {
+                Authorization: `Bearer ${useVendorStore().vendorToken}`,
+            },
+        });
+
+        const data = {
+            cover_image: res.data.cover_image,
+        };
+
+        if (res.data.cover_image) {
+            await useVendorStore().registerVendor(data);
+        }
+    } catch (error) {
+        console.error(error);
+        if (error.response) {
+            errorMessage.value = error.response.data.message || 'An error occurred during file upload.';
+        } else if (error.request) {
+            errorMessage.value = 'No response received from server. Please try again later.';
+        } else {
+            errorMessage.value = 'An error occurred. Please try again later.';
+        }
+    } finally {
+        coverLoading.value = false;
+    }
+}
 
 		watch(
 			() => vendorStore.vendor,

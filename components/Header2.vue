@@ -146,7 +146,7 @@
 				</v-btn>
 			</v-list>
 
-			<template v-slot:append>
+			<template v-if="!isLoggedIn" v-slot:append>
 				<div class="pa-4 pb-16">
 					<v-btn block color="#333" size="large" variant="outlined" flat rounded="xl">
 						<span class="d-flex align-center" style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Login </span>
@@ -219,7 +219,7 @@ export default {
 			const loggedIn = this.isLoggedIn;
 			return [
 				{ title: "Buy", route: "/user/login", disabled: this.isLoggedIn },
-				{ title: "Sell", route: "/vendor/login", disabled: this.vendorStore.vendorIsLoggedIn },
+				{ title: "Sell", route: "/vendor/login", disabled: false },
 				{ title: "Discovery", route: "/discovery_page", disabled: false },
 				{ title: "Market Place", route: "/market_place", disabled: false },
 				{ title: "About Us", route: "/about/*", disabled: false },

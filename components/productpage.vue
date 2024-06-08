@@ -39,7 +39,7 @@
 										cover
 										width = "100%"
 										height="349px"
-										:src="getCloudinaryImageUrl(n, 2000)"
+										:src="getCloudinaryImageUrl(n, 3000)"
 									>
 									</v-carousel-item>
 									<v-carousel-item v-else :value="n" v-for="n in 4" :key="n" cover height="349px" :src="getCloudinaryImageUrl(product?.photo, 2000)"> </v-carousel-item>
@@ -738,7 +738,7 @@ export default {
 				{
 					title: this.product?.category_name,
 					disabled: false,
-					href: `/${this.product?.category_name}`,
+					href: `/category/${this.product?.category_name}`,
 				},
 				{
 					title: this.product?.name,

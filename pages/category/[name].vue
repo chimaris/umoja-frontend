@@ -42,7 +42,7 @@
 		:maxwidth="'1200px'"
 		:showVendor="true"
 		:title="databank.postadrow.title"
-		:items="databank.postadrow.items"
+		:items="products"
 	/>
 
 	<PopularTwoRow
@@ -66,14 +66,16 @@
 			:maxwidth="'1200px'"
 			:showVendor="true"
 			:title="databank.postcarorow.title"
-			:items="databank.postcarorow.items"
+			:items="products"
 		/>
 	</div>
-	<PostsRow style="margin-bottom: 100px" :maxwidth="'1200px'" :showVendor="true" :title="databank.postRow.title" :items="databank.postRow.items" />
+	<PostsRow style="margin-bottom: 100px" :maxwidth="'1200px'" :showVendor="true" :title="databank.postRow.title" :items="availablePosts" />
 	<Toplist style="margin-bottom: 100px" :maxwidth="'1200px'" :title="databank.toplist" />
 	<Mainfooter :maxwidth="'1200px'" />
 </template>
 <script>
+import { useProductStore } from '~/stores/productStore';
+import { useUserStore } from "~/stores/userStore";
 export default {
 	data() {
 		return {
@@ -81,6 +83,15 @@ export default {
 		};
 	},
 	computed: {
+		productStore(){
+			return useProductStore()
+		},
+		availablePosts(){
+			return useUserStore().allPosts?.slice(0, 10)
+		},
+		products(){
+			return this.productStore.products.hotDeals
+		},
 		databank() {
 			var fashion = {
 				toplist: "Vendors",
@@ -1340,7 +1351,7 @@ export default {
 			preloadImages();
 		},
 		selectCategory(n) {
-			this.$router.push("/" + n);
+			this.$router.push("/category/" + n);
 		},
 	},
 };

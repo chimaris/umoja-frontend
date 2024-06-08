@@ -1,9 +1,10 @@
 import {defineStore} from "pinia";
 import {vendorUseApi} from '~/composables/vendorApi'
-import Compressor from 'compressorjs';
+import imageCompression from 'browser-image-compression';
 import { useVendorStore } from "./vendorStore";
 import { likePost, unlikePost } from "~/composables/useLike";
 import { useUserStore } from "./userStore";
+
 
 export const useCreateStore = defineStore('post', {
     state: () => ({
@@ -32,6 +33,32 @@ export const useCreateStore = defineStore('post', {
     },
 
     actions: {
+      async getPost(){
+        const api = vendorUseApi()
+        try{
+          const res = await api({
+            url: "vendor/posts",
+            method: 'GET'
+          });
+          this.posts = res.data.data
+        }catch(error){
+          console.error(error)
+          return []
+        }
+      },
+      async getArticle(){
+        const api = vendorUseApi()
+        try{
+          const res = await api({
+            url: "vendor/articles",
+            method: 'GET'
+          });
+          this.posts = res.data.data
+        }catch(error){
+          console.error(error)
+          return []
+        }
+      },
       clearUser(){
         this.posts = []
         this.articles = []
@@ -93,20 +120,11 @@ export const useCreateStore = defineStore('post', {
               try {
                 if (imageData) {
                   const blob = imageData instanceof Blob ? imageData : await fetch(imageData).then(res => res.blob());
-                  
-                  const compressedImage = await new Promise((resolve, reject) => {
-                    new Compressor(blob, {
-                      quality: 1, // Adjust the quality for actual compression
-                      maxWidth: 1000,
-                      maxHeight: 600,
-                      success(result) {
-                        resolve(result);
-                      },
-                      error(err) {
-                        reject(err);
-                      }
-                    });
-                  });
+                  const options = {
+                    maxSizeMB: 1,
+                    useWebWorker: true
+                  };
+                  const compressedImage = await imageCompression(blob, options);
                   
                   const formData = new FormData();
                   formData.append('featured_img', compressedImage, 'compressed.jpg');
@@ -144,19 +162,11 @@ export const useCreateStore = defineStore('post', {
                 if (imageData) {
                   const blob = imageData instanceof Blob ? imageData : await fetch(imageData).then(res => res.blob());
                   
-                  const compressedImage = await new Promise((resolve, reject) => {
-                    new Compressor(blob, {
-                      quality: 0.9, // Adjust the quality for actual compression
-                      maxWidth: 1900,
-                      maxHeight: 1000,
-                      success(result) {
-                        resolve(result);
-                      },
-                      error(err) {
-                        reject(err);
-                      }
-                    });
-                  });
+                  const options = {
+                    maxSizeMB: 1,
+                    useWebWorker: true
+                  };
+                  const compressedImage = await imageCompression(blob, options);
                   
                   const formData = new FormData();
                   formData.append('cover_image', compressedImage, 'compressed.jpg');

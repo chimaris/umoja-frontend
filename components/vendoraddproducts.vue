@@ -467,46 +467,20 @@
 										</p>
 										<input style="display: none" id="product4" type="file" @change="handleFileInputChange($event, 4)" />
 									</div>
-									<div
-										v-else
-										class="d-flex justify-center align-center mt-2 pa-2 rounded-lg"
-										style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1"
-										@dragenter.prevent
-										@dragleave.prevent
-										@dragover.prevent
-										@drop.prevent="drop($event, 4)"
-									>
-										<div class="text-center">
-											<v-avatar size="41" class="mb-2" rounded="lg">
-												<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
-											</v-avatar>
-											<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
-											<p style="color: #333; font-size: 14px; font-weight: 400">
-												select
-												<v-label for="product4" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer"> click to browse </v-label>
-											</p>
-											<input style="display: none" id="product4" type="file" @change="handleFileInputChange($event, 4)" />
-										</div>
-									</div>
-								</v-col>
-							</v-row>
-							<p style="color: #969696; font-size: 12px; font-weight: 400" class="mt-4">
-								You need to add at least 4 images. Pay attention to the quality of the pictures you add, comply with background color standards.
-								Pictures must be in certain dimensions. Notice that the product shows all the details.
-							</p>
-						</v-sheet>
-						<p style="color: #b00020; font-size: 14px; margin-top: 20px">{{ pictureError }}</p>
-						<p style="color: #b00020; font-size: 14px; margin-top: 20px">{{ vendorProducts.pictureError }}</p>
-						<v-btn
-							type="submit"
-							class="my-3"
-							flat
-							style="background-color: #2c6e63; color: #fff; margin-top: 20px; font-size: 16px; font-weight: 600; padding: 16px 34px"
-							size="x-large"
-						>
-							<span class="mr-4">Save and continue</span>
-							<v-progress-circular v-if="vendorProducts.loading" indeterminate :width="2" :size="25"></v-progress-circular>
-						</v-btn>
+								</div>
+							</v-col>
+						</v-row>
+						<p style="color: #969696; font-size: 12px; font-weight: 400" class="mt-4">
+							You need to add at least 4 images. Pay attention to the quality of the pictures you add, comply with background color standards.
+							Pictures must be in certain dimensions. Notice that the product shows all the details.
+						</p>
+					</v-sheet>
+					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureError}}</p>
+					<p style="color: #B00020; font-size: 14px; margin-top: 20px">{{pictureErrors}}</p>
+					<v-btn type="submit" class="my-3" flat style="background-color: #2c6e63; color: #fff; margin-top: 20px; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
+						<span class="mr-4">Save and continue</span>
+						<v-progress-circular v-if="loading" indeterminate :width="2" :size="25"></v-progress-circular>
+					</v-btn>
 					</v-form>
 				</v-window-item>
 				<v-window-item value="Inventory">
@@ -881,18 +855,19 @@
 	</v-container>
 </template>
 <script>
-import { Editor, EditorContent } from "@tiptap/vue-3";
-import { formattedPrice } from "~/utils/price";
-import StarterKit from "@tiptap/starter-kit";
-import TextAlign from "@tiptap/extension-text-align";
-import Underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
-import { inputRules, numRules } from "~/utils/formrules";
-import { ref, computed, onMounted, watchEffect } from "vue";
-import { useVendorProductStore } from "~/stores/vendorProducts";
-import { vendorUseApi } from "~/composables/vendorApi";
-import Compressor from "compressorjs";
-import { fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories } from "~/composables/useCategories";
+import { Editor, EditorContent } from '@tiptap/vue-3'
+import {formattedPrice} from '~/utils/price'
+import StarterKit from '@tiptap/starter-kit'
+import TextAlign from '@tiptap/extension-text-align'
+import Underline from '@tiptap/extension-underline'
+import Link from '@tiptap/extension-link'
+import {inputRules, numRules} from '~/utils/formrules'
+import { ref, computed, onMounted, watchEffect } from 'vue';
+import {useVendorProductStore} from '~/stores/vendorProducts'
+import {vendorUseApi} from '~/composables/vendorApi'
+import Compressor from 'compressorjs';
+import { handlephotoUpload, loading, pictureErrors } from '~/composables/uploadProducts'
+import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
 
 export default {
 	setup() {
@@ -1225,7 +1200,7 @@ export default {
 		async savePictures() {
 			if (this.imagePreviews.length >= 4) {
 				this.pictureError = "";
-				const response = await this.vendorProducts.handlephotoUpload(this.imagePreviews, this.pictureError);
+				const response = await handlephotoUpload(this.imagePreviews, this.pictureError);
 				if (response) {
 					this.nextTab();
 				}

@@ -1,6 +1,6 @@
 <template>
 	<v-container height="100%" class="mx-auto px-5" width="100%" style="overflow: hidden; padding-bottom: 200px; max-width: 1330px" flat>
-		<div v-if="vendor.vendor_details?.product_count > 0" class="d-flex align-center justify-space-between">
+		<div class="d-flex align-center justify-space-between">
 			<div class="d-flex w-100 align-center">
 				<div class="d-flex align-center">
 					<v-text-field
@@ -66,7 +66,7 @@
 			</div>
 		</div>
 
-		<div v-if="vendor.vendor_details?.product_count > 0" class="mt-5">
+		<div class="mt-5">
 			<v-tabs v-model="tab" class="orders" color="green">
 				<v-tab @click.stop="sort(item.prop, item.value)" v-for="item in tabs" :key="item" :value="item" class="d-flex text-capitalize align-center">
 					{{ item.name }}
@@ -78,17 +78,16 @@
 					color="green"
 				indeterminate
 				></v-progress-circular>
-			</div>
+				</div>
 			<v-table v-if="filteredProductsData.length > 0 && !productLoading"
-				style="    height: 80%; !important;
-   overflow: scroll;"
+				style="    height: 80% !important; overflow: scroll;"
 			>
 				<thead >
 					<tr style="background: #f8f8f8; border-radius: 6px" class="rounded-lg">
 						<th style="width: 50px" class="font-weight-medium text-left">
 							<v-checkbox hide-details></v-checkbox>
 						</th>
-						<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left">Product Details</th>
+						<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left ">Product Details</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Category</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Options/Colors</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Status</th>
@@ -99,7 +98,7 @@
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium"></th>
 					</tr>
 				</thead>
-				<tbody >
+				<tbody  >
 					<!-- @click="chosen = item.sn" -->
 					<tr :style="chosen == item.id ? 'background:#DFDFDF' : ''" v-for="item in filteredProductsData" :key="item.id">
 						<td class="text-grey-lighten-1 pl-4 px-1">
@@ -120,7 +119,7 @@
 												<p class="mb-1" style="font-weight: 600; white-space: nowrap; font-size: 16px !important; line-height: 20px; color: #333333">
 													{{ item.name }}
 												</p>
-												<p style="font-weight: 400; max-width: 300px; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; line-height: 18px; color: #969696" class="text-truncate">
+												<p style="font-weight: 400; max-width: 200px; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; line-height: 18px; color: #969696" class="text-truncate">
 													{{ item.description }}
 												</p>
 											</div>
@@ -149,9 +148,6 @@
 						</td>
 
 						<td style="height: 100px" class="align-center d-flex px-1">
-							<v-chip style="color: #333; font-size: 10px; font-weight: 500" rounded="lg" class="" size="small" color="grey" variant="tonal">
-								{{item.category_name}}
-							</v-chip>
 							<v-chip style="color: #333; font-size: 10px; font-weight: 500" rounded="lg" class="mx-2" size="small" color="grey" variant="tonal">
 								{{ item.sub_category_name }}
 							</v-chip>
@@ -248,7 +244,42 @@
 				</v-dialog>
 				
 			</v-table>
-			<div v-if="filteredProductsData.length > 0 && !productLoading"
+
+			<div
+			v-if="!hasProduct"
+			class="d-flex flex-column justify-center align-center"
+			style="max-height: 100%; height: 90vh;"
+		>
+			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
+				<v-img
+					:width="300"
+					cover
+					src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/product-empty-box.png"
+					style="filter: grayscale(100%) brightness(100%)"
+				></v-img>
+				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Your products will show here</h2>
+				<p style="color: #969696; font-size: 16px; font-weight: 500">
+					This is where you'll fulfill orders, collect payments, and track order progress.
+				</p>
+				<div class="mt-10">
+					<v-btn class="mr-4" size="x-large" width="191" style="border: 1px solid #cecece; padding: 12px 20px" flat @click="choose('Import Product')">
+						<v-icon class="mr-2" icon="mdi mdi-tray-arrow-down"></v-icon>
+						<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 20px"> Import</span></v-btn
+					>
+					<v-btn
+						size="x-large"
+						width="191"
+						style="background-color: #2c6e63; color: #edf0ef; padding: 12px 20px"
+						flat
+						@click="choose('Add Products')"
+					>
+						<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
+						<span style="font-size: 16px; font-weight: 600; line-height: 20px"> Add product</span></v-btn
+					>
+				</div>
+			</v-sheet>
+			</div>
+			<div 
 				class="w-100 mt-4 d-flex justify-space-between align-center"
 				style="background-color: #f8f8f8; border: 1px solid #ededed; border-radius: 6px; padding: 10px 20px; height: 60px; overflow: hidden;"
 			>
@@ -280,41 +311,7 @@
 
 		</div>
 
-		<!-- If there is no Product show this -->
-		<div
-			v-if="vendor.vendor_details?.product_count == 0"
-			class="d-flex flex-column justify-center align-center"
-			style="max-height: 100%; height: 90vh; border: 1px solid #cecece; border-radius: 15px"
-		>
-			<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 450px">
-				<v-img
-					:width="300"
-					cover
-					src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/product-empty-box.png"
-					style="filter: grayscale(100%) brightness(100%)"
-				></v-img>
-				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Your products will show here</h2>
-				<p style="color: #969696; font-size: 16px; font-weight: 500">
-					This is where you'll fulfill orders, collect payments, and track order progress.
-				</p>
-				<div class="mt-10">
-					<v-btn class="mr-4" size="x-large" width="191" style="border: 1px solid #cecece; padding: 12px 20px" flat @click="choose('Import Product')">
-						<v-icon class="mr-2" icon="mdi mdi-tray-arrow-down"></v-icon>
-						<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 20px"> Import</span></v-btn
-					>
-					<v-btn
-						size="x-large"
-						width="191"
-						style="background-color: #2c6e63; color: #edf0ef; padding: 12px 20px"
-						flat
-						@click="choose('Add Products')"
-					>
-						<v-icon class="mr-2" icon="mdi mdi-plus"></v-icon>
-						<span style="font-size: 16px; font-weight: 600; line-height: 20px"> Add product</span></v-btn
-					>
-				</div>
-			</v-sheet>
-		</div>
+	
 		
 	<v-dialog v-model="vendorProducts.newProductAdded" max-width="1200">
 		<v-card style="width: 100%; border-radius: 5px; background-color: #EDF3F0; position: absolute; left: 170px; top: -300px">
@@ -365,17 +362,12 @@ export default {
 		const loading = ref(false)
 		const vendorStore = useVendorStore()
 		const vendor = ref(vendorStore.vendor)
+		const hasProduct = computed(() => vendor.value.vendor_details?.product_count > 0)
 	
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		}
 
-		watch(() => vendorStore.vendor, async (newval, oldval) => {
-			vendor.value = newval
-			if (newval && vendor.value.vendor_details?.product_count > 0){
-				await fetchFilteredProducts();
-			}
-		});
 		onEvent('product-updated', fetchFilteredProducts);
 		
 		onBeforeMount(async () => {
@@ -383,16 +375,12 @@ export default {
 				await fetchFilteredProducts();
 			}	
 		});
-		watch(() => tab.value, () => {
-			fetchFilteredProducts();
+		watch(() => [tab.value, selectedPage.value,searchQuery.value ], async() => {
+			if (hasProduct.value){
+				await fetchFilteredProducts();
+			}
 		});
 
-		watch(() => selectedPage.value, () => {
-			fetchFilteredProducts();
-		});
-		watch(() => searchQuery.value, () => {
-			fetchFilteredProducts();
-		});
 		const editProduct = (product) => {
 			choose('Edit Product')
 			useEditVendorStore().setCurrentProduct(product)
@@ -452,6 +440,7 @@ export default {
 			selectedPage,
 			editProduct,
 			tabs,
+			hasProduct,
 			filteredProductsData,
 			tab,
 			fetchFilteredProducts,

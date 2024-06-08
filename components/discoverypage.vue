@@ -172,7 +172,7 @@
 								<p>{{ productStore.searchError }}</p>
 							</div>
 							<v-row dense>
-								<v-col v-for="(n, i) in loadMore? items : items.slice(0, 10)" :key="i" cols="6" :md="3" :lg="24">
+								<v-col v-for="(n, i) in items" :key="i" cols="6" :md="3" :lg="24">
 									<product-component :item="n" :index="i" />
 								</v-col>
 							</v-row>
@@ -180,18 +180,19 @@
 								<v-btn
 									class="mt-10 mx-auto"
 									block
+									:style="{ cursor: hasReached ? 'not-allowed' :'', opacity: hasReached ? 0.5 : ''}"
 									color="#333"
 									size="large"
-									variant="outlined"
 									@click="load()"
+									flat
 									rounded="xl"
 									style="border: 1px solid #cecece; font-size: 14px; font-weight: 600"
 								>
 									<span class="mr-4"> Load More</span>
-										<v-progress-circular v-if="productStore.loadProduct" indeterminate :width="2" :size="20"></v-progress-circular>
+										<v-progress-circular v-if="loadProduct" indeterminate :width="2" :size="20"></v-progress-circular>
 								</v-btn>
 			</v-container>
-							<v-btn
+							<!-- <v-btn
 								block
 								class="d-flex d-md-none mt-8"
 								color="#333"
@@ -201,7 +202,7 @@
 								rounded="xl"
 							>
 								<span style="font-size: 14px">See All</span> <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
-							</v-btn>
+							</v-btn> -->
 						</v-sheet>
 					</v-col>
 				</v-row>
@@ -397,34 +398,43 @@ import { useUserStore } from "~/stores/userStore";
 import {getdateRegistered} from '~/utils/date'
 import { countries, countryCodes } from "~/utils/countryapi";
 import emojiFlags from 'emoji-flags';
+import {discoverPageProducts, loadProduct} from '~/composables/useProducts'
 
 export default {
 	setup(){
 		const userStore = useUserStore();
 		const availablePosts = computed(() => userStore.allPosts.slice(0, 10));
 		const availableArticle = computed(() => userStore.allArticles)
-		const loadMore = ref(false)
 		const productStore = useProductStore()
-		const items = ref(productStore.products.popular)
-
-		const load = () => {
-			if (loadMore.value){
+		const items = computed(() => productStore.products.popular)
+		const page = ref(1)
+		const hasReached = computed(() => {
+			return productStore.discoveryCurrentPage == productStore.discoveryLastPage
+		})
+		async function load(){
+			if (productStore.discoveryCurrentPage == productStore.discoveryLastPage ){
+				return 
+			}
+			if (productStore.discoveryCurrentPage < productStore.discoveryLastPage){
+				page.value ++;
+				await discoverPageProducts(page.value)
 				return
 			}
-			if (!loadMore.value){
-				loadMore.value = true
-			}
 		}
-
-
+		onBeforeMount(async () => {
+			productStore.products.popular  = []
+			await discoverPageProducts(page.value)
+		})
+		
 		return{
 			userStore,
 			availablePosts,
 			availableArticle,
-			loadMore,
 			items,
 			productStore,
-			load
+			page,
+			load,
+			hasReached
 		}
 	},
 	data() {
@@ -512,9 +522,6 @@ export default {
 			],
 		};
 	},
-	async mounted() {
-		await this.productStore.discoverPageProducts()
-	},
 	computed: {
 		buttons() {
 			return [
@@ -555,19 +562,6 @@ export default {
 				return emojiFlags.countryCode(countryCodes[country]).emoji;
 			}
 			
-		},
-		async loadProduct(){
-			console.log(this.productStore.discoveryCurrentPage,this.productStore.discoveryLastPage, this.productStore.discoveryPage )
-			if (this.productStore.discoveryCurrentPage  == this.productStore.discoveryLastPage && this.productStore.discoveryPage > 1){
-				this.productStore.discoveryPage = this.productStore.discoveryPage - 1;
-				await this.productStore.discoverPageProducts()
-				return 
-			}
-			if (this.productStore.discoveryCurrentPage < this.productStore.discoveryLastPage){
-				this.productStore.discoveryPage = this.productStore.discoveryPage + 1;
-				await this.productStore.discoverPageProducts()
-				return
-			}
 		},
 		selectCountry(item) {
 			this.country = item;
