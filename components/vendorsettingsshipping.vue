@@ -502,8 +502,7 @@
 						<p style="color: #1273eb">See more rates</p>
 					</v-col>
 					<v-col>
-						<p>Within Jan 1st to Jan 10th</p>
-						<p>8 business days</p>
+						<VDatePicker v-model.range="range" mode="dateTime" />
 					</v-col>
 				</v-row>
 				<v-row style="font-size: 16px; font-weight: 500; color: #333">
@@ -579,6 +578,7 @@ export default {
 			savePackageModal: false,
 			printSlipModal: false,
 			deliveryDateModal: false,
+			range: null,
 			items: [
 				{
 					value: "umoja-logistics",
