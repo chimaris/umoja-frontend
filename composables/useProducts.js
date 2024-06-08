@@ -24,3 +24,16 @@ export const discoverPageProducts = async(page) => {
     }
    
   }
+  export const productDetail = async(id) => {
+    const api = useApi()
+   try {
+      const res = await api({
+        url: `vendor/products/${id}/show_product`,
+        method: 'GET'
+      });
+    return res.data.data
+   }catch(err){
+    console.error(err)
+    return null
+   }
+  }

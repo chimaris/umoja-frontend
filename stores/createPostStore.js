@@ -53,7 +53,7 @@ export const useCreateStore = defineStore('post', {
             url: "vendor/articles",
             method: 'GET'
           });
-          this.posts = res.data.data
+          this.articles = res.data.data
         }catch(error){
           console.error(error)
           return []
