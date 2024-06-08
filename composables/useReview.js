@@ -22,6 +22,6 @@ export const getReview = async (id) => {
         return res.data.data
     }catch(error){
         console.error(error)
-        return false
+        return []
     }
 }

@@ -15,15 +15,14 @@
               <v-img cover v-if="vendor.vendor_details?.profile_photo" :src="vendor.vendor_details?.profile_photo"></v-img>
               <v-img cover v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
             </v-avatar>
-            <div class="text-left px-4">
+            <div class="text-left px-4" style="max-width: 150px">
             <p style="color: #1A1D1F; text-transform: capitalize;
-            font-weight: 600;
-            font-size: 16px;
-            line-height: 24px;"> {{vendor.vendor_details?.business_name}}</p>
-            <p style="font-weight: 500; text-transform: capitalize;
-            font-size: 12px;
+            font-weight: 600; text-overflow: ellipsis;
+            font-size: 16px; white-space: nowrap;
+            line-height: 24px;" class="text-truncate"> {{vendor.vendor_details?.business_name}}</p>
+            <p class="text-truncate" style="font-weight: 500; text-transform: capitalize;
+            font-size: 12px; white-space: nowrap;text-overflow: ellipsis;
             line-height: 18px;
-            display: flex;
             color: #596066;">{{ vendor.last_name }} {{ vendor.first_name }}</p>
             </div>
             <v-spacer></v-spacer>
