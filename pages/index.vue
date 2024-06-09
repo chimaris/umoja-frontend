@@ -62,7 +62,10 @@
 			<div
 				style="position: absolute; top: 0; z-index: 99; width: 100%; height: 100px; background: linear-gradient(to bottom, #fdf5e7, transparent)"
 			></div>
-			<div style="position: absolute; bottom: 0px; z-index: 99; width: 100%; height: 100px"></div>
+			<div
+				style="position: absolute; bottom: 0px; z-index: 99; width: 100%; height: 100px"
+				:style="{ background: $vuetify.display.mobile ? '' : 'linear-gradient(to bottom, transparent, #fff)' }"
+			></div>
 			<div id="img" style="width: 1442px" class="mx-auto">
 				<v-img
 					eager

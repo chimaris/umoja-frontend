@@ -673,13 +673,12 @@ export default {
 
 		};
 	},
-	props: ["product", "review"],
+	props: ["product", "loading", "review"],
 	components: {
 		EditorContent,
 	},
 	data() {
 		return {
-			loading: true,
 			posting: false,
 			editorContent: "",
 			rating: 0,
@@ -748,7 +747,6 @@ export default {
     },
   },
 	mounted() {
-		this.mockLoading()
 		this.editor = new Editor({
 			extensions: [
 				StarterKit,

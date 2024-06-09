@@ -39,7 +39,7 @@
 			</div>
 		</div>
 		<!-- For mobile View -->
-		<div class="d-block d-md-none">
+		<div class="d-block d-md-none px-3">
 			<v-row dense>
 				<v-col v-for="(n, i) in items" :key="i" cols="6" :md="6" :lg="3">
 					<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
