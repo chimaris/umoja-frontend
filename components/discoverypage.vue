@@ -173,7 +173,7 @@
 							</div>
 							<v-row dense>
 								<v-col v-for="(n, i) in items" :key="i" cols="6" :md="3" :lg="24">
-									<product-component :item="n" :index="i" />
+									<product-component :loading='loadProduct' :item="n" :index="i" />
 								</v-col>
 							</v-row>
 							<v-container style="max-width: 1400px">

@@ -11,7 +11,7 @@
         <v-sheet class="cardStyle d-flex flex-column" style="height: 100%;" >
             <div  class="d-flex mb-2 justify-space-between">
                 <v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large"  color="green"> <span style="font-size: 16.879px!important;
-            font-weight: 500;">Free Package</span></v-chip>
+            font-weight: 500;">Free Plan</span></v-chip>
             <v-icon size="30" color="#2C6E63" icon="mdi mdi-check-circle"></v-icon>
             </div>
             <p style="color:#333;
@@ -39,7 +39,7 @@
         <v-sheet class="cardStyle" style="opacity: 0.5;">
 <div  class="d-flex mb-2 justify-space-between">
     <v-chip flat variant="elevated" elevation="0" class="pa-5 px-6" size="large"  color="green"> <span style="font-size: 16.879px!important;
-font-weight: 500;">Business Package</span></v-chip>
+font-weight: 500;">Business Plan</span></v-chip>
 <v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
 
 </div>
@@ -233,7 +233,7 @@ const seePremium = ref(false)
         "Umoja business application",
         "Customer support & partnership",
         "Unlimited accounts",
-		"All features included in the Basic Package",
+		"All features included in the Basic Plan",
 		"Enhanced marketing and promotional tools, including featured listings and discounts",
 		"Advanced analytics and reporting for deeper insights into sales performance",
 		"Priority customer support with faster response times and dedicated account management",

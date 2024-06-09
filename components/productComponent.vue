@@ -3,10 +3,11 @@
 		max-width="290"
 		width="100%"
 		height="100%"
-		v-if="loaded"
+		v-if="!loading"
 		style="overflow: visible; background: transparent !important"
 		flat
-		class="bg-white parent-card rounded-lg mb-2 pa-1"
+		:style="{padding: $vuetify.display.mobile ? '0': '4px'}"
+		class="bg-white parent-card rounded-lg mb-2"
 	>
 		<v-img
 			class="rounded-lg bg-grey-lighten-5"
@@ -161,7 +162,7 @@ import emojiFlags from "emoji-flags";
 import { getCloudinaryImageUrl } from '~/utils/cloudinary';
 
 export default {
-	props: ["item", "short", "category", "cover", "index", "showVendor", "showdisco", "role"],
+	props: ["item", "loading", "short", "category", "cover", "index", "showVendor", "showdisco", "role"],
 	computed: {
 		likedStore() {
 			return useLikedStore();
@@ -190,14 +191,6 @@ export default {
 		short() {
 			return this.short ? this.short : false;
 		},
-	},
-	data() {
-		return {
-			loaded: false,
-		};
-	},
-	mounted() {
-		this.mockLoading();
 	},
 
 	methods: {
@@ -232,11 +225,6 @@ export default {
 			} else {
 				this.$router.push("/user/login");
 			}
-		},
-		mockLoading() {
-			setTimeout(() => {
-				this.loaded = true;
-			}, 1000);
 		},
 		toggleLike(item, index) {
 			this.likedStore.toggleLike(item, index);

@@ -60,7 +60,7 @@
 			:style="{ 'overflow-x': $vuetify.display.mobile ? 'scroll' : 'hidden' }"
 		>
 			<div
-				style="position: absolute; top: 0; z-index: 99; width: 100%; height: 100px; background: linear-gradient(to bottom, #fdf5e7, transparent)"
+				style="position: absolute; top: 0; z-index: 99; width: 100%; height: 100px;" :style="{background: $vuetify.display.mobile ? '' : 'linear-gradient(to bottom, #fdf5e7, transparent)'}"
 			></div>
 			<div
 				style="position: absolute; bottom: 0px; z-index: 99; width: 100%; height: 100px"
