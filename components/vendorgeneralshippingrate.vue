@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<span class="pa-5 d-flex align-center">
-			<v-icon class="mr-4" icon="mdi mdi-arrow-left"></v-icon>
+			<v-icon class="mr-4" icon="mdi mdi-arrow-left" @click="vendorStore.renderRate = false"></v-icon>
 			<p style="color: #000; font-size: 20px; font-weight: 600" class="">General Shipping Rates</p>
 		</span>
 		<v-divider></v-divider>
@@ -62,7 +62,7 @@
 											<v-icon icon="mdi mdi-logout"></v-icon> <span style="font-size: 14px; font-weight: 600"> Edit Zone </span>
 										</span>
 
-										<span class="pa-2" flat>
+										<span class="pa-2" flat style="color: #c20052">
 											<v-icon icon="mdi mdi-delete"></v-icon> <span style="font-size: 14px; font-weight: 600">Delete Zone </span>
 										</span>
 									</v-card>
@@ -135,7 +135,7 @@
 											<v-icon icon="mdi mdi-logout"></v-icon> <span style="font-size: 14px; font-weight: 600"> Edit Zone </span>
 										</span>
 
-										<span class="pa-2" flat>
+										<span class="pa-2" flat style="color: #c20052">
 											<v-icon icon="mdi mdi-delete"></v-icon> <span style="font-size: 14px; font-weight: 600">Delete Zone </span>
 										</span>
 									</v-card>
@@ -180,13 +180,29 @@
 				</v-card>
 			</v-card>
 		</div>
+		<div class="d-flex justify-end ga-4">
+			<v-btn size="default" style="border: 1px solid #e5e5e5" flat>
+				<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Discard</span></v-btn
+			>
+			<v-btn size="default" color="green" flat>
+				<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save</span></v-btn
+			>
+		</div>
 	</div>
 </template>
 
 <script>
+import { useVendorStore } from "~/stores/vendorStore";
+
 export default {
 	data() {
 		return {};
+	},
+	computed: {
+		vendorStore() {
+			console.log("Rate ", useVendorStore().renderRate);
+			return useVendorStore();
+		},
 	},
 };
 </script>

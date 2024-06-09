@@ -54,7 +54,12 @@
 							<vendorgeneralshippingrate />
 						</v-window-item>
 						<v-window-item value="Shipping and Delivery">
-							<Vendorsettingsshipping />
+							<template v-if="vendorStore.renderRate">
+								<vendorgeneralshippingrate />
+							</template>
+							<template v-else>
+								<Vendorsettingsshipping />
+							</template>
 						</v-window-item>
 					</v-window>
 				</v-col>

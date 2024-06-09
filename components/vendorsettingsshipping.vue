@@ -76,8 +76,8 @@
 									<span style="font-weight: 500; font-size: 16px; color: #969696">{{ item }}</span>
 								</span>
 							</div>
-							<v-btn class="" size="default" variant="text">
-								<v-icon class="" icon="fas fa-chevron-right"></v-icon>
+							<v-btn @click="vendorStore.renderRate = true" class="" size="default" variant="text">
+								<v-icon icon="fas fa-chevron-right"></v-icon>
 							</v-btn>
 						</div>
 					</div>
@@ -747,9 +747,11 @@
 			</div>
 		</v-sheet>
 	</v-dialog>
+
 </template>
 
 <script>
+import { useVendorStore } from "~/stores/vendorStore";
 export default {
 	data() {
 		return {
@@ -780,6 +782,10 @@ export default {
 		};
 	},
 	computed: {
+		vendorStore() {
+			console.log("Rate ", useVendorStore().renderRate);
+			return useVendorStore();
+		},
 		computedLabel() {
 			console.log(this.selected);
 			return this.selected ? "" : "Select Shipping Method";
