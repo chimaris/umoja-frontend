@@ -50,11 +50,16 @@
 						<v-window-item value="Account Details">
 							<Vendorsettingsaccount :vendor="vendor" />
 						</v-window-item>
-						<!-- <v-window-item value="Integrations">
-							<Vendorsettingsintegrations />
-						</v-window-item> -->
+						<v-window-item value="Integrations">
+							<vendorgeneralshippingrate />
+						</v-window-item>
 						<v-window-item value="Shipping and Delivery">
-							<Vendorsettingsshipping />
+							<template v-if="vendorStore.renderRate">
+								<vendorgeneralshippingrate />
+							</template>
+							<template v-else>
+								<Vendorsettingsshipping />
+							</template>
 						</v-window-item>
 					</v-window>
 				</v-col>
@@ -94,8 +99,10 @@ import { useUserStore } from "~/stores/userStore";
 import { useVendorStore } from "~/stores/vendorStore";
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
+import vendorgeneralshippingrate from "./vendorgeneralshippingrate.vue";
 
 export default {
+	components: { vendorgeneralshippingrate },
 	setup() {
 		const vendorStore = useVendorStore();
 		const vendor = ref(vendorStore.vendor);

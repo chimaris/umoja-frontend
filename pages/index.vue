@@ -2,7 +2,7 @@
 	<Header2 :maxwidth="'1200px'" />
 	<div class="pt-12" id="topper" style="background: #fdf5e7">
 		<v-container style="max-width: 1200px" class="mt-4">
-			<v-row class="pb-6" >
+			<v-row class="pb-6">
 				<v-col cols="12" lg="7">
 					<p
 						:style="{
@@ -54,12 +54,17 @@
 				</v-col>
 			</v-row>
 		</v-container>
-		<div class="d-flex align-center justify-center" style="position: relative; overflow-y: hidden" :style="{'overflow-x': $vuetify.display.mobile ? 'scroll': 'hidden' }">
+		<div
+			class="d-flex align-center justify-center"
+			style="position: relative; overflow-y: hidden"
+			:style="{ 'overflow-x': $vuetify.display.mobile ? 'scroll' : 'hidden' }"
+		>
 			<div
 				style="position: absolute; top: 0; z-index: 99; width: 100%; height: 100px; background: linear-gradient(to bottom, #fdf5e7, transparent)"
 			></div>
 			<div
-				style="position: absolute; bottom: 0px; z-index: 99; width: 100%; height: 100px;" :style="{background: $vuetify.display.mobile ? '' : 'linear-gradient(to bottom, transparent, #fff)'}"
+				style="position: absolute; bottom: 0px; z-index: 99; width: 100%; height: 100px"
+				:style="{ background: $vuetify.display.mobile ? '' : 'linear-gradient(to bottom, transparent, #fff)' }"
 			></div>
 			<div id="img" style="width: 1442px" class="mx-auto">
 				<v-img
@@ -829,7 +834,7 @@ export default {
 			points: [
 				{
 					// icon: "cart",
-					icon: getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716231082/umoja/cartIcon.svg', 60),
+					icon: getCloudinaryImageUrl("https://res.cloudinary.com/payhospi/image/upload/v1716231082/umoja/cartIcon.svg", 60),
 					title: "Umoja Delivery",
 					body: "Get free delivery for every order above $20",
 				},
@@ -1134,15 +1139,13 @@ export default {
 </script>
 <style scoped>
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 12px;
+	width: 10px;
+	height: 12px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #A8A8A8; /* Customize the color */
-    border-radius: 10px;
-    background-clip: padding-box;
+	background: #a8a8a8; /* Customize the color */
+	border-radius: 10px;
+	background-clip: padding-box;
 }
-
-
 </style>

@@ -14,11 +14,12 @@
 				outlined
 				append-inner-icon=""
 				class="my-5"
+				:bg-color="selected == 'umoja-logistics' ? '#EDF0EF' : selected == 'manual-shipping' ? '#FDF1ED' : ''"
 			>
 				<template v-slot:selection="{ item }">
 					<v-list-item>
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" color="#FDF1ED">
+							<v-avatar class="mr-4" size="50" :color="selected == 'manual-shipping' ? '#F38218' : '#fff'">
 								<v-icon>{{ item.raw.icon }}</v-icon>
 							</v-avatar>
 							<div>
@@ -31,8 +32,9 @@
 				<template v-slot:item="{ props, item }">
 					<v-list-item v-bind="props">
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" color="#FDF1ED">
-								<v-icon>{{ item.raw.icon }}</v-icon>
+							<v-avatar class="mr-4" size="50" :color="selected == 'manual-shipping' ? '#FDF1ED' : '#fff'">
+								<!-- <v-icon>{{ item.raw.icon }}</v-icon> -->
+								<v-img height="24" width="24" src="https://res.cloudinary.com/payhospi/image/upload/v1717407683/umoja/favicon_fpqa9y.png" />
 							</v-avatar>
 							<div>
 								<p style="font-size: 16px; font-weight: 600; color: #333333">{{ item.raw.text }}</p>
@@ -57,9 +59,9 @@
 				<div class="" flat style="border: 1px solid #cecece; border-radius: 15px">
 					<div class="d-flex justify-space-between align-center w-100 pa-4">
 						<p style="font-size: 18px; font-weight: 600; color: #333">General Shipping Rates</p>
-						<v-btn variant="text" class="d-flex align-center" style="font-weight: 600; font-size: 16px">
-							<v-icon class="mr-2" icon="mdi mdi-border-color"></v-icon>
-							<span>Edit</span>
+						<v-btn variant="text" class="ml-4 menubar text-grey-darken-3" size="default" style="font-weight: 600; font-size: 16px">
+							<v-icon class="mr-2" icon="mdi mdi-pencil-outline"></v-icon>
+							Edit
 						</v-btn>
 					</div>
 					<v-divider></v-divider>
@@ -74,13 +76,15 @@
 									<span style="font-weight: 500; font-size: 16px; color: #969696">{{ item }}</span>
 								</span>
 							</div>
-							<v-icon class="mr-2" icon="fas fa-chevron-right"></v-icon>
+							<v-btn @click="vendorStore.renderRate = true" class="" size="default" variant="text">
+								<v-icon icon="fas fa-chevron-right"></v-icon>
+							</v-btn>
 						</div>
 					</div>
 				</div>
 			</v-card>
 
-			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat rel="noopener" style="justify-content: between">
+			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat rel="noopener">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
 					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="24"></v-icon>
 				</p>
@@ -192,7 +196,15 @@
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
 					<div>
-						<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> Setup </v-btn>
+						<v-btn
+							@click="localDeliveryModal = true"
+							style="border: 1px solid #e5e5e5"
+							variant="outlined"
+							size="default"
+							class="ml-4 menubar text-grey-darken-3"
+						>
+							Setup
+						</v-btn>
 					</div>
 				</div>
 			</v-card>
@@ -204,7 +216,15 @@
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
 					<div>
-						<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> Setup </v-btn>
+						<v-btn
+							@click="localPickupModal = true"
+							style="border: 1px solid #e5e5e5"
+							variant="outlined"
+							size="default"
+							class="ml-4 menubar text-grey-darken-3"
+						>
+							Setup
+						</v-btn>
 					</div>
 				</div>
 			</v-card>
@@ -303,7 +323,9 @@
 		<v-sheet width="100vw" max-width="744px" class="cardStyle px-0">
 			<div class="px-6 d-flex justify-space-between">
 				<div class="d-flex align-center ga-3">
-					<v-avatar size="70" color="#EDF3F0"><v-icon icon="mdi mdi-account-plus"></v-icon></v-avatar>
+					<v-avatar color="#EDF3F0" size="50" class="mr-2">
+						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+					</v-avatar>
 					<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Add Package</p>
 				</div>
 				<v-icon @click="savePackageModal = false" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
@@ -360,9 +382,9 @@
 
 				<v-checkbox hide-details density="comfortable" color="#00966D">
 					<template v-slot:label>
-						<div style="color: #333; font-size: 14px; font-weight: 500" class="ml-2">
-							<h4>Use as default package</h4>
-							<h6>Used to calculate rates at checkout and pre-selected when buying labels</h6>
+						<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2">
+							<p>Use as default package</p>
+							<p>Used to calculate rates at checkout and pre-selected when buying labels</p>
 						</div>
 					</template>
 				</v-checkbox>
@@ -502,7 +524,35 @@
 						<p style="color: #1273eb">See more rates</p>
 					</v-col>
 					<v-col>
-						<VDatePicker v-model.range="range" mode="dateTime" />
+						<v-card flat>
+							<v-menu
+								ref="menu"
+								v-model="menu"
+								:close-on-content-click="false"
+								:nudge-right="40"
+								transition="scale-transition"
+								offset-y
+								min-width="auto"
+							>
+								<template v-slot:activator="{ on, attrs }">
+									<v-text-field
+										v-bind="attrs"
+										v-on="on"
+										:value="formattedDate"
+										label="Select Date Range"
+										outlined
+										dense
+										icon-color="#2C6E63"
+										append-inner-icon="mdi mdi-calendar"
+										readonly
+										@click:append-inner="openMenu"
+									></v-text-field>
+								</template>
+								<v-card>
+									<VCalender v-model="dateRange" mode="range" @change="updateDate" />
+								</v-card>
+							</v-menu>
+						</v-card>
 					</v-col>
 				</v-row>
 				<v-row style="font-size: 16px; font-weight: 500; color: #333">
@@ -513,10 +563,7 @@
 						<p>€60.00 and up</p>
 						<p>€60.00 - €100.00</p>
 					</v-col>
-					<v-col>
-						<p>Within Jan 1st to Jan 10th</p>
-						<p>8 business days</p>
-					</v-col>
+					<v-col> </v-col>
 				</v-row>
 				<v-row style="font-size: 16px; font-weight: 500; color: #333">
 					<v-col cols="3">
@@ -526,10 +573,7 @@
 						<p>€60.00 and up</p>
 						<p>€60.00 - €100.00</p>
 					</v-col>
-					<v-col>
-						<p>Within Jan 1st to Jan 10th</p>
-						<p>8 business days</p>
-					</v-col>
+					<v-col> </v-col>
 				</v-row>
 				<v-row style="font-size: 16px; font-weight: 500; color: #333">
 					<v-col cols="3">
@@ -540,10 +584,7 @@
 						<p>€60.00 - €100.00</p>
 						<p style="color: #1273eb">See more rates</p>
 					</v-col>
-					<v-col>
-						<p>Within Jan 1st to Jan 10th</p>
-						<p>8 business days</p>
-					</v-col>
+					<v-col> </v-col>
 				</v-row>
 
 				<span class="d-flex align-center mt-5" style="color: #1273eb; font-weight: 600; font-size: 16px; cursor: pointer">
@@ -568,17 +609,160 @@
 			</div>
 		</v-sheet>
 	</v-dialog>
+	<v-dialog width="auto" v-model="localDeliveryModal">
+		<v-sheet width="100vw" max-width="669px" class="cardStyle px-0">
+			<div class="px-6 d-flex justify-space-between">
+				<div class="d-flex align-center">
+					<v-avatar color="#EDF3F0" size="50" class="mr-2">
+						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+					</v-avatar>
+					<div class="mx-4">
+						<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Local Delivery</p>
+						<p style="color: #969696; font-size: 16px; font-weight: 500; line-height: 20px; letter-spacing: -0.16px" class="mt-2">
+							Enter office address for local delivery
+						</p>
+					</div>
+				</div>
+				<v-icon @click="localDeliveryModal = false" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
+			</div>
+			<v-divider class="my-4"></v-divider>
+
+			<div class="px-7">
+				<p class="inputLabel">Company</p>
+				<v-text-field placeholder="Company" density="comfortable"> </v-text-field>
+
+				<p class="inputLabel">Country/region</p>
+				<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Country/region" density="comfortable"> </v-select>
+
+				<p class="inputLabel">Address</p>
+
+				<v-text-field placeholder="Enter customer address" density="comfortable"> </v-text-field>
+
+				<p class="inputLabel">Apartment, suite, etc</p>
+				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
+			</div>
+			<div class="px-7">
+				<v-row class="mt-2">
+					<v-col>
+						<p class="inputLabel">City</p>
+						<v-text-field placeholder="Enter city" density="comfortable"> </v-text-field
+					></v-col>
+					<v-col>
+						<p class="inputLabel">State</p>
+						<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"> </v-select>
+					</v-col>
+					<v-col>
+						<p class="inputLabel">Zipcode</p>
+
+						<v-text-field placeholder="Enter last name" density="comfortable"> </v-text-field
+					></v-col>
+				</v-row>
+
+				<p class="inputLabel">Phone</p>
+				<v-text-field append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+
+				<div class="py-4">
+					<v-row>
+						<v-col cols="6"
+							><v-btn size="large" style="border: 1px solid #e5e5e5" flat block>
+								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
+							></v-col
+						>
+						<v-col cols="6">
+							<v-btn size="large" color="green" flat block>
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save</span></v-btn
+							></v-col
+						>
+					</v-row>
+				</div>
+			</div>
+		</v-sheet>
+	</v-dialog>
+	<v-dialog width="auto" v-model="localPickupModal">
+		<v-sheet width="100vw" max-width="669px" class="cardStyle px-0">
+			<div class="px-6 d-flex justify-space-between">
+				<div class="d-flex align-center">
+					<v-avatar color="#EDF3F0" size="50" class="mr-2">
+						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+					</v-avatar>
+					<div class="mx-4">
+						<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Local Pickups</p>
+						<p style="color: #969696; font-size: 16px; font-weight: 500; line-height: 20px; letter-spacing: -0.16px" class="mt-2">
+							Enter office address for local pickups
+						</p>
+					</div>
+				</div>
+				<v-icon @click="localPickupModal = false" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
+			</div>
+			<v-divider class="my-4"></v-divider>
+
+			<div class="px-7">
+				<p class="inputLabel">Company</p>
+				<v-text-field placeholder="Company" density="comfortable"> </v-text-field>
+
+				<p class="inputLabel">Country/region</p>
+				<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Country/region" density="comfortable"> </v-select>
+
+				<p class="inputLabel">Address</p>
+
+				<v-text-field placeholder="Enter customer address" density="comfortable"> </v-text-field>
+
+				<p class="inputLabel">Apartment, suite, etc</p>
+				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
+			</div>
+			<div class="px-7">
+				<v-row class="mt-2">
+					<v-col>
+						<p class="inputLabel">City</p>
+						<v-text-field placeholder="Enter city" density="comfortable"> </v-text-field
+					></v-col>
+					<v-col>
+						<p class="inputLabel">State</p>
+						<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"> </v-select>
+					</v-col>
+					<v-col>
+						<p class="inputLabel">Zipcode</p>
+
+						<v-text-field placeholder="Enter last name" density="comfortable"> </v-text-field
+					></v-col>
+				</v-row>
+
+				<p class="inputLabel">Phone</p>
+				<v-text-field append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+
+				<div class="py-4">
+					<v-row>
+						<v-col cols="6"
+							><v-btn size="large" style="border: 1px solid #e5e5e5" flat block>
+								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
+							></v-col
+						>
+						<v-col cols="6">
+							<v-btn size="large" color="green" flat block>
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save</span></v-btn
+							></v-col
+						>
+					</v-row>
+				</div>
+			</div>
+		</v-sheet>
+	</v-dialog>
+
 </template>
 
 <script>
+import { useVendorStore } from "~/stores/vendorStore";
 export default {
 	data() {
 		return {
+			localDeliveryModal: false,
+			localPickupModal: false,
 			selected: null,
 			savePackageModal: false,
 			printSlipModal: false,
 			deliveryDateModal: false,
-			range: null,
+			menu: false,
+			dateRange: { start: new Date(), end: new Date() },
 			items: [
 				{
 					value: "umoja-logistics",
@@ -598,8 +782,29 @@ export default {
 		};
 	},
 	computed: {
+		vendorStore() {
+			console.log("Rate ", useVendorStore().renderRate);
+			return useVendorStore();
+		},
 		computedLabel() {
+			console.log(this.selected);
 			return this.selected ? "" : "Select Shipping Method";
+		},
+		formattedDate() {
+			const options = { year: "numeric", month: "long", day: "numeric" };
+			const start = this.dateRange.start.toLocaleDateString(undefined, options);
+			const end = this.dateRange.end.toLocaleDateString(undefined, options);
+			return `${start} - ${end}`;
+		},
+	},
+
+	methods: {
+		updateDate(value) {
+			this.dateRange = value;
+			this.menu = false;
+		},
+		openMenu() {
+			this.menu = true;
 		},
 	},
 };
@@ -610,5 +815,8 @@ export default {
 	font-size: 14px;
 	font-weight: 500;
 	color: #333;
+}
+.v-text-field {
+	cursor: pointer;
 }
 </style>
