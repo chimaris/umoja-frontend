@@ -182,7 +182,12 @@
 						<div v-if="productStore.notFound && !productStore.productLoading" class="d-flex align-center justify-center" style="height: 100%; min-height: 300px;">
 							<p style="font-weight: 500; font-size: 16px; text-align: center; color: #969696;">No results found for selected category. <br/> Please try a different category.</p>
 						</div>
-					<template v-else>
+						<v-row v-else dense class="mt-2 align-items-stretch"  >
+							<v-col v-for="(n, i) in productStore.getProductsArray('main')" :key="i" cols="6" :md="3" :lg="3" >
+								<product-component :loading="productStore.productLoading" :item="n" :index="i" />
+							</v-col>
+						</v-row>
+					<!-- <template v-else>
 						<v-row dense v-if="productStore.productLoading" class="mt-2 align-items-stretch"  >
 							<v-col v-for="(n, i) in 8" :key="i" cols="6" :md="3" :lg="3" >
 								<productloader :item="n" :index="i" />
@@ -193,7 +198,7 @@
 								<product-component :item="n" :index="i" />
 							</v-col>
 						</v-row>
-					</template>
+					</template> -->
 					</div>
 				</div>
 				<!-- Responsive fILTER dRAWER -->
@@ -298,13 +303,7 @@ export default {
 		},
 		async removeFilter(key) {
         // Reset gender and category_name to default values if they are removed
-        if (key === 'gender') {
-            this.productStore.params.gender = "Unisex";
-        } else if (key === 'category_name') {
-            this.productStore.params.category_name = "Clothing";
-        } else {
             this.productStore.removeParam(key);
-        }
         
         await this.productStore.fetchFilteredProducts();
     },

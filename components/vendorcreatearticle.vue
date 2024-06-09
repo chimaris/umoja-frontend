@@ -182,24 +182,24 @@ line-height: 140%;">{{n.title}}</p>
 <div v-html="n.content" style="display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis" class="article-content"></div>
 <!-- <p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 400; line-height: 140%; display: -webkit-box; -webkit-line-clamp: 4; -webkit-box-orient: vertical; overflow: hidden; text-overflow: ellipsis;
 ">{{n.content}}</p> -->
-<v-btn @click="$router.push(`/article_detail/${n.id}`)" size="small" color="#1273EB" class="px-0" variant="text">
+<!-- <v-btn @click="$router.push(`/article_detail/${n.id}`)" size="small" color="#1273EB" class="px-0" variant="text">
     <span style="color: var(--deep-sky-blue-4, #1273EB);
 font-size: 14px;
 font-weight: 600;">
 
         Read more 
     </span>
-    <v-icon size="small" class="ml-4" icon="mdi mdi-arrow-right"></v-icon></v-btn>
+    <v-icon size="small" class="ml-4" icon="mdi mdi-arrow-right"></v-icon></v-btn> -->
     <v-divider class="my-5"></v-divider>
 </div>
 
 
 <div class="px-5 pt-2 mt-2">
 
-    <v-btn @click="$router.push('/article_page')" block style="    border: 1px solid #e5e5e5;"  variant="outlined"><span style="color: var(--grey-1000, #1A1D1F);
+    <!-- <v-btn @click="$router.push('/article_page')" block style="    border: 1px solid #e5e5e5;"  variant="outlined"><span style="color: var(--grey-1000, #1A1D1F);
 
 font-size: 12px;
-font-weight: 600;">View all Articles</span></v-btn>
+font-weight: 600;">View all Articles</span></v-btn> -->
 </div>
 </v-sheet>
               

@@ -231,7 +231,7 @@
 											font-size: 12px;
 											font-weight: 600;
 										"
-										>Pre-Order</span
+										>Add to Cart</span
 									></v-btn
 								>
 							</div>

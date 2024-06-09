@@ -1,3 +1,12 @@
+// utils/date.js
+import { formatDistanceToNow, parseISO } from 'date-fns';
+
+export const formatRelativeTime = (timestamp) => {
+  const date = parseISO(timestamp);
+  return formatDistanceToNow(date, { addSuffix: true });
+};
+
+
 export function formatDate() {
     const currentDate = new Date();
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

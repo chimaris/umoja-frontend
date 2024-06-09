@@ -228,6 +228,7 @@ async function loadVendorData(){
 onMounted(async () => {
 	const vendorId  = vendorStore.vendor?.id;
 	await vendorStore.getUser(vendorId)
+	// console.log(vendorStore.vendor)
 	if (vendorStore.vendor.complete_setup == 1){
 		await loadVendorData();
 	}

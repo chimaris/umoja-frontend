@@ -7,8 +7,8 @@ import { debounce } from 'lodash';
 export const useProductStore = defineStore('productStore', {
   state: () => ({
     params: {
-      gender: "Unisex",
-      category_name: "Clothing",
+      gender: "",
+      category_name: "",
       sizes: "",
       product_rating: "",
       compare_at_price: "",
@@ -47,6 +47,18 @@ export const useProductStore = defineStore('productStore', {
   actions: {
     saveParams(data){
       this.params = data
+    },
+    clearParams(){
+      this.params = {
+        gender: "",
+        category_name: "",
+        sizes: "",
+        product_rating: "",
+        compare_at_price: "",
+        sub_category_name: "",
+        priceMinimum: "",
+        priceMaximum: ""
+      }
     },
     removeParam(key) {
       this.params[key] = "";

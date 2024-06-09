@@ -86,7 +86,7 @@
 											><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img
 										></v-avatar>
 										<div>
-											<p style="font-weight: 500; font-size: 14px" class="text-capitalize">{{ item.customer_fullname }}</p>
+											<p style="font-weight: 500; text-transform: capitalize; font-size: 14px" class="text-capitalize">{{ item.customer_fullname }}</p>
 											<p
 												style="
 													font-weight: 500;
@@ -106,7 +106,7 @@
 							</v-menu>
 						</td>
 						<td class="tabledate px-1">{{ getdateRegistered(item.created_at) }}</td>
-						<td class="tableThick px-1">{{ item.customer_fullname }}</td>
+						<td style="text-transform: capitalize;" class="tableThick px-1">{{ item.customer_fullname }}</td>
 						<td class="tableLight px-1">
 							<span v-if="item.delivery_price !== 0">
 								{{ item.delivery_price }}
@@ -114,14 +114,14 @@
 							<span v-else class="d-flex align-center text-green">Free <v-icon class="ml-1" size="small" icon="mdi mdi-star"></v-icon></span>
 						</td>
 						<td class="tableThick px-1">{{ formattedPrice(item.total) }}</td>
-						<td class="text-grey-lighten-1 text-center px-1">
+						<td class="text-grey-lighten-1 text-center px-1" style="text-transform: capitalize;">
 							<v-chip rounded="lg" class="tablechip" :color="item.payment_status == 'paid' ? 'blue' : 'orange'" variant="tonal">
 								<v-icon class="mr-2" size="small" icon="mdi mdi-check-circle"></v-icon>
 								{{ item.payment_status }}
 							</v-chip>
 						</td>
 						<td class="tableLight px-1">{{ item.items.length + " Item" + (item.items.length > 1 ? "s" : "") }}</td>
-						<td class="text-grey-lighten-1 text-center px-1">
+						<td class="text-grey-lighten-1 text-center px-1" style="text-transform: capitalize;">
 							<v-chip rounded="lg" class="tablechip" :color="item.fulfillment_status == 'fulfilled' ? 'green' : item.fulfillment_status == 'unfulfilled' ? 'red' : 'orange'" variant="tonal">
 								{{ item.fulfillment_status }}
 							</v-chip>

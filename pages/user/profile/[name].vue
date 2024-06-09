@@ -135,7 +135,7 @@
 								</span>
 							</v-btn>
 						</v-expansion-panel-title>
-						<v-expansion-panel-text>
+						<v-expansion-panel-text class="">
 							<v-window v-model="selected">
 							<v-window-item value="Account Settings">
 								<Useraccountsettings />
@@ -388,6 +388,9 @@ export default {
 }
 .v-expansion-panel:first-child{
 	border-radius: 15px 15px 0 0;
+}
+.v-expansion-panel-text__wrapper {
+  padding: 0;
 }
 .v-expansion-panel:last-child{
 	border-radius: 0 0 15px 15px;
