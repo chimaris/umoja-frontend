@@ -9,22 +9,29 @@
 			</div>
 			<v-expand-transition leave-absolute>
 				<div v-if="genderExpand">
-					<v-chip-group v-model="productStore.params.gender" color="green" column>
-						<v-chip
-							:value="n"
-							style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
-							v-for="n in genders"
-							:key="n"
-							rounded="lg"
-							:disabled="disable && (n== 'Female' || n== 'Male')"
-							class="px-8 py-3"
-							variant="outlined"
-							grow
-							active-class="bordergreen text--green"
-						>
-							<span style="font-size: 14px; font-weight: 500; letter-spacing: -0.42px"> {{ n }}</span>
-						</v-chip>
-					</v-chip-group>
+					<v-row dense>
+							<v-col @click="productStore.params.gender = n"  :key="i" v-for="(n, i) in genders">
+								<p
+									class="px-3 py-2 d-flex align-center justify-center"
+									style="
+										font-size: 14px;
+										min-width: 100px;
+										max-width: 150px;
+										font-weight: 500;
+										cursor: pointer;
+										letter-spacing: -0.42px;
+										border-radius: 6px;
+										border: 1px solid var(--carbon-2, #cecece);
+									"
+									:style="{
+										backgroundColor: productStore.params.gender === n ? '#E5EDEC' : '#ffffff',
+										color: productStore.params.gender === n ? '#2C6E63' : '#1e1e1e'
+									}"
+								>
+									{{ n }}
+								</p>
+							</v-col>
+						</v-row>
 				</div>
 			</v-expand-transition>
 
@@ -36,21 +43,28 @@
 			</div>
 			<v-expand-transition leave-absolute>
 				<div v-if="categoryExpand">
-					<v-chip-group v-model="productStore.params.category_name" color="green" column>
-						<v-chip
-							:value="n"
-							style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
-							v-for="n in categoryNames"
-							:key="n"
-							rounded="lg"
-							class="px-5 py-3"
-							variant="outlined"
-							grow
-							active-class="bordergreen text--green"
-						>
-							<span style="font-size: 14px; font-weight: 500; letter-spacing: -0.42px"> {{ n }}</span>
-						</v-chip>
-					</v-chip-group>
+					<v-row dense>
+							<v-col @click="productStore.params.category_name = n"  :key="i" v-for="(n, i) in categoryNames">
+								<p
+									class="px-3 py-2 d-flex align-center justify-center"
+									style="
+										font-size: 14px;
+										max-width: 150px;
+										font-weight: 500;
+										white-space: nowrap;
+										cursor: pointer;
+										border-radius: 6px;
+										border: 1px solid var(--carbon-2, #cecece);
+									"
+									:style="{
+										backgroundColor: productStore.params.category_name === n ? '#E5EDEC' : '#ffffff',
+										color: productStore.params.category_name === n ? '#2C6E63' : '#1e1e1e'
+									}"
+								>
+									{{ n }}
+								</p>
+							</v-col>
+						</v-row>
 				</div>
 			</v-expand-transition>
 
@@ -308,23 +322,19 @@ const disable = computed(() => {
 	}
 })
 onMounted(async () => {
+	productStore.clearParams();
 	categories.value = await fetchCategories("customer")
-	if (productStore.params.category_name && productStore.params.gender){
-		subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
-	}
-	productStore.params.category_name = 'Clothing'
-	productStore.params.gender = 'Unisex'
-	productStore.params.sub_category_name = subCategories.value[0].name
+	// if (productStore.params.category_name && productStore.params.gender){
+	// 	subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
+	// }
+	// productStore.params.category_name = 'Clothing'
+	// productStore.params.gender = 'Unisex'
+	// productStore.params.sub_category_name = subCategories.value[0].name
 });
 			// watch for change ins any of the filter value
 			watch(() => [productStore.params.gender, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
 			async ([newGender, newCategory_name, newSizes, newProduct_rating, newCompare_at_price, newSub_category_name]) => {
-				if(!newGender){
-					productStore.params.gender = 'Unisex'
-				}
-				if (!newCategory_name){
-					productStore.params.category_name = 'Clothing'
-				}
+				
 				await productStore.fetchFilteredProducts()
 			});
 			watch(() => [productStore.params.gender, productStore.params.category_name], async () => {
@@ -345,9 +355,9 @@ onMounted(async () => {
 				);
 
 			
-			const categoryExpand = ref(true);
+			const categoryExpand = ref(false);
 			const subCategoryExpand = ref(false);
-			const genderExpand = ref(true);
+			const genderExpand = ref(false);
 			const country = ref("All of Africa");
 			const sellingExpand = ref(false);
 			const priceExpand = ref(false);

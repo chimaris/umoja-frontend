@@ -14,8 +14,11 @@
             :value="item" 
             class="d-flex text-capitalize  align-center"
             >
-            {{ item }} <v-badge v-if="item == 'All'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" content="2" size="12"  ></v-badge>
-            
+            {{ item }} 
+            <v-badge v-if="item == 'All'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="Notification.length" size="12"  ></v-badge>
+            <v-badge v-if="item == 'Orders'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="orderNotification.length" size="12"  ></v-badge>
+            <v-badge v-if="item == 'Reviews'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="reviewNotification.length" size="12"  ></v-badge>
+            <v-badge v-if="item == 'Customers'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="customerNotification.length" size="12"  ></v-badge>
           </v-tab>
         </v-tabs>
         <v-btn variant="text">
@@ -26,17 +29,130 @@ font-weight: 600;">  Mark all as read</span>
   </div>
     <v-divider></v-divider>
     </div>
-    <div class="mb-8" v-for="(g, i) in notifications" :key="i">
-
-      
-      <p style="color: var(--carbon-4, #333);
-
-font-size: 20px;
-font-weight: 600;" class="my-5">{{ g.date }}</p>
-<div v-for="(n, k) in g.notifications" :key="k" >
-
-
-<v-sheet class=" d-flex justify-space-between align-center py-6">
+  <!-- <div v-if="loading" class="d-flex justify-center align-center" style="height: 100%; min-height: 60vh">
+  <v-progress-circular 
+						color="green"
+						:size="30"
+						:width="3"
+						indeterminate
+	></v-progress-circular>
+</div> -->
+<div>
+  <template v-if="tab == 'All'">
+    <v-sheet v-for="(n, i) in Notification" :key="i"  class=" d-flex justify-space-between align-center py-6">
+    <div>
+      <div style="max-width: 759px;" class="d-flex">
+        <v-avatar rounded="lg" color="grey-lighten-3" class="mr-4"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689252826/matskirt_ecf6ym.png"></v-img></v-avatar>
+      <div>
+    <p>
+      <span style="color: #333;
+  font-size: 14px;
+  font-weight: 600;">{{n.data?.message }}</span>
+  <!-- <span style="color:  #969696; font-size: 14px; font-weight: 500;"> by </span> 
+  <span style="color: #333; font-size: 14px; font-weight: 600; text-transform: capitalize">{{ n.data?.shipping_full_name }}</span>
+  <span style="color:  #969696; font-size: 14px; font-weight: 500;"> with order number #{{ n.data?.order_number }} <a style="color: #1273EB;" href=""> Tap to see order details</a></span>  -->
+  
+  </p>
+      <p style="color: #969696;
+  font-size: 14px;
+  font-weight: 500;" class="mt-1">{{ formatRelativeTime(n.created_at) }}</p>
+  </div>
+  </div>
+  </div>
+  <v-icon icon="mdi mdi-circle" size="10" color="green"></v-icon>
+  
+    </v-sheet>
+  </template>
+    
+    <template v-if="tab == 'Orders'">
+      <v-sheet v-for="(n, i) in orderNotification" :key="i"  class=" d-flex justify-space-between align-center py-6">
+    <div>
+      <div style="max-width: 759px;" class="d-flex">
+        <v-avatar rounded="lg" color="grey-lighten-3" class="mr-4"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689252826/matskirt_ecf6ym.png"></v-img></v-avatar>
+      <div>
+    <p>
+      <span style="color: #333;
+  font-size: 14px;
+  font-weight: 600;">{{n?.message }}</span>
+  <span style="color:  #969696; font-size: 14px; font-weight: 500;"> by </span> 
+  <span style="color: #333; font-size: 14px; font-weight: 600; text-transform: capitalize">{{ n?.shipping_full_name }}</span>
+  <span style="color:  #969696; font-size: 14px; font-weight: 500;"> with order number #{{ n?.order_number }} <a style="color: #1273EB;" href=""> Tap to see order details</a></span> 
+  
+  </p>
+      <p style="color: #969696;
+  font-size: 14px;
+  font-weight: 500;" class="mt-1">{{ formatRelativeTime(n.created_at) }}</p>
+  </div>
+  </div>
+  </div>
+  <v-icon icon="mdi mdi-circle" size="10" color="green"></v-icon>
+  
+    </v-sheet>
+    </template>
+    <template v-if="tab == 'Reviews'">
+      <v-sheet v-for="(n, i) in reviewNotification" :key="i" class=" d-flex justify-space-between align-center py-6">
+      <div>
+      <div style="max-width: 759px;" class="d-flex">
+        <v-avatar rounded="xl" color="grey-lighten-3" class="mr-4">
+          <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685880308/Frame_221_gj6tpk.png"></v-img>
+        </v-avatar>
+    <div>
+      <p>
+        <span style="color: #333; font-size: 14px; font-weight: 600;">{{ n.data?.message }}</span>
+      </p>
+      <p style="color:#333; font-size: 14px; font-weight: 500;">"{{ n.data?.review_comment }}""</p>
+    <p
+    style="font-weight: 600;
+        font-size: 12px;
+        line-height: 13px;
+        color: #000000;
+        " class="d-flex mb-1 align-center">
+            <v-rating 
+            :model-value="n.data?.rating"
+            read-only
+            color="grey-lighten-2 "
+            active-color="#E7CE5D"
+            class="ml-2 rt" hide-details
+            size="x-small"
+            ></v-rating><span style="margin-left:9px ;" >{{n.data?.rating}}/5.0</span> 
+        </p>
+        <p style="color: #969696;
+    font-size: 14px;
+    font-weight: 500;" class="mt-1">{{ formatRelativeTime(n.created_at) }}</p>
+    </div>
+    </div>
+    </div>
+    <v-icon icon="mdi mdi-circle" size="10" color="green"></v-icon>
+</v-sheet>
+    </template>
+    <template v-if="tab == 'Customers'">
+      <v-sheet v-for="(n, i) in customerNotification" :key="i" class=" d-flex justify-space-between align-center py-6">
+        <div>
+        <div style="max-width: 759px;" class="d-flex">
+      <v-avatar rounded="xl" color="grey-lighten-3" class="mr-4"><v-img :src="n.image"></v-img></v-avatar>
+      <div>
+        <p>
+          <span style="color: #333;
+      font-size: 14px;
+      font-weight: 600;">{{ n.message }}</span>
+      <span style="color:  #969696;
+      font-size: 14px;
+      font-weight: 500;" >
+  You have now have a total of {{n.followers_count}} followers. <a style="color: #1273EB;" href="">
+          See customer details
+        </a>
+      </span>
+          </p>
+          <p style="color: #969696;
+      font-size: 14px;
+      font-weight: 500;" class="mt-1">{{ formatRelativeTime(n.created_at) }}</p>
+      </div>
+      </div>
+        </div>
+        <v-icon icon="mdi mdi-circle" size="10" color="green" v-if="n.unread"></v-icon>
+      </v-sheet>
+    </template>
+<!-- <v-sheet class=" d-flex justify-space-between align-center py-6">
   <div>
   <div style="max-width: 759px;" class="d-flex">
 <v-avatar :rounded="n.type == 'review' || n.type == 'customer'? 'xl': 'lg'" color="grey-lighten-3" class="mr-4"><v-img :src="n.image"></v-img></v-avatar>
@@ -114,9 +230,7 @@ font-weight: 500;" class="mt-1">{{ n.time }}</p>
 </div>
 <v-icon icon="mdi mdi-circle" size="10" color="green" v-if="n.unread"></v-icon>
 
-</v-sheet>
-<v-divider v-show="(k + 1) < g.notifications.length"></v-divider>
-</div>
+</v-sheet> -->
 </div>
 </v-container>
 </template>
@@ -124,16 +238,25 @@ font-weight: 500;" class="mt-1">{{ n.time }}</p>
 .rt .v-icon--size-default {
     font-size: 18px;
 }</style>
-<script>
-export default {
- 
-  data() {
-    return {
-        tab: '',
-        rating: 4.5,
-        item: 'All',
-        tabs:[{name:'All Orders', prop:null,value: null}, {name:'Unfulfilled',prop:'status',value: 0}, {name:'Unpaid',prop:'payment_status',value: 0}, {name:'Open',prop:'status',value: 1}, {name:'closed',prop:'status',value: 2}],
-      notifications:[
+<script setup>
+import {ref} from 'vue';
+import {formatRelativeTime} from '~/utils/date'
+import { getNotification, loading, getCustomerNotification, getReviewNotification, getOrderNotification } from '~/composables/notification';
+
+
+const tab = ref('All')
+const Notification = ref([])
+const orderNotification = ref([])
+const customerNotification = ref([])
+const reviewNotification = ref([])
+
+onMounted(async() => {
+  Notification.value = await getNotification()
+  reviewNotification.value = await getReviewNotification()
+  orderNotification.value = await getOrderNotification()
+  customerNotification.value = await getCustomerNotification()
+});
+      const notifications = [
         {
         date: 'Today - 5TH July, 2023',
         notifications: [
@@ -223,26 +346,7 @@ export default {
     },
     
      
-      ],
-   items: []  
-}
-},
-mounted(){
-    this.items = this.items1;
-  },
-  methods:{
-    choose(x){
-      this.$emit('changePage', 'Order details');
-    },
-    choose2(x){
-      this.$emit('changePage', 'createorder');
-    },
-    sort(x, y){
-      var itm = this.items1;
-      this.items = itm.filter((item) => {
-      return item[x] == y;
-    });
-  }
-}
-}
+      ]
+
+
 </script>

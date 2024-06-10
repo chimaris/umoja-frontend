@@ -32,7 +32,7 @@
             </div>
             </template>
 
-            <v-list>
+            <v-list class="mt-3">
             <v-list-item style="cursor: pointer">
             Account
             </v-list-item>

@@ -116,7 +116,7 @@
 												></v-img
 											></v-avatar>
 											<div>
-												<p class="mb-1" style="font-weight: 600; white-space: nowrap; font-size: 16px !important; line-height: 20px; color: #333333">
+												<p class="mb-1 text-truncate"  style="font-weight: 600; max-width: 250px; white-space: nowrap; font-size: 16px !important; line-height: 20px; color: #333333" >
 													{{ item.name }}
 												</p>
 												<p style="font-weight: 400; max-width: 200px; font-size: 14px; text-overflow: ellipsis; white-space: nowrap; line-height: 18px; color: #969696" class="text-truncate">

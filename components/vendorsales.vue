@@ -829,26 +829,7 @@ const items1 = ref( [
 				},
 			])
 		
-const items =  ref([
-				{
-					name: "Buju Golden Bracelet",
-					sales: 80,
-					color: "#CBDED6",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686877087/Rectangle_1916_s0h5tz.png",
-				},
-				{
-					name: "Ankara Sneaker",
-					sales: 20,
-					color: "#00966D",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686877087/Rectangle_1916_1_lacsng.png",
-				},
-				{
-					name: "Multi-Colored Kente",
-					sales: 90,
-					color: "#005A41",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png",
-				},
-			])	
+const items =  ref([])	
 const colors = ["#CBDED6", "#00966D", "#005A41"]
 
 </script>

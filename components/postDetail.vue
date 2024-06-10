@@ -106,7 +106,7 @@
 										</h1>
 									</div>
 									<v-btn style="border: 1px solid #e5e5e5" size="small" variant="outlined">
-										<span style="color: var(--grey-1000, #1a1d1f); font-size: 12px; font-weight: 600"> Pre-Order </span>
+										<span style="color: var(--grey-1000, #1a1d1f); font-size: 12px; font-weight: 600"> Add to Cart </span>
 									</v-btn>
 								</div>
 							</div>
@@ -141,7 +141,7 @@
 						</h1>
 					</div>
 					<v-btn style="border: 1px solid #e5e5e5" size="small" variant="outlined">
-						<span style="color: var(--grey-1000, #1a1d1f); font-size: 12px; font-weight: 600">Pre-Order</span>
+						<span style="color: var(--grey-1000, #1a1d1f); font-size: 12px; font-weight: 600">Add to Cart</span>
 					</v-btn>
 				</div>
 			</v-col>
