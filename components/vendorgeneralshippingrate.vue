@@ -285,11 +285,31 @@
 				<v-text-field placeholder="Custom delivery description" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Price</p>
-				<v-text-field model-value="10.00" prefix="$" density="comfortable" :messages="['Add Conditional Pricing']">
+				<v-text-field model-value="10.00" prefix="$" density="comfortable">
 					<template v-slot:append-inner>
 						<v-btn flat style="font-size: 12px" variant="tonal">Free</v-btn>
 					</template>
 				</v-text-field>
+
+				<span @click="isConditionPrice = !isConditionPrice" style="color: #1273eb; font-weight: 500; font-size: 14px; cursor: pointer">
+					<span>{{ isConditionPrice ? "Remove" : "Add" }} Conditional Pricing</span>
+				</span>
+				<div v-if="isConditionPrice">
+					<v-radio-group>
+						<v-radio color="#00966D" label="Based on item weight" value="one"></v-radio>
+						<v-radio color="#00966D" label="Based on order price" value="two"></v-radio>
+					</v-radio-group>
+					<v-row dense>
+						<v-col>
+							<p class="inputLabel">Minimum weight</p>
+							<v-text-field density="comfortable" placeholder="0" suffix="kg"> </v-text-field
+						></v-col>
+						<v-col>
+							<p class="inputLabel">Maximum weight</p>
+							<v-text-field density="comfortable" placeholder="No Limit" suffix="kg"> </v-text-field
+						></v-col>
+					</v-row>
+				</div>
 			</div>
 
 			<p class="inputLabel mx-7 mt-5">Checkout Preview</p>
@@ -341,6 +361,7 @@ export default {
 			createZoneModal: false,
 			addRateModal: false,
 			selectAll: false,
+			isConditionPrice: false,
 			countries: [
 				{ name: "Cameroon", flag: "https://flagcdn.com/w320/cm.png", selected: false },
 				{ name: "Egypt", flag: "https://flagcdn.com/w320/eg.png", selected: false },
