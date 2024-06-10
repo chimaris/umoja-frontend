@@ -3,11 +3,20 @@
 		<p style="color: #333; font-size: 24px; font-weight: 500">Manage your account settings</p>
 		<v-sheet class="cardStyle mt-4 mb-12 py-0">
 			<v-row>
-				<v-col class="py-4 dash" style="position: relative; min-height: 600px" cols="12" md="3">
+				<v-col class="py-4 dash" style="position: relative; min-height: 700px" cols="12" md="3">
 					<div
 						class="py-3"
 						:key="n"
-						v-for="n in ['My Profile', 'Security', 'Notifications', 'Account Details', 'Billing', 'Integrations', 'Shipping and Delivery']"
+						v-for="n in [
+							'My Profile',
+							'Security',
+							'Notifications',
+							'Account Details',
+							'Billing',
+							'Integrations',
+							'Shipping and Delivery',
+							'Policies',
+						]"
 					>
 						<v-btn size="large" variant="tonal" @click="selected = n" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
 							<v-scale-transition>
@@ -50,9 +59,7 @@
 						<v-window-item value="Account Details">
 							<Vendorsettingsaccount :vendor="vendor" />
 						</v-window-item>
-						<v-window-item value="Integrations">
-							<vendorgeneralshippingrate />
-						</v-window-item>
+						<v-window-item value="Integrations"> </v-window-item>
 						<v-window-item value="Shipping and Delivery">
 							<template v-if="vendorStore.renderRate">
 								<vendorgeneralshippingrate />
@@ -60,6 +67,9 @@
 							<template v-else>
 								<Vendorsettingsshipping />
 							</template>
+						</v-window-item>
+						<v-window-item value="Policies">
+							<vendorsettingspolicies />
 						</v-window-item>
 					</v-window>
 				</v-col>
