@@ -344,6 +344,7 @@
 						<v-radio color="#00966D" label="Soft package or satchel" value="three"></v-radio>
 					</v-radio-group>
 				</div>
+
 				<v-row dense>
 					<v-col cols="2">
 						<p class="inputLabel">Length</p>
@@ -747,7 +748,6 @@
 			</div>
 		</v-sheet>
 	</v-dialog>
-
 </template>
 
 <script>
@@ -755,9 +755,9 @@ import { useVendorStore } from "~/stores/vendorStore";
 export default {
 	data() {
 		return {
+			selected: null,
 			localDeliveryModal: false,
 			localPickupModal: false,
-			selected: null,
 			savePackageModal: false,
 			printSlipModal: false,
 			deliveryDateModal: false,
