@@ -15,10 +15,11 @@
             class="d-flex text-capitalize  align-center"
             >
             {{ item }} 
-            <v-badge v-if="item == 'All'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="Notification.length" size="12"  ></v-badge>
-            <v-badge v-if="item == 'Orders'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="orderNotification.length" size="12"  ></v-badge>
-            <v-badge v-if="item == 'Reviews'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="reviewNotification.length" size="12"  ></v-badge>
-            <v-badge v-if="item == 'Customers'" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="customerNotification.length" size="12"  ></v-badge>
+            <v-badge v-if="item == 'All' && Notification.length > 0" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="Notification.length" size="12"  ></v-badge>
+            <v-badge v-if="item == 'Orders' && orderNotification.length > 0" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="orderNotification.length" size="12"  ></v-badge>
+            <v-badge v-if="item == 'Reviews' && reviewNotification.length > 0" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="reviewNotification.length" size="12"  ></v-badge>
+            <v-badge v-if="item == 'Products' && productNotification.length > 0" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="productNotification.length" size="12"  ></v-badge>
+            <v-badge v-if="item == 'Customers' && customerNotification.length > 0" class="ml-4 mb-1 px-1" rounded="lg" color="grey-lighten-2" :content="customerNotification.length" size="12"  ></v-badge>
           </v-tab>
         </v-tabs>
         <v-btn variant="text">
@@ -42,7 +43,7 @@ font-weight: 600;">  Mark all as read</span>
     <v-sheet v-for="(n, i) in Notification" :key="i"  class=" d-flex justify-space-between align-center py-6">
     <div>
       <div style="max-width: 759px;" class="d-flex">
-        <v-avatar rounded="lg" color="grey-lighten-3" class="mr-4"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689252826/matskirt_ecf6ym.png"></v-img></v-avatar>
+        <v-avatar rounded="lg" color="grey-lighten-3" class="mr-4"><v-img src=""></v-img></v-avatar>
       <div>
     <p>
       <span style="color: #333;
@@ -59,7 +60,7 @@ font-weight: 600;">  Mark all as read</span>
   </div>
   </div>
   </div>
-  <v-icon icon="mdi mdi-circle" size="10" color="green"></v-icon>
+  <v-icon icon="mdi mdi-circle" v-if="!n.read_at" size="10" color="green"></v-icon>
   
     </v-sheet>
   </template>
@@ -68,7 +69,7 @@ font-weight: 600;">  Mark all as read</span>
       <v-sheet v-for="(n, i) in orderNotification" :key="i"  class=" d-flex justify-space-between align-center py-6">
     <div>
       <div style="max-width: 759px;" class="d-flex">
-        <v-avatar rounded="lg" color="grey-lighten-3" class="mr-4"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689252826/matskirt_ecf6ym.png"></v-img></v-avatar>
+        <v-avatar rounded="lg" color="grey-lighten-3" class="mr-4"><v-img :src="n?.product_photo"></v-img></v-avatar>
       <div>
     <p>
       <span style="color: #333;
@@ -76,7 +77,7 @@ font-weight: 600;">  Mark all as read</span>
   font-weight: 600;">{{n?.message }}</span>
   <span style="color:  #969696; font-size: 14px; font-weight: 500;"> by </span> 
   <span style="color: #333; font-size: 14px; font-weight: 600; text-transform: capitalize">{{ n?.shipping_full_name }}</span>
-  <span style="color:  #969696; font-size: 14px; font-weight: 500;"> with order number #{{ n?.order_number }} <a style="color: #1273EB;" href=""> Tap to see order details</a></span> 
+  <span style="color:  #969696; font-size: 14px; font-weight: 500;"> with order number #{{ n?.order_number }} <span @click="choose('Orders')" style="color: #1273EB; text-decoration: underline;"> Tap to see order details</span></span> 
   
   </p>
       <p style="color: #969696;
@@ -85,7 +86,7 @@ font-weight: 600;">  Mark all as read</span>
   </div>
   </div>
   </div>
-  <v-icon icon="mdi mdi-circle" size="10" color="green"></v-icon>
+  <v-icon v-if="!n?.read_at" icon="mdi mdi-circle" size="10" color="green"></v-icon>
   
     </v-sheet>
     </template>
@@ -94,7 +95,7 @@ font-weight: 600;">  Mark all as read</span>
       <div>
       <div style="max-width: 759px;" class="d-flex">
         <v-avatar rounded="xl" color="grey-lighten-3" class="mr-4">
-          <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1685880308/Frame_221_gj6tpk.png"></v-img>
+          <v-img :src="n.data?.user_photo"></v-img>
         </v-avatar>
     <div>
       <p>
@@ -122,14 +123,14 @@ font-weight: 600;">  Mark all as read</span>
     </div>
     </div>
     </div>
-    <v-icon icon="mdi mdi-circle" size="10" color="green"></v-icon>
+    <v-icon v-if="!n.read_at" icon="mdi mdi-circle" size="10" color="green"></v-icon>
 </v-sheet>
     </template>
     <template v-if="tab == 'Customers'">
       <v-sheet v-for="(n, i) in customerNotification" :key="i" class=" d-flex justify-space-between align-center py-6">
         <div>
         <div style="max-width: 759px;" class="d-flex">
-      <v-avatar rounded="xl" color="grey-lighten-3" class="mr-4"><v-img :src="n.image"></v-img></v-avatar>
+      <v-avatar rounded="xl" color="grey-lighten-3" class="mr-4"><v-img src=""></v-img></v-avatar>
       <div>
         <p>
           <span style="color: #333;
@@ -138,9 +139,9 @@ font-weight: 600;">  Mark all as read</span>
       <span style="color:  #969696;
       font-size: 14px;
       font-weight: 500;" >
-  You have now have a total of {{n.followers_count}} followers. <a style="color: #1273EB;" href="">
+  You have now have a total of {{n.followers_count}} followers. <span @click="choose('Customers')" style="color: #1273EB; text-decoration: underline;">
           See customer details
-        </a>
+        </span>
       </span>
           </p>
           <p style="color: #969696;
@@ -149,7 +150,7 @@ font-weight: 600;">  Mark all as read</span>
       </div>
       </div>
         </div>
-        <v-icon icon="mdi mdi-circle" size="10" color="green" v-if="n.unread"></v-icon>
+        <v-icon icon="mdi mdi-circle" size="10" color="green"></v-icon>
       </v-sheet>
     </template>
 <!-- <v-sheet class=" d-flex justify-space-between align-center py-6">
@@ -241,7 +242,7 @@ font-weight: 500;" class="mt-1">{{ n.time }}</p>
 <script setup>
 import {ref} from 'vue';
 import {formatRelativeTime} from '~/utils/date'
-import { getNotification, loading, getCustomerNotification, getReviewNotification, getOrderNotification } from '~/composables/notification';
+import { getNotification, getProductNotification , loading, getCustomerNotification, getReviewNotification, getOrderNotification } from '~/composables/notification';
 
 
 const tab = ref('All')
@@ -249,12 +250,18 @@ const Notification = ref([])
 const orderNotification = ref([])
 const customerNotification = ref([])
 const reviewNotification = ref([])
+const productNotification = ref([])
+const emit = defineEmits(['changePage'])
 
+function choose(x){
+  emit('changePage', x)
+}
 onMounted(async() => {
   Notification.value = await getNotification()
-  reviewNotification.value = await getReviewNotification()
   orderNotification.value = await getOrderNotification()
+  productNotification.value = await getProductNotification()
   customerNotification.value = await getCustomerNotification()
+  reviewNotification.value = await getReviewNotification()
 });
       const notifications = [
         {

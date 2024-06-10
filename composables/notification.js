@@ -10,6 +10,7 @@ export const getNotification = async(tab) => {
             url: 'vendor/notifications',
             method: 'GET'
         });
+        // console.log(res.data)
         return res.data
     }catch(error){
         console.error(error)
@@ -26,6 +27,7 @@ export const getOrderNotification = async() => {
             url: 'vendor/notifications/orders',
             method: 'GET'
         });
+        
         return res.data
     }catch(error){
         console.error(error)
@@ -42,6 +44,7 @@ export const getReviewNotification = async() => {
             url: 'vendor/notifications/reviews',
             method: 'GET'
         });
+        // console.log(res.data)
         return res.data
     }catch(error){
         console.error(error)
@@ -59,6 +62,39 @@ export const getCustomerNotification = async() => {
             method: 'GET'
         });
         return res.data
+    }catch(error){
+        console.error(error)
+        return []
+    }finally{
+        loading.value = false
+    }
+}
+export const getProductNotification = async() => {
+    const api = vendorUseApi()
+    try{
+        loading.value = true 
+        const res = await api({
+            url: 'vendor/notifications/products',
+            method: 'GET'
+        });
+        // console.log(res.data)
+        return res.data
+    }catch(error){
+        console.error(error)
+        return []
+    }finally{
+        loading.value = false
+    }
+}
+export const readNotification = async(id) => {
+    const api = vendorUseApi()
+    try{
+        const res = await api({
+            url: `vendor/notifications/${id}/read`,
+            method: 'POST'
+        });
+        console.log(data)
+        return true
     }catch(error){
         console.error(error)
         return []

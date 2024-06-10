@@ -131,7 +131,7 @@
 							<Vendorreviews />
 						</v-window-item>
 						<v-window-item :value="'Notifications'">
-							<Vendornotifications />
+							<Vendornotifications  @changePage="changePage" />
 						</v-window-item>
 						<v-window-item :value="'Settings'">
 							<Vendorsettings />
