@@ -69,7 +69,12 @@
 							</template>
 						</v-window-item>
 						<v-window-item value="Policies">
-							<vendorsettingspolicies />
+							<template v-if="vendorStore.renderReturnRule">
+								<vendorpoliciesreturnrule />
+							</template>
+							<template v-else>
+								<vendorsettingspolicies />
+							</template>
 						</v-window-item>
 					</v-window>
 				</v-col>

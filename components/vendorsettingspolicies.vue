@@ -30,7 +30,9 @@
 					<div class="d-flex justify-space-between align-center w-100">
 						<div class="d-flex py-2">
 							<div>
-								<p style="font-size: 16px; font-weight: 600; color: #333333">Return Rule</p>
+								<p style="font-size: 16px; font-weight: 600; color: #333333">
+									Return Rule <v-chip class="px-2" style="border-radius: 6px"> Off </v-chip>
+								</p>
 								<p style="font-size: 16px; font-weight: 500; color: #969696; width: 85%">
 									Define conditions for <span style="color: #1273eb">customer return requests</span> and returns using Point of Sale. Return rules
 									will only apply to items purchased after the return rules were turned on or updated.
@@ -60,7 +62,7 @@
 								<li style="font-weight: 500; font-size: 16px; color: #969696">{{ item }}</li>
 							</ul>
 						</div>
-						<span @click="isConditionPrice = !isConditionPrice" style="color: #1273eb; font-weight: 500; font-size: 14px; cursor: pointer">
+						<span @click="vendorStore.renderReturnRule = true" style="color: #1273eb; font-weight: 500; font-size: 14px; cursor: pointer">
 							<span>Manage</span>
 						</span>
 					</div>
@@ -535,6 +537,8 @@ import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
 import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
+import { useVendorStore } from "~/stores/vendorStore";
+
 export default {
 	data() {
 		return {
@@ -557,6 +561,13 @@ export default {
 		this.editor.on("update", ({ editor }) => {
 			this.editorContent = editor.getText(); // or use getText() for plain text
 		});
+	},
+
+	computed: {
+		vendorStore() {
+			console.log("Rate ", useVendorStore().renderRate);
+			return useVendorStore();
+		},
 	},
 };
 </script>
