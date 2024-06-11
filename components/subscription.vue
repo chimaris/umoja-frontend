@@ -50,7 +50,7 @@
 						>
 						<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
 					</div>
-					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ Customised/Month</p>
+					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ Custom/Month</p>
 					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything our premium plan has...</p>
 
 					<div v-for="n in seePremium ? premiumPackage : premiumPackage.slice(0, 4)" :key="n" class="mb-4 d-flex align-center">
