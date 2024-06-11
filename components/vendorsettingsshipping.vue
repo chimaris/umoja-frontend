@@ -19,8 +19,8 @@
 				<template v-slot:selection="{ item }">
 					<v-list-item>
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" :color="selected == 'manual-shipping' ? '#F38218' : '#fff'">
-								<v-icon>{{ item.raw.icon }}</v-icon>
+							<v-avatar class="mr-4" size="50" :color="selected == 'manual-shipping' ? '#fff' : '#fff'">
+								<v-img height="24" width="24" :src="item.raw.icon" />
 							</v-avatar>
 							<div>
 								<p style="font-size: 16px; font-weight: 600; color: #333333">{{ item.raw.text }}</p>
@@ -32,9 +32,8 @@
 				<template v-slot:item="{ props, item }">
 					<v-list-item v-bind="props">
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" :color="selected == 'manual-shipping' ? '#FDF1ED' : '#fff'">
-								<!-- <v-icon>{{ item.raw.icon }}</v-icon> -->
-								<v-img height="24" width="24" src="https://res.cloudinary.com/payhospi/image/upload/v1717407683/umoja/favicon_fpqa9y.png" />
+							<v-avatar class="mr-4" size="50" :color="item.raw.value == 'manual-shipping' ? '#FDF1ED' : '#fff'">
+								<v-img height="24" width="24" :src="item.raw.icon" />
 							</v-avatar>
 							<div>
 								<p style="font-size: 16px; font-weight: 600; color: #333333">{{ item.raw.text }}</p>
@@ -49,7 +48,7 @@
 			<v-card class="my-5 pa-6 cardStyle" flat>
 				<div class="d-flex justify-space-between align-center w-100 mb-4">
 					<div>
-						<p style="font-size: 18px; font-weight: 600; color: #333">Shipping <v-icon icon="mdi mdi-information-outline" size="24"></v-icon></p>
+						<p style="font-size: 18px; font-weight: 600; color: #333">Shipping <v-icon icon="mdi mdi-information-outline" size="20"></v-icon></p>
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Choose where you ship and how much you charge for shipping at checkout.</p>
 					</div>
 					<div>
@@ -59,8 +58,20 @@
 				<div class="" flat style="border: 1px solid #cecece; border-radius: 15px">
 					<div class="d-flex justify-space-between align-center w-100 pa-4">
 						<p style="font-size: 18px; font-weight: 600; color: #333">General Shipping Rates</p>
-						<v-btn variant="text" class="ml-4 menubar text-grey-darken-3" size="default" style="font-weight: 600; font-size: 16px">
-							<v-icon class="mr-2" icon="mdi mdi-pencil-outline"></v-icon>
+
+						<v-btn
+							variant="text"
+							class="ml-4 menubar text-grey-darken-3 d-flex align-center"
+							size="default"
+							style="font-weight: 600; font-size: 16px"
+						>
+							<v-img
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+								contain
+								class="mr-1"
+								width="20"
+								height="20"
+							></v-img>
 							Edit
 						</v-btn>
 					</div>
@@ -86,7 +97,7 @@
 
 			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat rel="noopener">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
-					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="24"></v-icon>
+					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
 				<div class="cardStyle">
 					<div class="d-flex justify-space-between align-center w-100">
@@ -182,7 +193,7 @@
 			<!-- If Umoja shipping is selected -->
 			<v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener">
 				<p style="font-size: 18px; font-weight: 600; color: #333">
-					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="24"></v-icon>
+					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
 				<p style="font-size: 16px; font-weight: 500; color: #969696">Choose where you ship and how much you charge for shipping at checkout.</p>
 			</v-card>
@@ -191,7 +202,7 @@
 				<div class="d-flex justify-space-between align-center w-100">
 					<div>
 						<p style="font-size: 18px; font-weight: 600; color: #333">
-							Local Delivery <v-icon icon="mdi mdi-information-outline" size="24"></v-icon>
+							Local Delivery <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 						</p>
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
@@ -212,7 +223,7 @@
 			<v-card class="my-5 pa-6 cardStyle" flat style="justify-content: between">
 				<div class="d-flex justify-space-between align-center w-100">
 					<div>
-						<p style="font-size: 18px; font-weight: 600; color: #333">Local Pickups <v-icon icon="mdi mdi-information-outline" size="24"></v-icon></p>
+						<p style="font-size: 18px; font-weight: 600; color: #333">Local Pickups <v-icon icon="mdi mdi-information-outline" size="20"></v-icon></p>
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
 					<div>
@@ -231,13 +242,13 @@
 
 			<v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener" style="justify-content: between">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
-					Saved Packages <v-icon icon="mdi mdi-information-outline" size="24"></v-icon>
+					Saved Packages <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
 				<div class="cardStyle">
 					<div class="d-flex justify-space-between align-center w-100">
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" color="#FDF1ED">
-								<v-icon icon="mdi mdi-equal-box"></v-icon>
+							<v-avatar class="mr-4" size="50" color="#EDEDED">
+								<v-img width="18" height="18" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718101987/umoja/Vector_chjtbc.svg"></v-img>
 							</v-avatar>
 							<div>
 								<p style="font-size: 16px; font-weight: 600; color: #333333">Beispielbox</p>
@@ -246,7 +257,6 @@
 						</div>
 						<div class="d-flex">
 							<v-btn class="mr-4" size="small" text="Default package" variant="tonal"></v-btn>
-							<!-- <v-icon icon="mdi mdi-dots-horizontal"></v-icon> -->
 							<v-menu>
 								<template v-slot:activator="{ props }">
 									<!-- <v-btn class="pa-0" flat icon="mdi mdi-dots-horizontal" v-bind="props"></v-btn> -->
@@ -254,15 +264,42 @@
 								</template>
 
 								<v-card class="bg-white d-flex flex-column text-left pa-4 h-auto">
-									<span class="pa-2 text-left">
-										<v-icon icon="mdi mdi-logout"></v-icon> <span style="font-size: 14px; font-weight: 600"> Edit </span>
+									<span class="pa-2 text-left d-flex">
+										<div class="mr-4" style="width: 20px; height: 20px">
+											<v-img
+												src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+												contain
+												width="100"
+												height="100"
+											></v-img>
+										</div>
+
+										<span style="font-size: 14px; font-weight: 600; color: #969696">Edit</span>
 									</span>
-									<span class="pa-2" flat>
-										<v-icon icon="mdi mdi-logout"></v-icon> <span style="font-size: 14px; font-weight: 600">Set as default </span>
+									<span class="pa-2 text-left d-flex">
+										<div class="mr-4" style="width: 20px; height: 20px">
+											<v-img
+												src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718101388/umoja/Clipboard_Check_me7i9x.svg"
+												contain
+												width="100"
+												height="100"
+											></v-img>
+										</div>
+										<span style="font-size: 14px; font-weight: 600; color: #969696">Set as default</span>
 									</span>
-									<span class="pa-2" flat>
-										<v-icon icon="mdi mdi-delete"></v-icon> <span style="font-size: 14px; font-weight: 600">Delete </span>
+									<span class="pa-2 text-left d-flex">
+										<div class="mr-4" style="width: 20px; height: 20px">
+											<v-img
+												src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718101570/umoja/Trash_Bin_Trash_m6u5on.svg"
+												contain
+												width="100"
+												height="100"
+											></v-img>
+										</div>
+										<span style="font-size: 14px; font-weight: 600; color: #c20052">Delete</span>
 									</span>
+
+								
 								</v-card>
 							</v-menu>
 						</div>
@@ -272,7 +309,7 @@
 						icon="mdi mdi-information-outline"
 						type="warning"
 						variant="tonal"
-						class="mt-5"
+						class="mt-5 pa-3"
 						style="font-size: 16px; font-weight: 400"
 					></v-alert>
 
@@ -289,13 +326,13 @@
 
 			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat rel="noopener" style="justify-content: between">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
-					Packing Slip <v-icon icon="mdi mdi-information-outline" size="24"></v-icon>
+					Packing Slip <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
 				<div class="cardStyle">
 					<div class="d-flex justify-space-between align-center w-100">
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" color="#FDF1ED">
-								<v-icon icon="mdi mdi-equal-box"></v-icon>
+							<v-avatar class="mr-4" size="50" color="#EDEDED">
+								<v-img width="18" height="18" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718102214/umoja/Vector_ncodnt.svg"></v-img>
 							</v-avatar>
 							<div>
 								<p style="font-size: 16px; font-weight: 600; color: #333333">Packing Slip Template</p>
@@ -324,7 +361,7 @@
 			<div class="px-6 d-flex justify-space-between">
 				<div class="d-flex align-center ga-3">
 					<v-avatar color="#EDF3F0" size="50" class="mr-2">
-						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718102885/umoja/Vector_mq9lgb.svg" />
 					</v-avatar>
 					<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Add Package</p>
 				</div>
@@ -540,14 +577,16 @@
 										v-bind="attrs"
 										v-on="on"
 										:value="formattedDate"
-										label="Select Date Range"
+										:label="computedLabel1"
 										outlined
 										dense
-										icon-color="#2C6E63"
-										append-inner-icon="mdi mdi-calendar"
 										readonly
 										@click:append-inner="openMenu"
-									></v-text-field>
+									>
+										<template v-slot:append-inner>
+											<v-icon color="#2C6E63">mdi mdi-calendar</v-icon>
+										</template>
+									</v-text-field>
 								</template>
 								<v-card>
 									<VCalender v-model="dateRange" mode="range" @change="updateDate" />
@@ -614,8 +653,8 @@
 		<v-sheet width="100vw" max-width="669px" class="cardStyle px-0">
 			<div class="px-6 d-flex justify-space-between">
 				<div class="d-flex align-center">
-					<v-avatar color="#EDF3F0" size="50" class="mr-2">
-						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+					<v-avatar color="#EDF3F0" size="70" class="mr-2">
+						<v-img width="28" height="20" color="green" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718105027/umoja/Vector_hsb576.svg" />
 					</v-avatar>
 					<div class="mx-4">
 						<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Local Delivery</p>
@@ -643,14 +682,14 @@
 				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
 			</div>
 			<div class="px-7">
-				<v-row class="mt-2">
+				<v-row class="mt-0">
 					<v-col>
 						<p class="inputLabel">City</p>
 						<v-text-field placeholder="Enter city" density="comfortable"> </v-text-field
 					></v-col>
 					<v-col>
 						<p class="inputLabel">State</p>
-						<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"> </v-select>
+						<v-select placeholder="Select State" density="comfortable"> </v-select>
 					</v-col>
 					<v-col>
 						<p class="inputLabel">Zipcode</p>
@@ -683,8 +722,13 @@
 		<v-sheet width="100vw" max-width="669px" class="cardStyle px-0">
 			<div class="px-6 d-flex justify-space-between">
 				<div class="d-flex align-center">
-					<v-avatar color="#EDF3F0" size="50" class="mr-2">
-						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+					<v-avatar color="#EDF3F0" size="70" class="mr-2">
+						<v-img
+							width="40"
+							height="40"
+							color="green"
+							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718105858/umoja/Routing_2_wvo6mc.svg"
+						/>
 					</v-avatar>
 					<div class="mx-4">
 						<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Local Pickups</p>
@@ -712,7 +756,7 @@
 				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
 			</div>
 			<div class="px-7">
-				<v-row class="mt-2">
+				<v-row class="">
 					<v-col>
 						<p class="inputLabel">City</p>
 						<v-text-field placeholder="Enter city" density="comfortable"> </v-text-field
@@ -768,14 +812,14 @@ export default {
 					value: "umoja-logistics",
 					text: "Umoja Logistics",
 					description: "Let Umoja handle your entire business logistics and make it easier for you",
-					icon: "mdi mdi-truck",
+					icon: "https://res.cloudinary.com/payhospi/image/upload/v1717407683/umoja/favicon_fpqa9y.png",
 					none: "",
 				},
 				{
 					value: "manual-shipping",
 					text: "Manual Shipping",
 					description: "The business owners handles everything concerns shipping their product",
-					icon: "mdi mdi-package-variant",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718096905/umoja/Hand_Stars_ezru3e.svg",
 					none: "",
 				},
 			],
@@ -787,8 +831,11 @@ export default {
 			return useVendorStore();
 		},
 		computedLabel() {
-			console.log(this.selected);
+			console.log("Selected ", this.selected);
 			return this.selected ? "" : "Select Shipping Method";
+		},
+		computedLabel1() {
+			return this.menu ? "" : "Select date";
 		},
 		formattedDate() {
 			const options = { year: "numeric", month: "long", day: "numeric" };

@@ -15,13 +15,20 @@
 						<v-avatar class="mr-4" size="50" color="#EDEDED">
 							<v-icon icon="mdi mdi-map-marker"></v-icon>
 						</v-avatar>
+
 						<div>
 							<p style="font-size: 16px; font-weight: 600; color: #333333">Store location</p>
 							<p style="font-size: 16px; font-weight: 500; color: #969696">Ghana</p>
 						</div>
 					</div>
-					<v-btn variant="text" class="ml-4 menubar text-grey-darken-3" size="default" style="font-weight: 600; font-size: 16px">
-						<v-icon class="mr-2" icon="mdi mdi-pencil-outline"></v-icon>
+					<v-btn variant="text" class="ml-4 menubar text-grey-darken-3 d-flex align-center" size="default" style="font-weight: 600; font-size: 16px">
+						<v-img
+							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+							contain
+							class="mr-1"
+							width="20"
+							height="20"
+						></v-img>
 						Edit
 					</v-btn>
 				</div>
@@ -41,8 +48,13 @@
 					<div class="cardStyle pa-4">
 						<div class="d-flex justify-space-between align-center w-100">
 							<div class="d-flex">
-								<v-avatar class="mr-4" size="50" color="#EDF0EF">
-									<v-icon icon="mdi mdi-equal-box"></v-icon>
+								<v-avatar color="#EDF0EF" size="50" class="mr-2">
+									<v-img
+										width="28"
+										height="20"
+										color="green"
+										src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718106780/umoja/Vector_dkiz5b.svg"
+									/>
 								</v-avatar>
 								<div>
 									<p style="font-size: 16px; font-weight: 600; color: #333333">Africa <v-icon icon="mdi mdi-chevron-down"></v-icon></p>
@@ -58,12 +70,29 @@
 									</template>
 
 									<v-card class="bg-white d-flex flex-column text-left pa-4 h-auto">
-										<span class="pa-2 text-left">
-											<v-icon icon="mdi mdi-logout"></v-icon> <span style="font-size: 14px; font-weight: 600"> Edit Zone </span>
+										<span class="pa-2 text-left d-flex">
+											<div class="mr-4" style="width: 20px; height: 20px">
+												<v-img
+													src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+													contain
+													width="100"
+													height="100"
+												></v-img>
+											</div>
+
+											<span style="font-size: 14px; font-weight: 600">Edit Zone</span>
 										</span>
 
-										<span class="pa-2" flat style="color: #c20052">
-											<v-icon icon="mdi mdi-delete"></v-icon> <span style="font-size: 14px; font-weight: 600">Delete Zone </span>
+										<span class="pa-2 text-left d-flex">
+											<div class="mr-4" style="width: 20px; height: 20px">
+												<v-img
+													src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718101570/umoja/Trash_Bin_Trash_m6u5on.svg"
+													contain
+													width="100"
+													height="100"
+												></v-img>
+											</div>
+											<span style="font-size: 14px; font-weight: 600; color: #c20052">Delete Zone</span>
 										</span>
 									</v-card>
 								</v-menu>
@@ -110,8 +139,13 @@
 					<div class="cardStyle pa-4">
 						<div class="d-flex justify-space-between align-center w-100">
 							<div class="d-flex">
-								<v-avatar class="mr-4" size="50" color="#FDF1ED">
-									<v-icon icon="mdi mdi-equal-box"></v-icon>
+								<v-avatar color="#FDF1ED" size="50" class="mr-2">
+									<v-img
+										width="28"
+										height="20"
+										color="green"
+										src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718107235/umoja/Vector_iozllt.svg"
+									/>
 								</v-avatar>
 								<div>
 									<p style="font-size: 16px; font-weight: 600; color: #333333">Asia <v-icon icon="mdi mdi-chevron-down"></v-icon></p>
@@ -178,6 +212,188 @@
 						Add rate
 					</v-btn>
 				</v-card>
+
+				<v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener" style="justify-content: between">
+					<div class="cardStyle pa-4">
+						<div class="d-flex justify-space-between align-center w-100">
+							<div class="d-flex">
+								<v-avatar color="#EDF0EF" size="50" class="mr-2">
+									<v-img
+										width="28"
+										height="20"
+										color="green"
+										src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718106780/umoja/Vector_dkiz5b.svg"
+									/>
+								</v-avatar>
+								<div>
+									<p style="font-size: 16px; font-weight: 600; color: #333333">Domestic <v-icon icon="mdi mdi-chevron-down"></v-icon></p>
+									<p style="font-size: 16px; font-weight: 500; color: #969696">
+										Algerien, Angola, Ascension... <span style="color: #1273eb">Show all</span>
+									</p>
+								</div>
+							</div>
+							<div class="d-flex">
+								<v-menu>
+									<template v-slot:activator="{ props }">
+										<v-icon icon="mdi mdi-dots-horizontal" v-bind="props"></v-icon>
+									</template>
+
+									<v-card class="bg-white d-flex flex-column text-left pa-4 h-auto">
+										<span class="pa-2 text-left d-flex">
+											<div class="mr-4" style="width: 20px; height: 20px">
+												<v-img
+													src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+													contain
+													width="100"
+													height="100"
+												></v-img>
+											</div>
+
+											<span style="font-size: 14px; font-weight: 600">Edit Zone</span>
+										</span>
+
+										<span class="pa-2 text-left d-flex">
+											<div class="mr-4" style="width: 20px; height: 20px">
+												<v-img
+													src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718101570/umoja/Trash_Bin_Trash_m6u5on.svg"
+													contain
+													width="100"
+													height="100"
+												></v-img>
+											</div>
+											<span style="font-size: 14px; font-weight: 600; color: #c20052">Delete Zone</span>
+										</span>
+									</v-card>
+								</v-menu>
+							</div>
+						</div>
+					</div>
+
+					<v-row class="mt-2" style="font-size: 16px; font-weight: 600; color: #333">
+						<v-col cols="3">
+							<p>Rate name <v-icon icon="mdi mdi-chevron-down"></v-icon></p>
+						</v-col>
+						<v-col cols="3">
+							<p>Condition</p>
+						</v-col>
+						<v-col>
+							<p>Price</p>
+						</v-col>
+					</v-row>
+					<v-divider class="my-2"></v-divider>
+					<v-row class="mb-1" style="font-size: 16px; font-weight: 400; color: #333">
+						<v-col cols="3">
+							<p>Domestic</p>
+						</v-col>
+						<v-col cols="3">
+							<p>_</p>
+						</v-col>
+						<v-col>
+							<p>€15.00 EUR</p>
+						</v-col>
+					</v-row>
+
+					<v-btn
+						@click="addRateModal = true"
+						style="border: 1px solid #e5e5e5"
+						variant="outlined"
+						size="default"
+						class="mt-4 menubar text-grey-darken-3"
+					>
+						Add rate
+					</v-btn>
+				</v-card>
+
+				<v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener" style="justify-content: between">
+					<div class="cardStyle pa-4">
+						<div class="d-flex justify-space-between align-center w-100">
+							<div class="d-flex">
+								<v-avatar color="#EDF0EF" size="50" class="mr-2">
+									<v-img
+										width="28"
+										height="20"
+										color="green"
+										src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718106780/umoja/Vector_dkiz5b.svg"
+									/>
+								</v-avatar>
+								<div>
+									<p style="font-size: 16px; font-weight: 600; color: #333333">International <v-icon icon="mdi mdi-chevron-down"></v-icon></p>
+									<p style="font-size: 16px; font-weight: 500; color: #969696">
+										Algerien, Angola, Ascension... <span style="color: #1273eb">Show all</span>
+									</p>
+								</div>
+							</div>
+							<div class="d-flex">
+								<v-menu>
+									<template v-slot:activator="{ props }">
+										<v-icon icon="mdi mdi-dots-horizontal" v-bind="props"></v-icon>
+									</template>
+
+									<v-card class="bg-white d-flex flex-column text-left pa-4 h-auto">
+										<span class="pa-2 text-left d-flex">
+											<div class="mr-4" style="width: 20px; height: 20px">
+												<v-img
+													src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+													contain
+													width="100"
+													height="100"
+												></v-img>
+											</div>
+
+											<span style="font-size: 14px; font-weight: 600">Edit Zone</span>
+										</span>
+
+										<span class="pa-2 text-left d-flex">
+											<div class="mr-4" style="width: 20px; height: 20px">
+												<v-img
+													src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718101570/umoja/Trash_Bin_Trash_m6u5on.svg"
+													contain
+													width="100"
+													height="100"
+												></v-img>
+											</div>
+											<span style="font-size: 14px; font-weight: 600; color: #c20052">Delete Zone</span>
+										</span>
+									</v-card>
+								</v-menu>
+							</div>
+						</div>
+					</div>
+
+					<v-row class="mt-2" style="font-size: 16px; font-weight: 600; color: #333">
+						<v-col cols="3">
+							<p>Rate name <v-icon icon="mdi mdi-chevron-down"></v-icon></p>
+						</v-col>
+						<v-col cols="3">
+							<p>Condition</p>
+						</v-col>
+						<v-col>
+							<p>Price</p>
+						</v-col>
+					</v-row>
+					<v-divider class="my-2"></v-divider>
+					<v-row class="mb-1" style="font-size: 16px; font-weight: 400; color: #333">
+						<v-col cols="3">
+							<p>International</p>
+						</v-col>
+						<v-col cols="3">
+							<p>_</p>
+						</v-col>
+						<v-col>
+							<p>€15.00 EUR</p>
+						</v-col>
+					</v-row>
+
+					<v-btn
+						@click="addRateModal = true"
+						style="border: 1px solid #e5e5e5"
+						variant="outlined"
+						size="default"
+						class="mt-4 menubar text-grey-darken-3"
+					>
+						Add rate
+					</v-btn>
+				</v-card>
 			</v-card>
 		</div>
 		<div class="d-flex justify-end ga-4">
@@ -194,12 +410,12 @@
 		<v-sheet width="100vw" max-width="669px" class="cardStyle px-0">
 			<div class="px-6 d-flex justify-space-between">
 				<div class="d-flex align-center">
-					<v-avatar color="#EDF3F0" size="50" class="mr-4">
-						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+					<v-avatar color="#EDF3F0" size="50" class="mr-3">
+						<v-img width="28" height="20" color="green" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718106780/umoja/Vector_dkiz5b.svg" />
 					</v-avatar>
 					<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Create new shipping zone</p>
 				</div>
-				<v-icon @click="createZoneModal = false" size="30" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
+				<v-icon @click="createZoneModal = false" size="24" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
 			</div>
 			<v-divider class="my-4"></v-divider>
 			<div class="px-7">
@@ -214,7 +430,7 @@
 					persistent-hint
 					variant="outlined"
 					prepend-inner-icon="mdi mdi-magnify"
-					placeholder="Search Products"
+					placeholder="Search countries and regions by name or code"
 					density="compact"
 					block
 				>
@@ -260,7 +476,7 @@
 			<div class="px-6 d-flex justify-space-between">
 				<div class="d-flex align-center">
 					<v-avatar color="#EDF3F0" size="70" class="mr-2">
-						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+						<v-img width="20" height="20" color="green" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718108482/umoja/Vector_qthzhv.svg" />
 					</v-avatar>
 					<div class="mx-4">
 						<p style="color: #333; font-size: 24px; font-weight: 600; line-height: 20px; letter-spacing: -0.24px">Add Rate</p>
@@ -270,7 +486,7 @@
 						<p style="color: #969696; font-size: 16px; font-weight: 500; letter-spacing: -0.16px">shipping to a particular region</p>
 					</div>
 				</div>
-				<v-icon @click="addRateModal = false" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
+				<v-icon @click="addRateModal = false" size="24" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
 			</div>
 			<v-divider class="my-4"></v-divider>
 
