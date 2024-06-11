@@ -64,7 +64,7 @@
 							</div>
 						</div>
 						<div class="d-flex align-center mt-4">
-							<h1 class="bigpriceClass2">{{hasReview ? `${(totalReview) / 1000}K` : 0}}</h1>
+							<h1 class="bigpriceClass2">{{hasReview ? convertToShorthand(totalReview) : 0}}</h1>
 							<!-- <div class="text-left">
 								<v-chip style="font-weight: 600; font-size: 14px; line-height: 18px; color: #00966d" class="ml-3 text-green-lighten-2"
 									><v-icon icon="mdi mdi-trending-up"></v-icon> {{hasReview ? '10%' : '0%'}}</v-chip
@@ -402,7 +402,7 @@
 </style>
 <script setup>
 import {getAllReview, filterReview, replyReview, deleteReview, editReview, dissapproveReview, searchReview} from '~/composables/useVendorReview';
-import { formattedPrice } from '~/utils/price';
+import { formattedPrice, convertToShorthand } from '~/utils/price';
 import { useVendorStore } from '~/stores/vendorStore';
 import {getDateTime} from '~/utils/date'
 import {ref, onBeforeMount} from 'vue';
@@ -444,24 +444,20 @@ import { vendorUseApi } from "~/composables/vendorApi";
 			const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
 			return localDate.toISOString().substring(0, 10);
 		});
-		onBeforeMount(async () => {
+		onMounted(async () => {
 			if (vendor.value.vendor_details.review_count > 0){
 			await getVendorReview()
 		}
 		})
-		watch(() => selectedPage.value, async () => {
+		watch(() => [selectedPage.value, formattedDate.value], async ([newPage, newDate]) => {
 			if (vendor.value.vendor_details.review_count > 0){
-			await getVendorReview()
+				if (newDate || newPage){
+					await getVendorReview()
+				}
+
 		}
 		});
-		watch(() => formattedDate.value, async (newval) => {
-			if (!newval){
-				return 
-			}
-			if (vendor.value.vendor_details.review_count > 0){
-			await getVendorReview()
-		}
-		});
+
 		async function setReview(stats){
 			status.value = stats
 			await getVendorReview()
@@ -535,7 +531,6 @@ import { vendorUseApi } from "~/composables/vendorApi";
 				ratingsCount.value = res.data.ratings_count
 				currentPage.value = res.data.pagination.current_page
 				pagesNo.value = res.data.pagination.last_page
-
 				searchTerm.value = ""
 				status.value = ""
 				selectedDate.value = null
@@ -555,12 +550,6 @@ import { vendorUseApi } from "~/composables/vendorApi";
 				console.error(error)
 			}
 		}
-		watch(() => vendorStore.vendor, async (newval, oldval) => {
-			vendor.value = newval
-			if (newval && vendor.value.vendor_details?.review_count > 0){
-				await getVendorReview()
-			}
-		});
 
 
 </script>

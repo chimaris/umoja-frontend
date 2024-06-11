@@ -78,7 +78,7 @@
         <p v-show="sidebar" :class="vendorStore.selectedItem == n.text? 'text-green ':'text-grey'" class="style-3">{{ n.text }}</p>
         </div>
         <div class="d-flex align-center">
-        <v-badge rounded="lg" color="green" content="2" size="12" v-if="n.text == 'Notifications'"></v-badge>
+        <v-badge rounded="lg" color="green" :content="vendor.vendor_details.unread_notification_count" size="12" v-if="n.text == 'Notifications' && vendor.vendor_details.unread_notification_count > 0"></v-badge>
         <v-icon color="green" size="6" v-if="vendorStore.selectedItem == n.text && (n.text !== 'Notifications') && (n.text !== 'All Apps')" icon="mdi mdi-circle"></v-icon>
         <v-icon  size="20" v-if=" n.text == 'All Apps'" :icon="openapps?'mdi mdi-chevron-up':'mdi mdi-chevron-down'"></v-icon>
         </div>

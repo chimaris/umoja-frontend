@@ -125,7 +125,7 @@ color: #969696;">vs last 7 days</p>
                 <v-card v-if="hasSale" style="position: absolute;top:20%;left: 30%;transform: translate(-50%, 0);"  width="" class=" pa-3 px-6 rounded-lg bg-green">
               <p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>{{mapCountry}}</p>
               <div class="pt-2 align-center d-flex">
-                  <v-progress-circular class="mr-4" size="48" :model-value="currentCountry?.percentage">{{currentCountry?.percentage}}%</v-progress-circular>            <div>
+                  <v-progress-circular class="mr-4" size="48" style="font-size: 12px" :model-value="currentCountry?.percentage">{{currentCountry?.percentage}}%</v-progress-circular>            <div>
                       <p style="font-weight: 500;font-size: 14px" class="text-capitalize">{{currentCountry?.order_count}}</p>
                       <p style="font-weight: 500;
       font-size: 10px;
@@ -519,7 +519,7 @@ import { useVendorStore } from '~/stores/vendorStore';
 import emojiFlags from 'emoji-flags';
 import axios from 'axios'
 import {ref, onBeforeMount, onMounted} from 'vue';
-import {formattedPrice} from '~/utils/price'
+import {formattedPrice, convertToShorthand } from '~/utils/price'
 import {getAllReview} from '~/composables/useVendorReview';
 import {countryCodes} from '~/utils/countryapi';
 import {getdateRegistered} from '~/utils/date'
@@ -578,7 +578,7 @@ import { findIndex } from 'lodash';
 			}
 		}
 	}
-    onBeforeMount(async () => {
+    onMounted(async () => {
       if (hasSale.value){
         weeklyRevenue.value = await getWeeklyRevenue()
         totalRevenue.value = await getTotalRevenue()
@@ -653,7 +653,7 @@ watch(() => mapCountry.value, async () => {
         img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691668/Frame_427320547_hzperi.png',
         name: 'Total Customers',
         tooltip: 'Total customers in the last seven days',
-        amount: hasSale.value ? noCusomers.value : '0',
+        amount: hasSale.value ?  convertToShorthand(noCusomers.value) : '0',
         trend: '0',
         trending:true
     },
@@ -661,7 +661,7 @@ watch(() => mapCountry.value, async () => {
         img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691671/Frame_427320547_3_rhk1fq.png',
         name: 'Total Transactions',
         tooltip: 'Total transactions in the last seven days',
-        amount: hasSale.value ? noTransactions.value :'0',
+        amount: hasSale.value ?  convertToShorthand(noTransactions.value) :'0',
         trend: '0',
         trending:true
     },
@@ -669,17 +669,12 @@ watch(() => mapCountry.value, async () => {
         img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691668/Frame_427320547_2_krqzsv.png',
         name: 'Total Products Sold',
         tooltip: 'Total products sold in the last seven days',
-        amount: hasSale.value ? noProductSold.value : '0',
+        amount: hasSale.value ?  convertToShorthand(noProductSold.value) : '0',
         trend: '0',
         trending:true
     },
    ]
     })
 
-const imgs = [
-  'https://res.cloudinary.com/payhospi/image/upload/v1685693850/Rectangle_1895_u1foj0.png',
-  'https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1896_x07ole.png',
-  'https://res.cloudinary.com/payhospi/image/upload/v1685693851/Rectangle_1897_ca06qx.png'
-]
 
 </script>

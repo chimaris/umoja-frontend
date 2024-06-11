@@ -394,6 +394,7 @@
 <style></style>
 <script>
 import { useProductStore } from "~/stores/productStore.js";
+import { useApi } from "~/composables/useApi";
 import { useUserStore } from "~/stores/userStore";
 import {getdateRegistered} from '~/utils/date'
 import { countries, countryCodes } from "~/utils/countryapi";
@@ -403,8 +404,8 @@ import {discoverPageProducts, loadProduct} from '~/composables/useProducts'
 export default {
 	setup(){
 		const userStore = useUserStore();
-		const availablePosts = computed(() => userStore.allPosts.slice(0, 10));
-		const availableArticle = computed(() => userStore.allArticles)
+		const availablePosts = ref([]);
+		const availableArticle = ref([]);
 		const productStore = useProductStore()
 		const items = computed(() => productStore.products.popular)
 		const page = ref(1)
@@ -421,9 +422,37 @@ export default {
 				return
 			}
 		}
-		onBeforeMount(async () => {
+		async function getPosts(){
+			const api = useApi()
+			try{
+				const response = await api({
+					url: `allposts/?page=${page}`,
+					method: 'GET'
+				});
+				return response.data.data
+			}catch(error){
+				console.error(error)
+				return []
+			}
+		}
+		async function getArticles(){
+			const api = useApi()
+			try{
+				const response = await api({
+					url: `allarticles`,
+					method: 'GET'
+				});
+				return response.data.data
+			}catch(error){
+				console.error(error)
+				return []
+			}
+		}
+		onMounted(async () => {
 			productStore.products.popular  = []
 			await discoverPageProducts(page.value)
+			availablePosts.value = await getPosts()
+			availableArticle.value = await getArticles()
 		})
 		
 		return{
@@ -434,7 +463,9 @@ export default {
 			productStore,
 			page,
 			load,
-			hasReached
+			hasReached,
+			getPosts,
+			getArticles
 		}
 	},
 	data() {

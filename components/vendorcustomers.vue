@@ -706,9 +706,9 @@ import Underline from "@tiptap/extension-underline";
 import Link from "@tiptap/extension-link";
 import { useVendorStore } from "~/stores/vendorStore";
 import { getVendorFollowers, getNoFollowers } from "~/composables/vendorCustomers";
-import { formattedPrice } from "~/utils/price";
+import { formattedPrice, convertToShorthand  } from "~/utils/price";
 import { getdateRegistered } from "~/utils/date";
-import { sortedIndexBy } from "lodash";
+
 
 export default {
 	setup() {
@@ -718,7 +718,7 @@ export default {
 		const vendorFollowers = ref([]);
 		const loading = ref(false);
 
-		onBeforeMount(async () => {
+		onMounted(async () => {
 			if (hasCustomer.value) {
 				loading.value = true;
 				const id = vendor.value.vendor_details?.id;
@@ -734,7 +734,7 @@ export default {
 					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320547_6_u4cwdq.png",
 					name: "Total Customers",
 					tooltip: "Total customers in your shop",
-					amount: hasCustomer.value ? vendorFollowers.value?.total_order_users : "0",
+					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.total_order_users) : "0",
 					trend: "0",
 					trending: true,
 				},
@@ -742,7 +742,7 @@ export default {
 					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320548_1_bvohqz.png",
 					name: "Followers",
 					tooltip: "Total members in the last seven days",
-					amount: hasCustomer.value ? vendorFollowers.value?.total_followers : "0",
+					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.total_followers) : "0",
 					trend: "0",
 					trending: true,
 				},
@@ -750,7 +750,7 @@ export default {
 					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906397/Frame_427320547_7_znnge2.png",
 					name: "Active",
 					tooltip: "Active customers in the last seven days",
-					amount: hasCustomer.value ? vendorFollowers.value?.active_followers : "0",
+					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.active_followers) : "0",
 					trend: "0",
 					trending: true,
 				},

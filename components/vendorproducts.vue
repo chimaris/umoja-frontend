@@ -395,6 +395,7 @@ export default {
 		const vendorStore = useVendorStore();
 		const vendor = ref(vendorStore.vendor);
 		const hasProduct = computed(() => vendor.value.vendor_details?.product_count > 0);
+		const debouncedSearchQuery = ref('');
 
 		const choose = (x) => {
 			ctx.emit("changePage", x);
@@ -402,19 +403,26 @@ export default {
 
 		onEvent("product-updated", fetchFilteredProducts);
 
-		onBeforeMount(async () => {
-			if (vendor.value.vendor_details?.product_count > 0) {
-				await fetchFilteredProducts();
-			}
-		});
+		// onMounted(async () => {
+		// 	if (vendor.value.vendor_details?.product_count > 0) {
+		// 		await fetchFilteredProducts();
+		// 	}
+		// });
+
+		const debounceSearch = debounce((value) => {
+			debouncedSearchQuery.value = value;
+			}, 1000);
+
+		watch(searchQuery, (newValue) => {
+			debounceSearch(newValue.trim());
+			});
 		watch(
-			() => [tab.value, selectedPage.value, searchQuery.value],
-			async () => {
+			[tab, selectedPage, debouncedSearchQuery], async () => {
 				if (hasProduct.value) {
-					await fetchFilteredProducts();
+				await fetchFilteredProducts();
 				}
 			}
-		);
+			);
 
 		const editProduct = (product) => {
 			choose("Edit Product");
@@ -440,9 +448,9 @@ export default {
 				if (tab.value.name === "Archived") {
 					url = `vendor/products/?archive=true&page=${selectedPage.value}`;
 				}
-				if (searchQuery.value.trim()) {
+				if (debouncedSearchQuery.value.trim()) {
 					loading.value = true;
-					url = `vendor/products/?search_global=${searchQuery.value}&page=${selectedPage.value}`;
+					url = `vendor/products/?search_global=${debouncedSearchQuery.value}&page=${selectedPage.value}`;
 				}
 
 				const response = await api({
@@ -464,9 +472,7 @@ export default {
 
 			return vendorProducts.Products;
 		}
-		// onBeforeMount(async () => {
-		// 	await vendorProducts.getAllProduct();
-		// });
+
 
 		return {
 			choose,

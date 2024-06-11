@@ -10,12 +10,12 @@
 							</p>
 						</div>
 						<div class="d-flex align-center justify-space-between">
-							<h1 style="font-weight: 600; font-size: 40px; line-height: 60px; color: #edf0ef">{{!hasOrder? formattedPrice(0.00) : orderStore.revenue[0]?.total_amount? `€ ${(orderStore.revenue[0]?.total_amount/1000000)}M` : formattedPrice(0.00)}}</h1>
+							<h1 style="font-weight: 600; font-size: 40px; line-height: 60px; color: #edf0ef">{{!hasOrder? formattedPrice(0.00) : orderStore.revenue[0]?.total_amount? formattedPrice(orderStore.revenue[0]?.total_amount) : formattedPrice(0.00)}}</h1>
 							<div class="pa-4" style="position: absolute; bottom: 0; width: 100%; left: 0">
-								<v-progress-linear class="rounded-xl"  :model-value="!hasOrder? 0 : orderStore.revenue[0]?.total_amount? `${(orderStore.revenue[0]?.total_amount/1000000)}` : 0" :height="5"></v-progress-linear>
+								<v-progress-linear class="rounded-xl"  :model-value="!hasOrder? 0 : orderStore.revenue[0]?.total_amount? `${(orderStore.revenue[0]?.total_amount)}` : 0" :height="5"></v-progress-linear>
 								<div class="d-flex pt-3 justify-space-between">
-									<p class="tiny">{{!hasOrder? '0%' : orderStore.revenue[0]?.total_amount? `${(orderStore.revenue[0]?.total_amount/1000000)}` : 0}}</p>
-									<p class="tiny">{{!hasOrder? '' :'€ 65M Last year'}}</p>
+									<p class="tiny">{{!hasOrder? '0%' : orderStore.revenue[0]?.total_amount? formattedPrice(orderStore.revenue[0]?.total_amount) : 0}}</p>
+									<!-- <p class="tiny">{{!hasOrder? '' :'€ 65M Last year'}}</p> -->
 								</div>
 							</div>
 						</div>
@@ -75,9 +75,9 @@
 									<div class="d-flex align-center">
 										<p class="ml-2 tiny2">{{ n.product_name }}</p>
 									</div>
-									<p class="tiny2">€ {{(n.total_amount/1000000)}}M</p>
+									<p class="tiny2">{{formattedPrice(n.total_amount)}}</p>
 								</div>
-								<v-progress-linear class="rounded-xl" :color="colors[i]" :model-value="n.total_amount/1000000" :height="5"></v-progress-linear>
+								<v-progress-linear class="rounded-xl" :color="colors[i]" :model-value="n.total_amount" :height="5"></v-progress-linear>
 							</div>
 						</div>
 					</v-card>
@@ -144,7 +144,7 @@
 					<div class="d-flex justify-space-between">
 						<div>
 							<h4 class="mb-2 timernum d-flex align-center text-left">Revenue Growth <span class="ml-2 lightText">(EUR)</span></h4>
-							<p style="font-weight: 600; font-size: 48px; line-height: 60px; color: #333333">{{!hasOrder? formattedPrice(0.00) : saleRevenue[0]?.total_amount? `€ ${(saleRevenue[0]?.total_amount/1000)}K` : formattedPrice(0.00)}}</p>
+							<p style="font-weight: 600; font-size: 48px; line-height: 60px; color: #333333">{{!hasOrder? formattedPrice(0.00) : saleRevenue[0]?.total_amount? formattedPrice(saleRevenue[0]?.total_amount) : formattedPrice(0.00)}}</p>
 						</div>
 
 						<v-chip-group
@@ -683,7 +683,7 @@ import { useVendorStore } from '~/stores/vendorStore';
 
 		const hasOrder = computed(() => vendor.value.vendor_details?.order_count > 0)
 
-		onBeforeMount(async () => {
+		onMounted(async () => {
 			if (hasOrder.value){
 				soldProducts.value = await getSales()
 				soldCategories.value = await getCategories()
@@ -691,14 +691,23 @@ import { useVendorStore } from '~/stores/vendorStore';
 				await useOrderStore().getRevenues()
 			}
 		});
-		watch(() => filterProduct.value, async () => {
-			soldProducts.value = await getSales()
+		watch(() => filterProduct.value, async (newval) => {
+			if (hasOrder.value && newval){
+				soldProducts.value = await getSales()
+			}
+			
 		})
-		watch(() => filterCategory.value, async () => {
-			soldCategories.value = await getCategories()
+		watch(() => filterCategory.value, async (newval) => {
+			if (hasOrder.value && newval){
+				soldCategories.value = await getCategories()
+			}
+			
 		})
-		watch(() => filterRevenue.value, async () => {
-			saleRevenue.value = await getRevenue()
+		watch(() => filterRevenue.value, async (newval) => {
+			if (hasOrder.value && newval){
+				saleRevenue.value = await getRevenue()
+			}
+		
 		})
 
 		function getCurrentMonthIndex() {
@@ -721,6 +730,7 @@ import { useVendorStore } from '~/stores/vendorStore';
                     url: url,
                     method: 'GET'
                 });
+				
 				 return res.data
             }catch(error){
                 console.error(error)
@@ -742,6 +752,7 @@ import { useVendorStore } from '~/stores/vendorStore';
                     url: url,
                     method: 'GET'
                 });
+				
 				 return res.data
             }catch(error){
                 console.error(error)
@@ -768,6 +779,7 @@ import { useVendorStore } from '~/stores/vendorStore';
                     url: url,
                     method: 'GET'
                 });
+				
 				return res.data
             }catch(error){
                 console.error(error)

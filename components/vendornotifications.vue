@@ -241,11 +241,13 @@ font-weight: 500;" class="mt-1">{{ n.time }}</p>
 }</style>
 <script setup>
 import {ref} from 'vue';
+import { useVendorStore } from '~/stores/vendorStore';
 import {formatRelativeTime} from '~/utils/date'
 import { getNotification, getProductNotification , getCustomerNotification, getReviewNotification, getOrderNotification } from '~/composables/notification';
 
 
 const tab = ref('All')
+const vendor = ref(useVendorStore().vendor)
 const Notification = ref([])
 const orderNotification = ref([])
 const customerNotification = ref([])
@@ -257,11 +259,14 @@ function choose(x){
   emit('changePage', x)
 }
 onMounted(async() => {
-  Notification.value = await getNotification()
-  orderNotification.value = await getOrderNotification()
-  productNotification.value = await getProductNotification()
-  customerNotification.value = await getCustomerNotification()
-  reviewNotification.value = await getReviewNotification()
+  if (vendor.value.vendor_details.unread_notification_count > 0){
+    Notification.value = await getNotification()
+    orderNotification.value = await getOrderNotification()
+    productNotification.value = await getProductNotification()
+    customerNotification.value = await getCustomerNotification()
+    reviewNotification.value = await getReviewNotification()
+  }
+
 });
       const notifications = [
         {
