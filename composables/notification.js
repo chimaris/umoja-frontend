@@ -1,11 +1,9 @@
 import { vendorUseApi } from "./vendorApi";
 import {ref} from 'vue'
 
-export const loading = ref(false)
 export const getNotification = async(tab) => {
     const api = vendorUseApi()
     try{
-        loading.value = true 
         const res = await api({
             url: 'vendor/notifications',
             method: 'GET'
@@ -15,14 +13,11 @@ export const getNotification = async(tab) => {
     }catch(error){
         console.error(error)
         return []
-    }finally{
-        loading.value = false
     }
 }
 export const getOrderNotification = async() => {
     const api = vendorUseApi()
     try{
-        loading.value = true 
         const res = await api({
             url: 'vendor/notifications/orders',
             method: 'GET'
@@ -32,14 +27,11 @@ export const getOrderNotification = async() => {
     }catch(error){
         console.error(error)
         return []
-    }finally{
-        loading.value = false
     }
 }
 export const getReviewNotification = async() => {
     const api = vendorUseApi()
     try{
-        loading.value = true 
         const res = await api({
             url: 'vendor/notifications/reviews',
             method: 'GET'
@@ -49,14 +41,10 @@ export const getReviewNotification = async() => {
     }catch(error){
         console.error(error)
         return []
-    }finally{
-        loading.value = false
-    }
-}
+    }}
 export const getCustomerNotification = async() => {
     const api = vendorUseApi()
     try{
-        loading.value = true 
         const res = await api({
             url: 'vendor/notifications/customers',
             method: 'GET'
@@ -65,14 +53,11 @@ export const getCustomerNotification = async() => {
     }catch(error){
         console.error(error)
         return []
-    }finally{
-        loading.value = false
     }
 }
 export const getProductNotification = async() => {
     const api = vendorUseApi()
     try{
-        loading.value = true 
         const res = await api({
             url: 'vendor/notifications/products',
             method: 'GET'
@@ -82,8 +67,6 @@ export const getProductNotification = async() => {
     }catch(error){
         console.error(error)
         return []
-    }finally{
-        loading.value = false
     }
 }
 export const readNotification = async(id) => {
@@ -98,7 +81,5 @@ export const readNotification = async(id) => {
     }catch(error){
         console.error(error)
         return []
-    }finally{
-        loading.value = false
     }
 }

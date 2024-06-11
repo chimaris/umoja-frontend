@@ -242,7 +242,7 @@ font-weight: 500;" class="mt-1">{{ n.time }}</p>
 <script setup>
 import {ref} from 'vue';
 import {formatRelativeTime} from '~/utils/date'
-import { getNotification, getProductNotification , loading, getCustomerNotification, getReviewNotification, getOrderNotification } from '~/composables/notification';
+import { getNotification, getProductNotification , getCustomerNotification, getReviewNotification, getOrderNotification } from '~/composables/notification';
 
 
 const tab = ref('All')

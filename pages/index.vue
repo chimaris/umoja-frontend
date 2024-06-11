@@ -931,6 +931,9 @@ export default {
 	beforeUnmount() {
 		// this.timeline.kill()
 	},
+	async mounted(){
+		await useProductStore().fetchProducts();
+	},
 	created() {
 		// // this.tutorialStore.init()
 		// gsap.registerPlugin(CSSPlugin);
