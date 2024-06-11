@@ -37,7 +37,7 @@
 									<v-avatar class="mx-auto" :style="`border: 3px solid ${profileBorderColor};`" size="100">
 										<v-img class="bg-grey-lighten-3 rounded-xl" cover :src="vendor?.profile_photo"></v-img>
 									</v-avatar>
-									<h3 class="py-4" style="font-size: 24px; font-weight: 800; line-height: 30px">
+									<h3 class="py-4" style="font-size: 24px; text-transform: capitalize; font-weight: 800; line-height: 30px">
 										{{ vendor?.business_name }}
 									</h3>
 									<!-- <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon> -->
@@ -70,7 +70,7 @@
 									<v-avatar rounded="0" size="19"
 										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 									></v-avatar>
-									<p class="textClass px-4">{{ vendor?.address }}, {{ vendor?.city }}, {{ vendor?.state }} {{ vendor?.country_name }}</p>
+									<p style="text-transform: capitalize;" class="textClass px-4">{{ vendor?.address }}, {{ vendor?.city }}, {{ vendor?.state }} {{ vendor?.country_name }}</p>
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="px-6 pt-8">
@@ -111,7 +111,7 @@
 										<v-img class="bg-grey-lighten-3 rounded-xl" cover :src="vendor?.profile_photo"></v-img>
 									</v-avatar>
 									<div class="d-flex justify-space-between align-center py-5">
-										<h3 style="font-size: 20px; font-weight: 600; line-height: 25px">
+										<h3 style="font-size: 20px; text-transform: capitalize; font-weight: 600; line-height: 25px">
 											{{ vendor?.business_name }}
 										</h3>
 										<!-- <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon> -->
@@ -145,7 +145,7 @@
 									<v-avatar rounded="0" size="19"
 										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
 									></v-avatar>
-									<p class="textClass px-4">{{ vendor?.address }}, {{ vendor?.city }}, {{ vendor?.state }} {{ vendor?.country_name }}</p>
+									<p style="text-transform: capitalize;" class="textClass px-4">{{ vendor?.address }}, {{ vendor?.city }}, {{ vendor?.state }} {{ vendor?.country_name }}</p>
 								</div>
 								<v-divider></v-divider>
 								<v-sheet class="pt-8">

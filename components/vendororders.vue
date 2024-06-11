@@ -258,16 +258,16 @@ async function fetchFilteredOrders(){
 		console.error(error);
 	}
 }
-onBeforeMount(async () => {
+// onMounted(async () => {
+// 	if (vendor.value.vendor_details.order_count > 0){
+// 		await fetchFilteredOrders();
+// 	}
+// });
+
+watch(() => [tab.value, selectedPage.value], async() => {
 	if (vendor.value.vendor_details.order_count > 0){
-		await fetchFilteredOrders();
+		await fetchFilteredOrders(); 	
 	}
 });
 
-watch(() => tab.value, () => {
-	fetchFilteredOrders();
-});
-watch(() => selectedPage.value, () => {
-	fetchFilteredOrders();
-});
 </script>
