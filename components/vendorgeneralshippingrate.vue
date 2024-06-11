@@ -503,7 +503,7 @@
 				<p class="inputLabel">Price</p>
 				<v-text-field model-value="10.00" prefix="$" density="comfortable">
 					<template v-slot:append-inner>
-						<v-btn flat style="font-size: 12px" variant="tonal">Free</v-btn>
+						<v-btn flat style="font-size: 12px" class="pa-1" variant="tonal">Free</v-btn>
 					</template>
 				</v-text-field>
 
