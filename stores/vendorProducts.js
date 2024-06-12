@@ -75,11 +75,9 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   sub_category_id: this.textInfo.SubCategory,
                   gender: this.textInfo.Gender,
                   photo: this.pictureInfo,
-                  ust_index: this.priceInfo.ustIndex,
                   price: this.priceInfo.price,
                   commission: this.priceInfo.commission,
                   compare_at_price: this.priceInfo.comparePrice,
-                  tax_charge_on_product: this.priceInfo.chargeTax,
                   cost_per_item: this.priceInfo.costPerItem,
                   profit: this.priceInfo.profit,
                   margin: this.priceInfo.margin,
@@ -89,14 +87,12 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   sell_out_of_stock: this.inventoryInfo.continueSellingNoStock,
                   has_sku: this.inventoryInfo.hasSkuBarCode,
                   storage_location: this.inventoryInfo.storageAddress,
-                  product_ship_internationally: this.shippingInfo.shipsInternational,
                   gross_weight: this.shippingInfo.grossWeight,
                   net_weight:  this.shippingInfo.netWeight,
                   length: this.shippingInfo.length,
                   weight: this.shippingInfo.width,
                   height: this.shippingInfo.height,
                   shipping_method: this.shippingInfo.shippingOption,
-                  digital_product_or_service: this.shippingInfo.digitalProduct,
                   unit_per_item: this.generalInfo.unitperItem
                 }
               });

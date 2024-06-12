@@ -261,11 +261,11 @@
 							<div class="d-flex align-center">
 								<p style="color: #333; font-size: 20px; font-weight: 600">Item Price</p>
 							</div>
-							<div class="mt-6">
+							<!-- <div class="mt-6">
 								<p class="inputLabel">Ust Index (Optional)</p>
 								<v-select v-model="ustIndex" :items="['0%', '5%', '19%', '20%']" placeholder="Eg. 19%" density="comfortable"> </v-select>
-							</div>
-							<v-row>
+							</div> -->
+							<v-row class="mt-6">
 								<v-col>
 									<p class="inputLabel">Price</p>
 									<v-text-field :rules="numRules" v-model="price" placeholder="€ 0.00" density="comfortable"> </v-text-field
@@ -289,13 +289,13 @@
 									</v-tooltip>
 								</v-col>
 							</v-row>
-							<v-checkbox v-model="chargeTax" @click="chargeTax = !chargeTax" hide-details density="compact" color="#00966D">
+							<!-- <v-checkbox v-model="chargeTax" @click="chargeTax = !chargeTax" hide-details density="compact" color="#00966D">
 								<template v-slot:label>
 									<div style="color: #333; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
 										Charge tax on this product
 									</div>
 								</template>
-							</v-checkbox>
+							</v-checkbox> -->
 						</div>
 						<v-divider class="my-4"></v-divider>
 						<v-row class="px-5">
@@ -637,8 +637,8 @@
 								<p style="color: #333; font-size: 20px; font-weight: 600">Shipping</p>
 							</div>
 
-							<div style="overflow: hidden" class="cardStyle rounded-lg px-0 py-0">
-								<div class="pa-4" style="background: #edf3f0">
+							<div style="overflow: hidden" class="cardStyle rounded-lg px-0 py-4">
+								<!-- <div class="pa-4" style="background: #edf3f0">
 									<v-radio v-model="physicalProduct" @click="physicalProduct = !physicalProduct" hide-details density="compact" color="#00966D">
 										<template v-slot:label>
 											<div style="color: #00966d; font-size: 14px; font-weight: 500; line-height: 20px" class="ml-2 font-weight-medium">
@@ -646,7 +646,7 @@
 											</div>
 										</template>
 									</v-radio>
-								</div>
+								</div> -->
 								<div class="d-flex align-center">
 									<div class="pa-4">
 										<p class="inputLabel">Gross Weight</p>
@@ -721,7 +721,7 @@
 										</div>
 									</div>
 								</div>
-								<v-checkbox
+								<!-- <v-checkbox
 									v-model="shipsInternational"
 									@click="shipsInternational = !shipsInternational"
 									class="pa-4"
@@ -734,7 +734,7 @@
 											This product ships internationally
 										</div>
 									</template>
-								</v-checkbox>
+								</v-checkbox> -->
 								<div class="d-flex align-center">
 									<div class="pa-4">
 										<p class="inputLabel">Length</p>
@@ -846,11 +846,11 @@
 									</div>
 								</div>
 							</div>
-							<div class="my-4">
+							<div class="mt-6">
 								<p class="inputLabel">Shipping Method</p>
 								<v-select v-model="shippingOption" :items="shippingOptions" label="Select shipping option"> </v-select>
 							</div>
-							<div style="overflow: hidden" class="rounded-lg cardStyle px-0 py-0">
+							<!-- <div style="overflow: hidden" class="rounded-lg cardStyle px-0 py-0">
 								<div class="pa-4" style="background: #fff">
 									<v-radio v-model="digitalProduct" @click="digitalProduct = !digitalProduct" hide-details density="compact" color="#00966D">
 										<template v-slot:label>
@@ -860,7 +860,7 @@
 										</template>
 									</v-radio>
 								</div>
-							</div>
+							</div> -->
 						</v-sheet>
 						<p v-show="shippingError" style="color: #b00020; font-size: 14px; margin-top: 20px">{{ shippingError }}</p>
 						<v-btn
@@ -1199,11 +1199,9 @@ export default {
 		savePrice() {
 			this.checkError = "";
 			const data = {
-				ustIndex: this.ustIndex,
 				price: this.price,
 				commission: this.commission,
 				comparePrice: this.prevPrice,
-				chargeTax: this.chargeTax ? 1 : 0,
 				costPerItem: this.itemCost,
 				profit: this.profit,
 				margin: this.margin.split("%")[0],
@@ -1248,32 +1246,18 @@ export default {
 		},
 		saveShipping() {
 			this.shippingError = "";
-			if (this.digitalProduct && this.physicalProduct) {
-				this.shippingError = "Product cannot be digital and physical, select one!!!";
-				return;
-			}
-			if (this.physicalProduct) {
-				if (!this.grossWeight || !this.netWeight || !this.length || !this.width || !this.height || !this.shippingOption) {
-					this.shippingError = "Please fill in all compulsory fields.";
-					return;
-				}
-			}
-			if (this.digitalProduct) {
-				if (this.grossWeight || this.netWeight || this.length || this.width || this.height || this.shippingOption || this.shipsInternational) {
-					this.shippingError = "These fields are not required for digital products";
-					return;
-				}
-			}
+
+				// if (!this.grossWeight || !this.netWeight || !this.length || !this.width || !this.height || !this.shippingOption) {
+				// 	this.shippingError = "Please fill in all compulsory fields.";
+				// 	return;
+				// }
 
 			const data = {
-				physicalProduct: this.physicalProduct,
 				netWeight: this.netWeight,
 				grossWeight: this.grossWeight,
-				shipsInternational: this.shipsInternational ? 1 : 0,
 				length: this.length,
 				height: this.height,
 				width: this.width,
-				digitalProduct: this.digitalProduct ? 1 : 0,
 				shippingOption: this.shippingOption,
 			};
 			this.vendorProducts.saveShippingInfo(data);

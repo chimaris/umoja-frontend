@@ -38,16 +38,16 @@
 							<v-btn size="small" variant="text" color="#1361F4" class="" @click="dialog = true"> View All </v-btn>
 						</div>
 
-						<div style="position: absolute; bottom: 16px; width: 100%; left: 0" class="">
-							<div v-for="n in items" :key="n" class="px-4 py-1">
+						<div  class="mt-3">
+							<div v-for="(n, i) in allCategories.slice(0, 3)" :key="i" class="px-0 py-1">
 								<div class="d-flex pb-2 align-center justify-space-between">
 									<div class="d-flex align-center">
-										<v-avatar size="30" rounded="lg"><v-img :src="n.img"></v-img></v-avatar>
-										<p class="ml-2 tiny2">{{ n.name }}</p>
+										<!-- <v-avatar size="30" rounded="lg"><v-img :src="n.img"></v-img></v-avatar> -->
+										<p class="ml-2 tiny2">{{ n.category_name }}</p>
 									</div>
-									<p class="tiny2">€ 0.{{ n.sales }}M</p>
+									<p class="tiny2">{{formattedPrice(n.total_revenue)}}</p>
 								</div>
-								<v-progress-linear class="rounded-xl" :color="n.color" :model-value="n.sales" :height="5"></v-progress-linear>
+								<v-progress-linear class="rounded-xl" :color="colors[i]" :model-value="n.total_revenue" :height="5"></v-progress-linear>
 							</div>
 						</div>
 					</v-card>
@@ -69,15 +69,16 @@
 							<v-btn size="small" variant="text" color="#1361F4" class="" @click="dialog1 = true"> View All </v-btn>
 						</div>
 
-						<div style="position: absolute; bottom: 30px; width: 100%; left: 0" class="">
-							<div v-for="(n,i) in soldProducts.slice(0,3)" :key="n" class="px-4 py-2">
+						<div  class="mt-3">
+							<div v-for="(n,i) in allProducts.slice(0,3)" :key="n" class="px-0 py-2">
 								<div class="d-flex pb-2 align-center justify-space-between">
 									<div class="d-flex align-center">
+										<v-avatar size="30" rounded="lg"><v-img cover :src="n.product_photo.split(',')[0]"></v-img></v-avatar>
 										<p class="ml-2 tiny2">{{ n.product_name }}</p>
 									</div>
-									<p class="tiny2">{{formattedPrice(n.total_amount)}}</p>
+									<p class="tiny2">{{formattedPrice(n.total_revenue)}}</p>
 								</div>
-								<v-progress-linear class="rounded-xl" :color="colors[i]" :model-value="n.total_amount" :height="5"></v-progress-linear>
+								<v-progress-linear class="rounded-xl" :color="colors[i]" :model-value="n.total_revenue" :height="5"></v-progress-linear>
 							</div>
 						</div>
 					</v-card>
@@ -664,6 +665,7 @@ import { formattedPrice } from '~/utils/price';
 import {vendorUseApi} from '~/composables/vendorApi'
 import {ref, onBeforeMount, onMounted} from 'vue'
 import { useVendorStore } from '~/stores/vendorStore';
+import { getRevenue, getSales, getCategories, getAllCategories, getAllProducts } from '~/composables/useSales';
 
 		const soldProducts =ref([])
 		const vendorStore  = useVendorStore();
@@ -680,111 +682,41 @@ import { useVendorStore } from '~/stores/vendorStore';
 		const dialog = ref(false)
 		const dialog1 = ref(false)
 		const showFilter = ref(false)
-
+		const allCategories = ref([])
+		const allProducts = ref([])
 		const hasOrder = computed(() => vendor.value.vendor_details?.order_count > 0)
 
 		onMounted(async () => {
 			if (hasOrder.value){
-				soldProducts.value = await getSales()
-				soldCategories.value = await getCategories()
-				saleRevenue.value = await getRevenue()
+				allCategories.value = await getAllCategories()
+				allProducts.value = await getAllProducts()
+				soldProducts.value = await getSales(filterProduct.value)
+				soldCategories.value = await getCategories(filterCategory.value)
+				saleRevenue.value = await getRevenue(filterRevenue.value)
 				await useOrderStore().getRevenues()
 			}
 		});
 		watch(() => filterProduct.value, async (newval) => {
 			if (hasOrder.value && newval){
-				soldProducts.value = await getSales()
+				soldProducts.value = await getSales(filterProduct.value)
 			}
 			
 		})
 		watch(() => filterCategory.value, async (newval) => {
 			if (hasOrder.value && newval){
-				soldCategories.value = await getCategories()
+				soldCategories.value = await getCategories(filterCategory.value)
 			}
 			
 		})
 		watch(() => filterRevenue.value, async (newval) => {
 			if (hasOrder.value && newval){
-				saleRevenue.value = await getRevenue()
+				saleRevenue.value = await getRevenue(filterRevenue.value)
 			}
 		
 		})
 
-		function getCurrentMonthIndex() {
-		const date = new Date();
-		return date.getMonth() + 1; 
-		}
 
-		async function getCategories(){
-			const api = vendorUseApi()
-			let url = 'vendor/top_categories?last_days=7'
-			if (filterCategory.value == 'This Year'){
-				const year = new Date().getFullYear()
-				url = `vendor/top_categories?year=${year}`
-			}
-			if (filterCategory.value == 'This Month'){
-				url = `vendor/top_categories?month=${getCurrentMonthIndex()}`
-			}
-			try{
-                const res = await api({
-                    url: url,
-                    method: 'GET'
-                });
-				
-				 return res.data
-            }catch(error){
-                console.error(error)
-            }
-		}
 
-		async function getSales(){
-        const api = vendorUseApi()
-			let url = 'vendor/sold_products?last_days=7'
-			if (filterProduct.value == 'This Year'){
-				const year = new Date().getFullYear()
-				url = `vendor/sold_products?year=${year}`
-			}
-			if (filterProduct.value == 'This Month'){
-				url = `vendor/sold_products?month=${getCurrentMonthIndex()}`
-			}
-            try{
-                const res = await api({
-                    url: url,
-                    method: 'GET'
-                });
-				
-				 return res.data
-            }catch(error){
-                console.error(error)
-            }
-    }
-	async function getRevenue(){
-        const api = vendorUseApi()
-			let url;
-			if (filterRevenue.value == 'Last 24 hours'){
-				url = `vendor/revenue_growth?filter=24hours`
-			}
-			if (filterRevenue.value == 'Last 7 days'){
-				url = `vendor/revenue_growth?filter=last7days`
-			}
-			if (filterRevenue.value == 'This Month'){
-				url = `vendor/revenue_growth?filter=month&months=${getCurrentMonthIndex()}`
-			}
-			if (filterRevenue.value == 'This Year'){
-				const year = new Date().getFullYear()
-				url = `vendor/revenue_growth?filter=year&years=${year}`
-			}
-            try{
-                const res = await api({
-                    url: url,
-                    method: 'GET'
-                });
-				
-				return res.data
-            }catch(error){
-                console.error(error)
-            }
-    }
 const items1 = ref( [
 				{
 					sn: "#23942",
