@@ -298,8 +298,6 @@
 										</div>
 										<span style="font-size: 14px; font-weight: 600; color: #c20052">Delete</span>
 									</span>
-
-								
 								</v-card>
 							</v-menu>
 						</div>
@@ -563,34 +561,23 @@
 					</v-col>
 					<v-col>
 						<v-card flat>
-							<v-menu
-								ref="menu"
-								v-model="menu"
-								:close-on-content-click="false"
-								:nudge-right="40"
-								transition="scale-transition"
-								offset-y
-								min-width="auto"
-							>
-								<template v-slot:activator="{ on, attrs }">
+							<v-menu open-on-hover :close-on-content-click="false" v-model="menu">
+								<template v-slot:activator="{ props }">
 									<v-text-field
-										v-bind="attrs"
-										v-on="on"
+										v-bind="props"
+										style="border: 1px solid #e5e5e5; border-radius: 6px; min-width: 300px"
+										variant="outlined"
+										density="compact"
+										hide-details
+										placeholder="Select Date"
 										:value="formattedDate"
-										:label="computedLabel1"
-										outlined
-										dense
-										readonly
-										@click:append-inner="openMenu"
 									>
 										<template v-slot:append-inner>
 											<v-icon color="#2C6E63">mdi mdi-calendar</v-icon>
 										</template>
 									</v-text-field>
 								</template>
-								<v-card>
-									<VCalender v-model="dateRange" mode="range" @change="updateDate" />
-								</v-card>
+								<v-date-picker style="width: 100%" v-model="dateRange" mode="range" @change="menu = false"></v-date-picker>
 							</v-menu>
 						</v-card>
 					</v-col>
@@ -806,7 +793,7 @@ export default {
 			printSlipModal: false,
 			deliveryDateModal: false,
 			menu: false,
-			dateRange: { start: new Date(), end: new Date() },
+			dateRange:[], // { start: new Date(), end: new Date() },
 			items: [
 				{
 					value: "umoja-logistics",
@@ -837,11 +824,18 @@ export default {
 		computedLabel1() {
 			return this.menu ? "" : "Select date";
 		},
+		// formattedDate() {
+		// 	const options = { year: "numeric", month: "long", day: "numeric" };
+		// 	const start = this.dateRange.start.toLocaleDateString(undefined, options);
+		// 	const end = this.dateRange.end.toLocaleDateString(undefined, options);
+		// 	return `${start} - ${end}`;
+		// },
 		formattedDate() {
-			const options = { year: "numeric", month: "long", day: "numeric" };
-			const start = this.dateRange.start.toLocaleDateString(undefined, options);
-			const end = this.dateRange.end.toLocaleDateString(undefined, options);
-			return `${start} - ${end}`;
+			if (this.dateRange.length === 2) {
+				const [start, end] = this.dateRange;
+				return `${this.formatDate(start)} - ${this.formatDate(end)}`;
+			}
+			return "";
 		},
 	},
 
@@ -852,6 +846,11 @@ export default {
 		},
 		openMenu() {
 			this.menu = true;
+		},
+		formatDate(date) {
+			if (!date) return "";
+			const options = { year: "numeric", month: "short", day: "numeric" };
+			return new Date(date).toLocaleDateString(undefined, options);
 		},
 	},
 };
