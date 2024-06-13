@@ -6,7 +6,7 @@
 			<p style="font-size: 20px; font-weight: 600">How do you want to handle your shipping?</p>
 
 			<v-select
-				v-model="selected"
+				v-model="vendorStore.shippingMethod"
 				:items="items"
 				item-value="value"
 				item-title="none"
@@ -14,12 +14,12 @@
 				outlined
 				append-inner-icon=""
 				class="my-5"
-				:bg-color="selected == 'umoja-logistics' ? '#EDF0EF' : selected == 'manual-shipping' ? '#FDF1ED' : ''"
+				:bg-color="vendorStore.shippingMethod == 'umoja-logistics' ? '#EDF0EF' : vendorStore.shippingMethod == 'manual-shipping' ? '#FDF1ED' : ''"
 			>
 				<template v-slot:selection="{ item }">
 					<v-list-item>
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" :color="selected == 'manual-shipping' ? '#fff' : '#fff'">
+							<v-avatar class="mr-4" size="50" :color="vendorStore.shippingMethod == 'manual-shipping' ? '#fff' : '#fff'">
 								<v-img height="24" width="24" :src="item.raw.icon" />
 							</v-avatar>
 							<div>
@@ -43,8 +43,8 @@
 					</v-list-item>
 				</template>
 			</v-select>
-
-			<!-- If manuel shipping is selected -->
+		<template v-if="vendorStore.shippingMethod">
+				<!-- If manuel shipping is selected -->
 			<v-card class="my-5 pa-6 cardStyle" flat>
 				<div class="d-flex justify-space-between align-center w-100 mb-4">
 					<div>
@@ -240,7 +240,7 @@
 				</div>
 			</v-card>
 
-			<v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener" style="justify-content: between">
+			<!-- <v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener" style="justify-content: between">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
 					Saved Packages <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
@@ -259,7 +259,7 @@
 							<v-btn class="mr-4" size="small" text="Default package" variant="tonal"></v-btn>
 							<v-menu>
 								<template v-slot:activator="{ props }">
-									<!-- <v-btn class="pa-0" flat icon="mdi mdi-dots-horizontal" v-bind="props"></v-btn> -->
+									<v-btn class="pa-0" flat icon="mdi mdi-dots-horizontal" v-bind="props"></v-btn> 
 									<v-icon icon="mdi mdi-dots-horizontal" v-bind="props"></v-icon>
 								</template>
 
@@ -322,7 +322,7 @@
 						<span>Saved Packages</span>
 					</span>
 				</div>
-			</v-card>
+			</v-card> -->
 
 			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat rel="noopener" style="justify-content: between">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
@@ -353,6 +353,7 @@
 					</div>
 				</div>
 			</v-card>
+		</template>
 		</div>
 	</div>
 
@@ -794,21 +795,20 @@
 	</v-dialog>
 </template>
 
-<script>
+<script setup>
 import { useVendorStore } from "~/stores/vendorStore";
-export default {
-	data() {
-		return {
-			selected: null,
-			localDeliveryModal: false,
-			localPickupModal: false,
-			savePackageModal: false,
-			printSlipModal: false,
-			deliveryDateModal: false,
-			menu: false,
-			dateRange: { start: new Date(), end: new Date() },
-			items: [
-				{
+import {ref} from 'vue';
+
+const selected = ref(null)
+const localDeliveryModal = ref(false)
+const localPickupModal = ref(false)
+const savePackageModal = ref(false)
+const printSlipModal = ref(false)
+const deliveryDateModal = ref(false)
+const menu = ref(false)
+const vendorStore = useVendorStore()
+const dateRange = ref({ start: new Date(), end: new Date() })
+const items = [{
 					value: "umoja-logistics",
 					text: "Umoja Logistics",
 					description: "Let Umoja handle your entire business logistics and make it easier for you",
@@ -822,39 +822,29 @@ export default {
 					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718096905/umoja/Hand_Stars_ezru3e.svg",
 					none: "",
 				},
-			],
-		};
-	},
-	computed: {
-		vendorStore() {
-			console.log("Rate ", useVendorStore().renderRate);
-			return useVendorStore();
-		},
-		computedLabel() {
-			console.log("Selected ", this.selected);
-			return this.selected ? "" : "Select Shipping Method";
-		},
-		computedLabel1() {
-			return this.menu ? "" : "Select date";
-		},
-		formattedDate() {
-			const options = { year: "numeric", month: "long", day: "numeric" };
-			const start = this.dateRange.start.toLocaleDateString(undefined, options);
-			const end = this.dateRange.end.toLocaleDateString(undefined, options);
-			return `${start} - ${end}`;
-		},
-	},
-
-	methods: {
-		updateDate(value) {
-			this.dateRange = value;
-			this.menu = false;
-		},
-		openMenu() {
-			this.menu = true;
-		},
-	},
-};
+]
+const computedLabel = computed(() => {
+	return vendorStore.shippingMethod ? "" : "Select Shipping Method";
+})
+const computedLabel1 = computed(() => {
+	return menu.value ? "" : "Select date";
+})
+const formattedDate= computed(() => {
+	const options = { year: "numeric", month: "long", day: "numeric" };
+	const start = dateRange.value.start.toLocaleDateString(undefined, options);
+	const end = dateRange.value.end.toLocaleDateString(undefined, options);
+	return `${start} - ${end}`;
+})
+watch(() => vendorStore.shippingMethod, (newVal) => {
+	console.log(newVal)
+})
+function updateDate(value) {
+	dateRange.value = value;
+	menu.value = false;
+}
+function openMenu() {
+	menu.value = true;
+}
 </script>
 
 <style scoped>
