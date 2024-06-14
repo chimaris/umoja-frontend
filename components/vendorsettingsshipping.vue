@@ -6,7 +6,7 @@
 			<p style="font-size: 20px; font-weight: 600">How do you want to handle your shipping?</p>
 
 			<v-select
-				v-model="vendorStore.shippingMethod"
+				v-model="selected"
 				:items="items"
 				item-value="value"
 				item-title="none"
@@ -14,12 +14,12 @@
 				outlined
 				append-inner-icon=""
 				class="my-5"
-				:bg-color="vendorStore.shippingMethod == 'umoja-logistics' ? '#EDF0EF' : vendorStore.shippingMethod == 'manual-shipping' ? '#FDF1ED' : ''"
+				:bg-color="selected == 'umoja-logistics' ? '#EDF0EF' : selected == 'manual-shipping' ? '#FDF1ED' : ''"
 			>
 				<template v-slot:selection="{ item }">
 					<v-list-item>
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" :color="vendorStore.shippingMethod == 'manual-shipping' ? '#fff' : '#fff'">
+							<v-avatar class="mr-4" size="50" :color="selected == 'manual-shipping' ? '#fff' : '#fff'">
 								<v-img height="24" width="24" :src="item.raw.icon" />
 							</v-avatar>
 							<div>
@@ -43,9 +43,9 @@
 					</v-list-item>
 				</template>
 			</v-select>
-		<template v-if="vendorStore.shippingMethod">
+		<template v-if="selected">
 				<!-- If manuel shipping is selected -->
-			<v-card class="my-5 pa-6 cardStyle" flat>
+			<v-card v-if="selected == 'manual-shipping'" class="my-5 pa-6 cardStyle" flat>
 				<div class="d-flex justify-space-between align-center w-100 mb-4">
 					<div>
 						<p style="font-size: 18px; font-weight: 600; color: #333">Shipping <v-icon icon="mdi mdi-information-outline" size="20"></v-icon></p>
@@ -94,8 +94,8 @@
 					</div>
 				</div>
 			</v-card>
-
-			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat rel="noopener">
+			<!-- if manual-shipping is selected -->
+			<v-card v-if="selected == 'manual-shipping'"  class="mx-auto my-5 py-2 px-6 cardStyle" flat >
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
 					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
@@ -191,7 +191,7 @@
 			</v-card>
 
 			<!-- If Umoja shipping is selected -->
-			<v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener">
+			<v-card v-if="selected == 'manual-shipping'" class="mx-auto my-5 pa-6 cardStyle" flat >
 				<p style="font-size: 18px; font-weight: 600; color: #333">
 					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
@@ -239,7 +239,7 @@
 					</div>
 				</div>
 			</v-card>
-
+			
 			<!-- <v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener" style="justify-content: between">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
 					Saved Packages <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
@@ -298,8 +298,6 @@
 										</div>
 										<span style="font-size: 14px; font-weight: 600; color: #c20052">Delete</span>
 									</span>
-
-								
 								</v-card>
 							</v-menu>
 						</div>
@@ -324,9 +322,9 @@
 				</div>
 			</v-card> -->
 
-			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat rel="noopener" style="justify-content: between">
+			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat style="justify-content: between">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
-					Packing Slip <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
+					Packing Slipss <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
 				<div class="cardStyle">
 					<div class="d-flex justify-space-between align-center w-100">
@@ -564,39 +562,40 @@
 					</v-col>
 					<v-col>
 						<v-card flat>
-							<v-menu
-								ref="menu"
-								v-model="menu"
-								:close-on-content-click="false"
-								:nudge-right="40"
-								transition="scale-transition"
-								offset-y
-								min-width="auto"
-							>
-								<template v-slot:activator="{ on, attrs }">
+							<!-- <div class="d-flex align-center" style="border: 1px solid #e5e5e5; border-radius: 6px; min-width: 300px; "> -->
+							<v-date-input class=""
+							v-model="model"
+							prepend-icon=""
+        					append-inner-icon="$calendar"
+							label="Select date range"
+							multiple="range"
+							></v-date-input>
+							
+						<!-- </div> -->
+							<!-- <v-menu open-on-hover :close-on-content-click="false" v-model="menu">
+								<template v-slot:activator="{ props }">
 									<v-text-field
-										v-bind="attrs"
-										v-on="on"
+										v-bind="props"
+										
+										style="border: 1px solid #e5e5e5; border-radius: 6px; min-width: 300px"
+										variant="outlined"
+										density="compact"
+										hide-details
+										placeholder="Select Date"
 										:value="formattedDate"
-										:label="computedLabel1"
-										outlined
-										dense
-										readonly
-										@click:append-inner="openMenu"
 									>
 										<template v-slot:append-inner>
 											<v-icon color="#2C6E63">mdi mdi-calendar</v-icon>
 										</template>
 									</v-text-field>
 								</template>
-								<v-card>
-									<VCalender v-model="dateRange" mode="range" @change="updateDate" />
-								</v-card>
-							</v-menu>
+								 <v-date-picker style="width: 100%" v-model="dateRange" mode="range" @change="menu = false"></v-date-picker> 
+							</v-menu> -->
 						</v-card>
 					</v-col>
 				</v-row>
 				<v-row style="font-size: 16px; font-weight: 500; color: #333">
+					
 					<v-col cols="3">
 						<p>Asia</p>
 					</v-col>
@@ -670,14 +669,14 @@
 
 			<div class="px-7">
 				<p class="inputLabel">Company</p>
-				<v-text-field placeholder="Company" density="comfortable"> </v-text-field>
+				<v-text-field placeholder="Company" v-model="vendor.business_name" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Country/region</p>
-				<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Country/region" density="comfortable"> </v-select>
+				<v-select append-inner-icon="mdi mdi-chevron-down" v-model="vendor.country_name" placeholder="Country/region" density="comfortable"> </v-select>
 
 				<p class="inputLabel">Address</p>
 
-				<v-text-field placeholder="Enter customer address" density="comfortable"> </v-text-field>
+				<v-text-field v-model="vendor.address" placeholder="Enter customer address" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Apartment, suite, etc</p>
 				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
@@ -686,11 +685,11 @@
 				<v-row class="mt-0">
 					<v-col>
 						<p class="inputLabel">City</p>
-						<v-text-field placeholder="Enter city" density="comfortable"> </v-text-field
+						<v-text-field placeholder="Enter city" v-model="vendor.city" density="comfortable"> </v-text-field
 					></v-col>
 					<v-col>
 						<p class="inputLabel">State</p>
-						<v-select placeholder="Select State" density="comfortable"> </v-select>
+						<v-text-field v-model="vendor.state" placeholder="Select State" density="comfortable"> </v-text-field>
 					</v-col>
 					<v-col>
 						<p class="inputLabel">Zipcode</p>
@@ -700,7 +699,7 @@
 				</v-row>
 
 				<p class="inputLabel">Phone</p>
-				<v-text-field append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+				<v-text-field v-model="vendor.busniess_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
 
 				<div class="py-4">
 					<v-row>
@@ -797,18 +796,23 @@
 
 <script setup>
 import { useVendorStore } from "~/stores/vendorStore";
-import {ref} from 'vue';
+import { VDateInput } from 'vuetify/lib/labs/VDateInput'
+import {ref} from 'vue'
 
-const selected = ref(null)
-const localDeliveryModal = ref(false)
-const localPickupModal = ref(false)
-const savePackageModal = ref(false)
-const printSlipModal = ref(false)
-const deliveryDateModal = ref(false)
-const menu = ref(false)
-const vendorStore = useVendorStore()
-const dateRange = ref({ start: new Date(), end: new Date() })
-const items = [{
+			
+			const model = ref(null)
+			const vendorStore = useVendorStore()
+			const vendor = ref(vendorStore.vendor.vendor_details)
+			const selected = ref(vendorStore.vendor.vendor_details.shipping_method)
+			const localDeliveryModal = ref(false)
+			const localPickupModal = ref(false)
+			const savePackageModal = ref(false)
+			const printSlipModal = ref(false)
+			const deliveryDateModal = ref(false)
+			const menu = ref(false)
+			const dateRange = ref([]) // { start: new Date(), end: new Date() },
+			const items = [
+				{
 					value: "umoja-logistics",
 					text: "Umoja Logistics",
 					description: "Let Umoja handle your entire business logistics and make it easier for you",
@@ -822,32 +826,47 @@ const items = [{
 					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718096905/umoja/Hand_Stars_ezru3e.svg",
 					none: "",
 				},
-]
-const computedLabel = computed(() => {
-	return vendorStore.shippingMethod ? "" : "Select Shipping Method";
-})
-const computedLabel1 = computed(() => {
-	return menu.value ? "" : "Select date";
-})
-const formattedDate= computed(() => {
-	const options = { year: "numeric", month: "long", day: "numeric" };
-	const start = dateRange.value.start.toLocaleDateString(undefined, options);
-	const end = dateRange.value.end.toLocaleDateString(undefined, options);
-	return `${start} - ${end}`;
-})
-watch(() => vendorStore.shippingMethod, (newVal) => {
-	console.log(newVal)
-})
-function updateDate(value) {
-	dateRange.value = value;
-	menu.value = false;
-}
-function openMenu() {
-	menu.value = true;
-}
+			]
+
+		const computedLabel = computed(() => {
+			return selected.value ? "" : "Select Shipping Method";
+		})
+		const computedLabel1 = computed(() => {
+			return menu.value ? "" : "Select date";
+		})
+		onMounted(() => {
+			console.log(vendor)
+		})
+		// formattedDate() {
+		// 	const options = { year: "numeric", month: "long", day: "numeric" };
+		// 	const start = this.dateRange.start.toLocaleDateString(undefined, options);
+		// 	const end = this.dateRange.end.toLocaleDateString(undefined, options);
+		// 	return `${start} - ${end}`;
+		// },
+		const formattedDate = computed(() => {
+			if (dateRange.value.length === 2) {
+				const [start, end] = dateRange.value;
+				return `${formatDate.value(start)} - ${formatDate.value(end)}`;
+			}
+			return "";
+		})
+
+		function updateDate(value) {
+			dateRange.value = value;
+			menu.value = false;
+		}
+		function openMenu() {
+			menu.value = true;
+		}
+		function formatDate(date) {
+			if (!date) return "";
+			const options = { year: "numeric", month: "short", day: "numeric" };
+			return new Date(date).toLocaleDateString(undefined, options);
+		}
 </script>
 
 <style scoped>
+
 .inputLabel {
 	font-size: 14px;
 	font-weight: 500;
