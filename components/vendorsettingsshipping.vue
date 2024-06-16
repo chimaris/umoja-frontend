@@ -52,14 +52,28 @@
 						<p style="font-size: 16px; font-weight: 500; color: #969696">Choose where you ship and how much you charge for shipping at checkout.</p>
 					</div>
 					<div>
-						<v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> New Profile </v-btn>
+						<!-- <v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> New Profile </v-btn> -->
 					</div>
 				</div>
 				<div class="" flat style="border: 1px solid #cecece; border-radius: 15px">
 					<div class="d-flex justify-space-between align-center w-100 pa-4">
 						<p style="font-size: 18px; font-weight: 600; color: #333">General Shipping Rates</p>
-
-						<v-btn
+						<v-btn @click="vendorStore.renderRate = true" v-if="shippingZones.length == 0"
+							variant="text"
+							class="ml-4 menubar text-grey-darken-3 d-flex align-center"
+							size="default"
+							style="font-weight: 600; font-size: 16px"
+						>
+							<v-img
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+								contain
+								class="mr-1"
+								width="20"
+								height="20"
+							></v-img>
+							Create Profile
+						</v-btn>
+						<v-btn @click="vendorStore.renderRate = true" v-if="shippingZones.length > 0"
 							variant="text"
 							class="ml-4 menubar text-grey-darken-3 d-flex align-center"
 							size="default"
@@ -75,16 +89,16 @@
 							Edit
 						</v-btn>
 					</div>
-					<v-divider></v-divider>
+					<v-divider v-if="shippingZones.length > 0"></v-divider>
 
-					<div class="pa-4">
+					<div class="pa-4" v-if="shippingZones.length > 0">
 						<p style="font-size: 16px; font-weight: 600">Rates for</p>
 
 						<div class="d-flex justify-space-between align-center">
 							<div>
-								<span v-for="item in ['Africa', 'Asia', 'Domestic', 'International']" :key="item" class="d-flex align-center mt-1">
+								<span v-for="item in shippingZones" :key="item" class="d-flex align-center mt-1">
 									<v-icon class="mr-2" icon="mdi mdi-web"></v-icon>
-									<span style="font-weight: 500; font-size: 16px; color: #969696">{{ item }}</span>
+									<span style="font-weight: 500; font-size: 16px; color: #969696">{{ item.name }}</span>
 								</span>
 							</div>
 							<v-btn @click="vendorStore.renderRate = true" class="" size="default" variant="text">
@@ -133,70 +147,30 @@
 						</v-col>
 					</v-row>
 					<v-divider class="my-3"></v-divider>
-					<v-row style="font-size: 16px; font-weight: 500; color: #333">
+					<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
 						<v-col cols="3">
-							<p>Africa</p>
+							<p>{{zone.name}}</p>
 						</v-col>
 						<v-col cols="3" style="color: #969696">
-							<p>€60.00 and up</p>
+							<p class="text-truncate" style="max-width: 200px;">{{zone.rates[0].condition}}</p>
 							<p>€60.00 - €100.00</p>
-							<p style="color: #1273eb">See more rates</p>
+							<p v-if="zone.rates.length > 1" style="color: #1273eb">See more rates</p>
 						</v-col>
 						<v-col>
-							<p>Within Jan 1st to Jan 10th</p>
-							<p>8 business days</p>
-						</v-col>
-					</v-row>
-					<v-row style="font-size: 16px; font-weight: 500; color: #333">
-						<v-col cols="3">
-							<p>Asia</p>
-						</v-col>
-						<v-col cols="3" style="color: #969696">
-							<p>€60.00 and up</p>
-							<p>€60.00 - €100.00</p>
-						</v-col>
-						<v-col>
-							<p>Within Jan 1st to Jan 10th</p>
-							<p>8 business days</p>
-						</v-col>
-					</v-row>
-					<v-row style="font-size: 16px; font-weight: 500; color: #333">
-						<v-col cols="3">
-							<p>Domestic</p>
-						</v-col>
-						<v-col cols="3" style="color: #969696">
-							<p>€60.00 and up</p>
-							<p>€60.00 - €100.00</p>
-						</v-col>
-						<v-col>
-							<p>Within Jan 1st to Jan 10th</p>
-							<p>8 business days</p>
-						</v-col>
-					</v-row>
-					<v-row style="font-size: 16px; font-weight: 500; color: #333">
-						<v-col cols="3">
-							<p>International</p>
-						</v-col>
-						<v-col cols="3" style="color: #969696">
-							<p>€60.00 and up</p>
-							<p>€60.00 - €100.00</p>
-							<p style="color: #1273eb">See more rates</p>
-						</v-col>
-						<v-col>
-							<p>Within Jan 1st to Jan 10th</p>
-							<p>8 business days</p>
+							<!-- <p>Within Jan 1st to Jan 10th</p> -->
+							<!-- <p>8 business days</p> -->
 						</v-col>
 					</v-row>
 				</div>
 			</v-card>
 
 			<!-- If Umoja shipping is selected -->
-			<v-card v-if="selected == 'manual-shipping'" class="mx-auto my-5 pa-6 cardStyle" flat >
+			<!-- <v-card v-if="selected == 'manual-shipping'" class="mx-auto my-5 pa-6 cardStyle" flat >
 				<p style="font-size: 18px; font-weight: 600; color: #333">
 					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
 				<p style="font-size: 16px; font-weight: 500; color: #969696">Choose where you ship and how much you charge for shipping at checkout.</p>
-			</v-card>
+			</v-card> -->
 
 			<v-card class="my-5 pa-6 cardStyle" flat style="justify-content: between">
 				<div class="d-flex justify-space-between align-center w-100">
@@ -351,6 +325,11 @@
 					</div>
 				</div>
 			</v-card>
+			<div v-if="selected == 'umoja-logistics'" class="d-flex justify-end ga-4">
+			<v-btn size="default" color="green" flat>
+				<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save shipping method</span></v-btn
+			>
+		</div>
 		</template>
 		</div>
 	</div>
@@ -743,14 +722,14 @@
 
 			<div class="px-7">
 				<p class="inputLabel">Company</p>
-				<v-text-field placeholder="Company" density="comfortable"> </v-text-field>
+				<v-text-field v-model="vendor.business_name" placeholder="Company" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Country/region</p>
-				<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Country/region" density="comfortable"> </v-select>
+				<v-select v-model="vendor.country_name" append-inner-icon="mdi mdi-chevron-down" placeholder="Country/region" density="comfortable"> </v-select>
 
 				<p class="inputLabel">Address</p>
 
-				<v-text-field placeholder="Enter customer address" density="comfortable"> </v-text-field>
+				<v-text-field v-model="vendor.address" placeholder="Enter customer address" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Apartment, suite, etc</p>
 				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
@@ -759,11 +738,11 @@
 				<v-row class="">
 					<v-col>
 						<p class="inputLabel">City</p>
-						<v-text-field placeholder="Enter city" density="comfortable"> </v-text-field
+						<v-text-field v-model="vendor.city" placeholder="Enter city" density="comfortable"> </v-text-field
 					></v-col>
 					<v-col>
 						<p class="inputLabel">State</p>
-						<v-select append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"> </v-select>
+						<v-select v-model="vendor.state" append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"> </v-select>
 					</v-col>
 					<v-col>
 						<p class="inputLabel">Zipcode</p>
@@ -773,7 +752,7 @@
 				</v-row>
 
 				<p class="inputLabel">Phone</p>
-				<v-text-field append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+				<v-text-field v-model="vendor.busniess_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
 
 				<div class="py-4">
 					<v-row>
@@ -797,21 +776,31 @@
 <script setup>
 import { useVendorStore } from "~/stores/vendorStore";
 import { VDateInput } from 'vuetify/lib/labs/VDateInput'
+import { useMyVendorShippingStore } from "~/stores/vendorShipping";
 import {ref} from 'vue'
 
 			
-			const model = ref(null)
-			const vendorStore = useVendorStore()
-			const vendor = ref(vendorStore.vendor.vendor_details)
-			const selected = ref(vendorStore.vendor.vendor_details.shipping_method)
-			const localDeliveryModal = ref(false)
-			const localPickupModal = ref(false)
-			const savePackageModal = ref(false)
-			const printSlipModal = ref(false)
-			const deliveryDateModal = ref(false)
-			const menu = ref(false)
-			const dateRange = ref([]) // { start: new Date(), end: new Date() },
-			const items = [
+const model = ref(null)
+const vendorStore = useVendorStore()
+const vendor = ref(vendorStore.vendor.vendor_details)
+const shippingStore = useMyVendorShippingStore()
+const selected = ref(vendorStore.vendor.vendor_details.shipping_method.type)
+const shippingZones = computed(() => shippingStore.shippingZones)
+
+onMounted(async () => {
+	if(selected.value = "manual-shipping"){
+		shippingStore.shippingZones = await getShipping()
+	}
+});
+
+const localDeliveryModal = ref(false)
+const localPickupModal = ref(false)
+const savePackageModal = ref(false)
+const printSlipModal = ref(false)
+const deliveryDateModal = ref(false)
+const menu = ref(false)
+const dateRange = ref([]) // { start: new Date(), end: new Date() },
+const items = [
 				{
 					value: "umoja-logistics",
 					text: "Umoja Logistics",
@@ -834,9 +823,7 @@ import {ref} from 'vue'
 		const computedLabel1 = computed(() => {
 			return menu.value ? "" : "Select date";
 		})
-		onMounted(() => {
-			console.log(vendor)
-		})
+
 		// formattedDate() {
 		// 	const options = { year: "numeric", month: "long", day: "numeric" };
 		// 	const start = this.dateRange.start.toLocaleDateString(undefined, options);
@@ -862,6 +849,33 @@ import {ref} from 'vue'
 			if (!date) return "";
 			const options = { year: "numeric", month: "short", day: "numeric" };
 			return new Date(date).toLocaleDateString(undefined, options);
+		}
+
+		const data = {
+			name: "Africa Zone ",
+			contient: "Africa",
+			shipping_method_id: 1,
+			countries: ["Nigeria","Kenya","South Africa"],
+			delivery_date_range: {
+				"start": "2024-07-01 00:00:00",
+				"end": "2024-07-10 23:59:59"
+			},
+			local_delivery_company: "Africa Delivery Co.",
+			local_delivery_address: "1234 Delivery Rd.",
+			local_delivery_country_name: "Nigeria",
+			local_delivery_city: "Lagos",
+			local_delivery_state: "Lagos State",
+			local_delivery_apartment: "Suite 102",
+			local_delivery_zipcode: "100001",
+			local_delivery_phone_number: "+234-123-456-78901",
+			local_pickup_company: "Africa Pickup Co.",
+			local_pickup_address: "5678 Pickup Blvd.",
+			local_pickup_country_name: "Nigeria",
+			local_pickup_city: "Abuja",
+			local_pickup_state: "FCT",
+			local_pickup_apartment: "Apt 203",
+			local_pickup_zipcode: "900001",
+			local_pickup_phone_number: "+234-098-765-4321"
 		}
 </script>
 

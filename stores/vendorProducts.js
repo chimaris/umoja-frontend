@@ -92,7 +92,6 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   length: this.shippingInfo.length,
                   weight: this.shippingInfo.width,
                   height: this.shippingInfo.height,
-                  shipping_method: this.shippingInfo.shippingOption,
                   unit_per_item: this.generalInfo.unitperItem
                 }
               });

@@ -257,8 +257,9 @@
 								<v-card flat class="mt-4 py-9 cardStyle">
 									<div class="d-flex justify-space-between align-center">
 										<p style="color: #1e1e1e; font-size: 14px; font-weight: 600">Ship to</p>
-										<p style="color: #1273eb; font-size: 14px; font-weight: 500">
-											<v-icon class="mb-1 mr-1" size="14" color="black" icon="mdi mdi-map-marker"></v-icon>United States 🇺🇸
+										<p style="color: #1273eb; font-size: 14px; font-weight: 500; cursor: pointer;" class="d-flex align-center">
+											<v-icon class="mb-1 mr-1" size="14" color="black" icon="mdi mdi-map-marker" @click="showCountryModal = true"></v-icon>
+											<span @click="showCountryModal = true">{{country}} {{getFlag(country)}}</span>
 										</p>
 									</div>
 									<v-divider color="#EDEDED" class="my-4"></v-divider>
@@ -569,8 +570,9 @@
 						<v-card flat class="mt-4 py-9 cardStyle">
 							<div class="d-flex justify-space-between align-center">
 								<p style="color: #1e1e1e; font-size: 14px; font-weight: 600">Ship to</p>
-								<p style="color: #1273eb; font-size: 14px; font-weight: 500">
-									<v-icon class="mb-1 mr-1" size="14" color="black" icon="mdi mdi-map-marker"></v-icon>United States 🇺🇸
+								<p @click="showCountryModal = true" style="color: #1273eb; font-size: 14px; font-weight: 500; cursor: pointer;" class="d-flex align-center">
+									<v-icon class="mb-1 mr-1" size="14" color="black" icon="mdi mdi-map-marker"></v-icon>{{country}} 
+									<span class="ml-2">{{getFlag(country)}}</span>
 								</p>
 							</div>
 							<v-divider color="#EDEDED" class="my-4"></v-divider>
@@ -619,6 +621,19 @@
 		<product-row :maxwidth="'1400px'" :showVendor="true" title="🌓 Related Products" />
 		<product-row :maxwidth="'1400px'" class="mt-12" :showVendor="false" title="🛍 More items from this seller" />
 		<product-row :maxwidth="'1400px'" :showVendor="true" title="😎 Recently viewed" />
+		<v-dialog v-model="showCountryModal" persistent max-width="400px">
+			<v-card>
+				<v-card-title class="headline">Change Shipping Country</v-card-title>
+				<v-card-text>
+					<v-select :items="allCountries" label="Select country" v-model="selectedCountry"></v-select>
+				</v-card-text>
+				<v-card-actions>
+					<v-spacer></v-spacer>
+					<v-btn variant="outlined" color="green" text @click="showCountryModal = false">Cancel</v-btn>
+					<v-btn style="background-color: #2C6E63; color: #fff" flat text @click="changeCountry()">Confirm</v-btn>
+					</v-card-actions>
+				</v-card>
+		</v-dialog>
 	</v-container>
 </template>
 <style>
@@ -660,16 +675,33 @@ import { ref, onMounted , defineProps} from "vue";
 import {makeReview, getReview} from '~/composables/useReview'
 import {getDateTime} from '~/utils/date'
 import { useProductStore } from "~/stores/productStore";
+import { allCountries, countryCodes, getFlag } from "~/utils/countryapi";
 import { getCloudinaryImageUrl } from "~/utils/cloudinary";
 
 export default {
 	setup() {
 		const quantity = ref(1);
 		const productStore = useProductStore()
-	
+		const userStore = useUserStore()
+		const showCountryModal = ref(false)
+		const country = computed(() => userStore.userCountry)
+		const selectedCountry = ref(country.value)
+
+		const changeCountry = () => {
+			if (selectedCountry.value && selectedCountry.value !== country.value){
+				userStore.setCountry(selectedCountry.value)
+			}
+			showCountryModal.value = false
+		}
+
 		return {
 			quantity,
 			productStore,
+			userStore,
+			showCountryModal,
+			country,
+			selectedCountry,
+			changeCountry
 
 		};
 	},

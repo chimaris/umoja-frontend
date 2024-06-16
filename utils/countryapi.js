@@ -1,10 +1,18 @@
 import axios from 'axios'
 import {ref} from 'vue'
+import emojiFlags from 'emoji-flags';
 
 export const states = ref([]);
 export const cities = ref([]);
 export const loadingStates = ref(false);
 export const loadingCities = ref(false);
+
+export const getFlag = (country) => {
+  const countryCode = countryCodes[country]
+  if (countryCode){
+    return emojiFlags.countryCode(countryCodes[country]).emoji;
+  }
+}
 
 export const countries = [
     "Algeria", "Angola", "Benin", "Botswana", "Burkina Faso", "Burundi", "Cabo Verde",
@@ -246,7 +254,9 @@ export const countries = [
     "Zambia": "ZM",
     "Zimbabwe": "ZW"
 };
-
+export const countryNames = Object.fromEntries(
+  Object.entries(countryCodes).map(([name, code]) => [code, name])
+);
 export const allCountries = [
   "Afghanistan",
   "Albania",
@@ -288,7 +298,7 @@ export const allCountries = [
   "Comoros",
   "Congo",
   "Costa Rica",
-  "Côte d’Ivoire",
+  "Cote d'Ivoire",
   "Croatia",
   "Cuba",
   "Cyprus",
@@ -310,7 +320,7 @@ export const allCountries = [
   "Finland",
   "France",
   "Gabon",
-  "The Gambia",
+  "Gambia",
   "Georgia",
   "Germany",
   "Ghana",

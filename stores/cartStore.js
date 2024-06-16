@@ -164,9 +164,8 @@ export const useCartStore = defineStore('cart', {
         }
       },
       checkoutProducts() {
-        const selectedItems = this.items.filter(item => item.selected);
-        this.checkoutItems = [...this.checkoutItems, ...selectedItems]
-        this.items = this.items.filter(item => !item.selected);
+        this.checkoutItems = [...this.checkoutItems, ...this.items];
+        this.items = [];
       },
       selectAllItems() {
         this.items.forEach(item => item.selected = true)

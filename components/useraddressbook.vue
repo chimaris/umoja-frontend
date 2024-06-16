@@ -145,21 +145,12 @@
 							</v-text-field
 						></v-col>
 					</v-row>
-					<p class="inputLabel">Street Name and House Number*<span class="mb-2">*</span></p>
-					<v-text-field :rules="inputRules" v-model="streetName" placeholder="Enter your Street Name and House Number" density="comfortable">
-					</v-text-field>
+					
 					<v-row class="">
 						<v-col cols="12" md="6">
-							<p class="inputLabel">Country<span class="mb-2">*</span></p>
-							<v-select
-								v-model="shippingCountry"
-								placeholder="Select Country"
-								:items="allCountries"
-								:rules="inputRules"
-								@input="fetchStates(shippingCountry)"
-								density="comfortable"
-							>
-							</v-select>
+							<p class="inputLabel">Street Name and House Number*<span class="mb-2">*</span></p>
+							<v-text-field :rules="inputRules" v-model="streetName" placeholder="Enter your Street Name and House Number" density="comfortable">
+							</v-text-field>
 						</v-col>
 						<v-col cols="12" md="6">
 							<p class="inputLabel">Region<span class="mb-2">*</span></p>
@@ -167,7 +158,6 @@
 								v-model="shippingState"
 								color="green"
 								:items="states"
-								@input="fetchCities(shippingCountry, shippingState)"
 								:rules="inputRules"
 								hint="**Make sure you select your country first**"
 								:loading="loadingStates"
@@ -199,7 +189,7 @@
 					<p style="color: red; font-size: 16px">{{ addressError }}</p>
 					<div class="d-flex justify-center justify-md-start w-100">
 						<v-btn class="textClass px-8" rounded="xl" type="submit" :disabled="!valid" color="green" flat>Create New Address</v-btn>
-						<!-- <v-btn @click="dialog = false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn> -->
+						<v-btn @click="dialog = false" variant="tonal" class="textClass ml-2 px-8" rounded="xl" color="green" flat>Cancel</v-btn>
 					</div>
 				</v-form>
 			</v-card>
@@ -331,6 +321,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useApi } from "~/composables/useApi";
+import { useUserStore } from "~/stores/userStore";
 import { emailRules, inputRules, phoneRules } from "~/utils/formrules";
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from "~/utils/countryapi";
 import { fetchShippingAdress, updateShippingAddress, createShippingAddress, addressError } from "~/composables/useShippingAddress";
@@ -340,7 +331,8 @@ const dialog2 = ref(false);
 const shippingAddress = ref([]);
 const deleteDialog = ref(false);
 const shippingCity = ref("");
-const shippingCountry = ref("");
+const userStore = useUserStore();
+const shippingCountry = computed(() => userStore.userCountry);
 const shippingState = ref("");
 const fullName = ref("");
 const phoneNumber = ref("");
@@ -354,6 +346,7 @@ const deleteId = ref(null);
 
 onMounted(async () => {
 	shippingAddress.value = await fetchShippingAdress();
+	fetchStates(shippingCountry.value);
 });
 watch(
 	() => shippingCountry.value,
@@ -386,7 +379,6 @@ async function addAddress() {
 			shipping_address: streetName.value,
 			shipping_region: shippingState.value,
 			shipping_city: shippingCity.value,
-			shipping_country: shippingCountry.value,
 			shipping_postal_code: zipcode.value,
 		};
 		const response = await createShippingAddress(data);
@@ -400,7 +392,6 @@ async function addAddress() {
 			streetName.value = "";
 			shippingState.value = "";
 			shippingCity.value = "";
-			shippingCountry.value = "";
 			zipcode.value = "";
 		}
 	}
