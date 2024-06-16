@@ -10,7 +10,7 @@
 			<div class="d-flex justify-space-between align-center">
 				<div class="d-flex align-center">
 					<v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
-						<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png', 200)"></v-img>
+						<v-img cover eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png', 200)"></v-img>
 					</v-avatar>
 					<div class="d-none d-sm-flex">
 						<v-btn :to="n.route" variant="text" v-show="!n.disabled" class="mx-2" flat v-for="n in urls" :key="n.title">
@@ -150,7 +150,7 @@
 	</div>
 
 	<!-- Responsive navbar -->
-	<v-layout v-if="$vuetify.display.mobile">
+	<v-layout v-if="$vuetify.display.mobile && drawer">
 		<v-navigation-drawer v-model="drawer" :location="$vuetify.display.mobile ? 'left' : undefined" temporary style="width: 100%; height: 100vh">
 			<div class="d-flex align-center justify-space-between px-4">
 				<v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
@@ -203,7 +203,7 @@
 								<p class="d-flex align-center"><span class="mr-3" style="font-size: 25px;">{{getFlag(item)}}</span> {{ countryCodes[item] }}</p>
 							</v-list-item>
 						</v-list>
-					</v-menu>
+			</v-menu>
 			<template v-if="!isLoggedIn" v-slot:append>
 				<div class="pa-4 pb-16">
 					<v-btn block color="#333" size="large" variant="outlined" flat rounded="xl">
