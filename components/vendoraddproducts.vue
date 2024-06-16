@@ -846,10 +846,10 @@
 									</div>
 								</div>
 							</div>
-							<div class="mt-6">
+							<!-- <div class="mt-6">
 								<p class="inputLabel">Shipping Method</p>
 								<v-select v-model="shippingOption" :items="shippingOptions" label="Select shipping option"> </v-select>
-							</div>
+							</div> -->
 							<!-- <div style="overflow: hidden" class="rounded-lg cardStyle px-0 py-0">
 								<div class="pa-4" style="background: #fff">
 									<v-radio v-model="digitalProduct" @click="digitalProduct = !digitalProduct" hide-details density="compact" color="#00966D">
@@ -1258,7 +1258,6 @@ export default {
 				length: this.length,
 				height: this.height,
 				width: this.width,
-				shippingOption: this.shippingOption,
 			};
 			this.vendorProducts.saveShippingInfo(data);
 			this.nextTab();

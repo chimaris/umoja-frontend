@@ -32,7 +32,7 @@
 			<v-row class="pt-2">
 				<v-col cols="12" lg="8">
 					<v-card flat class="cardStyle">
-						<h1 class="chkt">Select Shipping Country</h1>
+						<!-- <h1 class="chkt">Select Shipping Country</h1>
 						<v-select
 							style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
 							hide-details=""
@@ -48,7 +48,7 @@
 						>
 						</v-select>
 
-						<v-divider class="my-8"></v-divider>
+						<v-divider class="my-8"></v-divider> -->
 						<h1 class="chkt">Shipping Address</h1>
 						<template v-if="shippingAddress.length > 0">
 							<template v-for="(item, index) in shippingAddress" :key="index">
@@ -124,7 +124,6 @@
 												v-model="item.shipping_region"
 												color="green"
 												:items="states"
-												@change="fetchCities(shippingCountry, shippingState)"
 												:rules="inputRules"
 												hint="**Make sure you select your country first**"
 												:loading="loadingStates"
@@ -199,7 +198,6 @@
 											v-model="shippingState"
 											color="green"
 											:items="states"
-											@change="fetchCities(shippingCountry, shippingState)"
 											:rules="inputRules"
 											hint="**Make sure you select your country first**"
 											:loading="loadingStates"
@@ -270,6 +268,7 @@
 </template>
 <script>
 import { useCartStore } from "~/stores/cartStore";
+import { useUserStore } from "~/stores/userStore";
 import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from "~/utils/countryapi";
 import { emailRules, inputRules, phoneRules } from "~/utils/formrules";
 import { ref, onMounted } from "vue";
@@ -280,16 +279,18 @@ import { fetchShippingAdress, updateShippingAddress, createShippingAddress, addr
 export default {
 	setup() {
 		definePageMeta({
-			middleware: ["auth"],
+			middleware: ["auth", "cart"],
 		});
 
 		const cartStore = useCartStore();
 		const shippingState = ref("");
 		const shippingCity = ref("");
-		const shippingCountry = ref("");
+		const userStore = useUserStore();
+		const shippingCountry = computed(() => userStore.userCountry);
 		const shippingTypes = ref();
 		const router = useRouter();
 		const shippingAddress = ref([]);
+		
 
 		watch(
 			() => shippingCountry.value,
@@ -307,6 +308,7 @@ export default {
 		onMounted(async () => {
 			shippingTypes.value = await shippingMethods();
 			shippingAddress.value = await fetchShippingAdress();
+			fetchStates(shippingCountry.value);
 		});
 
 		// watch(
@@ -326,6 +328,7 @@ export default {
 			shippingTypes,
 			router,
 			shippingAddress,
+			userStore
 		};
 	},
 	data() {
@@ -479,7 +482,6 @@ export default {
 					shipping_address: this.streetName,
 					shipping_region: this.shippingState,
 					shipping_city: this.shippingCity,
-					shipping_country: this.shippingCountry,
 					shipping_postal_code: this.postalCode,
 				};
 				const response = await createShippingAddress(data);
@@ -495,7 +497,6 @@ export default {
 					this.shippingState = "";
 					this.shippingCity = "";
 					this.postalCode = "";
-					this.shippingCountry = "";
 				}
 
 			}

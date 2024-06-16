@@ -20,6 +20,7 @@ export const useVendorStore = defineStore("vendor", {
 		verified: "",
 		error: "",
 		vendorIsLoggedIn: false,
+		shippingMethod: null,
 		vendorEmail: "",
 		vendorToken: null,
 		renderRate: false,

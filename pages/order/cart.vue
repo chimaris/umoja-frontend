@@ -31,7 +31,7 @@
 									<thead>
 										<tr style="border-radius: 6px" class="rounded-lg">
 											<th style="width: 50px" class="font-weight-medium px-1 text-left">
-												<v-checkbox color="green" @click="selectAllItems" v-model="selectAll" hide-details></v-checkbox>
+												<v-checkbox color="green" hide-details></v-checkbox>
 											</th>
 											<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left pl-md-0">Select all</th>
 											<th style="font-size: 14px" class="text-center px-1 font-weight-medium">Quantity</th>
@@ -44,7 +44,7 @@
 										<template v-if="cartStore.items.length >= 1">
 											<tr v-for="item in cartStore.items" :key="item.id">
 												<td class="text-grey-lighten-1 pl-1">
-													<v-checkbox color="green" v-model="item.selected" @click="selectItem(item.id)" hide-details></v-checkbox>
+													<v-checkbox color="green"  hide-details></v-checkbox>
 												</td>
 												<td style="position: relative; font-size: 14px; height: 100px" class="pl-5 pl-md-0">
 													<div style="position: ; top: 24px; width: ">
@@ -115,14 +115,14 @@
 								<div class="d-block d-md-none">
 									<div class="d-flex align-center justify-start">
 										<div class="text-grey-lighten-1 mr-3">
-											<v-checkbox density="compact" color="green" v-model="selectAll" hide-details></v-checkbox>
+											<v-checkbox density="compact" color="green"  hide-details></v-checkbox>
 										</div>
 										<span style="font-size: 14px; width: 100px" class="font-weight-medium">Select all</span>
 									</div>
 									<div v-for="item in cartStore.items" :key="item.id" class="mt-3" style="border-bottom: 1px solid #ededed">
 										<div class="d-flex">
 											<div class="text-grey-lighten-1 mr-3">
-												<v-checkbox density="compact" color="green" v-model="selectAll" hide-details></v-checkbox>
+												<v-checkbox density="compact" color="green"  hide-details></v-checkbox>
 											</div>
 											<div class="mr-3">
 												<v-avatar color="grey-lighten-4" style="border-radius: 15px" class="" size="100">
@@ -282,7 +282,7 @@
 
 <script setup>
 definePageMeta({
-	middleware: ["auth"],
+	middleware: ["auth", "cart"],
 });
 import { ref, computed, watch, nextTick } from "vue";
 import { getLocalStorageItem, setLocalStorageItem, removeLocalStorageItem } from "~/utils/storage";
@@ -294,7 +294,7 @@ const cartStore = useCartStore();
 const router = useRouter();
 
 // Reactive data
-const selectAll = ref(getLocalStorageItem("selectAll", false));
+// const selectAll = ref(getLocalStorageItem("selectAll", false));
 const placescards = ref(false);
 const mods = ref(1);
 const tab = ref(null);
@@ -327,13 +327,13 @@ function confirmRemoval() {
 	}
 }
 
-function selectItem(id) {
-	cartStore.handleSelect(id);
-	if (selectAll.value) {
-		selectAll.value = false;
-		setLocalStorageItem("selectAll", selectAll.value);
-	}
-}
+// function selectItem(id) {
+// 	cartStore.handleSelect(id);
+// 	if (selectAll.value) {
+// 		selectAll.value = false;
+// 		setLocalStorageItem("selectAll", selectAll.value);
+// 	}
+// }
 
 function handleCheckout() {
 	cartStore.checkoutProducts();
@@ -342,15 +342,15 @@ function handleCheckout() {
 	}
 }
 
-function selectAllItems() {
-	selectAll.value = !selectAll.value;
-	setLocalStorageItem("selectAll", selectAll.value);
-	if (selectAll.value) {
-		cartStore.selectAllItems();
-	} else {
-		cartStore.deSelectAllItems();
-	}
-}
+// function selectAllItems() {
+// 	selectAll.value = !selectAll.value;
+// 	setLocalStorageItem("selectAll", selectAll.value);
+// 	if (selectAll.value) {
+// 		cartStore.selectAllItems();
+// 	} else {
+// 		cartStore.deSelectAllItems();
+// 	}
+// }
 
 function showClearCart() {
 	isConfirmClear.value = true;
@@ -372,10 +372,7 @@ const buttons = computed(() => [
 	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png" },
 ]);
 
-const isAnyItemSelected = computed(() => {
-	// return cartStore.items.some(item => item.selected);
-	return cartStore.totalCheckoutItems > 0;
-});
+
 
 const cols = computed(() => {
 	const { lg, sm, md } = $vuetify.display;

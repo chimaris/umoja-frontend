@@ -107,7 +107,36 @@
 						</template>
 						<dialognotification />
 					</v-menu>
-
+					<v-menu location="bottom" offset="10px" width="120px" max-height="400">
+						<template v-slot:activator="{ props }">
+							<div
+								v-ripple
+								v-bind="props"
+								style="cursor: pointer; width: fit-content; height: 40px; border: 1px solid #cecece"
+								size="large"
+								color="white"
+								variant="elevated"
+								flat
+								class="bg-white d-none d-md-flex rounded-lg elevation-0 chipper px-1 ml-4"
+							>
+								<div class="d-flex justify-space-between w-100 h-100 align-center">
+									<div class="d-flex align-center">
+										<!-- <p class="d-flex align-center h-100" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
+											<span class="mx-2" style="font-size: 18px;">{{ getFlag(country) }}</span>
+											<span style="font-size: 18px;" class="mr-2 d-md-flex">{{ countryCodes[country] }}</span>
+										</p> -->
+										<p class="d-flex align-center"><span class="mr-3" style="font-size: 22px;">{{getFlag(country)}}</span> {{ countryCodes[country] }}</p>
+									</div>
+									<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
+								</div>
+							</div>
+						</template>
+						<v-list>
+							<v-list-item v-for="(item, index) in allCountries" :key="index" :value="index" @click="selectCountry(item)">
+								<p class="d-flex align-center"><span class="mr-3" style="font-size: 25px;">{{getFlag(item)}}</span> {{ countryCodes[item] }}</p>
+							</v-list-item>
+						</v-list>
+					</v-menu>
 					<v-btn v-if="$vuetify.display.mobile" rounded="xl" size="40" icon flat color="transparent" @click.stop="openNav">
 						<v-avatar size="20">
 							<v-img
@@ -145,7 +174,36 @@
 					{{ n.title }}
 				</v-btn>
 			</v-list>
-
+			<v-menu location="bottom" offset="10px" width="120px" max-height="400">
+						<template v-slot:activator="{ props }">
+							<div
+								v-ripple
+								v-bind="props"
+								style="cursor: pointer; width: fit-content; height: 40px; border: 1px solid #cecece"
+								size="large"
+								color="white"
+								variant="elevated"
+								flat
+								class="bg-white  rounded-lg elevation-0 chipper px-1 ml-4"
+							>
+								<div class="d-flex justify-space-between w-100 h-100 align-center">
+									<div class="d-flex align-center">
+										<!-- <p class="d-flex align-center h-100" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
+											<span class="mx-2" style="font-size: 18px;">{{ getFlag(country) }}</span>
+											<span style="font-size: 18px;" class="mr-2 d-md-flex">{{ countryCodes[country] }}</span>
+										</p> -->
+										<p class="d-flex align-center"><span class="mr-3" style="font-size: 22px;">{{getFlag(country)}}</span> {{ countryCodes[country] }}</p>
+									</div>
+									<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
+								</div>
+							</div>
+						</template>
+						<v-list>
+							<v-list-item v-for="(item, index) in allCountries" :key="index" :value="index" @click="selectCountry(item)">
+								<p class="d-flex align-center"><span class="mr-3" style="font-size: 25px;">{{getFlag(item)}}</span> {{ countryCodes[item] }}</p>
+							</v-list-item>
+						</v-list>
+					</v-menu>
 			<template v-if="!isLoggedIn" v-slot:append>
 				<div class="pa-4 pb-16">
 					<v-btn block color="#333" size="large" variant="outlined" flat rounded="xl">
@@ -168,13 +226,38 @@
 <script>
 import { useTheme } from "vuetify";
 import { useCartStore } from "~/stores/cartStore";
+import {ref, onMounted} from 'vue'
 import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
 import { useVendorStore } from "~/stores/vendorStore";
+import { allCountries, countryCodes, getFlag } from "~/utils/countryapi";
 import { useProductStore } from "~/stores/productStore";
 import { getCloudinaryImageUrl } from "~/utils/cloudinary";
+import emojiFlags from 'emoji-flags';
+import useGeolocation from "~/composables/getCountry";
 
 export default {
+	setup(){
+		const userStore = useUserStore()
+		const country = computed(() => userStore.userCountry)
+
+		onMounted(async () => {
+			if (!userStore.userCountry){
+			await useGeolocation()
+			}
+		})
+
+		function selectCountry(item) {
+			userStore.setCountry(item);
+		}
+
+		return{
+			userStore,
+			country,
+			getFlag,
+			selectCountry
+		}
+	},
 	data() {
 		return {
 			searchQuery: "",
@@ -238,9 +321,6 @@ export default {
 		},
 		router() {
 			return useRouter();
-		},
-		userStore() {
-			return useUserStore();
 		},
 		isLoggedIn() {
 			return this.userStore.isLoggedIn;

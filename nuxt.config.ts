@@ -44,6 +44,7 @@ export default defineNuxtConfig({
 		public: {
 			stripePK: process.env.NUXT_ENV_STRIPE_PUBLIC_KEY,
 			mapboxAccessToken: process.env.MAP_BOX_TOKEN,
+			ipInfoToken: process.env.NUXT_ENV_IP_KEY,
 		},
 	},
 	// mapbox: {

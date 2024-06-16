@@ -397,7 +397,7 @@ import { useProductStore } from "~/stores/productStore.js";
 import { useApi } from "~/composables/useApi";
 import { useUserStore } from "~/stores/userStore";
 import {getdateRegistered} from '~/utils/date'
-import { countries, countryCodes } from "~/utils/countryapi";
+import { countries, countryCodes, getFlag } from "~/utils/countryapi";
 import emojiFlags from 'emoji-flags';
 import {discoverPageProducts, loadProduct} from '~/composables/useProducts'
 
@@ -587,13 +587,6 @@ export default {
 		},
 	},
 	methods: {
-		getFlag(country) {
-			const countryCode = countryCodes[country]
-			if (countryCode){
-				return emojiFlags.countryCode(countryCodes[country]).emoji;
-			}
-			
-		},
 		selectCountry(item) {
 			this.country = item;
 		},

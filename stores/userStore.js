@@ -10,6 +10,7 @@ export const useUserStore = defineStore({
   id: 'user',
   state: () => ({
     loading: false,
+    userCountry: null,
     allPosts: [],
     allArticles: [],
     postPage: 1,
@@ -32,9 +33,13 @@ export const useUserStore = defineStore({
     storage: persistedState.localStorage,
   },
   getters: {
-    getIsLoggedIn: (state) => state.isLoggedIn
+    getIsLoggedIn: (state) => state.isLoggedIn,
+    getCountry: (state) => state.country,
   },
-  actions: {   
+  actions: {  
+    setCountry(country) {
+      this.userCountry = country;
+  }, 
     async login({email, password}) {
       const api = useApi()
       this.loading = true;
