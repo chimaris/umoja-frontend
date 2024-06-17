@@ -10,7 +10,10 @@
 			<div class="d-flex justify-space-between align-center">
 				<div class="d-flex align-center">
 					<v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
-						<v-img cover eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718615349/umoja/Frame_4_emeelq_ajydmg.png', 200)"></v-img>
+						<v-img
+							eager
+							:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718615349/umoja/Frame_4_emeelq_ajydmg.png', 200)"
+						></v-img>
 					</v-avatar>
 					<div class="d-none d-sm-flex">
 						<v-btn :to="n.route" variant="text" v-show="!n.disabled" class="mx-2" flat v-for="n in urls" :key="n.title">
@@ -125,7 +128,9 @@
 											<span class="mx-2" style="font-size: 18px;">{{ getFlag(country) }}</span>
 											<span style="font-size: 18px;" class="mr-2 d-md-flex">{{ countryCodes[country] }}</span>
 										</p> -->
-										<p class="d-flex align-center"><span class="mr-3" style="font-size: 22px;">{{getFlag(country)}}</span> {{ countryCodes[country] }}</p>
+										<p class="d-flex align-center">
+											<span class="mr-3" style="font-size: 22px">{{ getFlag(country) }}</span> {{ countryCodes[country] }}
+										</p>
 									</div>
 									<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
 								</div>
@@ -133,7 +138,9 @@
 						</template>
 						<v-list>
 							<v-list-item v-for="(item, index) in allCountries" :key="index" :value="index" @click="selectCountry(item)">
-								<p class="d-flex align-center"><span class="mr-3" style="font-size: 25px;">{{getFlag(item)}}</span> {{ countryCodes[item] }}</p>
+								<p class="d-flex align-center">
+									<span class="mr-3" style="font-size: 25px">{{ getFlag(item) }}</span> {{ countryCodes[item] }}
+								</p>
 							</v-list-item>
 						</v-list>
 					</v-menu>
@@ -175,34 +182,38 @@
 				</v-btn>
 			</v-list>
 			<v-menu location="bottom" offset="10px" width="120px" max-height="400">
-						<template v-slot:activator="{ props }">
-							<div
-								v-ripple
-								v-bind="props"
-								style="cursor: pointer; width: fit-content; height: 40px; border: 1px solid #cecece"
-								size="large"
-								color="white"
-								variant="elevated"
-								flat
-								class="bg-white  rounded-lg elevation-0 chipper px-1 ml-4"
-							>
-								<div class="d-flex justify-space-between w-100 h-100 align-center">
-									<div class="d-flex align-center">
-										<!-- <p class="d-flex align-center h-100" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
+				<template v-slot:activator="{ props }">
+					<div
+						v-ripple
+						v-bind="props"
+						style="cursor: pointer; width: fit-content; height: 40px; border: 1px solid #cecece"
+						size="large"
+						color="white"
+						variant="elevated"
+						flat
+						class="bg-white rounded-lg elevation-0 chipper px-1 ml-4"
+					>
+						<div class="d-flex justify-space-between w-100 h-100 align-center">
+							<div class="d-flex align-center">
+								<!-- <p class="d-flex align-center h-100" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
 											<span class="mx-2" style="font-size: 18px;">{{ getFlag(country) }}</span>
 											<span style="font-size: 18px;" class="mr-2 d-md-flex">{{ countryCodes[country] }}</span>
 										</p> -->
-										<p class="d-flex align-center"><span class="mr-3" style="font-size: 22px;">{{getFlag(country)}}</span> {{ countryCodes[country] }}</p>
-									</div>
-									<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
-								</div>
+								<p class="d-flex align-center">
+									<span class="mr-3" style="font-size: 22px">{{ getFlag(country) }}</span> {{ countryCodes[country] }}
+								</p>
 							</div>
-						</template>
-						<v-list>
-							<v-list-item v-for="(item, index) in allCountries" :key="index" :value="index" @click="selectCountry(item)">
-								<p class="d-flex align-center"><span class="mr-3" style="font-size: 25px;">{{getFlag(item)}}</span> {{ countryCodes[item] }}</p>
-							</v-list-item>
-						</v-list>
+							<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
+						</div>
+					</div>
+				</template>
+				<v-list>
+					<v-list-item v-for="(item, index) in allCountries" :key="index" :value="index" @click="selectCountry(item)">
+						<p class="d-flex align-center">
+							<span class="mr-3" style="font-size: 25px">{{ getFlag(item) }}</span> {{ countryCodes[item] }}
+						</p>
+					</v-list-item>
+				</v-list>
 			</v-menu>
 			<template v-if="!isLoggedIn" v-slot:append>
 				<div class="pa-4 pb-16">
@@ -226,35 +237,35 @@
 <script>
 import { useTheme } from "vuetify";
 import { useCartStore } from "~/stores/cartStore";
-import {ref, onMounted} from 'vue'
+import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useUserStore } from "~/stores/userStore";
 import { useVendorStore } from "~/stores/vendorStore";
 import { allCountries, countryCodes, getFlag } from "~/utils/countryapi";
 import { useProductStore } from "~/stores/productStore";
 import { getCloudinaryImageUrl } from "~/utils/cloudinary";
-import emojiFlags from 'emoji-flags';
+import emojiFlags from "emoji-flags";
 import useGeolocation from "~/composables/getCountry";
 
 export default {
-	setup(){
-		const userStore = useUserStore()
-		const country = computed(() => userStore.userCountry)
+	setup() {
+		const userStore = useUserStore();
+		const country = computed(() => userStore.userCountry);
 
 		onMounted(async () => {
-			await useGeolocation()
-		})
+			await useGeolocation();
+		});
 
 		function selectCountry(item) {
 			userStore.setCountry(item);
 		}
 
-		return{
+		return {
 			userStore,
 			country,
 			getFlag,
-			selectCountry
-		}
+			selectCountry,
+		};
 	},
 	data() {
 		return {
@@ -304,7 +315,7 @@ export default {
 				{ title: "Discovery", route: "/discovery_page", disabled: false },
 				{ title: "Market Place", route: "/market_place", disabled: false },
 				{ title: "About Us", route: "/about/*", disabled: false },
-				{ title: "Create Account", route: "/signup-category", disabled: this.isLoggedIn},
+				{ title: "Create Account", route: "/signup-category", disabled: this.isLoggedIn },
 				// { title: "ERP Solution", route: "/vendor/dashboard/Homepage", disabled: false },
 			];
 		},
