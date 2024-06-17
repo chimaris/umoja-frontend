@@ -19,8 +19,7 @@
 		"@types/node": "^18",
 		"mapbox-gl": "^3.3.0",
 		"nuxt": "^3.4.3",
-		"nuxt-mapbox": "^1.5.9",
-		"vite-plugin-vuetify": "^2.0.3"
+		"nuxt-mapbox": "^1.5.9"
 	},
 	"dependencies": {
 		"@chenfengyuan/vue-countdown": "^2.1.1",
@@ -56,8 +55,9 @@
 		"maz-ui": "^3.40.0",
 		"sass": "^1.57.1",
 		"v-calendar": "^3.1.2",
+		"vite-plugin-vuetify": "^1.0.2",
 		"vue-sonner": "^1.1.2",
 		"vue3-apexcharts": "^1.5.2",
-		"vuetify": "3.4.0"
+		"vuetify": "^3.4.0"
 	}
 }

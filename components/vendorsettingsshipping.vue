@@ -783,7 +783,6 @@
 
 <script setup>
 import { useVendorStore } from "~/stores/vendorStore";
-// import { VDateInput } from 'vuetify/lib/labs/VDateInput'
 import { useMyVendorShippingStore } from "~/stores/vendorShipping";
 import { ref } from "vue";
 
