@@ -10,7 +10,7 @@
 			<div class="d-flex justify-space-between align-center">
 				<div class="d-flex align-center">
 					<v-avatar class="mr-8" @click="$router.push('/')" size="102" height="" style="cursor: pointer; height: 65px !important" rounded="0">
-						<v-img style="object-fit: contain" eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718615349/umoja/Frame_4_emeelq_ajydmg.png', 200)"></v-img>
+						<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718615349/umoja/Frame_4_emeelq_ajydmg.png', 200)"></v-img>
 					</v-avatar>
 					<div class="d-none d-sm-flex">
 						<v-btn :to="n.route" variant="text" v-show="!n.disabled" class="mx-2" flat v-for="n in urls" :key="n.title">
