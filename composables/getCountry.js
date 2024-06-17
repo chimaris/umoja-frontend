@@ -25,7 +25,6 @@ import { countryNames } from '~/utils/countryapi';
             if (geoData && geoData.country) {
                 const countryName = countryNames[geoData.country]
                 userStore.setCountry(countryName);
-                console.log(countryName);
             }
         } catch (error) {
             console.error('Error fetching geolocation data:', error);
