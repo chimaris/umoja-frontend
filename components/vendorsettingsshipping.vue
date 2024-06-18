@@ -14,12 +14,12 @@
 				outlined
 				append-inner-icon=""
 				class="my-5"
-				:bg-color="selected == 'umoja-logistics' ? '#EDF0EF' : selected == 'manual-shipping' ? '#FDF1ED' : ''"
+				:bg-color="selected == 'Umoja Logistics' ? '#EDF0EF' : selected == 'Manual Shipping' ? '#FDF1ED' : ''"
 			>
 				<template v-slot:selection="{ item }">
 					<v-list-item>
 						<div class="d-flex py-2">
-							<v-avatar class="mr-4" size="50" :color="selected == 'manual-shipping' ? '#fff' : '#fff'">
+							<v-avatar class="mr-4" size="50" :color="selected == 'Manual Shipping' ? '#fff' : '#fff'">
 								<v-img height="24" width="24" :src="item.raw.icon" />
 							</v-avatar>
 							<div>
@@ -45,7 +45,7 @@
 			</v-select>
 			<template v-if="selected">
 				<!-- If manuel shipping is selected -->
-				<v-card v-if="selected == 'manual-shipping'" class="my-5 pa-6 cardStyle" flat>
+				<v-card v-if="selected == 'Manual Shipping'" class="my-5 pa-6 cardStyle" flat>
 					<div class="d-flex justify-space-between align-center w-100 mb-4">
 						<div>
 							<p style="font-size: 18px; font-weight: 600; color: #333">Shipping <v-icon icon="mdi mdi-information-outline" size="20"></v-icon></p>
@@ -113,7 +113,7 @@
 					</div>
 				</v-card>
 				<!-- if manual-shipping is selected -->
-				<v-card v-if="selected == 'manual-shipping'" class="mx-auto my-5 py-2 px-6 cardStyle" flat>
+				<v-card v-if="selected == 'Manual Shipping'" class="mx-auto my-5 py-2 px-6 cardStyle" flat>
 					<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
 						Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 					</p>
@@ -156,13 +156,15 @@
 								<p>{{ zone.name }}</p>
 							</v-col>
 							<v-col cols="3" style="color: #969696">
-								<p class="text-truncate" style="max-width: 200px">{{ zone.rates[0].condition }}</p>
-								<p>€60.00 - €100.00</p>
-								<p v-if="zone.rates.length > 1" style="color: #1273eb">See more rates</p>
+								<p v-if="zone.rates[0].minimum_price">from {{formattedPrice(zone.rates[0].minimum_price)}} <span v-if="zone.rates[0].maximum_price">to {{ formattedPrice(zone.rates[0].maximum_price) }}</span></p>
+								<p v-if="zone.rates[0].minimum_weight">from {{zone.rates[0].minimum_weight}}Kg <span v-if="zone.rates[0].maximum_weight">to {{ zone.rates[0].maximum_weight }}</span></p>
+								<!-- <p>€60.00 - €100.00</p> -->
+								<!-- <p v-if="zone.rates[0].minimum_price">from {{formattedPrice(zone.rates[0].minimum_price)}} <span v-if="zone.rates[0].maximum_price">to {{ formattedPrice(zone.rates[0].maximum_price) }}</span></p> -->
+								<!-- <p v-if="zone.rates.length > 1" style="color: #1273eb">See more rates</p> -->
 							</v-col>
 							<v-col>
 								<!-- <p>Within Jan 1st to Jan 10th</p> -->
-								<!-- <p>8 business days</p> -->
+								<p>{{zone.delivery_date_range}}</p>
 							</v-col>
 						</v-row>
 					</div>
@@ -331,8 +333,9 @@
 						</div>
 					</div>
 				</v-card>
-				<div v-if="selected == 'umoja-logistics'" class="d-flex justify-end ga-4">
-					<v-btn size="default" color="green" flat>
+				<div v-if="selected == 'Umoja Logistics'" class="d-flex flex-column align-end justify-end ga-2">
+					<p class="" style="color: red; font-size: 16px">{{shippingError}}</p>
+					<v-btn  disabled="true" size="default" color="green" flat>
 						<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save shipping method</span></v-btn
 					>
 				</div>
@@ -532,84 +535,59 @@
 						<p>Rates</p>
 					</v-col>
 					<v-col>
-						<p>Delivery Dates</p>
+						<p>No. of Delivery Days</p>
 					</v-col>
 				</v-row>
 				<v-divider class="my-3"></v-divider>
-				<v-row style="font-size: 16px; font-weight: 500; color: #333">
+				<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
 					<v-col cols="3">
-						<p>Africa</p>
+						<p>{{ zone.name }}</p>
 					</v-col>
 					<v-col cols="3" style="color: #969696">
-						<p>€60.00 and up</p>
-						<p>€60.00 - €100.00</p>
-						<p style="color: #1273eb">See more rates</p>
+						<p v-if="zone.rates[0].minimum_price">from {{formattedPrice(zone.rates[0].minimum_price)}} <span v-if="zone.rates[0].maximum_price">to {{ formattedPrice(zone.rates[0].maximum_price) }}</span></p>
+						<p v-if="zone.rates[0].minimum_weight">from {{zone.rates[0].minimum_weight}}Kg <span v-if="zone.rates[0].maximum_weight">to {{ zone.rates[0].maximum_weight }}</span></p>
+						<!-- <p>€60.00 - €100.00</p> -->
+						<!-- <p style="color: #1273eb">See more rates</p> -->
 					</v-col>
 					<v-col>
 						<v-card flat>
-							<!-- <div class="d-flex align-center" style="border: 1px solid #e5e5e5; border-radius: 6px; min-width: 300px; "> -->
-							<v-date-input
-								class=""
-								v-model="model"
-								prepend-icon=""
-								append-inner-icon="$calendar"
-								label="Select date range"
-								multiple="range"
-							></v-date-input>
-
-							<!-- </div> -->
-							<!-- <v-menu open-on-hover :close-on-content-click="false" v-model="menu">
-								<template v-slot:activator="{ props }">
-									<v-text-field
-										v-bind="props"
-										
-										style="border: 1px solid #e5e5e5; border-radius: 6px; min-width: 300px"
-										variant="outlined"
-										density="compact"
-										hide-details
-										placeholder="Select Date"
-										:value="formattedDate"
-									>
-										<template v-slot:append-inner>
-											<v-icon color="#2C6E63">mdi mdi-calendar</v-icon>
-										</template>
-									</v-text-field>
-								</template>
-								 <v-date-picker style="width: 100%" v-model="dateRange" mode="range" @change="menu = false"></v-date-picker> 
-							</v-menu> -->
+							<div class="d-flex my-2 align-center ga-1">
+								<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px;">
+												<v-text-field
+												style="max-width: 50px"
+												class="mr-3 rounded-lg bg-grey-lighten-3"
+												density="compact"
+												hide-details
+												variant="outline"
+												v-model="zone.delivery_date_range"
+											></v-text-field>
+												<div>
+													<v-btn
+														@click="zone.delivery_date_range++"
+														size="x-small"
+														height="18px"
+														color="grey-lighten-3"
+														flat
+														class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
+														icon="mdi mdi-menu-up"
+													></v-btn>
+													<v-btn
+														@click="zone.delivery_date_range = zone.delivery_date_range <= 0 ? zone.delivery_date_range : zone.delivery_date_range - 1"
+														size="x-small"
+														height="18px"
+														color="grey-lighten-3"
+														flat
+														class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+														icon="mdi mdi-menu-down"
+													></v-btn>
+												</div>
+											</div>
+											<p>Business working days</p>								
+											
+											
+							</div>
 						</v-card>
 					</v-col>
-				</v-row>
-				<v-row style="font-size: 16px; font-weight: 500; color: #333">
-					<v-col cols="3">
-						<p>Asia</p>
-					</v-col>
-					<v-col cols="3" style="color: #969696">
-						<p>€60.00 and up</p>
-						<p>€60.00 - €100.00</p>
-					</v-col>
-					<v-col> </v-col>
-				</v-row>
-				<v-row style="font-size: 16px; font-weight: 500; color: #333">
-					<v-col cols="3">
-						<p>Domestic</p>
-					</v-col>
-					<v-col cols="3" style="color: #969696">
-						<p>€60.00 and up</p>
-						<p>€60.00 - €100.00</p>
-					</v-col>
-					<v-col> </v-col>
-				</v-row>
-				<v-row style="font-size: 16px; font-weight: 500; color: #333">
-					<v-col cols="3">
-						<p>International</p>
-					</v-col>
-					<v-col cols="3" style="color: #969696">
-						<p>€60.00 and up</p>
-						<p>€60.00 - €100.00</p>
-						<p style="color: #1273eb">See more rates</p>
-					</v-col>
-					<v-col> </v-col>
 				</v-row>
 
 				<span class="d-flex align-center mt-5" style="color: #1273eb; font-weight: 600; font-size: 16px; cursor: pointer">
@@ -625,8 +603,8 @@
 							></v-col
 						>
 						<v-col cols="6">
-							<v-btn size="large" color="green" flat block>
-								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Done </span></v-btn
+							<v-btn @click="updateDeliveryDays()" :disabled="updating" size="large" color="green" flat block>
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px">{{ updating ? 'Saving' : 'Done' }} </span></v-btn
 							></v-col
 						>
 					</v-row>
@@ -654,49 +632,50 @@
 
 			<div class="px-7">
 				<p class="inputLabel">Company</p>
-				<v-text-field placeholder="Company" v-model="vendor.business_name" density="comfortable"> </v-text-field>
+				<v-text-field placeholder="Company" v-model="localDelivery.local_delivery_company" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Country/region</p>
-				<v-select append-inner-icon="mdi mdi-chevron-down" v-model="vendor.country_name" placeholder="Country/region" density="comfortable">
+				<v-select  v-model="localDelivery.local_delivery_country_name" :items="allCountries" placeholder="Country/region" density="comfortable">
 				</v-select>
 
 				<p class="inputLabel">Address</p>
 
-				<v-text-field v-model="vendor.address" placeholder="Enter customer address" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localDelivery.local_delivery_address" placeholder="Enter customer address" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Apartment, suite, etc</p>
-				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localDelivery.local_delivery_apartment" placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
 			</div>
 			<div class="px-7">
 				<v-row class="mt-0">
 					<v-col>
 						<p class="inputLabel">City</p>
-						<v-text-field placeholder="Enter city" v-model="vendor.city" density="comfortable"> </v-text-field
+						<v-text-field placeholder="Enter city" v-model="localDelivery.local_delivery_city" density="comfortable"> </v-text-field
 					></v-col>
 					<v-col>
 						<p class="inputLabel">State</p>
-						<v-text-field v-model="vendor.state" placeholder="Select State" density="comfortable"> </v-text-field>
+						<v-select v-model="localDelivery.local_delivery_state" :items="deliveryAddress" :loading="loadingStates" color="green" placeholder="Select State" density="comfortable"> </v-select>
 					</v-col>
 					<v-col>
 						<p class="inputLabel">Zipcode</p>
 
-						<v-text-field placeholder="Enter last name" density="comfortable"> </v-text-field
+						<v-text-field v-model="localDelivery.local_delivery_zipcode" placeholder="Enter last name" density="comfortable"> </v-text-field
 					></v-col>
 				</v-row>
 
 				<p class="inputLabel">Phone</p>
-				<v-text-field v-model="vendor.busniess_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localDelivery.local_delivery_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
 
 				<div class="py-4">
+					<p class="mb-2" style="color: red; font-size: 16px">{{deliveryError}}</p>
 					<v-row>
 						<v-col cols="6"
-							><v-btn size="large" style="border: 1px solid #e5e5e5" flat block>
+							><v-btn @click="localDeliveryModal = false" size="large" style="border: 1px solid #e5e5e5" flat block>
 								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
 							></v-col
 						>
 						<v-col cols="6">
-							<v-btn size="large" color="green" flat block>
-								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save</span></v-btn
+							<v-btn @click="editDeliveryAddress()" :disabled="loading" size="large" color="green" flat block>
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> {{loading ? 'Saving' : 'Save'}}</span></v-btn
 							></v-col
 						>
 					</v-row>
@@ -729,49 +708,50 @@
 
 			<div class="px-7">
 				<p class="inputLabel">Company</p>
-				<v-text-field v-model="vendor.business_name" placeholder="Company" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localPickup.local_pickup_company" placeholder="Company" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Country/region</p>
-				<v-select v-model="vendor.country_name" append-inner-icon="mdi mdi-chevron-down" placeholder="Country/region" density="comfortable">
+				<v-select v-model="localPickup.local_pickup_country_name" :items="allCountries"  placeholder="Country/region" density="comfortable">
 				</v-select>
 
 				<p class="inputLabel">Address</p>
 
-				<v-text-field v-model="vendor.address" placeholder="Enter customer address" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localPickup.local_pickup_address" placeholder="Enter customer address" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Apartment, suite, etc</p>
-				<v-text-field placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localPickup.local_pickup_apartment" placeholder="Apartment, suite, etc" density="comfortable"> </v-text-field>
 			</div>
 			<div class="px-7">
 				<v-row class="">
 					<v-col>
 						<p class="inputLabel">City</p>
-						<v-text-field v-model="vendor.city" placeholder="Enter city" density="comfortable"> </v-text-field
+						<v-text-field v-model="localPickup.local_pickup_phone_number" placeholder="Enter city" density="comfortable"> </v-text-field
 					></v-col>
 					<v-col>
 						<p class="inputLabel">State</p>
-						<v-select v-model="vendor.state" append-inner-icon="mdi mdi-chevron-down" placeholder="Select State" density="comfortable"> </v-select>
+						<v-select v-model="localPickup.local_pickup_state" :loading="loadingStates" color="green" :items="pickupAddress"  placeholder="Select State" density="comfortable"> </v-select>
 					</v-col>
 					<v-col>
 						<p class="inputLabel">Zipcode</p>
 
-						<v-text-field placeholder="Enter last name" density="comfortable"> </v-text-field
+						<v-text-field v-model="localPickup.local_pickup_zipcode" placeholder="Enter last name" density="comfortable"> </v-text-field
 					></v-col>
 				</v-row>
 
 				<p class="inputLabel">Phone</p>
-				<v-text-field v-model="vendor.busniess_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localPickup.local_pickup_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
 
 				<div class="py-4">
+					<p class="mb-2" style="color: red; font-size: 16px">{{pickupError}}</p>
 					<v-row>
 						<v-col cols="6"
-							><v-btn size="large" style="border: 1px solid #e5e5e5" flat block>
+							><v-btn @click="localPickupModal = false" size="large" style="border: 1px solid #e5e5e5" flat block>
 								<span style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Cancel</span></v-btn
 							></v-col
 						>
 						<v-col cols="6">
-							<v-btn size="large" color="green" flat block>
-								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save</span></v-btn
+							<v-btn @click="editPickupAddress()" :disabled="loading" size="large" color="green" flat block>
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> {{loading ? 'Saving' : 'Save'}}</span></v-btn
 							></v-col
 						>
 					</v-row>
@@ -784,38 +764,36 @@
 <script setup>
 import { useVendorStore } from "~/stores/vendorStore";
 import { useMyVendorShippingStore } from "~/stores/vendorShipping";
+import { createDeliveryAddress, createPickupAddress, getDeliveryAddress, getPickupAddress, updateDeliveryAddress, updatePickupAddress } from "~/composables/delivery";
 import { ref } from "vue";
+import { fetchStates, loadingStates, allCountries } from "~/utils/countryapi";
+import {createShippingMethod, updateShipping } from "~/composables/usevendorShipping";
 
 const model = ref(null);
+const shippingError = ref("")
+const savingMethod = ref(false)
 const vendorStore = useVendorStore();
 const vendor = ref(vendorStore.vendor.vendor_details);
 const shippingStore = useMyVendorShippingStore();
-const selected = ref(vendorStore.vendor.vendor_details.shipping_method.type);
+const selected = ref(null);
+// const selected = ref("")
 const shippingZones = computed(() => shippingStore.shippingZones);
-
-onMounted(async () => {
-	if ((selected.value = "manual-shipping")) {
-		shippingStore.shippingZones = await getShipping();
-	}
-});
-
 const localDeliveryModal = ref(false);
 const localPickupModal = ref(false);
 const savePackageModal = ref(false);
 const printSlipModal = ref(false);
 const deliveryDateModal = ref(false);
 const menu = ref(false);
-const dateRange = ref([]); // { start: new Date(), end: new Date() },
 const items = [
 	{
-		value: "umoja-logistics",
+		value: "Umoja Logistics",
 		text: "Umoja Logistics",
 		description: "Let Umoja handle your entire business logistics and make it easier for you",
 		icon: "https://res.cloudinary.com/payhospi/image/upload/v1717407683/umoja/favicon_fpqa9y.png",
 		none: "",
 	},
 	{
-		value: "manual-shipping",
+		value: "Manual Shipping",
 		text: "Manual Shipping",
 		description: "The business owners handles everything concerns shipping their product",
 		icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718096905/umoja/Hand_Stars_ezru3e.svg",
@@ -823,66 +801,166 @@ const items = [
 	},
 ];
 
+// local delivery address
+const localDelivery = ref([])
+const deliveryAddress = ref([])
+const deliveryError = ref("")
+const loading = ref(false)
+const updating = ref(false)
+// local pickup address
+const localPickup = ref([])
+const pickupAddress = ref([])
+const pickupError = ref("")
+
+onMounted(async () => {
+	
+	selected.value = vendorStore.vendor.vendor_details.shipping_method
+
+	if ((selected.value == "Manual Shipping")) {
+		shippingStore.shippingZones = await getShipping();
+			}
+	localDelivery.value = await getDeliveryAddress()
+	if (localDelivery.value.length == 0){
+		await saveDeliveryAddress()
+	}
+	localPickup.value = await getPickupAddress()
+	if (localPickup.value.length == 0){
+		await savePickupAddress()
+	}
+});
+
+watch(() => localPickup.value.local_pickup_country_name, async()=> {
+	pickupAddress.value = await fetchStates(localPickup.value.local_pickup_country_name)
+})
+watch(() => localDelivery.value.local_delivery_country_name, async()=> {
+	deliveryAddress.value = await fetchStates(localDelivery.value.local_delivery_country_name)
+})
 const computedLabel = computed(() => {
 	return selected.value ? "" : "Select Shipping Method";
 });
-const computedLabel1 = computed(() => {
-	return menu.value ? "" : "Select date";
-});
 
-// formattedDate() {
-// 	const options = { year: "numeric", month: "long", day: "numeric" };
-// 	const start = this.dateRange.start.toLocaleDateString(undefined, options);
-// 	const end = this.dateRange.end.toLocaleDateString(undefined, options);
-// 	return `${start} - ${end}`;
-// },
-const formattedDate = computed(() => {
-	if (dateRange.value.length === 2) {
-		const [start, end] = dateRange.value;
-		return `${formatDate.value(start)} - ${formatDate.value(end)}`;
+async function updateDeliveryDays() {
+	updating.value = true 
+  const updatePromises = shippingZones.value.map(zone => {
+    const data = {
+      delivery_date_range: zone.delivery_date_range
+    };
+    return updateShipping(data, zone.id);
+  });
+
+  await Promise.all(updatePromises);
+
+  shippingStore.shippingZones = await getShipping();
+  updating.value = false
+}
+async function editDeliveryAddress(){
+	const data = {
+		local_delivery_company: localDelivery.value.local_delivery_company,
+		local_delivery_address: localDelivery.value.local_delivery_address,
+		local_delivery_country_name: localDelivery.value.local_delivery_country_name,
+		local_delivery_city: localDelivery.value.local_delivery_city,
+		local_delivery_state: localDelivery.value.local_delivery_state,
+		local_delivery_apartment: localDelivery.value.local_delivery_apartment,
+		local_delivery_zipcode: localDelivery.value.local_delivery_zipcode,
+		local_delivery_phone_number: localDelivery.value.local_delivery_phone_number
 	}
-	return "";
-});
+	try{
+		loading.value = true
+		await updateDeliveryAddress(data, localDelivery.value.id)
+		localDelivery.value = await getDeliveryAddress()
+		
+		deliveryError.value = ""
+	}catch(error){
+		if (error.response) {
+            deliveryError.value = error.response.data.message || 'An error occurred while saving local pickup address.';
+          } else if (error.request) {
+            deliveryError.value = 'No response received from server. Please try again later.';
+          } else {
+            deliveryError.value = 'An error occurred. Please try again later.';
+          }
+	}finally{
+		loading.value = false
+	}
+}
+async function editPickupAddress(){
+	const data = {
+		local_pickup_company: localPickup.value.local_pickup_company,
+		local_pickup_address: localPickup.value.local_pickup_address,
+		local_pickup_country_name: localPickup.value.local_pickup_country_name,
+		local_pickup_city: localPickup.value.local_pickup_city,
+		local_pickup_state: localPickup.value.local_pickup_state,
+		local_pickup_apartment: localPickup.value.local_pickup_apartment,
+		local_pickup_zipcode: localPickup.value.local_pickup_zipcode,
+		local_pickup_phone_number: localPickup.value.local_pickup_phone_number
+	}
+	try{
+		loading.value = true
+		await updatePickupAddress(data, localPickup.value.id)
+		localPickup.value = await getPickupAddress()
+		pickupError.value = ""
+	}catch(error){
+		if (error.response) {
+            pickupError.value = error.response.data.message || 'An error occurred while saving local pickup address.';
+          } else if (error.request) {
+            pickupError.value = 'No response received from server. Please try again later.';
+          } else {
+            pickupError.value = 'An error occurred. Please try again later.';
+          }
+	}finally{
+		loading.value = false
+	}
+}
+async function saveDeliveryAddress(){
+	const data = {
+		local_delivery_company: vendor.value.business_name,
+		local_delivery_address: vendor.value.address,
+		local_delivery_country_name: vendor.value.country_name,
+		local_delivery_city: vendor.value.city,
+		local_delivery_state: vendor.value.state,
+		local_delivery_apartment: "",
+		local_delivery_zipcode: "",
+		local_delivery_phone_number: vendor.value.busniess_phone_number
+	}
+	const res = await createDeliveryAddress(data)
+	if (res){
+		localDelivery.value = await getDeliveryAddress()
+	}
+}
+async function savePickupAddress(){
+	const data = {
+		local_pickup_company: vendor.value.business_name,
+		local_pickup_address: vendor.value.address,
+		local_pickup_country_name: vendor.value.country_name,
+		local_pickup_city: vendor.value.city,
+		local_pickup_state: vendor.value.state,
+		local_pickup_apartment: "",
+		local_pickup_zipcode: "",
+		local_pickup_phone_number: vendor.value.busniess_phone_number
+	}
+	const res = await createPickupAddress(data)
+	if (res){
+		localPickup.value = await getPickupAddress()
+	}
+}
+async function saveZone (){
+	const data = {
+		shipping_method_id: 1
+	}
 
-function updateDate(value) {
-	dateRange.value = value;
-	menu.value = false;
-}
-function openMenu() {
-	menu.value = true;
-}
-function formatDate(date) {
-	if (!date) return "";
-	const options = { year: "numeric", month: "short", day: "numeric" };
-	return new Date(date).toLocaleDateString(undefined, options);
-}
-
-const data = {
-	name: "Africa Zone ",
-	contient: "Africa",
-	shipping_method_id: 1,
-	countries: ["Nigeria", "Kenya", "South Africa"],
-	delivery_date_range: {
-		start: "2024-07-01 00:00:00",
-		end: "2024-07-10 23:59:59",
-	},
-	local_delivery_company: "Africa Delivery Co.",
-	local_delivery_address: "1234 Delivery Rd.",
-	local_delivery_country_name: "Nigeria",
-	local_delivery_city: "Lagos",
-	local_delivery_state: "Lagos State",
-	local_delivery_apartment: "Suite 102",
-	local_delivery_zipcode: "100001",
-	local_delivery_phone_number: "+234-123-456-78901",
-	local_pickup_company: "Africa Pickup Co.",
-	local_pickup_address: "5678 Pickup Blvd.",
-	local_pickup_country_name: "Nigeria",
-	local_pickup_city: "Abuja",
-	local_pickup_state: "FCT",
-	local_pickup_apartment: "Apt 203",
-	local_pickup_zipcode: "900001",
-	local_pickup_phone_number: "+234-098-765-4321",
-};
+	try{
+		savingMethod.value = true
+		await createShippingMethod(data)
+	}catch(error){
+		if (error.response) {
+            shippingError.value = error.response.data.message || 'An error occurred while adding shipping method.';
+          } else if (error.request) {
+            shippingError.value = 'No response received from server. Please try again later.';
+          } else {
+            shippingError.value = 'An error occurred. Please try again later.';
+          }
+	}finally{
+		savingMethod.value = false
+	}}
 </script>
 
 <style scoped>

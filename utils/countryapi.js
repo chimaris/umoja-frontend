@@ -32,9 +32,11 @@ export const countries = [
       });
       const stateNames = response.data.data.states.map(state => state.name);
       states.value = stateNames;
+      return stateNames
     } catch (error) {
       console.error('Error fetching states:', error);
       states.value = [];
+      return []
     } finally {
       loadingStates.value = false;
     }
