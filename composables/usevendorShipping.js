@@ -11,7 +11,7 @@ export const createShippingMethod = async (data) => {
 }
 export const updateShipping = async (data, id) => {
     const api = vendorUseApi()
-   try{
+
     const res = await api ({
         url: `vendor/shipping_zones/${id}`,
         method: 'POST',
@@ -20,10 +20,8 @@ export const updateShipping = async (data, id) => {
             ...data
         }
     });
-    console.log(res)
-   }catch(error){
-    console.error(error);
-   }
+    return res
+   
 }
 export const getShipping = async () => {
     const api = vendorUseApi()
@@ -46,7 +44,6 @@ export const getZones = async (id) => {
         url: `vendor/shipping_zones/${id}/zone_rates`,
         method: 'GET'
     });
-    console.log(res)
    }catch(error){
     console.error(error);
     return []
@@ -60,11 +57,9 @@ export const createZones = async (data, id) => {
         data: data
     });
     return res
-   
 }
 export const updateZone = async (data, id, rateId) => {
     const api = vendorUseApi()
-   try{
     const res = await api ({
         url: `vendor/shipping_zones/${id}/zone_rates/${rateId}`,
         method: 'POST',
@@ -73,10 +68,7 @@ export const updateZone = async (data, id, rateId) => {
             ...data
         }
     });
-    console.log(res)
-   }catch(error){
-    console.error(error);
-   }
+    return res
 }
 export const deleteZone = async (id, rateId) => {
     const api = vendorUseApi()

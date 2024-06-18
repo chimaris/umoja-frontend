@@ -566,9 +566,7 @@ export default {
 
 			const data = {
 				shipping_address_id: this.cartStore.shippingDetails.shippingAddressId,
-				shipping_method_id: this.cartStore.shippingDetails.shippingOption.id,
 				payment_method_id: this.paymentMethodId.id,
-				delivery_charge: this.cartStore.shippingDetails.shippingOption.amount,
 				products: this.cartStore.checkoutItems,
 			};
 			this.cartStore.paymentMethod = this.paymentMethodId

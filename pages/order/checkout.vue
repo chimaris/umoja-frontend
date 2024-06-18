@@ -233,7 +233,7 @@
 							</v-form>
 						</v-card>
 					</v-card>
-					<v-card flat class="cardStyle bg-white rounded-lg my-4 py-6 pa-4">
+					<!-- <v-card flat class="cardStyle bg-white rounded-lg my-4 py-6 pa-4">
 						<v-card
 							flat
 							:color="n.cost == '0.00' ? '#EDF3F0' : ''"
@@ -258,7 +258,7 @@
 							<v-spacer></v-spacer>
 							<p style="" class="addressName mb-2">{{ formattedPrice(n.amount) }}</p>
 						</v-card>
-					</v-card>
+					</v-card> -->
 				</v-col>
 				<Cartsummary :route="'/order/payment'" :cartError="cartError" :text="'Continue to Payment'" @handleSubmit="handlePayment()" />
 			</v-row>
@@ -440,14 +440,13 @@ export default {
 				this.cartError = "Please select shipping address, if you don't have click on add new address to create new shipping address.";
 				return;
 			}
-			if (!this.selectedShippingValue) {
-				this.cartError = "Please select shipping method";
-				return;
-			}
+			// if (!this.selectedShippingValue) {
+			// 	this.cartError = "Please select shipping method";
+			// 	return;
+			// }
 
 			const data = {
 				discountCode: "",
-				shippingOption: this.selectedShippingValue,
 				shippingAddressId: this.selectedAddress,
 			};
 			this.cartStore.saveShippingDetails(data);
