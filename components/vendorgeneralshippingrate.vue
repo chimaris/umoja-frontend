@@ -233,9 +233,7 @@
 								<li v-for="(country, index) in continent.countries" :key="index" class="d-flex align-center">
 									<v-checkbox v-model="country.checked" @change="toggleCountry(country, continent)" density="compact" class="my-0 py-0">
 									<template v-slot:label>
-										<v-avatar color="#EDF3F0" size="24" class="mx-4">
-										<v-img :src="country.flag" />
-										</v-avatar>
+										<span class="mx-4">{{getFlag(country.name)}}</span>
 										{{ country.name }}
 									</template>
 									</v-checkbox>
@@ -511,7 +509,8 @@
 						<v-expansion-panel  class="w-100"  :key="index" :value="continent.name" v-for="(continent, index) in filteredContinents">
 						<v-expansion-panel-title >
 							<li class="d-flex align-center"  style="color: #333; font-size: 14px; font-weight: 600; line-height: 17px">
-								<v-checkbox @click.stop density="compact" class="pr-3" v-model="checkedContinents[continent.name]" @change="toggleEditContinent(continent)"  :label="continent.name"></v-checkbox>
+								<v-checkbox @click.stop density="compact" class="pr-3" v-model="checkedContinents[continent.name]" @change="toggleEditContinent(continent)"  :label="continent.name">
+								</v-checkbox>
 							</li>
 						</v-expansion-panel-title>
 						<v-expansion-panel-text class="">
@@ -519,9 +518,7 @@
 								<li v-for="(country, index) in continent.countries" :key="index" class="d-flex align-center">
 									<v-checkbox v-model="checkedCountries[country.name]" @change="toggleEditCountry(country, continent)" density="compact" class="my-0 py-0">
 									<template v-slot:label>
-										<v-avatar color="#EDF3F0" size="24" class="mx-4">
-										<v-img :src="country.flag" />
-										</v-avatar>
+										<span class="mx-4">{{getFlag(country.name)}}</span>
 										{{ country.name }}
 									</template>
 									</v-checkbox>
@@ -554,6 +551,7 @@
 <script setup>
 import { useVendorStore } from "~/stores/vendorStore";
 import { useMyVendorShippingStore } from "~/stores/vendorShipping";
+import {getFlag } from "~/utils/countryapi";
 import {ref} from 'vue'
 import { formattedPrice } from "~/utils/price";
 import { getCountryByRegion } from "~/composables/useContinent";

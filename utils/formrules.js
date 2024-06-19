@@ -27,11 +27,11 @@ export const inputRules = [v => !!v || "Field is required"];
 
 export const idRules = [
 	v => !!v || 'ID number is required',
-	v => /^[0-9]+$/.test(v) || 'Only numbers are allowed',
+	v => /^[0-9-]+$/.test(v) || 'Only numbers are allowed',
   ];
   export const numRules = [
-    v => /^[0-9]*\.?[0-9]+$/.test(v) || 'Only numbers are allowed', // Updated regex to allow decimals
-];
+    v => /^[0-9-]+$/.test(v) || 'Only numbers and hyphens are allowed',
+  ];
 
 export const phoneRules = [
   v => /^\d{11}$/.test(v) || 'Enter a valid phone Number',
