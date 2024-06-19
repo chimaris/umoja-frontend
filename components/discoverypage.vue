@@ -115,7 +115,7 @@
 											{{ tag.name }} <v-icon size="21" v-if="tag.image" class="ml-2" :icon="'mdi mdi-' + tag.image"></v-icon>
 										</v-chip>
 									</v-chip-group>
-									<div>
+									<!-- <div>
 										<v-btn style="border: 1px solid #e5e5e5; border-radius: 100px !important" variant="outlined" class="textClass text-grey-darken-3">
 											<v-img
 												class="mr-2"
@@ -125,7 +125,7 @@
 											/>
 											Filter
 										</v-btn>
-									</div>
+									</div> -->
 								</div>
 							</div>
 
@@ -490,66 +490,10 @@ export default {
 					name: "products on promo",
 					image: "sale-outline",
 				},
-				{
-					name: "top auction",
-					image: "trending-up",
-				},
-			],
-			africanCountries: [
-				"Algeria",
-				"Angola",
-				"Benin",
-				"Botswana",
-				"Burkina Faso",
-				"Burundi",
-				"Cabo Verde",
-				"Cameroon",
-				"Central African Republic",
-				"Chad",
-				"Comoros",
-				"Democratic Republic of the Congo",
-				"Republic of the Congo",
-				"Cote d'Ivoire",
-				"Djibouti",
-				"Egypt",
-				"Equatorial Guinea",
-				"Eritrea",
-				"Eswatini",
-				"Ethiopia",
-				"Gabon",
-				"Gambia",
-				"Ghana",
-				"Guinea",
-				"Guinea-Bissau",
-				"Kenya",
-				"Lesotho",
-				"Liberia",
-				"Libya",
-				"Madagascar",
-				"Malawi",
-				"Mali",
-				"Mauritania",
-				"Mauritius",
-				"Morocco",
-				"Mozambique",
-				"Namibia",
-				"Niger",
-				"Nigeria",
-				"Rwanda",
-				"Sao Tome and Principe",
-				"Senegal",
-				"Seychelles",
-				"Sierra Leone",
-				"Somalia",
-				"South Africa",
-				"South Sudan",
-				"Sudan",
-				"Tanzania",
-				"Togo",
-				"Tunisia",
-				"Uganda",
-				"Zambia",
-				"Zimbabwe",
+				// {
+				// 	name: "top auction",
+				// 	image: "trending-up",
+				// },
 			],
 		};
 	},

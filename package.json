@@ -55,6 +55,7 @@
 		"maz-ui": "^3.40.0",
 		"sass": "^1.57.1",
 		"v-calendar": "^3.1.2",
+		"vite": "4.0.0",
 		"vite-plugin-vuetify": "^1.0.2",
 		"vue-sonner": "^1.1.2",
 		"vue3-apexcharts": "^1.5.2",

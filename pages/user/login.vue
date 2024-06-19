@@ -18,7 +18,6 @@
 									<v-text-field
 										v-model="email"
 										:rules="emailRules"
-										prepend-inner-icon="mdi mdi-email-outline"
 										placeholder="Enter email address"
 										density="comfortable"
 									>
@@ -30,7 +29,6 @@
 										:type="visible ? 'text' : 'password'"
 										placeholder="Enter Password"
 										density="comfortable"
-										prepend-inner-icon="mdi mdi-lock-outline"
 										@click:append-inner="visible = !visible"
 										:rules="passwordRules"
 										v-model="password"

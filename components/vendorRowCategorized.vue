@@ -24,7 +24,7 @@
 		<div class="rower h-auto pb-2 mt-10 mb-5">
 			<v-chip-group v-model="category" block color="green" class="d-inline-block">
 				<v-chip
-					:value="n"
+					:value="n.category"
 					style="border-radius: 6px; border: 1px solid var(--carbon-2, #cecece)"
 					v-for="n in filters"
 					:key="n"
@@ -35,17 +35,13 @@
 					grow
 					active-class="bordergreen text--green "
 				>
-					<span style="font-size: 14px; font-weight: 500; letter-spacing: -0.42px">{{ n }}</span>
+					<span style="font-size: 14px; font-weight: 500; letter-spacing: -0.42px">{{ n.name }}</span>
 				</v-chip>
 			</v-chip-group>
 		</div>
 
 		<div id="homepage" style="background: transparent !important" class="rower mt-8 d-none d-md-block">
-			<div class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in items" :key="i">
-				<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
-				<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
-			</div>
-			<div class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in items" :key="i">
+			<div class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in stores" :key="i">
 				<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
 				<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 			</div>
@@ -54,15 +50,9 @@
 		<!-- For mobile View -->
 		<div class="d-block d-md-none">
 			<v-row dense>
-				<v-col v-for="(n, i) in items" :key="i" cols="6" :md="6" :lg="3">
+				<v-col v-for="(n, i) in stores" :key="i" cols="6" :md="6" :lg="3">
 					<vendor-component v-if="vendorBol" :category="category" :index="i" :item="n" />
 					<product-component v-else :cover="coverbol" :category="category" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
-				</v-col>
-			</v-row>
-			<v-row dense>
-				<v-col v-for="(n, i) in items" :key="i" cols="6" :md="6" :lg="3">
-					<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
-					<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 				</v-col>
 			</v-row>
 			<v-btn
@@ -93,9 +83,72 @@ color: #fff!important;
 </style>
 <script>
 import { useProductStore } from "~/stores/productStore.js";
+import { bestSellingStores } from "~/composables/useProducts";
+import {ref} from 'vue';
 
 export default {
-	props: ["showVendor", "vendorlist", "cover", "category", "showdisco", "vendor", "items", "title", "maxwidth"],
+	setup(){
+		const productStore = useProductStore()
+		const category = ref("")
+		const stores = computed(() => productStore.bestSelling[category.value])
+		const filters = [
+				{name: 'All',
+				 id: "",
+				 category: "all"
+				},
+				{name: "Art",
+				 id: 5,
+				 category: "art"
+				},
+				{name: "Home Decoration",
+				 id: 4,
+				 category: "homeDecoration"
+				},
+				{name: "Cosmetics",
+				 id: 3,
+				 category: "cosmetics"
+				},
+				{name: "Accessories",
+				 id: 2,
+				 category: "accessories"
+				},
+				{name: "Clothing",
+				 id: 1,
+				 category: "clothing"
+				}
+			]
+
+	async function fetchStores(id, category){
+		if (productStore.bestSelling[category].length === 0) {
+        await bestSellingStores(id, category);
+      }
+	}
+	onMounted(async() => {
+		productStore.bestSelling = {
+									all: [],
+									art: [],
+									homeDecoration: [],
+									cosmetics: [],
+									accessories: [],
+									clothing: []
+   									 }
+		category.value = "all"
+	})
+	  watch(() => category.value, async (newVal) => {
+		const selectedFilter = filters.find(filter => filter.category == newVal)
+		if(selectedFilter){
+			fetchStores(selectedFilter.id, selectedFilter.category)
+		}
+	  })
+		return{
+			productStore,
+			category,
+			filters,
+			fetchStores,
+			stores
+		}
+	},
+	props: ["showVendor", "cover", "showdisco", "vendor", "items", "title", "maxwidth"],
 	computed: {
 		maxw() {
 			return this.maxwidth ? this.maxwidth : "1400px";
@@ -106,9 +159,6 @@ export default {
 		coverbol() {
 			// Returns true if this.cover is set, otherwise returns true
 			return this.cover !== undefined ? this.cover : true;
-		},
-		productStore() {
-			return useProductStore();
 		},
 		items() {
 			if (this.vendor) {
@@ -136,8 +186,7 @@ export default {
 	data() {
 		return {
 			loaded: false,
-			category: "All",
-			filters: ["All", "Fashion", "Art", "Home Decoration", "Cosmetics"],
+
 		};
 	},
 	methods: {

@@ -324,13 +324,11 @@
 
 	<div>
 		<vendorRowCategorized
-			:vendorlist="vendor.items"
-			:category="select"
 			:style="{ marginTop: $vuetify.display.mobile ? '10px' : '50px' }"
 			:vendor="true"
 			:maxwidth="'1200px'"
 			:showVendor="true"
-			:title="vendor.title"
+			title="🔥 Best Selling Stores"
 		/>
 	</div>
 	<div>
@@ -377,7 +375,7 @@
 			</v-carousel>
 		</div>
 
-		<product-row :items="productStore.products.hotDeals" :cover="false" :maxwidth="'1200px'" :showVendor="true" title="💰 Most Selling Products" />
+		<product-row :items="productStore.products.homeMostSelling" :loading="isLoading" :cover="false" :maxwidth="'1200px'" :showVendor="true" title="💰 Most Selling Products" />
 		<PopularTwoRow :showBid="twocardrow.showBid" :maxwidth="'1200px'" :items="twocardrow.items" :title="twocardrow.title" />
 	</div>
 	<div class="bg-black py-16 py-md-0">
@@ -567,6 +565,7 @@ import { useTutorialStore } from "~/stores/tutorialStore";
 import { Howl, Howler } from "howler";
 import { useProductStore } from "~/stores/productStore";
 import { getCloudinaryImageUrl } from "~/utils/cloudinary";
+import {mostSellingProducts, isLoading} from '~/composables/useProducts'
 export default {
 	data() {
 		return {
@@ -801,35 +800,6 @@ export default {
 				],
 			},
 
-			vendor: {
-				title: "🔥 Best Selling Stores",
-				items: [
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694165862/rectangle-22439pointgftg_tpujdo.png",
-						vendorImage: "https://res.cloudinary.com/payhospi/image/upload/v1693922523/ellipse-107_pajkls.png",
-						vendorName: "Orderly Fashion",
-						subCategory: "Unisex Wears",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694165862/rectangle-22439bangli8_wxwwk9.png",
-						vendorImage: "https://res.cloudinary.com/payhospi/image/upload/v1694166638/ellipse-107hgcj_boyj1l.png",
-						vendorName: "Fashion De Africana",
-						subCategory: "Jewelry",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694165862/rectangle-22439sunglasses_zpydih.png",
-						vendorImage: "https://res.cloudinary.com/payhospi/image/upload/v1694166638/ellipse-107jgchgx_suyemd.png",
-						vendorName: "Woman Elegant",
-						subCategory: "Materials",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694165861/rectangle-22439baggd_c4bkra.png",
-						vendorImage: "https://res.cloudinary.com/payhospi/image/upload/v1694166638/ellipse-107mhgs_j5208p.png",
-						vendorName: "Me-Kweku Bags",
-						subCategory: "Bags",
-					},
-				],
-			},
 
 			points: [
 				{
@@ -932,6 +902,7 @@ export default {
 		// this.timeline.kill()
 	},
 	async mounted(){
+		await mostSellingProducts()
 		await useProductStore().fetchProducts();
 	},
 	created() {

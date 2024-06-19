@@ -153,18 +153,18 @@
 						<v-divider class="my-3"></v-divider>
 						<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
 							<v-col cols="3">
-								<p>{{ zone.name }}</p>
+								<p>{{ zone?.name }}</p>
 							</v-col>
 							<v-col cols="3" style="color: #969696">
-								<p v-if="zone.rates[0].minimum_price">from {{formattedPrice(zone.rates[0].minimum_price)}} <span v-if="zone.rates[0].maximum_price">to {{ formattedPrice(zone.rates[0].maximum_price) }}</span></p>
-								<p v-if="zone.rates[0].minimum_weight">from {{zone.rates[0].minimum_weight}}Kg <span v-if="zone.rates[0].maximum_weight">to {{ zone.rates[0].maximum_weight }}</span></p>
+								<p v-if="zone?.rates[0]?.minimum_price">from {{formattedPrice(zone?.rates[0]?.minimum_price)}} <span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span></p>
+								<p v-if="zone?.rates[0]?.minimum_weight">from {{zone?.rates[0]?.minimum_weight}}Kg <span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span></p>
 								<!-- <p>€60.00 - €100.00</p> -->
-								<!-- <p v-if="zone.rates[0].minimum_price">from {{formattedPrice(zone.rates[0].minimum_price)}} <span v-if="zone.rates[0].maximum_price">to {{ formattedPrice(zone.rates[0].maximum_price) }}</span></p> -->
-								<!-- <p v-if="zone.rates.length > 1" style="color: #1273eb">See more rates</p> -->
+								<!-- <p v-if="zone?.rates[0]?.minimum_price">from {{formattedPrice(zone?.rates[0]?.minimum_price)}} <span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span></p> -->
+								<!-- <p v-if="zone?.rates.length > 1" style="color: #1273eb">See more rates</p> -->
 							</v-col>
 							<v-col>
 								<!-- <p>Within Jan 1st to Jan 10th</p> -->
-								<p>{{zone.delivery_date_range}}</p>
+								<p>{{zone?.delivery_date_range}}</p>
 							</v-col>
 						</v-row>
 					</div>
@@ -541,11 +541,11 @@
 				<v-divider class="my-3"></v-divider>
 				<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
 					<v-col cols="3">
-						<p>{{ zone.name }}</p>
+						<p>{{ zone?.name }}</p>
 					</v-col>
 					<v-col cols="3" style="color: #969696">
-						<p v-if="zone.rates[0].minimum_price">from {{formattedPrice(zone.rates[0].minimum_price)}} <span v-if="zone.rates[0].maximum_price">to {{ formattedPrice(zone.rates[0].maximum_price) }}</span></p>
-						<p v-if="zone.rates[0].minimum_weight">from {{zone.rates[0].minimum_weight}}Kg <span v-if="zone.rates[0].maximum_weight">to {{ zone.rates[0].maximum_weight }}</span></p>
+						<p v-if="zone?.rates[0]?.minimum_price">from {{formattedPrice(zone?.rates[0]?.minimum_price)}} <span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span></p>
+						<p v-if="zone?.rates[0]?.minimum_weight">from {{zone?.rates[0]?.minimum_weight}}Kg <span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span></p>
 						<!-- <p>€60.00 - €100.00</p> -->
 						<!-- <p style="color: #1273eb">See more rates</p> -->
 					</v-col>
@@ -843,9 +843,9 @@ async function updateDeliveryDays() {
 	updating.value = true 
   const updatePromises = shippingZones.value.map(zone => {
     const data = {
-      delivery_date_range: zone.delivery_date_range
+      delivery_date_range: zone?.delivery_date_range
     };
-    return updateShipping(data, zone.id);
+    return updateShipping(data, zone?.id);
   });
 
   await Promise.all(updatePromises);

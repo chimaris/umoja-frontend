@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				<div class="d-flex">
-					<v-menu persistent="" v-model="searchmenu" :close-on-content-click="false" location="bottom" offset="28px">
+					<v-menu persistent="" v-model="searchmenu" :close-on-content-click="false" location="bottom" offset="20px">
 						<template v-slot:activator="{ props, isActive }">
 							<div class="d-flex align-center">
 								<div v-bind="props">
@@ -90,7 +90,7 @@
 						</v-badge>
 					</v-btn>
 
-					<v-menu v-if="isLoggedIn" v-model="notification" :close-on-content-click="false" location="bottom" offset="28px">
+					<v-menu v-if="isLoggedIn" v-model="notification" :close-on-content-click="false" location="bottom" offset="20px">
 						<template v-slot:activator="{ props }">
 							<v-btn icon size="40" v-bind="props" rounded="xl" flat color="transparent">
 								<v-avatar rounded="0" size="16">
@@ -107,17 +107,17 @@
 						</template>
 						<dialognotification />
 					</v-menu>
-					<v-menu location="bottom" offset="10px" width="120px" max-height="400">
+					<v-menu location="bottom" offset="20px" width="250px" max-height="400">
 						<template v-slot:activator="{ props }">
 							<div
 								v-ripple
 								v-bind="props"
-								style="cursor: pointer; width: fit-content; height: 40px; border: 1px solid #cecece"
+								style="cursor: pointer; width: fit-content; height: 40px;"
 								size="large"
 								color="white"
 								variant="elevated"
 								flat
-								class="bg-white d-none d-md-flex rounded-lg elevation-0 chipper px-1 ml-4"
+								class="d-none d-md-flex rounded-lg elevation-0 chipper px-1 pl-2"
 							>
 								<div class="d-flex justify-space-between w-100 h-100 align-center">
 									<div class="d-flex align-center">
@@ -125,18 +125,18 @@
 											<span class="mx-2" style="font-size: 18px;">{{ getFlag(country) }}</span>
 											<span style="font-size: 18px;" class="mr-2 d-md-flex">{{ countryCodes[country] }}</span>
 										</p> -->
-										<p class="d-flex align-center">
-											<span class="mr-3" style="font-size: 22px">{{ getFlag(country) }}</span> {{ countryCodes[country] }}
+										<p class="d-flex align-center" style="font-size: 22px">
+											{{ getFlag(country) }}
 										</p>
 									</div>
 									<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
 								</div>
 							</div>
 						</template>
-						<v-list>
+						<v-list class="rounded-lg">
 							<v-list-item v-for="(item, index) in allCountries" :key="index" :value="index" @click="selectCountry(item)">
 								<p class="d-flex align-center">
-									<span class="mr-3" style="font-size: 25px">{{ getFlag(item) }}</span> {{ countryCodes[item] }}
+									<span class="mr-3" style="font-size: 25px">{{ getFlag(item) }}</span> {{ item }}
 								</p>
 							</v-list-item>
 						</v-list>
@@ -178,17 +178,17 @@
 					{{ n.title }}
 				</v-btn>
 			</v-list>
-			<v-menu location="bottom" offset="10px" width="120px" max-height="400">
+			<v-menu location="bottom" offset="10px" width="300px" max-height="400">
 				<template v-slot:activator="{ props }">
 					<div
 						v-ripple
 						v-bind="props"
-						style="cursor: pointer; width: fit-content; height: 40px; border: 1px solid #cecece"
+						style="cursor: pointer; width: fit-content; height: 40px;"
 						size="large"
 						color="white"
 						variant="elevated"
 						flat
-						class="bg-white rounded-lg elevation-0 chipper px-1 ml-4"
+						class="elevation-0 chipper px-1 ml-4"
 					>
 						<div class="d-flex justify-space-between w-100 h-100 align-center">
 							<div class="d-flex align-center">
@@ -197,7 +197,7 @@
 											<span style="font-size: 18px;" class="mr-2 d-md-flex">{{ countryCodes[country] }}</span>
 										</p> -->
 								<p class="d-flex align-center">
-									<span class="mr-3" style="font-size: 22px">{{ getFlag(country) }}</span> {{ countryCodes[country] }}
+									<span class="mr-3" style="font-size: 22px">{{ getFlag(country) }}</span> 
 								</p>
 							</div>
 							<v-icon class="" icon="mdi mdi-chevron-down"></v-icon>
@@ -207,7 +207,7 @@
 				<v-list>
 					<v-list-item v-for="(item, index) in allCountries" :key="index" :value="index" @click="selectCountry(item)">
 						<p class="d-flex align-center">
-							<span class="mr-3" style="font-size: 25px">{{ getFlag(item) }}</span> {{ countryCodes[item] }}
+							<span class="mr-3" style="font-size: 25px">{{ getFlag(item) }}</span> {{ item }}
 						</p>
 					</v-list-item>
 				</v-list>
@@ -241,7 +241,6 @@ import { useVendorStore } from "~/stores/vendorStore";
 import { allCountries, countryCodes, getFlag } from "~/utils/countryapi";
 import { useProductStore } from "~/stores/productStore";
 import { getCloudinaryImageUrl } from "~/utils/cloudinary";
-import emojiFlags from "emoji-flags";
 import useGeolocation from "~/composables/getCountry";
 
 export default {

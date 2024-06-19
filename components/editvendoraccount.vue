@@ -27,6 +27,18 @@
 					<v-text-field :rules="numRules" v-model="vendor.bank_account_number" placeholder="Enter your account number" density="comfortable"> </v-text-field>
 				</div>
 				<div class="mb-4">
+					<v-label class="inputLabel">Sort Code </v-label>
+					<v-text-field :rules="numRules" v-model="vendor.sort_code"  placeholder="Enter your sort code" density="comfortable"> </v-text-field>
+				</div>
+				<div class="mb-4">
+					<v-label class="inputLabel">Swift Code </v-label>
+					<v-text-field  v-model="vendor.swift_code"  placeholder="Enter your swift code" density="comfortable"> </v-text-field>
+				</div>
+				<div class="mb-4">
+					<v-label class="inputLabel">IBAN </v-label>
+					<v-text-field  v-model="vendor.iban"  placeholder="Enter your IBAN" density="comfortable"> </v-text-field>
+				</div>
+				<div class="mb-4">
 					<v-label class="inputLabel">Name on Account </v-label>
 					<v-text-field :rules="inputRules" v-model="vendor.name_on_account" density="comfortable"> </v-text-field>
 				</div>
@@ -42,7 +54,7 @@
 				</div>
 				<div class="mb-4">
 					<v-label class="inputLabel">PayPal Account Holder Name </v-label>
-					<v-text-field :rules="numRules"  placeholder="Enter your account name" density="comfortable"> </v-text-field>
+					<v-text-field   placeholder="Enter your account name" density="comfortable"> </v-text-field>
 				</div>
 				<p style="font-weight: 500; font-size: 16px; color: #969696">
 					To help us verify your account, the name on your paypal account should match the name you provided as the owner of your business Verifying.
@@ -63,6 +75,18 @@
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Account Number</p>
 				<p :contenteditable="isEditing" class="contact-value">{{vendor?.bank_account_number}}</p>
+			</div>
+			<div class="mb-4">
+				<p class="mb-1 contact-label">Sort Code</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor?.sort_code}}</p>
+			</div>
+			<div class="mb-4">
+				<p class="mb-1 contact-label">Swift Code</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor?.swift_code}}</p>
+			</div>
+			<div class="mb-4">
+				<p class="mb-1 contact-label">IBAN</p>
+				<p :contenteditable="isEditing" class="contact-value">{{vendor?.iban}}</p>
 			</div>
 			<div class="mb-4">
 				<p class="mb-1 contact-label">Account Name</p>
@@ -109,7 +133,10 @@ const submit = async () => {
 		const data = {
 		bank_name: vendor.value?.bank_name,
 		bank_account_number: vendor.value?.bank_account_number,
-		name_on_account: vendor.value?.name_on_account
+		name_on_account: vendor.value?.name_on_account,
+		sort_code: vendor.value?.sort_code,
+		swift_code: vendor.value?.swift_code,
+		iban: vendor.value?.iban
 	}
 
 	try{

@@ -94,7 +94,6 @@
 						:type="visible ? 'text' : 'password'"
 						placeholder="Enter Password"
 						density="comfortable"
-						prepend-inner-icon="mdi mdi-lock-outline"
 						@click:append-inner="visible = !visible"
 						:rules="passwordRules"
 						v-model="password"

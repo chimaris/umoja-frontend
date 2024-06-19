@@ -29,6 +29,15 @@ export const useProductStore = defineStore('productStore', {
     searchError: "",
     searchTerm: "",
     searching: false,
+    topArticle: [],
+    bestSelling: {
+      all: [],
+      art: [],
+      homeDecoration: [],
+      cosmetics: [],
+      accessories: [],
+      clothing: []
+    },
     products: {
       main: [],
       row: [],
@@ -36,6 +45,9 @@ export const useProductStore = defineStore('productStore', {
       popular: [],
       recently_viewed: [],
       sale: [],
+      homePopular: [],
+      homePromo: [],
+      homeMostSelling: [],
       customArray: [],
        // You can add more arrays based on your needs
     },
