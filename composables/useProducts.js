@@ -2,30 +2,13 @@ import { vendorUseApi } from "./vendorApi";
 import { useProductStore } from "~/stores/productStore.js";
 import {ref} from 'vue'
 
-export const loadProduct = ref(false)
+
 export const loaded = ref(false)
 export const isLoading = ref(false)
+export const articleLoading = ref(false)
+export const popularLoaded = ref(false)
 
-export const discoverPageProducts = async(page) => {
-    const api = useApi()
-    const productStore = useProductStore()
-    loadProduct.value = true
-    try{
-      const response = await api({
-        url: `allproducts/?page=${page}`
-      });
-      const data = response.data.data
-      productStore.products.popular = [...productStore.products.popular, ...data]
-      productStore.discoveryCurrentPage = response.data.meta.current_page
-      productStore.discoveryLastPage = response.data.meta.last_page
-      loadProduct.value = false
-    }catch(error){
-      console.error(error)
-    }finally{
-        loadProduct.value = false
-    }
-   
-  }
+
   export const productDetail = async(id) => {
     const api = useApi()
    try {
@@ -43,6 +26,7 @@ export const discoverPageProducts = async(page) => {
     const api = useApi()
     const productStore = useProductStore()
     try{
+      popularLoaded.value = false
       const response = await api({
         url: 'home_popular_products',
         method: 'GET'
@@ -51,6 +35,8 @@ export const discoverPageProducts = async(page) => {
     }catch(error){
       console.error(error)
       return []
+    }finally{
+      popularLoaded.value = true
     }
    
   }
@@ -62,7 +48,7 @@ export const discoverPageProducts = async(page) => {
         url: 'products_on_promo',
         method: 'GET'
       });
-      productStore.products.homePromo = response.data.data
+      productStore.products.hotDeals = response.data.data
     }catch(error){
       console.error(error)
       return []
@@ -91,6 +77,7 @@ export const discoverPageProducts = async(page) => {
     const api = useApi()
     const productStore = useProductStore()
     try{
+      articleLoading.value = false
       const response = await api({
         url: 'latest_articles',
         method: 'GET'

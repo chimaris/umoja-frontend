@@ -92,10 +92,9 @@
 						</th>
 						<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left">ID</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Username</th>
-						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Gender</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Joined Date</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Country/State</th>
-						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">status</th>
+						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Ordered</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium"></th>
 					</tr>
 				</thead>
@@ -115,27 +114,6 @@
 								{{ item.first_name }} {{ item.last_name }}
 							</div>
 						</td>
-						<td class="tableLight text-center px-1">
-							<span>
-								<v-chip
-									style="width: 70px; font-weight: 500; font-size: 10px"
-									class="rounded-lg elevation-0 d-flex justify-center"
-									size="small"
-									variant="elevated"
-									color="#1273EB"
-								></v-chip>
-							</span>
-							<!-- <span v-else class="d-flex align-center">
-								<v-chip
-									style="width: 70px; font-weight: 500; font-size: 10px"
-									class="rounded-lg elevation-0 d-flex justify-center"
-									size="small"
-									variant="elevated"
-									color="#F38218"
-									>Female</v-chip
-								></span
-							> -->
-						</td>
 						<td class="tableLight px-1">{{ getdateRegistered(item.created) }}</td>
 
 						<td style="font-weight: 600; font-size: 14px; line-height: 18px" class="tableLight px-1">
@@ -143,15 +121,26 @@
 							<span style="color: #969696">{{ item.user_city }}</span>
 						</td>
 						<td class="text-grey-lighten-1 text-center px-1">
-							<v-chip
+						
+							<v-chip v-if="index == 1"
 								style="width: 70px; font-weight: 500 !important; font-size: 10px !important"
 								size="small"
 								rounded="lg"
 								class="tablechip text-center d-flex justify-center"
-								:color="item.status == 'active' ? 'green' : 'red'"
+								color="red"
 								variant="tonal"
 							>
-								{{ item.status }}
+								<!-- {{ item.status }} --> No
+							</v-chip>
+							<v-chip v-else
+								style="width: 70px; font-weight: 500 !important; font-size: 10px !important"
+								size="small"
+								rounded="lg"
+								class="tablechip text-center d-flex justify-center"
+								:color="index == 0 ? 'green' : 'red'"
+								variant="tonal"
+							>
+								<!-- {{ item.status }} --> Yes
 							</v-chip>
 						</td>
 						<td class="text-grey-lighten-1 text-center px-1">

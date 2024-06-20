@@ -57,15 +57,15 @@
 				<div class="d-flex mb-8 justify-space-between align-center">
 					<p style="color: #969696; font-size: 14px; font-weight: 500">Sort Code</p>
 					<div class="d-flex align-center">
-						<p style="color: #000; font-size: 14px; font-weight: 500"></p>
-						<!-- <v-icon color="green" size="small" class="ml-3" icon="mdi mdi-content-copy"></v-icon> -->
+						<p style="color: #000; font-size: 14px; font-weight: 500">{{ vendor.vendor_details?.sort_code }}</p>
+						<v-icon @click="copyToClipboard(vendor.vendor_details?.sort_code)" color="green" size="small" class="ml-3" icon="mdi mdi-content-copy"></v-icon>
 					</div>
 				</div>
 				<div class="d-flex mb-8 justify-space-between align-center">
 					<p style="color: #969696; font-size: 14px; font-weight: 500">Swift Code</p>
 					<div class="d-flex align-center">
-						<p style="color: #000; font-size: 14px; font-weight: 500"></p>
-						<!-- <v-icon color="green" size="small" class="ml-3" icon="mdi mdi-content-copy"></v-icon> -->
+						<p style="color: #000; font-size: 14px; font-weight: 500">{{ vendor.vendor_details?.swift_code }}</p>
+						<v-icon @click="copyToClipboard(vendor.vendor_details?.swift_code)" color="green" size="small" class="ml-3" icon="mdi mdi-content-copy"></v-icon>
 					</div>
 				</div>
 				<div class="d-flex mb-8 justify-space-between align-center">
@@ -84,8 +84,8 @@
 				<div class="d-flex mb-8 justify-space-between align-center">
 					<p style="color: #969696; font-size: 14px; font-weight: 500">IBAN</p>
 					<div class="d-flex align-center">
-						<p style="color: #000; font-size: 14px; font-weight: 500"></p>
-						<!-- <v-icon color="green" size="small" class="ml-3" icon="mdi mdi-content-copy"></v-icon> -->
+						<p style="color: #000; font-size: 14px; font-weight: 500">{{vendor.vendor_details?.iban}}</p>
+						<v-icon @click="copyToClipboard(vendor.vendor_details?.iban)" color="green" size="small" class="ml-3" icon="mdi mdi-content-copy"></v-icon>
 					</div>
 				</div>
 				<div class="d-flex mb-8 justify-space-between align-center">
@@ -141,7 +141,7 @@
 							</v-col>
 							<v-col cols="12" md="6" class="pt-0">
 								<p class="inputLabel">IBAN<span class="mb-2">*</span></p>
-								<v-text-field v-model="vendor.vendor_details.iban_number" placeholder="Enter your IBAN" density="comfortable"> </v-text-field>
+								<v-text-field v-model="vendor.vendor_details.iban" placeholder="Enter your IBAN" density="comfortable"> </v-text-field>
 							</v-col>
 						</v-row>
 						<v-row>
@@ -241,19 +241,22 @@ const copyToClipboard = (refName) => {
 };
 
 async function editBankDets() {
-	if (
-		!props.vendor.vendor_details?.address ||
-		!props.vendor.vendor_details?.bank_name ||
-		!props.vendor.vendor_details?.bank_account_number ||
-		!props.vendor.vendor_details?.name_on_account
-	) {
-		return;
-	}
+	// if (
+	// 	!props.vendor.vendor_details?.address ||
+	// 	!props.vendor.vendor_details?.bank_name ||
+	// 	!props.vendor.vendor_details?.bank_account_number ||
+	// 	!props.vendor.vendor_details?.name_on_account
+	// ) {
+	// 	return;
+	// }
 	const data = {
 		address: props.vendor.vendor_details?.address,
 		bank_name: props.vendor.vendor_details?.bank_name,
 		bank_account_number: props.vendor.vendor_details?.bank_account_number,
 		name_on_account: props.vendor.vendor_details?.name_on_account,
+		sort_code: props.vendor.vendor_details?.sort_code,
+		iban: props.vendor.vendor_details?.iban,
+		swift_code: props.vendor.vendor_details?.swift_code
 	};
 	try {
 		bankError.value = "";

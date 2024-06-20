@@ -101,7 +101,7 @@
 										mandatory
 										style="font-size: 14px; line-height: 17px; letter-spacing: 0.03em; text-transform: uppercase; color: #333333"
 										class="text-uppercase"
-										v-model="chip"
+										v-model="tag"
 										selected-class=" chipselected"
 									>
 										<v-chip
@@ -109,6 +109,7 @@
 											style="font-size: 14px"
 											size="large"
 											class="pa-4"
+											:value="tag.name"
 											v-for="tag in tags"
 											:key="tag.name"
 										>
@@ -171,8 +172,18 @@
 							<div v-if="productStore.searchError" style="width: 100%; text-align: center; color: red; margin-bottom: 20px">
 								<p>{{ productStore.searchError }}</p>
 							</div>
-							<v-row dense>
-								<v-col v-for="(n, i) in items" :key="i" cols="6" :md="3" :lg="24">
+							<v-row dense v-if="tag == 'POPULAR products'">
+								<v-col v-for="(n, i) in productStore.products.popular" :key="i" cols="6" :md="3" :lg="24">
+									<product-component :loading='loadProduct' :item="n" :index="i" />
+								</v-col>
+							</v-row>
+							<v-row dense v-else-if ="tag == 'top selling products'">
+								<v-col v-for="(n, i) in productStore.products.mostSelling" :key="i" cols="6" :md="3" :lg="24">
+									<product-component :loading='loadProduct' :item="n" :index="i" />
+								</v-col>
+							</v-row>
+							<v-row dense v-else-if ="tag == 'products on promo'">
+								<v-col v-for="(n, i) in productStore.products.sale" :key="i" cols="6" :md="3" :lg="24">
 									<product-component :loading='loadProduct' :item="n" :index="i" />
 								</v-col>
 							</v-row>
@@ -258,7 +269,7 @@
 		</div>
 
 		<v-container class="px-3 mb-16" style="padding-top: 0px; max-width: 1400px">
-			<PostsRow :maxwidth="'1400px'" :showVendor="true" title="Top Posts" :items="availablePosts" />
+			<PostsRow :maxwidth="'1400px'" :load="loadPost" :showVendor="true" title="Top Posts" :items="availablePosts" />
 		</v-container>
 
 		<div style="padding: 50px 0, width: 100%">
@@ -399,7 +410,7 @@ import { useUserStore } from "~/stores/userStore";
 import {getdateRegistered} from '~/utils/date'
 import { countries, countryCodes, getFlag } from "~/utils/countryapi";
 import emojiFlags from 'emoji-flags';
-import {discoverPageProducts, loadProduct} from '~/composables/useProducts'
+import { popularProducts, topSelling, promo, loadProduct } from "~/composables/discovery";
 
 export default {
 	setup(){
@@ -408,76 +419,12 @@ export default {
 		const availableArticle = ref([]);
 		const productStore = useProductStore()
 		const items = computed(() => productStore.products.popular)
-		const page = ref(1)
-		const hasReached = computed(() => {
-			return productStore.discoveryCurrentPage == productStore.discoveryLastPage
-		})
-		async function load(){
-			if (productStore.discoveryCurrentPage == productStore.discoveryLastPage ){
-				return 
-			}
-			if (productStore.discoveryCurrentPage < productStore.discoveryLastPage){
-				page.value ++;
-				await discoverPageProducts(page.value)
-				return
-			}
-		}
-		async function getPosts(){
-			const api = useApi()
-			try{
-				const response = await api({
-					url: `allposts/?page=${page}`,
-					method: 'GET'
-				});
-				return response.data.data
-			}catch(error){
-				console.error(error)
-				return []
-			}
-		}
-		async function getArticles(){
-			const api = useApi()
-			try{
-				const response = await api({
-					url: `allarticles`,
-					method: 'GET'
-				});
-				return response.data.data
-			}catch(error){
-				console.error(error)
-				return []
-			}
-		}
-		onMounted(async () => {
-			productStore.products.popular  = []
-			await discoverPageProducts(page.value)
-			availablePosts.value = await getPosts()
-			availableArticle.value = await getArticles()
-		})
-		
-		return{
-			userStore,
-			availablePosts,
-			availableArticle,
-			items,
-			productStore,
-			page,
-			load,
-			hasReached,
-			getPosts,
-			getArticles
-		}
-	},
-	data() {
-		return {
-			selectedTag: null,
-			tag: "POPULAR products",
-			placescards: false,
-			mods: 1,
-			tab: null,
-			country: "All of Africa",
-			chip: "POPULAR products",
-			tags: [
+		const pagePop = ref(1)
+		const pagePromo = ref(1)
+		const pageMost = ref(1)
+		const tag = ref("POPULAR products")
+		const loadPost = ref(true)
+		const tags = [
 				{
 					name: "POPULAR products",
 					image: "",
@@ -494,26 +441,151 @@ export default {
 				// 	name: "top auction",
 				// 	image: "trending-up",
 				// },
-			],
+			]
+		
+		async function getPosts(){
+			const api = useApi()
+			try{
+				loadPost.value = true
+				const response = await api({
+					url: `allposts`,
+					method: 'GET'
+				});
+				return response.data.data
+			}catch(error){
+				console.error(error)
+				return []
+			}finally{
+				loadPost.value = false
+			}
+		}
+		async function getArticles(){
+			const api = useApi()
+			try{
+				const response = await api({
+					url: `allarticles`,
+					method: 'GET'
+				});
+				return response.data.data
+			}catch(error){
+				console.error(error)
+				return []
+			}
+		}
+		watch(() => tag.value, async () => {
+			await loadProducts(tag.value)
+		})
+		onMounted(async () => {
+			// reset the products 
+			productStore.products.popular = [];
+      		productStore.products.mostSelling = [];
+      		productStore.products.sale = [];
+
+			// loads products, posts and articles
+			await loadProducts(tag.value)
+			availablePosts.value = await getPosts()
+			availableArticle.value = await getArticles()
+		})
+
+		// to load products for the first time based on the current tab
+		const loadProducts = async (tag) => {
+		switch (tag) {
+			case 'POPULAR products':
+			if (productStore.products.popular.length === 0) {
+				await popularProducts(pagePop.value); 
+			}
+			break;
+			case 'top selling products':
+			if (productStore.products.mostSelling.length === 0) {
+				await topSelling(pageMost.value); 
+			}
+			break;
+			case 'products on promo':
+			if (productStore.products.sale.length === 0) {
+				await promo(pagePromo.value); 
+			}
+			break;
+			default:
+			console.error('Unknown tag:', tag);
+		}
+		};
+
+		// to load more products based on the current tab 
+		async function load() {
+			switch (tag.value) {
+				case 'POPULAR products':
+				if (productStore.popCurrentPage >= productStore.popLastPage) {
+					return; 
+				}
+				pagePop.value++;
+				await popularProducts(pagePop.value); 
+				break;
+
+				case 'top selling products':
+				if (productStore.mostCurrentPage >= productStore.mostLastPage) {
+					return; 
+				}
+				pageMost.value++;
+				await topSelling(pageMost.value); 
+				break;
+
+				case 'products on promo':
+				if (productStore.promoCurrentPage >= productStore.promoLastPage) {
+					return; 
+				}
+				pagePromo.value++;
+				await promo(pagePromo.value); 
+				break;
+
+				default:
+				console.error('Unknown tag:', tag.value);
+			}
+			}
+
+			// for disabling the load more button depending on the current tab and if the products have being exhausted 
+			const hasReached = computed(() => {
+			switch (tag.value) {
+				case 'POPULAR products':
+				return productStore.popCurrentPage == productStore.popLastPage;
+
+				case 'top selling products':
+				return productStore.mostCurrentPage == productStore.mostLastPage;
+
+				case 'products on promo':
+				return productStore.promoCurrentPage == productStore.promoLastPage;
+
+				default:
+				console.error('Unknown tag:', tag.value);
+				return true;
+			}
+			});
+
+		
+		return{
+			userStore,
+			availablePosts,
+			availableArticle,
+			items,
+			productStore,
+			pageMost,
+			pagePromo,
+			pagePop,
+			load,
+			hasReached,
+			getPosts,
+			getArticles,
+			tags,
+			loadProducts,
+			loadPost,
+			tag
+		}
+	},
+	data() {
+		return {
+			country: "All of Africa",
 		};
 	},
 	computed: {
-		buttons() {
-			return [
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png",
-				},
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png",
-				},
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png",
-				},
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png",
-				},
-			];
-		},
 		cols() {
 			const { lg, sm, md } = this.$vuetify.display;
 			return lg

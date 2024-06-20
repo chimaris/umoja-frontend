@@ -112,24 +112,36 @@
 <script>
 import { useUserStore } from "~/stores/userStore";
 import { useVendorStore } from "~/stores/vendorStore";
-import { ref, onMounted } from "vue";
-import { useRouter } from "vue-router";
-import vendorgeneralshippingrate from "./vendorgeneralshippingrate.vue";
+import { ref, onMounted, defineEmits } from "vue";
+import { useRouter, useRoute } from "vue-router";
+
 
 export default {
-	components: { vendorgeneralshippingrate },
-	setup() {
+	emits: ['changeTab'],
+	setup(_, {emit}) {
 		const vendorStore = useVendorStore();
 		const vendor = ref(vendorStore.vendor);
 		const router = useRouter();
 		const logOutUser = ref(false);
-
+		const route = useRoute()
+		const selected = ref("My Profile")
 		watch(
 			() => vendorStore.vendor,
 			(newpost, oldpost) => {
 				vendor.value = newpost;
 			}
 		);
+		// onMounted(() => {
+		// 	// selectedTab = this.$route.params.tab || 'profile';
+		// 	route.params.tab = selected.value
+		// })
+		// function change(){
+		// 	emit('changeTab', selected.value);
+		// }
+		// watch(() => selected.value, () => {
+		// 	// router.push(`/vendor/dashboard/Settings/${selected.value}`)
+		// 	// change()
+		// })
 		async function logOut() {
 			const response = await vendorStore.logout();
 			if (response) {
@@ -143,17 +155,20 @@ export default {
 			logOut,
 			router,
 			logOutUser,
+			selected,
+			route,
 		};
 	},
 	data() {
 		return {
 			tab: "",
-			selected: "My Profile",
+			
 			items: [],
 		};
 	},
 	mounted() {
 		this.items = this.items1;
+		console.log(this.route)
 	},
 	computed: {
 		userStore() {

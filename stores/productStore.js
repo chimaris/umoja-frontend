@@ -6,22 +6,15 @@ import { debounce } from 'lodash';
 
 export const useProductStore = defineStore('productStore', {
   state: () => ({
-    params: {
-      gender: "",
-      category_name: "",
-      sizes: "",
-      product_rating: "",
-      compare_at_price: "",
-      sub_category_name: "",
-      priceMinimum: "",
-      priceMaximum: ""
-    },
     productLoading: false,
     notFound: false,
     recentSearches: [],
-    discoveryCurrentPage: null,
-    discoveryLastPage: null,
-    discoveryPage: 1,
+    popCurrentPage: null,
+    popLastPage: null,
+    mostCurrentPage: null,
+    mostLastPage: null,
+    promoCurrentPage: null,
+    promoLastPage: null,
     productFrom: "",
     allProducts: [],
     productTo: "",
@@ -43,14 +36,27 @@ export const useProductStore = defineStore('productStore', {
       row: [],
       hotDeals: [],
       popular: [],
+      mostSelling: [],
       recently_viewed: [],
       sale: [],
       homePopular: [],
-      homePromo: [],
       homeMostSelling: [],
       customArray: [],
        // You can add more arrays based on your needs
     },
+    // marketplace
+    params: {
+      gender: "",
+      category_name: "",
+      sizes: "",
+      product_rating: "",
+      compare_at_price: "",
+      sub_category_name: "",
+      priceMinimum: "",
+      priceMaximum: ""
+    },
+    pageNo: 1,
+    marketLastPage: null,
   }),
   persist: {
     enabled: true,
@@ -71,6 +77,8 @@ export const useProductStore = defineStore('productStore', {
         priceMinimum: "",
         priceMaximum: ""
       }
+      this.pageNo = 1
+      this.marketLastPage = null
     },
     removeParam(key) {
       this.params[key] = "";
@@ -82,7 +90,7 @@ export const useProductStore = defineStore('productStore', {
       this.notFound = false;
       try{
         const res = await api({
-          url: `allproducts?${params}`,
+          url: `allproducts/?page=${this.pageNo}&${params}`,
           method: 'GET'
         });
         if (res.data.data.length == 0){
@@ -96,6 +104,7 @@ export const useProductStore = defineStore('productStore', {
           this.products.main = res.data.data
           this.productFrom = res.data.meta.from;
           this.productTo = res.data.meta.to;
+          this.marketLastPage = res.data.meta.last_page
           this.totalProducts = res.data.meta.total
           this.notFound = false;
           this.productLoading = false
@@ -155,7 +164,6 @@ export const useProductStore = defineStore('productStore', {
       const response = await axios.get('https://umoja-production-9636.up.railway.app/api/allproducts');
       this.products.row = response.data.data;
       this.allProducts = response.data.data
-      this.products.hotDeals = response.data.data;
     },
     // Method to add a product to a specific array
     addProductToArray(product, arrayName) {

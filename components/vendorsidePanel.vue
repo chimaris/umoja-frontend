@@ -88,9 +88,9 @@
 								<v-badge
 									rounded="lg"
 									color="green"
-									:content="vendor.vendor_details.unread_notification_count"
+									:content="vendor.vendor_details?.unread_notification_count"
 									size="12"
-									v-if="n.text == 'Notifications' && vendor.vendor_details.unread_notification_count > 0"
+									v-if="n.text == 'Notifications' && vendor.vendor_details?.unread_notification_count > 0"
 								></v-badge>
 								<v-icon
 									color="green"

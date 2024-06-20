@@ -6,7 +6,7 @@
 			<p class="inputLabel">What African country are you representing?</p>
 			<v-select
 				v-model="vendor.rep_country"
-				:items="allCountries"
+				:items="countries"
 				placeholder="Select African Country"
 				density="comfortable"
 				:rules="inputRules"
@@ -113,7 +113,7 @@ import { useVendorStore } from '~/stores/vendorStore';
 import axios from 'axios'
 import { on } from 'events';
 import {inputRules} from '~/utils/formrules'
-import { allCountries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
+import { allCountries, countries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
 
 const vendorStore = useVendorStore()
 const vendor = ref(vendorStore.vendor.vendor_details)

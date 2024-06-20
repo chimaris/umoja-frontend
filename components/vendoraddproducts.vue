@@ -213,6 +213,7 @@
 										<p class="inputLabel">Sub Category</p>
 										<v-select
 											:loading="loadingSub"
+											:disabled="!selectedCategory || !selectedGender"
 											color="green"
 											:items="subCategories.map((subCategory) => subCategory.name)"
 											v-model="selectedSubCategory"

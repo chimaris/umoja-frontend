@@ -33,7 +33,7 @@
 						>
 						<v-icon size="30" color="#A0A0A0" icon="mdi mdi-circle-outline"></v-icon>
 					</div>
-					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ 29.99/Month</p>
+					<p style="color: #2c6e63; font-size: 40px; font-weight: 600">€ 49.99/Month</p>
 					<p style="color: #333; font-size: 16px; font-weight: 400" class="mb-8">Everything  our business plan has...</p>
 
 					<div v-for="n in seeBusiness ? businessPackage : businessPackage.slice(0, 4)" :key="n" class="mb-4 d-flex align-center">
@@ -174,7 +174,7 @@
 		"Ideal for: Businesses and start-ups looking to test the platform and get started with minimal upfront costs."
 	]
 	const businessPackage = [
-        "Price: €29.99",
+        "Price: €49.99",
         "Verified business",
         "Umoja business application",
         "Customer support",

@@ -129,7 +129,7 @@ function isFormValid () {
 	return vendor.value?.name_on_account && vendor.value?.bank_account_number && vendor.value?.bank_name
 }
 const submit = async () => {
-	if (isFormValid()) {
+
 		const data = {
 		bank_name: vendor.value?.bank_name,
 		bank_account_number: vendor.value?.bank_account_number,
@@ -153,7 +153,7 @@ const submit = async () => {
         }
         return 
 	}
-	}
+	
 };
 </script>
 

@@ -28,7 +28,7 @@
 			class="rower my-8 d-none d-md-block"
 		>
 			<div class="d-inline-block mr-2" style="width: 275px" v-for="(n, i) in items" :key="i" cols="6" lg="3">
-				<postComponent :index="i" :item="n" :likedPost="likedPosts[n.id]" @likePost="likedPosts[n.id] = true" @unLikePost="likedPosts[n.id] = false" />
+				<postComponent :index="i" :load="load" :item="n" :likedPost="likedPosts[n.id]" @likePost="likedPosts[n.id] = true" @unLikePost="likedPosts[n.id] = false" />
 			</div>	
 		</div>
 
@@ -36,12 +36,7 @@
 		<div class="d-block d-md-none">
 			<v-row dense>
 				<v-col v-for="(n, i) in items" :key="i" cols="12" class="mb-4">
-					<postComponent :index="i" :item="n" />
-				</v-col>
-			</v-row>
-			<v-row dense>
-				<v-col v-for="(n, i) in items" :key="i" cols="12" class="mb-4">
-					<postComponent :index="i" :item="n" />
+					<postComponent :load="load" @likePost="likedPosts[n.id] = true" @unLikePost="likedPosts[n.id] = false" :likedPost="likedPosts[n.id]" :index="i" :item="n" />
 				</v-col>
 			</v-row>
 			<v-btn
@@ -77,7 +72,7 @@ import { hasLiked } from "~/composables/useLike";
 import { useUserStore } from "~/stores/userStore";
 
 export default {
-	props: ["showVendor", "vendor", "items", "title", "maxwidth"],
+	props: ["showVendor", "load", "vendor", "items", "title", "maxwidth"],
 	data(){
 		return{
 			likedPosts: []
