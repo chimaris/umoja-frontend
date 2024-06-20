@@ -169,7 +169,7 @@
 			</v-table>
 			<div v-if="!hasCustomer" class="d-flex flex-column justify-center align-center" style="max-height: 100%; height: 70vh">
 				<v-sheet class="d-flex flex-column justify-center align-center text-center" style="width: 740px">
-					<v-img :width="100" cover src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/customer-empty-box.png"></v-img>
+					<v-img :width="100" cover src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718889207/umoja-backup/customer-empty-box_dl4qje.png"></v-img>
 					<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Everything customer in a single place</h2>
 					<p style="color: #969696; font-size: 16px; font-weight: 500">
 						When you have a customer, you will be updated with their details, get a summary of their order history, create segment to send
@@ -207,7 +207,7 @@
 						<div class=" ">
 							<div class="d-flex px-6 py-8">
 								<v-avatar class="" size="150"
-									><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687702335/rectangle-1939_khvhag.png"></v-img
+									><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900864/rectangle-1939_khvhag_hixaut.png"></v-img
 								></v-avatar>
 
 								<div>
@@ -354,7 +354,7 @@
 															<td style="font-size: 14px; height: 100px" class="px-1 d-flex align-center pl-2">
 																<v-avatar rounded="lg" color="grey-lighten-2" class="pa-1 mr-3 ml-1" size="50"
 																	><v-img
-																		src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"
+																		src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900935/H468a70379a6043119f5077bf8ba35a7cO_bnnitb_itell3.png"
 																	></v-img
 																></v-avatar>
 																<div>
@@ -481,7 +481,7 @@
 												<div class="d-flex justify-space-between align-center">
 													<div class="d-flex">
 														<v-avatar size="56">
-															<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688110792/rectangle-22424_cbrmty.png"></v-img>
+															<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893086/umoja-backup2/rectangle-22424_cbrmty_i9uriq.png"></v-img>
 														</v-avatar>
 														<div class="px-4">
 															<p style="color: #969696; font-size: 14px; font-weight: 400">
@@ -491,7 +491,7 @@
 														</div>
 													</div>
 													<v-avatar rounded="lg" size="56">
-														<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688113032/rectangle-22423_gbfrmk.png"></v-img>
+														<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901033/rectangle-22423_gbfrmk_t82ej6.png"></v-img>
 													</v-avatar>
 												</div>
 											</div>
@@ -720,7 +720,7 @@ export default {
 		const dashes = computed(() => {
 			return [
 				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320547_6_u4cwdq.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901102/Frame_427320547_6_u4cwdq_x9vtgb.png",
 					name: "Total Customers",
 					tooltip: "Total customers in your shop",
 					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.total_order_users) : "0",
@@ -728,7 +728,7 @@ export default {
 					trending: true,
 				},
 				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906413/Frame_427320548_1_bvohqz.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901162/Frame_427320548_1_bvohqz_ks1snk.png",
 					name: "Followers",
 					tooltip: "Total members in the last seven days",
 					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.total_followers) : "0",
@@ -736,7 +736,7 @@ export default {
 					trending: true,
 				},
 				{
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1686906397/Frame_427320547_7_znnge2.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901229/Frame_427320547_7_znnge2_lfsogz.png",
 					name: "Active",
 					tooltip: "Active customers in the last seven days",
 					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.active_followers) : "0",

@@ -37,7 +37,7 @@
 								>
 									<div class="text-center">
 										<v-img
-											src="https://res.cloudinary.com/payhospi/image/upload/v1688740513/gallery_azmmka.png"
+											src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893088/umoja-backup2/gallery_azmmka_dyc0te.png"
 											class="rounded-lg mx-auto mb-2"
 											width="45"
 										></v-img>

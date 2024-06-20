@@ -27,7 +27,7 @@
 						<div class="d-flex justify-space-between w-25 w-100 h-100 align-center">
 							<div class="d-flex align-center">
 								<v-avatar size="30.88" class="mr-md-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893074/umoja-backup2/rw-rwanda-medium_oui3ln_gemrrc.png"></v-img
 								></v-avatar>
 								<span class="mr-2 d-none d-md-block" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
 									{{ country }}
@@ -109,7 +109,7 @@ import { fetchAllArticle } from "~/composables/usePost";
 const userStore = useUserStore()
 const page = ref(1)
 const availableArticle = computed(() => userStore.allArticles)
-const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg")
+const imageUrl1 = ref("https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990471/umoja/post-hero1_iyrq7h.svg")
 const country = ref("All of African")
 const africanCountries = [
 				"Algeria",

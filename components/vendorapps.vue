@@ -14,7 +14,7 @@ font-weight: 400;">Lorem ipsum dolor sit amet consectetur. Mattis vitae.</p>
             <div class="d-flex mb-4 justify-space-between">
 
                 <v-avatar size="50" class="pa-2" :color="n.color" rounded="lg">
-                <v-img style="opacity: 0.4;" src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_100/v1693570621/frame_hcvde3.png"></v-img></v-avatar>
+                <v-img style="opacity: 0.4;" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718889186/umoja-backup/frame_hcvde3_o3mogj.png"></v-img></v-avatar>
 
                 <v-btn class="rounded-lg" v-if="isIntegrated(n.id)" variant="tonal" color="green" @click="uninstall(n.id)" > <v-icon class="mr-1" icon="mdi mdi-lightning-bolt-outline"></v-icon>  <span style="
                 font-size: 14px;

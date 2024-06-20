@@ -39,7 +39,7 @@
 								<div class="d-flex justify-space-between w-100 h-100 align-center">
 									<div class="d-flex align-center">
 										<v-avatar v-if="!getFlag(country)" size="30.88" class="mr-1"
-											><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+											><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893074/umoja-backup2/rw-rwanda-medium_oui3ln_gemrrc.png"></v-img
 										></v-avatar>
 										<p class="d-flex align-center" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
 											<span class="mx-2" style="font-size: 24px;">{{ getFlag(country) }}</span><span class="d-none mr-2 d-md-flex">{{ country }}</span>
@@ -228,7 +228,7 @@
 						width="100%"
 						:min-height="$vuetify.display.mobile ? 195 : 429"
 						height="auto"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1690560694/rectangle-69_u12j2b.png"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893102/umoja-backup2/rectangle-69_u12j2b_a1knis.png"
 					></v-img>
 				</v-col>
 
@@ -315,7 +315,7 @@
 						cover
 						width="100%"
 						height="auto"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1690560991/rectangle-69_vgfhlc.png"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893025/umoja-backup2/rectangle-69_vgfhlc_lgguoq.png"
 					></v-img>
 				</v-col>
 			</v-row>
@@ -411,6 +411,7 @@ import {getdateRegistered} from '~/utils/date'
 import { countries, countryCodes, getFlag } from "~/utils/countryapi";
 import emojiFlags from 'emoji-flags';
 import { popularProducts, topSelling, promo, loadProduct } from "~/composables/discovery";
+import { getCloudinaryImageUrl } from "~/utils/cloudinary";
 
 export default {
 	setup(){
@@ -598,8 +599,8 @@ export default {
 		},
 		getImageSource() {
 			return this.$vuetify.display.mobile
-				? "https://res.cloudinary.com/payhospi/image/upload/v1713952672/umoja/discovery-hero-mobile.png"
-				: "https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1690557693/rectangle-1943_ki3qvz.png";
+				? "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/discovery-hero-mobile_ql5s8v.png"
+				: getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893096/umoja-backup2/rectangle-1943_ki3qvz_wlqnv5.png', 1400);
 		},
 	},
 	methods: {

@@ -289,7 +289,7 @@ color: #969696;" class="ml-4">{{ n?.percentage }}%</p>
   </v-card>
     </v-col>
     <v-col v-if="!show_more" cols="12" lg="3" :style="{opacity: hasSale ? '': 0.5}">
-        <v-card theme="dark" image="https://res.cloudinary.com/payhospi/image/upload/v1685693850/Rectangle_1894_auhcts.png" height="100%" min-height="300px" class="mx-auto cardStyle" width="100%" style=""  flat >
+        <v-card theme="dark" image="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893098/umoja-backup2/Rectangle_1894_auhcts_cu8ewn.png" height="100%" min-height="300px" class="mx-auto cardStyle" width="100%" style=""  flat >
         <div class="d-flex justify-space-between">
                 <p style="font-weight: 500;
 font-size: 27px;
@@ -474,7 +474,7 @@ View Details            </v-btn>
         :key="item.sn"
       >
         <td style="font-size: 14px;" class="px-1 pl-2">
-          <v-avatar  color="grey-lighten-2" class="pa-1 ml-1" size="30" rounded="lg"><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686754027/H468a70379a6043119f5077bf8ba35a7cO_bnnitb.png"></v-img></v-avatar>
+          <v-avatar  color="grey-lighten-2" class="pa-1 ml-1" size="30" rounded="lg"><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900935/H468a70379a6043119f5077bf8ba35a7cO_bnnitb_itell3.png"></v-img></v-avatar>
     </td>
         <td style="font-size: 14px;" class="text-grey-lighten-1 px-1">{{ item.sn }}</td>
         <td style="font-size: 16px;" class="font-weight-bold text-grey-darken-2 px-1">{{ item.name }}</td>
@@ -642,7 +642,7 @@ watch(() => mapCountry.value, async () => {
     const dashes = computed(() => {
       return [
     {
-        img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691668/Frame_427320547_1_vxn2kx.png',
+        img: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901375/Frame_427320547_1_vxn2kx_budj1o.png',
         name: 'Total Revenue',
         tooltip: 'Total revenue made in the last seven days',
         amount: hasSale.value ? formattedPrice(totalRevenue.value) : '£ 0.00',
@@ -650,7 +650,7 @@ watch(() => mapCountry.value, async () => {
         trending:true
     },
     {
-        img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691668/Frame_427320547_hzperi.png',
+        img: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901499/Frame_427320547_hzperi_uifhml.png',
         name: 'Total Customers',
         tooltip: 'Total customers in the last seven days',
         amount: hasSale.value ?  convertToShorthand(noCusomers.value) : '0',
@@ -658,7 +658,7 @@ watch(() => mapCountry.value, async () => {
         trending:true
     },
     {
-        img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691671/Frame_427320547_3_rhk1fq.png',
+        img: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901580/Frame_427320547_3_rhk1fq_bfbgzv.png',
         name: 'Total Transactions',
         tooltip: 'Total transactions in the last seven days',
         amount: hasSale.value ?  convertToShorthand(noTransactions.value) :'0',
@@ -666,7 +666,7 @@ watch(() => mapCountry.value, async () => {
         trending:true
     },
     {
-        img: 'https://res.cloudinary.com/payhospi/image/upload/v1685691668/Frame_427320547_2_krqzsv.png',
+        img: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901642/Frame_427320547_2_krqzsv_rnbh03.png',
         name: 'Total Products Sold',
         tooltip: 'Total products sold in the last seven days',
         amount: hasSale.value ?  convertToShorthand(noProductSold.value) : '0',

@@ -10,9 +10,9 @@
  background-repeat: no-repeat;   background-position: right;overflow: hidden;
  position: relative; right: 3px; " class=" py-4 px-6 card d-flex  align-center">
             <img height="200" width="30" style="position: absolute;left: 0;"
-                src="https://res.cloudinary.com/payhospi/image/upload/v1696060844/Paper_left_ibphsv.png" class="left" />
+                src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890423/umoja-backup/Paper_left_ibphsv_t7aovf.png" class="left" />
             <img height="200" width="500" style="position: absolute;"
-                src="https://res.cloudinary.com/payhospi/image/upload/v1696060863/Paper_center_u1gxbz.png" class="center" />
+                src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890565/umoja-backup/Paper_center_u1gxbz_slc6zg.png" class="center" />
             <div v-if="timer" style="position: absolute;height: 150px; width: calc(500px - 48px);overflow-y: scroll;"
                 class="text-center pa-3">
 
@@ -34,7 +34,7 @@
     bottom: ; font-size: 20px;" v-html="text" class="rower nishi"> </p>
             </div>
             <img height="200" width="30" style="position: absolute;right: -2px;"
-                src="https://res.cloudinary.com/payhospi/image/upload/v1696060847/Paper_right_llq8uq.png" class="right" />
+                src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888922/umoja-backup/Paper_right_llq8uq_jfz1jt.png" class="right" />
         </div>
 
 
@@ -148,7 +148,7 @@ watch: {
 },
     mounted() {
         this.sound = new Howl({
-                src: ['https://res.cloudinary.com/payhospi/video/upload/v1696066412/gamevideo-item-turning-page-paper-sound-effect-186184608_nw_prev33_ce5igm.wav'],
+                src: ['https://res.cloudinary.com/dd26v0ffw/video/upload/v1718890587/umoja-backup/gamevideo-item-turning-page-paper-sound-effect-186184608_nw_prev33_ce5igm_chigmv.wav'],
             })
 //   this.voicenotesloader();
  if(this.tutorialbol ){
@@ -319,7 +319,7 @@ watch: {
         },
         mksound() {
             this.sound = new Howl({
-                src: ['https://res.cloudinary.com/payhospi/video/upload/v1696066412/gamevideo-item-turning-page-paper-sound-effect-186184608_nw_prev33_ce5igm.wav'],
+                src: ['https://res.cloudinary.com/dd26v0ffw/video/upload/v1718890587/umoja-backup/gamevideo-item-turning-page-paper-sound-effect-186184608_nw_prev33_ce5igm_chigmv.wav'],
                 volume: 0.3,
             });
         },

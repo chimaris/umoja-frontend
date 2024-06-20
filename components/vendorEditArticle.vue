@@ -55,7 +55,7 @@ letter-spacing: -0.2px;">Cover Image</p>
 	</v-card>
     <v-card v-else width="100%" flat style="border-radius: 6px; border: 3px dashed var(--carbon-2, #CECECE);" height="266" class=" mt-4 d-flex justify-center align-center" color="#F8F8F8">
         <div class=" text-center">
-            <v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688740513/gallery_azmmka.png" class="rounded-lg mx-auto mb-2" width="41"></v-img>
+            <v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893088/umoja-backup2/gallery_azmmka_dyc0te.png" class="rounded-lg mx-auto mb-2" width="41"></v-img>
             <p style="color: #333; font-size: 14px; max-width: 473px; font-weight: 400;">
                 Add a cover image that complements your article to attract more readers.
                 We recommend uploading an image that is <span style="font-weight: 700;">1920x1080 pixels

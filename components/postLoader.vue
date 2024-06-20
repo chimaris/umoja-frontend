@@ -49,7 +49,7 @@
           </p>
         </div>
         <div>
-          <v-img width="19" height="19" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716240124/umoja/export_n0gjxv.svg', 19)" />
+          <v-img width="19" height="19" :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990442/umoja/export_n0gjxv_u56e1i.svg', 19)" />
         </div>
       </div>
     </v-card>

@@ -48,12 +48,12 @@
 				1/{{ item?.featured_img.split(",").length }}
 			</p>
 			<v-avatar v-if="item?.video" size="39"
-				><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693937411/vuesax-twotone-play-circle_oyfiqz.png"></v-img
+				><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890551/umoja-backup/vuesax-twotone-play-circle_oyfiqz_s0ys5h.png"></v-img
 			></v-avatar>
 		</v-card>
 		<v-card  @click="$router.push(`/post_detail/${item?.id}`)" v-if="!item?.featured_img.includes(',')" :image="getCloudinaryImageUrl(item?.featured_img, 800)" flat color="grey-lighten-4" width="100%" height="308px" class="d-flex align-center justify-center rounded-lg">
 			<v-avatar v-if="item?.video" size="39"
-				><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1693937411/vuesax-twotone-play-circle_oyfiqz.png"></v-img
+				><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890551/umoja-backup/vuesax-twotone-play-circle_oyfiqz_s0ys5h.png"></v-img
 			></v-avatar>
 		</v-card>
 		<p
@@ -98,7 +98,7 @@
 				</v-dialog>
 			</div>
 			<div>
-				<v-img width="19" height="19" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716240124/umoja/export_n0gjxv.svg', 19)" />
+				<v-img width="19" height="19" :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990442/umoja/export_n0gjxv_u56e1i.svg', 19)" />
 			</div>
 		</div>
 	</v-card>

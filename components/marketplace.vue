@@ -28,7 +28,7 @@
 						<div class="d-flex justify-space-between w-25 w-100 h-100 align-center">
 							<div class="d-flex align-center">
 								<v-avatar v-if="!getFlag(country)" size="30.88" class="mr-md-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893074/umoja-backup2/rw-rwanda-medium_oui3ln_gemrrc.png"></v-img
 								></v-avatar>
 								<p class="d-flex align-center" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
 									<span class="mx-2" style="font-size: 24px;">{{ getFlag(country) }}</span><span class="d-none mr-2 d-md-flex">{{ country }}</span>
@@ -64,7 +64,7 @@
 									class="mr-2"
 									width="20"
 									height="20"
-									src="https://res.cloudinary.com/payhospi/image/upload/v1716242897/umoja/Filter_k0khdy.svg"
+									src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/Filter_k0khdy_hql38z.svg"
 								/>
 								Filter</v-btn
 							>
@@ -222,7 +222,7 @@
 										width="21"
 										height="21"
 										@click.stop="filterDrawer = false"
-										src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+										src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990515/umoja/close-icon_vecha5.svg"
 									/>
 								</div>
 							</div>

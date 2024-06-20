@@ -8,7 +8,7 @@
 				height=""
 				width="366"
 				contain
-				src="https://res.cloudinary.com/payhospi/image/upload/v1695370409/Frame_5_jyfv_two6l9.png"
+				src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890587/umoja-backup/Frame_5_jyfv_two6l9_mbwsz9.png"
 			/>
 			<img
 				class="rotimg d-none d-md-block"
@@ -16,7 +16,7 @@
 				height=""
 				width="286"
 				contain
-				src="https://res.cloudinary.com/payhospi/image/upload/v1693848059/vector_xfq7us.png"
+				src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888923/umoja-backup/vector_xfq7us_wt29vq.png"
 			/>
 		</div>
 		<div class="d-block d-md-none">
@@ -25,14 +25,14 @@
 				style="z-index: -1; opacity: 0.1; position: absolute; left: -55%; top: 90px"
 				width="366"
 				contain
-				src="https://res.cloudinary.com/payhospi/image/upload/v1695370409/Frame_5_jyfv_two6l9.png"
+				src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890587/umoja-backup/Frame_5_jyfv_two6l9_mbwsz9.png"
 			/>
 			<img
 				class="rotimg"
 				style="z-index: -1; opacity: 0.1; position: absolute; right: -40%; top: 390px"
 				width="286"
 				contain
-				src="https://res.cloudinary.com/payhospi/image/upload/v1693848059/vector_xfq7us.png"
+				src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888923/umoja-backup/vector_xfq7us_wt29vq.png"
 			/>
 		</div>
 		<v-container style="max-width: 1200px; width: 100%" class="d-none d-md-block">
@@ -85,7 +85,7 @@
 							{{ n.name }}
 							<img
 								v-show="select == n.name"
-								src="https://res.cloudinary.com/payhospi/image/upload/v1693888075/underline-10_jqkobi.svg"
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890487/umoja-backup/underline-10_jqkobi_xagslv.svg"
 								style="bottom: -10px; left: 50%; transform: translate(-50%, 0); position: absolute"
 							/>
 						</li>
@@ -145,7 +145,7 @@
 							{{ n.name }}
 							<img
 								v-show="select == n.name"
-								src="https://res.cloudinary.com/payhospi/image/upload/v1693888075/underline-10_jqkobi.svg"
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890487/umoja-backup/underline-10_jqkobi_xagslv.svg"
 								style="bottom: -10px; left: 50%; transform: translate(-50%, 0); position: absolute"
 							/>
 						</li>

@@ -98,7 +98,7 @@
 						<p style="color: #1e1e1e; font-size: 16px; font-weight: 600" class="  ">**** 9373</p>
 
 						<div class="mx-4" style="border-radius: 4.536px; border: 0.588px solid var(--carbon-1, #ededed)">
-							<v-img width="54" src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo2_jpei5o.png"></v-img>
+							<v-img width="54" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893048/umoja-backup2/logo2_jpei5o_b1rtj8.png"></v-img>
 						</div>
 						<p style="color: var(--carbon-4, #333); font-size: 14px; font-weight: 500">Expiry 10/2024</p>
 					</div>

@@ -4,7 +4,7 @@
         <div class="d-flex justify-space-between align-center">
           <v-avatar class="" @click="$router.push('/')" size="150" style="height:auto!important" rounded="0">
     
-    <v-img  eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
+    <v-img  eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718615349/umoja/Frame_4_emeelq_ajydmg.png"></v-img>
   </v-avatar>
   <div class="d-flex align-center">
 

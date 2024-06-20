@@ -6,10 +6,10 @@
 		flat
 		class="bg-white parent-card rounded-lg mb-2"
 	>
-		<v-img eager class="bg-grey-lighten-5" cover style="border-radius: 16px" width="100%" height="237" :src="item.cover_image ? item.cover_image : 'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"> </v-img>
+		<v-img eager class="bg-grey-lighten-5" cover style="border-radius: 16px" width="100%" height="237" :src="item.cover_image ? item.cover_image : 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893068/umoja-backup2/Rectangle_448_2_lh8kz3_fhxaab.png'"> </v-img>
 		<div class="px-md-4">
 			<v-avatar style="margin-top: -37px" :size="$vuetify.display.mobile ? 43 : 67">
-				<v-img eager class="bg-grey-lighten-2" cover style="border-radius: 16px" width="100%" height="237" :src="item.profile_photo ? item.profile_photo : 'https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png'"> </v-img>
+				<v-img eager class="bg-grey-lighten-2" cover style="border-radius: 16px" width="100%" height="237" :src="item.profile_photo ? item.profile_photo : 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890679/umoja-backup/profile_image_pd4dcv_k3cl6j.png'"> </v-img>
 			</v-avatar>
 			<p
 				style="font-weight: 600; text-transform: capitalize; line-height: normal; cursor: pointer; color: #000000"
@@ -43,7 +43,7 @@
 				class="d-flex items-center"
 			>
 				<span style="width: 10px">
-					<v-img height="14" width="10" src="https://res.cloudinary.com/payhospi/image/upload/v1714122594/umoja/Vector_fl2a3t.png"> </v-img>
+					<v-img height="14" width="10" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990498/umoja/Vector_fl2a3t_b6ptcc.png"> </v-img>
 				</span>
 				<span class="ml-1">Delivery within 5 Working Days</span>
 			</span>

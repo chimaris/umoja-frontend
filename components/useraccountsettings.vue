@@ -182,7 +182,7 @@
 						width="21"
 						height="21"
 						@click="userDetails = false"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990515/umoja/close-icon_vecha5.svg"
 					/>
 				</div>
 			</div>
@@ -248,7 +248,7 @@
 						width="21"
 						height="21"
 						@click="userAddress = false"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990515/umoja/close-icon_vecha5.svg"
 					/>
 				</div>
 			</div>

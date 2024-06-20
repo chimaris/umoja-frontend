@@ -330,7 +330,7 @@
 								<div class="d-flex justify-center align-center pa-2 rounded-lg" style="height: 298px; width: 100%; border: 3.4px dashed #e1e1e1">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
-											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
+											<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900820/gallery_j91r7n_g4uehk.png"></v-img>
 										</v-avatar>
 										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
 										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product1" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
@@ -359,7 +359,7 @@
 								<div class="d-flex justify-center align-center pa-2 rounded-lg" style="height: 298px; width: 100%; border: 3.4px dashed #e1e1e1">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
-											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
+											<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900820/gallery_j91r7n_g4uehk.png"></v-img>
 										</v-avatar>
 										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
 										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product2" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
@@ -385,7 +385,7 @@
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
 											
-											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
+											<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900820/gallery_j91r7n_g4uehk.png"></v-img>
 										</v-avatar>
 										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
 										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product3" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
@@ -408,7 +408,7 @@
 								<div v-else class="d-flex justify-center align-center mt-2 pa-2 rounded-lg" style="height: 141px; width: 100%; border: 3.4px dashed #e1e1e1" @dragenter.prevent @dragleave.prevent @dragover.prevent @drop.prevent="drop($event, 4, 'drop')">
 									<div class="text-center">
 										<v-avatar size="41" class="mb-2" rounded="lg">
-											<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1688131104/gallery_j91r7n.png"></v-img>
+											<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900820/gallery_j91r7n_g4uehk.png"></v-img>
 										</v-avatar>
 										<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
 										<p style="color: #333; font-size: 14px; font-weight: 400">select <v-label for="product4" style="color: #1273eb; font-size: 14px; font-weight: 400; cursor: pointer;"> click to browse </v-label></p>
