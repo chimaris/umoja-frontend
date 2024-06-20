@@ -134,7 +134,7 @@
 							<Vendornotifications  @changePage="changePage" />
 						</v-window-item>
 						<v-window-item :value="'Settings'">
-							<Vendorsettings />
+							<Vendorsettings @changeTab="changeTab" />
 						</v-window-item>
 						<v-window-item :value="'All Apps'">
 							<Vendorapps />
@@ -257,7 +257,10 @@ const handleClick = () => {
 function changePage(n) {
   	router.push(`/vendor/dashboard/${n}`);
 }
-
+// function changeTab(n){
+// 	// router.push(`/vendor/dashboard/Settings/${n}`)
+// 	route.params.tab = n
+// }
 function sideFn() {
   useVendorStore().sideBtn = false
 }

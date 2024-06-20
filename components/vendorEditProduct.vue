@@ -197,7 +197,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Sub Category</p>
-									<v-select :loading="loadingSub" color="green" :items="subCategories.map(subCategory => subCategory.name)" v-model="product.sub_category_name" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
+									<v-select :loading="loadingSub" :disabled="!product.gender || !product.category_name" color="green" :items="subCategories.map(subCategory => subCategory.name)" v-model="product.sub_category_name" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
 								</div>
 							
 								<div>

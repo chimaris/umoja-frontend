@@ -1,5 +1,6 @@
 <template>
-	<v-card width="100%" flat class="cardStyle pa-4 pb-3">
+	<post-loader v-if="load" />
+	<v-card v-else width="100%" flat class="cardStyle pa-4 pb-3">
 		<div class="mb-4 d-flex">
 			<v-avatar size="45">
 				<v-img cover eager :src="getCloudinaryImageUrl(item?.vendor_profile_photo, 150)"></v-img>
@@ -109,7 +110,7 @@ import { useUserStore } from "~/stores/userStore";
 import { likePost, hasLiked, unlikePost } from '~/composables/useLike';
 
 export default {
-	props: ["item", "short", "index", "showVendor", "showdisco", "likedPost"],
+	props: ["item", "short", "load", "index", "showVendor", "showdisco", "likedPost"],
 	data(){
 		return{
 			loginDialog: false,

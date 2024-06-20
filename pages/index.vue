@@ -77,7 +77,7 @@
 					height="auto"
 					@load="startall()"
 					width="1442px"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1695833095/map-base_1jhfvk_qb0c3b.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718884722/map-base_1jhfvk_qb0c3b_gsb8cb.png"
 				>
 					<div
 						v-show="placescards"
@@ -376,7 +376,7 @@
 		</div>
 
 		<product-row :items="productStore.products.homeMostSelling" :loading="isLoading" :cover="false" :maxwidth="'1200px'" :showVendor="true" title="💰 Most Selling Products" />
-		<PopularTwoRow :showBid="twocardrow.showBid" :maxwidth="'1200px'" :items="twocardrow.items" :title="twocardrow.title" />
+		<PopularTwoRow :showBid="false" :maxwidth="'1200px'" :items="productStore.products.homePopular" title="⚡️ Popular Products of the Week" />
 	</div>
 	<div class="bg-black py-16 py-md-0">
 		<v-container style="height: 774px" class="d-flex align-center justify-center">
@@ -427,7 +427,8 @@
 			</div>
 		</v-container>
 	</div>
-	<blogRow :items="blogpost.items" style="margin-top: 100px" :maxwidth="'1200px'" :showVendor="true" :title="blogpost.title" />
+	<blogRow :items="productStore.topArticle" style="margin-top: 100px" :maxwidth="'1200px'" :showVendor="true" title="🗞 Tips, updates and stories from our community" />
+	
 	<div>
 		<v-container style="max-width: 1200px">
 			<p style="font-size: 48px; font-weight: 600; line-height: 180%" class="mb-8">FAQ's</p>
@@ -565,7 +566,7 @@ import { useTutorialStore } from "~/stores/tutorialStore";
 import { Howl, Howler } from "howler";
 import { useProductStore } from "~/stores/productStore";
 import { getCloudinaryImageUrl } from "~/utils/cloudinary";
-import {mostSellingProducts, isLoading} from '~/composables/useProducts'
+import {mostSellingProducts, isLoading, popularProducts, latestArticles, promoProducts} from '~/composables/useProducts'
 export default {
 	data() {
 		return {
@@ -736,69 +737,6 @@ export default {
 				},
 			],
 			selectedCountry: "",
-			twocardrow: {
-				showBid: false,
-				title: "⚡️ Popular Products of the Week",
-				items: [
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694659373/rectangle-22440jhfj456_ienfo3.png",
-						name: "Koko Rachel Deco Set",
-						vendorName: "Nweke Franklin O.",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694659373/rectangle-22440jghd454hfgd_qjlxsi.png",
-						name: "The Nawi Scarfs",
-						vendorName: "Okoli Cecilia Bona.",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694659373/rectangle-22440jhfj456_ienfo3.png",
-						name: "Koko Rachel Deco Set",
-						vendorName: "Nweke Franklin O.",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694659373/rectangle-22440jghd454hfgd_qjlxsi.png",
-						name: "The Nawi Scarfs",
-						vendorName: "Okoli Cecilia Bona.",
-					},
-				],
-			},
-			blogpost: {
-				title: "🗞 Tips, updates and stories from our community",
-				items: [
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694661747/frame-1000007817jhcjcj867_lkwfam.png",
-						author: "Nweke Franklin O.",
-						date: "Sept 04, 2023",
-						title: "Simple steps on how to use the Umoja CRM system.",
-						category: "How-to’s",
-						color: "#1273EB",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694661747/frame-1000007818jhf78r853563764_x03szl.png",
-						author: "Okoli Bonaventure",
-						date: "Sept 01, 2023",
-						title: "Umoja Africa raises $3 Million seed round.",
-						category: "Business",
-						color: "#00966D",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694661747/frame-1000007817hgcnh756675_l1j5jm.png",
-						author: "David Obukeme",
-						date: "Sept 04, 2023",
-						title: "A new feature has been added to the Umoja.",
-						category: "Product",
-						color: "#F38218",
-					},
-					{
-						image: "https://res.cloudinary.com/payhospi/image/upload/v1694661747/frame-1000007817jhcjcj867_lkwfam.png",
-						author: "Nweke Franklin O.",
-						date: "Sept 04, 2023",
-						title: "Simple steps on how to use the Umoja CRM system.",
-						category: "How-to’s",
-						color: "#1273EB",
-					},
-				],
-			},
 
 
 			points: [
@@ -903,6 +841,9 @@ export default {
 	},
 	async mounted(){
 		await mostSellingProducts()
+		await promoProducts()
+		await popularProducts()
+		await latestArticles()
 		await useProductStore().fetchProducts();
 	},
 	created() {

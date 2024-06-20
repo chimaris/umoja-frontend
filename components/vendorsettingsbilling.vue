@@ -45,7 +45,7 @@ font-weight: 500;">Business Plan</span></v-chip>
 </div>
 <p style="color:#2C6E63;
 font-size: 40px;
-font-weight: 600;">€ 29.99/Month</p>
+font-weight: 600;">€ 49.99/Month</p>
 <p style="color: #333;
 font-size: 16px;
 font-weight: 400;" class="mb-8">Everything in our free plan plus...</p>
@@ -214,7 +214,7 @@ const seePremium = ref(false)
 		"Ideal for: Businesses and start-ups looking to test the platform and get started with minimal upfront costs."
 	]
 	const businessPackage = [
-        "Price: €29.99",
+        "Price: €49.99",
         "Verified business",
         "Umoja business application",
         "Customer support",

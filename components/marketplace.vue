@@ -187,6 +187,14 @@
 								<product-component :loading="productStore.productLoading" :item="n" :index="i" />
 							</v-col>
 						</v-row>
+						<div class="text-center mt-5">
+							<v-pagination
+							v-model="productStore.pageNo"
+							:length="productStore.marketLastPage"
+							next-icon="mdi mdi-menu-right"
+							prev-icon="mdi mdi-menu-left"
+							></v-pagination>
+						</div>
 					<!-- <template v-else>
 						<v-row dense v-if="productStore.productLoading" class="mt-2 align-items-stretch"  >
 							<v-col v-for="(n, i) in 8" :key="i" cols="6" :md="3" :lg="3" >
@@ -255,7 +263,7 @@ export default {
 		this.productStore = useProductStore();
 	},
 	async mounted() {
-		await this.productStore.fetchFilteredProducts();
+		// await this.productStore.fetchFilteredProducts();
 		this.editor = new Editor({
 			extensions: [
 				StarterKit,

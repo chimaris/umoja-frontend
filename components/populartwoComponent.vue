@@ -1,19 +1,19 @@
 <template>
 	<v-card
 		width="100%"
-		v-if="loaded"
+		v-if="popularLoaded"
 		:style="{ overflow: $vuetify.display.mobile ? 'scroll' : 'hidden' }"
 		style="border-radius: 15px"
 		flat
 		color="#F8F8F8"
 		class="parent-card rounded-lg"
 	>
-		<v-img eager class="bg-grey-lighten-2" cover width="100%" :height="'313'" :src="item.image"> </v-img>
+		<v-img eager class="bg-grey-lighten-2" cover width="100%" :height="'313'" :src="item.photo.split(',')[0]"> </v-img>
 		<div class="d-flex flex-row flex-md-column justify-space-between pa-3 pa-md-6">
 			<div class="d-flex align-center justify-space-between">
 				<div>
 					<p
-						@click="$router.push('/product_page')"
+						@click="$router.push(`/product_page/${item.id}`)"
 						style="font-weight: 600; line-height: 18px; cursor: pointer; color: #000000"
 						:style="{ fontSize: $vuetify.display.mobile ? '16px' : '20px' }"
 						class="mt-2"
@@ -22,7 +22,7 @@
 					</p>
 					<p style="color: #969696; font-size: 14px; font-weight: 500; letter-spacing: -0.42px" class="mt-1">
 						Sold by
-						<span style="color: #1273eb; font-weight: 600"> Nweke Franklin O. </span>
+						<span style="color: #1273eb; text-transform: capitalize; font-weight: 600">{{item.vendor_firstname}} {{ item.vendor_lastname }}</span>
 					</p>
 				</div>
 				<!-- <div v-if="showBid">
@@ -41,7 +41,7 @@
 				<v-btn
 					height="44"
 					width="161"
-					@click="$router.push('/product_page')"
+					@click="$router.push(`/product_page/${item.id}`)"
 					rounded="xl"
 					style="border-radius: 6px"
 					color="green"
@@ -57,6 +57,7 @@
 </template>
 <script>
 import { useLikedStore } from "~/stores/likedStore";
+import { popularLoaded } from "~/composables/useProducts";
 
 export default {
 	props: ["item", "index", "showBid"],
@@ -65,20 +66,7 @@ export default {
 			return useLikedStore();
 		},
 	},
-	data() {
-		return {
-			loaded: false,
-		};
-	},
-	mounted() {
-		this.mockLoading();
-	},
 	methods: {
-		mockLoading() {
-			setTimeout(() => {
-				this.loaded = true;
-			}, 2000);
-		},
 		toggleLike(item, index) {
 			this.likedStore.toggleLike(item, index);
 		},

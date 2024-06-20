@@ -75,7 +75,9 @@
 					<v-icon>{{ subCategoryExpand ? "mdi mdi-chevron-up" : "mdi mdi-chevron-down" }}</v-icon>
 				</div>
 				<v-expand-transition leave-absolute>
+				
 					<v-list v-if="subCategoryExpand" dense>
+						<p v-if="!productStore.params.category_name  || !productStore.params.gender" style="text-align: center; font-size: 14px">You need to select gender and category</p>
 							<v-list-item
 								v-for="(sub, subIndex) in subCategories"
 								:key="subIndex"
@@ -332,8 +334,8 @@ onMounted(async () => {
 	// productStore.params.sub_category_name = subCategories.value[0].name
 });
 			// watch for change ins any of the filter value
-			watch(() => [productStore.params.gender, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
-			async ([newGender, newCategory_name, newSizes, newProduct_rating, newCompare_at_price, newSub_category_name]) => {
+			watch(() => [productStore.params.gender, productStore.pageNo, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
+			async ([]) => {
 				
 				await productStore.fetchFilteredProducts()
 			});
@@ -342,8 +344,10 @@ onMounted(async () => {
 					subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
 					productStore.params.sub_category_name = subCategories.value[0].name
 				}
+				if(!productStore.params.category_name  || !productStore.params.gender){
+					subCategories.value = []
+				}
 			});
-
 			watch(() => price.value, (newPrice) => {
 					if (newPrice) {
 					const [min, max] = newPrice.split(' - ').map(price => price.replace('€', '').trim());
