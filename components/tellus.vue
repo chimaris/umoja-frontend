@@ -17,7 +17,7 @@
 
 			<v-select
 				v-model="vendor.business_type"
-				:items="companyCategories"
+				:items="companyCategories.map(cat => cat.name)"
 				placeholder="Select"
 				density="comfortable"
 				:rules="inputRules"
@@ -112,6 +112,7 @@ import { ref, defineEmits, onMounted, onBeforeMount} from 'vue';
 import { useVendorStore } from '~/stores/vendorStore';
 import axios from 'axios'
 import { on } from 'events';
+import { fetchBusinessCategories, getbusinessCategoryId } from '~/composables/useCategories';
 import {inputRules} from '~/utils/formrules'
 import { allCountries, countries, fetchStates, fetchCities, states, cities, loadingStates, loadingCities } from '~/utils/countryapi'
 
@@ -140,15 +141,16 @@ const emit = defineEmits(['submit']);
 
 
 
-const companyCategories = [
-  "Fashion", "Cosmetic", "Art", "Home decoration", "Furniture", "Accessories"
-];
+const companyCategories = ref([]);
 
+onMounted(async () => {
+	companyCategories.value = await fetchBusinessCategories()
+})
 const submit = async () => {
 	formError.value = ""
 	const companyInfo = {
 		rep_country: vendor.value.rep_country,
-		business_type: vendor.value.business_type,
+		business_type_id: getbusinessCategoryId(vendor.value.business_type, companyCategories.value),
 		business_name: vendor.value.business_name,
 		address: vendor.value.address,
 		state: vendor.value.state,

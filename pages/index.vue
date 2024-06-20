@@ -186,8 +186,8 @@
 						@click="$router.push('/category/fashion')"
 						style="cursor: pointer; height: calc(100% - 3px); position: relative; border-radius: 15px"
 						width="100%"
-						lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529528/rectangle-64_zmh8cd.png"
-						src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690529528/rectangle-64_zmh8cd.png"
+						:lazy-src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893059/umoja-backup2/rectangle-64_zmh8cd_qhfd8q.png', 100)"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893059/umoja-backup2/rectangle-64_zmh8cd_qhfd8q.png"
 					>
 						<v-btn color="white" size="large" style="position: absolute; top: 24px; right: 27.5px" variant="outlined" rounded="xl">
 							Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
@@ -219,8 +219,8 @@
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
-								lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529526/rectangle-66_kbe8bk.png"
-								src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-66_kbe8bk.png"
+								:lazy-src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893037/umoja-backup2/rectangle-66_kbe8bk_yeiwaz.png', 100)"
+								:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893037/umoja-backup2/rectangle-66_kbe8bk_yeiwaz.png', 1000)"
 							>
 								<v-btn color="white" size="44" style="position: absolute; top: 24px; right: 27.5px" variant="outlined" rounded="xl">
 									<v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
@@ -251,8 +251,8 @@
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
-								lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529526/rectangle-67_oa0r6o.png"
-								src="https://res.cloudinary.com/payhospi/image/upload/v1690529526/rectangle-67_oa0r6o.png"
+								:lazy-src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893094/umoja-backup2/rectangle-67_oa0r6o_vgdoss.png', 100)"
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893094/umoja-backup2/rectangle-67_oa0r6o_vgdoss.png"
 							>
 								<v-btn
 									icon="mdi mdi-arrow-top-right"
@@ -290,8 +290,8 @@
 								style="cursor: pointer; position: relative; border-radius: 15px"
 								width="100%"
 								cover
-								lazy-src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_90/v1690529527/rectangle-65_czgty7.png"
-								src="https://res.cloudinary.com/payhospi/image/upload/v1690529527/rectangle-65_czgty7.png"
+								:lazy-src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893054/umoja-backup2/rectangle-65_czgty7_sptdw1.png', 100)"
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893054/umoja-backup2/rectangle-65_czgty7_sptdw1.png"
 							>
 								<v-btn color="white" size="large" style="position: absolute; top: 24px; right: 27.5px" variant="outlined" rounded="xl">
 									Shop now <v-icon class="ml-1" icon="mdi mdi-arrow-top-right"></v-icon>
@@ -345,7 +345,7 @@
 								width="100%"
 								height="auto"
 								min-height="429"
-								src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1690541372/rectangle-69_jzdwc3.png"
+								:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893064/umoja-backup2/rectangle-69_jzdwc3_p0aioa.png', 1000)"
 							></v-img>
 						</v-col>
 						<v-col class="px-0" cols="12" md="6" lg="6">
@@ -385,7 +385,7 @@
 					class="mx-auto mb-8"
 					width="100%"
 					max-width="420px"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1690543426/frame_aivj5d.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893046/umoja-backup2/frame_aivj5d_wigyvt.png"
 				></v-img>
 				<p
 					style="
@@ -742,27 +742,27 @@ export default {
 			points: [
 				{
 					// icon: "cart",
-					icon: getCloudinaryImageUrl("https://res.cloudinary.com/payhospi/image/upload/v1716231082/umoja/cartIcon.svg", 60),
+					icon: getCloudinaryImageUrl("https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990515/umoja/cartIcon_sgvf2a.svg", 60),
 					title: "Umoja Delivery",
 					body: "Get free delivery for every order above $20",
 				},
 				{
 					// icon: "history",
-					icon: getCloudinaryImageUrl("https://res.cloudinary.com/payhospi/image/upload/v1716230312/umoja/calender.svg", 60),
+					icon: getCloudinaryImageUrl("https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990514/umoja/calender_ffhivx.svg", 60),
 
 					title: "90 Days Return",
 					body: "Return within 90 days of receiving your order.",
 				},
 				{
 					//icon: "credit-card",
-					icon: getCloudinaryImageUrl("https://res.cloudinary.com/payhospi/image/upload/v1716231343/umoja/credit-card.svg", 60),
+					icon: getCloudinaryImageUrl("https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990440/umoja/credit-card_mhhqvw.svg", 60),
 
 					title: "Secure Payment",
 					body: "100% secure payment. Get easy support anytime",
 				},
 				{
 					//icon: "face-agent",
-					icon: getCloudinaryImageUrl("https://res.cloudinary.com/payhospi/image/upload/v1716231241/umoja/support-icon.svg", 60),
+					icon: getCloudinaryImageUrl("https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990494/umoja/support-icon_umblws.svg", 60),
 
 					title: "24/7 Online Support",
 					body: "100% secure payment. Get easy support anytime",
@@ -771,43 +771,7 @@ export default {
 			openid: null,
 			placescards: false,
 			mods: 1,
-			images: [
-				"https://res.cloudinary.com/dkbt6at26/image/upload/v1684302547/Rectangle_7_h4lxnd.png",
-				"https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_6_1_qlrzss.png",
-				"https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_5_ucb5ag.png",
-				"https://res.cloudinary.com/dkbt6at26/image/upload/v1684302543/Rectangle_4_tzf2yf.png",
-				"https://res.cloudinary.com/dkbt6at26/image/upload/v1684298703/profile_ievpza.png",
-			],
 			rating: 4,
-			items: [
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_dfuzam.png",
-					price: "115.32",
-					likes: "1.2k",
-				},
-				{
-					name: "Multi colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png",
-					price: "57.00",
-					likes: "456",
-					oos: true,
-				},
-
-				{
-					name: "Green and brown kente scarf material, Made in Lagos Nigeria..",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602019/Rectangle_459_2_m9thyj.png",
-					price: "57.00",
-					likes: "456",
-				},
-				{
-					name: "Orange colored ankara scarf for women designed by Lumi Opeyemi.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684602018/Rectangle_459_4_w3hzqw.png",
-					price: "79.00",
-					likes: "66",
-					oos: true,
-				},
-			],
 			faqs: [
 				{
 					title: "Does Umoja have tools for complex business?",

@@ -41,7 +41,10 @@
 		</div>
 
 		<div id="homepage" style="background: transparent !important" class="rower mt-8 d-none d-md-block">
-			<div class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in stores" :key="i">
+			<div v-if="stores?.length == 0" class="d-inline-block mr-4" style="width: 254px" v-for="n in [1,2,3,4,5]" :key="n">
+				<vendorloader />
+			</div>
+			<div v-else class="d-inline-block mr-4" style="width: 254px" v-for="(n, i) in stores" :key="i">
 				<vendor-component :category="category" v-if="vendorBol" :index="i" :item="n" />
 				<product-component :cover="coverbol" :category="category" v-else :index="i" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
 			</div>
@@ -85,6 +88,7 @@ color: #fff!important;
 import { useProductStore } from "~/stores/productStore.js";
 import { bestSellingStores } from "~/composables/useProducts";
 import {ref} from 'vue';
+import Vendorloader from './vendorloader.vue';
 
 export default {
 	setup(){
@@ -97,7 +101,7 @@ export default {
 				 category: "all"
 				},
 				{name: "Art",
-				 id: 5,
+				 id: 3,
 				 category: "art"
 				},
 				{name: "Home Decoration",
@@ -105,17 +109,21 @@ export default {
 				 category: "homeDecoration"
 				},
 				{name: "Cosmetics",
-				 id: 3,
+				 id: 2,
 				 category: "cosmetics"
 				},
 				{name: "Accessories",
-				 id: 2,
+				 id: 6,
 				 category: "accessories"
 				},
-				{name: "Clothing",
+				{name: "Fashion",
 				 id: 1,
-				 category: "clothing"
-				}
+				 category: "fashion"
+				},
+				{name: "Furniture",
+				 id: 5,
+				 category: "furniture"
+				},
 			]
 
 	async function fetchStores(id, category){
@@ -130,7 +138,8 @@ export default {
 									homeDecoration: [],
 									cosmetics: [],
 									accessories: [],
-									clothing: []
+									fashion: [],
+									furniture: []
    									 }
 		category.value = "all"
 	})

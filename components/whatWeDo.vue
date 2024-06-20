@@ -6,36 +6,36 @@
 				class="topcard height1 rounded-xl d-flex justify-center align-center"
 				height="100vh"
 				min-height="900px"
-				image="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1300/v1689483514/african-safari-animals-11_k5q3lr.png"
+				image="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893066/umoja-backup2/african-safari-animals-11_k5q3lr_a6z8qb.png"
 			>
 				<div v-if="$vuetify.display.smAndUp" style="position: absolute; top: 0; height: 100%; width: 100%">
 					<v-btn style="height: auto; top: 15%; left: 10%" flat rounded="xl" class="rw px-2 py-2" height="auto">
 						<v-avatar size="30.88" class="mr-1"
-							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+							><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893074/umoja-backup2/rw-rwanda-medium_oui3ln_gemrrc.png"></v-img
 						></v-avatar>
 						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
 					</v-btn>
 					<v-btn style="height: auto; position: absolute; right: 25%; top: 8%" flat rounded="xl" class="gh px-2 py-2" height="auto">
 						<v-avatar size="30.88" class="mr-1"
-							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
+							><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893097/umoja-backup2/gh-ghana-medium_rvbvcj_m8pxdv.png"></v-img
 						></v-avatar>
 						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
 					</v-btn>
 					<v-btn style="position: absolute; top: 50%" flat rounded="xl" class="ng px-2 py-2" height="auto">
 						<v-avatar size="30.88" class="mr-1"
-							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
+							><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893044/umoja-backup2/ng-nigeria_puk1kr_ts33bj.png"></v-img
 						></v-avatar>
 						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
 					</v-btn>
 					<v-btn style="position: absolute; top: 40%; right: 5%" flat rounded="xl" class="sa px-2 py-2" height="auto">
 						<v-avatar size="30.88" class="mr-1"
-							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
+							><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893026/umoja-backup2/za-south-africa_h5tfp8_zyvys7.png"></v-img
 						></v-avatar>
 						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> SOUTH AFRICA </span>
 					</v-btn>
 					<v-btn style="position: absolute; bottom: 25%; right: 20%" flat rounded="xl" class="ke px-2 py-2" height="auto">
 						<v-avatar size="30.88" class="mr-1"
-							><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
+							><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893031/umoja-backup2/ke-kenya_bcsssx_ejhvoi.png"></v-img
 						></v-avatar>
 						<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
 					</v-btn>
@@ -72,7 +72,7 @@
 						<span class="upspan">
 							<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893074/umoja-backup2/rw-rwanda-medium_oui3ln_gemrrc.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
 							</v-btn>
@@ -80,7 +80,7 @@
 						<span class="upspan">
 							<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893097/umoja-backup2/gh-ghana-medium_rvbvcj_m8pxdv.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
 							</v-btn>
@@ -88,7 +88,7 @@
 						<span class="upspan">
 							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893044/umoja-backup2/ng-nigeria_puk1kr_ts33bj.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
 							</v-btn>
@@ -96,7 +96,7 @@
 						<span class="upspan">
 							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893026/umoja-backup2/za-south-africa_h5tfp8_zyvys7.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500">
 									SOUTH AFRICA
@@ -106,7 +106,7 @@
 						<span class="upspan">
 							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893031/umoja-backup2/ke-kenya_bcsssx_ejhvoi.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
 							</v-btn>
@@ -114,7 +114,7 @@
 						<span class="upspan">
 							<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893074/umoja-backup2/rw-rwanda-medium_oui3ln_gemrrc.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> RWANDA </span>
 							</v-btn>
@@ -122,7 +122,7 @@
 						<span class="upspan">
 							<v-btn style="height: auto" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/gh-ghana-medium_rvbvcj.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893097/umoja-backup2/gh-ghana-medium_rvbvcj_m8pxdv.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> GHANA </span>
 							</v-btn>
@@ -130,7 +130,7 @@
 						<span class="upspan">
 							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ng-nigeria_puk1kr.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893044/umoja-backup2/ng-nigeria_puk1kr_ts33bj.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> NIGERIA </span>
 							</v-btn>
@@ -138,7 +138,7 @@
 						<span class="upspan">
 							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486634/za-south-africa_h5tfp8.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893026/umoja-backup2/za-south-africa_h5tfp8_zyvys7.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500">
 									SOUTH AFRICA
@@ -148,7 +148,7 @@
 						<span class="upspan">
 							<v-btn style="" flat rounded="xl" class="px-2 mx-3 py-2" height="auto">
 								<v-avatar size="30.88" class="mr-1"
-									><v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689486623/ke-kenya_bcsssx.png"></v-img
+									><v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893031/umoja-backup2/ke-kenya_bcsssx_ejhvoi.png"></v-img
 								></v-avatar>
 								<span class="mr-2" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: 2.38px; font-weight: 500"> KENYA </span>
 							</v-btn>

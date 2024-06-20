@@ -29,7 +29,9 @@ export const useProductStore = defineStore('productStore', {
       homeDecoration: [],
       cosmetics: [],
       accessories: [],
-      clothing: []
+      fashion: [],
+      furniture: []
+
     },
     products: {
       main: [],

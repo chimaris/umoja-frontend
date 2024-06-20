@@ -95,7 +95,7 @@ export const popularLoaded = ref(false)
     try{
       loaded.value = false
       const response = await api({
-        url: `stores?category_id=${id}`,
+        url: `stores?business_type_id=${id}`,
         method: 'GET'
       });
       productStore.bestSelling[category] = response.data.data

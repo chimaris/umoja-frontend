@@ -21,7 +21,29 @@ export 	async function fetchCategories(role) {
     }
     
 }
+export 	async function fetchBusinessCategories() {
+    let api = useApi()
+    try {
+        const response = await api({
+            url: 'allbusinesstypes',
+            method: 'get'
+        });
+       
+        return response.data.data;
 
+    }catch(error) {
+        console.error(error)
+    }
+    
+}
+export const getbusinessCategoryId = (selectedCat, Categories) => {
+    const category = Categories?.findIndex(category => category.name === selectedCat);
+    if (category === -1) {
+        return
+    }
+    const category_id = Categories[category].id
+    return category_id
+}
 export const getCategoryId = (selectedCat, Categories) => {
     const category = Categories?.findIndex(category => category.name === selectedCat);
     if (category === -1) {
