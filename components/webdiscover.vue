@@ -77,18 +77,18 @@ export default {
         items1: [
             {
                 color: '#EDF0EF',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-messages-coversation-pen-2_jnbd3t.png',
+                src: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893025/umoja-backup2/bold-messages-coversation-pen-2_bm9ici_zl1uy1.png',
                 title: 'Authentic Products',
                 content: 'Umoja offers consumers a curated selection of authentic African products, ranging from fashion and art to home decor and accessories. '
             },
             {
                 color: '#FDF1ED',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-search-minimalistic-magnifer_k1wit4.png',
+                src: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893039/umoja-backup2/bold-search-minimalistic-magnifer_k1wit4_sxbbd2.png',
                 title: 'Cultural Exploration',
                 content: `Umoja provides consumers with an opportunity to explore and experience the richness and diversity of African culture, heritage, and traditions.`
             },
             {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-shopping-ecommerce-cart-2_fpmwr0.png',
+                src: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893028/umoja-backup2/bold-shopping-ecommerce-cart-2_fpmwr0_x14gix.png',
                 color: '#FEF6ED',
                 title: 'Ethical Shopping',
                 content: `Umoja promotes ethical shopping practices by prioritizing fair trade, sustainability, and social impact. `

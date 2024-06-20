@@ -14,7 +14,7 @@
 					eager
 					:style="{ height: $vuetify.display.mobile ? '500px' : '772px' }"
 					style="z-index: -1; position: absolute; width: 100%"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1712605472/umoja/about-hero.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990516/umoja/about-hero_yelh5l.png"
 					class="bg-black rounded-0 img"
 				/>
 
@@ -95,8 +95,8 @@
 			<v-col cols="12" md="3" lg="3">
 				<v-card style="border-radius: 15px">
 					<v-img
-						lazy-src="https://res.cloudinary.com/payhospi/image/upload/v1712605539/umoja/ceo.png"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1712605539/umoja/ceo.png"
+						lazy-src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990518/umoja/ceo_l26j6t.png"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990518/umoja/ceo_l26j6t.png"
 						class="align-end"
 						cover
 						height="100%"
@@ -166,7 +166,7 @@
 				>
 					<v-container style="" class="">
 						<v-avatar color="#F4EBFF">
-							<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon1.svg" alt="Icon" />
+							<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718889224/umoja-backup/mission-icon1_qowiyo.svg" alt="Icon" />
 						</v-avatar>
 						<p class="my-4" :style="{ fontSize: $vuetify.display.mobile ? '24px' : '30px' }" style="color: #333; font-weight: 600">
 							Empower Artisans and Vendors:
@@ -189,7 +189,7 @@
 					width="100%"
 					min-height="429"
 					height="auto"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1712605917/umoja/mission-pic1.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890639/umoja-backup/mission-pic1_pmf0lw.png"
 				></v-img>
 			</v-col>
 		</v-row>
@@ -208,7 +208,7 @@
 				>
 					<v-container style="" class="">
 						<v-avatar color="#F4EBFF">
-							<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon2.svg" alt="Icon" />
+							<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990468/umoja/mission-icon2_pu6q3e.svg" alt="Icon" />
 						</v-avatar>
 						<p class="my-4" :style="{ fontSize: $vuetify.display.mobile ? '24px' : '30px' }" style="color: #333; font-weight: 600">
 							Promote Cultural Exchange:
@@ -233,7 +233,7 @@
 					width="100%"
 					min-height="429"
 					height="auto"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1712605947/umoja/mission-pic2.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990470/umoja/mission-pic2_qtnkdh.png"
 				></v-img>
 			</v-col>
 		</v-row>
@@ -253,7 +253,7 @@
 				>
 					<v-container style="" class="">
 						<v-avatar color="#F4EBFF">
-							<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/mission-icon3.svg" alt="Icon" />
+							<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888942/umoja-backup/mission-icon3_q41w6q.svg" alt="Icon" />
 						</v-avatar>
 						<p class="my-4" :style="{ fontSize: $vuetify.display.mobile ? '24px' : '30px' }" style="color: #333; font-weight: 600">
 							Ensure Transparency and Trust:
@@ -278,7 +278,7 @@
 					width="100%"
 					min-height="429"
 					height="auto"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1712605977/umoja/mission-pic3.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990471/umoja/mission-pic3_xacoam.png"
 				></v-img>
 			</v-col>
 		</v-row>
@@ -435,7 +435,7 @@
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
 									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
-										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon1.svg" alt="Icon" />
+										<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890685/umoja-backup/value-icon1_de5yzk.svg" alt="Icon" />
 									</v-avatar>
 									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Empowerment</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
@@ -448,7 +448,7 @@
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
 									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
-										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon2.svg" alt="Icon" />
+										<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890671/umoja-backup/value-icon2_u04s38.svg" alt="Icon" />
 									</v-avatar>
 									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Inclusivity</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
@@ -462,7 +462,7 @@
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
 									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
-										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon3.svg" alt="Icon" />
+										<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890637/umoja-backup/value-icon3_tkr7nl.svg" alt="Icon" />
 									</v-avatar>
 									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Social Responsibility</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
@@ -478,7 +478,7 @@
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
 									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
-										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon4.svg" alt="Icon" />
+										<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990496/umoja/value-icon4_hitwc5.svg" alt="Icon" />
 									</v-avatar>
 									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Innovation</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
@@ -492,7 +492,7 @@
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
 									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
-										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon5.svg" alt="Icon" />
+										<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990496/umoja/value-icon5_tkla9u.svg" alt="Icon" />
 									</v-avatar>
 									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Quality</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-8">
@@ -506,7 +506,7 @@
 							<v-card rounded="0" width="100%" flat class="d-flex align-center justify-center text-center p-2" style="background-color: transparent">
 								<v-container style="max-width: 1400px" class="px-2">
 									<v-avatar size="large" style="border: 1px solid #eaecf0; border-radius: 10px">
-										<img src="https://res.cloudinary.com/payhospi/image/upload/v1712845305/umoja/value-icon6.svg" alt="Icon" />
+										<img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990496/umoja/value-icon6_ohub3z.svg" alt="Icon" />
 									</v-avatar>
 									<p class="my-4" style="color: #101828; font-size: 20px; font-weight: 600">Customer Centricity</p>
 									<p style="color: #475467; font-size: 16px; font-weight: 400" class="mb-md-8">
@@ -568,7 +568,7 @@
 							width="100%"
 							min-height="429"
 							height="auto"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1712601877/umoja/teams.png"
+							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990496/umoja/teams_pzhqdr.png"
 						></v-img>
 					</v-col>
 				</v-row>
@@ -582,7 +582,7 @@
 					class="mx-auto mb-8"
 					width="100%"
 					max-width="420px"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1690543426/frame_aivj5d.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893046/umoja-backup2/frame_aivj5d_wigyvt.png"
 				></v-img>
 				<p
 					style="
