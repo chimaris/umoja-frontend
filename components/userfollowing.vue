@@ -14,7 +14,7 @@
 			variant="outlined"
 			class="textClass text-grey-darken-3 ml-3"
 		>
-			<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
+			<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/filtericon_ri5zov.svg" />
 			Filter
 		</v-btn>
 	</div>

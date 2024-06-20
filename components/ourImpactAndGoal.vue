@@ -62,7 +62,7 @@
 			</v-col>
 			<v-col class="px-0 py-0" cols="12" md="6" lg="6">
 				<v-container style="max-width: 1400px; width: 100%">
-					<v-img eager width="100%" src="https://res.cloudinary.com/payhospi/image/upload/v1712601877/umoja/goal.png"></v-img>
+					<v-img eager width="100%" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990450/umoja/goal_mfkhm6.png"></v-img>
 				</v-container>
 			</v-col>
 		</v-row>
@@ -84,43 +84,43 @@ export default {
 					title: "1. Help End poverty ",
 					des: "Umoja plays a substantial role in alleviating poverty in Africa by empowering over 50 million micro, small, and medium-sized enterprises with resources and support. This leads to effective operation management, global expansion, and direct contributions to poverty alleviation, fostering sustainable economic opportunities and community upliftment.",
 					color: "#F38218",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1712663914/umoja/impact1.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890566/umoja-backup/impact1_x271au.png",
 				},
 				{
 					title: "2. Economic growth",
 					des: "Umoja significantly contribute to fostering economic growth. Through empowering micro, small and medium-sized enterprises, Umoja promotes economic development, sustainable job creation, and inclusive growth within the communities it serves.",
 					color: "#245A51",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1712663914/umoja/impact2.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890531/umoja-backup/impact2_gtiozp.png",
 				},
 				{
 					title: "3. Foster innovation",
 					des: "Umoja is vital for advancing innovation in its regions by connecting and empowering MSMEs through its platform. This fosters business growth, contributing to a robust industry ecosystem and improved infrastructure. Umoja acts as a catalyst for entrepreneurship, innovation, and overall economic development in these areas.",
 					color: "#CC962B",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1712663914/umoja/impact3.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990449/umoja/impact3_tzkbem.png",
 				},
 				{
 					title: "4. Equality education",
 					des: "Umoja impacts education by offering a platform for vendors to share educational materials on their products and cultures. This enhances transparency, trust, and provides valuable insights, contributing to a more informed and educated user base. Umoja aligns with the goal of promoting quality education and fostering understanding of diverse cultures and products.",
 					color: "#561217",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1712663914/umoja/impact4.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890481/umoja-backup/impact4_kuwdvp.png",
 				},
 				{
 					title: "5. Sustainability partnership",
 					des: "Housing a large variety of vendors who are majorly producers gives Umoja an opportunity to push for sustainability in their practices as a core value for our users.",
 					color: "#0E5EC1",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1712663914/umoja/impact5.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990451/umoja/impact5_xtal84.png",
 				},
 				{
 					title: "6. Fight Discrimination ",
 					des: "African culture has taken a new turn as a leading soft power in today's socioeconomic landscape. Umoja intends to amplify this by pushing the tangible negative of 'Excellent Africa' to break through the negative and primitive stereotypes that show the continent is bad light.",
 					color: "#00966D",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1712663914/umoja/impact6.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/impact6_gdlw9b.png",
 				},
 				{
 					title: "7. Reducing Inequality ",
 					des: "Umoja reduces inequalities by empowering micro, small and medium-sized enterprises (MSMEs) in Africa through its platform. We provide equal opportunities, resources, and global scalability, bridging the gap between enterprises and fostering an environment where diverse businesses can thrive. This aligns with the goal of reducing inequalities in the business ecosystem.",
 					color: "#906A20",
-					img: "https://res.cloudinary.com/payhospi/image/upload/v1712663914/umoja/impact7.png",
+					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/impact7_qopnen.png",
 				},
 			],
 		};

@@ -16,7 +16,7 @@
 				variant="outlined"
 				class="textClass text-grey-darken-3 ml-3"
 			>
-				<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
+				<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890639/umoja-backup/filtericon_m3afa1.svg" />
 				Filter
 			</v-btn>
 		</div>
@@ -113,12 +113,12 @@
 						<div class="d-flex">
 							<v-avatar color="#EDF0FC" size="50" class="mr-2">
 								<!-- <v-icon color="#1273EB" size="20" icon="fas fa-box"></v-icon> -->
-								<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+								<v-img width="20" height="20" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990497/umoja/Vector_ds0yoy_gcurxq.svg" />
 							</v-avatar>
 							<div>
 								<span class="d-flex align-center">
 									<span style="font-size: 20px; font-weight: 600">001799/10</span>
-									<v-img width="24" height="24" class="ml-2" src="https://res.cloudinary.com/payhospi/image/upload/v1716456639/umoja/copy-icon.svg" />
+									<v-img width="24" height="24" class="ml-2" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990440/umoja/copy-icon_guqvnt.svg" />
 								</span>
 
 								<span style="font-size: 12px; letter-spacing: 3%; color: #969696">ORDER DETAILS</span>

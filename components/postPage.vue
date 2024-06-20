@@ -9,7 +9,7 @@
 						</p>
 						<v-btn @click="$router.push('/vendor/dashboard/Posts')" rounded="xl" color="#FFFFFF" height="44" style="width: 225px; padding: 10px 20px">
 							Make a post now
-							<v-img width="24" height="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1714745945/umoja/star_outlined.svg', 40)"></v-img>
+							<v-img width="24" height="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990493/umoja/star_outlined_lvxy1j.svg', 40)"></v-img>
 						</v-btn>
 					</div>
 				</div>
@@ -40,7 +40,7 @@
 						<div class="d-flex justify-space-between w-25 w-100 h-100 align-center">
 							<div class="d-flex align-center">
 								<v-avatar size="30.88" class="mr-md-1"
-									><v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1689486623/rw-rwanda-medium_oui3ln.png', 60)"></v-img
+									><v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893074/umoja-backup2/rw-rwanda-medium_oui3ln_gemrrc.png', 60)"></v-img
 								></v-avatar>
 								<span class="mr-2 d-none d-md-block" style="color: var(--carbon-4, #333); font-size: 14px; letter-spacing: -0.14px; font-weight: 500">
 									{{ country }}
@@ -89,7 +89,7 @@
 					<div class="align-center justify-space-between d-flex">
 						<div class="mb-4 d-flex">
 							<v-avatar size="45">
-								<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png', 80)"></v-img>
+								<v-img eager :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893021/umoja-backup2/rectangle-22437_hlbqwt_ttq2cs.png', 80)"></v-img>
 							</v-avatar>
 
 							<div class="pl-2" style="min-width: 0">
@@ -135,8 +135,8 @@ const likedPosts = ref([])
 const page = ref(1)
 const userStore = useUserStore();
 const availablePosts = computed(() => userStore.allPosts);
-const imageUrl1 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742905/umoja/post-hero1.svg");
-const imageUrl2 = ref("https://res.cloudinary.com/payhospi/image/upload/v1714742949/umoja/post-hero2.png");
+const imageUrl1 = ref("https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890472/umoja-backup/post-hero1_qgq9ed.svg");
+const imageUrl2 = ref("https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990471/umoja/post-hero2_m8epxr.png");
 const country = ref("All of African");
 const africanCountries = [
 				"Algeria",

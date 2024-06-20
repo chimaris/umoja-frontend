@@ -203,7 +203,7 @@
 													class="mr-2"
 													width="13"
 													height="15"
-													:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716238487/umoja/share-icon.svg', 30)"
+													:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990492/umoja/share-icon_gvamat.svg', 30)"
 												/>
 
 												<span style="font-size: 14px; font-weight: 600">Share</span>

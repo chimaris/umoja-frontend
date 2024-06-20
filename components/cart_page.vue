@@ -38,7 +38,7 @@
 										class="rounded-lg bg-grey-lighten-2"
 										width="100%"
 										height="180"
-										src="https://res.cloudinary.com/payhospi/image/upload/v1684602010/Rectangle_459_1_wnr1ld.png"
+										src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893058/umoja-backup2/Rectangle_459_1_wnr1ld_f2bmap.png"
 									></v-img>
 								</v-col>
 								<v-col cols="6">
@@ -50,7 +50,7 @@
 									<p class="lightText">Location: Lagos Nigeria.</p>
 									<div class="d-flex py-2 align-center">
 										<v-avatar color="white" size="40" class=" "
-											><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img
+											><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893046/umoja-backup2/Frame_481586_piaotu_fijtzh.png"></v-img
 										></v-avatar>
 										<p style="font-weight: 800; font-size: 16px" class="ml-2">The Golden Matrix</p>
 									</div>
@@ -105,7 +105,7 @@
 				min-height="600px"
 				cover
 				eager
-				src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png"
+				src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893064/umoja-backup2/Rectangle_465_sohqlg_m8vcnf.png"
 				height="auto"
 			>
 				<div class=" ">
@@ -133,7 +133,7 @@
 						class="d-flex align-center pa-4"
 					>
 						<v-avatar size="50" class="mr-4"
-							><v-img class="bg-grey-lighten-2" src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img
+							><v-img class="bg-grey-lighten-2" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893046/umoja-backup2/Frame_481586_piaotu_fijtzh.png"></v-img
 						></v-avatar>
 						<p class="text-white">@nawi_the_skulptur_queen</p>
 					</v-card>

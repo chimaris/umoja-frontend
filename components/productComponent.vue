@@ -33,7 +33,7 @@
 					width="15"
 					height="15"
 					:color="!isLiked(index) ? '#1C274C' : 'red'"
-					:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg', 30)"
+					:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/like-icon_fpseyf.svg', 30)"
 				/>
 				<!-- <v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon> -->
 			</v-btn>
@@ -62,7 +62,7 @@
 					width="15"
 					height="15"
 					:color="!isLiked(index) ? '#1C274C' : 'red'"
-					:src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716290614/umoja/like-icon.svg', 30)"
+					:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/like-icon_fpseyf.svg', 30)"
 				/>
 				<!-- <v-icon size="15" :color="!isLiked(index) ? '#1C274C' : 'red '" :icon="!isLiked(index) ? 'mdi mdi-heart-outline' : 'mdi mdi-heart'"></v-icon> -->
 			</v-btn>

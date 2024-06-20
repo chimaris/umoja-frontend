@@ -23,17 +23,17 @@
 						<v-img
 							v-if="n.last_card_brand == 'visa'"
 							width="54"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo_shmb54.png"
+							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893044/umoja-backup2/logo_shmb54_bdqder.png"
 						></v-img>
 						<v-img
 							v-if="n.last_card_brand == 'mastercard'"
 							width="54"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo2_jpei5o.png"
+							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893048/umoja-backup2/logo2_jpei5o_b1rtj8.png"
 						></v-img>
 						<v-img
 							v-if="n.last_card_brand == 'verve'"
 							width="54"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1714813559/umoja/234-2342510_aerocontractors-the-reliable-way-to-fly-verve-card_i7s2un.jpg"
+							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990514/umoja/234-2342510_aerocontractors-the-reliable-way-to-fly-verve-card_i7s2un_azzrtw.jpg"
 						></v-img>
 					</div>
 					<div class="text-capitalize px-4">
@@ -73,7 +73,7 @@
 						width="21"
 						height="21"
 						@click="dialog = false"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888896/umoja-backup/close-icon_yomzpz.svg"
 					/>
 				</div>
 			</div>
@@ -288,11 +288,11 @@ export default {
 			paymenthods: [
 				{
 					name: "Paypal",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1691582666/pay-pal-1_dtxv1k.png",
+					image: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893024/umoja-backup2/pay-pal-1_dtxv1k_rfupnd.png",
 				},
 				{
 					name: "Neteller",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1691582681/neteller-1_mjjfeu.png",
+					image: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890483/umoja-backup/neteller-1_mjjfeu_rygqr2.png",
 				},
 			],
 			paymentMethods: [],

@@ -59,7 +59,7 @@
 						</p>
 						<div class="profile d-flex mt-4">
 							<v-avatar size="40"
-								><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img
+								><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893021/umoja-backup2/rectangle-22437_hlbqwt_ttq2cs.png"></v-img
 							></v-avatar>
 							<div style="cursor: pointer" @click="$router.push('/vendor_page')" class="ml-2">
 								<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">Genevieve Obukeme</p>
@@ -121,7 +121,7 @@
 
 						<div class="profile d-flex mt-4">
 							<v-avatar size="40"
-								><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1691149309/rectangle-22437_hlbqwt.png"></v-img
+								><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893021/umoja-backup2/rectangle-22437_hlbqwt_ttq2cs.png"></v-img
 							></v-avatar>
 							<div style="cursor: pointer" @click="$router.push('/vendor_page')" class="ml-2">
 								<p style="color: #1e1e1e; font-size: 14px; font-weight: 600; letter-spacing: -0.14px">Genevieve Obukeme</p>

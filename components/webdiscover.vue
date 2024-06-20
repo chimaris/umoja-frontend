@@ -94,7 +94,7 @@ export default {
                 content: `Umoja promotes ethical shopping practices by prioritizing fair trade, sustainability, and social impact. `
             },
             {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689496936/bold-essentional-ui-delivery_nifd95.png',
+                src: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893069/umoja-backup2/bold-essentional-ui-delivery_nifd95_lw2tkg.png',
                 color: '#F7EDEE',
                 title: 'Global Connectivity',
                 content: "Umoja serves as a digital bridge connecting consumers worldwide to African creativity and culture. This fosters cross-cultural exchange, dialogue, and understanding, breaking down barriers and promoting a sense of global unity and solidarity."
@@ -103,24 +103,24 @@ export default {
         items2: [
         {
                 color: '#F7EDEE',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497083/bold-messages-coversation-pen-2_bm9ici.png',
+                src: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893025/umoja-backup2/bold-messages-coversation-pen-2_bm9ici_zl1uy1.png',
                 title: 'Access to Global Market',
                 content: 'Umoja provides vendors, especially African-related B2C MSMEs, with access to a global marketplace, enabling them to reach a wider audience beyond their local markets and expand their customer base.'
             },
             {
                 color: '#FEF6ED',
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-text-formatting-link_hica4l.png',
+                src: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893091/umoja-backup2/bold-text-formatting-link_hica4l_bi0crl.png',
                 title: 'Empowerment and Support',
                 content: 'Umoja is committed to empowering vendors by offering resources, support, and guidance to help them grow and scale their businesses. This includes tools, and networking opportunities to enhance their skills and capabilities.'
             },
             {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-settings-fine-tuning-widget_c23nms.png',
+                src: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893078/umoja-backup2/bold-settings-fine-tuning-widget_c23nms_prcpw9.png',
                 color: '#FEF6ED',
                 title: 'Cultural Celebration',
                 content: "Umoja celebrates African creativity, culture, and heritage, allowing vendors to showcase their authentic products and cultural experiences to a global audience. "
             },
             {
-                src: 'https://res.cloudinary.com/payhospi/image/upload/v1689497594/bold-business-statistic-graph-new_qqphec.png',
+                src: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893021/umoja-backup2/bold-business-statistic-graph-new_qqphec_m0knhs.png',
                 color: '#EDF0EF',
                 title: 'Community Engagement',
                 content: "Umoja fosters a sense of community among vendors, encouraging collaboration, knowledge sharing, and mutual support. This creates a supportive ecosystem where vendors can learn from each other, share best practices, and collectively grow and succeed."

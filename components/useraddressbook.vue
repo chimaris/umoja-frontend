@@ -14,7 +14,7 @@
 			variant="outlined"
 			class="textClass text-grey-darken-3 ml-3"
 		>
-			<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
+			<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/filtericon_ri5zov.svg" />
 			Filter
 		</v-btn>
 	</div>
@@ -44,7 +44,7 @@
 									class="mx-2"
 									height="24"
 									width="24"
-									src="https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg"
+									src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990470/umoja/Pen_2_oztt3w_yitjgc.svg"
 								/>
 								Edit
 							</span>
@@ -81,7 +81,7 @@
 										class="mx-2"
 										height="24"
 										width="24"
-										src="https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg"
+										src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888908/umoja-backup/Pen_2_oztt3w_p15qgq.svg"
 									/>
 
 									Edit
@@ -123,7 +123,7 @@
 						width="21"
 						height="21"
 						@click="dialog = false"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888896/umoja-backup/close-icon_yomzpz.svg"
 					/>
 				</div>
 			</div>
@@ -204,7 +204,7 @@
 						width="21"
 						height="21"
 						@click="dialog2 = false"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888896/umoja-backup/close-icon_yomzpz.svg"
 					/>
 				</div>
 			</div>

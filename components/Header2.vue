@@ -214,7 +214,7 @@
 			</v-menu>
 			<template v-if="!isLoggedIn" v-slot:append>
 				<div class="pa-4 pb-16">
-					<v-btn block color="#333" size="large" variant="outlined" flat rounded="xl">
+					<v-btn @click="$router.push('/user/login')" block color="#333" size="large" variant="outlined" flat rounded="xl">
 						<span class="d-flex align-center" style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px"> Login </span>
 					</v-btn>
 				</div>

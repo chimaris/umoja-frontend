@@ -83,7 +83,7 @@
 									<p><v-icon class="mr-2" size="6" icon="mdi mdi-circle"></v-icon>Customer ID: #{{ item.order_id }}</p>
 									<div class="pt-2 align-center d-flex">
 										<v-avatar size="44" class="mr-2"
-											><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img
+											><v-img src="hhttps://res.cloudinary.com/dd26v0ffw/image/upload/v1718890679/umoja-backup/profile_image_pd4dcv_k3cl6j.png"></v-img
 										></v-avatar>
 										<div>
 											<p style="font-weight: 500; text-transform: capitalize; font-size: 14px" class="text-capitalize">{{ item.customer_fullname }}</p>
@@ -142,7 +142,7 @@
 				<v-img
 					:width="300"
 					cover
-					src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/order-empy-box.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990470/umoja/order-empy-box_uyehif.png"
 					style="filter: grayscale(100%) brightness(100%)"
 				></v-img>
 				<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Your orders will show here</h2>
@@ -170,7 +170,7 @@
 					<v-img
 						:width="10"
 						:height="40"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1713471908/umoja/vertical-line.svg"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/vertical-line_gvytku.svg"
 						class="mx-2"
 					></v-img>
 

@@ -50,7 +50,7 @@
 			<!-- Modal content -->
 			<v-card style="width: 550px; justify-content: center; align-items: center; border-radius: 15px" class="d-flex flex-column text-center pa-10">
 				<v-avatar color="#FEF6ED" size="x-large" class="mb-5">
-					<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1713546697/umoja/good.svg"></v-img>
+					<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990449/umoja/good_bs9qfy.svg"></v-img>
 				</v-avatar>
 				<h3 style="font-size: 32px; font-weight: 600; line-height: 40px; color: #2a2a2a">
 					You have successfully submitted your business registeration

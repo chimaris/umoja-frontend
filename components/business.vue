@@ -101,11 +101,11 @@
 			style="height: 200px; position: relative;"
 			width="100%"
 			cover
-			:src="cover_photo || vendor?.cover_image || 'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"
+			:src="cover_photo || vendor?.cover_image || 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893068/umoja-backup2/Rectangle_448_2_lh8kz3_fhxaab.png'"
 		></v-img>
 		<h6 class="mt-4 mb-2" style="font-weight: 600; font-size: 20px; line-height: 30px; color: #333333">Logo</h6>
 		<v-avatar  size="100">
-			<v-img class="bg-grey-lighten-3 rounded-xl" cover :src="profile_photo || vendor?.profile_photo || 'https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png'"></v-img>
+			<v-img class="bg-grey-lighten-3 rounded-xl" cover :src="profile_photo || vendor?.profile_photo || 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990483/umoja/profile_image_pd4dcv_alvzjz.png'"></v-img>
 		</v-avatar>
 		
 

@@ -198,12 +198,12 @@
 				<div class="d-flex">
 					<v-avatar color="#EDF0FC" size="50" class="mr-2">
 						<!-- <v-icon color="#1273EB" size="20" icon="fas fa-box"></v-icon> -->
-						<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716455424/umoja/Vector_ds0yoy.svg" />
+						<v-img width="20" height="20" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990497/umoja/Vector_ds0yoy_gcurxq.svg" />
 					</v-avatar>
 					<div>
 						<span class="d-flex align-center">
 							<span style="font-size: 20px; font-weight: 600">001799/10</span>
-							<v-img width="24" height="24" class="ml-2" src="https://res.cloudinary.com/payhospi/image/upload/v1716456639/umoja/copy-icon.svg" />
+							<v-img width="24" height="24" class="ml-2" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718888886/umoja-backup/copy-icon_ysuaia.svg" />
 						</span>
 
 						<span style="font-size: 12px; letter-spacing: 3%; color: #969696">ORDER DETAILS</span>
@@ -250,7 +250,7 @@
 				<span class="d-flex justify-space-between align-center">
 					<span style="font-size: 14px; letter-spacing: -4%; font-weight: 500; color: #333">Express delivery (DHL Express)</span>
 					<div>
-						<v-img width="40" height="40" src="https://res.cloudinary.com/payhospi/image/upload/v1716473804/umoja/DHL_Logo_apivwt.svg" />
+						<v-img width="40" height="40" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990441/umoja/DHL_Logo_apivwt_hu2lct.svg" />
 					</div>
 				</span>
 			</div>
@@ -259,7 +259,7 @@
 				<span class="d-flex justify-space-between align-center">
 					<span style="font-size: 14px; letter-spacing: -4%; font-weight: 500; color: #333">VISA xxxx 5642</span>
 					<div>
-						<v-img width="53" height="29" src="https://res.cloudinary.com/payhospi/image/upload/v1716474298/umoja/visa-logo.svg" />
+						<v-img width="53" height="29" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/visa-logo_gtga9i.svg" />
 					</div>
 				</span>
 			</div>

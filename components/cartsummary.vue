@@ -7,7 +7,7 @@
 						<v-img
 							v-if="cartStore.checkoutItems[0].photo == null"
 							cover
-							src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"
+							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990440/umoja/download_1_dwnmbf_wg1ded.png"
 						></v-img>
 						<v-img v-else-if="cartStore.checkoutItems[0].photo.includes(',')" cover :src="cartStore.checkoutItems[0].photo.split(',')[0]"></v-img>
 						<v-img v-else cover :src="cartStore.checkoutItems[0].photo"></v-img>
@@ -39,7 +39,7 @@
 							<v-img
 								v-if="item.photo == null"
 								cover
-								src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990440/umoja/download_1_dwnmbf_wg1ded.png"
 							></v-img>
 							<v-img v-else-if="item.photo.includes(',')" cover :src="item.photo.split(',')[0]"></v-img>
 							<v-img v-else cover :src="item.photo"></v-img>
