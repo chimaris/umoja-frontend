@@ -152,6 +152,7 @@ export const useUserStore = defineStore({
     logout() {
         this.isLoggedIn = false,
         this.userToken = null
+        this.user = null
         return true 
     }
   }
