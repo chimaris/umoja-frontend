@@ -10,7 +10,7 @@
 			<v-expand-transition leave-absolute>
 				<div v-if="genderExpand">
 					<v-row dense>
-							<v-col @click="productStore.params.gender = n"  :key="i" v-for="(n, i) in genders">
+							<v-col @click="productStore.params.gender = n.name"  :key="i" v-for="(n, i) in genders">
 								<p
 									class="px-3 py-2 d-flex align-center justify-center"
 									style="
@@ -24,11 +24,11 @@
 										border: 1px solid var(--carbon-2, #cecece);
 									"
 									:style="{
-										backgroundColor: productStore.params.gender === n ? '#E5EDEC' : '#ffffff',
-										color: productStore.params.gender === n ? '#2C6E63' : '#1e1e1e'
+										backgroundColor: productStore.params.gender === n.name ? '#E5EDEC' : '#ffffff',
+										color: productStore.params.gender === n.name ? '#2C6E63' : '#1e1e1e'
 									}"
 								>
-									{{ n }}
+									{{ n.name }}
 								</p>
 							</v-col>
 						</v-row>
@@ -82,12 +82,12 @@
 								v-for="(sub, subIndex) in subCategories"
 								:key="subIndex"
 								:style="{
-								color: productStore.params.sub_category_name === sub.name ? '#2C6E63' : '',
-								backgroundColor: productStore.params.sub_category_name === sub.name ? '#E5EDEC' : '',
+								color: productStore.params.sub_category_name === sub.subcategory_name ? '#2C6E63' : '',
+								backgroundColor: productStore.params.sub_category_name === sub.subcategory_name ? '#E5EDEC' : '',
 								}"
-								:title="sub.name"
+								:title="sub.subcategory_name"
 								style="cursor: pointer; font-size: 10px; border-radius: 10px; width: 200px;"
-								@click="productStore.params.sub_category_name = sub.name"
+								@click="productStore.params.sub_category_name = sub.subcategory_name"
 							></v-list-item>
 					</v-list>
 					</v-expand-transition>
@@ -301,7 +301,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useProductStore } from "~/stores/productStore";
-import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
+import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories, genders, getGenderId} from '~/composables/useCategories';
 
 const props = defineProps({
 	closeModal: {
@@ -341,8 +341,8 @@ onMounted(async () => {
 			});
 			watch(() => [productStore.params.gender, productStore.params.category_name], async () => {
 				if (productStore.params.category_name && productStore.params.gender){
-					subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
-					productStore.params.sub_category_name = subCategories.value[0].name
+					subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value,role: "customer"});
+					// productStore.params.sub_category_name = subCategories.value[0].subcategory_name
 				}
 				if(!productStore.params.category_name  || !productStore.params.gender){
 					subCategories.value = []
@@ -369,7 +369,6 @@ onMounted(async () => {
 			const productExpand = ref(false);
 			const sizeExpand = ref(false);
 			const discountExpand = ref(false);
-			const genders = ref(['Male', 'Female', 'Unisex']);
 			const discounts = ref(["10", "20", "30", "45", "50", "60", "75"]);
 			// const subCategories = ref([
 			// 	{

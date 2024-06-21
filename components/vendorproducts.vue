@@ -155,7 +155,7 @@
 
 						<td style="height: 100px" class="align-center d-flex px-1">
 							<v-chip style="color: #333; font-size: 10px; font-weight: 500" rounded="lg" class="mx-2" size="small" color="grey" variant="tonal">
-								{{ item.sub_category_name[0] }}
+								{{ item.sub_category_name }}
 							</v-chip>
 						</td>
 						<td class="tableThick px-1">

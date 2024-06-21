@@ -196,7 +196,7 @@
 									</div>
 									<div>
 										<p class="inputLabel">Gender</p>
-										<v-select v-model="selectedGender" :items="['Male', 'Female', 'Unisex']" placeholder="Unisex" density="comfortable"> </v-select>
+										<v-select v-model="selectedGender" :items="genders.map((gen) => gen.name)" placeholder="Unisex" density="comfortable"> </v-select>
 									</div>
 									<div>
 										<p class="inputLabel">Category</p>
@@ -215,7 +215,7 @@
 											:loading="loadingSub"
 											:disabled="!selectedCategory || !selectedGender"
 											color="green"
-											:items="subCategories.map((subCategory) => subCategory.name)"
+											:items="subCategories.map((subCategory) => subCategory.subcategory_name)"
 											v-model="selectedSubCategory"
 											:rules="inputRules"
 											placeholder="Sneakers"
@@ -894,7 +894,7 @@ import { useVendorProductStore } from "~/stores/vendorProducts";
 import { vendorUseApi } from "~/composables/vendorApi";
 import Compressor from "compressorjs";
 import { handlephotoUpload, loading, pictureErrors } from "~/composables/uploadProducts";
-import { fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories } from "~/composables/useCategories";
+import { fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories, genders, getGenderId } from "~/composables/useCategories";
 
 export default {
 	setup() {
@@ -910,7 +910,6 @@ export default {
 					subCategories.value = await fetchSubCategories({
 						selectedCat: selectedCategory.value,
 						Categories: Categories.value,
-						gender: selectedGender.value,
 						role: "vendor",
 					});
 				}
@@ -922,7 +921,7 @@ export default {
 		});
 
 		function getSubCategoryId(subCategory) {
-			const subCat = subCategories.value.findIndex((subCat) => subCat.name === subCategory);
+			const subCat = subCategories.value.findIndex((subCat) => subCat.subcategory_name === subCategory);
 			if (subCat === -1) {
 				return;
 			}
@@ -1179,7 +1178,7 @@ export default {
 				productSpec: this.productSpec,
 				Category: getCategoryId(this.selectedCategory, this.Categories).toString(),
 				SubCategory: this.getSubCategoryId(this.selectedSubCategory).toString(),
-				Gender: this.selectedGender,
+				gender_id: getGenderId(this.selectedGender).toString(),
 				Description: this.editorContent,
 				Tags: this.tags,
 			};

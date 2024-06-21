@@ -4,7 +4,7 @@ import {ref} from 'vue'
 
 export const loadProduct = ref(false)
 
-export const popularProducts = async (page) => {
+export const discoveryPopularProducts = async (page) => {
     const api = useApi()
     const productStore = useProductStore()
     loadProduct.value = true
