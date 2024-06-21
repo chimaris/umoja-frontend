@@ -410,7 +410,7 @@ import { useUserStore } from "~/stores/userStore";
 import {getdateRegistered} from '~/utils/date'
 import { countries, countryCodes, getFlag } from "~/utils/countryapi";
 import emojiFlags from 'emoji-flags';
-import { popularProducts, topSelling, promo, loadProduct } from "~/composables/discovery";
+import { discoveryPopularProducts, topSelling, promo, loadProduct } from "~/composables/discovery";
 import { getCloudinaryImageUrl } from "~/utils/cloudinary";
 
 export default {
@@ -493,7 +493,7 @@ export default {
 		switch (tag) {
 			case 'POPULAR products':
 			if (productStore.products.popular.length === 0) {
-				await popularProducts(pagePop.value); 
+				await discoveryPopularProducts(pagePop.value); 
 			}
 			break;
 			case 'top selling products':
@@ -519,7 +519,7 @@ export default {
 					return; 
 				}
 				pagePop.value++;
-				await popularProducts(pagePop.value); 
+				await discoveryPopularProducts(pagePop.value); 
 				break;
 
 				case 'top selling products':

@@ -579,6 +579,7 @@ import { findIndex } from 'lodash';
 		}
 	}
     onMounted(async () => {
+    
       if (hasSale.value){
         weeklyRevenue.value = await getWeeklyRevenue()
         totalRevenue.value = await getTotalRevenue()
@@ -587,7 +588,7 @@ import { findIndex } from 'lodash';
         noProductSold.value = await getNoSold()
         soldByCountry.value = await getCountrySold()
         if (soldByCountry.value){
-          mapCountry.value = soldByCountry.value[0].country
+          mapCountry.value = soldByCountry.value[0]?.country
           updateCurrentCountry()
           allCountries.value = soldByCountry.value.map((item) => item.country)
         }

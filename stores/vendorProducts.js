@@ -73,7 +73,7 @@ export const useVendorProductStore = defineStore('vendor-product', {
                   styles: this.styleInfo,
                   category_id: this.textInfo.Category,
                   sub_category_id: this.textInfo.SubCategory,
-                  gender: this.textInfo.Gender,
+                  gender_id: this.textInfo.gender_id,
                   photo: this.pictureInfo,
                   price: this.priceInfo.price,
                   commission: this.priceInfo.commission,

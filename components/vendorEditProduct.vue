@@ -189,7 +189,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Gender</p>
-									<v-select v-model="product.gender" :items="['Male', 'Female', 'Unisex']"  placeholder="Unisex" density="comfortable"> </v-select>
+									<v-select v-model="product.gender" :items="genders.map((gen) => gen.name)"  placeholder="Unisex" density="comfortable"> </v-select>
 								</div>
 								<div>
 									<p class="inputLabel">Category</p>
@@ -197,7 +197,7 @@
 								</div>
 								<div>
 									<p class="inputLabel">Sub Category</p>
-									<v-select :loading="loadingSub" :disabled="!product.gender || !product.category_name" color="green" :items="subCategories.map(subCategory => subCategory.name)" v-model="product.sub_category_name" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
+									<v-select :loading="loadingSub" :disabled="!product.gender || !product.category_name" color="green" :items="subCategories.map(subCategory => subCategory.subcategory_name)" v-model="product.sub_category_name" :rules="inputRules"  placeholder="Sneakers" density="comfortable"> </v-select>
 								</div>
 							
 								<div>
@@ -222,6 +222,7 @@
 							</v-sheet>
 						</v-col>
 					</v-row>
+					<p style="color: #B00020; font-size: 14px; margin: 5px 0;" >{{textError}}</p>
 					<v-btn type="submit" class="my-2" flat style="background-color: #2c6e63; color: #fff; font-size: 16px; font-weight: 600; padding: 16px 34px" size="x-large">
 						<span class="mr-4">Save changes</span>
 						<v-progress-circular v-if="editStore.loading" indeterminate :width="2" :size="20"></v-progress-circular>
@@ -801,7 +802,7 @@ import {useEditVendorStore} from '~/stores/editProduct';
 import { emitEvent } from '~/utils/eventBus';
 import { useRouter } from 'vue-router'
 import { handlephotoUpload, loading, pictureErrors } from '~/composables/uploadProducts'
-import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
+import {fetchCategories, getCategoryId, getCategoryName, genders, getGenderId, loadingSub, fetchSubCategories} from '~/composables/useCategories';
 
 export default {
 
@@ -815,7 +816,7 @@ export default {
 
 		watch(() => [product.value.category_name, product.value.gender ],  async () => {
 			if (product.value.category_name && product.value.gender){
-				subCategories.value = await fetchSubCategories({selectedCat: product.value.category_name, Categories: Categories.value , gender: product.value.gender, role: 'vendor'});
+				subCategories.value = await fetchSubCategories({selectedCat: product.value.category_name, Categories: Categories.value , role: 'vendor'});
 			}
 		});
 
@@ -823,10 +824,11 @@ export default {
 			originalProduct.value = {...product.value}
             if (!product) {
                 router.push('/vendor/dashboard/Products')
+				
             }
 			Categories.value = await fetchCategories()
 			if (product.value.category_name && product.value.gender){
-				subCategories.value = await fetchSubCategories({selectedCat: product.value.category_name, Categories: Categories.value , gender: product.value.gender, role: 'vendor'});
+				subCategories.value = await fetchSubCategories({selectedCat: product.value.category_name, Categories: Categories.value ,role: 'vendor'});
 			}
 			if (!product.value.colors || !product.value.sizes || !product.value.materials || !product.value.styles) {
 			product.value.colors = [];
@@ -841,7 +843,7 @@ export default {
 			editStore.currentEditProduct = { ...originalProduct.value };
 			};
 		function getSubCategoryId(subCategory) {
-			const subCat = subCategories.value.findIndex(subCat => subCat.name === subCategory);
+			const subCat = subCategories.value.findIndex(subCat => subCat.subcategory_name === subCategory);
 			if (subCat === -1) {
 				return
 			}
@@ -933,6 +935,7 @@ export default {
     data() {
         return {
 			descError: "",
+			textError: "",
             inventoryError: "",
 			shippingError: "",
 			physicalProduct: false,
@@ -1106,13 +1109,14 @@ handleFileInputChange(event, index, mode) {
 		},
 		async saveText() {
 			this.descError = ""
+			this.textError = ""
 			const data = {
 				name: this.product.name,
 				status: this.product.status,
 				product_spec: this.product.product_spec,
 				category_id: getCategoryId(this.product.category_name, this.Categories).toString(),
                 sub_category_id: this.getSubCategoryId(this.product.sub_category_name)?.toString(),
-				gender: this.product.gender,
+				gender_id: getGenderId(this.product.gender).toString(),
 				description: this.editorContent,
 				tags: this.product.tags
 			}
@@ -1126,21 +1130,22 @@ handleFileInputChange(event, index, mode) {
 			}
 		
                 try {
-                    this.descError = ""
                     this.editStore.loading = true;
                     const res = await this.editStore.editProduct(data)
 					if (res){
 						emitEvent('product-updated', this.product);
 						this.nextTab()
                     	setLocalStorageItem("current-edit", this.product)
+						this.descError = ""
+						this.textError = ""
 					}
                 }catch(error){
                     if (error.response) {
-                        this.descError = error.response.data.message || 'An error occurred while saving changes.';
+                        this.textError = error.response.data.message || 'An error occurred while saving changes.';
                     } else if (error.request) {
-                        this.descError = 'No response received from server. Please try again later.';
+                        this.textError = 'No response received from server. Please try again later.';
                     } else {
-                        this.descError = 'An error occurred. Please try again later.';
+                        this.textError = 'An error occurred. Please try again later.';
                     }
                 }finally {
                     this.editStore.loading = false;

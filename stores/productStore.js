@@ -114,6 +114,9 @@ export const useProductStore = defineStore('productStore', {
         }
       }catch(error){
         console.error(error)
+        this.notFound = true
+        this.productLoading = false
+        this.products.main = []
       }
     },
     search: debounce(async function() {

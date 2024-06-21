@@ -168,7 +168,6 @@ export default {
 	},
 	mounted() {
 		this.items = this.items1;
-		console.log(this.route)
 	},
 	computed: {
 		userStore() {

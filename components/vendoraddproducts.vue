@@ -196,7 +196,7 @@
 									</div>
 									<div>
 										<p class="inputLabel">Gender</p>
-										<v-select v-model="selectedGender" :items="['Male', 'Female', 'Unisex']" placeholder="Unisex" density="comfortable"> </v-select>
+										<v-select v-model="selectedGender" :items="genders.map((gen) => gen.name)" placeholder="Unisex" density="comfortable"> </v-select>
 									</div>
 									<div>
 										<p class="inputLabel">Category</p>
@@ -215,7 +215,7 @@
 											:loading="loadingSub"
 											:disabled="!selectedCategory || !selectedGender"
 											color="green"
-											:items="subCategories.map((subCategory) => subCategory.name)"
+											:items="subCategories.map((subCategory) => subCategory.subcategory_name)"
 											v-model="selectedSubCategory"
 											:rules="inputRules"
 											placeholder="Sneakers"
@@ -399,7 +399,7 @@
 									<div class="d-flex justify-center align-center pa-2 rounded-lg" style="height: 298px; width: 100%; border: 3.4px dashed #e1e1e1">
 										<div class="text-center">
 											<v-avatar size="41" class="mb-2" rounded="lg">
-												<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900345/gallery_j91r7n_dw8yl8.png></v-img>
+												<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900345/gallery_j91r7n_dw8yl8.png"></v-img>
 											</v-avatar>
 											<p style="color: #333; font-size: 14px; font-weight: 400">Drop your images here, or</p>
 											<p style="color: #333; font-size: 14px; font-weight: 400">
@@ -894,7 +894,7 @@ import { useVendorProductStore } from "~/stores/vendorProducts";
 import { vendorUseApi } from "~/composables/vendorApi";
 import Compressor from "compressorjs";
 import { handlephotoUpload, loading, pictureErrors } from "~/composables/uploadProducts";
-import { fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories } from "~/composables/useCategories";
+import { fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories, genders, getGenderId } from "~/composables/useCategories";
 
 export default {
 	setup() {
@@ -910,7 +910,6 @@ export default {
 					subCategories.value = await fetchSubCategories({
 						selectedCat: selectedCategory.value,
 						Categories: Categories.value,
-						gender: selectedGender.value,
 						role: "vendor",
 					});
 				}
@@ -922,7 +921,7 @@ export default {
 		});
 
 		function getSubCategoryId(subCategory) {
-			const subCat = subCategories.value.findIndex((subCat) => subCat.name === subCategory);
+			const subCat = subCategories.value.findIndex((subCat) => subCat.subcategory_name === subCategory);
 			if (subCat === -1) {
 				return;
 			}
@@ -1179,7 +1178,7 @@ export default {
 				productSpec: this.productSpec,
 				Category: getCategoryId(this.selectedCategory, this.Categories).toString(),
 				SubCategory: this.getSubCategoryId(this.selectedSubCategory).toString(),
-				Gender: this.selectedGender,
+				gender_id: getGenderId(this.selectedGender).toString(),
 				Description: this.editorContent,
 				Tags: this.tags,
 			};

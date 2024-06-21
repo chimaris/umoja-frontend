@@ -99,7 +99,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr @click="dialog = true" v-for="(item, index) in vendorFollowers.followers" :key="item.sn">
+					<tr @click="setCustomerDets(item)" v-for="(item, index) in vendorFollowers.users" :key="item.sn">
 						<td class="text-grey-lighten-1 pl-4 px-1">
 							<v-checkbox color="green" hide-details></v-checkbox>
 						</td>
@@ -109,38 +109,28 @@
 						<td class="tableThick px-1">
 							<div class="d-flex align-center" style="text-transform: capitalize">
 								<v-avatar size="30" class="mr-2">
-									<v-img :src="item.picture"></v-img>
+									<v-img :src="item.user.picture"></v-img>
 								</v-avatar>
-								{{ item.first_name }} {{ item.last_name }}
+								{{ item.user.first_name }} {{ item.user.last_name }}
 							</div>
 						</td>
-						<td class="tableLight px-1">{{ getdateRegistered(item.created) }}</td>
+						<td class="tableLight px-1">{{ getdateRegistered(item.user.created) }}</td>
 
 						<td style="font-weight: 600; font-size: 14px; line-height: 18px" class="tableLight px-1">
-							<span style="color: #333333">{{ item.user_country }}, </span>
-							<span style="color: #969696">{{ item.user_city }}</span>
+							<span style="color: #333333">{{ item.user.user_country }}, </span>
+							<span style="color: #969696">{{ item.user.user_city }}</span>
 						</td>
 						<td class="text-grey-lighten-1 text-center px-1">
 						
-							<v-chip v-if="index == 1"
-								style="width: 70px; font-weight: 500 !important; font-size: 10px !important"
+							<v-chip
+								style="width: 70px; text-transform: capitalize; font-weight: 500 !important; font-size: 10px !important"
 								size="small"
 								rounded="lg"
 								class="tablechip text-center d-flex justify-center"
-								color="red"
+								:color="item.status == 'member'? 'green' : 'red'"
 								variant="tonal"
 							>
-								<!-- {{ item.status }} --> No
-							</v-chip>
-							<v-chip v-else
-								style="width: 70px; font-weight: 500 !important; font-size: 10px !important"
-								size="small"
-								rounded="lg"
-								class="tablechip text-center d-flex justify-center"
-								:color="index == 0 ? 'green' : 'red'"
-								variant="tonal"
-							>
-								<!-- {{ item.status }} --> Yes
+								{{ item.status }}
 							</v-chip>
 						</td>
 						<td class="text-grey-lighten-1 text-center px-1">
@@ -151,7 +141,7 @@
 									</v-btn>
 								</template>
 								<v-list>
-									<v-list-item v-for="(item, index) in ['visit profile', 'edit', 'delete']" :key="index" :value="index">
+									<v-list-item v-for="(item, index) in ['visit profile']" :key="index" :value="index">
 										<v-list-item-title>{{ item }}</v-list-item-title>
 									</v-list-item>
 								</v-list>
@@ -196,23 +186,23 @@
 								<div class="d-flex align-center">
 									<v-btn class="mr-4" icon="mdi mdi-arrow-right-top" flat rounded="xl" @click="dialog = !dialog" variant="outlined"> </v-btn>
 
-									<p style="font-weight: 600; font-size: 24px; line-height: 32px; color: #1a1d1f">Customer #23456</p>
+									<p style="font-weight: 600; font-size: 24px; line-height: 32px; color: #1a1d1f">Customer #{{customerDets.user?.id}}</p>
 								</div>
-								<v-btn style="border: 1px solid #c20052" variant="outlined" size="large" class="ml-4" color="red">
+								<!-- <v-btn style="border: 1px solid #c20052" variant="outlined" size="large" class="ml-4" color="red">
 									<v-icon class="mr-2" icon="mdi mdi-trash-can-outline"></v-icon>
 									Remove Customer
-								</v-btn>
+								</v-btn> -->
 							</div>
 						</div>
 						<div class=" ">
 							<div class="d-flex px-6 py-8">
 								<v-avatar class="" size="150"
-									><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900864/rectangle-1939_khvhag_hixaut.png"></v-img
+									><v-img :src="customerDets.user?.picture"></v-img
 								></v-avatar>
 
 								<div>
-									<p class="px-6" style="color: #333; font-size: 32px; font-weight: 600; letter-spacing: -0.96px">Nweke Franklin Odira</p>
-									<div class="d-flex px-6">
+									<p class="px-6" style="color: #333; font-size: 32px; text-transform: capitalize; font-weight: 600; letter-spacing: -0.96px">{{customerDets.user?.first_name}} {{ customerDets.user?.last_name }}</p>
+									<div class="d-flex px-6" v-if="customerDets?.status == 'following'">
 										<v-chip
 											size="small"
 											style="color: #333; font-size: 10px; font-weight: 500; width: 98px"
@@ -221,14 +211,14 @@
 										>
 											<span class=""> Follows you </span>
 										</v-chip>
-										<v-chip
+										<v-chip v-if="customerDets?.status == 'member'"
 											color="green"
 											size="small"
 											style="font-size: 10px; font-weight: 500; width: 98px"
 											rounded="lg"
 											class="d-flex justify-center align-center mx-"
 										>
-											Active User</v-chip
+											Member</v-chip
 										>
 									</div>
 									<div style="max-width: " class="px-1 pt-8 d-flex">
@@ -341,25 +331,26 @@
 												</thead>
 											</v-table>
 
-											<div
+											<div v-if="customerDets?.orders.length > 0"
 												class="rounded-lg"
 												:class="selected == item.sn + '' + i ? 'bg-grey-lighten-4' : ''"
 												style="width: 100% !important"
-												v-for="(item, i) in items1"
-												:key="item.sn"
+												v-for="(item, i) in customerDets?.orders"
+												:key="item.order_id"
 											>
-												<v-table :class="selected == item.sn + '' + i ? 'bg-grey-lighten-4' : ''">
+												<v-table :class="selected == item.order_id + '' + i ? 'bg-grey-lighten-4' : ''">
 													<tbody>
-														<tr style="width: 100%" :style="chosen == item.sn ? 'background:#DFDFDF' : ''">
-															<td style="font-size: 14px; height: 100px" class="px-1 d-flex align-center pl-2">
-																<v-avatar rounded="lg" color="grey-lighten-2" class="pa-1 mr-3 ml-1" size="50"
-																	><v-img
-																		src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718900935/H468a70379a6043119f5077bf8ba35a7cO_bnnitb_itell3.png"
+														<template v-for="n in item?.items" :key="n">
+														<tr style="width: 100%" :style="chosen == item?.order_id ? 'background:#DFDFDF' : ''">
+																<td style="font-size: 14px; height: 100px" class="px-1 d-flex align-center pl-2">
+																<v-avatar rounded="lg" color="grey-lighten-2" class="pa-0 mr-3 ml-1" size="50"
+																	><v-img cover
+																		:src="n.photo.split(',')[0]"
 																	></v-img
 																></v-avatar>
 																<div>
-																	<p class="" style="font-weight: 600; font-size: 16px; line-height: 20px; color: #333333">{{ item.name }}</p>
-																	<p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696">Fashion and Style</p>
+																	<p class="text-truncate" style="font-weight: 600; font-size: 16px; width: 200px; line-height: 20px; color: #333333">{{ n?.name }}</p>
+																	<!-- <p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696">Fashion and Style</p> -->
 																</div>
 															</td>
 															<td style="font-size: 14px" class="text-grey-darken-1 px-1">
@@ -368,21 +359,22 @@
 																		style="color: var(--carbon-4, #333); font-size: 14px !important; font-weight: 600; line-height: 20px"
 																		class="text-black"
 																	>
-																		€ 1,829.00
+																		{{formattedPrice(n?.price)}}
 																	</span>
 																</v-chip>
 															</td>
 															<td style="color: #000; font-size: 14px; font-weight: 500" class="text-right px-1">
-																<span> September 9, 2022 </span>
+																<span> {{getdateRegistered(item.created_at)}} </span>
 															</td>
 															<td style="color: #000; font-size: 14px; font-weight: 500" class="text-right px-1">
 																<v-icon
-																	@click="select(item.sn + '' + i)"
-																	class="ml-"
-																	:icon="selected !== item.sn + '' + i ? 'mdi mdi-chevron-down-circle-outline' : 'mdi mdi-chevron-up-circle-outline'"
+																@click="select(item.order_id + '' + i)"
+																class="ml-"
+																:icon="selected !== item.order_id + '' + i ? 'mdi mdi-chevron-down-circle-outline' : 'mdi mdi-chevron-up-circle-outline'"
 																></v-icon>
 															</td>
 														</tr>
+														</template>
 													</tbody>
 												</v-table>
 												<div style="width: 100%; border-bottom: 0.5px solid rgb(215, 215, 215)" class=" ">
@@ -391,7 +383,7 @@
 															color="grey-lighten-4"
 															class="pb-4"
 															flat
-															v-show="selected == item.sn + '' + i"
+															v-show="selected == item.order_id + '' + i"
 															style="width: 100%; border-top: 1px dashed #cecece"
 														>
 															<v-row class="pa-4">
@@ -400,7 +392,7 @@
 																		Address
 																	</p>
 																	<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal">
-																		Mrs Smith 71 Cherry Court Southampton SO53 5PD
+																		{{item?.customer_address}}, {{item?.customer_city}}, {{item?.customer_country}}
 																	</p>
 																</v-col>
 																<v-col>
@@ -413,13 +405,13 @@
 																</v-col>
 																<v-col>
 																	<p class="mb-2" style="color: #969696; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal">
-																		Tracking #UMOJA
+																		Tracking #
 																	</p>
 																	<p
 																		style="color: #333; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal"
 																		class="d-flex align-center"
 																	>
-																		4589058409584045845 <v-icon size="x-small" color="green" class="ml-2" icon="mdi mdi-content-copy"></v-icon>
+																		 <!-- <v-icon size="x-small" color="green" class="ml-2" icon="mdi mdi-content-copy"></v-icon> -->
 																	</p>
 																</v-col>
 																<v-col>
@@ -427,7 +419,7 @@
 																		Delivery type
 																	</p>
 																	<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal">
-																		Umoja Shipping
+																		{{item?.delivery_method}}
 																	</p>
 																</v-col>
 															</v-row>
@@ -438,14 +430,14 @@
 																	<p class="mb-2" style="color: #969696; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal">
 																		Processed
 																	</p>
-																	<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal">May 14</p>
+																	<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal">{{getdateRegistered(item?.created_at)}}</p>
 																</v-col>
 																<v-col style="position: relative">
 																	<v-icon style="top: -28px; left: 5%; position: absolute" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
 																	<p class="mb-2" style="color: #969696; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal">
 																		Shipped
 																	</p>
-																	<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 600; line-height: normal">May 16</p>
+																	<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 600; line-height: normal"></p>
 																</v-col>
 																<v-col style="position: relative">
 																	<v-icon style="top: -28px; left: 5%; position: absolute" color="#90BEAA" icon="mdi mdi-circle"></v-icon>
@@ -456,7 +448,6 @@
 																		style="color: #333; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal"
 																		class="d-flex align-center"
 																	>
-																		May 24
 																	</p>
 																</v-col>
 																<v-col style="position: relative">
@@ -465,7 +456,7 @@
 																		Delivery type
 																	</p>
 																	<p style="color: #333; font-size: 14px; font-style: normal; font-weight: 500; line-height: normal">
-																		Umoja Shipping
+																		{{item?.delivery_method}}
 																	</p>
 																</v-col>
 															</v-row>
@@ -476,7 +467,7 @@
 										</div>
 									</v-window-item>
 									<v-window-item :value="'Activities'">
-										<v-card class="py-4">
+										<!-- <v-card class="py-4">
 											<div class="py-4" style="border-bottom: 0.5px solid rgb(215, 215, 215)" v-for="n in 4" :key="n">
 												<div class="d-flex justify-space-between align-center">
 													<div class="d-flex">
@@ -495,7 +486,7 @@
 													</v-avatar>
 												</div>
 											</div>
-										</v-card>
+										</v-card> -->
 									</v-window-item>
 								</v-window>
 							</v-card>
@@ -697,15 +688,21 @@ import { useVendorStore } from "~/stores/vendorStore";
 import { getVendorFollowers, getNoFollowers } from "~/composables/vendorCustomers";
 import { formattedPrice, convertToShorthand  } from "~/utils/price";
 import { getdateRegistered } from "~/utils/date";
+import { getFlag } from "~/utils/countryapi";
 
 
 export default {
 	setup() {
 		const vendorStore = useVendorStore();
 		const vendor = ref(vendorStore.vendor);
-		const hasCustomer = computed(() => vendor.value.vendor_details?.order_count > 0);
+		const hasCustomer = computed(() => {
+			const vendorDets = vendor.value?.vendor_details
+			return vendorDets?.order_count > 0 || vendorDets?.followers_count > 0
+		});
 		const vendorFollowers = ref([]);
+		const dialog = ref(false)
 		const loading = ref(false);
+		const customerDets = ref(null)
 
 		onMounted(async () => {
 			if (hasCustomer.value) {
@@ -717,13 +714,17 @@ export default {
 				}
 			}
 		});
+		const setCustomerDets = (detail) => {
+			customerDets.value = detail
+			dialog.value = true 
+		}
 		const dashes = computed(() => {
 			return [
 				{
 					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901102/Frame_427320547_6_u4cwdq_x9vtgb.png",
 					name: "Total Customers",
 					tooltip: "Total customers in your shop",
-					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.total_order_users) : "0",
+					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.total_customer) : "0",
 					trend: "0",
 					trending: true,
 				},
@@ -737,20 +738,46 @@ export default {
 				},
 				{
 					img: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901229/Frame_427320547_7_znnge2_lfsogz.png",
-					name: "Active",
-					tooltip: "Active customers in the last seven days",
-					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.active_followers) : "0",
+					name: "Members",
+					tooltip: "Customers that have made an order",
+					amount: hasCustomer.value ? convertToShorthand(vendorFollowers.value?.total_order_users) : "0",
 					trend: "0",
 					trending: true,
 				},
 			];
 		});
+		
+		const customer_details = computed(() => {
+			return [
+				{
+					item: "Gender",
+					value: ""
+				},
+				{
+					item: "Age",
+					value: "",
+				},
+				{
+					item: "Customer since",
+					value: getdateRegistered(customerDets.value?.user?.created),
+				},
+				{
+					item: "Country",
+					value: `${getFlag(customerDets.value?.user?.user_country)} ${customerDets.value.user?.user_state == null ? '' : customerDets.value.user?.user_state}, ${customerDets.value.user?.user_country == null ? '' : customerDets.value.user?.user_country} `,
+				}
+			]
+		})
+
 		return {
 			vendor,
 			hasCustomer,
 			vendorFollowers,
 			dashes,
 			loading,
+			dialog,
+			customerDets,
+			setCustomerDets,
+			customer_details
 		};
 	},
 	components: {
@@ -761,7 +788,6 @@ export default {
 		return {
 			tab: "",
 			editor: null,
-			dialog: false,
 			dialog2: false,
 			selected: "",
 			window: "Customer Orders",
@@ -770,24 +796,7 @@ export default {
 				{ name: "Activities", prop: "status", value: "Activities" },
 			],
 			items1: [],
-			customer_details: [
-				{
-					item: "Gender",
-					value: "Male",
-				},
-				{
-					item: "Age",
-					value: "26yrs",
-				},
-				{
-					item: "Customer since",
-					value: "14th May, 2023",
-				},
-				{
-					item: "Country",
-					value: "🇺🇸 United States, New York City",
-				},
-			],
+		
 		};
 	},
 

@@ -3,6 +3,36 @@ import { useApi } from "./useApi";
 import {ref} from 'vue'
 
 export const loadingSub = ref(false)
+export const genders = [
+                        {
+                            id: 1,
+                            name: "male"
+                        },
+                        {
+                            id: 2,
+                            name: "female"
+                        },
+                        {
+                            id: 3,
+                            name: "unisex"
+                        }
+                        ]
+export const getGenderId = (gender) => {
+    const gen = genders.findIndex(item => item.name === gender);
+    if (gen === -1) {
+        return
+    }
+    const gender_id = genders[gen].id
+    return gender_id
+}
+export const getGenderName = (id) => {
+    const gen = genders.findIndex(item => item.id === id);
+    if (gen === -1) {
+        return
+    }
+    const gender_name = genders[gen].name
+    return gender_name
+}
 export 	async function fetchCategories(role) {
     let api = vendorUseApi()
     if (role = "customer"){
@@ -63,7 +93,7 @@ export const getCategoryName = (selectedCat, Categories) => {
     return category_name
 }
 
-export const fetchSubCategories = async ({selectedCat, Categories, gender, role}) => {
+export const fetchSubCategories = async ({selectedCat, Categories, role}) => {
     loadingSub.value = true;
     let api = vendorUseApi();
     if (role === "customer") {
@@ -81,34 +111,8 @@ export const fetchSubCategories = async ({selectedCat, Categories, gender, role}
             }
         });
         const subCats = response.data.data;
-        let filteredSubCats;
-
-        if (gender === 'Male') {
-            filteredSubCats = subCats.filter(category => category.gender_subcategory === 'Male');
-        } else if (gender === 'Female') {
-            filteredSubCats = subCats.filter(category => category.gender_subcategory === 'Female');
-        } else {
-            filteredSubCats = subCats;
-        }
-
-        const resultCategories = [];
-
-        filteredSubCats.forEach(category => {
-            if (category.neted_subcategories && category.neted_subcategories.length > 0) {
-                category.neted_subcategories.forEach(sub => {
-                    resultCategories.push({
-                        id: category.id,
-                        name: sub
-                    });
-                });
-            } else {
-                resultCategories.push({
-                    id: category.id,
-                    name: category.subcategory_name
-                });
-            }
-        });
-        return resultCategories;
+        // console.log(response.data.data)
+        return subCats;
     } catch (error) {
         console.error(error);
         return [];
