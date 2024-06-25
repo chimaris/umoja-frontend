@@ -52,7 +52,12 @@
 
 		<!-- For mobile View -->
 		<div class="d-block d-md-none">
-			<v-row dense>
+			<v-row dense v-if="stores?.length == 0">
+				<v-col v-for="n in [1,2,3,4,5]" :key="n" cols="6" :md="6" :lg="3">
+					<vendorloader />
+				</v-col>
+			</v-row>
+			<v-row v-else dense>
 				<v-col v-for="(n, i) in stores" :key="i" cols="6" :md="6" :lg="3">
 					<vendor-component v-if="vendorBol" :category="category" :index="i" :item="n" />
 					<product-component v-else :cover="coverbol" :category="category" :showVendor="showVendor" :showdisco="showdisco" :item="n" />
@@ -89,8 +94,10 @@ import { useProductStore } from "~/stores/productStore.js";
 import { bestSellingStores } from "~/composables/useProducts";
 import {ref} from 'vue';
 import Vendorloader from './vendorloader.vue';
+import vendorloader from './vendorloader.vue';
 
 export default {
+  components: { vendorloader },
 	setup(){
 		const productStore = useProductStore()
 		const category = ref("")

@@ -5,7 +5,7 @@
 				<v-row class="row0 mt-12">
 					<v-col cols="12" class="pt-0" lg="6">
 						<v-avatar class="mb-8" style="width: 130px; height: 54px" rounded="0" flat>
-							<v-img eager src="https://res.cloudinary.com/payhospi/image/upload/v1689512117/frame-4_cawhs0.png"> </v-img>
+							<v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893077/umoja-backup2/frame-4_cawhs0_wm6c0r.png"> </v-img>
 						</v-avatar>
 						<p
 							style="

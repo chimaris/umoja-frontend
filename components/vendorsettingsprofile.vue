@@ -11,7 +11,7 @@
 						:src="
 							vendor.vendor_details?.profile_photo
 								? vendor.vendor_details?.profile_photo
-								: 'https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png'
+								: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990483/umoja/profile_image_pd4dcv_alvzjz.png'
 						"
 					>
 					</v-img>
@@ -228,7 +228,7 @@
 							width="21"
 							height="21"
 							@click="vendorAddress = false"
-							src="https://res.cloudinary.com/payhospi/image/upload/v1716243322/umoja/close-icon.svg"
+							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990515/umoja/close-icon_vecha5.svg"
 						/>
 					</div>
 				</div>
@@ -312,7 +312,7 @@
 										:src="
 											profile_photo ||
 											vendor?.vendor_details?.profile_photo ||
-											'https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png'
+											'https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990483/umoja/profile_image_pd4dcv_alvzjz.png'
 										"
 									></v-img>
 								</v-avatar>

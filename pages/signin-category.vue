@@ -38,7 +38,7 @@
 						</div>
 					</div>
 
-					<v-img class="signupimg" src="https://res.cloudinary.com/payhospi/image/upload/v1686202938/Frame_yg0jej.png"></v-img>
+					<v-img class="signupimg" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893027/umoja-backup2/Frame_yg0jej_p9ibes.png"></v-img>
 				</v-card>
 				<v-card
 					:style="{ width: $vuetify.display.mobile ? '100%' : '859px', height: $vuetify.display.mobile ? '100px' : '169px' }"
@@ -64,7 +64,7 @@
 						</div>
 					</div>
 
-					<v-img class="signupimg" src="https://res.cloudinary.com/payhospi/image/upload/v1686202934/Frame_1_dlp4zd.png"></v-img>
+					<v-img class="signupimg" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893070/umoja-backup2/Frame_1_dlp4zd_yixekf.png"></v-img>
 				</v-card>
 			</div>
 		</div>

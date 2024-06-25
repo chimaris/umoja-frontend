@@ -2,6 +2,7 @@ import { vendorUseApi } from "./vendorApi";
 import { useApi } from "./useApi";
 import {ref} from 'vue'
 
+
 export const loadingSub = ref(false)
 export const genders = [
                         {
@@ -34,17 +35,21 @@ export const getGenderName = (id) => {
     return gender_name
 }
 export 	async function fetchCategories(role) {
-    let api = vendorUseApi()
-    if (role = "customer"){
-        api = useApi()
+    const transformResponse = (data) => {
+        const jsonData = JSON.parse(data);
+        return jsonData.data;
     }
+    let api = vendorUseApi(transformResponse);
+    if (role = "customer"){
+        api = useApi(transformResponse)
+    }
+    
     try {
         const response = await api({
             url: 'allcategory',
             method: 'get'
         });
-       
-        return response.data.data;
+        return response.data;
 
     }catch(error) {
         console.error(error)

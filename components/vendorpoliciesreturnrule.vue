@@ -40,10 +40,10 @@
 					</v-radio-group>
 				</div>
 
-				<div>
+				<!-- <div>
 					<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">Restocking fee</p>
 					<v-checkbox density="comfortable" v-model="selectAll" label="Charge restocking fee"></v-checkbox>
-				</div>
+				</div> -->
 			</v-card>
 
 			<v-card class="mx-auto my-2 py-5 px-6 cardStyle" flat rel="noopener">

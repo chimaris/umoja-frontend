@@ -126,15 +126,16 @@
 		<v-card class="d-flex flex-column text-center pa-10" style="width: 550px; justify-content: center; align-items: center; border-radius: 15px">
 			<v-avatar color="#FEF6ED" size="x-large" class="mb-5"> 🎉</v-avatar>
 			<h3 style="font-size: 32px; font-weight: 600; line-height: 40px; color: #2a2a2a">Your profile setup has been successfully completed</h3>
-			<p class="mt-4" style="font-size: 16px; font-weight: 500; line-height: 22px; color: #333; width: 340px">
-				You can now use your new password to login to your account 🙌🏽.
+			<p class="my-4" style="font-size: 16px; font-weight: 500; line-height: 22px; color: #333; width: 340px">
+				You are almost done, welldone 👏🏽👏🏽🎉
 			</p>
-			<v-card-actions class="d-flex justify-space-between pt-10 w-100">
-				<v-btn @click="toDashboard" size="large" style="border: 1px solid #969696" flat>
+			<p style="font-size: 16px; font-weight: 500; text-align: center; max-width: 400px;">Now unto the next step to complete your business settings 👇🏽👇🏽👇🏽</p>
+			<v-card-actions class="d-flex justify-center align-center pt-10 w-100">
+				<!-- <v-btn @click="toDashboard" size="large" style="border: 1px solid #969696" flat>
 					<span style="color: #333; font-size: 16px; font-weight: 600; line-height: 20px; padding: 10px"> Go back to dashboard</span></v-btn
-				>
-				<v-btn @click="dialog = false" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px" size="large"
-					>View profile in settings</v-btn
+				> -->
+				<v-btn @click="toDashboard" flat style="background-color: #2c6e63; color: #edf0ef; font-size: 16px; font-weight: 600; padding: 10px 25px" size="large"
+					>Continue</v-btn
 				>
 			</v-card-actions>
 		</v-card>
@@ -212,7 +213,7 @@
 		this.editSubscriptionInfo = true;
 	}
     function toDashboard(){
-		router.push('/vendor/dashboard/Homepage')
+		router.push('/vendor/dashboard/Settings')
 		dialog.value = false
 	}
 	async function submit(){

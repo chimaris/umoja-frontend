@@ -49,17 +49,17 @@
 										<v-img
 											v-if="n.last_card_brand == 'visa'"
 											width="54"
-											src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo_shmb54.png"
+											src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893044/umoja-backup2/logo_shmb54_bdqder.png"
 										></v-img>
 										<v-img
 											v-if="n.last_card_brand == 'mastercard'"
 											width="54"
-											src="https://res.cloudinary.com/payhospi/image/upload/v1691581811/logo2_jpei5o.png"
+											src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893048/umoja-backup2/logo2_jpei5o_b1rtj8.png"
 										></v-img>
 										<v-img
 											v-if="n.last_card_brand == 'verve'"
 											width="54"
-											src="https://res.cloudinary.com/payhospi/image/upload/v1714813559/umoja/234-2342510_aerocontractors-the-reliable-way-to-fly-verve-card_i7s2un.jpg"
+											src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890509/umoja-backup/234-2342510_aerocontractors-the-reliable-way-to-fly-verve-card_i7s2un_xjpn0d.jpg"
 										></v-img>
 									</div>
 									<div class="text-capitalize px-4">
@@ -369,11 +369,11 @@ export default {
 			paymenthods: [
 				{
 					name: "Paypal",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1691582666/pay-pal-1_dtxv1k.png",
+					image: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893024/umoja-backup2/pay-pal-1_dtxv1k_rfupnd.png",
 				},
 				{
 					name: "Neteller",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1691582681/neteller-1_mjjfeu.png",
+					image: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718890483/umoja-backup/neteller-1_mjjfeu_rygqr2.png",
 				},
 			],
 		};
@@ -406,16 +406,16 @@ export default {
 		buttons() {
 			return [
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/Vector_mgadhr_nkvm4k.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990442/umoja/facebook_tup8rq_nm5k9d.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990456/umoja/instagram_wogd5x_wj1not.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990448/umoja/globe-americas_annyvh_uzbrub.png",
 				},
 			];
 		},

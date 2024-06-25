@@ -13,7 +13,6 @@
 							'Notifications',
 							'Account Details',
 							'Billing',
-							'Integrations',
 							'Shipping and Delivery',
 							'Policies',
 						]"
@@ -59,7 +58,7 @@
 						<v-window-item value="Account Details">
 							<Vendorsettingsaccount :vendor="vendor" />
 						</v-window-item>
-						<v-window-item value="Integrations"> </v-window-item>
+						<!-- <v-window-item value="Integrations"> </v-window-item> -->
 						<v-window-item value="Shipping and Delivery">
 							<template v-if="vendorStore.renderRate">
 								<vendorgeneralshippingrate />

@@ -22,8 +22,6 @@ export const useUserStore = defineStore({
     artCurrentPage: null,
     artLastPage: null,
     error: '',
-    loginError: '',
-    signUpError: '',
     isLoggedIn: false,
     userToken: null,
     user: null
@@ -40,38 +38,35 @@ export const useUserStore = defineStore({
     setCountry(country) {
       this.userCountry = country;
   }, 
-    async login({email, password}) {
-      const api = useApi()
-      this.loading = true;
-      try {
-          const response = await api({
-          url: 'auth/customer_login', 
-          method: 'post',
-          data: { email, password}
-        });
-       
-        this.loginError = '';
-        const {access_token} = response.data;
-        this.userToken = access_token
-        this.isLoggedIn = true;
-        this.user = await getUser(response.data.user_id)
-        return true;
-      } catch(error) {
-          if (error.response) {
-            this.loginError = error.response.data.message || 'An error occurred during signup.';
-          } else if (error.request) {
-            this.loginError = 'No response received from server. Please try again later.';
-          } else {
-            this.loginError = 'An error occurred. Please try again later.';
-          }
-          return false;
-      } finally {
-        this.loading = false;
+  async login({ email, password }) {
+    const api = useApi();
+    this.loading = true;
+    try {
+      const response = await api({
+        url: 'auth/customer_login', 
+        method: 'post',
+        data: { email, password }
+      });
+     
+      const { access_token, user_id } = response.data;
+      this.userToken = access_token;
+      this.isLoggedIn = true;
+      this.user = await getUser(user_id); // Assuming getUser is a function that fetches user details
+      return { success: true };
+    } catch (error) {
+      let errorMessage = 'An error occurred. Please try again later.';
+      if (error.response) {
+        errorMessage = error.response.data.message || 'An error occurred during login.';
+      } else if (error.request) {
+        errorMessage = 'No response received from server. Please try again later.';
       }
-    },
+      return { success: false, message: errorMessage };
+    } finally {
+      this.loading = false;
+    }
+  },
     async signup({first_name, last_name, email, password, password_confirmation, terms_accepted}) {
       this.loading = true;
-      this.signUpError = '';
       const api = useApi()
       try {
         const response = await api({
@@ -79,21 +74,19 @@ export const useUserStore = defineStore({
           method: 'post',
           data: {first_name, last_name, email, password, password_confirmation,terms_accepted}
         });
-        this.signUpError = '';
         const {access_token} = response.data;
         this.user = await getUser(response.data.user_id)
         this.userToken = access_token
         this.isLoggedIn = true
-        return true
+        return {success: true}
       } catch (error) {
+        let errorMessage = 'An error occurred. Please try again later.';
         if (error.response) {
-          this.signUpError = error.response.data.message || 'An error occurred during signup.';
+          errorMessage= error.response.data.message || 'An error occurred during signup.';
         } else if (error.request) {
-          this.signUpError = 'No response received from server. Please try again later.';
-        } else {
-          this.signUpError = 'An error occurred. Please try again later.';
-        }
-        return false;
+          errorMessage = 'No response received from server. Please try again later.';
+        } 
+        return {success: false, message: errorMessage}
       }finally {
         this.loading = false;
       }  

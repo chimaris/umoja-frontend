@@ -162,7 +162,7 @@ Download All
 
                                                        <v-avatar color="grey-lighten-2" class="pa-1 ml-1 mr-2" size="44"
                                                        rounded="lg"><v-img
-                                                       src="https://res.cloudinary.com/payhospi/image/upload/v1689344970/pdf-file-icon-1_efdfmv.png"></v-img></v-avatar>
+                                                       src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719305247/pdf-file-icon-1_efdfmv_rjtk0h.png"></v-img></v-avatar>
                                                        <p style="color: #333;
 font-size: 14px;
 font-weight: 500;">Invoice #007 - Dec 2023</p>

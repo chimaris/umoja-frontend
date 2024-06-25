@@ -24,7 +24,7 @@
 				</p>
 				<div>
 					<v-btn style="border: 1px solid #e5e5e5; border-radius: 100px !important" variant="outlined" class="textClass text-grey-darken-3">
-						<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
+						<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/filtericon_ri5zov.svg" />
 						Filter
 					</v-btn>
 				</div>
@@ -44,7 +44,7 @@
 						height="auto"
 						min-height="160px"
 						class="bg-black d-flex py-3 align-center rounded-lg"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1715767704/umoja/vendo-slide-banner.png"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990514/umoja/vendo-slide-banner_ojoipx.png"
 					>
 						<div>
 							<v-row class="d-flex pa-4 px-4 justify-space-between align-center">

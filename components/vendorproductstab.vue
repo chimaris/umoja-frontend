@@ -11,7 +11,7 @@
 			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{items.length}} products found</p>
 			<div>
 				<v-btn flat color="transparent" style="font-size: 15px; color: #333333">
-					<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716236003/umoja/view-grid.svg" />
+					<v-img width="20" height="20" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/view-grid_udnxcc.svg" />
 				</v-btn>
 				<v-btn
 					flat
@@ -22,10 +22,10 @@
 					icon="mdi mdi-filter-variant"
 					class="mr-2"
 				>
-					<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filter-icon.svg" />
+					<v-img width="20" height="20" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/filter-icon_hg5ksh.svg" />
 				</v-btn>
 				<v-btn style="border: 1px solid #e5e5e5; border-radius: 100px !important" variant="outlined" class="textClass text-grey-darken-3">
-					<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
+					<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/filtericon_ri5zov.svg" />
 					Filter
 				</v-btn>
 			</div>
@@ -44,7 +44,7 @@
 					height="auto"
 					min-height="160px"
 					class="bg-black d-flex py-3 align-center rounded-lg"
-					src="https://res.cloudinary.com/payhospi/image/upload/c_fit,w_1000/v1684602013/Rectangle_458_zafbwy.png"
+					:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893034/umoja-backup2/Rectangle_458_zafbwy_nc48gx.png', 1000)"
 				>
 					<div>
 						<v-row class="d-flex pa-4 px-6 justify-space-between align-center">
@@ -168,7 +168,7 @@
 					height="auto"
 					min-height="160px"
 					class="bg-black d-flex py-3 align-center rounded-lg"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1715767704/umoja/vendo-slide-banner.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990514/umoja/vendo-slide-banner_ojoipx.png"
 				>
 					<div>
 						<v-row class="d-flex pa-4 px-4 justify-space-between align-center">
@@ -204,6 +204,7 @@ import { useVendorStore } from "~/stores/vendorStore";
 import { useCartStore } from "~/stores/cartStore";
 import { useProductStore } from "~/stores/productStore.js";
 import {useVendorProductStore} from '~/stores/vendorProducts'
+import { getCloudinaryImageUrl } from "~/utils/cloudinary";
 import {ref, computed} from 'vue'
 
 export default {

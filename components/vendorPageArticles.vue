@@ -7,7 +7,7 @@
 			<p style="font-weight: 600; font-size: 12px; line-height: 15px; text-transform: uppercase; color: #969696">{{allArticles.length}} articles found</p>
 			<div>
 				<v-btn flat color="transparent" style="font-size: 15px; color: #333333">
-					<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716236003/umoja/view-grid.svg" />
+					<v-img width="20" height="20" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/view-grid_udnxcc.svg" />
 				</v-btn>
 				<v-btn
 					flat
@@ -18,10 +18,10 @@
 					icon="mdi mdi-filter-variant"
 					class="mr-2"
 				>
-					<v-img width="20" height="20" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filter-icon.svg" />
+					<v-img width="20" height="20" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/filter-icon_hg5ksh.svg" />
 				</v-btn>
 				<v-btn style="border: 1px solid #e5e5e5; border-radius: 100px !important" variant="outlined" class="textClass text-grey-darken-3">
-					<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/payhospi/image/upload/v1716236855/umoja/filtericon.svg" />
+					<v-img class="mr-2" width="14" height="14" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990443/umoja/filtericon_ri5zov.svg" />
 					Filter
 				</v-btn>
 			</div>
@@ -41,7 +41,7 @@
 					height="auto"
 					min-height="160px"
 					class="bg-black d-flex py-3 align-center rounded-lg"
-					src="https://res.cloudinary.com/payhospi/image/upload/v1715767704/umoja/vendo-slide-banner.png"
+					src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990514/umoja/vendo-slide-banner_ojoipx.png"
 				>
 					<div>
 						<v-row class="d-flex pa-4 px-4 justify-space-between align-center">

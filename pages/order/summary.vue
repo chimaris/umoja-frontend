@@ -185,15 +185,15 @@ export default {
 			paymenthods: [
 				{
 					name: "Google Pay",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684927396/gpay-new-logo-png-removebg-preview_1_wn3n7e.png",
+					image: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1719307117/gpay-new-logo-png-removebg-preview_1_wn3n7e_gs5mog.png",
 				},
 				{
 					name: "Apple Pay",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684926118/icon_q5y7el.png",
+					image: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1719307125/icon_q5y7el_g5q6h5.png",
 				},
 				{
 					name: "Stripe",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1684926107/Stripe_berhja.png",
+					image: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1719307133/Stripe_berhja_uh2poz.png",
 				},
 			],
 		};
@@ -225,16 +225,16 @@ export default {
 		buttons() {
 			return [
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/Vector_mgadhr_nkvm4k.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990442/umoja/facebook_tup8rq_nm5k9d.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990456/umoja/instagram_wogd5x_wj1not.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990448/umoja/globe-americas_annyvh_uzbrub.png",
 				},
 			];
 		},

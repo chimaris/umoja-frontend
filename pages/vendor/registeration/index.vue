@@ -23,7 +23,7 @@
 							Lorem ipsum dolor sit amet consectetur. Sit urna neque pellentesque at cras.
 						</p>
 					</div>
-					<v-img class="signupimg" src="https://res.cloudinary.com/payhospi/image/upload/v1686202938/Frame_yg0jej.png"></v-img>
+					<v-img class="signupimg" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893027/umoja-backup2/Frame_yg0jej_p9ibes.png"></v-img>
 				</v-card>
 				<v-card
 					style="height: 169px; max-width: 859px; width: 616px"
@@ -40,7 +40,7 @@
 							Lorem ipsum dolor sit amet consectetur. Sit urna neque pellentesque at cras.
 						</p>
 					</div>
-					<v-img class="signupimg" src="https://res.cloudinary.com/payhospi/image/upload/v1686202934/Frame_1_dlp4zd.png"></v-img>
+					<v-img class="signupimg" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893070/umoja-backup2/Frame_1_dlp4zd_yixekf.png"></v-img>
 				</v-card>
 			</div>
 		</div>
