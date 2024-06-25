@@ -2,7 +2,7 @@ import axios from 'axios'
 import { useUserStore } from '~/stores/userStore';
 
 
-export const useApi = () => {
+export const useApi = (transformResponse) => {
     const token = useUserStore().userToken;
     const baseURL = 'https://umoja-production-9636.up.railway.app/api/';
 
@@ -10,7 +10,8 @@ export const useApi = () => {
         baseURL,
         headers: {
             Authorization: token ? `Bearer ${token}` : undefined
-        }
+        },
+        transformResponse: transformResponse ? [transformResponse] : axios.defaults.transformResponse
     });
 
     instance.interceptors.response.use(

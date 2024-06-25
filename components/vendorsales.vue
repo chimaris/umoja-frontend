@@ -671,12 +671,12 @@ import { getRevenue, getSales, getCategories, getAllCategories, getAllProducts }
 		const vendorStore  = useVendorStore();
 		const soldCategories = ref([])
 		const saleRevenue = ref([])
-		const filterProduct =ref("Last 7 days")
-		const filterCategory = ref("Last 7 days")
-		const filterRevenue = ref("Last 24 hours")
+		const filterProduct =ref("This Year")
+		const filterCategory = ref("This Year")
+		const filterRevenue = ref("This Year")
 		const orderStore = useOrderStore()
 		const vendor = ref(vendorStore.vendor)
-		const chip = ref("Last 24 hours")
+		const chip = ref("This Year")
 		const text = ref("1")
 		const chosen =ref("")
 		const dialog = ref(false)
@@ -714,65 +714,9 @@ import { getRevenue, getSales, getCategories, getAllCategories, getAllProducts }
 			}
 		
 		})
-
-
-
-const items1 = ref( [
-				{
-					sn: "#23942",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 7,
-					delivery_method: "Umoja Delivery",
-				},
-				{
-					sn: "#876567",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "David",
-					delivery: 0,
-					payment_status: 0,
-					status: 2,
-					items_no: 1,
-					delivery_method: "Fedex Delivery",
-				},
-				{
-					sn: "#3456456",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Frank",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 2,
-					items_no: 4,
-					delivery_method: "DHL Delivery",
-				},
-
-				{
-					sn: "#9867763",
-					name: "Leather crop top & pants......",
-					date: "17 May",
-					total: "€2,349‎",
-					date: "May 29, 2023",
-					customer: "Okoli Bonaventure",
-					delivery: "€ 24.08",
-					payment_status: 1,
-					status: 1,
-					items_no: 7,
-					delivery_method: "DHL Delivery",
-				},
-			])
+				
 		
+
 const items =  ref([])	
 const colors = ["#CBDED6", "#00966D", "#005A41"]
 

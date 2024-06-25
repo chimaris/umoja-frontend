@@ -80,7 +80,7 @@
 					<v-card min-width="300px" class="mx-auto cardStyle" width="100%" style="" flat>
 						<div class="d-flex align-center">
 							<v-avatar class="mr-2" size="34"
-								><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1687450127/Frame_427320547_9_zeqdtt.png"></v-img
+								><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719304732/Frame_427320547_9_zeqdtt_px1fwe.png"></v-img
 							></v-avatar>
 							<p style="font-weight: 500; font-size: 20px; line-height: 25px; color: #333333">Average Rating</p>
 							<div class="ml-2">
@@ -220,7 +220,7 @@
 									<div style="position: absolute; top: 24px; width: 200px">
 										<div class="px-1 d-flex  pl-0">
 											<v-avatar color="grey-lighten-4" class=" mr-2" size="50"
-												><v-img cover src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img
+												><v-img cover src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990483/umoja/profile_image_pd4dcv_alvzjz.png"></v-img
 											></v-avatar>
 											<div>
 												<p class="" style="font-weight: 500; font-size: 16px !important; line-height: 20px; text-transform: capitalize; color: #333333">{{item.user.first_name}} {{item.user.last_name}}</p>
@@ -310,7 +310,7 @@
 							<v-img
 								:width="300"
 								cover
-								src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/review-empty-box.png"
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990484/umoja/review-empty-box_eg0vuz.png"
 								style="filter: grayscale(100%) brightness(100%)"
 							></v-img>
 							<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">All your reviews will show here</h2>
@@ -339,7 +339,7 @@
 					<v-img
 						:width="10"
 						:height="40"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1713471908/umoja/vertical-line.svg"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/vertical-line_gvytku.svg"
 						class="mx-2"
 					></v-img>
 

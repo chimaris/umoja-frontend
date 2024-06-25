@@ -94,7 +94,7 @@
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Username</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Joined Date</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Country/State</th>
-						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Ordered</th>
+						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Status</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium"></th>
 					</tr>
 				</thead>
@@ -233,13 +233,13 @@
 							</div>
 						</div>
 						<div class="pa-6">
-							<p style="font-size: 20px; font-style: normal; font-weight: 600; line-height: normal" class="mb-2">
+							<!-- <p style="font-size: 20px; font-style: normal; font-weight: 600; line-height: normal" class="mb-2">
 								Private note <v-icon size="16" icon="mdi mdi-information"> </v-icon>
 								<v-tooltip activator="parent" location="right" class="text-red"> Note for Customer</v-tooltip>
 							</p>
 							<v-card height="auto" class="mx-auto pt-2 coolTable pb-0 mb-8" width="100%" style="overflow: hidden" flat>
 								<div class="bg-white d-flex justify-space-between px-2 pb-2" v-if="editor">
-									<!-- :disabled="!editor.can().chain().focus().toggleBold().run()" -->
+									
 									<div>
 										<v-btn
 											flat
@@ -302,7 +302,7 @@
 								<div style="min-height: 162px" class="bg-grey-lighten-4 pa-4">
 									<editor-content :editor="editor" />
 								</div>
-							</v-card>
+							</v-card> -->
 
 							<v-card height="auto" class="mx-auto px-6 pt-6 coolTable pb-12" width="100%" style="overflow: hidden" flat>
 								<v-tabs v-model="tab" class="orders" color="green">

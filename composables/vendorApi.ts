@@ -3,7 +3,7 @@ import { useRouter } from 'vue-router';
 import { useVendorStore } from '~/stores/vendorStore';
 
 
-export const vendorUseApi = () => {
+export const vendorUseApi = (transformResponse) => {
     
     const token = useVendorStore().vendorToken;
     const baseURL = 'https://umoja-production-9636.up.railway.app/api/';
@@ -12,7 +12,8 @@ export const vendorUseApi = () => {
         baseURL,
         headers: {
             Authorization: token ? `Bearer ${token}` : undefined
-        }
+        },
+        transformResponse: transformResponse ? [transformResponse] : axios.defaults.transformResponse
     });
 
     instance.interceptors.response.use(

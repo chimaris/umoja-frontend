@@ -6,7 +6,7 @@
 				<v-card flat tile width="100%" height="100%">
 					<v-container style="min-height: 100vh">
 						<v-avatar class="" @click="$router.push('/')" size="150" style="cursor: pointer; height: auto !important" rounded="0">
-							<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
+							<v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718615349/umoja/Frame_4_emeelq_ajydmg.png"></v-img>
 						</v-avatar>
 						<div style="height: calc(100% -150px)">
 							<div style="max-width: 385px" class="pt-12 mx-auto">
@@ -47,7 +47,7 @@
 											</v-btn>
 										</v-col>
 									</v-row>
-									<p v-if="userStore.loginError" style="color: red">{{ userStore.loginError }}</p>
+									<p v-if="loginError" style="color: red">{{ loginError }}</p>
 									<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-3">
 										<span class="mr-4"> Sign in</span>
 										<v-progress-circular v-if="userStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
@@ -122,7 +122,7 @@ export default {
 	data() {
 		return {
 			images: [
-				"https://res.cloudinary.com/dkbt6at26/image/upload/c_fit,w_1000/v1684229355/portrait-scary-african-shaman-female-with-petrified-cracked-skin-dreadlocks-holds-traditional-mask-dark-background-make-up-concept_1_dr3e2c.png",
+				"https://res.cloudinary.com/dd26v0ffw/image/upload/v1719308063/portrait-scary-african-shaman-female-with-petrified-cracked-skin-dreadlocks-holds-traditional-mask-dark-background-make-up-concept_1_dr3e2c_vjk8zr.png",
 				"https://img.freepik.com/free-photo/side-view-woman-clay-sculpting_23-2149730894.jpg?size=926&ext=jpg",
 				"https://img.freepik.com/free-photo/close-up-hands-holding-money_23-2148761613.jpg?size=926&ext=jpg",
 				"https://img.freepik.com/free-photo/high-angle-souvenirs-arrangement_23-2149726233.jpg?size=926&ext=jpg",
@@ -132,22 +132,30 @@ export default {
 			rememberMe: false,
 			valid: false,
 			visible: false,
+			loginError: ''
 		};
 	},
 	methods: {
 		async handleLogin() {
-			if (this.valid) {
-					const isLoggedIn = await this.userStore.login({ email: this.email, password: this.password });
-					if (isLoggedIn) {
-						this.$router.push("/");
-						this.userStore.loginError = "";
-						this.email = "";
-						this.password = "";
-					} else {
-						// Show error message
-						console.error("Login failed");
-					}
+		if (this.valid) {
+			const userStore = useUserStore();
+
+			const result = await userStore.login({ 
+			email: this.email, 
+			password: this.password 
+			});
+
+			if (result.success) {
+			this.$router.push("/");
+			this.loginError = "";
+			this.email = "";
+			this.password = "";
+			} else {
+			// Show error message
+			this.loginError = result.message;
+			console.error("Login failed");
 			}
+		}
 		},
 
 		async socialMediaLogin(provider) {

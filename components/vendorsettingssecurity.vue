@@ -98,7 +98,7 @@
 			<v-col cols="12" lg="4">
 				<div class="py-5 px-3">
 					<v-avatar size="60" class="mb-12"
-						><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1689951111/frame-7_cgys91.png"></v-img
+						><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893042/umoja-backup2/frame-7_cgys91_lmzvmc.png"></v-img
 					></v-avatar>
 
 					<p style="font-size: 20px; font-weight: 600">Devices</p>

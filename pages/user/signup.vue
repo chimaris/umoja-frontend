@@ -12,14 +12,14 @@
 					<v-col cols="6">
 						<v-btn @click="socialMediaLogin('google')" size="x-large" flat variant="outlined" block>
 							<v-avatar rounded="0" size="24" class="mr-2">
-								<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686302222/flat-color-icons_google_vhnhqm.png"></v-img> </v-avatar
+								<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893024/umoja-backup2/flat-color-icons_google_vhnhqm_pcmc3e.png"></v-img> </v-avatar
 							><span style="font-size: 12px; font-weight: 500">Sign Up with Google</span>
 						</v-btn>
 					</v-col>
 					<v-col cols="6">
 						<v-btn @click="socialMediaLogin('facebook')" size="x-large" flat color="black" block>
 							<v-avatar rounded="0" size="24" class="mr-2">
-								<v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686302222/bi_apple_qka2so.png"></v-img> </v-avatar
+								<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719308202/bi_apple_qka2so_mvxwf1.png"></v-img> </v-avatar
 							><span style="font-size: 12px; font-weight: 500">Sign Up with Facebook</span>
 						</v-btn>
 					</v-col>
@@ -71,7 +71,7 @@
 							</div>
 						</template>
 					</v-checkbox>
-					<p v-if="userStore.signUpError" style="color: red">{{ userStore.signUpError }}</p>
+					<p v-if="signupError" style="color: red">{{ signupError }}</p>
 					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-6">
 						<span class="mr-4" style="text-transform: none">Create an account</span>
 						<v-progress-circular v-if="userStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
@@ -108,6 +108,7 @@ const first_name = ref("");
 const password = ref("");
 const confirmPassword = ref("");
 const agree = ref(false);
+const signupError = ref("")
 
 const agreeRule = [(v) => !!v || "You must agree to the terms and conditions"];
 
@@ -124,8 +125,7 @@ async function socialMediaLogin(provider) {
 
 async function handleSubmit() {
 	if (valid.value) {
-		try {
-			const isSignedUp = await userStore.signup({
+			const result= await userStore.signup({
 				first_name: first_name.value,
 				last_name: last_name.value,
 				email: email.value,
@@ -133,23 +133,20 @@ async function handleSubmit() {
 				password_confirmation: confirmPassword.value,
 				terms_accepted: 1,
 			});
-			if (isSignedUp) {
+			if (result.success) {
 				router.push("/");
-				userStore.signUpError = "";
+				signupError.value = "";
 				first_name.value = "";
 				last_name.value = "";
 				email.value = "";
 				password.value = "";
 				password_confirmation.value = "";
 				agree.value = false;
+			}else{
+				signupError.value = result.message
 			}
-		} catch (error) {
-			// Handle any unexpected errors
-			console.error("An error occurred during signup:", error);
-			userStore.signUpError = error.message;
-		}
+		} 
 	}
-}
 
 const closePrivacyVisible = () => {
 	privacyVisible.value = false;

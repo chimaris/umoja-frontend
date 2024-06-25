@@ -7,7 +7,7 @@
 				<div class="w-100" style="height: calc(100vh - 96px); position: sticky; top: 69px">
 					<div style="position: absolute; left: 24px; bottom: 22px" class="d-flex pt-12 mt-12 justify-space-between align-center">
 						<v-avatar class="" @click="$router.push('/')" size="135" style="cursor: pointer; height: auto !important" rounded="0">
-							<v-img eager src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
+							<v-img eager src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718615349/umoja/Frame_4_emeelq_ajydmg.png"></v-img>
 						</v-avatar>
 					</div>
 					<v-card class="rounded-0 py-4 pl-4 pt-12" height="256px" flat color="#F6F7F9" min>

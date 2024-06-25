@@ -86,28 +86,42 @@ export const useProductStore = defineStore('productStore', {
       this.params[key] = "";
     },
     async fetchFilteredProducts() {
-      const api = useApi()
+      
       const params = new URLSearchParams(this.params).toString();
       this.productLoading = true;
       this.notFound = false;
+      const transformResponse = (data) => {
+        const jsonData = JSON.parse(data);
+        return {
+          Products: jsonData.data,
+          meta: {
+            last_page: jsonData.meta.last_page,
+            total: jsonData.meta.total,
+            from: jsonData.meta.from,
+            to: jsonData.meta.to,
+          }
+        }
+      };
+      const api = useApi(transformResponse)
       try{
         const res = await api({
           url: `allproducts/?page=${this.pageNo}&${params}`,
           method: 'GET'
         });
-        if (res.data.data.length == 0){
+        const {Products, meta} = res.data
+        if (Products.length == 0){
           this.notFound = true
           this.productLoading = false
-          this.productFrom = res.data.meta.from;
-          this.productTo = res.data.meta.to;
-          this.totalProducts = res.data.meta.total
+          this.productFrom = meta.from;
+          this.productTo = meta.to;
+          this.totalProducts = meta.total
           return
         }else{
-          this.products.main = res.data.data
-          this.productFrom = res.data.meta.from;
-          this.productTo = res.data.meta.to;
-          this.marketLastPage = res.data.meta.last_page
-          this.totalProducts = res.data.meta.total
+          this.products.main = Products
+          this.productFrom = meta.from;
+          this.productTo = meta.to;
+          this.marketLastPage = meta.last_page
+          this.totalProducts = meta.total
           this.notFound = false;
           this.productLoading = false
           return

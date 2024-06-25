@@ -13,7 +13,6 @@ export const useVendorStore = defineStore("vendor", {
 		vendorCleared: false,
 		showRegistrationModal: false,
 		loading: false,
-		loginError: "",
 		signupError: "",
 		resendError: "",
 		verifyError: "",
@@ -48,16 +47,15 @@ export const useVendorStore = defineStore("vendor", {
 				this.vendorEmail = email;
 				const { access_token } = response.data;
 				this.vendorToken = access_token;
-				return true;
+				return {success: true}
 			} catch (error) {
+				let errorMessage = "An error occurred. Please try again later.";
 				if (error.response) {
-					this.signUpError = error.response.data.message || "An error occurred during signup.";
+					errorMessage = error.response.data.message || "An error occurred during signup.";
 				} else if (error.request) {
-					this.signUpError = "No response received from server. Please try again later.";
-				} else {
-					this.signUpError = "An error occurred. Please try again later.";
+					errorMessage = "No response received from server. Please try again later.";
 				}
-				return false;
+				return {success: false, message: errorMessage}
 			} finally {
 				this.loading = false;
 			}
@@ -131,16 +129,15 @@ export const useVendorStore = defineStore("vendor", {
 				await this.getUser(id);
 				this.verified = true;
 				this.vendorIsLoggedIn = true;
-				return true;
+				return {success: true}
 			} catch (error) {
+				let errorMessage = "An error occurred. Please try again later."
 				if (error.response) {
-					this.loginError = error.response.data.message || "An error occurred during signup.";
+					errorMessage = error.response.data.message || "An error occurred during signup.";
 				} else if (error.request) {
-					this.loginError = "No response received from server. Please try again later.";
-				} else {
-					this.loginError = "An error occurred. Please try again later.";
-				}
-				return false;
+					errorMessage= "No response received from server. Please try again later.";
+				} 
+				return {success: false, message: errorMessage}
 			} finally {
 				this.loading = false;
 			}

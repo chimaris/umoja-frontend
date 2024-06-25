@@ -10,7 +10,7 @@
 			<v-expand-transition leave-absolute>
 				<div v-if="genderExpand">
 					<v-row dense>
-							<v-col @click="productStore.params.gender = n.name"  :key="i" v-for="(n, i) in genders">
+							<v-col @click="productStore.params.gender = n"  :key="i" v-for="(n, i) in ['Male', 'Female']">
 								<p
 									class="px-3 py-2 d-flex align-center justify-center"
 									style="
@@ -24,11 +24,11 @@
 										border: 1px solid var(--carbon-2, #cecece);
 									"
 									:style="{
-										backgroundColor: productStore.params.gender === n.name ? '#E5EDEC' : '#ffffff',
-										color: productStore.params.gender === n.name ? '#2C6E63' : '#1e1e1e'
+										backgroundColor: productStore.params.gender === n ? '#E5EDEC' : '#ffffff',
+										color: productStore.params.gender === n ? '#2C6E63' : '#1e1e1e'
 									}"
 								>
-									{{ n.name }}
+									{{ n }}
 								</p>
 							</v-col>
 						</v-row>
@@ -301,7 +301,7 @@
 <script setup>
 import { ref, onMounted, computed } from 'vue';
 import { useProductStore } from "~/stores/productStore";
-import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories, genders, getGenderId} from '~/composables/useCategories';
+import {fetchCategories, getCategoryId, getCategoryName, loadingSub, fetchSubCategories} from '~/composables/useCategories';
 
 const props = defineProps({
 	closeModal: {

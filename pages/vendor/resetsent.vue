@@ -3,7 +3,7 @@
 		<authHeader />
 		<div class="d-flex justify-center py-12 px-2">
 			<v-card color="transparent" flat class="pa-12 text-center rounded-lg" width="100%" max-width="582px">
-				<v-img eager class="mx-auto mb-6" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229325/Frame_o0hnea.png" width="195"></v-img>
+				<v-img eager class="mx-auto mb-6" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719308470/Frame_o0hnea_ldockg.png" width="195"></v-img>
 				<h1
 					style="
 						font-style: normal;

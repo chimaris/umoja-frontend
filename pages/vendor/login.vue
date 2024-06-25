@@ -40,7 +40,7 @@
 						v-model="password"
 					></v-text-field>
 					<v-btn to="/vendor/forgot" style="color: #0076ff; text-decoration: none" variant="text" class="px-0 mb-4"> Forgot Password? </v-btn>
-					<p style="color: red; font-size: 16px">{{ vendorStore.loginError }}</p>
+					<p style="color: red; font-size: 16px">{{ loginError }}</p>
 					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-6">
 						<span class="mr-4" style="text-transform: none">Login</span>
 						<v-progress-circular v-if="vendorStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
@@ -65,21 +65,20 @@ const visible = ref(false);
 const valid = ref(false);
 const vendorStore = useVendorStore();
 const router = useRouter();
+const loginError = ref("")
 
 async function handleLogin() {
 	if (valid.value) {
-		try {
-			const isLoggedIn = await vendorStore.login({ email: email.value, password: password.value });
-			if (isLoggedIn) {
+			const result = await vendorStore.login({ email: email.value, password: password.value });
+			if (result.success) {
 				email.value = "";
 				password.value = "";
 				vendorStore.selectedItem = 'Homepage';
 				router.push('/vendor/dashboard/Homepage');
-				vendorStore.loginError = "";
+				loginError.value = "";
+			}else{
+				loginError.value = result.message
 			}
-		} catch (error) {
-			console.error("An error occurred during login:", error);
-		}
+		} 
 	}
-}
 </script>

@@ -118,7 +118,7 @@
 							</div>
 						</template>
 					</v-checkbox>
-					<p v-if="vendorStore.signupError" style="color: red">{{ vendorStore.signUpError }}</p>
+					<p v-if="signupError" style="color: red">{{ signupError }}</p>
 					<v-btn type="submit" :disabled="!valid" block color="green" flat size="x-large" class="rounded-lg mt-6">
 						<span class="mr-4" style="text-transform: none">Create an account</span>
 						<v-progress-circular v-if="vendorStore.loading" indeterminate :width="2" :size="25"></v-progress-circular>
@@ -155,6 +155,7 @@ const password = ref("");
 const confirmPassword = ref("");
 const agree = ref(false);
 const valid = ref(false)
+const signupError = ref("")
 
 const agreeRule = [(v) => !!v || "You must agree to the terms and conditions"];
 
@@ -171,8 +172,7 @@ async function socialMediaLogin(provider) {
 
 async function handleSubmit() {
 	if (valid.value) {
-		try {
-			const isSignedUp = await vendorStore.signupVendor({
+			const result = await vendorStore.signupVendor({
 				first_name: first_name.value,
 				last_name: last_name.value,
 				email: email.value,
@@ -180,20 +180,18 @@ async function handleSubmit() {
 				password_confirmation: confirmPassword.value,
 				terms_accepted: 1,
 			});
-			if (isSignedUp) {
+			if (result) {
 				router.push("/vendor/verification");
-				vendorStore.signupError = "";
+				signupError.value = "";
 				first_name.value = "";
 				last_name.value = "";
 				email.value = "";
 				password.value = "";
 				password_confirmation.value = "";
 				agree.value = false;
+			}else{
+				signupError.value = result.message
 			}
-		} catch (error) {
-			// Handle any unexpected errors
-			vendorStore.signupError = error.message;
-		}
 	}
 }
 const closePrivacyVisible = () => {

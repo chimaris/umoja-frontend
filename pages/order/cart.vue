@@ -53,7 +53,7 @@
 																<v-img
 																	v-if="item.photo == null"
 																	cover
-																	src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"
+																	src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990440/umoja/download_1_dwnmbf_wg1ded.png"
 																></v-img>
 																<v-img v-else-if="item.photo.includes(',')" cover :src="item.photo.split(',')[0]"></v-img>
 																<v-img v-else cover :src="item.photo"></v-img>
@@ -129,7 +129,7 @@
 													<v-img
 														v-if="item.photo == null"
 														cover
-														src="https://res.cloudinary.com/payhospi/image/upload/v1714649462/umoja/download_1_dwnmbf.png"
+														src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990440/umoja/download_1_dwnmbf_wg1ded.png"
 													></v-img>
 													<v-img v-else-if="item.photo.includes(',')" cover :src="item.photo.split(',')[0]"></v-img>
 													<v-img v-else cover :src="item.photo"></v-img>
@@ -237,7 +237,7 @@
 						max-height="674px"
 						cover
 						eager
-						src="https://res.cloudinary.com/payhospi/image/upload/v1684673782/Rectangle_465_sohqlg.png"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893064/umoja-backup2/Rectangle_465_sohqlg_m8vcnf.png"
 						height="100%"
 					>
 						<div class=" ">
@@ -265,7 +265,7 @@
 								class="d-flex align-center pa-4"
 							>
 								<v-avatar size="50" class="mr-4"
-									><v-img class="bg-grey-lighten-2" src="https://res.cloudinary.com/payhospi/image/upload/v1684658586/Frame_481586_piaotu.png"></v-img
+									><v-img class="bg-grey-lighten-2" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893046/umoja-backup2/Frame_481586_piaotu_fijtzh.png"></v-img
 								></v-avatar>
 								<p class="text-white">@nawi_the_skulptur_queen</p>
 							</v-card>
@@ -366,10 +366,10 @@ async function confirmClearCart() {
 }
 // Computed properties
 const buttons = computed(() => [
-	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png" },
-	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png" },
-	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png" },
-	{ icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png" },
+	{ icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/Vector_mgadhr_nkvm4k.png" },
+	{ icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893079/umoja-backup2/facebook_tup8rq_ihxcho.png" },
+	{ icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990456/umoja/instagram_wogd5x_wj1not.png" },
+	{ icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990448/umoja/globe-americas_annyvh_uzbrub.png" },
 ]);
 
 

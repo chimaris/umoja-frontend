@@ -21,6 +21,10 @@ watch(() => props.saleRevenue, () => {
 
 
 function updateSeries() {
+	series3.value = [
+		{ name: 'Revenue Growth',
+        data: Array(12).fill(0),}
+	]
     props.saleRevenue.forEach(dataPoint => {
             const monthIndex = dataPoint.month - 1; // Convert month to zero-based index
             series3.value[0].data[monthIndex] = dataPoint.total_amount / 1000; // Convert amount to thousands

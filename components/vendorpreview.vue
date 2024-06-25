@@ -8,7 +8,7 @@
 			:src="
 				vendor.vendor_details?.cover_image
 					? vendor.vendor_details?.cover_image
-					: 'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'
+					: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893068/umoja-backup2/Rectangle_448_2_lh8kz3_fhxaab.png'
 			"
 		>
 			<v-container style="max-width: 1400px; height: 100%; width: 100%" class="d-flex flex-column pt-6 justify-between align-start">
@@ -59,7 +59,7 @@
 											v-else
 											cover
 											class="bg-grey-lighten-3 rounded-xl"
-											src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"
+											src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990483/umoja/profile_image_pd4dcv_alvzjz.png"
 										></v-img>
 									</v-avatar>
 									<h3 class="py-4 pb-6" style="font-size: 24px; font-weight: 800; line-height: 30px; text-transform: capitalize">
@@ -72,7 +72,7 @@
 									<div class="pa-4 px-6 align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
-												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684592715/umoja/profile-2user_2_jcekww.png"></v-img
+												><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990484/umoja/profile-2user_2_jcekww_nw2jiw.png"></v-img
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Followers</p>
 										</div>
@@ -83,7 +83,7 @@
 									<div class="pa-4 px-6 align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
-												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686310494/game-icons_africa_b7x2hf.png"></v-img
+												><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719302755/game-icons_africa_b7x2hf_mxocvp.png"></v-img
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
@@ -93,7 +93,7 @@
 									<v-divider></v-divider>
 									<div class="pa-4 px-6 align-center d-flex">
 										<v-avatar rounded="0" size="19"
-											><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
+											><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/location_q0ouqw_pv4z9t.png"></v-img
 										></v-avatar>
 										<p class="textClass px-4" style="text-transform: capitalize">
 											{{ vendor.vendor_details?.address }}, {{ vendor.vendor_details?.city }}, {{ vendor.vendor_details?.state }}

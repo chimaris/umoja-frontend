@@ -8,7 +8,7 @@
 			width="100%"
 			cover
 			class="d-flex bg-grey justify-end align-end"
-			:src="vendor?.cover_image ? vendor.cover_image : 'https://res.cloudinary.com/payhospi/image/upload/v1685854735/Rectangle_448_2_lh8kz3.png'"
+			:src="vendor?.cover_image ? vendor.cover_image : 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893068/umoja-backup2/Rectangle_448_2_lh8kz3_fhxaab.png'"
 		>
 			<v-container
 				class="w-100"
@@ -49,7 +49,7 @@
 									<div class="pa-4 align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
-												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684592715/umoja/profile-2user_2_jcekww.png"></v-img
+												><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990484/umoja/profile-2user_2_jcekww_nw2jiw.png"></v-img
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Followers</p>
 										</div>
@@ -58,7 +58,7 @@
 									<div class="px-4 align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
-												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686310494/game-icons_africa_b7x2hf.png"></v-img
+												><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719302755/game-icons_africa_b7x2hf_mxocvp.png"></v-img
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
@@ -68,7 +68,7 @@
 								<v-divider></v-divider>
 								<div class="pa-4 px-6 align-center d-flex">
 									<v-avatar rounded="0" size="19"
-										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
+										><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/location_q0ouqw_pv4z9t.png"></v-img
 									></v-avatar>
 									<p style="text-transform: capitalize;" class="textClass px-4">{{ vendor?.address }}, {{ vendor?.city }}, {{ vendor?.state }} {{ vendor?.country_name }}</p>
 								</div>
@@ -133,7 +133,7 @@
 									<div class="px-4 align-center justify-space-between d-flex">
 										<div class="align-center d-flex">
 											<v-avatar rounded="0" size="23"
-												><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1686310494/game-icons_africa_b7x2hf.png"></v-img
+												><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719302755/game-icons_africa_b7x2hf_mxocvp.png"></v-img
 											></v-avatar>
 											<p class="textClass text-grey-darken-1 px-2">Country</p>
 										</div>
@@ -143,7 +143,7 @@
 								<v-divider></v-divider>
 								<div class="py-6 align-center d-flex">
 									<v-avatar rounded="0" size="19"
-										><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1684591613/umoja/location_q0ouqw.png"></v-img
+										><v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/location_q0ouqw_pv4z9t.png"></v-img
 									></v-avatar>
 									<p style="text-transform: capitalize;" class="textClass px-4">{{ vendor?.address }}, {{ vendor?.city }}, {{ vendor?.state }} {{ vendor?.country_name }}</p>
 								</div>

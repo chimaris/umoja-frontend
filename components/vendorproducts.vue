@@ -273,7 +273,7 @@
 					<v-img
 						:width="300"
 						cover
-						src="https://res.cloudinary.com/payhospi/image/upload/v1713433043/umoja/product-empty-box.png"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990471/umoja/product-empty-box_f8mjno.png"
 						style="filter: grayscale(100%) brightness(100%)"
 					></v-img>
 					<h2 style="color: #333; font-size: 24px; font-weight: 700; line-height: 30px">Your products will show here</h2>
@@ -329,7 +329,7 @@
 					<v-img
 						:width="10"
 						:height="40"
-						src="https://res.cloudinary.com/payhospi/image/upload/v1713471908/umoja/vertical-line.svg"
+						src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/vertical-line_gvytku.svg"
 						class="mx-2"
 					></v-img>
 

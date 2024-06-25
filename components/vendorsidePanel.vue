@@ -9,7 +9,7 @@
 								<div class="d-flex pa-4 align-center justify-space-between">
 									<v-avatar size="48" color="white">
 										<v-img cover v-if="vendor.vendor_details?.profile_photo" :src="vendor.vendor_details?.profile_photo"></v-img>
-										<v-img cover v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
+										<v-img cover v-else src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719305736/Frame_427320539_v9jme9_udrkdt.png"></v-img>
 									</v-avatar>
 									<div class="text-left px-4" style="max-width: 150px">
 										<p
@@ -59,7 +59,7 @@
 						<div v-bind="props" class="px-5">
 							<v-avatar size="48" color="white">
 								<v-img cover v-if="vendor.vendor_details?.profile_photo" :src="vendor.vendor_details?.profile_photo"></v-img>
-								<v-img cover v-else src="https://res.cloudinary.com/payhospi/image/upload/v1685685306/Frame_427320539_v9jme9.png"></v-img>
+								<v-img cover v-else src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1719305736/Frame_427320539_v9jme9_udrkdt.png"></v-img>
 							</v-avatar>
 						</div>
 					</template>
@@ -153,16 +153,13 @@
 		<div style="position: fixed; bottom: 10px; width: 100%; left: -5px; background-color: #f6f7f9">
 			<div v-if="!sidebar" class="d-flex pt-12 px-4 justify-space-between align-center style-4">
 				<v-avatar style="cursor: pointer; padding-top: 20px; margin-bottom: 32px" size="57" rounded="0">
-					<v-img eager="" src="https://res.cloudinary.com/payhospi/image/upload/v1688141514/Frame_2_gfd65l.png"></v-img>
+					<v-img eager="" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893051/umoja-backup2/Frame_2_gfd65l_wxdmoh.png"></v-img>
 				</v-avatar>
 			</div>
 			<div v-else class="d-flex pt-12 px-8 justify-space-between align-center style-6">
 				<v-avatar size="135" rounded="0" style="cursor: pointer; padding-top: 20px">
-					<v-img src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
+					<v-img src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718615349/umoja/Frame_4_emeelq_ajydmg.png"></v-img>
 				</v-avatar>
-				<!-- <v-avatar style="cursor: pointer;" class="style-7" @click="$router.push('/')" size="135" rounded="0">
-            <v-img eager="" src="https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png"></v-img>
-          </v-avatar> -->
 			</div>
 		</div>
 		<v-dialog v-model="logOutUser" persistent max-width="600">
