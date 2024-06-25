@@ -20,16 +20,31 @@ line-height: 30px;">Hi {{vendor.first_name}} {{ vendor.last_name }}, Welcome bac
 </div>
       </template>
       <v-list>
-        <v-list-item
-          v-for="(item, index) in ['Last 7 days', 'This Month', 'This Year', 'Custom']"
+        <v-list-item 
+          v-for="(item, index) in ['Last 7 days', 'This Month', 'This Year']"
           :key="index"
-          :value="index"
+          :value="item"
+          @click="filterBy = item"
         >
           <v-list-item-title>{{ item }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-menu>
-  
+    <v-menu open-on-hover :close-on-content-click="false">
+					<template v-slot:activator="{ props }">
+						<v-text-field
+						v-bind="props" 
+						style="border: 1px solid #e5e5e5; border-radius: 6px; min-width: 300px;"
+						variant="outlined"
+						density="compact"
+						hide-details
+						prepend-inner-icon="mdi mdi-calendar"
+						placeholder="Select date to filter by"
+						v-model="formattedDate"
+					></v-text-field>
+					</template>
+					<v-date-picker style="width: 100%;" v-model="selectedDate" :max="new Date().toISOString().substr(0, 10)"></v-date-picker>
+				</v-menu>
     <v-text-field style="" variant="outlined" density="compact" class="ml-2 borderedinput" hide-details="" prepend-inner-icon="mdi mdi-magnify" placeholder="Search"></v-text-field>
   </div>
  </div>
@@ -67,9 +82,9 @@ line-height: 18px;
 color: #00966D;" class="text-grey-lighten-2" :class="n.trending? 'text-grey-lighten-2' : 'text-red'"><v-icon :icon="n.trending? 'mdi mdi-trending-up':'mdi mdi-trending-down'"></v-icon> {{n.trend}}%</p>
         <p style="font-weight: 500;
 font-size: 14px;
-line-height: 18px;
+line-height: 18px; text-transform: lowercase;
 letter-spacing: -0.01em;
-color: #969696;">vs last 7 days</p>
+color: #969696;">vs {{ filterBy == 'Date' ? 'the year' : filterBy }}</p>
     </div>
 </div>
     </v-card>
@@ -81,7 +96,7 @@ color: #969696;">vs last 7 days</p>
     <v-col cols="12" lg="6">
         <v-card  class="mx-auto cardStyle" width="100%" min-height="450px" style=""  flat >
            <h4 class="mb-2 timernum d-flex align-center text-left">Revenue Growth <span class="ml-2 lightText">(EUR)</span></h4> 
-           <p class="lightText2">Revenue growth analytics of the week </p>
+           <p class="lightText2">Revenue growth analytics of the {{ filterDuration }} </p>
            <!-- <revenuegraph /> -->
            <weeklyrevenue :revenue="weeklyRevenue" />
   </v-card>
@@ -523,7 +538,7 @@ import {formattedPrice, convertToShorthand } from '~/utils/price'
 import {getAllReview} from '~/composables/useVendorReview';
 import {countryCodes} from '~/utils/countryapi';
 import {getdateRegistered} from '~/utils/date'
-import {getWeeklyRevenue, getTopProducts, getTotalRevenue, getCountrySold, getRecentOrders, getTransactions, getCustomers, getNoSold, getOutOfStock, getTopTransaction } from '~/composables/useDashboard';
+import {getWeeklyRevenue, getFilteredValues, getTopProducts, getTotalRevenue, getCountrySold, getRecentOrders, getTransactions, getCustomers, getNoSold, getOutOfStock, getTopTransaction } from '~/composables/useDashboard';
 import { findIndex } from 'lodash';
 
     const vendorStore = useVendorStore()
@@ -534,15 +549,34 @@ import { findIndex } from 'lodash';
     const show_more = ref(false)
     const rating = ref(4)
     const text = ref(1)
+    // filter
+    const filterBy = ref("This Year")
+    const selectedDate = ref(null)
+    const generalStats = ref({
+      total_revenue: 0,
+      total_products_sold: 0,
+      total_customers: 0,
+      total_transactions: 0
+    })
+    const filterDuration = computed(() => {
+      switch (filterBy.value) {
+        case 'This Year':
+          return 'year'
+        case 'This Month':
+          return 'month'
+        case 'Last 7 days':
+          return 'week';
+        case 'Date':
+          return 'year';
+        default:
+          return '';
+      }
+    })
     const weeklyRevenue = ref([])
     const topTransactions = ref([])
     const topProducts = ref([])
     const recentOrders = ref([])
     const noStock = ref([])
-    const totalRevenue = ref(null)
-    const noCusomers = ref(null)
-    const noTransactions = ref(null)
-    const noProductSold = ref(null)
     const topTranLoading = ref(true)
     const topProdLoading = ref(true)
 	const recentLoading = ref(true)
@@ -560,7 +594,14 @@ import { findIndex } from 'lodash';
 			}
 			
 		}
-
+    const formattedDate = computed(() => {
+			if (!selectedDate.value) {
+				return "";
+			}
+			const date = new Date(selectedDate.value);
+			const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+			return localDate.toISOString().substring(0, 10);
+		});
     const config = useRuntimeConfig();
     const mapOptions = ref({
       style: 'mapbox://styles/mapbox/light-v11', 
@@ -579,13 +620,9 @@ import { findIndex } from 'lodash';
 		}
 	}
     onMounted(async () => {
-    
       if (hasSale.value){
         weeklyRevenue.value = await getWeeklyRevenue()
-        totalRevenue.value = await getTotalRevenue()
-        noTransactions.value = await getTransactions()
-        noCusomers.value = await getCustomers()
-        noProductSold.value = await getNoSold()
+        generalStats.value = await getFilteredValues(filterBy.value)
         soldByCountry.value = await getCountrySold()
         if (soldByCountry.value){
           mapCountry.value = soldByCountry.value[0]?.country
@@ -638,6 +675,15 @@ import { findIndex } from 'lodash';
 watch(() => mapCountry.value, async () => {
   await zoomToCountry()
 })
+watch(() => [filterBy.value, formattedDate.value], async([newVal, newDate]) => {
+    if (newDate){
+      filterBy.value = 'Date'
+      generalStats.value = await getFilteredValues(filterBy.value, formattedDate.value)
+    }else if(newVal && newVal !== 'Date'){
+      generalStats.value = await getFilteredValues(filterBy.value)
+    }
+    
+})
 
     
     const dashes = computed(() => {
@@ -646,7 +692,7 @@ watch(() => mapCountry.value, async () => {
         img: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901375/Frame_427320547_1_vxn2kx_budj1o.png',
         name: 'Total Revenue',
         tooltip: 'Total revenue made in the last seven days',
-        amount: hasSale.value ? formattedPrice(totalRevenue.value) : '£ 0.00',
+        amount: hasSale.value ? formattedPrice(generalStats.value?.total_revenue) : '£ 0.00',
         trend: '0',
         trending:true
     },
@@ -654,7 +700,7 @@ watch(() => mapCountry.value, async () => {
         img: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901499/Frame_427320547_hzperi_uifhml.png',
         name: 'Total Customers',
         tooltip: 'Total customers in the last seven days',
-        amount: hasSale.value ?  convertToShorthand(noCusomers.value) : '0',
+        amount: hasSale.value ?  convertToShorthand(generalStats.value?.total_customers) : '0',
         trend: '0',
         trending:true
     },
@@ -662,7 +708,7 @@ watch(() => mapCountry.value, async () => {
         img: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901580/Frame_427320547_3_rhk1fq_bfbgzv.png',
         name: 'Total Transactions',
         tooltip: 'Total transactions in the last seven days',
-        amount: hasSale.value ?  convertToShorthand(noTransactions.value) :'0',
+        amount: hasSale.value ?  convertToShorthand(generalStats.value?.total_transactions) :'0',
         trend: '0',
         trending:true
     },
@@ -670,7 +716,7 @@ watch(() => mapCountry.value, async () => {
         img: 'https://res.cloudinary.com/dd26v0ffw/image/upload/v1718901642/Frame_427320547_2_krqzsv_rnbh03.png',
         name: 'Total Products Sold',
         tooltip: 'Total products sold in the last seven days',
-        amount: hasSale.value ?  convertToShorthand(noProductSold.value) : '0',
+        amount: hasSale.value ?  convertToShorthand(generalStats.value?.total_products_sold) : '0',
         trend: '0',
         trending:true
     },

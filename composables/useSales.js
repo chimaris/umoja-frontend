@@ -39,7 +39,7 @@ export const getSales = async (filterby) => {
       url = `vendor/sold_products?year=${year}`
     }
     if (filterby == 'This Month'){
-      url = `vendor/sold_products?month=${getCurrentMonthIndex()}`
+      url = `vendor/sold_products?month=${new Date().getMonth() + 1}`
     }
           try{
               const res = await api({
