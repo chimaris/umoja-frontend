@@ -23,7 +23,6 @@ export const getTotalRevenue = async () => {
         return res.data.total_amount
     }catch(error){
         console.error(error)
-        return false
     }
 }
 export const getTransactions = async () => {
@@ -36,7 +35,6 @@ export const getTransactions = async () => {
         return res.data.total_transactions
     }catch(error){
         console.error(error)
-        return false
     }
 }
 export const getCustomers = async () => {
@@ -49,7 +47,6 @@ export const getCustomers = async () => {
         return res.data.total_customers
     }catch(error){
         console.error(error)
-        return false
     }
 }
 export const getNoSold = async () => {
@@ -62,7 +59,6 @@ export const getNoSold = async () => {
         return res.data.total_products_sold
     }catch(error){
         console.error(error)
-        return false
     }
 }
 export const getTopTransaction = async () => {
@@ -131,3 +127,41 @@ export const getCountrySold = async () => {
         return []
     }
 }
+
+export const getFilteredValues = async (filter, date) => {
+    const api = vendorUseApi()
+    let url;
+    switch (filter) {
+        case 'This Year':
+            const year = new Date().getFullYear()
+            url = `vendor/vendor_stats?filter=year&year=${year}`
+            break;
+        case 'This Month':
+            url = `vendor/vendor_stats?filter=month&month=${new Date().getMonth() + 1}`
+            break;
+        case 'Last 7 days':
+            url = `vendor/vendor_stats?filter=last7days`
+            break;
+        case 'Date':
+            if (date) {
+                url = `vendor/vendor_stats?filter=custom&start_date=${date}`
+            } else {
+                throw new Error('Date filter selected but no date provided')
+            }
+            break;
+        default:
+            throw new Error('Invalid filter')
+        }
+    
+    try {
+        const res = await api({
+            url: url,
+            method: 'GET'
+        });
+            return res.data
+        } catch (err) {
+            console.error(err)
+            return []
+        }
+    }
+    
