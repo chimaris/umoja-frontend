@@ -7,7 +7,7 @@
 			width="100%"
 			cover
 			class="d-flex bg-grey justify-end align-start"
-			src="https://res.cloudinary.com/payhospi/image/upload/v1684584271/Rectangle_448_x784z8.png"
+			src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893044/umoja-backup2/Rectangle_448_x784z8_jovui2.png"
 		>
 			<v-container style="max-width: 1400px; height: 100%; width: 100%" class="d-flex pt-6 justify-end align-start">
 				<v-btn
@@ -18,7 +18,7 @@
 					style="text-transform: none !important"
 					color="rgba(0, 0, 0, 0.5)"
 				>
-					<v-img class="mx-2" height="24" width="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716540767/umoja/edit-icon.svg', 60)" />
+					<v-img class="mx-2" height="24" width="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990442/umoja/edit-icon_uq4ckx.svg', 60)" />
 					<span style="font-size: 12px; font-weight: 400"> Edit Cover Photo </span>
 				</v-btn>
 				<v-menu open-on-hover="" class="d-block d-md-none">
@@ -53,7 +53,7 @@
 				<div class="d-flex align-center justify-space-between">
 					<div class="d-flex flex-column flex-md-row align-md-center">
 						<v-avatar color="grey-lighten-3" style="overflow: visible" class="mr-2" :size="$vuetify.display.mobile ? '111' : '166'">
-							<v-img :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1689338074/frame-481584_vquap5.png', 300)"></v-img>
+							<v-img :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1718893043/umoja-backup2/frame-481584_vquap5_szac4e.png', 300)"></v-img>
 							<v-btn
 								color="white"
 								rounded="xl"
@@ -63,7 +63,7 @@
 								style="position: absolute; height: 32px; width: 32px; border-radius: 50%"
 								:style="{ right: $vuetify.display.mobile ? '2px' : '11px', top: $vuetify.display.mobile ? '2px' : '8px' }"
 							>
-								<v-img height="24" width="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/payhospi/image/upload/v1716541214/umoja/Pen_2_oztt3w.svg', 60)" />
+								<v-img height="24" width="24" :src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990470/umoja/Pen_2_oztt3w_yitjgc.svg', 60)" />
 							</v-btn>
 						</v-avatar>
 						<div class="pt-4 d-none d-md-block">
@@ -177,7 +177,7 @@
 								</span>
 							</v-btn>
 							<div class="d-block d-md-none">
-								<v-img height="11" width="16" src="https://res.cloudinary.com/payhospi/image/upload/v1716302680/umoja/arrow.svg" />
+								<v-img height="11" width="16" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990513/umoja/arrow_chyq9y.svg" />
 							</div>
 						</div>
 					</div>
@@ -335,17 +335,17 @@ export default {
 		},
 		buttons() {
 			return [
-				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684591614/umoja/Vector_mgadhr.png",
+			{
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990511/umoja/Vector_mgadhr_nkvm4k.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/facebook_tup8rq.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990442/umoja/facebook_tup8rq_nm5k9d.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/instagram_wogd5x.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990456/umoja/instagram_wogd5x_wj1not.png",
 				},
 				{
-					icon: "https://res.cloudinary.com/payhospi/image/upload/v1684592133/umoja/globe-americas_annyvh.png",
+					icon: "https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990448/umoja/globe-americas_annyvh_uzbrub.png",
 				},
 			];
 		},

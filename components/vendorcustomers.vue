@@ -353,7 +353,7 @@
 																	<!-- <p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696">Fashion and Style</p> -->
 																</div>
 															</td>
-															<td style="font-size: 14px" class="text-grey-darken-1 px-1">
+															<td style="font-size: 14px; padding-right: 10px;" class="text-grey-darken-1">
 																<v-chip rounded="lg" color="blue">
 																	<span
 																		style="color: var(--carbon-4, #333); font-size: 14px !important; font-weight: 600; line-height: 20px"
@@ -363,7 +363,7 @@
 																	</span>
 																</v-chip>
 															</td>
-															<td style="color: #000; font-size: 14px; font-weight: 500" class="text-right px-1">
+															<td style="color: #000; font-size: 14px; padding-right: 40px; font-weight: 500" class="text-right">
 																<span> {{getdateRegistered(item.created_at)}} </span>
 															</td>
 															<td style="color: #000; font-size: 14px; font-weight: 500" class="text-right px-1">
