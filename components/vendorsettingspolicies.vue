@@ -13,7 +13,7 @@
 			<div class="mt-5" style="border: 1px solid #cecece; border-radius: 15px">
 				<div class="d-flex justify-space-between align-center w-100 pa-4">
 					<p style="font-size: 18px; font-weight: 600; color: #333">Return Policy</p>
-					<v-btn variant="text" class="ml-4 menubar text-grey-darken-3 d-flex align-center" size="default" style="font-weight: 600; font-size: 16px">
+					<v-btn @click="vendorStore.renderReturnRule = true" variant="text" class="ml-4 menubar text-grey-darken-3 d-flex align-center" size="default" style="font-weight: 600; font-size: 16px">
 						<v-img
 							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
 							contain
@@ -21,7 +21,7 @@
 							width="20"
 							height="20"
 						></v-img>
-						Edit
+						{{ hasPolicy ? 'Edit' : 'Set Return Rule' }}
 					</v-btn>
 				</div>
 				<v-divider></v-divider>
@@ -54,13 +54,13 @@
 
 					<div class="d-flex justify-space-between align-center pa-4" style="border: 1px solid #cecece; border-radius: 15px">
 						<div>
-							<ul
-								v-for="item in ['Returns accepted for 30 davs', 'Free return shipping', 'No restocking fee']"
+							<!-- <ul
+								v-for="item in returnPolicies"
 								:key="item"
 								class="mx-5"
 							>
 								<li style="font-weight: 500; font-size: 16px; color: #969696">{{ item }}</li>
-							</ul>
+							</ul> -->
 						</div>
 						<span @click="vendorStore.renderReturnRule = true" style="color: #1273eb; font-weight: 500; font-size: 14px; cursor: pointer">
 							<span>Manage</span>
@@ -81,45 +81,20 @@
 	</div>
 </template>
 
-<script>
-import { Editor, EditorContent } from "@tiptap/vue-3";
-import StarterKit from "@tiptap/starter-kit";
-import TextAlign from "@tiptap/extension-text-align";
-import Underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
+<script setup>
 import { useVendorStore } from "~/stores/vendorStore";
+import { usePolicy } from "~/composables/policy";
 
-export default {
-	data() {
-		return {
-			editor: null,
-		};
-	},
+const vendorStore = useVendorStore()
+const vendor = computed(() => vendorStore.vendor)
+const hasPolicy = computed(() => vendorStore.vendor.vendor_details?.policy)
+const returnPolicies = ref([])
 
-	mounted() {
-		this.editor = new Editor({
-			extensions: [
-				StarterKit,
-				Link,
-				Underline,
-				TextAlign.configure({
-					types: ["heading", "paragraph"],
-				}),
-			],
-		});
-
-		this.editor.on("update", ({ editor }) => {
-			this.editorContent = editor.getText(); // or use getText() for plain text
-		});
-	},
-
-	computed: {
-		vendorStore() {
-			console.log("Rate ", useVendorStore().renderRate);
-			return useVendorStore();
-		},
-	},
-};
+onMounted(async () => {
+	if (hasPolicy.value){
+		returnPolicies.value = await usePolicy()
+	}
+})
 </script>
 
 <style scoped>

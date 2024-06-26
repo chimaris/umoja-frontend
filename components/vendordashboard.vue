@@ -196,7 +196,7 @@ color: #969696;" class="ml-4">{{ n?.percentage }}%</p>
             </div>
             <v-btn v-if="hasSale" variant="text" color="#1361F4" class="" >View All</v-btn>
         </div>
-        <div v-if="!hasSale" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
+        <div v-if="!hasSale || topTransactions.length == 0" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
 							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
 							<span>No Product has been sold yet</span>
 					</div>
@@ -207,7 +207,7 @@ color: #969696;" class="ml-4">{{ n?.percentage }}%</p>
               indeterminate
             ></v-progress-circular>
           </div>
-            <v-table v-if="hasSale && !topTranLoading" style="    height: 190px!important;
+            <v-table v-if="topTransactions.length > 0 && !topTranLoading" style="    height: 190px!important;
             overflow: scroll;">
             <thead>
               <tr class="bg-grey-lighten-3 ">
@@ -286,7 +286,7 @@ color: #969696;" class="ml-4">{{ n?.percentage }}%</p>
             </div>
             <v-btn v-if="hasSale" variant="text" color="#1361F4" >View more</v-btn>
         </div>
-        <div v-if="!hasSale" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
+        <div v-if="!hasSale || topProducts.length == 0" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
 							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
 							<span>No Product has been sold yet</span>
 				</div>
@@ -296,7 +296,7 @@ color: #969696;" class="ml-4">{{ n?.percentage }}%</p>
               indeterminate
             ></v-progress-circular>
         </div>
-        <v-row v-if="hasSale && !topProdLoading" class="mt-0">
+        <v-row v-if="topProducts.length > 0 && !topProdLoading" class="mt-0">
              <v-col v-for="n in topProducts.slice(0,3)"  :key="n">
 				<v-img width="100%" cover height="200" class="rounded-lg" :src="n.product_photo.split(',')[0]"></v-img>
 			</v-col>
@@ -329,6 +329,10 @@ your decision</p>
             <v-btn variant="text" color="#1361F4" class="" >
 See All            </v-btn>
         </div>
+        <div v-if="Review.length == 0" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
+							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
+							<span>No Review yet</span>
+					</div>
         <v-carousel style="overflow: visible;"
     height="auto" 
      :show-arrows="false" hide-delimiter-background="" >
@@ -390,6 +394,10 @@ color: #333333;" class="px-4">{{item?.review_comment}}
             <v-btn :disabled="recentOrders.length == 0" variant="text" color="#1361F4" class="" >
 View More            </v-btn>
         </div>
+        <div v-if="!hasSale || recentOrders.length == 0" style="display: flex; flex-direction: column; justify-content: center; color: #969696; width: 100%; height: 100%; gap: 10px; align-items: center" class="">
+							<v-icon><i class="mdi mdi-block-helper"></i></v-icon>
+							<span>No Product has been sold yet</span>
+					</div>
 		<div v-if="hasSale && recentLoading" class="d-flex align-center justify-center" style="height: 200px">
             <v-progress-circular
               color="green"
@@ -397,7 +405,7 @@ View More            </v-btn>
             ></v-progress-circular>
         </div>
 <div class="rounded- mt-5" >
-    <v-table v-if="hasSale && !recentLoading"  style="    height: 190px!important;
+    <v-table v-if="recentOrders.length > 0 && !recentLoading"  style="    height: 190px!important;
     overflow: scroll;">
     <thead>
       <tr class="bg-grey-lighten-3  ">
@@ -533,13 +541,13 @@ color: orange;
 import { useVendorStore } from '~/stores/vendorStore';
 import emojiFlags from 'emoji-flags';
 import axios from 'axios'
-import {ref, onBeforeMount, onMounted} from 'vue';
+import {ref, onMounted} from 'vue';
 import {formattedPrice, convertToShorthand } from '~/utils/price'
 import {getAllReview} from '~/composables/useVendorReview';
 import {countryCodes} from '~/utils/countryapi';
 import {getdateRegistered} from '~/utils/date'
-import {getWeeklyRevenue, getFilteredValues, getTopProducts, getTotalRevenue, getCountrySold, getRecentOrders, getTransactions, getCustomers, getNoSold, getOutOfStock, getTopTransaction } from '~/composables/useDashboard';
-import { findIndex } from 'lodash';
+import {getTotalFilteredValues, getTopProducts, getRecentOrders, getOutOfStock, getTopTransaction } from '~/composables/useDashboard';
+
 
     const vendorStore = useVendorStore()
     const vendor = ref(vendorStore.vendor)
@@ -556,8 +564,12 @@ import { findIndex } from 'lodash';
       total_revenue: 0,
       total_products_sold: 0,
       total_customers: 0,
-      total_transactions: 0
+      total_transactions: 0,
+      orders_by_country: [],
+      weekly_revenue: []
     })
+    const soldByCountry = computed(() => generalStats.value.orders_by_country)
+    const weeklyRevenue = computed(() => generalStats.value.weekly_revenue)
     const filterDuration = computed(() => {
       switch (filterBy.value) {
         case 'This Year':
@@ -572,7 +584,7 @@ import { findIndex } from 'lodash';
           return '';
       }
     })
-    const weeklyRevenue = ref([])
+
     const topTransactions = ref([])
     const topProducts = ref([])
     const recentOrders = ref([])
@@ -581,7 +593,6 @@ import { findIndex } from 'lodash';
     const topProdLoading = ref(true)
 	const recentLoading = ref(true)
     const Review = ref([])
-    const soldByCountry = ref([])
 	const currentCountry = ref(null)
     const mapCountry = ref("")
     const map = ref(null);
@@ -620,33 +631,7 @@ import { findIndex } from 'lodash';
 		}
 	}
     onMounted(async () => {
-      if (hasSale.value){
-        weeklyRevenue.value = await getWeeklyRevenue()
-        generalStats.value = await getFilteredValues(filterBy.value)
-        soldByCountry.value = await getCountrySold()
-        if (soldByCountry.value){
-          mapCountry.value = soldByCountry.value[0]?.country
-          updateCurrentCountry()
-          allCountries.value = soldByCountry.value.map((item) => item.country)
-        }
-        topTransactions.value = await getTopTransaction()
-        if (topTransactions.value){
-          topTranLoading.value = false
-        }
-        topProducts.value = await getTopProducts()
-        if (topProducts.value){
-          topProdLoading.value = false
-        }
-        recentOrders.value = await getRecentOrders()
-        if (recentOrders.value){
-          recentLoading.value = false
-        }
-        if (hasReview.value){
-          const res = await getAllReview()
-          Review.value = res.data.data
-        }
-		    noStock.value = await getOutOfStock()
-      }
+      await fetchAllData()
     });
 
     const zoomToCountry = async () => {
@@ -678,9 +663,9 @@ watch(() => mapCountry.value, async () => {
 watch(() => [filterBy.value, formattedDate.value], async([newVal, newDate]) => {
     if (newDate){
       filterBy.value = 'Date'
-      generalStats.value = await getFilteredValues(filterBy.value, formattedDate.value)
+      generalStats.value = await getTotalFilteredValues(filterBy.value, formattedDate.value)
     }else if(newVal && newVal !== 'Date'){
-      generalStats.value = await getFilteredValues(filterBy.value)
+      generalStats.value = await getTotalFilteredValues(filterBy.value)
     }
     
 })
@@ -722,6 +707,32 @@ watch(() => [filterBy.value, formattedDate.value], async([newVal, newDate]) => {
     },
    ]
     })
-
+async function fetchAllData(){
+  if (hasSale.value){
+        generalStats.value = await getTotalFilteredValues(filterBy.value)
+        if (soldByCountry.value.length > 0){
+          mapCountry.value = soldByCountry.value[0]?.country
+          updateCurrentCountry()
+          allCountries.value = soldByCountry.value.map((item) => item.country)
+        }
+        topTransactions.value = await getTopTransaction()
+        if (topTransactions.value){
+          topTranLoading.value = false
+        }
+        topProducts.value = await getTopProducts()
+        if (topProducts.value){
+          topProdLoading.value = false
+        }
+        recentOrders.value = await getRecentOrders()
+        if (recentOrders.value){
+          recentLoading.value = false
+        }
+        if (hasReview.value){
+          const res = await getAllReview()
+          Review.value = res.data.data
+        }
+		    noStock.value = await getOutOfStock()
+      }
+}
 
 </script>
