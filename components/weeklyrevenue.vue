@@ -10,13 +10,19 @@ const props = defineProps({
         required: true
     }
 });
-const   series = ref([
+const series = ref([
         {
           name: 'Revenue Growth',
           data: Array(7).fill(0)
         }
-      ])
+      ]);
 function updateSeries() {
+  series.value = [
+  {
+      name: 'Revenue Growth',
+      data: Array(7).fill(0)
+    }
+  ]
     props.revenue.forEach(dataPoint => {
             const dayIndex = dataPoint.day_of_week - 1; 
             series.value[0].data[dayIndex] = dataPoint.total_amount / 1000; // Convert amount to thousands
