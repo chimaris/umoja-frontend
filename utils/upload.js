@@ -118,7 +118,7 @@ export const uploadCoverImage = async({event, upLoadedFiles1, showProgress1, cov
                 coverPicture.value[coverPicture.value.length - 1].loading = Math.floor((loaded / total) * 100);
                     if (loaded == total) {
                         const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-                        upLoadedFiles1.value.push({ name: filename, size: fileSize });
+                        upLoadedFiles1.value.push({ name: compressedFile.name, size: fileSize });
                         coverPicture.value = [];
                     }
             }

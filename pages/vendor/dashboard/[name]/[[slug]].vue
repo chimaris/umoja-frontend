@@ -1,4 +1,5 @@
 <template>
+	<complete-settings />
 	<beta-test />
 	<div>
 		<v-row class="d-flex">
@@ -73,74 +74,74 @@
 					<!-- :value=" -->
 					<v-window :touch="false" style="padding-top: 67px" v-model="currentPage">
 						<v-window-item :value="'Order details'">
-							<Vendororderdetails />
+							<LazyVendororderdetails />
 						</v-window-item>
 
 						<v-window-item :value="'Homepage'">
-							<Vendorpreview @changePage="changePage" />
+							<LazyVendorpreview @changePage="changePage" />
 						</v-window-item>
 						<v-window-item :value="'Dashboard'">
-							<Vendordashboard />
+							<LazyVendordashboard />
 						</v-window-item>
 						<v-window-item :value="'Orders'">
-							<Vendororders @changePage="changePage" />
+							<LazyVendororders @changePage="changePage" />
 						</v-window-item>
 						<v-window-item :value="'Add Products'">
-							<Vendoraddproducts />
+							<LazyVendoraddproducts />
 						</v-window-item>
 						<v-window-item :value="'Edit Product'">
-							<VendorEditProduct />
+							<LazyVendorEditProduct />
 						</v-window-item>
 						<v-window-item :value="'Import Product'">
-							<Vendorimportproduct />
+							<LazyVendorimportproduct />
 						</v-window-item>
 						<v-window-item :value="'Products'">
-							<Vendorproducts @changePage="changePage" />
+							<LazyVendorproducts @changePage="changePage" />
 						</v-window-item>
 						<v-window-item :value="'cpage'">
-							<Vendorordcustomerpage />
+							<LazyVendorordcustomerpage />
 						</v-window-item>
 						<v-window-item :value="'createorder'">
-							<Vendorcreateorder />
+							<LazyVendorcreateorder />
 						</v-window-item>
 						<v-window-item :value="'Create Post'">
-							<Vendorcreatepost />
+							<LazyVendorcreatepost />
 						</v-window-item>
 						<v-window-item :value="'Posts'">
-							<Vendorshowposts @changePage="changePage" />
+							<LazyVendorshowposts @changePage="changePage" />
 						</v-window-item>
 						<v-window-item :value="'Edit Post'">
-							<VendorEditPost />
+							<LazyVendorEditPost />
 						</v-window-item>
 						<v-window-item :value="'Create Article'">
-							<Vendorcreatearticle />
+							<LazyVendorcreatearticle />
 						</v-window-item>
 						<v-window-item :value="'Edit Article'">
-							<VendorEditArticle />
+							<LazyVendorEditArticle />
 						</v-window-item>
 						<v-window-item :value="'Articles'">
-							<Vendorshowarticle @changePage="changePage" />
+							<LazyVendorshowarticle @changePage="changePage" />
 						</v-window-item>
 						<v-window-item @changeTab="changePage" :value="'Customers'">
-							<Vendorcustomers />
+							<LazyVendorcustomers />
 						</v-window-item>
 						<v-window-item :value="'Sales'">
-							<Vendorsales />
+							<LazyVendorsales />
 						</v-window-item>
 						<v-window-item :value="'Reviews'">
-							<Vendorreviews />
+							<LazyVendorreviews />
 						</v-window-item>
 						<v-window-item :value="'Notifications'">
-							<Vendornotifications  @changePage="changePage" />
+							<LazyVendornotifications  @changePage="changePage" />
 						</v-window-item>
 						<v-window-item :value="'Settings'">
-							<Vendorsettings @changeTab="changeTab" />
+							<LazyVendorsettings @changeTab="changeTab" @changePageTab="changePageTab" />
 						</v-window-item>
 						<v-window-item :value="'All Apps'">
-							<Vendorapps />
+							<LazyVendorapps />
 						</v-window-item>
 						<v-window-item :value="'Profile Setup'">
-							<VendorProfileSetup />
+							<LazyVendorProfileSetup />
 						</v-window-item>
 					</v-window>
 				</v-card>
@@ -256,6 +257,9 @@ const handleClick = () => {
 
 function changePage(n) {
   	router.push(`/vendor/dashboard/${n}`);
+}
+function changePageTab(n) {
+  	router.push(`/vendor/dashboard/Settings/${n}`);
 }
 // function changeTab(n){
 // 	// router.push(`/vendor/dashboard/Settings/${n}`)

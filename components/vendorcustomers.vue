@@ -93,7 +93,6 @@
 						<th style="font-size: 14px; width: 100px" class="font-weight-medium text-left">ID</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Username</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Joined Date</th>
-						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Country/State</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium">Status</th>
 						<th style="font-size: 14px" class="text-left px-1 font-weight-medium"></th>
 					</tr>
@@ -115,11 +114,6 @@
 							</div>
 						</td>
 						<td class="tableLight px-1">{{ getdateRegistered(item.user.created) }}</td>
-
-						<td style="font-weight: 600; font-size: 14px; line-height: 18px" class="tableLight px-1">
-							<span style="color: #333333">{{ item.user.user_country }}, </span>
-							<span style="color: #969696">{{ item.user.user_city }}</span>
-						</td>
 						<td class="text-grey-lighten-1 text-center px-1">
 						
 							<v-chip
@@ -323,8 +317,9 @@
 											<v-table>
 												<thead>
 													<tr class="  ">
-														<th style="font-size: 14px; width: 53%" class="font-weight-bold text-left">Products</th>
-														<th style="font-size: 14px; width: 10%" class="text- px-1 font-weight-bold">Price</th>
+														<th style="font-size: 14px; width: 42%" class="font-weight-bold text-left">Products</th>
+														<th style="font-size: 14px; " class="font-weight-bold text-left">Country/State</th>
+														<th style="font-size: 14px; " class="text- px-1 font-weight-bold">Price</th>
 														<th style="font-size: 14px" class="text-left text-right font-weight-bold">Date</th>
 														<th style="font-size: 14px" class="text-left pr-8 text-right font-weight-bold"></th>
 													</tr>
@@ -352,6 +347,9 @@
 																	<p class="text-truncate" style="font-weight: 600; font-size: 16px; width: 200px; line-height: 20px; color: #333333">{{ n?.name }}</p>
 																	<!-- <p style="font-weight: 400; font-size: 14px; line-height: 18px; color: #969696">Fashion and Style</p> -->
 																</div>
+															</td>
+															<td style="color: #000; font-size: 14px; padding-right: 40px; font-weight: 500" class="text-right">
+																<span> {{item.customer_country}}/{{ item.customer_region }} </span>
 															</td>
 															<td style="font-size: 14px; padding-right: 10px;" class="text-grey-darken-1">
 																<v-chip rounded="lg" color="blue">

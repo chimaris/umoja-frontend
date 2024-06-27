@@ -263,7 +263,6 @@ export default {
 		this.productStore = useProductStore();
 	},
 	async mounted() {
-		// await this.productStore.fetchFilteredProducts();
 		this.editor = new Editor({
 			extensions: [
 				StarterKit,
@@ -312,8 +311,6 @@ export default {
 		async removeFilter(key) {
         // Reset gender and category_name to default values if they are removed
             this.productStore.removeParam(key);
-        
-        await this.productStore.fetchFilteredProducts();
     },
 		selectCountry(item) {
 			this.country = item;

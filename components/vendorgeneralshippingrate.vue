@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<span class="pa-5 d-flex align-center">
-			<v-icon class="mr-4" icon="mdi mdi-arrow-left" @click="vendorStore.renderRate = false"></v-icon>
+			<v-icon class="mr-4" icon="mdi mdi-arrow-left" @click="$router.push('/vendor/dashboard/Settings/Shipping and Delivery')"></v-icon>
 			<p style="color: #000; font-size: 20px; font-weight: 600" class="">General Shipping Rates</p>
 		</span>
 		<v-divider></v-divider>
@@ -57,7 +57,7 @@
 									/>
 								</v-avatar>
 								<div>
-									<p style="font-size: 16px; font-weight: 600; color: #333333">{{ zone.name }} <v-icon icon="mdi mdi-chevron-down"></v-icon></p>
+									<p style="font-size: 16px; font-weight: 600; color: #333333; text-transform: capitalize;">{{ zone.name }} <v-icon icon="mdi mdi-chevron-down"></v-icon></p>
 									<p style="font-size: 16px; font-weight: 500; color: #969696">
 										
 										{{ zone.showAll ? `${zone.countries.join(', ')} .` : `${zone.countries.slice(0, 3).join(', ')}` }}
@@ -116,7 +116,7 @@
 					<v-divider class="my-2"></v-divider>
 					<v-row class="mb-1" v-for="rate in zone.rates" :key="rate" style="font-size: 16px; font-weight: 400; color: #333">
 						<v-col cols="3">
-							<p>{{ rate.name }}</p>
+							<p>{{ rate.custom_rate_name }}</p>
 						</v-col>
 						<v-col cols="3">
 							<p v-if="rate.minimum_price">from {{formattedPrice(rate.minimum_price)}} <span v-if="rate.maximum_price">to {{ formattedPrice(rate.maximum_price) }}</span></p>
@@ -406,12 +406,12 @@
 				<span @click="isConditionPrice = !isConditionPrice" style="color: #1273eb; font-weight: 500; font-size: 14px; cursor: pointer">
 					<span>{{ isConditionPrice ? "Remove" : "Add" }} Conditional Pricing</span>
 				</span>
-				<div v-if="isConditionPrice">
+				<div v-if="isConditionPrice || editRate.minimum_weight || editRate.maximum_weight || editRate.minimum_price || editRate.maximum_price">
 					<v-radio-group v-model="basedOn">
 						<v-radio color="#00966D" label="Based on item weight" value="weight"></v-radio>
 						<v-radio color="#00966D" label="Based on order price" value="price"></v-radio>
 					</v-radio-group>
-					<v-row dense v-if="basedOn == 'weight'">
+					<v-row dense v-if="editRate.minimum_weight || editRate.maximum_weight">
 						<v-col>
 							<p class="inputLabel">Minimum weight</p>
 							<v-text-field v-model="editRate.minimum_weight" density="comfortable" placeholder="0" suffix="kg"> </v-text-field
@@ -421,7 +421,7 @@
 							<v-text-field v-model="editRate.maximum_weight" density="comfortable" placeholder="No Limit" suffix="kg"> </v-text-field
 						></v-col>
 					</v-row>
-					<v-row dense v-if="basedOn == 'price'">
+					<v-row dense v-if="editRate.minimum_price || editRate.maximum_price">
 						<v-col>
 							<p class="inputLabel">Minimum price</p>
 							<v-text-field prefix="$" v-model="editRate.minimum_price" density="comfortable" placeholder="0"> </v-text-field
@@ -556,7 +556,7 @@ import {ref} from 'vue'
 import { formattedPrice } from "~/utils/price";
 import { getCountryByRegion } from "~/composables/useContinent";
 import { Continents } from "~/utils/continent";
-import { getZones, getShipping, createShippingMethod, createZones, deleteShippingZone } from "~/composables/usevendorShipping";
+import { getZones, getShipping, createShippingZone, createZones, deleteShippingZone } from "~/composables/usevendorShipping";
 
 const createZoneModal = ref(false)
 const shippingStore = useMyVendorShippingStore()
@@ -623,7 +623,7 @@ function openEditZone(item){
 
 async function saveZone (){
 	const data = {
-		shipping_method_id: 2,
+		admin_shipping_id: 2,
 		name: zoneName.value,
 		countries: selectedCountries.value
 	}
@@ -632,7 +632,7 @@ async function saveZone (){
 	}
 	try{
 		loading.value = true
-		await createShippingMethod(data)
+		await createShippingZone(data)
 		shippingStore.shippingZones = await getShipping()
 		createZoneModal.value = false
 		zoneName.value = ""
@@ -698,7 +698,7 @@ async function addZoneRate(){
 		name: rateName.value,
 		custom_rate_name: customName.value,
 		custom_delivery_description: description.value,
-		price: ratePrice.value,
+		price: ratePrice.value || 0,
 		based_on_item_weight: basedOn.value == 'weight' ? 1 : 0,
 		based_on_order_price: basedOn.value == 'price' ? 1 : 0,
 		minimum_weight: minWeight.value,

@@ -182,6 +182,7 @@
 				<v-col cols="12" lg="5">
 					<v-img
 						cover
+						eager
 						class="heroimg"
 						@click="$router.push('/category/fashion')"
 						style="cursor: pointer; height: calc(100% - 3px); position: relative; border-radius: 15px"
@@ -215,6 +216,7 @@
 					<v-row>
 						<v-col cols="12" md="6">
 							<v-img
+								eager
 								@click="$router.push('/category/home decoration')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
@@ -247,6 +249,7 @@
 						</v-col>
 						<v-col cols="12" md="6">
 							<v-img
+								eager
 								@click="$router.push('/category/cosmetics')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"
@@ -285,6 +288,7 @@
 						</v-col>
 						<v-col cols="12">
 							<v-img
+								eager
 								@click="$router.push('/category/art')"
 								class="heroimg"
 								style="cursor: pointer; position: relative; border-radius: 15px"

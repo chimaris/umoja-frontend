@@ -22,8 +22,8 @@ export const useVendorStore = defineStore("vendor", {
 		shippingMethod: null,
 		vendorEmail: "",
 		vendorToken: null,
-		renderRate: false,
-		renderReturnRule: false,
+		vendorPolicies: [],
+		showNotif: false
 	}),
 	persist: {
 		enabled: true,

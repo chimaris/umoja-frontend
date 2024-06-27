@@ -31,6 +31,7 @@
 			>
 				<v-img
 					width="15"
+					@click.stop=""
 					height="15"
 					:color="!isLiked(index) ? '#1C274C' : 'red'"
 					:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/like-icon_fpseyf.svg', 30)"
@@ -61,6 +62,7 @@
 				<v-img
 					width="15"
 					height="15"
+					@click.stop=""
 					:color="!isLiked(index) ? '#1C274C' : 'red'"
 					:src="getCloudinaryImageUrl('https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990457/umoja/like-icon_fpseyf.svg', 30)"
 				/>
