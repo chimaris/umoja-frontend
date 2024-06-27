@@ -86,10 +86,10 @@ export const useProductStore = defineStore('productStore', {
       this.params[key] = "";
     },
     async fetchFilteredProducts() {
-      
       const params = new URLSearchParams(this.params).toString();
       this.productLoading = true;
       this.notFound = false;
+    
       const transformResponse = (data) => {
         const jsonData = JSON.parse(data);
         return {
@@ -102,38 +102,39 @@ export const useProductStore = defineStore('productStore', {
           }
         }
       };
-      const api = useApi(transformResponse)
-      try{
+    
+      const api = useApi(transformResponse);
+    
+      try {
         const res = await api({
           url: `allproducts/?page=${this.pageNo}&${params}`,
           method: 'GET'
         });
-        const {Products, meta} = res.data
-        if (Products.length == 0){
-          this.notFound = true
-          this.productLoading = false
-          this.productFrom = meta.from;
-          this.productTo = meta.to;
-          this.totalProducts = meta.total
-          this.marketLastPage = meta.last_page
-          return
-        }else{
-          this.products.main = Products
-          this.productFrom = meta.from;
-          this.productTo = meta.to;
-          this.marketLastPage = meta.last_page
-          this.totalProducts = meta.total
+        const { Products, meta } = res.data;
+    
+        if (Products.length === 0) {
+          this.notFound = true;
+        } else {
+          this.products.main = Products;
           this.notFound = false;
-          this.productLoading = false
-          return
         }
-      }catch(error){
-        console.error(error)
-        this.notFound = true
-        this.productLoading = false
-        this.products.main = []
+    
+        this.productFrom = meta.from;
+        this.productTo = meta.to;
+        this.totalProducts = meta.total;
+        this.marketLastPage = meta.last_page;
+      } catch (error) {
+        console.error(error);
+        this.notFound = true;
+        this.products.main = [];
+        this.productFrom = '';
+        this.productTo = '';
+        this.marketLastPage = null;
+        this.totalProducts = '';
+      } finally {
+        this.productLoading = false;
       }
-    },
+    } ,
     search: debounce(async function() {
       const api = useApi()
       
