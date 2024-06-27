@@ -23,7 +23,6 @@ export const useVendorStore = defineStore("vendor", {
 		vendorEmail: "",
 		vendorToken: null,
 		vendorPolicies: [],
-		showNotif: false
 	}),
 	persist: {
 		enabled: true,
