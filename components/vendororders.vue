@@ -254,6 +254,7 @@ async function filterOrderBy(){
 async function fetchFilteredOrders(){
 	try{
 		filteredOrderData.value = await filterOrderBy();
+		console.log(filteredOrderData.value)
 	}catch(error){
 		console.error(error);
 	}

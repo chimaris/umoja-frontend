@@ -65,8 +65,8 @@
 											{{ n.value }}
 										
 										</p>
-										<v-btn v-if="n.img" color="grey-lighten-2" flat class="pa-1 mt-2 px-2 rounded-lg">
-												<v-img width="100" :src="n.img"></v-img
+										<v-btn v-if="n.img" color="grey-lighten-2" flat class="py-4 px-3 mt-2  d-flex align-center justify-center rounded-lg">
+												<v-img width="100" cover :src="n.img"></v-img
 											></v-btn>
 									</v-col>
 									<v-col v-if="edit" cols="12" style="font-weight: 500; font-size: 14px; line-height: 18px" sm="6" md="8">
@@ -291,6 +291,9 @@ onMounted(() => {
 
 function getMaxDeliveryDate() {
 	const deliveryDuration = orderDetails.value?.delivery_duration;
+	if (!deliveryDuration){
+		return ''
+	}
   const parts = deliveryDuration?.split(' - ');
   const maxDeliveryDate = parts[1]?.split(' ')[0]; 
   return parseInt(maxDeliveryDate, 10);
