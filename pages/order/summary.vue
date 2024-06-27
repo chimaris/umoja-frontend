@@ -41,7 +41,7 @@
 				<div>
 					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Shipping Method</p>
 					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px" class="mb-2">
-						{{ cartStore.shippingDetails.shippingOption.type }} ({{ cartStore.shippingDetails.shippingOption.duration }})
+						{{ cartStore.shippingDetails?.shippingOption?.type }} ({{ cartStore.shippingDetails?.shippingOption?.duration }})
 					</p>
 					<a style="color: var(--deep-sky-blue-4, #1273eb); font-size: 12px; font-weight: 600" href="">TRACK ORDER</a>
 				</div>	
@@ -130,7 +130,7 @@
 					</div>
 					<div class="d-flex pb-3 align-center justify-space-between">
 						<p style="font-weight: 500; font-size: 14px; color: #969696">Shipment cost</p>
-						<p style="color: var(--carbon-4, #333); font-size: 16px; font-weight: 600" class="">{{formattedPrice(cartStore.shippingDetails.shippingOption.amount)}}</p>
+						<p style="color: var(--carbon-4, #333); font-size: 16px; font-weight: 600" class="">{{formattedPrice(cartStore.shippingDetails.shippingOption?.amount) || 0}}</p>
 					</div>
 					<hr class="dashed-2 my-6" />
 					<div class="d-flex pb-3 align-center justify-space-between">
