@@ -40,7 +40,7 @@
 				<hr class="dashed-2 my-4" />
 				<div>
 					<p style="color: var(--carbon-6, #1e1e1e); font-size: 14px; font-weight: 600; line-height: 20px" class="mb-2">Shipping Method</p>
-					<p style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px" class="mb-2">
+					<p v-if="cartStore.shippingDetails?.shippingOption?.type" style="color: var(--carbon-3, #969696); font-size: 14px; font-weight: 500; line-height: 20px" class="mb-2">
 						{{ cartStore.shippingDetails?.shippingOption?.type }} ({{ cartStore.shippingDetails?.shippingOption?.duration }})
 					</p>
 					<a style="color: var(--deep-sky-blue-4, #1273eb); font-size: 12px; font-weight: 600" href="">TRACK ORDER</a>

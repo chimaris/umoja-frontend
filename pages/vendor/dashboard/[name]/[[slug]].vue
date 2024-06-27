@@ -177,7 +177,6 @@ import { useVendorStore } from '~/stores/vendorStore';
 import { useRouter, useRoute } from '#vue-router';
 import {useCreateStore} from '~/stores/createPostStore'
 import { useOrderStore } from '~/stores/order';
-import {useSaleStore} from '~/stores/sales'
 import {fetchProducts, fetchDetails, fetchPromos, fetchPosts, fetchArticles  } from '~/composables/useVendorPage'
 
 

@@ -229,7 +229,7 @@
 								</v-btn>
 							</div>
 
-							<v-card
+							<!-- <v-card
 								flat
 								:color="n.cost == '0.00' ? '#EDF3F0' : ''"
 								class="pa-4 cardStyle rounded-lg justify-space-between align-center my-4 d-flex"
@@ -250,7 +250,7 @@
 								<v-avatar style="width: 100px; max-height: 20px" rounded="0" size="40">
 									<v-img :src="n.image"></v-img>
 								</v-avatar>
-							</v-card>
+							</v-card> -->
 						</v-card>
 					</v-dialog>
 				</v-col>

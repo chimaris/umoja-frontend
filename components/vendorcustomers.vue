@@ -216,12 +216,14 @@
 										>
 									</div>
 									<div style="max-width: " class="px-1 pt-8 d-flex">
-										<div :style="i < 3 ? 'border-right: 1px solid #e0e0e0;' : ''" class="px-5" v-for="(n, i) in customer_details" :key="i">
-											<div>
-												<p style="color: #969696; font-size: 14px; font-weight: 500">{{ n.item }}</p>
+										<template :key="i" v-for="(n, i) in customer_details">
+											<div  :style="i < 3 ? 'border-right: 1px solid #e0e0e0;' : ''" class="px-5"  v-if="n.value || !n.value == null" >
+												<div >
+													<p style="color: #969696; font-size: 14px; font-weight: 500">{{ n.item }}</p>
+												</div>
+												<p style="color: #333; font-size: 14px; font-weight: 500">{{ n.value }}</p>
 											</div>
-											<p style="color: #333; font-size: 14px; font-weight: 500">{{ n.value }}</p>
-										</div>
+										</template>
 									</div>
 								</div>
 							</div>
@@ -298,7 +300,7 @@
 								</div>
 							</v-card> -->
 
-							<v-card height="auto" class="mx-auto px-6 pt-6 coolTable pb-12" width="100%" style="overflow: hidden" flat>
+							<v-card v-if="customerDets?.orders.length > 0" height="auto" class="mx-auto px-6 pt-6 coolTable pb-12" width="100%" style="overflow: hidden" flat>
 								<v-tabs v-model="tab" class="orders" color="green">
 									<v-tab
 										@click.stop="sort(item.prop, item.value)"
@@ -761,7 +763,7 @@ export default {
 				},
 				{
 					item: "Country",
-					value: `${getFlag(customerDets.value?.user?.user_country)} ${customerDets.value.user?.user_state == null ? '' : customerDets.value.user?.user_state}, ${customerDets.value.user?.user_country == null ? '' : customerDets.value.user?.user_country} `,
+					value: customerDets.value.user?.user_country,
 				}
 			]
 		})
