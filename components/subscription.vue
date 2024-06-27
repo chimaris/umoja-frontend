@@ -213,8 +213,9 @@
 		this.editSubscriptionInfo = true;
 	}
     function toDashboard(){
-		router.push('/vendor/dashboard/Settings')
+		router.push('/vendor/dashboard/Settings/Shipping and Delivery')
 		dialog.value = false
+		// vendorStore.showNotif = true
 	}
 	async function submit(){
 		const api = vendorUseApi()

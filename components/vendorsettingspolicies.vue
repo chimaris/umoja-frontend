@@ -13,7 +13,7 @@
 			<div class="mt-5" style="border: 1px solid #cecece; border-radius: 15px">
 				<div class="d-flex justify-space-between align-center w-100 pa-4">
 					<p style="font-size: 18px; font-weight: 600; color: #333">Return Policy</p>
-					<v-btn @click="vendorStore.renderReturnRule = true" variant="text" class="ml-4 menubar text-grey-darken-3 d-flex align-center" size="default" style="font-weight: 600; font-size: 16px">
+					<v-btn @click="moveTo()" variant="text" class="ml-4 menubar text-grey-darken-3 d-flex align-center" size="default" style="font-weight: 600; font-size: 16px">
 						<v-img
 							src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
 							contain
@@ -54,15 +54,16 @@
 
 					<div class="d-flex justify-space-between align-center pa-4" style="border: 1px solid #cecece; border-radius: 15px">
 						<div>
-							<!-- <ul
-								v-for="item in returnPolicies"
-								:key="item"
+							<ul
+								v-if="returnPolicies"
 								class="mx-5"
 							>
-								<li style="font-weight: 500; font-size: 16px; color: #969696">{{ item }}</li>
-							</ul> -->
+								<li style="font-weight: 500; font-size: 16px; color: #969696">{{ returnPolicies?.refund_policy }}</li>
+								<li style="font-weight: 500; font-size: 16px; color: #969696">{{ returnPolicies?.return_shipping_cost }}</li>
+								<li style="font-weight: 500; font-size: 16px; color: #969696">{{ returnPolicies?.return_window }} return window</li>
+							</ul>
 						</div>
-						<span @click="vendorStore.renderReturnRule = true" style="color: #1273eb; font-weight: 500; font-size: 14px; cursor: pointer">
+						<span @click="moveTo()" style="color: #1273eb; font-weight: 500; font-size: 14px; cursor: pointer">
 							<span>Manage</span>
 						</span>
 					</div>
@@ -88,13 +89,14 @@ import { usePolicy } from "~/composables/policy";
 const vendorStore = useVendorStore()
 const vendor = computed(() => vendorStore.vendor)
 const hasPolicy = computed(() => vendorStore.vendor.vendor_details?.policy)
-const returnPolicies = ref([])
+const returnPolicies = computed(() => vendorStore.vendor.vendor_details.policy)
+const router = useRouter()
 
-onMounted(async () => {
-	if (hasPolicy.value){
-		returnPolicies.value = await usePolicy()
-	}
-})
+function moveTo(){
+	router.push('/vendor/dashboard/Settings/Return Rule')
+}
+
+
 </script>
 
 <style scoped>

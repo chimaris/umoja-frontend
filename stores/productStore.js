@@ -115,6 +115,7 @@ export const useProductStore = defineStore('productStore', {
           this.productFrom = meta.from;
           this.productTo = meta.to;
           this.totalProducts = meta.total
+          this.marketLastPage = meta.last_page
           return
         }else{
           this.products.main = Products

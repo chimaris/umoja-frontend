@@ -36,7 +36,7 @@ export const getDeliveryAddress = async () => {
         url: 'vendor/local_deliveries',
         method: 'GET'
     });
-    return res.data.data[0]
+    return res.data.data
    }catch(error){
     console.error(error);
     return []
@@ -49,7 +49,7 @@ export const getPickupAddress = async () => {
         url: 'vendor/local_pickups',
         method: 'GET'
     });
-    return res.data.data[0]
+    return res.data.data
    }catch(error){
     console.error(error);
     return []

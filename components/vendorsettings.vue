@@ -17,7 +17,7 @@
 							'Policies',
 						]"
 					>
-						<v-btn size="large" variant="tonal" @click="selected = n" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
+						<v-btn size="large" variant="tonal" @click="change(n)" rounded="xl" flat :color="selected == n ? 'green' : 'white'">
 							<v-scale-transition>
 								<v-icon v-if="selected == n" icon="mdi mdi-star-four-points" class="mr-2"></v-icon>
 							</v-scale-transition>
@@ -44,36 +44,32 @@
 				<v-col cols="12" class="px-0 dash" md="9">
 					<v-window v-model="selected">
 						<v-window-item value="My Profile">
-							<Vendorsettingsprofile :vendor="vendor" />
+							<LazyVendorsettingsprofile :vendor="vendor" />
 						</v-window-item>
 						<v-window-item value="Billing">
-							<Vendorsettingsbilling />
+							<LazyVendorsettingsbilling />
 						</v-window-item>
 						<v-window-item value="Notifications">
-							<Vendorsettingsnotifications />
+							<LazyVendorsettingsnotifications />
 						</v-window-item>
 						<v-window-item value="Security">
-							<Vendorsettingssecurity />
+							<LazyVendorsettingssecurity />
 						</v-window-item>
 						<v-window-item value="Account Details">
-							<Vendorsettingsaccount :vendor="vendor" />
+							<LazyVendorsettingsaccount :vendor="vendor" />
+						</v-window-item>
+						<v-window-item value="Shipping Zone">
+							<Lazyvendorgeneralshippingrate />
 						</v-window-item>
 						<!-- <v-window-item value="Integrations"> </v-window-item> -->
 						<v-window-item value="Shipping and Delivery">
-							<template v-if="vendorStore.renderRate">
-								<vendorgeneralshippingrate />
-							</template>
-							<template v-else>
-								<Vendorsettingsshipping />
-							</template>
+							<LazyVendorsettingsshipping />
 						</v-window-item>
 						<v-window-item value="Policies">
-							<template v-if="vendorStore.renderReturnRule">
-								<vendorpoliciesreturnrule />
-							</template>
-							<template v-else>
-								<vendorsettingspolicies />
-							</template>
+								<Lazyvendorsettingspolicies />
+						</v-window-item>
+						<v-window-item value="Return Rule">
+							<Lazyvendorpoliciesreturnrule />
 						</v-window-item>
 					</v-window>
 				</v-col>
@@ -116,27 +112,27 @@ import { useRouter, useRoute } from "vue-router";
 
 
 export default {
-	emits: ['changeTab'],
+	emits: ['changePageTab'],
 	setup(_, {emit}) {
 		const vendorStore = useVendorStore();
 		const vendor = ref(vendorStore.vendor);
 		const router = useRouter();
 		const logOutUser = ref(false);
 		const route = useRoute()
-		const selected = ref("My Profile")
+		const selected = ref(route.params.slug ? route.params.slug : "My Profile")
 		watch(
 			() => vendorStore.vendor,
 			(newpost, oldpost) => {
 				vendor.value = newpost;
 			}
 		);
-		// onMounted(() => {
-		// 	// selectedTab = this.$route.params.tab || 'profile';
-		// 	route.params.tab = selected.value
-		// })
-		// function change(){
-		// 	emit('changeTab', selected.value);
-		// }
+		watch(() => route.params.slug, (slug) => {
+			selected.value = slug
+		})
+		function change(n){
+			emit('changePageTab', n);
+		}
+	
 		// watch(() => selected.value, () => {
 		// 	// router.push(`/vendor/dashboard/Settings/${selected.value}`)
 		// 	// change()
@@ -156,6 +152,7 @@ export default {
 			logOutUser,
 			selected,
 			route,
+			change,
 		};
 	},
 	data() {

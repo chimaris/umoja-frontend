@@ -326,15 +326,9 @@ const disable = computed(() => {
 onMounted(async () => {
 	productStore.clearParams();
 	categories.value = await fetchCategories("customer")
-	// if (productStore.params.category_name && productStore.params.gender){
-	// 	subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value, gender: productStore.params.gender, role: "customer"});
-	// }
-	// productStore.params.category_name = 'Clothing'
-	// productStore.params.gender = 'Unisex'
-	// productStore.params.sub_category_name = subCategories.value[0].name
 });
 			// watch for change ins any of the filter value
-			watch(() => [productStore.params.gender, productStore.pageNo, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
+			watch(() => [productStore.params.gender, productStore.params.priceMinimum, productStore.params.priceMaximum,  productStore.pageNo, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
 			async ([]) => {
 				
 				await productStore.fetchFilteredProducts()
@@ -348,12 +342,11 @@ onMounted(async () => {
 					subCategories.value = []
 				}
 			});
-			watch(() => price.value, (newPrice) => {
+			watch(() => price.value, async (newPrice) => {
 					if (newPrice) {
 					const [min, max] = newPrice.split(' - ').map(price => price.replace('€', '').trim());
 					productStore.params.priceMinimum = min;
 					productStore.params.priceMaximum = max;
-					productStore.fetchFilteredProducts();
 					}
 				}
 				);
