@@ -21,7 +21,7 @@
 					<p style="font-size: 16px; text-transform: capitalize; font-weight: 600">
 						{{ vendor?.vendor_details.rep_country }} <span>{{ getFlag() }}</span>
 					</p>
-					<p style="color: #969696; font-size: 16px; font-weight: 500">{{ vendor?.vendor_details.business_type }}</p>
+					<p style="color: #969696; text-transform: capitalize; font-size: 16px; font-weight: 500">{{ vendor?.vendor_details.business_type }}</p>
 				</div>
 			</div>
 			<v-btn @click="profile = true" style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3">

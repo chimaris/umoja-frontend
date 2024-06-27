@@ -262,7 +262,7 @@ import { useRouter } from "#vue-router";
 import { follow, unFollowVendor, isFollowing } from "~/composables/usefollowVendor";
 
 const profileBorderColor = ref(null);
-const router = useRouter;
+const router = useRouter();
 const loginDialog = ref(false);
 const flag = ref(null);
 const placescards = ref(false);
@@ -339,8 +339,8 @@ async function followVendor() {
 	}
 }
 function toLogin() {
-	loginDialog.value = false;
 	router.push("/user/login");
+	loginDialog.value = false;
 }
 async function getBorderColor() {
 	return new Promise((resolve, reject) => {

@@ -11,6 +11,9 @@ export const convertToShorthand = (number) => {
   export const formattedPrice = (value) => {
     const numBer = Number(value);
     
+    if (isNaN(numBer) || numBer === 0) {
+      return '€ 0.00';
+    }
     // Handle large numbers with abbreviations
     if (numBer >= 1e9) {
       return '€ ' + (numBer / 1e9).toFixed(1).replace(/\.0$/, '') + 'B';
