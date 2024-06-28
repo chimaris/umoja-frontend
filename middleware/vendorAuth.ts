@@ -8,17 +8,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
    return navigateTo('/vendor/login')
   }
 
-  if (vendorStore.vendor.complete_setup !== 1 || !vendorStore.vendor.vendor_details?.policy || !vendorStore.vendor.vendor_details?.shipping_method) {
-    if (!to.path.startsWith('/vendor/dashboard/Profile Setup') && !to.path.startsWith('/vendor/dashboard/Settings')) {
-      if(vendorStore.vendor.complete_setup !== 1){
-        return navigateTo('/vendor/dashboard/Profile Setup')
-      }else if(!vendorStore.vendor.vendor_details?.policy){
-        return navigateTo('/vendor/dashboard/Settings/Policies')
-      }else if(!vendorStore.vendor.vendor_details?.shipping_method){
-        return navigateTo('/vendor/dashboard/Settings/Shipping and Delivery')
-      }
-    }
-  }
   if (vendorStore.vendor.complete_setup !== 1 || 
     !vendorStore.vendor.vendor_details?.policy || 
     !vendorStore.vendor.vendor_details?.shipping_method) {
@@ -28,8 +17,6 @@ export default defineNuxtRouteMiddleware((to, from) => {
     // Redirect based on missing information
     if (vendorStore.vendor.complete_setup !== 1) {
       return navigateTo('/vendor/dashboard/Profile Setup');
-    } else if (!vendorStore.vendor.vendor_details?.shipping_method) {
-      return navigateTo('/vendor/dashboard/Settings/Shipping and Delivery');
     } else if (!vendorStore.vendor.vendor_details?.policy) {
       return navigateTo('/vendor/dashboard/Settings/Policies');
     }

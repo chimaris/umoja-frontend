@@ -61,12 +61,7 @@
 				</v-sheet>
 			</div>
 		</div>
-		<stripe-checkout
-		ref="checkoutRef"
-		mode = "subscription"
-		:pk="publishableKey"
-		:lineItems = "lineItems"
-    />
+		<p class="my-2" style="color: red; font-size: 16px;">{{ subError }}</p>
 		<v-btn @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Join basic plan (Free)</v-btn>
 	</v-sheet>
 
@@ -159,8 +154,10 @@
 	const emit = defineEmits(['submit']);
 	const router = useRouter()
 	const vendorStore = useVendorStore()
+	const vendor = ref(vendorStore.vendor.vendor_details)
 	const seeBasic = ref(false)
 	const seeBusiness = ref(false)
+	const subError = ref("")
 	const seePremium = ref(false)
 	const freeFeatures = [
         "Price: Free",
@@ -215,12 +212,43 @@
     function toDashboard(){
 		router.push('/vendor/dashboard/Settings/Shipping and Delivery')
 		dialog.value = false
-		// vendorStore.showNotif = true
+	}
+	function isRegistered(){
+		if (
+			vendor.value?.rep_country &&
+			vendor.value.business_type &&
+			vendor.value.business_name &&
+			vendor.value.address &&
+			vendor.value.state &&
+			vendor.value.city &&
+			vendor.value.country_name &&
+			vendor.value.postal_code &&
+			vendor.value.business_bio &&
+			vendor.value.profile_photo &&
+			vendor.value.cover_image && 
+			vendor.value.busniess_email &&
+			vendor.value.busniess_phone_number &&
+			vendor.value.twitter_handle &&
+			vendor.value.instagram_handle &&
+			vendor.value.facebook_handle &&
+			vendor.value.youtube_handle &&
+			vendor.value.bank_name &&
+			vendor.value.name_on_account 
+		){
+			return true
+		}else{
+			subError.value = "Make sure you have provided all required Informations!!"
+			return false
+		}
 	}
 	async function submit(){
 		const api = vendorUseApi()
+		subError.value = ""
+		if(!isRegistered()){
+			return
+		}
 		try{
-			const response =  await api({
+			await api({
 				url: 'vendor/subscribe/',
 				method: 'POST'
 			});
@@ -230,7 +258,6 @@
 		}catch(error){
 			console.error(error)
 		}
-		// emit('submit')
 	}
 </script>
 
