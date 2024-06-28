@@ -153,18 +153,24 @@
 						<v-divider class="my-3"></v-divider>
 						<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
 							<v-col cols="3">
-								<p style="text-transform: capitalize;">{{ zone?.name }}</p>
+								<p style="text-transform: capitalize">{{ zone?.name }}</p>
 							</v-col>
 							<v-col cols="3" style="color: #969696">
-								<p v-if="zone?.rates[0]?.minimum_price">from {{formattedPrice(zone?.rates[0]?.minimum_price)}} <span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span></p>
-								<p v-if="zone?.rates[0]?.minimum_weight">from {{zone?.rates[0]?.minimum_weight}}Kg <span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span></p>
+								<p v-if="zone?.rates[0]?.minimum_price">
+									from {{ formattedPrice(zone?.rates[0]?.minimum_price) }}
+									<span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span>
+								</p>
+								<p v-if="zone?.rates[0]?.minimum_weight">
+									from {{ zone?.rates[0]?.minimum_weight }}Kg
+									<span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span>
+								</p>
 								<!-- <p>€60.00 - €100.00</p> -->
 								<!-- <p v-if="zone?.rates[0]?.minimum_price">from {{formattedPrice(zone?.rates[0]?.minimum_price)}} <span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span></p> -->
 								<!-- <p v-if="zone?.rates.length > 1" style="color: #1273eb">See more rates</p> -->
 							</v-col>
 							<v-col>
 								<!-- <p>Within Jan 1st to Jan 10th</p> -->
-								<p>{{zone?.delivery_date_range}}</p>
+								<p>{{ zone?.delivery_date_range }}</p>
 							</v-col>
 						</v-row>
 					</div>
@@ -334,13 +340,13 @@
 					</div>
 				</v-card>
 				<div v-if="!vendorStore.vendor.vendor_details.shipping_method" class="d-flex flex-column align-end justify-end ga-2">
-					<p class="" style="color: red; font-size: 16px">{{shippingError}}</p>
+					<p class="" style="color: red; font-size: 16px">{{ shippingError }}</p>
 					<v-btn @click="saveZone()" size="default" color="green" flat>
 						<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save shipping method</span></v-btn
 					>
 				</div>
 				<div @click="editZone()" v-else class="d-flex flex-column align-end justify-end ga-2">
-					<p class="" style="color: red; font-size: 16px">{{shippingError}}</p>
+					<p class="" style="color: red; font-size: 16px">{{ shippingError }}</p>
 					<v-btn size="default" color="green" flat>
 						<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Update shipping method</span></v-btn
 					>
@@ -547,50 +553,53 @@
 				<v-divider class="my-3"></v-divider>
 				<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
 					<v-col cols="3">
-						<p style="text-transform: capitalize;">{{ zone?.name }}</p>
+						<p style="text-transform: capitalize">{{ zone?.name }}</p>
 					</v-col>
 					<v-col cols="3" style="color: #969696">
-						<p v-if="zone?.rates[0]?.minimum_price">from {{formattedPrice(zone?.rates[0]?.minimum_price)}} <span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span></p>
-						<p v-if="zone?.rates[0]?.minimum_weight">from {{zone?.rates[0]?.minimum_weight}}Kg <span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span></p>
+						<p v-if="zone?.rates[0]?.minimum_price">
+							from {{ formattedPrice(zone?.rates[0]?.minimum_price) }}
+							<span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span>
+						</p>
+						<p v-if="zone?.rates[0]?.minimum_weight">
+							from {{ zone?.rates[0]?.minimum_weight }}Kg <span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span>
+						</p>
 						<!-- <p>€60.00 - €100.00</p> -->
 						<!-- <p style="color: #1273eb">See more rates</p> -->
 					</v-col>
 					<v-col>
 						<v-card flat>
 							<div class="d-flex my-2 align-center ga-1">
-								<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px;">
-												<v-text-field
-												style="max-width: 50px"
-												class="mr-3 rounded-lg bg-grey-lighten-3"
-												density="compact"
-												hide-details
-												variant="outline"
-												v-model="zone.delivery_date_range"
-											></v-text-field>
-												<div>
-													<v-btn
-														@click="zone.delivery_date_range++"
-														size="x-small"
-														height="18px"
-														color="grey-lighten-3"
-														flat
-														class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
-														icon="mdi mdi-menu-up"
-													></v-btn>
-													<v-btn
-														@click="zone.delivery_date_range = zone.delivery_date_range <= 0 ? zone.delivery_date_range : zone.delivery_date_range - 1"
-														size="x-small"
-														height="18px"
-														color="grey-lighten-3"
-														flat
-														class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
-														icon="mdi mdi-menu-down"
-													></v-btn>
-												</div>
-											</div>
-											<p>Business working days</p>								
-											
-											
+								<div class="d-flex bg-grey-lighten-3" style="border-radius: 6px">
+									<v-text-field
+										style="max-width: 50px"
+										class="mr-3 rounded-lg bg-grey-lighten-3"
+										density="compact"
+										hide-details
+										variant="outline"
+										v-model="zone.delivery_date_range"
+									></v-text-field>
+									<div>
+										<v-btn
+											@click="zone.delivery_date_range++"
+											size="x-small"
+											height="18px"
+											color="grey-lighten-3"
+											flat
+											class="pa-0 mb-0 d-flex align-center text-grey-darken-2 rounded-lg"
+											icon="mdi mdi-menu-up"
+										></v-btn>
+										<v-btn
+											@click="zone.delivery_date_range = zone.delivery_date_range <= 0 ? zone.delivery_date_range : zone.delivery_date_range - 1"
+											size="x-small"
+											height="18px"
+											color="grey-lighten-3"
+											flat
+											class="pa-0 d-flex align-center text-grey-darken-2 rounded-lg"
+											icon="mdi mdi-menu-down"
+										></v-btn>
+									</div>
+								</div>
+								<p>Business working days</p>
 							</div>
 						</v-card>
 					</v-col>
@@ -610,7 +619,7 @@
 						>
 						<v-col cols="6">
 							<v-btn @click="updateDeliveryDays()" :disabled="updating" size="large" color="green" flat block>
-								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px">{{ updating ? 'Saving' : 'Done' }} </span></v-btn
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px">{{ updating ? "Saving" : "Done" }} </span></v-btn
 							></v-col
 						>
 					</v-row>
@@ -641,7 +650,7 @@
 				<v-text-field placeholder="Company" v-model="localDelivery[0].local_delivery_company" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Country/region</p>
-				<v-select  v-model="localDelivery[0].local_delivery_country_name" :items="allCountries" placeholder="Country/region" density="comfortable">
+				<v-select v-model="localDelivery[0].local_delivery_country_name" :items="allCountries" placeholder="Country/region" density="comfortable">
 				</v-select>
 
 				<p class="inputLabel">Address</p>
@@ -659,7 +668,15 @@
 					></v-col>
 					<v-col>
 						<p class="inputLabel">State</p>
-						<v-select v-model="localDelivery[0].local_delivery_state" :items="deliveryAddress" :loading="loadingStates" color="green" placeholder="Select State" density="comfortable"> </v-select>
+						<v-select
+							v-model="localDelivery[0].local_delivery_state"
+							:items="deliveryAddress"
+							:loading="loadingStates"
+							color="green"
+							placeholder="Select State"
+							density="comfortable"
+						>
+						</v-select>
 					</v-col>
 					<v-col>
 						<p class="inputLabel">Zipcode</p>
@@ -669,10 +686,11 @@
 				</v-row>
 
 				<p class="inputLabel">Phone</p>
-				<v-text-field v-model="localDelivery[0].local_delivery_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localDelivery[0].local_delivery_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable">
+				</v-text-field>
 
 				<div class="py-4">
-					<p class="mb-2" style="color: red; font-size: 16px">{{deliveryError}}</p>
+					<p class="mb-2" style="color: red; font-size: 16px">{{ deliveryError }}</p>
 					<v-row>
 						<v-col cols="6"
 							><v-btn @click="localDeliveryModal = false" size="large" style="border: 1px solid #e5e5e5" flat block>
@@ -681,7 +699,7 @@
 						>
 						<v-col cols="6">
 							<v-btn @click="editDeliveryAddress()" :disabled="loading" size="large" color="green" flat block>
-								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> {{loading ? 'Saving' : 'Save'}}</span></v-btn
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> {{ loading ? "Saving" : "Save" }}</span></v-btn
 							></v-col
 						>
 					</v-row>
@@ -717,7 +735,7 @@
 				<v-text-field v-model="localPickup[0].local_pickup_company" placeholder="Company" density="comfortable"> </v-text-field>
 
 				<p class="inputLabel">Country/region</p>
-				<v-select v-model="localPickup[0].local_pickup_country_name" :items="allCountries"  placeholder="Country/region" density="comfortable">
+				<v-select v-model="localPickup[0].local_pickup_country_name" :items="allCountries" placeholder="Country/region" density="comfortable">
 				</v-select>
 
 				<p class="inputLabel">Address</p>
@@ -735,7 +753,15 @@
 					></v-col>
 					<v-col>
 						<p class="inputLabel">State</p>
-						<v-select v-model="localPickup[0].local_pickup_state" :loading="loadingStates" color="green" :items="pickupAddress"  placeholder="Select State" density="comfortable"> </v-select>
+						<v-select
+							v-model="localPickup[0].local_pickup_state"
+							:loading="loadingStates"
+							color="green"
+							:items="pickupAddress"
+							placeholder="Select State"
+							density="comfortable"
+						>
+						</v-select>
 					</v-col>
 					<v-col>
 						<p class="inputLabel">Zipcode</p>
@@ -745,10 +771,11 @@
 				</v-row>
 
 				<p class="inputLabel">Phone</p>
-				<v-text-field v-model="localPickup[0].local_pickup_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable"> </v-text-field>
+				<v-text-field v-model="localPickup[0].local_pickup_phone_number" append-inner-icon="mdi mdi-phone" placeholder="NG" density="comfortable">
+				</v-text-field>
 
 				<div class="py-4">
-					<p class="mb-2" style="color: red; font-size: 16px">{{pickupError}}</p>
+					<p class="mb-2" style="color: red; font-size: 16px">{{ pickupError }}</p>
 					<v-row>
 						<v-col cols="6"
 							><v-btn @click="localPickupModal = false" size="large" style="border: 1px solid #e5e5e5" flat block>
@@ -757,7 +784,7 @@
 						>
 						<v-col cols="6">
 							<v-btn @click="editPickupAddress()" :disabled="loading" size="large" color="green" flat block>
-								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> {{loading ? 'Saving' : 'Save'}}</span></v-btn
+								<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> {{ loading ? "Saving" : "Save" }}</span></v-btn
 							></v-col
 						>
 					</v-row>
@@ -770,19 +797,27 @@
 <script setup>
 import { useVendorStore } from "~/stores/vendorStore";
 import { useMyVendorShippingStore } from "~/stores/vendorShipping";
-import { createDeliveryAddress, createPickupAddress, getDeliveryAddress, getPickupAddress, updateDeliveryAddress, updatePickupAddress } from "~/composables/delivery";
+import {
+	createDeliveryAddress,
+	createPickupAddress,
+	getDeliveryAddress,
+	getPickupAddress,
+	updateDeliveryAddress,
+	updatePickupAddress,
+} from "~/composables/delivery";
 import { ref } from "vue";
 import { fetchStates, loadingStates, allCountries } from "~/utils/countryapi";
-import {chooseShippingMethod, updateShipping, changeShippingMethod } from "~/composables/usevendorShipping";
+import { chooseShippingMethod, updateShipping, changeShippingMethod } from "~/composables/usevendorShipping";
 
 const model = ref(null);
-const shippingError = ref("")
-const savingMethod = ref(false)
+const shippingError = ref("");
+const savingMethod = ref(false);
 const vendorStore = useVendorStore();
 const vendor = ref(vendorStore.vendor.vendor_details);
 const shippingStore = useMyVendorShippingStore();
 const selected = ref(null);
-const router = useRouter()
+const router = useRouter();
+
 // const selected = ref("")
 const shippingZones = computed(() => shippingStore.shippingZones);
 const localDeliveryModal = ref(false);
@@ -809,62 +844,68 @@ const items = [
 ];
 
 // local delivery address
-const localDelivery = ref([])
-const deliveryAddress = ref([])
-const deliveryError = ref("")
-const loading = ref(false)
-const updating = ref(false)
+const localDelivery = ref([]);
+const deliveryAddress = ref([]);
+const deliveryError = ref("");
+const loading = ref(false);
+const updating = ref(false);
 // local pickup address
-const localPickup = ref([])
-const pickupAddress = ref([])
-const pickupError = ref("")
+const localPickup = ref([]);
+const pickupAddress = ref([]);
+const pickupError = ref("");
 
-function navTo(){
-	router.push('/vendor/dashboard/Settings/Shipping Zone')
+function navTo() {
+	router.push("/vendor/dashboard/Settings/Shipping Zone");
 }
 onMounted(async () => {
-	selected.value = vendorStore.vendor.vendor_details.shipping_method?.name
-	shippingStore.shippingZones = []
+	selected.value = vendorStore.vendor.vendor_details.shipping_method?.name;
+	shippingStore.shippingZones = [];
 
-	if ((selected.value == "manual shipping")) {
+	if (selected.value == "manual shipping") {
 		shippingStore.shippingZones = await getShipping();
-			}
-	localDelivery.value = await getDeliveryAddress()
-	if (localDelivery.value?.length == 0){
-		await saveDeliveryAddress()
 	}
-	localPickup.value = await getPickupAddress()
-	if (localPickup.value?.length == 0){
-		await savePickupAddress()
+	localDelivery.value = await getDeliveryAddress();
+	if (localDelivery.value?.length == 0) {
+		await saveDeliveryAddress();
+	}
+	localPickup.value = await getPickupAddress();
+	if (localPickup.value?.length == 0) {
+		await savePickupAddress();
 	}
 });
 
-watch(() => localPickup.value[0]?.local_pickup_country_name, async()=> {
-	pickupAddress.value = await fetchStates(localPickup.value[0].local_pickup_country_name)
-})
-watch(() => localDelivery.value[0]?.local_delivery_country_name, async()=> {
-	deliveryAddress.value = await fetchStates(localDelivery.value[0].local_delivery_country_name)
-})
+watch(
+	() => localPickup.value[0]?.local_pickup_country_name,
+	async () => {
+		pickupAddress.value = await fetchStates(localPickup.value[0].local_pickup_country_name);
+	}
+);
+watch(
+	() => localDelivery.value[0]?.local_delivery_country_name,
+	async () => {
+		deliveryAddress.value = await fetchStates(localDelivery.value[0].local_delivery_country_name);
+	}
+);
 const computedLabel = computed(() => {
 	return selected.value ? "" : "Select Shipping Method";
 });
 
 async function updateDeliveryDays() {
-	updating.value = true 
-  const updatePromises = shippingZones.value.map(zone => {
-    const data = {
-      delivery_date_range: zone?.delivery_date_range
-    };
-    return updateShipping(data, zone?.id);
-  });
+	updating.value = true;
+	const updatePromises = shippingZones.value.map((zone) => {
+		const data = {
+			delivery_date_range: zone?.delivery_date_range,
+		};
+		return updateShipping(data, zone?.id);
+	});
 
-  await Promise.all(updatePromises);
+	await Promise.all(updatePromises);
 
-  shippingStore.shippingZones = await getShipping();
-  updating.value = false
-  deliveryDateModal.value = false
+	shippingStore.shippingZones = await getShipping();
+	updating.value = false;
+	deliveryDateModal.value = false;
 }
-async function editDeliveryAddress(){
+async function editDeliveryAddress() {
 	const data = {
 		local_delivery_company: localDelivery.value[0].local_delivery_company,
 		local_delivery_address: localDelivery.value[0].local_delivery_address,
@@ -873,27 +914,27 @@ async function editDeliveryAddress(){
 		local_delivery_state: localDelivery.value[0].local_delivery_state,
 		local_delivery_apartment: localDelivery.value[0].local_delivery_apartment,
 		local_delivery_zipcode: localDelivery.value[0].local_delivery_zipcode,
-		local_delivery_phone_number: localDelivery.value[0].local_delivery_phone_number
-	}
-	try{
-		loading.value = true
-		await updateDeliveryAddress(data, localDelivery.value[0].id)
-		localDelivery.value = await getDeliveryAddress()
-		
-		deliveryError.value = ""
-	}catch(error){
+		local_delivery_phone_number: localDelivery.value[0].local_delivery_phone_number,
+	};
+	try {
+		loading.value = true;
+		await updateDeliveryAddress(data, localDelivery.value[0].id);
+		localDelivery.value = await getDeliveryAddress();
+
+		deliveryError.value = "";
+	} catch (error) {
 		if (error.response) {
-            deliveryError.value = error.response.data.message || 'An error occurred while saving local pickup address.';
-          } else if (error.request) {
-            deliveryError.value = 'No response received from server. Please try again later.';
-          } else {
-            deliveryError.value = 'An error occurred. Please try again later.';
-          }
-	}finally{
-		loading.value = false
+			deliveryError.value = error.response.data.message || "An error occurred while saving local pickup address.";
+		} else if (error.request) {
+			deliveryError.value = "No response received from server. Please try again later.";
+		} else {
+			deliveryError.value = "An error occurred. Please try again later.";
+		}
+	} finally {
+		loading.value = false;
 	}
 }
-async function editPickupAddress(){
+async function editPickupAddress() {
 	const data = {
 		local_pickup_company: localPickup.value[0].local_pickup_company,
 		local_pickup_address: localPickup.value[0].local_pickup_address,
@@ -902,26 +943,26 @@ async function editPickupAddress(){
 		local_pickup_state: localPickup.value[0].local_pickup_state,
 		local_pickup_apartment: localPickup.value[0].local_pickup_apartment,
 		local_pickup_zipcode: localPickup.value[0].local_pickup_zipcode,
-		local_pickup_phone_number: localPickup.value[0].local_pickup_phone_number
-	}
-	try{
-		loading.value = true
-		await updatePickupAddress(data, localPickup.value[0].id)
-		localPickup.value = await getPickupAddress()
-		pickupError.value = ""
-	}catch(error){
+		local_pickup_phone_number: localPickup.value[0].local_pickup_phone_number,
+	};
+	try {
+		loading.value = true;
+		await updatePickupAddress(data, localPickup.value[0].id);
+		localPickup.value = await getPickupAddress();
+		pickupError.value = "";
+	} catch (error) {
 		if (error.response) {
-            pickupError.value = error.response.data.message || 'An error occurred while saving local pickup address.';
-          } else if (error.request) {
-            pickupError.value = 'No response received from server. Please try again later.';
-          } else {
-            pickupError.value = 'An error occurred. Please try again later.';
-          }
-	}finally{
-		loading.value = false
+			pickupError.value = error.response.data.message || "An error occurred while saving local pickup address.";
+		} else if (error.request) {
+			pickupError.value = "No response received from server. Please try again later.";
+		} else {
+			pickupError.value = "An error occurred. Please try again later.";
+		}
+	} finally {
+		loading.value = false;
 	}
 }
-async function saveDeliveryAddress(){
+async function saveDeliveryAddress() {
 	const data = {
 		local_delivery_company: vendor.value.business_name,
 		local_delivery_address: vendor.value.address,
@@ -930,14 +971,14 @@ async function saveDeliveryAddress(){
 		local_delivery_state: vendor.value.state,
 		local_delivery_apartment: "",
 		local_delivery_zipcode: "",
-		local_delivery_phone_number: vendor.value.busniess_phone_number
-	}
-	const res = await createDeliveryAddress(data)
-	if (res){
-		localDelivery.value = await getDeliveryAddress()
+		local_delivery_phone_number: vendor.value.busniess_phone_number,
+	};
+	const res = await createDeliveryAddress(data);
+	if (res) {
+		localDelivery.value = await getDeliveryAddress();
 	}
 }
-async function savePickupAddress(){
+async function savePickupAddress() {
 	const data = {
 		local_pickup_company: vendor.value.business_name,
 		local_pickup_address: vendor.value.address,
@@ -946,28 +987,28 @@ async function savePickupAddress(){
 		local_pickup_state: vendor.value.state,
 		local_pickup_apartment: "",
 		local_pickup_zipcode: "",
-		local_pickup_phone_number: vendor.value.busniess_phone_number
-	}
-	const res = await createPickupAddress(data)
-	if (res){
-		localPickup.value = await getPickupAddress()
+		local_pickup_phone_number: vendor.value.busniess_phone_number,
+	};
+	const res = await createPickupAddress(data);
+	if (res) {
+		localPickup.value = await getPickupAddress();
 	}
 }
-async function saveZone (){
-	const result = await chooseShippingMethod(selected.value, savingMethod)
-	if(!result.success){
-		shippingError.value = result.message
-	}else{
-		await vendorStore.getUser(vendorStore.vendor.id)
+async function saveZone() {
+	const result = await chooseShippingMethod(selected.value, savingMethod);
+	if (!result.success) {
+		shippingError.value = result.message;
+	} else {
+		await vendorStore.getUser(vendorStore.vendor.id);
 	}
-	}
-async function editZone (){
-	const id = vendorStore.vendor.vendor_details.shipping_method.id
-	const result = await changeShippingMethod(id, selected.value, savingMethod)
-	if(!result.success){
-		shippingError.value = result.message
-	}else{
-		await vendorStore.getUser(vendorStore.vendor.id)
+}
+async function editZone() {
+	const id = vendorStore.vendor.vendor_details.shipping_method.id;
+	const result = await changeShippingMethod(id, selected.value, savingMethod);
+	if (!result.success) {
+		shippingError.value = result.message;
+	} else {
+		await vendorStore.getUser(vendorStore.vendor.id);
 	}
 }
 </script>

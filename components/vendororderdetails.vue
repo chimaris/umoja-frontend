@@ -3,14 +3,25 @@
 		<div class="d-flex pb-4 pt-2 justify-space-between">
 			<div class="d-flex align-center">
 				<h1 style="font-weight: 700; font-size: 24px; line-height: 30px; letter-spacing: -0.02em">
-					Order Details / <span style="color: #2c6e63"> #{{orderDetails?.order_id}} </span>
+					Order Details / <span style="color: #2c6e63"> #{{ orderDetails?.order_id }} </span>
 				</h1>
 				<v-chip rounded="lg" style="width: 108px" class="d-flex align-center justify-center ml-3 mr-2" color="#1273EB">
 					<v-icon class="mr-2" size="16" icon="mdi mdi-check-circle"></v-icon>
-					<span style="font-weight: 600; font-size: 12px; line-height: 15px; letter-spacing: -0.01em;" :color="orderDetails?.payment_status == 'paid' ? 'blue' : 'orange'">{{orderDetails?.payment_status}}</span>
+					<span
+						style="font-weight: 600; font-size: 12px; line-height: 15px; letter-spacing: -0.01em"
+						:color="orderDetails?.payment_status == 'paid' ? 'blue' : 'orange'"
+						>{{ orderDetails?.payment_status }}</span
+					>
 				</v-chip>
-				<v-chip rounded="lg" style="width: 108px" class="d-flex align-center justify-center mx-2" :color="orderDetails?.fulfillment_status == 'fulfilled' ? 'green' : orderDetails?.fulfillment_status == 'unfulfilled' ? 'red' : 'orange'">
-					<span style="font-weight: 600; font-size: 12px; line-height: 15px; letter-spacing: -0.01em; color: #c5912c">{{orderDetails?.fulfillment_status}}</span>
+				<v-chip
+					rounded="lg"
+					style="width: 108px"
+					class="d-flex align-center justify-center mx-2"
+					:color="orderDetails?.fulfillment_status == 'fulfilled' ? 'green' : orderDetails?.fulfillment_status == 'unfulfilled' ? 'red' : 'orange'"
+				>
+					<span style="font-weight: 600; font-size: 12px; line-height: 15px; letter-spacing: -0.01em; color: #c5912c">{{
+						orderDetails?.fulfillment_status
+					}}</span>
 				</v-chip>
 			</div>
 			<div class="d-flex align-center">
@@ -27,11 +38,11 @@
 		<div class="d-flex">
 			<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696">
 				Order Date:
-				<span style="color: #333333"> {{getdateRegistered(orderDetails?.created_at)}} </span>
+				<span style="color: #333333"> {{ getdateRegistered(orderDetails?.created_at) }} </span>
 			</p>
 			<p style="font-weight: 500; font-size: 14px; line-height: 18px; color: #969696" class="ml-3">
 				Maximum Delivery Period:
-				<span style="color: #333333"> {{getMaxDeliveryDate()}} Days </span>
+				<span style="color: #333333"> {{ getMaxDeliveryDate() }} Days </span>
 			</p>
 		</div>
 
@@ -50,41 +61,65 @@
 								<v-avatar rounded="sm" class="mr-6" size="107"
 									><v-img src="https://res.cloudinary.com/payhospi/image/upload/v1713956914/umoja/profile_image_pd4dcv.png"></v-img
 								></v-avatar>
-								<v-row>
-									<v-col
-										v-show="!edit || (edit && n.title !== 'Email' && n.title !== 'Phone')"
-										v-for="n in customerDetails"
-										:key="n.title"
-										cols="12"
-										style="font-weight: 500; font-size: 14px; line-height: 18px"
-										sm="6"
-										md="4"
-									>
-										<p style="color: #969696" class="text-capitalize">{{ n.title }}</p>
-										<p style="color: #333333" class="mt-2">
-											{{ n.value }}
-										
-										</p>
-										<v-btn v-if="n.img" color="grey-lighten-2" flat class="py-4 px-3 mt-2  d-flex align-center justify-center rounded-lg">
-												<v-img width="100" cover :src="n.img"></v-img
+								<div>
+									<v-row>
+										<v-col
+											v-show="!edit || (edit && n.title !== 'Email' && n.title !== 'Phone')"
+											v-for="n in customerDetails"
+											:key="n.title"
+											cols="12"
+											style="font-weight: 500; font-size: 14px; line-height: 18px"
+											sm="6"
+											md="4"
+										>
+											<p style="color: #969696" class="text-capitalize">{{ n.title }}</p>
+											<p style="color: #333333" class="mt-2">
+												{{ n.value }}
+											</p>
+											<v-btn v-if="n.img" color="grey-lighten-2" flat class="py-4 px-3 mt-2 d-flex align-center justify-center rounded-lg">
+												<v-img width="100" height="50" contain :src="n.img"></v-img
 											></v-btn>
-									</v-col>
-									<v-col v-if="edit" cols="12" style="font-weight: 500; font-size: 14px; line-height: 18px" sm="6" md="8">
-										<p style="color: #969696" class="text-capitalize">Order Status</p>
+										</v-col>
+										<v-col v-if="edit" cols="12" style="font-weight: 500; font-size: 14px; line-height: 18px" sm="6" md="8">
+											<p style="color: #969696" class="text-capitalize">Order Status</p>
 
-										<v-select
-											density="compact"
-											append-inner-icon="mdi mdi-chevron-down"
-											color="grey-lighten-2"
-											flat
-											class="mt-2"
-											size="x-small"
-											block
-											value="Processing"
-											:items="['Processing', 'Shipped', 'In Transit', 'Delivered']"
-										></v-select>
-									</v-col>
-								</v-row>
+											<v-select
+												density="compact"
+												append-inner-icon="mdi mdi-chevron-down"
+												color="grey-lighten-2"
+												flat
+												class="mt-2"
+												size="x-small"
+												block
+												value="Processing"
+												:items="['Processing', 'Shipped', 'In Transit', 'Delivered']"
+											></v-select>
+										</v-col>
+									</v-row>
+									<v-row>
+										<v-col>
+											<p style="color: #969696" class="text-capitalize">Shipping</p>
+											<p style="color: #333333" class="mt-2">
+												Michael Johnson Michael’s Corp LLC Rose Str. 120 New York, PH 10000 United States (US)
+											</p>
+										</v-col>
+										<v-col>
+											<p style="color: #969696" class="text-capitalize">Order Status</p>
+											<v-select
+												density="compact"
+												color="grey-lighten-2"
+												flat
+												class="mt-2"
+												size="x-small"
+												block
+												value="Processing"
+												:items="['Processing', 'Shipped', 'In Transit', 'Delivered']"
+												@change="handleSelectionChange"
+											></v-select>
+										</v-col>
+										<v-col></v-col>
+									</v-row>
+								</div>
 							</v-sheet>
 						</v-window-item>
 						<v-window-item value="Payments">
@@ -93,7 +128,7 @@
 									<div class="d-flex justify-space-between align-center py-4">
 										<p style="color: #969696; font-size: 14px; font-weight: 500">Amount paid by customer</p>
 										<p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px" class="d-flex align-center">
-											<v-icon icon="mdi mdi-check-circle" size="small" color="teal" class="mr-2"></v-icon>{{formattedPrice(orderDetails?.total)}}
+											<v-icon icon="mdi mdi-check-circle" size="small" color="teal" class="mr-2"></v-icon>{{ formattedPrice(orderDetails?.total) }}
 										</p>
 									</div>
 									<v-divider></v-divider>
@@ -101,14 +136,18 @@
 								<div>
 									<div class="d-flex justify-space-between align-center py-4">
 										<p style="color: #969696; font-size: 14px; font-weight: 500">Receiving amount</p>
-										<p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px" class="d-flex align-center">{{formattedPrice(orderDetails?.total)}}</p>
+										<p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px" class="d-flex align-center">
+											{{ formattedPrice(orderDetails?.total) }}
+										</p>
 									</div>
 									<v-divider></v-divider>
 								</div>
 								<div>
 									<div class="d-flex justify-space-between align-center py-4">
 										<p style="color: #969696; font-size: 14px; font-weight: 500">Companys %</p>
-										<p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px" class="d-flex align-center">{{formattedPrice(((orderDetails?.total) * (20/100)))}}</p>
+										<p style="color: #333; font-size: 14px; font-weight: 600; line-height: 20px" class="d-flex align-center">
+											{{ formattedPrice(orderDetails?.total * (20 / 100)) }}
+										</p>
 									</div>
 									<v-divider></v-divider>
 								</div>
@@ -116,9 +155,9 @@
 									<div class="d-flex justify-space-between align-center py-4">
 										<p style="color: #969696; font-size: 14px; font-weight: 500">Payment status</p>
 										<v-chip style="width: 81px" color="#C5912C" size="small" class="d-flex justify-center align-center" rounded="lg"
-											><span style="color: var(--baklava-5, #c5912c); font-size: 12px; font-weight: 600; letter-spacing: -0.12px"
-												>{{orderDetails?.payment_status}}</span
-											></v-chip
+											><span style="color: var(--baklava-5, #c5912c); font-size: 12px; font-weight: 600; letter-spacing: -0.12px">{{
+												orderDetails?.payment_status
+											}}</span></v-chip
 										>
 									</div>
 								</div>
@@ -190,9 +229,9 @@
 									</td>
 									<td style="font-size: 14px; font-weight: 500" class="text-grey-darken-2 px-1">5</td>
 									<td class="tiny2 px-1">{{ formattedPrice(item.price) }}</td>
-									<td class="tiny2 px-1">{{item.qty}}</td>
-									<td style="font-size: 14px" class="text-grey-lighten-2 px-1">{{item.discount ? item.discount : 0.00}}</td>
-									<td class="tiny2 pr-4 px-1">{{ formattedPrice((item.price * item.qty)) }}</td>
+									<td class="tiny2 px-1">{{ item.qty }}</td>
+									<td style="font-size: 14px" class="text-grey-lighten-2 px-1">{{ item.discount ? item.discount : 0.0 }}</td>
+									<td class="tiny2 pr-4 px-1">{{ formattedPrice(item.price * item.qty) }}</td>
 								</tr>
 							</tbody>
 						</v-table>
@@ -213,7 +252,7 @@
 						<div class="bg-black pt-6">
 							<div class="d-flex px-4 pb-6 text-white justify-space-between">
 								<p style="font-weight: 500; font-size: 16px; line-height: 18px">Grand Total:</p>
-								<p style="font-weight: 600; font-size: 20px; line-height: 20px">{{formattedPrice(orderDetails?.total)}}</p>
+								<p style="font-weight: 600; font-size: 20px; line-height: 20px">{{ formattedPrice(orderDetails?.total) }}</p>
 							</div>
 						</div>
 					</div>
@@ -261,106 +300,177 @@
 				</v-sheet>
 			</v-col>
 		</v-row>
+		<v-dialog max-width="600px" v-model="shippingModal">
+			<v-sheet width="100vw" max-width="744px" class="cardStyle px-0">
+				<div class="px-6 d-flex justify-end">
+					<v-icon @click="shippingModal = false" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
+				</div>
+				<v-divider class="my-3"></v-divider>
+
+				<div class="px-6">
+					<div class="image-container w-100">
+						<h2 class="text-white theText">Provide delivery tracking number.</h2>
+					</div>
+
+					<p class="my-6">Kindly add the delivery tracking number for this order so the customer can keep track of their products</p>
+
+					<div>
+						<p class="inputLabel">Delivery Company Name</p>
+						<v-select
+							density="compact"
+							color="grey-lighten-2"
+							flat
+							class="mt-2"
+							size="x-small"
+							block
+							placeholder="Select Delivery Company"
+							value=""
+							:items="shippingOptions"
+						></v-select>
+					</div>
+					<div>
+						<p class="inputLabel">Tracking Number</p>
+						<v-text-field
+							placeholder="Enter tracking number"
+							density="comfortable"
+							persistent-hint
+							hint="Please enter the correct delivery tracking number"
+						></v-text-field>
+					</div>
+
+					<div class="mt-8">
+						<v-btn size="large" color="green" flat block>
+							<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Add Number </span>
+						</v-btn>
+					</div>
+				</div>
+			</v-sheet>
+		</v-dialog>
 	</v-container>
 </template>
+
 <script setup>
-import {ref, onMounted, computed} from 'vue'
-import {useOrderStore} from '~/stores/order'
-import { getdateRegistered } from '~/utils/date';
-import { formattedPrice } from '~/utils/price';
-import {useRouter} from "vue-router"
+import { ref, onMounted, computed } from "vue";
+import { useOrderStore } from "~/stores/order";
+import { getdateRegistered } from "~/utils/date";
+import { formattedPrice } from "~/utils/price";
+import { useRouter } from "vue-router";
 
+const orderStore = useOrderStore();
+const tab = ref("Customer Details");
+const chip = ref("All");
+const edit = ref(false);
+const chosen = ref("");
+const shippingModal = ref(true);
 
-const orderStore = useOrderStore()
-const tab = ref("Customer Details")
-const chip =ref("All")
-const edit = ref(false)
-const chosen = ref("")
 // const orderDetails = orderStore.orderDetail == [] ? [] : orderStore.orderDetail;
 const orderDetails = computed(() => orderStore.orderDetail);
 
 const maxDeliveryDate = getMaxDeliveryDate();
-const router = useRouter()
+const router = useRouter();
 
+const handleSelectionChange = (newValue) => {
+	console.log(newValue);
+	if (newValue === "Shipped") {
+		dialog.value = true;
+	}
+};
 
 onMounted(() => {
-	if (!orderDetails.value || orderDetails.value == []){
-		router.push('/vendor/dashboard/Orders')
+	if (!orderDetails.value || orderDetails.value == []) {
+		router.push("/vendor/dashboard/Orders");
 	}
 });
 
 function getMaxDeliveryDate() {
 	const deliveryDuration = orderDetails.value?.delivery_duration;
-	if (!deliveryDuration){
-		return ''
+	if (!deliveryDuration) {
+		return "";
 	}
-  const parts = deliveryDuration?.split(' - ');
-  const maxDeliveryDate = parts[1]?.split(' ')[0]; 
-  return parseInt(maxDeliveryDate, 10);
+	const parts = deliveryDuration?.split(" - ");
+	const maxDeliveryDate = parts[1]?.split(" ")[0];
+	return parseInt(maxDeliveryDate, 10);
 }
 const notes = [
-				{
-					name: "Benjamin Franklin O.",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png",
-				},
-				{
-					name: "Nweke Franklin",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png",
-				},
-				{
-					name: "Nweke Franklin",
-					image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png",
-				},
-			]
+	{
+		name: "Benjamin Franklin O.",
+		image: "https://res.cloudinary.com/payhospi/image/upload/v1687265847/Rectangle_1929_qzdwmq.png",
+	},
+	{
+		name: "Nweke Franklin",
+		image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png",
+	},
+	{
+		name: "Nweke Franklin",
+		image: "https://res.cloudinary.com/payhospi/image/upload/v1687265844/Rectangle_1929_1_x8i5ic.png",
+	},
+];
+const shippingOptions = ["Umoja Shipping", "DHL", "Fedex"];
+
 const summary = computed(() => {
 	return [
-				{
-					title: "Total Quantity",
-					value: orderDetails.value?.items.length + " Item" + (orderDetails.value?.items.length > 1 ? "s" : ""),
-				},
-				{
-					title: "Sub-Total",
-					value: formattedPrice(orderDetails.value?.sub_total),
-				},
-				{
-					title: "Shipping International",
-					value: formattedPrice(orderDetails.value?.delivery_price),
-				},
-				{
-					title: "Taxes",
-					value: "€ 0.00",
-				},
-			]
-
-})
+		{
+			title: "Total Quantity",
+			value: orderDetails.value?.items.length + " Item" + (orderDetails.value?.items.length > 1 ? "s" : ""),
+		},
+		{
+			title: "Sub-Total",
+			value: formattedPrice(orderDetails.value?.sub_total),
+		},
+		{
+			title: "Shipping International",
+			value: formattedPrice(orderDetails.value?.delivery_price),
+		},
+		{
+			title: "Taxes",
+			value: "€ 0.00",
+		},
+	];
+});
 const customerDetails = computed(() => {
 	return [
-				{
-					title: "Name",
-					value: orderDetails.value?.customer_fullname,
-				},
-				{
-					title: "Email",
-					value: orderDetails.value?.customer_email,
-				},
-				{
-					title: "Phone",
-					value: orderDetails.value?.customer_phone,
-				},
-				{
-					title: "Billing",
-					value: orderDetails.value?.customer_address + ','+ orderDetails.value?.customer_region + ',' + orderDetails.value?.customer_country,
-				},
-				{
-					title: "Shipping",
-					value: orderDetails.value?.customer_address + ','+ orderDetails.value?.customer_region + ',' + orderDetails.value?.customer_country,
-				},
-				{
-					title: "Shipping Company",
-					value: orderDetails.value?.delivery_method,
-					img: "https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png",
-				},
-			];
-})
+		{
+			title: "Name",
+			value: orderDetails.value?.customer_fullname,
+		},
 
+		{
+			title: "Billing",
+			value: "Same as shipping address", //orderDetails.value?.customer_address + "," + orderDetails.value?.customer_region + "," + orderDetails.value?.customer_country,
+		},
+
+		{
+			title: "Shipping Company",
+			value: orderDetails.value?.delivery_method,
+			img: "https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png",
+		},
+		// {
+		// 	title: "Shipping",
+		// 	value: orderDetails.value?.customer_address + "," + orderDetails.value?.customer_region + "," + orderDetails.value?.customer_country,
+		// },
+	];
+});
 </script>
+
+<style scoped>
+.image-container {
+	width: 100%;
+	height: 200px;
+	object-fit: cover;
+	background-size: cover;
+	background-image: url("https://res.cloudinary.com/dd26v0ffw/image/upload/v1719569883/umoja/Rectangle_22443_nsqtgk.png");
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding: 0 20px;
+}
+
+.theText {
+	color: #ededed;
+	font-size: 40px;
+	font-weight: 600;
+	letter-spacing: -3%;
+	line-height: 42.8px;
+	width: 340px;
+}
+</style>
