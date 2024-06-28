@@ -340,14 +340,6 @@ const customerDetails = computed(() => {
 					value: orderDetails.value?.customer_fullname,
 				},
 				{
-					title: "Email",
-					value: orderDetails.value?.customer_email,
-				},
-				{
-					title: "Phone",
-					value: orderDetails.value?.customer_phone,
-				},
-				{
 					title: "Billing",
 					value: orderDetails.value?.customer_address + ','+ orderDetails.value?.customer_region + ',' + orderDetails.value?.customer_country,
 				},
