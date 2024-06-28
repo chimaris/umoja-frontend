@@ -97,7 +97,7 @@
 					</v-col>
 					<v-col cols="12" lg="6">
 						<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-2">Postal Code</p>
-						<p style="color: #333; font-size: 14px; font-weight: 500"></p>
+						<p style="color: #333; font-size: 14px; font-weight: 500">{{ vendor?.vendor_details.postal_code }}</p>
 					</v-col>
 					<v-col cols="12" lg="6">
 						<p style="color: #969696; font-size: 14px; font-weight: 500" class="mb-2">Tax ID</p>
@@ -280,7 +280,7 @@
 						<v-row>
 							<v-col cols="12" class="pt-0" md="6">
 								<p class="inputLabel">Postal code<span class="mb-2">*</span></p>
-								<v-text-field v-model="postalCode" placeholder="Enter your postal code" density="comfortable"> </v-text-field>
+								<v-text-field v-model="vendor.vendor_details.postal_code" placeholder="Enter your postal code" density="comfortable"> </v-text-field>
 							</v-col>
 							<v-col cols="12" md="6" class="pt-0">
 								<p class="inputLabel">Tax ID<span class="mb-2">*</span></p>
@@ -432,7 +432,6 @@ watch(
 const companyCategories = ["Fashion", "Cosmetic", "Art", "Home decoration", "Furniture", "Accessories"];
 const vendorStore = useVendorStore();
 
-const postalCode = ref("");
 const taxId = ref("");
 const upLoadedFiles = ref([]);
 const showProgress = ref(false);
@@ -530,6 +529,7 @@ async function editAddress() {
 		country_name: props.vendor.vendor_details.country_name,
 		state: props.vendor.vendor_details.state,
 		city: props.vendor.vendor_details.city,
+		postal_code: props.vendor.vendor_details.postal_code
 	};
 	try {
 		addressError.value = "";
