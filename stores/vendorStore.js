@@ -221,6 +221,19 @@ export const useVendorStore = defineStore("vendor", {
 			await this.getUser(this.vendor.id);
 			return response;
 		},
+		async editVendor(data) {
+			const api = vendorUseApi();
+			const response = await api({
+				url: `vendor/update_account/${this.vendor.id}`,
+				method: "POST",
+				data:{
+					_method: 'PUT',
+					...data
+				}
+			});
+			await this.getUser(this.vendor.id);
+			return response;
+		},
 		logout() {
 			this.vendor = [];
 			this.vendorIsLoggedIn = false;

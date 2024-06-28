@@ -429,10 +429,32 @@ const summary = computed(() => {
 });
 const customerDetails = computed(() => {
 	return [
+<<<<<<< HEAD
 		{
 			title: "Name",
 			value: orderDetails.value?.customer_fullname,
 		},
+=======
+				{
+					title: "Name",
+					value: orderDetails.value?.customer_fullname,
+				},
+				{
+					title: "Billing",
+					value: orderDetails.value?.customer_address + ','+ orderDetails.value?.customer_region + ',' + orderDetails.value?.customer_country,
+				},
+				{
+					title: "Shipping",
+					value: orderDetails.value?.customer_address + ','+ orderDetails.value?.customer_region + ',' + orderDetails.value?.customer_country,
+				},
+				{
+					title: "Shipping Company",
+					value: orderDetails.value?.delivery_method,
+					img: "https://res.cloudinary.com/dkbt6at26/image/upload/v1684229324/Frame_4_emeelq.png",
+				},
+			];
+})
+>>>>>>> b2a9e729caa3cddac9adf942db884cd43d7e7f34
 
 		{
 			title: "Billing",

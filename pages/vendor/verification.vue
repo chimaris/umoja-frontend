@@ -80,7 +80,6 @@ async function verify(){
        vendorStore.selectedItem = 'Homepage';
         router.push('/vendor/dashboard/Homepage')
         vendorStore.verifyError = ""
-        localStorage.removeItem('vendor-email')
         otp.value = ""
     }
 
