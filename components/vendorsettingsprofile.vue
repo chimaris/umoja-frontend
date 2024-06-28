@@ -479,7 +479,7 @@ async function editProfile() {
 	try {
 		profileError.value = "";
 		status.value = true;
-		const res = await vendorStore.registerVendor(data);
+		const res = await vendorStore.editVendor(data);
 		profile.value = false;
 	} catch (error) {
 		if (error.response) {
@@ -507,7 +507,7 @@ async function editDetails() {
 	try {
 		detailsError.value = "";
 		status.value = true;
-		await vendorStore.registerVendor(data);
+		await vendorStore.editVendor(data);
 		vendorDetails.value = false;
 	} catch (error) {
 		if (error.response) {
@@ -534,7 +534,7 @@ async function editAddress() {
 	try {
 		addressError.value = "";
 		status.value = true;
-		const res = await vendorStore.registerVendor(data);
+		const res = await vendorStore.editVendor(data);
 		vendorAddress.value = false;
 	} catch (error) {
 		if (error.response) {
