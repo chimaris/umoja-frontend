@@ -3,9 +3,9 @@
 		<p style="color: #000; font-size: 20px; font-weight: 600" class="pa-5">Shipping and Delivery</p>
 		<v-divider></v-divider>
 		<div class="pa-5 py-8">
-			<p style="font-size: 20px; font-weight: 600">How do you want to handle your shipping?</p>
+			<p style="font-size: 20px; font-weight: 600">Set Up Your Manual Shipping.</p>
 
-			<v-select
+			<!-- <v-select
 				v-model="selected"
 				:items="items"
 				item-value="value"
@@ -42,10 +42,9 @@
 						</div>
 					</v-list-item>
 				</template>
-			</v-select>
-			<template v-if="selected">
+			</v-select> -->
 				<!-- If manuel shipping is selected -->
-				<v-card v-if="selected == 'manual shipping'" class="my-5 pa-6 cardStyle" flat>
+				<v-card class="my-5 pa-6 cardStyle" flat>
 					<div class="d-flex justify-space-between align-center w-100 mb-4">
 						<div>
 							<p style="font-size: 18px; font-weight: 600; color: #333">Shipping <v-icon icon="mdi mdi-information-outline" size="20"></v-icon></p>
@@ -113,7 +112,7 @@
 					</div>
 				</v-card>
 				<!-- if manual-shipping is selected -->
-				<v-card v-if="selected == 'manual shipping'" class="mx-auto my-5 py-2 px-6 cardStyle" flat>
+				<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat>
 					<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
 						Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 					</p>
@@ -333,7 +332,7 @@
 						</div>
 					</div>
 				</v-card>
-				<div v-if="!vendorStore.vendor.vendor_details.shipping_method" class="d-flex flex-column align-end justify-end ga-2">
+				<!-- <div v-if="!vendorStore.vendor.vendor_details.shipping_method" class="d-flex flex-column align-end justify-end ga-2">
 					<p class="" style="color: red; font-size: 16px">{{shippingError}}</p>
 					<v-btn @click="saveZone()" size="default" color="green" flat>
 						<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save shipping method</span></v-btn
@@ -344,8 +343,7 @@
 					<v-btn size="default" color="green" flat>
 						<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Update shipping method</span></v-btn
 					>
-				</div>
-			</template>
+				</div> -->
 		</div>
 	</div>
 
@@ -823,12 +821,9 @@ function navTo(){
 	router.push('/vendor/dashboard/Settings/Shipping Zone')
 }
 onMounted(async () => {
-	selected.value = vendorStore.vendor.vendor_details.shipping_method?.name
+	// selected.value = vendorStore.vendor.vendor_details.shipping_method?.name
 	shippingStore.shippingZones = []
-
-	if ((selected.value == "manual shipping")) {
-		shippingStore.shippingZones = await getShipping();
-			}
+	shippingStore.shippingZones = await getShipping();
 	localDelivery.value = await getDeliveryAddress()
 	if (localDelivery.value?.length == 0){
 		await saveDeliveryAddress()

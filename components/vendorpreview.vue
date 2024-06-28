@@ -62,11 +62,19 @@
 											src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1717990483/umoja/profile_image_pd4dcv_alvzjz.png"
 										></v-img>
 									</v-avatar>
-									<h3 class="py-4 pb-6" style="font-size: 24px; font-weight: 800; line-height: 30px; text-transform: capitalize">
+									<h3 class="py-4" style="font-size: 24px; font-weight: 800; line-height: 30px; text-transform: capitalize">
 										{{ vendor.vendor_details?.business_name }}
 										<!-- <v-icon color="#1273EB" size="22" icon="mdi mdi-check-decagram"></v-icon> -->
 									</h3>
+									<v-chip :color="connected ? 'green' : 'red'">
+										{{ connected ? 'Connected' : 'Not Connected' }}
+									</v-chip>
+									<v-btn flat color="blue" size="default" class="menubar" style="display: block; width: 100%; margin: 20px auto 10PX;">
+										<!-- <v-icon class="mr-2" icon="mdi mdi-share"></v-icon> -->
+										{{ connected ?  'View Stripe Account': 'Connect Stripe Account' }}
+									</v-btn>
 								</div>
+					
 								<div class="px-4 py-0 m-0">
 									<v-divider></v-divider>
 									<div class="pa-4 px-6 align-center justify-space-between d-flex">
@@ -247,6 +255,7 @@ export default {
 		const postStore = useCreateStore();
 		const coverLoading = ref(false);
 		const errorMessage = ref("");
+		const connected = ref(false)
 		const choose = (x) => {
 			ctx.emit("changePage", x);
 		};
@@ -334,6 +343,7 @@ async function upLoadFile1(event) {
 			upLoadFile1,
 			errorMessage,
 			coverLoading,
+			connected
 		};
 	},
 	data() {

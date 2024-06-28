@@ -210,7 +210,7 @@ watch(() => window.innerWidth, () => {
 
 async function loadVendorData(){
 	const vendorDetails = vendorStore.vendor.vendor_details;
-	const vendorId  = vendorStore.vendor.vendor_details.id;
+	const vendorId  = vendorStore.vendor.vendor_details?.id;
 		if (vendorDetails?.product_count > 0){
 			vendorProducts.allProducts = await fetchProducts(vendorId)
 		}

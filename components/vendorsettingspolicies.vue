@@ -89,7 +89,7 @@ import { usePolicy } from "~/composables/policy";
 const vendorStore = useVendorStore()
 const vendor = computed(() => vendorStore.vendor)
 const hasPolicy = computed(() => vendorStore.vendor.vendor_details?.policy)
-const returnPolicies = computed(() => vendorStore.vendor.vendor_details.policy)
+const returnPolicies = computed(() => vendorStore.vendor.vendor_details?.policy)
 const router = useRouter()
 
 function moveTo(){
