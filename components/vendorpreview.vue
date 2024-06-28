@@ -69,7 +69,7 @@
 									<v-chip :color="connected ? 'green' : 'red'">
 										{{ connected ? 'Connected' : 'Not Connected' }}
 									</v-chip>
-									<v-btn flat color="blue" size="default" class="menubar" style="display: block; width: 100%; margin: 20px auto 10PX;">
+									<v-btn flat color="green" size="default" class="menubar" style="display: block; width: 100%; margin: 20px auto 10PX;">
 										<!-- <v-icon class="mr-2" icon="mdi mdi-share"></v-icon> -->
 										{{ connected ?  'View Stripe Account': 'Connect Stripe Account' }}
 									</v-btn>
