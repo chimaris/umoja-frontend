@@ -43,191 +43,189 @@
 					</v-list-item>
 				</template>
 			</v-select> -->
-				<!-- If manuel shipping is selected -->
-				<v-card class="my-5 pa-6 cardStyle" flat>
-					<div class="d-flex justify-space-between align-center w-100 mb-4">
-						<div>
-							<p style="font-size: 18px; font-weight: 600; color: #333">Shipping <v-icon icon="mdi mdi-information-outline" size="20"></v-icon></p>
-							<p style="font-size: 16px; font-weight: 500; color: #969696">Choose where you ship and how much you charge for shipping at checkout.</p>
-						</div>
-						<div>
-							<!-- <v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> New Profile </v-btn> -->
-						</div>
+			<!-- If manuel shipping is selected -->
+			<v-card class="my-5 pa-6 cardStyle" flat>
+				<div class="d-flex justify-space-between align-center w-100 mb-4">
+					<div>
+						<p style="font-size: 18px; font-weight: 600; color: #333">Shipping <v-icon icon="mdi mdi-information-outline" size="20"></v-icon></p>
+						<p style="font-size: 16px; font-weight: 500; color: #969696">Choose where you ship and how much you charge for shipping at checkout.</p>
 					</div>
-					<div class="" flat style="border: 1px solid #cecece; border-radius: 15px">
-						<div class="d-flex justify-space-between align-center w-100 pa-4">
-							<p style="font-size: 18px; font-weight: 600; color: #333">General Shipping Rates</p>
-							<v-btn
-								@click="navTo()"
-								v-if="shippingZones.length == 0"
-								variant="text"
-								class="ml-4 menubar text-grey-darken-3 d-flex align-center"
-								size="default"
-								style="font-weight: 600; font-size: 16px"
-							>
-								<v-img
-									src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
-									contain
-									class="mr-1"
-									width="20"
-									height="20"
-								></v-img>
-								Create Profile
-							</v-btn>
-							<v-btn
-								@click="navTo()"
-								v-if="shippingZones.length > 0"
-								variant="text"
-								class="ml-4 menubar text-grey-darken-3 d-flex align-center"
-								size="default"
-								style="font-weight: 600; font-size: 16px"
-							>
-								<v-img
-									src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
-									contain
-									class="mr-1"
-									width="20"
-									height="20"
-								></v-img>
-								Edit
-							</v-btn>
-						</div>
-						<v-divider v-if="shippingZones.length > 0"></v-divider>
-
-						<div class="pa-4" v-if="shippingZones.length > 0">
-							<p style="font-size: 16px; font-weight: 600">Rates for</p>
-
-							<div class="d-flex justify-space-between align-center">
-								<div>
-									<span v-for="item in shippingZones" :key="item" class="d-flex align-center mt-1">
-										<v-icon class="mr-2" icon="mdi mdi-web"></v-icon>
-										<span style="font-weight: 500; font-size: 16px; text-transform: capitalize; color: #969696">{{ item.name }}</span>
-									</span>
-								</div>
-								<v-btn @click="navTo()" class="" size="default" variant="text">
-									<v-icon icon="fas fa-chevron-right"></v-icon>
-								</v-btn>
-							</div>
-						</div>
+					<div>
+						<!-- <v-btn style="border: 1px solid #e5e5e5" variant="outlined" size="default" class="ml-4 menubar text-grey-darken-3"> New Profile </v-btn> -->
 					</div>
-				</v-card>
-				<!-- if manual-shipping is selected -->
-				<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat>
-					<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
-						Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
-					</p>
-					<div class="cardStyle">
-						<div class="d-flex justify-space-between align-center w-100">
-							<div class="d-flex py-2">
-								<div>
-									<p style="font-size: 16px; font-weight: 600; color: #333333">Manual delivery dates</p>
-									<p style="font-size: 16px; font-weight: 500; color: #969696">Show delivery dates at checkout</p>
-								</div>
-							</div>
+				</div>
+				<div class="" flat style="border: 1px solid #cecece; border-radius: 15px">
+					<div class="d-flex justify-space-between align-center w-100 pa-4">
+						<p style="font-size: 18px; font-weight: 600; color: #333">General Shipping Rates</p>
+						<v-btn
+							@click="navTo()"
+							v-if="shippingZones.length == 0"
+							variant="text"
+							class="ml-4 menubar text-grey-darken-3 d-flex align-center"
+							size="default"
+							style="font-weight: 600; font-size: 16px"
+						>
+							<v-img
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+								contain
+								class="mr-1"
+								width="20"
+								height="20"
+							></v-img>
+							Create Profile
+						</v-btn>
+						<v-btn
+							@click="navTo()"
+							v-if="shippingZones.length > 0"
+							variant="text"
+							class="ml-4 menubar text-grey-darken-3 d-flex align-center"
+							size="default"
+							style="font-weight: 600; font-size: 16px"
+						>
+							<v-img
+								src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718099894/umoja/Pen_2_cdzgaq.svg"
+								contain
+								class="mr-1"
+								width="20"
+								height="20"
+							></v-img>
+							Edit
+						</v-btn>
+					</div>
+					<v-divider v-if="shippingZones.length > 0"></v-divider>
+
+					<div class="pa-4" v-if="shippingZones.length > 0">
+						<p style="font-size: 16px; font-weight: 600">Rates for</p>
+
+						<div class="d-flex justify-space-between align-center">
 							<div>
-								<v-btn
-									@click="deliveryDateModal = true"
-									style="border: 1px solid #e5e5e5"
-									variant="outlined"
-									size="default"
-									class="ml-4 menubar text-grey-darken-3"
-								>
-									Update
-								</v-btn>
+								<span v-for="item in shippingZones" :key="item" class="d-flex align-center mt-1">
+									<v-icon class="mr-2" icon="mdi mdi-web"></v-icon>
+									<span style="font-weight: 500; font-size: 16px; text-transform: capitalize; color: #969696">{{ item.name }}</span>
+								</span>
 							</div>
+							<v-btn @click="navTo()" class="" size="default" variant="text">
+								<v-icon icon="fas fa-chevron-right"></v-icon>
+							</v-btn>
 						</div>
 					</div>
-					<div class="cardStyle">
-						<v-row style="font-size: 16px; font-weight: 500; color: #333">
-							<v-col cols="3">
-								<p>Region</p>
-							</v-col>
-							<v-col cols="3" style="color: #969696">
-								<p>Rates</p>
-							</v-col>
-							<v-col>
-								<p>Delivery Dates</p>
-							</v-col>
-						</v-row>
-						<v-divider class="my-3"></v-divider>
-						<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
-							<v-col cols="3">
-								<p style="text-transform: capitalize">{{ zone?.name }}</p>
-							</v-col>
-							<v-col cols="3" style="color: #969696">
-								<p v-if="zone?.rates[0]?.minimum_price">
-									from {{ formattedPrice(zone?.rates[0]?.minimum_price) }}
-									<span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span>
-								</p>
-								<p v-if="zone?.rates[0]?.minimum_weight">
-									from {{ zone?.rates[0]?.minimum_weight }}Kg
-									<span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span>
-								</p>
-								<!-- <p>€60.00 - €100.00</p> -->
-								<!-- <p v-if="zone?.rates[0]?.minimum_price">from {{formattedPrice(zone?.rates[0]?.minimum_price)}} <span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span></p> -->
-								<!-- <p v-if="zone?.rates.length > 1" style="color: #1273eb">See more rates</p> -->
-							</v-col>
-							<v-col>
-								<!-- <p>Within Jan 1st to Jan 10th</p> -->
-								<p>{{ zone?.delivery_date_range }}</p>
-							</v-col>
-						</v-row>
+				</div>
+			</v-card>
+			<!-- if manual-shipping is selected -->
+			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat>
+				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
+					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
+				</p>
+				<div class="cardStyle">
+					<div class="d-flex justify-space-between align-center w-100">
+						<div class="d-flex py-2">
+							<div>
+								<p style="font-size: 16px; font-weight: 600; color: #333333">Manual delivery dates</p>
+								<p style="font-size: 16px; font-weight: 500; color: #969696">Show delivery dates at checkout</p>
+							</div>
+						</div>
+						<div>
+							<v-btn
+								@click="deliveryDateModal = true"
+								style="border: 1px solid #e5e5e5"
+								variant="outlined"
+								size="default"
+								class="ml-4 menubar text-grey-darken-3"
+							>
+								Update
+							</v-btn>
+						</div>
 					</div>
-				</v-card>
+				</div>
+				<div class="cardStyle">
+					<v-row style="font-size: 16px; font-weight: 500; color: #333">
+						<v-col cols="3">
+							<p>Region</p>
+						</v-col>
+						<v-col cols="3" style="color: #969696">
+							<p>Rates</p>
+						</v-col>
+						<v-col>
+							<p>Delivery Dates</p>
+						</v-col>
+					</v-row>
+					<v-divider class="my-3"></v-divider>
+					<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
+						<v-col cols="3">
+							<p style="text-transform: capitalize">{{ zone?.name }}</p>
+						</v-col>
+						<v-col cols="3" style="color: #969696">
+							<p v-if="zone?.rates[0]?.minimum_price">
+								from {{ formattedPrice(zone?.rates[0]?.minimum_price) }}
+								<span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span>
+							</p>
+							<p v-if="zone?.rates[0]?.minimum_weight">
+								from {{ zone?.rates[0]?.minimum_weight }}Kg
+								<span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span>
+							</p>
+							<!-- <p>€60.00 - €100.00</p> -->
+							<!-- <p v-if="zone?.rates[0]?.minimum_price">from {{formattedPrice(zone?.rates[0]?.minimum_price)}} <span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span></p> -->
+							<!-- <p v-if="zone?.rates.length > 1" style="color: #1273eb">See more rates</p> -->
+						</v-col>
+						<v-col>
+							<!-- <p>Within Jan 1st to Jan 10th</p> -->
+							<p>{{ zone?.delivery_date_range }}</p>
+						</v-col>
+					</v-row>
+				</div>
+			</v-card>
 
-				<!-- If Umoja shipping is selected -->
-				<!-- <v-card v-if="selected == 'manual-shipping'" class="mx-auto my-5 pa-6 cardStyle" flat >
+			<!-- If Umoja shipping is selected -->
+			<!-- <v-card v-if="selected == 'manual-shipping'" class="mx-auto my-5 pa-6 cardStyle" flat >
 				<p style="font-size: 18px; font-weight: 600; color: #333">
 					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
 				<p style="font-size: 16px; font-weight: 500; color: #969696">Choose where you ship and how much you charge for shipping at checkout.</p>
 			</v-card> -->
 
-				<v-card class="my-5 pa-6 cardStyle" flat style="justify-content: between">
-					<div class="d-flex justify-space-between align-center w-100">
-						<div>
-							<p style="font-size: 18px; font-weight: 600; color: #333">
-								Local Delivery <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
-							</p>
-							<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
-						</div>
-						<div>
-							<v-btn
-								@click="localDeliveryModal = true"
-								style="border: 1px solid #e5e5e5"
-								variant="outlined"
-								size="default"
-								class="ml-4 menubar text-grey-darken-3"
-							>
-								Setup
-							</v-btn>
-						</div>
+			<v-card class="my-5 pa-6 cardStyle" flat style="justify-content: between">
+				<div class="d-flex justify-space-between align-center w-100">
+					<div>
+						<p style="font-size: 18px; font-weight: 600; color: #333">
+							Local Delivery <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
+						</p>
+						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
 					</div>
-				</v-card>
-
-				<v-card class="my-5 pa-6 cardStyle" flat style="justify-content: between">
-					<div class="d-flex justify-space-between align-center w-100">
-						<div>
-							<p style="font-size: 18px; font-weight: 600; color: #333">
-								Local Pickups <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
-							</p>
-							<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
-						</div>
-						<div>
-							<v-btn
-								@click="localPickupModal = true"
-								style="border: 1px solid #e5e5e5"
-								variant="outlined"
-								size="default"
-								class="ml-4 menubar text-grey-darken-3"
-							>
-								Setup
-							</v-btn>
-						</div>
+					<div>
+						<v-btn
+							@click="localDeliveryModal = true"
+							style="border: 1px solid #e5e5e5"
+							variant="outlined"
+							size="default"
+							class="ml-4 menubar text-grey-darken-3"
+						>
+							Setup
+						</v-btn>
 					</div>
-				</v-card>
+				</div>
+			</v-card>
 
-				<!-- <v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener" style="justify-content: between">
+			<v-card class="my-5 pa-6 cardStyle" flat style="justify-content: between">
+				<div class="d-flex justify-space-between align-center w-100">
+					<div>
+						<p style="font-size: 18px; font-weight: 600; color: #333">Local Pickups <v-icon icon="mdi mdi-information-outline" size="20"></v-icon></p>
+						<p style="font-size: 16px; font-weight: 500; color: #969696">Deliver orders directly to customers in the area.</p>
+					</div>
+					<div>
+						<v-btn
+							@click="localPickupModal = true"
+							style="border: 1px solid #e5e5e5"
+							variant="outlined"
+							size="default"
+							class="ml-4 menubar text-grey-darken-3"
+						>
+							Setup
+						</v-btn>
+					</div>
+				</div>
+			</v-card>
+
+			<!-- <v-card class="mx-auto my-5 pa-6 cardStyle" flat rel="noopener" style="justify-content: between">
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
 					Saved Packages <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
@@ -309,42 +307,37 @@
 				</div>
 			</v-card> -->
 
-				<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat style="justify-content: between">
-					<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
-						Packing Slipss <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
-					</p>
-					<div class="cardStyle">
-						<div class="d-flex justify-space-between align-center w-100">
-							<div class="d-flex py-2">
-								<v-avatar class="mr-4" size="50" color="#EDEDED">
-									<v-img width="18" height="18" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718102214/umoja/Vector_ncodnt.svg"></v-img>
-								</v-avatar>
-								<div>
-									<p style="font-size: 16px; font-weight: 600; color: #333333">Packing Slip Template</p>
-									<p style="font-size: 16px; font-weight: 500; color: #969696">See what it looks like</p>
-								</div>
-							</div>
+			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat style="justify-content: between">
+				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
+					Packing Slipss <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
+				</p>
+				<div class="cardStyle">
+					<div class="d-flex justify-space-between align-center w-100">
+						<div class="d-flex py-2">
+							<v-avatar class="mr-4" size="50" color="#EDEDED">
+								<v-img width="18" height="18" src="https://res.cloudinary.com/dd26v0ffw/image/upload/v1718102214/umoja/Vector_ncodnt.svg"></v-img>
+							</v-avatar>
 							<div>
-								<v-btn
-									@click="printSlipModal = true"
-									style="border: 1px solid #e5e5e5"
-									variant="outlined"
-									size="default"
-									class="ml-4 menubar text-grey-darken-3"
-								>
-									View
-								</v-btn>
+								<p style="font-size: 16px; font-weight: 600; color: #333333">Packing Slip Template</p>
+								<p style="font-size: 16px; font-weight: 500; color: #969696">See what it looks like</p>
 							</div>
 						</div>
+						<div>
+							<v-btn
+								@click="printSlipModal = true"
+								style="border: 1px solid #e5e5e5"
+								variant="outlined"
+								size="default"
+								class="ml-4 menubar text-grey-darken-3"
+							>
+								View
+							</v-btn>
+						</div>
 					</div>
-				</v-card>
-<<<<<<< HEAD
-				<div v-if="!vendorStore.vendor.vendor_details.shipping_method" class="d-flex flex-column align-end justify-end ga-2">
-					<p class="" style="color: red; font-size: 16px">{{ shippingError }}</p>
-=======
-				<!-- <div v-if="!vendorStore.vendor.vendor_details.shipping_method" class="d-flex flex-column align-end justify-end ga-2">
+				</div>
+			</v-card>
+			<!-- <div v-if="!vendorStore.vendor.vendor_details.shipping_method" class="d-flex flex-column align-end justify-end ga-2">
 					<p class="" style="color: red; font-size: 16px">{{shippingError}}</p>
->>>>>>> b2a9e729caa3cddac9adf942db884cd43d7e7f34
 					<v-btn @click="saveZone()" size="default" color="green" flat>
 						<span style="color: #edf0ef; font-size: 14px; font-weight: 600; line-height: 20px"> Save shipping method</span></v-btn
 					>
@@ -861,20 +854,12 @@ function navTo() {
 	router.push("/vendor/dashboard/Settings/Shipping Zone");
 }
 onMounted(async () => {
-<<<<<<< HEAD
-	selected.value = vendorStore.vendor.vendor_details.shipping_method?.name;
-	shippingStore.shippingZones = [];
-
-	if (selected.value == "manual shipping") {
-		shippingStore.shippingZones = await getShipping();
-=======
 	// selected.value = vendorStore.vendor.vendor_details.shipping_method?.name
-	shippingStore.shippingZones = []
+	shippingStore.shippingZones = [];
 	shippingStore.shippingZones = await getShipping();
-	localDelivery.value = await getDeliveryAddress()
-	if (localDelivery.value?.length == 0){
-		await saveDeliveryAddress()
->>>>>>> b2a9e729caa3cddac9adf942db884cd43d7e7f34
+	localDelivery.value = await getDeliveryAddress();
+	if (localDelivery.value?.length == 0) {
+		await saveDeliveryAddress();
 	}
 	localDelivery.value = await getDeliveryAddress();
 	if (localDelivery.value?.length == 0) {
