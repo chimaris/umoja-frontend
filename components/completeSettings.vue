@@ -1,5 +1,5 @@
 <template >
-  <div v-if="stepsCompleted >= 1 && stepsCompleted < 3" class="w-100 position-fixed rounded-xl pa-4" style="background-color: #FDF5ED; z-index: 100; top: 5px; left: 5px; right: 5px;">
+  <div v-if="stepsCompleted >= 1 && stepsCompleted < 2" class="w-100 position-fixed rounded-xl pa-4" style="background-color: #FDF5ED; z-index: 100; top: 5px; left: 5px; right: 5px;">
     <div class="d-flex align-center justify-space-between px-10">
         <div cols="4">
             <div class="d-flex align-center ga-5">
@@ -24,7 +24,7 @@
                     </v-progress-circular>
                 </div>
                 <div>
-                    <p style="color: #333333; font-weight: 600; font-size: 16px;">{{stepsCompleted}}/3 steps completed</p>
+                    <p style="color: #333333; font-weight: 600; font-size: 16px;">{{stepsCompleted}}/2 steps completed</p>
                 </div>
             </div>
         </div>
@@ -56,7 +56,6 @@
     let count = 0;
     if (vendorStore.vendor.complete_setup === 1) count++;
     if (vendorStore.vendor.vendor_details?.policy) count++;
-    if (vendorStore.vendor.vendor_details?.shipping_method) count++;
     return count;
     });
 
@@ -65,14 +64,12 @@
     const navigateToNextStep = () => {
     if (vendorStore.vendor.complete_setup !== 1) {
         router.push('/vendor/dashboard/Profile Setup');
-    }else if (!vendorStore.vendor.vendor_details?.shipping_method) {
-        router.push('/vendor/dashboard/Settings/Shipping and Delivery');
-    } else if (!vendorStore.vendor.vendor_details?.policy) {
+    }else if (!vendorStore.vendor.vendor_details?.policy) {
         router.push('/vendor/dashboard/Settings/Policies');
     } 
 };
 watch(() => stepsCompleted.value, () => {
-    if (stepsCompleted.value == 3){
+    if (stepsCompleted.value == 2){
         vendorStore.showNotif = false
     }
 })

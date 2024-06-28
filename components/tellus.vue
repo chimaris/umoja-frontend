@@ -15,14 +15,15 @@
 		
 			<p class="inputLabel" >What category is your business?</p>
 
-			<v-select
+			<v-select 
 				v-model="vendor.business_type"
-				:items="companyCategories.map(cat => cat.name)"
+				:items="companyCategories.map(cat => cat.name.charAt(0).toUpperCase() + cat.name.slice(1).toLowerCase())"
 				placeholder="Select"
 				density="comfortable"
 				:rules="inputRules"
 			>
 			</v-select>
+
 			<p class="inputLabel">Business name</p>
 
 			<v-text-field :rules="inputRules" v-model="vendor.business_name" placeholder="Type your official business name" density="comfortable"> </v-text-field>
@@ -101,8 +102,11 @@
 			:rules="inputRules"> 
 					
 			</v-select>
+			<p class="inputLabel">Postal Code</p>
+			<v-text-field :rules="inputRules" v-model="vendor.postal_code" placeholder="Enter postal code" density="comfortable"> </v-text-field>
 			<p style="color: red; font-size: 16px;" class="mb-4">{{ formError }}</p>
 			<v-btn class="my-5" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="large">Save and continue</v-btn>
+			
 		</div>
 	</div>
 </template>
@@ -150,12 +154,13 @@ const submit = async () => {
 	formError.value = ""
 	const companyInfo = {
 		rep_country: vendor.value.rep_country,
-		business_type_id: getbusinessCategoryId(vendor.value.business_type, companyCategories.value),
+		business_type_id: getbusinessCategoryId((vendor.value.business_type).toLowerCase(), companyCategories.value),
 		business_name: vendor.value.business_name,
 		address: vendor.value.address,
 		state: vendor.value.state,
 		city: vendor.value.city,
-		country_name: vendor.value.country_name
+		country_name: vendor.value.country_name,
+		postal_code: vendor.value.postal_code
 	}
 	if (!isFormValid()) {
 		formError.value = "Please fill in all required fields."
@@ -189,9 +194,6 @@ watch(() => vendor.value?.state, () => {
 	fetchCities(vendor.value.country_name, vendor.value.state);
 		});
 function isFormValid() {
-	if (businessImages.value.length < 5) {
-		errorMessage.value = 'You must upload a minimum of 5 images!!'
-	}
 	if (
 		vendor.value.rep_country &&
 		vendor.value.business_type &&
@@ -199,7 +201,8 @@ function isFormValid() {
 		vendor.value.address && 
 		vendor.value.city &&
 		vendor.value.state &&
-		vendor.value.country_name
+		vendor.value.country_name &&
+		vendor.value.postal_code
 	) {
 		errorMessage.value = ''
 		return true
@@ -207,138 +210,9 @@ function isFormValid() {
 		return false
 	}
 }
-function upLoadFile() {
-	    if (upLoadedFiles.value.length == 10) {
-			errorMessage.value = "Maximum number of file allowed is 10"
-			return;
-		}
-		const file = document.querySelector(".droppedFile").files[0]
-		if(!file) return;
-		
-		const allowedFiles = [".gif", ".png", ".jpeg", ".jpg", ".svg"]
-		const maxAllowedWidth = 800;
-		const maxAllowedHeight = 400;
-		const fileExtension = file.name.split(".").pop().toLowerCase();
-		
-		if (!allowedFiles.includes("." + fileExtension)) {
-					errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-					return;
-			}
-		errorMessage.value = ""
-
-		const img = new Image();
-		img.src = URL.createObjectURL(file);
-		img.onload = function () {
-			if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
-				errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
-				return;
-			}
-			errorMessage.value = "";
-			const filename = file.name
-			const formData = new FormData();
-			formData.append('business_image', file)
-			files.value.push({name: filename, loading: 0})
-			showProgress.value = true;
-
-			axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
-			headers: {
-					Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
-					},
-			onUploadProgress: ({loaded, total}) => {
-				files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
-				if (loaded == total) {
-					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-					upLoadedFiles.value.push({name: filename, size: fileSize});
-					files.value = [];
-				}
-			}
-			
-			})
-			.then(response => {
-				const businessImg = response.data.business_image
-				businessImages.value = [...businessImages.value, businessImg]
-			})
-			.catch(error => {
-				if (error.response) {
-				this.error = error.response.data.message || 'An error occurred during file upload.';
-				} else if (error.request) {
-				this.error = 'No response received from server. Please try again later.';
-				} else {
-				this.error = 'An error occurred. Please try again later.';
-				}
-			});
-			};
-
-		img.onerror = function () {
-			errorMessage.value = "Failed to load the image"
-		};
 
 
-	
-}
 
-function drop(e) {
-	if (upLoadedFiles.value.length >= 10) {
-			errorMessage.value = "Maximum number of files images allowed is 10"
-			return;
-		}
-	const file= e.dataTransfer.files[0]
-	if(!file) return;
-		
-		const allowedFiles = [".gif", ".png", ".jpeg", ".jpg", ".svg"]
-		const maxAllowedWidth = 800;
-		const maxAllowedHeight = 400;
-		const fileExtension = file.name.split(".").pop().toLowerCase();
-		
-		if (!allowedFiles.includes("." + fileExtension)) {
-					errorMessage.value = "Please upload files having extensions: " + allowedFiles.join(', ');
-					return;
-			}
-		errorMessage.value = ""
-
-		const img = new Image();
-		img.src = URL.createObjectURL(file);
-		img.onload = function () {
-			if (img.width > maxAllowedWidth || img.height > maxAllowedHeight) {
-				errorMessage.value = "Image dimensions exceeds the maximum allowed dimensions (800px x 400px)."
-				return;
-			}
-			errorMessage.value = "";
-			const filename = file.name
-			const formData = new FormData();
-			formData.append('business_image', file)
-			files.value.push({name: filename, loading: 0})
-			showProgress.value = true;
-
-			axios.post("https://umoja-production-9636.up.railway.app/api/vendor/upload", formData, {
-				headers: {
-					Authorization: `Bearer ${localStorage.getItem('vendorToken')}`
-					},
-			onUploadProgress: ({loaded, total}) => {
-				files.value[files.value.length - 1].loading = Math.floor((loaded / total) * 100);
-				if (loaded == total) {
-					const fileSize = (total < 1024) ? total + "KB" : (loaded / (1024 * 1024)).toFixed(2) + "MB";
-					upLoadedFiles.value.push({name: filename, size: fileSize});
-					files.value = [];
-				}
-			}
-			
-			})
-			.then(response => {
-				const businessImg = response.data.business_image
-				businessImages.value = [...businessImages.value, businessImg]
-			})
-			.catch(error => {
-				// Handle errors here
-				console.error(error);
-			});
-			};
-
-		img.onerror = function () {
-			errorMessage.value = "Failed to load the image"
-		};
-
-	}
 
 	
 
