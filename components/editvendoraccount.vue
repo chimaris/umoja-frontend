@@ -20,7 +20,7 @@
 			<div v-if="paymentMode == 'Bank Account'">
 				<div class="mb-4">
 					<v-label class="inputLabel">Bank Name </v-label>
-					<v-text-field :rules="inputRules" v-model="vendor.bank_name" density="comfortable" placeholder="Enter your bank name"></v-text-field>
+					<v-text-field  v-model="vendor.bank_name" density="comfortable" placeholder="Enter your bank name"></v-text-field>
 				</div>
 				<div class="mb-4">
 					<v-label class="inputLabel">Account Number </v-label>
@@ -40,7 +40,7 @@
 				</div>
 				<div class="mb-4">
 					<v-label class="inputLabel">Name on Account </v-label>
-					<v-text-field :rules="inputRules" v-model="vendor.name_on_account" density="comfortable"> </v-text-field>
+					<v-text-field  v-model="vendor.name_on_account" density="comfortable"> </v-text-field>
 				</div>
 
 				<p style="font-weight: 500; font-size: 16px; color: #969696">
@@ -50,7 +50,7 @@
 			<div v-if="paymentMode == 'PayPal'" class="pt-2">
 				<div class="mb-4">
 					<v-label class="inputLabel">PayPal Email Address </v-label>
-					<v-text-field :rules="inputRules"  density="comfortable" placeholder="Enter your paypal email address"></v-text-field>
+					<v-text-field   density="comfortable" placeholder="Enter your paypal email address"></v-text-field>
 				</div>
 				<div class="mb-4">
 					<v-label class="inputLabel">PayPal Account Holder Name </v-label>
