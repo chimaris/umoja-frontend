@@ -62,7 +62,7 @@
 			</div>
 		</div>
 		<p style="color: red; font-size: 16px;" class="mb-2">{{ formError }}</p>
-		<v-btn :disabled="!isFormValid() || paymentMode == 'PayPal'" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
+		<v-btn :disabled="paymentMode == 'PayPal'" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
 	</v-sheet>
 
 	<!-- View Contact Section -->
