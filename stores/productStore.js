@@ -22,6 +22,7 @@ export const useProductStore = defineStore('productStore', {
     searchError: "",
     searchTerm: "",
     searching: false,
+    fetchTriggered: false, 
     topArticle: [],
     bestSelling: {
       all: [],
