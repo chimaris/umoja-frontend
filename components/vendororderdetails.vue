@@ -300,7 +300,7 @@
 				</v-sheet>
 			</v-col>
 		</v-row>
-		<v-dialog max-width="600px" v-model="shippingModal">
+		<!-- <v-dialog max-width="600px" v-model="shippingModal">
 			<v-sheet width="100vw" max-width="744px" class="cardStyle px-0">
 				<div class="px-6 d-flex justify-end">
 					<v-icon @click="shippingModal = false" icon="mdi mdi-close-circle-outline" color="#1273EB"></v-icon>
@@ -345,7 +345,7 @@
 					</div>
 				</div>
 			</v-sheet>
-		</v-dialog>
+		</v-dialog> -->
 	</v-container>
 </template>
 
