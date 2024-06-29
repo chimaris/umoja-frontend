@@ -179,7 +179,7 @@ import Compressor from 'compressorjs';
 			business_bio: vendor.value.business_bio,
 			cover_image: cover_photo.value
 		}
-		if (profile_photo.value && vendor.value.business_bio){
+		if (profile_photo.value && vendor.value.business_bio && cover_photo.value){
 			try{
 				const response = await vendorStore.registerVendor(data)
 				emit("submit");

@@ -227,13 +227,7 @@
 			vendor.value.profile_photo &&
 			vendor.value.cover_image && 
 			vendor.value.busniess_email &&
-			vendor.value.busniess_phone_number &&
-			vendor.value.twitter_handle &&
-			vendor.value.instagram_handle &&
-			vendor.value.facebook_handle &&
-			vendor.value.youtube_handle &&
-			vendor.value.bank_name &&
-			vendor.value.name_on_account 
+			vendor.value.busniess_phone_number 
 		){
 			return true
 		}else{
