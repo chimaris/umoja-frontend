@@ -329,11 +329,50 @@ onMounted(async () => {
 	categories.value = await fetchCategories("customer")
 });
 			// watch for change ins any of the filter value
-			watch(() => [productStore.params.gender, productStore.params.priceMinimum, productStore.params.priceMaximum,  productStore.pageNo, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
-			async ([]) => {
-				
-				await productStore.fetchFilteredProducts()
-			});
+			// watch(() => [productStore.params.gender, productStore.params.priceMinimum, productStore.params.priceMaximum, productStore.params.category_name, productStore.params.sizes, productStore.params.product_rating, productStore.params.compare_at_price, productStore.params.sub_category_name], 
+			// async ([]) => {
+			// 	productStore.pageNo = 1
+			// 	await productStore.fetchFilteredProducts()
+			// });
+			// watch(() =>  productStore.pageNo, async() => {
+			// 	await productStore.fetchFilteredProducts()
+			// })
+			let isFetching = false;
+
+// Watch for changes in filter parameters
+		watch(() => [
+			productStore.params.gender,
+			productStore.params.priceMinimum,
+			productStore.params.priceMaximum,
+			productStore.params.category_name,
+			productStore.params.sizes,
+			productStore.params.product_rating,
+			productStore.params.compare_at_price,
+			productStore.params.sub_category_name
+		], async () => {
+			if (!isFetching) {
+				// Set the flag
+				isFetching = true;
+				// Reset the page number when any filter parameter changes
+				productStore.pageNo = 1;
+				// Fetch filtered products
+				await productStore.fetchFilteredProducts();
+				// Reset the flag
+				isFetching = false;
+			}
+		});
+
+		// Watch for changes in page number
+		watch(() => productStore.pageNo, async () => {
+			if (!isFetching) {
+				// Set the flag
+				isFetching = true;
+				// Fetch filtered products for the new page number
+				await productStore.fetchFilteredProducts();
+				// Reset the flag
+				isFetching = false;
+			}
+		});
 			watch(() => [productStore.params.gender, productStore.params.category_name], async () => {
 				if (productStore.params.category_name && productStore.params.gender){
 					subCategories.value = await fetchSubCategories({selectedCat: productStore.params.category_name, Categories: categories.value,role: "customer"});

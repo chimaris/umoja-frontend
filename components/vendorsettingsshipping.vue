@@ -112,11 +112,11 @@
 				</div>
 			</v-card>
 			<!-- if manual-shipping is selected -->
-			<v-card class="mx-auto my-5 py-2 px-6 cardStyle" flat>
+			<v-card class="mx-auto my-5 py-2 pb-5 px-6 cardStyle" flat>
 				<p class="mb-4" style="font-size: 18px; font-weight: 600; color: #333">
 					Expected Delivery Dates <v-icon icon="mdi mdi-information-outline" size="20"></v-icon>
 				</p>
-				<div class="cardStyle">
+				<div class="cardStyle mb-5">
 					<div class="d-flex justify-space-between align-center w-100">
 						<div class="d-flex py-2">
 							<div>
