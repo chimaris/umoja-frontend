@@ -10,7 +10,7 @@
 			<v-expand-transition leave-absolute>
 				<div v-if="genderExpand">
 					<v-row dense>
-							<v-col @click="productStore.params.gender = n"  :key="i" v-for="(n, i) in ['Male', 'Female']">
+							<v-col @click="productStore.params.gender = n"  :key="i" v-for="(n, i) in ['male', 'female']">
 								<p
 									class="px-3 py-2 d-flex align-center justify-center"
 									style="
@@ -22,6 +22,7 @@
 										letter-spacing: -0.42px;
 										border-radius: 6px;
 										border: 1px solid var(--carbon-2, #cecece);
+										text-transform: capitalize;
 									"
 									:style="{
 										backgroundColor: productStore.params.gender === n ? '#E5EDEC' : '#ffffff',
