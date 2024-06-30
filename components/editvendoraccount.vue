@@ -62,7 +62,7 @@
 			</div>
 		</div>
 		<p style="color: red; font-size: 16px;" class="mb-2">{{ formError }}</p>
-		<v-btn :disabled="paymentMode == 'PayPal'" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
+		<v-btn :disabled="paymentMode == 'PayPal' || !isFormValid()" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="x-large">Save and continue</v-btn>
 	</v-sheet>
 
 	<!-- View Contact Section -->
@@ -126,10 +126,12 @@ const paymentModes = ["Bank Account", "PayPal"]
 const emit = defineEmits(['submit'])
 
 function isFormValid () {
-	return vendor.value?.name_on_account && vendor.value?.bank_account_number && vendor.value?.bank_name
+	return vendor.value?.name_on_account && vendor.value?.bank_name
 }
 const submit = async () => {
-
+		if (!isFormValid()){
+			return
+		}
 		const data = {
 		bank_name: vendor.value?.bank_name,
 		bank_account_number: vendor.value?.bank_account_number,
