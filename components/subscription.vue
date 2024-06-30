@@ -227,7 +227,9 @@
 			vendor.value.profile_photo &&
 			vendor.value.cover_image && 
 			vendor.value.busniess_email &&
-			vendor.value.busniess_phone_number 
+			vendor.value.busniess_phone_number &&
+			vendor.value.bank_name &&
+			vendor.value.name_on_account
 		){
 			return true
 		}else{
