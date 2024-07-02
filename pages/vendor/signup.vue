@@ -104,7 +104,6 @@
 						:type="visible1 ? 'text' : 'password'"
 						placeholder="Confirm Password"
 						density="comfortable"
-						prepend-inner-icon="mdi mdi-lock-outline"
 						@click:append-inner="visible1 = !visible1"
 						:rules="confirmpasswordRules"
 						v-model="confirmPassword"
