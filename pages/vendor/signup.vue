@@ -179,7 +179,7 @@ async function handleSubmit() {
 				password_confirmation: confirmPassword.value,
 				terms_accepted: 1,
 			});
-			if (result) {
+			if (result.success) {
 				router.push("/vendor/verification");
 				signupError.value = "";
 				first_name.value = "";

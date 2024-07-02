@@ -3,7 +3,7 @@
 		<h1 style="font-weight: 600; font-size: 32px; color: #1a1d1f">Tell us more about your business</h1>
 		<p style="font-weight: 500; font-size: 16px; line-height: 24px; color: #9ea5ad">Complete your company information</p>
 		<div class="pt-8 pb-12" style="max-width: 502px">
-			<p class="inputLabel">What African country are you representing?</p>
+			<p class="inputLabel">What African country are you representing?*</p>
 			<v-select
 				v-model="vendor.rep_country"
 				:items="countries"
@@ -13,7 +13,7 @@
 			>
 			</v-select>
 		
-			<p class="inputLabel" >What category is your business?</p>
+			<p class="inputLabel" >What category is your business?*</p>
 
 			<v-select 
 				v-model="vendor.business_type"
@@ -24,7 +24,7 @@
 			>
 			</v-select>
 
-			<p class="inputLabel">Business name</p>
+			<p class="inputLabel">Business name*</p>
 
 			<v-text-field :rules="inputRules" v-model="vendor.business_name" placeholder="Type your official business name" density="comfortable"> </v-text-field>
 
@@ -65,11 +65,11 @@
 			</p>
 			
 
-			<p class="inputLabel">Address</p>
+			<p class="inputLabel">Address*</p>
 			<v-text-field :rules="inputRules" v-model="vendor.address" placeholder="Enter address" density="comfortable"> </v-text-field>
 
 			
-			<p class="inputLabel">Country</p>
+			<p class="inputLabel">Country*</p>
 
 			<v-select
 				v-model="vendor.country_name"
@@ -80,7 +80,7 @@
 				@change="fetchStates(vendor?.country_name)"
 			>
 			</v-select>
-			<p class="inputLabel">State</p>
+			<p class="inputLabel">State*</p>
 			<v-select 
 			v-model="vendor.state" 
 			color="green"
@@ -92,7 +92,7 @@
 			:rules="inputRules"> 
 			</v-select>
 
-				<p class="inputLabel">City</p>
+				<p class="inputLabel">City*</p>
 			<v-select 
 			v-model="vendor.city" 
 			:loading="loadingCities"
@@ -102,7 +102,7 @@
 			:rules="inputRules"> 
 					
 			</v-select>
-			<p class="inputLabel">Postal Code</p>
+			<p class="inputLabel">Postal Code*</p>
 			<v-text-field :rules="inputRules" v-model="vendor.postal_code" placeholder="Enter postal code" density="comfortable"> </v-text-field>
 			<p style="color: red; font-size: 16px;" class="mb-4">{{ formError }}</p>
 			<v-btn class="my-5" @click="submit" flat style="background-color: #2c6e63; color: #fff" size="large">Save and continue</v-btn>

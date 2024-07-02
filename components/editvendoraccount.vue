@@ -19,7 +19,7 @@
 			</div>
 			<div v-if="paymentMode == 'Bank Account'">
 				<div class="mb-4">
-					<v-label class="inputLabel">Bank Name </v-label>
+					<v-label class="inputLabel">Bank Name* </v-label>
 					<v-text-field  v-model="vendor.bank_name" density="comfortable" placeholder="Enter your bank name"></v-text-field>
 				</div>
 				<div class="mb-4">
@@ -39,7 +39,7 @@
 					<v-text-field  v-model="vendor.iban"  placeholder="Enter your IBAN" density="comfortable"> </v-text-field>
 				</div>
 				<div class="mb-4">
-					<v-label class="inputLabel">Name on Account </v-label>
+					<v-label class="inputLabel">Name on Account* </v-label>
 					<v-text-field  v-model="vendor.name_on_account" density="comfortable"> </v-text-field>
 				</div>
 
