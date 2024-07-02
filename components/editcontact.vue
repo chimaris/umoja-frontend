@@ -10,11 +10,11 @@
 
             <div class="pt-8" style="max-width: 502px">
                 <div class="mb-4">
-                    <v-label class="inputLabel">Email Address </v-label>
+                    <v-label class="inputLabel">Email Address* </v-label>
                     <v-text-field :rules="emailRules" v-model="vendor.busniess_email" placeholder="Enter email address" density="comfortable"> </v-text-field>
                 </div>
                 <div class="mb-4">
-                    <p class="inputLabel">Phone Number</p>
+                    <p class="inputLabel">Phone Number*</p>
                     <MazPhoneNumberInput style="width: 100%;"
                                          v-model="vendor.busniess_phone_number"
                                          show-code-on-list

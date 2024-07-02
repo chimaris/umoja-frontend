@@ -11,7 +11,7 @@
 			<div class="mt-10 mb-5">
 				<div class="mb-8">
 					<p style="font-size: 16px; color: #969696" class="mb-2">
-						<span style="font-weight: 500; color: #333">Upload business profile picture</span> (Business logo preferably)
+						<span style="font-weight: 500; color: #333">Upload business profile picture</span> (Business logo preferably)*
 					</p>
 					<v-row 
 						style="align-items: center; display: flex" 
@@ -48,7 +48,7 @@
 				</ul>
 				<div class="mb-8">
 					<p style="font-size: 16px; color: #969696" class="mb-2">
-						<span style="font-weight: 500; color: #333">Upload cover photo</span> (Optional)
+						<span style="font-weight: 500; color: #333">Upload cover photo*</span>
 					</p>
 					<v-row 
 						style="align-items: center; display: flex" 
@@ -84,7 +84,7 @@
 				</li>
 				</ul>
 				<div class="textarea-wrapper">
-					<p class="mb-4">Business Bio</p>
+					<p class="mb-4">Business Bio*</p>
 					<v-textarea :disabled="disableTextarea" v-model="vendor.business_bio" :rules="rules" rows="6" placeholder="Write a short bio about your business here..."></v-textarea>
 					<div class="char-count">{{ charCount }}/{{ maxCount }}</div>
 				</div>
