@@ -78,17 +78,17 @@
 				<v-form v-model="valid" @submit.prevent="handleSubmit">
 					<v-row>
 						<v-col>
-							<p class="inputLabel">First Name</p>
+							<p class="inputLabel">First Name*</p>
 							<v-text-field n v-model="first_name" :rules="firstNameRules" placeholder="First name" density="comfortable"></v-text-field>
 						</v-col>
 						<v-col>
-							<p class="inputLabel">Last Name</p>
+							<p class="inputLabel">Last Name*</p>
 							<v-text-field v-model="last_name" :rules="lastNameRules" placeholder="Last name" density="comfortable"></v-text-field>
 						</v-col>
 					</v-row>
-					<p class="inputLabel">Email Address</p>
+					<p class="inputLabel">Email Address*</p>
 					<v-text-field v-model="email" :rules="emailRules" placeholder="Enter email address" density="comfortable"></v-text-field>
-					<p class="inputLabel">Password</p>
+					<p class="inputLabel">Password*</p>
 					<v-text-field
 						:append-inner-icon="visible ? 'mdi mdi-eye' : 'mdi mdi-eye-off'"
 						:type="visible ? 'text' : 'password'"
@@ -98,7 +98,7 @@
 						:rules="passwordRules"
 						v-model="password"
 					></v-text-field>
-					<p class="inputLabel">Confirm Password</p>
+					<p class="inputLabel">Confirm Password*</p>
 					<v-text-field
 						:append-inner-icon="visible1 ? 'mdi mdi-eye' : 'mdi mdi-eye-off'"
 						:type="visible1 ? 'text' : 'password'"
