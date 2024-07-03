@@ -548,7 +548,7 @@
 					<v-col cols="3">
 						<p>Region</p>
 					</v-col>
-					<v-col cols="3" style="color: #969696">
+					<v-col cols="5" style="color: #969696">
 						<p>Rates</p>
 					</v-col>
 					<v-col>
@@ -560,17 +560,21 @@
 					<v-col cols="3">
 						<p style="text-transform: capitalize">{{ zone?.name }}</p>
 					</v-col>
-					<v-col cols="3" style="color: #969696">
-						<p v-if="zone?.rates[0]?.minimum_price">
-							from {{ formattedPrice(zone?.rates[0]?.minimum_price) }}
-							<span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span>
-						</p>
-						<p v-if="zone?.rates[0]?.minimum_weight">
-							from {{ zone?.rates[0]?.minimum_weight }}Kg <span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span>
-						</p>
-						<!-- <p>€60.00 - €100.00</p> -->
-						<!-- <p style="color: #1273eb">See more rates</p> -->
-					</v-col>
+					<v-col cols="5" style="color: #969696">
+								<template v-for="rate in zone.rates.showAll ? zone.rates : zone.rates.slice(0, 1)" :key="rate">
+									<p v-if="rate?.minimum_price || rate?.maximum_price">
+									from {{ formattedPrice(rate?.minimum_price) }}
+									<span v-if="rate?.maximum_price">to {{ formattedPrice(rate?.maximum_price) }}</span>({{ rate.custom_rate_name }})
+									</p>
+									<p  v-else-if="rate?.minimum_weight || rate?.maximum_weight">
+										from {{ rate?.minimum_weight }}Kg <span v-if="rate?.maximum_weight">to {{ rate?.maximum_weight }}</span> ({{ rate.custom_rate_name }})
+									</p>
+									<p v-else>
+									{{ formattedPrice(rate?.price) }}
+								</p>
+								</template>
+								<p v-if="zone.rates.length > 1" @click="zone.rates.showAll = !zone.rates.showAll" style="color: #1273eb">{{ zone.rates.showAll ? 'See less rates': 'See more rates' }}</p>
+							</v-col>
 					<v-col>
 						<v-card flat>
 							<div class="d-flex my-2 align-center ga-1">
