@@ -149,35 +149,37 @@
 						</v-col>
 					</v-row>
 					<v-divider class="my-3"></v-divider>
-					<v-row v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
-						<v-col cols="3">
-							<p style="text-transform: capitalize">{{ zone?.name }}</p>
-						</v-col>
-						<v-col v-if="zone.rates.length <= 1" cols="5" style="color: #969696">
-							<p v-if="zone?.rates[0]?.minimum_price">
-								from {{ formattedPrice(zone?.rates[0]?.minimum_price) }}
-								<span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span>
-							</p>
-							<p v-if="zone?.rates[0]?.minimum_weight">
-								from {{ zone?.rates[0]?.minimum_weight }}Kg <span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span>
-							</p>
-						</v-col>
-						<v-col v-if="zone.rates.length > 1" cols="5" style="color: #969696">
-							<template v-for="rate in zone.rates.showAll ? zone.rates : zone.rates.slice(0, 1)" :key="rate">
-								<p v-if="rate?.minimum_price || rate?.maximum_price">
-								from {{ formattedPrice(rate?.minimum_price) }}
-								<span v-if="rate?.maximum_price">to {{ formattedPrice(rate?.maximum_price) }}</span>({{ rate.custom_rate_name }})
+					<v-row  v-for="zone in shippingZones" :key="zone" style="font-size: 16px; font-weight: 500; color: #333">
+						<template  v-if="zone.rates.length > 0">
+							<v-col cols="3">
+								<p style="text-transform: capitalize">{{ zone?.name }}</p>
+							</v-col>
+							<v-col v-if="zone.rates.length <= 1" cols="5" style="color: #969696">
+								<p v-if="zone?.rates[0]?.minimum_price">
+									from {{ formattedPrice(zone?.rates[0]?.minimum_price) }}
+									<span v-if="zone?.rates[0]?.maximum_price">to {{ formattedPrice(zone?.rates[0]?.maximum_price) }}</span>
 								</p>
-								<p  v-if="rate?.minimum_weight || rate?.maximum_weight">
-									from {{ rate?.minimum_weight }}Kg <span v-if="rate?.maximum_weight">to {{ rate?.maximum_weight }}</span> ({{ rate.custom_rate_name }})
+								<p v-if="zone?.rates[0]?.minimum_weight">
+									from {{ zone?.rates[0]?.minimum_weight }}Kg <span v-if="zone?.rates[0]?.maximum_weight">to {{ zone?.rates[0]?.maximum_weight }}</span>
 								</p>
-							</template>
-							<p @click="zone.rates.showAll = !zone.rates.showAll" style="color: #1273eb">{{ zone.rates.showAll ? 'See less rates': 'See more rates' }}</p>
-						</v-col>
-						<v-col>
-							<!-- <p>Within Jan 1st to Jan 10th</p> -->
-							<p>{{ zone?.delivery_date_range }}</p>
-						</v-col>
+							</v-col>
+							<v-col v-if="zone.rates.length > 1" cols="5" style="color: #969696">
+								<template v-for="rate in zone.rates.showAll ? zone.rates : zone.rates.slice(0, 1)" :key="rate">
+									<p v-if="rate?.minimum_price || rate?.maximum_price">
+									from {{ formattedPrice(rate?.minimum_price) }}
+									<span v-if="rate?.maximum_price">to {{ formattedPrice(rate?.maximum_price) }}</span>({{ rate.custom_rate_name }})
+									</p>
+									<p  v-if="rate?.minimum_weight || rate?.maximum_weight">
+										from {{ rate?.minimum_weight }}Kg <span v-if="rate?.maximum_weight">to {{ rate?.maximum_weight }}</span> ({{ rate.custom_rate_name }})
+									</p>
+								</template>
+								<p @click="zone.rates.showAll = !zone.rates.showAll" style="color: #1273eb">{{ zone.rates.showAll ? 'See less rates': 'See more rates' }}</p>
+							</v-col>
+							<v-col>
+								<!-- <p>Within Jan 1st to Jan 10th</p> -->
+								<p>{{ zone?.delivery_date_range }}</p>
+							</v-col>
+						</template>
 					</v-row>
 				</div>
 			</v-card>
